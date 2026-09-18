@@ -12,7 +12,7 @@ internal readonly record struct AssemblyMotion(Double3 PositionO,Double3 Velocit
 /// Exact store amounts are only observed here. This evaluator cannot spend or publish.</summary>
 internal static class AssemblyDynamics
 {
-    internal static AssemblyMotion Evaluate(CompiledAssemblyDesign d,AssemblyMotion source,AssemblyConsumption c,AssemblyWrench poweredWrench)
+    internal static AssemblyMotion Evaluate(CompiledAssemblyDesign d,AssemblyMotion source,AssemblyConsumption c,AssemblyWrench poweredWrench,Double3 gravityRoot=default)
     {
         var motion=source;
         for(var phase=0;phase<2;phase++)
@@ -26,9 +26,9 @@ internal static class AssemblyDynamics
             double m1,m2,m4;
             if(powered)
             {
-                // D=2, total mass 630..830 => weighted mass 1260..1660 kg,
-                // normal binary64; exact integer product <=1106 bits. This is
-                // separately bounded, not inherited from the old dry-8 fixture.
+                // D=2; stock mass <=830 kg, explicit development mass <=2018900 kg.
+                // Weighted mass <=4037800 kg is normal binary64; exact mass in
+                // 1/(10^6*2^1074) kg units needs <=1116 bits, below 2176-bit storage.
                 if(!PoweredFlightNumerics.TryStageMass(dry,final,c.ConsumedTotal,0,2,out m1)||
                    !PoweredFlightNumerics.TryStageMass(dry,final,c.ConsumedTotal,1,2,out m2)||
                    !PoweredFlightNumerics.TryStageMass(dry,final,c.ConsumedTotal,2,2,out m4))throw new InvalidDataException("Exact stage mass failed.");
@@ -39,8 +39,8 @@ internal static class AssemblyDynamics
                 m2=m4=m1;
             }
             var w=powered?poweredWrench:default;
-            var k1=Derivative(d,motion,m1,w);var k2=Derivative(d,Add(motion,k1,h,2),m2,w);
-            var k3=Derivative(d,Add(motion,k2,h,2),m2,w);var k4=Derivative(d,Add(motion,k3,h,1),m4,w);
+            var k1=Derivative(d,motion,m1,w,gravityRoot);var k2=Derivative(d,Add(motion,k1,h,2),m2,w,gravityRoot);
+            var k3=Derivative(d,Add(motion,k2,h,2),m2,w,gravityRoot);var k4=Derivative(d,Add(motion,k3,h,1),m4,w,gravityRoot);
             motion=Add(motion,Combine(k1,k2,k3,k4),h,6);
             var q=motion.BodyToWorld.Normalized();if(q.W<0)q=new(-q.X,-q.Y,-q.Z,-q.W);
             motion=motion with {BodyToWorld=q};
@@ -50,14 +50,17 @@ internal static class AssemblyDynamics
     }
     internal static bool InEnvelope(AssemblyMotion s)=>s.Finite&&s.VelocityO.LengthSquared<=25&&s.AngularVelocityBody.LengthSquared<=4&&
         s.PositionO.LengthSquared<=10000&&Math.Abs(s.BodyToWorld.LengthSquared-1)<=1e-12;
-    private static AssemblyMotion Derivative(CompiledAssemblyDesign d,AssemblyMotion s,double mass,AssemblyWrench wrench)
+    private static AssemblyMotion Derivative(CompiledAssemblyDesign d,AssemblyMotion s,double mass,AssemblyWrench wrench,Double3 gravityRoot)
     {
         var props=d.ObserveMass(mass);var omega=s.AngularVelocityBody;
         var tau=wrench.MomentAtOrigin-Double3.Cross(props.Com,wrench.Force);
         var alpha=props.Inertia.Inverse().Apply(tau-Double3.Cross(omega,props.Inertia.Apply(omega)));
         var a=wrench.Force/mass-Double3.Cross(alpha,props.Com)-Double3.Cross(omega,Double3.Cross(omega,props.Com));
         var q=s.BodyToWorld*new DoubleQuaternion(omega.X,omega.Y,omega.Z,0);
-        return new(s.VelocityO,s.BodyToWorld.Rotate(a),new(q.X*.5,q.Y*.5,q.Z*.5,q.W*.5),alpha);
+        var rootAcceleration=s.BodyToWorld.Rotate(a);
+        // Preserve the banked zero-environment arithmetic path exactly.
+        if(gravityRoot!=Double3.Zero)rootAcceleration+=gravityRoot;
+        return new(s.VelocityO,rootAcceleration,new(q.X*.5,q.Y*.5,q.Z*.5,q.W*.5),alpha);
     }
     private static Double3 Scaled(Double3 v,PoweredBinaryScale h,double divisor)=>new(h.MultiplyDivide(v.X,divisor),h.MultiplyDivide(v.Y,divisor),h.MultiplyDivide(v.Z,divisor));
     private static AssemblyMotion Add(AssemblyMotion s,AssemblyMotion k,PoweredBinaryScale h,double n)=>new(s.PositionO+Scaled(k.PositionO,h,n),s.VelocityO+Scaled(k.VelocityO,h,n),

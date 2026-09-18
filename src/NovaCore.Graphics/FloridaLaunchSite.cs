@@ -14,9 +14,9 @@ public readonly record struct FloridaLaunchSite(
 {
     public const double Latitude = 28.6084d;
     public const double Longitude = -80.6042d;
-    public const double PlatformEastWidthMetres = 64d;
-    public const double PlatformNorthLengthMetres = 48d;
-    public const double PlatformThicknessMetres = 1.5d;
+    public const double PlatformEastWidthMetres = FloridaSlabSupport.EastWidth;
+    public const double PlatformNorthLengthMetres = FloridaSlabSupport.NorthLength;
+    public const double PlatformThicknessMetres = FloridaSlabSupport.AuthoredTop;
     public const double MountHeightMetres = 7d;
     public const double FoundationMarginMetres = .25d;
     /// <summary>Authored footing extends 25 cm below the original natural survey; support grading meets that unchanged bottom.</summary>
@@ -31,6 +31,16 @@ public readonly record struct FloridaLaunchSite(
     /// <summary>Depth of the separate foundation below the unchanged slab origin. Its unit mesh spans Z=-1..0.</summary>
     public double FoundationDepthMetres { get; init; }
     public Double3 FoundationScale => new(PlatformEastWidthMetres, PlatformNorthLengthMetres, FoundationDepthMetres);
+
+    internal FloridaSlabSupport CreateSupportSlab(IPhysicalSurfacePointQuery query)
+    {
+        if (!IsValid || query is not IPhysicalGradingProofSource proof || proof.GradingRegion != FloridaFacilitySupport.Region ||
+            query.Authority.BodyId != Object.Anchor.BodyId || query.Authority.Terrain != Object.Anchor.TerrainAuthorityVersion ||
+            (Object.Anchor.NormalizedBodyFixedDirection - FloridaFacilitySupport.Region.Up).LengthSquared > 1e-24)
+            throw new InvalidDataException("Florida support slab/site authority mismatch.");
+        // Exact union of authored base z=[0,1.5] and equal-footprint footing z=[-depth,0].
+        return new(query.Authority, LocalPhysicalSurfaceRadiusMetres, FoundationDepthMetres);
+    }
 
     public bool IsValid => Object.IsValid && double.IsFinite(AnchorTerrainHeightMetres) &&
         double.IsFinite(FoundationOffsetMetres) && FoundationOffsetMetres >= FoundationMarginMetres &&

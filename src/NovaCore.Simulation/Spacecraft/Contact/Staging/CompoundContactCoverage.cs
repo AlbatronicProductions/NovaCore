@@ -12,7 +12,7 @@ internal sealed class CompoundContactCoverage
     private readonly BodyHandle body;
     private readonly StaticHandle surface;
     private readonly TypedIndex shape;
-    private readonly Vector3 acceleration;
+    private Vector3 acceleration;
     private readonly float resolution;
     private readonly bool[] visited;
     private readonly CompoundContactSelector.Candidate[] candidates;
@@ -36,6 +36,7 @@ internal sealed class CompoundContactCoverage
     }
     internal void Begin(float duration)
     { dt = duration; count = 0; selectedCount = 0; parentSeen = false; Failed = false; Array.Clear(visited); }
+    internal void SetPreparedAcceleration(Vector3 value)=>acceleration=value;
 
     private bool PairMatches(int worker, CollidablePair pair) => worker == 0 &&
         pair.A.Mobility == CollidableMobility.Dynamic && pair.A.BodyHandle == body &&

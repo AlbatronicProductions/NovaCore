@@ -1,0 +1,38 @@
+    // Temporary diagnostic only. Never part of the retained production candidate.
+    private sealed class GapRow
+    {
+        internal long Entry,TitleEnd,Sample,Elapsed,ServiceBegin,ServiceEnd,PowerBegin,PowerEnd,Exit;
+        internal long AllocBefore,AllocAfter,PauseBefore,PauseAfter,DebtBefore,Credit,DebtAfter;
+        internal int G0,G1,G2,H0,H1,H2,Before,After,Ordinal;
+        internal AssemblyFlightObservation Observation;
+    }
+    private readonly GapRow[] gapRows=Enumerable.Range(0,4096).Select(_=>new GapRow()).ToArray();
+    private GapRow? gapActive;
+    private int gapOrdinal;
+    private static bool gapReplaying;
+    private static bool GapBits(double a,double b)=>BitConverter.DoubleToInt64Bits(a)==BitConverter.DoubleToInt64Bits(b);
+    private static bool GapVector(Double3 a,Double3 b)=>GapBits(a.X,b.X)&&GapBits(a.Y,b.Y)&&GapBits(a.Z,b.Z);
+    private static bool GapMotion(AssemblyMotion a,AssemblyMotion b)=>GapVector(a.PositionO,b.PositionO)&&GapVector(a.VelocityO,b.VelocityO)&&GapVector(a.AngularVelocityBody,b.AngularVelocityBody)&&GapBits(a.BodyToWorld.X,b.BodyToWorld.X)&&GapBits(a.BodyToWorld.Y,b.BodyToWorld.Y)&&GapBits(a.BodyToWorld.Z,b.BodyToWorld.Z)&&GapBits(a.BodyToWorld.W,b.BodyToWorld.W);
+    private void GapDump()
+    {
+        if(gapReplaying||!poweredSupport)return;
+        Console.WriteLine($"GAP_MANAGED_META frequency={Stopwatch.Frequency} recorded={frameCount} ordinal={gapOrdinal}");
+        var selected=new bool[frameCount];for(var i=0;i<Math.Min(8,frameCount);i++)selected[i]=true;
+        for(var i=0;i<frameCount;i++)if(gapRows[i].Elapsed*1000d/Stopwatch.Frequency>25||(gapRows[i].ServiceEnd-gapRows[i].ServiceBegin)*1000d/Stopwatch.Frequency>25)
+            for(var j=Math.Max(0,i-3);j<=Math.Min(frameCount-1,i+25);j++)selected[j]=true;
+        for(var i=0;i<frameCount;i++){var r=gapRows[i];if(selected[i])Console.WriteLine($"GAP_MANAGED {i},{r.Ordinal},{r.Entry},{r.TitleEnd},{r.Sample},{r.Elapsed},{r.ServiceBegin},{r.ServiceEnd},{r.PowerBegin},{r.PowerEnd},{r.Exit},{r.AllocBefore},{r.AllocAfter},{r.PauseBefore},{r.PauseAfter},{r.G0},{r.G1},{r.G2},{r.H0},{r.H1},{r.H2},{r.DebtBefore},{r.Credit},{r.DebtAfter},{r.Before},{r.After}");}
+        var total=0;var max=0;long credit=0;for(var i=0;i<frameCount;i++){var r=gapRows[i];total+=r.After-r.Before;max=Math.Max(max,r.After-r.Before);credit+=r.Credit;}
+        Console.WriteLine($"GAP_RECOVERY publications={total} maxPerCallback={max} credit={credit} publishedTicks={observation.Clock.Time.Ticks} debt={observation.Clock.Debt.Ticks}");
+        gapReplaying=true;
+        try{
+            using var reference=new StockAssemblyDevelopmentScene(supportedContact:true,poweredSupport:true);reference.Start();var matched=0;
+            for(var i=0;i<frameCount;i++){
+                var actual=gapRows[i].Observation;
+                while(reference.Observation.State.Frontier<actual.State.Frontier){var n=reference.Observation.State.Frontier;reference.Advance(new SimulationDuration((long)(n+1)*1_000_000/60-(long)n*1_000_000/60));}
+                var expected=reference.Observation;
+                if(!GapMotion(expected.State.Motion,actual.State.Motion)||expected.State.Stores!=actual.State.Stores||expected.State.Mass!=actual.State.Mass||expected.StateRevision!=actual.StateRevision||expected.HistoryCount!=actual.HistoryCount)throw new InvalidDataException($"Diagnostic single-interval replay mismatch at {actual.State.Frontier}");
+                matched++;
+            }
+            Console.WriteLine($"GAP_EQUIVALENCE singleIntervalReference=PASS sampledLiveEndpoints={matched} finalFrontier={reference.Observation.State.Frontier}");
+        }finally{gapReplaying=false;}
+    }

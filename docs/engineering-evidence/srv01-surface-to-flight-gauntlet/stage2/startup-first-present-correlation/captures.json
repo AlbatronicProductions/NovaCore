@@ -1,0 +1,3899 @@
+{
+  "order": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "nativeCodes": {
+    "1": "before_ShowWindow",
+    "2": "ShowWindow_return",
+    "3": "window_created",
+    "4": "native_window_initialization_entry",
+    "5": "instance_ready",
+    "6": "device_ready",
+    "7": "visual_meshes_ready",
+    "8": "initial_swap_ready",
+    "9": "backend_ready",
+    "10": "native_frame_begin",
+    "11": "native_frame_end",
+    "12": "graphics_fence_return",
+    "13": "first_post_successful_present_callback",
+    "14": "callback_begin",
+    "15": "callback_end",
+    "16": "acquire_return",
+    "17": "present_begin",
+    "18": "present_return",
+    "19": "recreate_begin"
+  },
+  "managedRowColumns": [
+    "entry",
+    "afterTitle",
+    "start",
+    "legacySample",
+    "legacyElapsed",
+    "serviceIn",
+    "serviceOut",
+    "observed",
+    "exit",
+    "frontierBefore",
+    "frontierAfter",
+    "debtBefore",
+    "credit",
+    "debtAfter"
+  ],
+  "captures": [
+    {
+      "id": "A1",
+      "order": 1,
+      "route": "srv01-powered-support",
+      "start": "2026-09-17T18:06:42.1175960-04:00",
+      "arguments": [
+        "--scene=srv01-powered-support",
+        "--benchmark-frames=180"
+      ],
+      "executableSha256": "7950CED63BDE459FBD49AD27805F972395DACAE2EC889BFD6722508CE2A9915A",
+      "interaction": "none intentionally",
+      "freshProcess": true,
+      "pid": 57360,
+      "end": "2026-09-17T18:07:00.5670898-04:00",
+      "exitCode": 0,
+      "result": "VALID",
+      "stdoutSha256": "8d8cd85adda2a76b4d318cb2268e680f6eafa99d79715fb5c10f05fc1eccf769",
+      "simulation": {
+        "frequency": 10000000,
+        "managedEntry": 4127948372134,
+        "poweredSupport": true,
+        "callbacks": 180,
+        "legacySamples": 179,
+        "failed": false,
+        "completed": false,
+        "frontier": 64,
+        "time": 1066666,
+        "debt": 3455,
+        "credits": 1070121,
+        "maxPublications": 3,
+        "revision": 64,
+        "timelineRevision": 0,
+        "history": 64,
+        "fuel": 29.91666671875,
+        "oxide": 44.875000078125,
+        "mass": 704.791666796875,
+        "identityPass": true,
+        "replayMatches": 180
+      },
+      "frequency": 10000000,
+      "recordedExtents": [
+        "960x540",
+        "960x540"
+      ],
+      "events": [
+        {
+          "tick": 4127950800875,
+          "msFromManagedEntry": 242.8741,
+          "name": "native_window_initialization_entry",
+          "code": 4,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4127950822691,
+          "msFromManagedEntry": 245.0557,
+          "name": "window_created",
+          "code": 3,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4127950822938,
+          "msFromManagedEntry": 245.0804,
+          "name": "before_ShowWindow",
+          "code": 1,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4127950884523,
+          "msFromManagedEntry": 251.2389,
+          "name": "ShowWindow_return",
+          "code": 2,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4127951545058,
+          "msFromManagedEntry": 317.2924,
+          "name": "instance_ready",
+          "code": 5,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4127951915092,
+          "msFromManagedEntry": 354.2958,
+          "name": "device_ready",
+          "code": 6,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4127952017462,
+          "msFromManagedEntry": 364.5328,
+          "name": "visual_meshes_ready",
+          "code": 7,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128117330047,
+          "msFromManagedEntry": 16895.7913,
+          "name": "initial_swap_ready",
+          "code": 8,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128117393539,
+          "msFromManagedEntry": 16902.1405,
+          "name": "backend_ready",
+          "code": 9,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128117397087,
+          "msFromManagedEntry": 16902.4953,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128117397253,
+          "msFromManagedEntry": 16902.5119,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128117397954,
+          "msFromManagedEntry": 16902.582,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4128117435008,
+          "msFromManagedEntry": 16906.2874,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4128117438184,
+          "msFromManagedEntry": 16906.605,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128117448206,
+          "msFromManagedEntry": 16907.6072,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128117526542,
+          "msFromManagedEntry": 16915.4408,
+          "name": "present_return",
+          "code": 18,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128117526558,
+          "msFromManagedEntry": 16915.4424,
+          "name": "recreate_begin",
+          "code": 19,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128117778401,
+          "msFromManagedEntry": 16940.6267,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128117778404,
+          "msFromManagedEntry": 16940.627,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128117778431,
+          "msFromManagedEntry": 16940.6297,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128117779039,
+          "msFromManagedEntry": 16940.6905,
+          "name": "first_post_successful_present_callback",
+          "code": 13,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4128117779039,
+          "msFromManagedEntry": 16940.6905,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4128118364462,
+          "msFromManagedEntry": 16999.2328,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 1,
+          "value": 39
+        },
+        {
+          "tick": 4128118365610,
+          "msFromManagedEntry": 16999.3476,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128118367037,
+          "msFromManagedEntry": 16999.4903,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128118370849,
+          "msFromManagedEntry": 16999.8715,
+          "name": "present_return",
+          "code": 18,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128118370857,
+          "msFromManagedEntry": 16999.8723,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128118370860,
+          "msFromManagedEntry": 16999.8726,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128118370927,
+          "msFromManagedEntry": 16999.8793,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128118375047,
+          "msFromManagedEntry": 17000.2913,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 2,
+          "value": 39
+        },
+        {
+          "tick": 4128118379916,
+          "msFromManagedEntry": 17000.7782,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 2,
+          "value": 39
+        },
+        {
+          "tick": 4128118380623,
+          "msFromManagedEntry": 17000.8489,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128118381584,
+          "msFromManagedEntry": 17000.945,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128118384638,
+          "msFromManagedEntry": 17001.2504,
+          "name": "present_return",
+          "code": 18,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128118384656,
+          "msFromManagedEntry": 17001.2522,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128118384660,
+          "msFromManagedEntry": 17001.2526,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128118384908,
+          "msFromManagedEntry": 17001.2774,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128118385811,
+          "msFromManagedEntry": 17001.3677,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 3,
+          "value": 39
+        },
+        {
+          "tick": 4128118388097,
+          "msFromManagedEntry": 17001.5963,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 3,
+          "value": 39
+        },
+        {
+          "tick": 4128118388967,
+          "msFromManagedEntry": 17001.6833,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128118390103,
+          "msFromManagedEntry": 17001.7969,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128118391131,
+          "msFromManagedEntry": 17001.8997,
+          "name": "present_return",
+          "code": 18,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128118391133,
+          "msFromManagedEntry": 17001.8999,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128118391134,
+          "msFromManagedEntry": 17001.9,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128118391703,
+          "msFromManagedEntry": 17001.9569,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128118392621,
+          "msFromManagedEntry": 17002.0487,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 4,
+          "value": 39
+        },
+        {
+          "tick": 4128118393314,
+          "msFromManagedEntry": 17002.118,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 4,
+          "value": 39
+        },
+        {
+          "tick": 4128118393858,
+          "msFromManagedEntry": 17002.1724,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128118394610,
+          "msFromManagedEntry": 17002.2476,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128118395544,
+          "msFromManagedEntry": 17002.341,
+          "name": "present_return",
+          "code": 18,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128118395549,
+          "msFromManagedEntry": 17002.3415,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128118395550,
+          "msFromManagedEntry": 17002.3416,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128118450204,
+          "msFromManagedEntry": 17007.807,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128118451053,
+          "msFromManagedEntry": 17007.8919,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 5,
+          "value": 39
+        },
+        {
+          "tick": 4128118453636,
+          "msFromManagedEntry": 17008.1502,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 5,
+          "value": 39
+        },
+        {
+          "tick": 4128118454055,
+          "msFromManagedEntry": 17008.1921,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128118454929,
+          "msFromManagedEntry": 17008.2795,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128118456312,
+          "msFromManagedEntry": 17008.4178,
+          "name": "present_return",
+          "code": 18,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128118456315,
+          "msFromManagedEntry": 17008.4181,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128118456316,
+          "msFromManagedEntry": 17008.4182,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128118505590,
+          "msFromManagedEntry": 17013.3456,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128118506422,
+          "msFromManagedEntry": 17013.4288,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 6,
+          "value": 39
+        },
+        {
+          "tick": 4128118507583,
+          "msFromManagedEntry": 17013.5449,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 6,
+          "value": 39
+        },
+        {
+          "tick": 4128118508053,
+          "msFromManagedEntry": 17013.5919,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128118508745,
+          "msFromManagedEntry": 17013.6611,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128118510304,
+          "msFromManagedEntry": 17013.817,
+          "name": "present_return",
+          "code": 18,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128118510308,
+          "msFromManagedEntry": 17013.8174,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128118510309,
+          "msFromManagedEntry": 17013.8175,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128118561470,
+          "msFromManagedEntry": 17018.9336,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128118562100,
+          "msFromManagedEntry": 17018.9966,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 7,
+          "value": 39
+        },
+        {
+          "tick": 4128118562949,
+          "msFromManagedEntry": 17019.0815,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 7,
+          "value": 39
+        },
+        {
+          "tick": 4128118563579,
+          "msFromManagedEntry": 17019.1445,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128118564199,
+          "msFromManagedEntry": 17019.2065,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128118565447,
+          "msFromManagedEntry": 17019.3313,
+          "name": "present_return",
+          "code": 18,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128118565451,
+          "msFromManagedEntry": 17019.3317,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 7,
+          "value": 0
+        }
+      ],
+      "firstCallbackRows": [
+        [
+          4128117404517,
+          4128117417617,
+          4128117418129,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4128117418686,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4128117779054,
+          4128117779769,
+          0,
+          4128117779769,
+          361640,
+          4128117799351,
+          4128118361180,
+          4128118361192,
+          4128118361385,
+          0,
+          2,
+          0,
+          36164,
+          2831
+        ],
+        [
+          4128118375054,
+          4128118375575,
+          0,
+          4128118375576,
+          595807,
+          4128118375733,
+          4128118379472,
+          4128118379480,
+          4128118379482,
+          2,
+          5,
+          2831,
+          59580,
+          12411
+        ],
+        [
+          4128118385866,
+          4128118386731,
+          0,
+          4128118386732,
+          11156,
+          4128118387179,
+          4128118387224,
+          4128118387240,
+          4128118387246,
+          5,
+          5,
+          12411,
+          1116,
+          13527
+        ],
+        [
+          4128118392633,
+          4128118392642,
+          0,
+          4128118392642,
+          5910,
+          4128118392822,
+          4128118392849,
+          4128118392858,
+          4128118392862,
+          5,
+          5,
+          13527,
+          591,
+          14118
+        ],
+        [
+          4128118451064,
+          4128118451072,
+          0,
+          4128118451073,
+          58431,
+          4128118451230,
+          4128118453236,
+          4128118453244,
+          4128118453247,
+          5,
+          6,
+          14118,
+          5843,
+          3294
+        ],
+        [
+          4128118506432,
+          4128118506984,
+          0,
+          4128118506985,
+          55912,
+          4128118507128,
+          4128118507155,
+          4128118507163,
+          4128118507165,
+          6,
+          6,
+          3294,
+          5591,
+          8885
+        ],
+        [
+          4128118562110,
+          4128118562115,
+          0,
+          4128118562116,
+          55131,
+          4128118562498,
+          4128118562526,
+          4128118562534,
+          4128118562537,
+          6,
+          6,
+          8885,
+          5513,
+          14398
+        ],
+        [
+          4128118618007,
+          4128118618012,
+          0,
+          4128118618012,
+          55896,
+          4128118618162,
+          4128118620052,
+          4128118620060,
+          4128118620063,
+          6,
+          7,
+          14398,
+          5590,
+          3322
+        ],
+        [
+          4128118674124,
+          4128118674854,
+          0,
+          4128118674855,
+          56843,
+          4128118675138,
+          4128118675198,
+          4128118675215,
+          4128118675220,
+          7,
+          7,
+          3322,
+          5684,
+          9006
+        ],
+        [
+          4128118729196,
+          4128118729202,
+          0,
+          4128118729202,
+          54347,
+          4128118729355,
+          4128118729391,
+          4128118729415,
+          4128118729418,
+          7,
+          7,
+          9006,
+          5435,
+          14441
+        ],
+        [
+          4128118785320,
+          4128118785326,
+          0,
+          4128118785326,
+          56124,
+          4128118785477,
+          4128118787352,
+          4128118787361,
+          4128118787364,
+          7,
+          8,
+          14441,
+          5612,
+          3386
+        ]
+      ],
+      "timeline": {
+        "T0": {
+          "tick": 4127948372134,
+          "msFromManagedEntry": 0.0
+        },
+        "T1": {
+          "tick": 4127950822691,
+          "msFromManagedEntry": 245.0557
+        },
+        "shown": {
+          "tick": 4127950884523,
+          "msFromManagedEntry": 251.2389
+        },
+        "T2": {
+          "tick": 4128117393539,
+          "msFromManagedEntry": 16902.1405
+        },
+        "T3": {
+          "tick": 4128117397087,
+          "msFromManagedEntry": 16902.4953
+        },
+        "T4": {
+          "tick": 4128117778401,
+          "msFromManagedEntry": 16940.6267
+        },
+        "T5": {
+          "tick": 4128117448206,
+          "msFromManagedEntry": 16907.6072
+        },
+        "T7": {
+          "tick": 4128117779039,
+          "msFromManagedEntry": 16940.6905
+        },
+        "T6": {
+          "tick": 4128117526542,
+          "msFromManagedEntry": 16915.4408
+        },
+        "T8_serviceEntryBound": {
+          "tick": 4128117799351,
+          "msFromManagedEntry": 16942.7217
+        },
+        "T9_publicationObservedUpperBound": {
+          "tick": 4128118361192,
+          "msFromManagedEntry": 16998.9058
+        },
+        "legacyStart": {
+          "tick": 4128117418129,
+          "msFromManagedEntry": 16904.5995
+        },
+        "firstLegacySample": {
+          "tick": 4128117779769,
+          "msFromManagedEntry": 16940.7635
+        },
+        "firstManagedCallbackEntry": {
+          "tick": 4128117404517,
+          "msFromManagedEntry": 16903.2383
+        }
+      },
+      "deltasMs": {
+        "windowCreatedToBackendReady": 16657.0848,
+        "windowCreatedToFirstNativeFrame": 16657.4396,
+        "shownToFirstSuccessfulPresentReturn": 16664.2019,
+        "createdToFirstSuccessfulPresentReturn": 16670.3851,
+        "firstPresentCall": 7.8336,
+        "firstNativeFrame": 38.1312,
+        "firstLegacyInterval": 36.164,
+        "legacyStartToFirstPresentReturn": 10.8413,
+        "presentReturnToFirstAdvancingService": 27.2809,
+        "firstAdvancingService": 56.1829,
+        "firstServiceCall": 56.1829
+      },
+      "serviceCallsBeforeFirstSuccessfulPresent": 0,
+      "publicationsObservedBeforeFirstSuccessfulPresent": 0,
+      "firstAdvancingCallback": 1,
+      "firstAdvancingObservation": {
+        "frontierBefore": 0,
+        "frontierAfter": 2,
+        "debtBefore": 0,
+        "credit": 36164,
+        "debtAfter": 2831,
+        "time": 33333
+      },
+      "legacyDisplay": {
+        "median": 5.5665,
+        "p95": 5.8205,
+        "p99": 36.164,
+        "max": 59.5807
+      },
+      "nativeFrames": {
+        "median": 5.521,
+        "p95": 5.9643,
+        "p99": 38.1312,
+        "max": 59.2452
+      },
+      "nativeFirstFrames": [
+        38.1312,
+        59.2452,
+        1.3794,
+        0.6473,
+        0.4414,
+        6.0764,
+        5.3991,
+        5.5141,
+        5.7523,
+        5.6208,
+        5.2386,
+        5.8379
+      ],
+      "legacyMaximumEndingCallback": 2,
+      "nativeMaximumIndex": 1,
+      "initialCanonical": {
+        "frontier": 0,
+        "debt": 0
+      },
+      "environment": [
+        "SRV01_COLD_PREPARATION ms=197.2288 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Vulkan validation layer: disabled (Release)",
+        "[native] Swapchain recreated after resize",
+        "[native] CPU timings: update=5.471 ms; fence=4.913; inspection=0.035; hostCallback=0.520; validationUpload=0.003; record=0.051; submit=0.028; present=0.203",
+        "SRV01_COLD_PREPARATION ms=8.1873 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0"
+      ]
+    },
+    {
+      "id": "B1",
+      "order": 2,
+      "route": "srv01-supported-contact",
+      "start": "2026-09-17T18:08:21.6564505-04:00",
+      "arguments": [
+        "--scene=srv01-supported-contact",
+        "--benchmark-frames=180"
+      ],
+      "executableSha256": "7950CED63BDE459FBD49AD27805F972395DACAE2EC889BFD6722508CE2A9915A",
+      "interaction": "none intentionally",
+      "freshProcess": true,
+      "pid": 27116,
+      "end": "2026-09-17T18:08:23.3738113-04:00",
+      "exitCode": 0,
+      "result": "VALID",
+      "stdoutSha256": "5d9bd6556aa775d9347f7064f603da93fa94c4a538ea48735fadf97c8a0f035b",
+      "simulation": {
+        "frequency": 10000000,
+        "managedEntry": 4128941703932,
+        "poweredSupport": false,
+        "callbacks": 180,
+        "legacySamples": 179,
+        "failed": false,
+        "completed": false,
+        "frontier": 63,
+        "time": 1050000,
+        "debt": 13525,
+        "credits": 1063525,
+        "maxPublications": 4,
+        "revision": 63,
+        "timelineRevision": 0,
+        "history": 63,
+        "fuel": 30,
+        "oxide": 45,
+        "mass": 705,
+        "identityPass": true,
+        "replayMatches": 180
+      },
+      "frequency": 10000000,
+      "recordedExtents": [
+        "960x540",
+        "960x540"
+      ],
+      "events": [
+        {
+          "tick": 4128943838509,
+          "msFromManagedEntry": 213.4577,
+          "name": "native_window_initialization_entry",
+          "code": 4,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128943862864,
+          "msFromManagedEntry": 215.8932,
+          "name": "window_created",
+          "code": 3,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128943863263,
+          "msFromManagedEntry": 215.9331,
+          "name": "before_ShowWindow",
+          "code": 1,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128943922209,
+          "msFromManagedEntry": 221.8277,
+          "name": "ShowWindow_return",
+          "code": 2,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128944544675,
+          "msFromManagedEntry": 284.0743,
+          "name": "instance_ready",
+          "code": 5,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128944777142,
+          "msFromManagedEntry": 307.321,
+          "name": "device_ready",
+          "code": 6,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128944878669,
+          "msFromManagedEntry": 317.4737,
+          "name": "visual_meshes_ready",
+          "code": 7,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128945644154,
+          "msFromManagedEntry": 394.0222,
+          "name": "initial_swap_ready",
+          "code": 8,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128945694234,
+          "msFromManagedEntry": 399.0302,
+          "name": "backend_ready",
+          "code": 9,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4128945697380,
+          "msFromManagedEntry": 399.3448,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128945697527,
+          "msFromManagedEntry": 399.3595,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128945699181,
+          "msFromManagedEntry": 399.5249,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4128945734404,
+          "msFromManagedEntry": 403.0472,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4128945737409,
+          "msFromManagedEntry": 403.3477,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128945749300,
+          "msFromManagedEntry": 404.5368,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128945832435,
+          "msFromManagedEntry": 412.8503,
+          "name": "present_return",
+          "code": 18,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128945832442,
+          "msFromManagedEntry": 412.851,
+          "name": "recreate_begin",
+          "code": 19,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128946046752,
+          "msFromManagedEntry": 434.282,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4128946046872,
+          "msFromManagedEntry": 434.294,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128946046896,
+          "msFromManagedEntry": 434.2964,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128946047817,
+          "msFromManagedEntry": 434.3885,
+          "name": "first_post_successful_present_callback",
+          "code": 13,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4128946047817,
+          "msFromManagedEntry": 434.3885,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4128946598538,
+          "msFromManagedEntry": 489.4606,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4128946599636,
+          "msFromManagedEntry": 489.5704,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128946601013,
+          "msFromManagedEntry": 489.7081,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128946604850,
+          "msFromManagedEntry": 490.0918,
+          "name": "present_return",
+          "code": 18,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128946604855,
+          "msFromManagedEntry": 490.0923,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4128946605011,
+          "msFromManagedEntry": 490.1079,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128946605324,
+          "msFromManagedEntry": 490.1392,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128946609084,
+          "msFromManagedEntry": 490.5152,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 2,
+          "value": 38
+        },
+        {
+          "tick": 4128946617476,
+          "msFromManagedEntry": 491.3544,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 2,
+          "value": 38
+        },
+        {
+          "tick": 4128946617967,
+          "msFromManagedEntry": 491.4035,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128946618795,
+          "msFromManagedEntry": 491.4863,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128946620959,
+          "msFromManagedEntry": 491.7027,
+          "name": "present_return",
+          "code": 18,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128946620963,
+          "msFromManagedEntry": 491.7031,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4128946621101,
+          "msFromManagedEntry": 491.7169,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128946621159,
+          "msFromManagedEntry": 491.7227,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128946623669,
+          "msFromManagedEntry": 491.9737,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 3,
+          "value": 38
+        },
+        {
+          "tick": 4128946624544,
+          "msFromManagedEntry": 492.0612,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 3,
+          "value": 38
+        },
+        {
+          "tick": 4128946624952,
+          "msFromManagedEntry": 492.102,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128946625721,
+          "msFromManagedEntry": 492.1789,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128946627126,
+          "msFromManagedEntry": 492.3194,
+          "name": "present_return",
+          "code": 18,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128946627130,
+          "msFromManagedEntry": 492.3198,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4128946627208,
+          "msFromManagedEntry": 492.3276,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128946628004,
+          "msFromManagedEntry": 492.4072,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128946628895,
+          "msFromManagedEntry": 492.4963,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 4,
+          "value": 38
+        },
+        {
+          "tick": 4128946629520,
+          "msFromManagedEntry": 492.5588,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 4,
+          "value": 38
+        },
+        {
+          "tick": 4128946629895,
+          "msFromManagedEntry": 492.5963,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128946630656,
+          "msFromManagedEntry": 492.6724,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128946631390,
+          "msFromManagedEntry": 492.7458,
+          "name": "present_return",
+          "code": 18,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128946631394,
+          "msFromManagedEntry": 492.7462,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4128946631395,
+          "msFromManagedEntry": 492.7463,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128946685364,
+          "msFromManagedEntry": 498.1432,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128946686160,
+          "msFromManagedEntry": 498.2228,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 5,
+          "value": 38
+        },
+        {
+          "tick": 4128946686680,
+          "msFromManagedEntry": 498.2748,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 5,
+          "value": 38
+        },
+        {
+          "tick": 4128946687133,
+          "msFromManagedEntry": 498.3201,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128946687766,
+          "msFromManagedEntry": 498.3834,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128946688396,
+          "msFromManagedEntry": 498.4464,
+          "name": "present_return",
+          "code": 18,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128946688400,
+          "msFromManagedEntry": 498.4468,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4128946688502,
+          "msFromManagedEntry": 498.457,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128946741793,
+          "msFromManagedEntry": 503.7861,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128946742756,
+          "msFromManagedEntry": 503.8824,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 6,
+          "value": 38
+        },
+        {
+          "tick": 4128946744452,
+          "msFromManagedEntry": 504.052,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 6,
+          "value": 38
+        },
+        {
+          "tick": 4128946744886,
+          "msFromManagedEntry": 504.0954,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128946745540,
+          "msFromManagedEntry": 504.1608,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128946746937,
+          "msFromManagedEntry": 504.3005,
+          "name": "present_return",
+          "code": 18,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128946746941,
+          "msFromManagedEntry": 504.3009,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4128946747567,
+          "msFromManagedEntry": 504.3635,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128946797072,
+          "msFromManagedEntry": 509.314,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128946798326,
+          "msFromManagedEntry": 509.4394,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 7,
+          "value": 38
+        },
+        {
+          "tick": 4128946799628,
+          "msFromManagedEntry": 509.5696,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 7,
+          "value": 38
+        },
+        {
+          "tick": 4128946800191,
+          "msFromManagedEntry": 509.6259,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128946800980,
+          "msFromManagedEntry": 509.7048,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128946802365,
+          "msFromManagedEntry": 509.8433,
+          "name": "present_return",
+          "code": 18,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4128946802371,
+          "msFromManagedEntry": 509.8439,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 7,
+          "value": 0
+        }
+      ],
+      "firstCallbackRows": [
+        [
+          4128945704772,
+          4128945717246,
+          4128945717757,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4128945718320,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4128946047829,
+          4128946048292,
+          0,
+          4128946048293,
+          330536,
+          4128946066568,
+          4128946597931,
+          4128946597945,
+          4128946598060,
+          0,
+          1,
+          0,
+          33053,
+          16387
+        ],
+        [
+          4128946609089,
+          4128946609562,
+          0,
+          4128946609562,
+          561269,
+          4128946609696,
+          4128946617097,
+          4128946617105,
+          4128946617108,
+          1,
+          5,
+          16387,
+          56127,
+          5847
+        ],
+        [
+          4128946623678,
+          4128946623978,
+          0,
+          4128946623978,
+          14416,
+          4128946624167,
+          4128946624191,
+          4128946624198,
+          4128946624200,
+          5,
+          5,
+          5847,
+          1442,
+          7289
+        ],
+        [
+          4128946628903,
+          4128946628909,
+          0,
+          4128946628909,
+          4931,
+          4128946629034,
+          4128946629059,
+          4128946629066,
+          4128946629068,
+          5,
+          5,
+          7289,
+          493,
+          7782
+        ],
+        [
+          4128946686168,
+          4128946686175,
+          0,
+          4128946686175,
+          57266,
+          4128946686305,
+          4128946686330,
+          4128946686338,
+          4128946686341,
+          5,
+          5,
+          7782,
+          5726,
+          13508
+        ],
+        [
+          4128946742769,
+          4128946742778,
+          0,
+          4128946742778,
+          56603,
+          4128946742976,
+          4128946744128,
+          4128946744135,
+          4128946744137,
+          5,
+          6,
+          13508,
+          5661,
+          2502
+        ],
+        [
+          4128946798338,
+          4128946798882,
+          0,
+          4128946798883,
+          56105,
+          4128946799070,
+          4128946799107,
+          4128946799118,
+          4128946799122,
+          6,
+          6,
+          2502,
+          5610,
+          8112
+        ],
+        [
+          4128946852693,
+          4128946852697,
+          0,
+          4128946852698,
+          53815,
+          4128946852826,
+          4128946852850,
+          4128946852857,
+          4128946852860,
+          6,
+          6,
+          8112,
+          5382,
+          13494
+        ],
+        [
+          4128946909424,
+          4128946909430,
+          0,
+          4128946909430,
+          56732,
+          4128946909559,
+          4128946910742,
+          4128946910749,
+          4128946910751,
+          6,
+          7,
+          13494,
+          5673,
+          2501
+        ],
+        [
+          4128946964545,
+          4128946964916,
+          0,
+          4128946964916,
+          55486,
+          4128946965039,
+          4128946965063,
+          4128946965072,
+          4128946965074,
+          7,
+          7,
+          2501,
+          5548,
+          8049
+        ],
+        [
+          4128947020327,
+          4128947020336,
+          0,
+          4128947020337,
+          55421,
+          4128947020576,
+          4128947020625,
+          4128947020639,
+          4128947020644,
+          7,
+          7,
+          8049,
+          5543,
+          13592
+        ]
+      ],
+      "timeline": {
+        "T0": {
+          "tick": 4128941703932,
+          "msFromManagedEntry": 0.0
+        },
+        "T1": {
+          "tick": 4128943862864,
+          "msFromManagedEntry": 215.8932
+        },
+        "shown": {
+          "tick": 4128943922209,
+          "msFromManagedEntry": 221.8277
+        },
+        "T2": {
+          "tick": 4128945694234,
+          "msFromManagedEntry": 399.0302
+        },
+        "T3": {
+          "tick": 4128945697380,
+          "msFromManagedEntry": 399.3448
+        },
+        "T4": {
+          "tick": 4128946046752,
+          "msFromManagedEntry": 434.282
+        },
+        "T5": {
+          "tick": 4128945749300,
+          "msFromManagedEntry": 404.5368
+        },
+        "T7": {
+          "tick": 4128946047817,
+          "msFromManagedEntry": 434.3885
+        },
+        "T6": {
+          "tick": 4128945832435,
+          "msFromManagedEntry": 412.8503
+        },
+        "T8_serviceEntryBound": {
+          "tick": 4128946066568,
+          "msFromManagedEntry": 436.2636
+        },
+        "T9_publicationObservedUpperBound": {
+          "tick": 4128946597945,
+          "msFromManagedEntry": 489.4013
+        },
+        "legacyStart": {
+          "tick": 4128945717757,
+          "msFromManagedEntry": 401.3825
+        },
+        "firstLegacySample": {
+          "tick": 4128946048293,
+          "msFromManagedEntry": 434.4361
+        },
+        "firstManagedCallbackEntry": {
+          "tick": 4128945704772,
+          "msFromManagedEntry": 400.084
+        }
+      },
+      "deltasMs": {
+        "windowCreatedToBackendReady": 183.137,
+        "windowCreatedToFirstNativeFrame": 183.4516,
+        "shownToFirstSuccessfulPresentReturn": 191.0226,
+        "createdToFirstSuccessfulPresentReturn": 196.9571,
+        "firstPresentCall": 8.3135,
+        "firstNativeFrame": 34.9369,
+        "firstLegacyInterval": 33.0536,
+        "legacyStartToFirstPresentReturn": 11.4678,
+        "presentReturnToFirstAdvancingService": 23.4133,
+        "firstAdvancingService": 53.1363,
+        "firstServiceCall": 53.1363
+      },
+      "serviceCallsBeforeFirstSuccessfulPresent": 0,
+      "publicationsObservedBeforeFirstSuccessfulPresent": 0,
+      "firstAdvancingCallback": 1,
+      "firstAdvancingObservation": {
+        "frontierBefore": 0,
+        "frontierAfter": 1,
+        "debtBefore": 0,
+        "credit": 33053,
+        "debtAfter": 16387,
+        "time": 16666
+      },
+      "legacyDisplay": {
+        "median": 5.5491,
+        "p95": 5.7612,
+        "p99": 33.0536,
+        "max": 56.1269
+      },
+      "nativeFrames": {
+        "median": 5.5427,
+        "p95": 5.8557,
+        "p99": 34.9369,
+        "max": 55.7981
+      },
+      "nativeFirstFrames": [
+        34.9369,
+        55.7981,
+        1.595,
+        0.6028,
+        0.4185,
+        5.7004,
+        5.8439,
+        5.4801,
+        5.2914,
+        5.7792,
+        5.4184,
+        5.6318
+      ],
+      "legacyMaximumEndingCallback": 2,
+      "nativeMaximumIndex": 1,
+      "initialCanonical": {
+        "frontier": 0,
+        "debt": 0
+      },
+      "environment": [
+        "SRV01_COLD_PREPARATION ms=179.5289 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Vulkan validation layer: disabled (Release)",
+        "[native] Swapchain recreated after resize",
+        "[native] CPU timings: update=5.465 ms; fence=4.941; inspection=0.036; hostCallback=0.485; validationUpload=0.003; record=0.052; submit=0.024; present=0.203",
+        "SRV01_COLD_PREPARATION ms=7.7934 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0"
+      ]
+    },
+    {
+      "id": "B2",
+      "order": 3,
+      "route": "srv01-supported-contact",
+      "start": "2026-09-17T18:08:40.8414000-04:00",
+      "arguments": [
+        "--scene=srv01-supported-contact",
+        "--benchmark-frames=180"
+      ],
+      "executableSha256": "7950CED63BDE459FBD49AD27805F972395DACAE2EC889BFD6722508CE2A9915A",
+      "interaction": "none intentionally",
+      "freshProcess": true,
+      "pid": 19316,
+      "end": "2026-09-17T18:08:42.6617799-04:00",
+      "exitCode": 0,
+      "result": "VALID",
+      "stdoutSha256": "4d7ee90f085d9296a35d1533d18bd187569b55ed8e759bc53fed542db203bb7d",
+      "simulation": {
+        "frequency": 10000000,
+        "managedEntry": 4129133895351,
+        "poweredSupport": false,
+        "callbacks": 180,
+        "legacySamples": 179,
+        "failed": false,
+        "completed": false,
+        "frontier": 64,
+        "time": 1066666,
+        "debt": 542,
+        "credits": 1067208,
+        "maxPublications": 3,
+        "revision": 64,
+        "timelineRevision": 0,
+        "history": 64,
+        "fuel": 30,
+        "oxide": 45,
+        "mass": 705,
+        "identityPass": true,
+        "replayMatches": 180
+      },
+      "frequency": 10000000,
+      "recordedExtents": [
+        "960x540",
+        "960x540"
+      ],
+      "events": [
+        {
+          "tick": 4129136394997,
+          "msFromManagedEntry": 249.9646,
+          "name": "native_window_initialization_entry",
+          "code": 4,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129136423241,
+          "msFromManagedEntry": 252.789,
+          "name": "window_created",
+          "code": 3,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129136423742,
+          "msFromManagedEntry": 252.8391,
+          "name": "before_ShowWindow",
+          "code": 1,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129136537984,
+          "msFromManagedEntry": 264.2633,
+          "name": "ShowWindow_return",
+          "code": 2,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129137196856,
+          "msFromManagedEntry": 330.1505,
+          "name": "instance_ready",
+          "code": 5,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129137451501,
+          "msFromManagedEntry": 355.615,
+          "name": "device_ready",
+          "code": 6,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129137553502,
+          "msFromManagedEntry": 365.8151,
+          "name": "visual_meshes_ready",
+          "code": 7,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129138378600,
+          "msFromManagedEntry": 448.3249,
+          "name": "initial_swap_ready",
+          "code": 8,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129138435943,
+          "msFromManagedEntry": 454.0592,
+          "name": "backend_ready",
+          "code": 9,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129138442288,
+          "msFromManagedEntry": 454.6937,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129138442477,
+          "msFromManagedEntry": 454.7126,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129138443124,
+          "msFromManagedEntry": 454.7773,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4129138480008,
+          "msFromManagedEntry": 458.4657,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4129138483979,
+          "msFromManagedEntry": 458.8628,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129138492379,
+          "msFromManagedEntry": 459.7028,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129138575361,
+          "msFromManagedEntry": 468.001,
+          "name": "present_return",
+          "code": 18,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129138575373,
+          "msFromManagedEntry": 468.0022,
+          "name": "recreate_begin",
+          "code": 19,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129138815637,
+          "msFromManagedEntry": 492.0286,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129138815918,
+          "msFromManagedEntry": 492.0567,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129138815951,
+          "msFromManagedEntry": 492.06,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129138816477,
+          "msFromManagedEntry": 492.1126,
+          "name": "first_post_successful_present_callback",
+          "code": 13,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4129138816478,
+          "msFromManagedEntry": 492.1127,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4129139356769,
+          "msFromManagedEntry": 546.1418,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4129139358132,
+          "msFromManagedEntry": 546.2781,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129139359456,
+          "msFromManagedEntry": 546.4105,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129139366066,
+          "msFromManagedEntry": 547.0715,
+          "name": "present_return",
+          "code": 18,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129139366076,
+          "msFromManagedEntry": 547.0725,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129139367847,
+          "msFromManagedEntry": 547.2496,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129139368039,
+          "msFromManagedEntry": 547.2688,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129139371955,
+          "msFromManagedEntry": 547.6604,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 2,
+          "value": 38
+        },
+        {
+          "tick": 4129139375285,
+          "msFromManagedEntry": 547.9934,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 2,
+          "value": 38
+        },
+        {
+          "tick": 4129139376014,
+          "msFromManagedEntry": 548.0663,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129139377048,
+          "msFromManagedEntry": 548.1697,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129139380304,
+          "msFromManagedEntry": 548.4953,
+          "name": "present_return",
+          "code": 18,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129139380323,
+          "msFromManagedEntry": 548.4972,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129139380327,
+          "msFromManagedEntry": 548.4976,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129139380489,
+          "msFromManagedEntry": 548.5138,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129139381237,
+          "msFromManagedEntry": 548.5886,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 3,
+          "value": 38
+        },
+        {
+          "tick": 4129139382707,
+          "msFromManagedEntry": 548.7356,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 3,
+          "value": 38
+        },
+        {
+          "tick": 4129139383162,
+          "msFromManagedEntry": 548.7811,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129139384268,
+          "msFromManagedEntry": 548.8917,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129139385212,
+          "msFromManagedEntry": 548.9861,
+          "name": "present_return",
+          "code": 18,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129139385215,
+          "msFromManagedEntry": 548.9864,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129139385216,
+          "msFromManagedEntry": 548.9865,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129139386494,
+          "msFromManagedEntry": 549.1143,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129139387335,
+          "msFromManagedEntry": 549.1984,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 4,
+          "value": 38
+        },
+        {
+          "tick": 4129139388062,
+          "msFromManagedEntry": 549.2711,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 4,
+          "value": 38
+        },
+        {
+          "tick": 4129139408864,
+          "msFromManagedEntry": 551.3513,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129139410301,
+          "msFromManagedEntry": 551.495,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129139412445,
+          "msFromManagedEntry": 551.7094,
+          "name": "present_return",
+          "code": 18,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129139412451,
+          "msFromManagedEntry": 551.71,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129139412453,
+          "msFromManagedEntry": 551.7102,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129139466509,
+          "msFromManagedEntry": 557.1158,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129139467350,
+          "msFromManagedEntry": 557.1999,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 5,
+          "value": 38
+        },
+        {
+          "tick": 4129139469556,
+          "msFromManagedEntry": 557.4205,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 5,
+          "value": 38
+        },
+        {
+          "tick": 4129139470268,
+          "msFromManagedEntry": 557.4917,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129139471221,
+          "msFromManagedEntry": 557.587,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129139472879,
+          "msFromManagedEntry": 557.7528,
+          "name": "present_return",
+          "code": 18,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129139472885,
+          "msFromManagedEntry": 557.7534,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129139474328,
+          "msFromManagedEntry": 557.8977,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129139522383,
+          "msFromManagedEntry": 562.7032,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129139523531,
+          "msFromManagedEntry": 562.818,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 6,
+          "value": 38
+        },
+        {
+          "tick": 4129139524909,
+          "msFromManagedEntry": 562.9558,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 6,
+          "value": 38
+        },
+        {
+          "tick": 4129139525517,
+          "msFromManagedEntry": 563.0166,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129139526509,
+          "msFromManagedEntry": 563.1158,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129139528378,
+          "msFromManagedEntry": 563.3027,
+          "name": "present_return",
+          "code": 18,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129139528382,
+          "msFromManagedEntry": 563.3031,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129139528480,
+          "msFromManagedEntry": 563.3129,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129139577374,
+          "msFromManagedEntry": 568.2023,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129139578202,
+          "msFromManagedEntry": 568.2851,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 7,
+          "value": 38
+        },
+        {
+          "tick": 4129139578943,
+          "msFromManagedEntry": 568.3592,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 7,
+          "value": 38
+        },
+        {
+          "tick": 4129139579551,
+          "msFromManagedEntry": 568.42,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129139580485,
+          "msFromManagedEntry": 568.5134,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129139582013,
+          "msFromManagedEntry": 568.6662,
+          "name": "present_return",
+          "code": 18,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129139582018,
+          "msFromManagedEntry": 568.6667,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 7,
+          "value": 0
+        }
+      ],
+      "firstCallbackRows": [
+        [
+          4129138448939,
+          4129138462380,
+          4129138462912,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4129138463483,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4129138816491,
+          4129138817031,
+          0,
+          4129138817032,
+          354120,
+          4129138835448,
+          4129139356050,
+          4129139356065,
+          4129139356255,
+          0,
+          2,
+          0,
+          35412,
+          2079
+        ],
+        [
+          4129139371970,
+          4129139372432,
+          0,
+          4129139372432,
+          555400,
+          4129139372592,
+          4129139374865,
+          4129139374872,
+          4129139374876,
+          2,
+          5,
+          2079,
+          55540,
+          7619
+        ],
+        [
+          4129139381277,
+          4129139381846,
+          0,
+          4129139381846,
+          9414,
+          4129139382152,
+          4129139382180,
+          4129139382189,
+          4129139382194,
+          5,
+          5,
+          7619,
+          941,
+          8560
+        ],
+        [
+          4129139387349,
+          4129139387360,
+          0,
+          4129139387360,
+          5514,
+          4129139387634,
+          4129139387659,
+          4129139387666,
+          4129139387669,
+          5,
+          5,
+          8560,
+          551,
+          9111
+        ],
+        [
+          4129139467379,
+          4129139467393,
+          0,
+          4129139467393,
+          80033,
+          4129139467624,
+          4129139469135,
+          4129139469142,
+          4129139469145,
+          5,
+          6,
+          9111,
+          8004,
+          448
+        ],
+        [
+          4129139523556,
+          4129139524170,
+          0,
+          4129139524171,
+          56778,
+          4129139524396,
+          4129139524429,
+          4129139524439,
+          4129139524442,
+          6,
+          6,
+          448,
+          5677,
+          6125
+        ],
+        [
+          4129139578224,
+          4129139578240,
+          0,
+          4129139578240,
+          54069,
+          4129139578462,
+          4129139578489,
+          4129139578497,
+          4129139578500,
+          6,
+          6,
+          6125,
+          5407,
+          11532
+        ],
+        [
+          4129139634274,
+          4129139634289,
+          0,
+          4129139634289,
+          56049,
+          4129139634524,
+          4129139636293,
+          4129139636300,
+          4129139636303,
+          6,
+          7,
+          11532,
+          5605,
+          471
+        ],
+        [
+          4129139689476,
+          4129139690088,
+          0,
+          4129139690089,
+          55800,
+          4129139690303,
+          4129139690328,
+          4129139690336,
+          4129139690339,
+          7,
+          7,
+          471,
+          5580,
+          6051
+        ],
+        [
+          4129139767799,
+          4129139767831,
+          0,
+          4129139767831,
+          77742,
+          4129139768395,
+          4129139768435,
+          4129139768447,
+          4129139768454,
+          7,
+          7,
+          6051,
+          7774,
+          13825
+        ],
+        [
+          4129139801104,
+          4129139801122,
+          0,
+          4129139801123,
+          33292,
+          4129139801481,
+          4129139803250,
+          4129139803259,
+          4129139803264,
+          7,
+          8,
+          13825,
+          3330,
+          488
+        ]
+      ],
+      "timeline": {
+        "T0": {
+          "tick": 4129133895351,
+          "msFromManagedEntry": 0.0
+        },
+        "T1": {
+          "tick": 4129136423241,
+          "msFromManagedEntry": 252.789
+        },
+        "shown": {
+          "tick": 4129136537984,
+          "msFromManagedEntry": 264.2633
+        },
+        "T2": {
+          "tick": 4129138435943,
+          "msFromManagedEntry": 454.0592
+        },
+        "T3": {
+          "tick": 4129138442288,
+          "msFromManagedEntry": 454.6937
+        },
+        "T4": {
+          "tick": 4129138815637,
+          "msFromManagedEntry": 492.0286
+        },
+        "T5": {
+          "tick": 4129138492379,
+          "msFromManagedEntry": 459.7028
+        },
+        "T7": {
+          "tick": 4129138816477,
+          "msFromManagedEntry": 492.1126
+        },
+        "T6": {
+          "tick": 4129138575361,
+          "msFromManagedEntry": 468.001
+        },
+        "T8_serviceEntryBound": {
+          "tick": 4129138835448,
+          "msFromManagedEntry": 494.0097
+        },
+        "T9_publicationObservedUpperBound": {
+          "tick": 4129139356065,
+          "msFromManagedEntry": 546.0714
+        },
+        "legacyStart": {
+          "tick": 4129138462912,
+          "msFromManagedEntry": 456.7561
+        },
+        "firstLegacySample": {
+          "tick": 4129138817032,
+          "msFromManagedEntry": 492.1681
+        },
+        "firstManagedCallbackEntry": {
+          "tick": 4129138448939,
+          "msFromManagedEntry": 455.3588
+        }
+      },
+      "deltasMs": {
+        "windowCreatedToBackendReady": 201.2702,
+        "windowCreatedToFirstNativeFrame": 201.9047,
+        "shownToFirstSuccessfulPresentReturn": 203.7377,
+        "createdToFirstSuccessfulPresentReturn": 215.212,
+        "firstPresentCall": 8.2982,
+        "firstNativeFrame": 37.3345,
+        "firstLegacyInterval": 35.412,
+        "legacyStartToFirstPresentReturn": 11.2449,
+        "presentReturnToFirstAdvancingService": 26.0087,
+        "firstAdvancingService": 52.0602,
+        "firstServiceCall": 52.0602
+      },
+      "serviceCallsBeforeFirstSuccessfulPresent": 0,
+      "publicationsObservedBeforeFirstSuccessfulPresent": 0,
+      "firstAdvancingCallback": 1,
+      "firstAdvancingObservation": {
+        "frontierBefore": 0,
+        "frontierAfter": 2,
+        "debtBefore": 0,
+        "credit": 35412,
+        "debtAfter": 2079,
+        "time": 33333
+      },
+      "legacyDisplay": {
+        "median": 5.5664,
+        "p95": 5.9956,
+        "p99": 35.412,
+        "max": 55.54
+      },
+      "nativeFrames": {
+        "median": 5.5084,
+        "p95": 6.0431,
+        "p99": 37.3345,
+        "max": 55.0156
+      },
+      "nativeFirstFrames": [
+        37.3345,
+        55.0156,
+        1.2473,
+        0.4887,
+        2.7234,
+        6.0431,
+        5.4051,
+        5.3537,
+        5.7667,
+        5.3337,
+        8.145,
+        3.1668
+      ],
+      "legacyMaximumEndingCallback": 2,
+      "nativeMaximumIndex": 1,
+      "initialCanonical": {
+        "frontier": 0,
+        "debt": 0
+      },
+      "environment": [
+        "SRV01_COLD_PREPARATION ms=209.8354 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Vulkan validation layer: disabled (Release)",
+        "[native] Swapchain recreated after resize",
+        "[native] CPU timings: update=5.348 ms; fence=4.767; inspection=0.040; hostCallback=0.535; validationUpload=0.006; record=0.080; submit=0.033; present=0.245",
+        "SRV01_COLD_PREPARATION ms=8.0099 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0"
+      ]
+    },
+    {
+      "id": "A2",
+      "order": 4,
+      "route": "srv01-powered-support",
+      "start": "2026-09-17T18:08:53.7548822-04:00",
+      "arguments": [
+        "--scene=srv01-powered-support",
+        "--benchmark-frames=180"
+      ],
+      "executableSha256": "7950CED63BDE459FBD49AD27805F972395DACAE2EC889BFD6722508CE2A9915A",
+      "interaction": "none intentionally",
+      "freshProcess": true,
+      "pid": 13224,
+      "end": "2026-09-17T18:08:55.4816539-04:00",
+      "exitCode": 0,
+      "result": "VALID",
+      "stdoutSha256": "9ed00297fcb9044e582b95025028480b1d3a7cd76df596c60fb46ad992bbb156",
+      "simulation": {
+        "frequency": 10000000,
+        "managedEntry": 4129262678887,
+        "poweredSupport": true,
+        "callbacks": 180,
+        "legacySamples": 179,
+        "failed": false,
+        "completed": false,
+        "frontier": 64,
+        "time": 1066666,
+        "debt": 6881,
+        "credits": 1073547,
+        "maxPublications": 3,
+        "revision": 64,
+        "timelineRevision": 0,
+        "history": 64,
+        "fuel": 29.91666671875,
+        "oxide": 44.875000078125,
+        "mass": 704.791666796875,
+        "identityPass": true,
+        "replayMatches": 180
+      },
+      "frequency": 10000000,
+      "recordedExtents": [
+        "960x540",
+        "960x540"
+      ],
+      "events": [
+        {
+          "tick": 4129264805728,
+          "msFromManagedEntry": 212.6841,
+          "name": "native_window_initialization_entry",
+          "code": 4,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129264827492,
+          "msFromManagedEntry": 214.8605,
+          "name": "window_created",
+          "code": 3,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129264827928,
+          "msFromManagedEntry": 214.9041,
+          "name": "before_ShowWindow",
+          "code": 1,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129264888427,
+          "msFromManagedEntry": 220.954,
+          "name": "ShowWindow_return",
+          "code": 2,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129265448870,
+          "msFromManagedEntry": 276.9983,
+          "name": "instance_ready",
+          "code": 5,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129265677787,
+          "msFromManagedEntry": 299.89,
+          "name": "device_ready",
+          "code": 6,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129265798171,
+          "msFromManagedEntry": 311.9284,
+          "name": "visual_meshes_ready",
+          "code": 7,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129266589281,
+          "msFromManagedEntry": 391.0394,
+          "name": "initial_swap_ready",
+          "code": 8,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129266647798,
+          "msFromManagedEntry": 396.8911,
+          "name": "backend_ready",
+          "code": 9,
+          "frame": 4294967295,
+          "value": 0
+        },
+        {
+          "tick": 4129266657662,
+          "msFromManagedEntry": 397.8775,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129266657917,
+          "msFromManagedEntry": 397.903,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129266658619,
+          "msFromManagedEntry": 397.9732,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4129266695357,
+          "msFromManagedEntry": 401.647,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 0,
+          "value": 38
+        },
+        {
+          "tick": 4129266699749,
+          "msFromManagedEntry": 402.0862,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129266708533,
+          "msFromManagedEntry": 402.9646,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129266815027,
+          "msFromManagedEntry": 413.614,
+          "name": "present_return",
+          "code": 18,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129266815054,
+          "msFromManagedEntry": 413.6167,
+          "name": "recreate_begin",
+          "code": 19,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129267083998,
+          "msFromManagedEntry": 440.5111,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "tick": 4129267084169,
+          "msFromManagedEntry": 440.5282,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129267084200,
+          "msFromManagedEntry": 440.5313,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129267085180,
+          "msFromManagedEntry": 440.6293,
+          "name": "first_post_successful_present_callback",
+          "code": 13,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4129267085180,
+          "msFromManagedEntry": 440.6293,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 1,
+          "value": 38
+        },
+        {
+          "tick": 4129267648668,
+          "msFromManagedEntry": 496.9781,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 1,
+          "value": 39
+        },
+        {
+          "tick": 4129267649796,
+          "msFromManagedEntry": 497.0909,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129267650960,
+          "msFromManagedEntry": 497.2073,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129267654699,
+          "msFromManagedEntry": 497.5812,
+          "name": "present_return",
+          "code": 18,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129267654709,
+          "msFromManagedEntry": 497.5822,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 1,
+          "value": 0
+        },
+        {
+          "tick": 4129267654959,
+          "msFromManagedEntry": 497.6072,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129267655114,
+          "msFromManagedEntry": 497.6227,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129267659257,
+          "msFromManagedEntry": 498.037,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 2,
+          "value": 39
+        },
+        {
+          "tick": 4129267663499,
+          "msFromManagedEntry": 498.4612,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 2,
+          "value": 39
+        },
+        {
+          "tick": 4129267664007,
+          "msFromManagedEntry": 498.512,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129267664889,
+          "msFromManagedEntry": 498.6002,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129267667040,
+          "msFromManagedEntry": 498.8153,
+          "name": "present_return",
+          "code": 18,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129267667044,
+          "msFromManagedEntry": 498.8157,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 2,
+          "value": 0
+        },
+        {
+          "tick": 4129267667135,
+          "msFromManagedEntry": 498.8248,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129267667207,
+          "msFromManagedEntry": 498.832,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129267667964,
+          "msFromManagedEntry": 498.9077,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 3,
+          "value": 39
+        },
+        {
+          "tick": 4129267668794,
+          "msFromManagedEntry": 498.9907,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 3,
+          "value": 39
+        },
+        {
+          "tick": 4129267669167,
+          "msFromManagedEntry": 499.028,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129267669833,
+          "msFromManagedEntry": 499.0946,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129267670522,
+          "msFromManagedEntry": 499.1635,
+          "name": "present_return",
+          "code": 18,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129267670525,
+          "msFromManagedEntry": 499.1638,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 3,
+          "value": 0
+        },
+        {
+          "tick": 4129267670526,
+          "msFromManagedEntry": 499.1639,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129267671453,
+          "msFromManagedEntry": 499.2566,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129267672698,
+          "msFromManagedEntry": 499.3811,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 4,
+          "value": 39
+        },
+        {
+          "tick": 4129267673223,
+          "msFromManagedEntry": 499.4336,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 4,
+          "value": 39
+        },
+        {
+          "tick": 4129267688189,
+          "msFromManagedEntry": 500.9302,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129267689687,
+          "msFromManagedEntry": 501.08,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129267691055,
+          "msFromManagedEntry": 501.2168,
+          "name": "present_return",
+          "code": 18,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129267691062,
+          "msFromManagedEntry": 501.2175,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 4,
+          "value": 0
+        },
+        {
+          "tick": 4129267691267,
+          "msFromManagedEntry": 501.238,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129267746714,
+          "msFromManagedEntry": 506.7827,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129267747725,
+          "msFromManagedEntry": 506.8838,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 5,
+          "value": 39
+        },
+        {
+          "tick": 4129267749842,
+          "msFromManagedEntry": 507.0955,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 5,
+          "value": 39
+        },
+        {
+          "tick": 4129267750359,
+          "msFromManagedEntry": 507.1472,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129267751009,
+          "msFromManagedEntry": 507.2122,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129267751667,
+          "msFromManagedEntry": 507.278,
+          "name": "present_return",
+          "code": 18,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129267751671,
+          "msFromManagedEntry": 507.2784,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 5,
+          "value": 0
+        },
+        {
+          "tick": 4129267751772,
+          "msFromManagedEntry": 507.2885,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129267801555,
+          "msFromManagedEntry": 512.2668,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129267802719,
+          "msFromManagedEntry": 512.3832,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 6,
+          "value": 39
+        },
+        {
+          "tick": 4129267804335,
+          "msFromManagedEntry": 512.5448,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 6,
+          "value": 39
+        },
+        {
+          "tick": 4129267804728,
+          "msFromManagedEntry": 512.5841,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129267805339,
+          "msFromManagedEntry": 512.6452,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129267806636,
+          "msFromManagedEntry": 512.7749,
+          "name": "present_return",
+          "code": 18,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129267806640,
+          "msFromManagedEntry": 512.7753,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 6,
+          "value": 0
+        },
+        {
+          "tick": 4129267806718,
+          "msFromManagedEntry": 512.7831,
+          "name": "native_frame_begin",
+          "code": 10,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129267857835,
+          "msFromManagedEntry": 517.8948,
+          "name": "graphics_fence_return",
+          "code": 12,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129267858727,
+          "msFromManagedEntry": 517.984,
+          "name": "callback_begin",
+          "code": 14,
+          "frame": 7,
+          "value": 39
+        },
+        {
+          "tick": 4129267860676,
+          "msFromManagedEntry": 518.1789,
+          "name": "callback_end",
+          "code": 15,
+          "frame": 7,
+          "value": 39
+        },
+        {
+          "tick": 4129267861087,
+          "msFromManagedEntry": 518.22,
+          "name": "acquire_return",
+          "code": 16,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129267861845,
+          "msFromManagedEntry": 518.2958,
+          "name": "present_begin",
+          "code": 17,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129267862960,
+          "msFromManagedEntry": 518.4073,
+          "name": "present_return",
+          "code": 18,
+          "frame": 7,
+          "value": 0
+        },
+        {
+          "tick": 4129267862963,
+          "msFromManagedEntry": 518.4076,
+          "name": "native_frame_end",
+          "code": 11,
+          "frame": 7,
+          "value": 0
+        }
+      ],
+      "firstCallbackRows": [
+        [
+          4129266664347,
+          4129266677978,
+          4129266678504,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4129266679064,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4129267085197,
+          4129267086156,
+          0,
+          4129267086156,
+          407652,
+          4129267104185,
+          4129267645624,
+          4129267645635,
+          4129267645817,
+          0,
+          2,
+          0,
+          40765,
+          7432
+        ],
+        [
+          4129267659266,
+          4129267659715,
+          0,
+          4129267659716,
+          573560,
+          4129267659841,
+          4129267663107,
+          4129267663115,
+          4129267663118,
+          2,
+          5,
+          7432,
+          57356,
+          14788
+        ],
+        [
+          4129267667972,
+          4129267668274,
+          0,
+          4129267668274,
+          8558,
+          4129267668397,
+          4129267668421,
+          4129267668430,
+          4129267668433,
+          5,
+          5,
+          14788,
+          856,
+          15644
+        ],
+        [
+          4129267672706,
+          4129267672711,
+          0,
+          4129267672711,
+          4437,
+          4129267672839,
+          4129267672864,
+          4129267672871,
+          4129267672873,
+          5,
+          5,
+          15644,
+          443,
+          16087
+        ],
+        [
+          4129267747734,
+          4129267747738,
+          0,
+          4129267747739,
+          75028,
+          4129267747870,
+          4129267749499,
+          4129267749506,
+          4129267749508,
+          5,
+          6,
+          16087,
+          7503,
+          6923
+        ],
+        [
+          4129267802733,
+          4129267803375,
+          0,
+          4129267803376,
+          55637,
+          4129267803602,
+          4129267803651,
+          4129267803665,
+          4129267803669,
+          6,
+          6,
+          6923,
+          5564,
+          12487
+        ],
+        [
+          4129267858735,
+          4129267858740,
+          0,
+          4129267858740,
+          55364,
+          4129267858868,
+          4129267860340,
+          4129267860347,
+          4129267860349,
+          6,
+          7,
+          12487,
+          5536,
+          1357
+        ],
+        [
+          4129267913196,
+          4129267913542,
+          0,
+          4129267913543,
+          54803,
+          4129267913662,
+          4129267913686,
+          4129267913693,
+          4129267913695,
+          7,
+          7,
+          1357,
+          5480,
+          6837
+        ],
+        [
+          4129267968982,
+          4129267968986,
+          0,
+          4129267968987,
+          55444,
+          4129267969111,
+          4129267969135,
+          4129267969142,
+          4129267969145,
+          7,
+          7,
+          6837,
+          5545,
+          12382
+        ],
+        [
+          4129268024876,
+          4129268024881,
+          0,
+          4129268024881,
+          55894,
+          4129268025006,
+          4129268026482,
+          4129268026489,
+          4129268026492,
+          7,
+          8,
+          12382,
+          5589,
+          1304
+        ],
+        [
+          4129268080243,
+          4129268080584,
+          0,
+          4129268080584,
+          55703,
+          4129268080704,
+          4129268080728,
+          4129268080735,
+          4129268080738,
+          8,
+          8,
+          1304,
+          5571,
+          6875
+        ]
+      ],
+      "timeline": {
+        "T0": {
+          "tick": 4129262678887,
+          "msFromManagedEntry": 0.0
+        },
+        "T1": {
+          "tick": 4129264827492,
+          "msFromManagedEntry": 214.8605
+        },
+        "shown": {
+          "tick": 4129264888427,
+          "msFromManagedEntry": 220.954
+        },
+        "T2": {
+          "tick": 4129266647798,
+          "msFromManagedEntry": 396.8911
+        },
+        "T3": {
+          "tick": 4129266657662,
+          "msFromManagedEntry": 397.8775
+        },
+        "T4": {
+          "tick": 4129267083998,
+          "msFromManagedEntry": 440.5111
+        },
+        "T5": {
+          "tick": 4129266708533,
+          "msFromManagedEntry": 402.9646
+        },
+        "T7": {
+          "tick": 4129267085180,
+          "msFromManagedEntry": 440.6293
+        },
+        "T6": {
+          "tick": 4129266815027,
+          "msFromManagedEntry": 413.614
+        },
+        "T8_serviceEntryBound": {
+          "tick": 4129267104185,
+          "msFromManagedEntry": 442.5298
+        },
+        "T9_publicationObservedUpperBound": {
+          "tick": 4129267645635,
+          "msFromManagedEntry": 496.6748
+        },
+        "legacyStart": {
+          "tick": 4129266678504,
+          "msFromManagedEntry": 399.9617
+        },
+        "firstLegacySample": {
+          "tick": 4129267086156,
+          "msFromManagedEntry": 440.7269
+        },
+        "firstManagedCallbackEntry": {
+          "tick": 4129266664347,
+          "msFromManagedEntry": 398.546
+        }
+      },
+      "deltasMs": {
+        "windowCreatedToBackendReady": 182.0306,
+        "windowCreatedToFirstNativeFrame": 183.017,
+        "shownToFirstSuccessfulPresentReturn": 192.66,
+        "createdToFirstSuccessfulPresentReturn": 198.7535,
+        "firstPresentCall": 10.6494,
+        "firstNativeFrame": 42.6326,
+        "firstLegacyInterval": 40.7652,
+        "legacyStartToFirstPresentReturn": 13.6523,
+        "presentReturnToFirstAdvancingService": 28.9158,
+        "firstAdvancingService": 54.1439,
+        "firstServiceCall": 54.1439
+      },
+      "serviceCallsBeforeFirstSuccessfulPresent": 0,
+      "publicationsObservedBeforeFirstSuccessfulPresent": 0,
+      "firstAdvancingCallback": 1,
+      "firstAdvancingObservation": {
+        "frontierBefore": 0,
+        "frontierAfter": 2,
+        "debtBefore": 0,
+        "credit": 40765,
+        "debtAfter": 7432,
+        "time": 33333
+      },
+      "legacyDisplay": {
+        "median": 5.5595,
+        "p95": 5.7767,
+        "p99": 40.7652,
+        "max": 57.356
+      },
+      "nativeFrames": {
+        "median": 5.51,
+        "p95": 6.0173,
+        "p99": 42.6326,
+        "max": 57.0537
+      },
+      "nativeFirstFrames": [
+        42.6326,
+        57.0537,
+        1.2084,
+        0.339,
+        2.0534,
+        6.0403,
+        5.4867,
+        5.6244,
+        5.2956,
+        5.4974,
+        5.732,
+        5.42
+      ],
+      "legacyMaximumEndingCallback": 2,
+      "nativeMaximumIndex": 1,
+      "initialCanonical": {
+        "frontier": 0,
+        "debt": 0
+      },
+      "environment": [
+        "SRV01_COLD_PREPARATION ms=178.2585 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Vulkan validation layer: disabled (Release)",
+        "[native] Swapchain recreated after resize",
+        "[native] CPU timings: update=5.464 ms; fence=4.919; inspection=0.036; hostCallback=0.506; validationUpload=0.004; record=0.050; submit=0.027; present=0.220",
+        "SRV01_COLD_PREPARATION ms=7.5757 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0"
+      ]
+    }
+  ]
+}

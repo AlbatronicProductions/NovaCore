@@ -1,0 +1,497 @@
+{
+  "capturedUtc": "2026-09-18T00:42:48.064015+00:00",
+  "refs": {
+    "HEAD": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+    "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+    "origin/main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5"
+  },
+  "remoteMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "codex/srv01-supported-contact-admission",
+  "historicalTagsUnchanged": true,
+  "historicalTagCount": 67,
+  "remoteTagsMatch": true,
+  "stagedPaths": [],
+  "diffCheck": "PASS",
+  "cachedDiffCheck": "PASS",
+  "gitStatus": [
+    "M samples/NovaCore.Triangle/Program.cs",
+    " M samples/NovaCore.Triangle/SampleOptions.cs",
+    " M samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    " M src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    " M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    " M tests/NovaCore.Graphics.Tests/Program.cs",
+    " M tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/post-m15.2-production-remeasurement/",
+    "?? docs/engineering-evidence/srv01-production-integration/closeout.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+    "?? docs/engineering-evidence/srv01-supported-contact-admission-design/",
+    "?? docs/engineering-evidence/srv01-surface-to-flight-gauntlet/",
+    "?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+    "?? docs/legal/LEGAL-REVIEW-TODO.md",
+    "?? docs/legal/MODDING-POLICY-DRAFT.md",
+    "?? docs/legal/ROOT-LICENSE-CANDIDATE.md",
+    "?? docs/legal/finalization/",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDevelopmentPropulsion.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-Development-Propulsion-v1.json",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Site.cs",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+    "?? tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDepartureMeasurements.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDepartureProofTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDevelopmentPropulsionTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs"
+  ],
+  "stage4Preservation": [
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "BEC89735D34AE7529AC7F01AA0889E4558B6B42B4B67A8F4FCEEFD37077DED23",
+      "preservedAt": "current"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "sha256": "405BB302532CE68CB930DB18F897A81385D84222C0FC89678390CD9F865136F9",
+      "preservedAt": "current"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "BACBE961FBCFF1F9D550A643A937D41EB095CABC4D5D70338AAE05F8519A1A63",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+      "sha256": "7CA1ED38A92A1A8CA7BA638C7FDB975D12F44C88B41AB208941498FAAEF2AB1A",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "sha256": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "sha256": "6D36E5782E22471EF4CAC15B88CF1E4F404F80C0E5E09A8E394F56C0A4E9A467",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs",
+      "sha256": "0CD49904A64988F2C6B152CC6B29E5F905DDA22038DA41F8CBF1654F796817C7",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "sha256": "940627F37D0A38AF1625AF1043F95647D091F94056D7676B9D0FBFA4FA23DAD1",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDevelopmentPropulsion.cs",
+      "sha256": "A284CA80B6DE5A545813DAD4C49A2134F1F3A6CE9B8EA3EE4070598ADCE727B9",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+      "sha256": "B3547BD1F71FC665B8F512F52456FAEF069C61125FD628B6951110FCD52AAA9C",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "sha256": "776638487AFF398047F057C7EADACC7C33441851D04D7469B7C2851B120C0520",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyProfileAdmission.cs",
+      "sha256": "071C2EB691EB950C699A1501E67E3AD94E6D9F78A76491FEC328DFA32BA08319",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+      "sha256": "3D41BD5EC9A74A15997C4D88DDF992684BEE19FBF6BBC26C2F0F9099695C9A06",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-Development-Propulsion-v1.json",
+      "sha256": "3A03909DA748624F22B5001AC67B1B5F1DD9689CAE20E0DA694231CF376C5779",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "sha256": "F0101D77D9A2D7AF81C4ABE1A1CD22515FF764B2E3F8B0B33E42ACF63D3FD491",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "C22866B767C888ECC1085812734B9AC7BD136FC7059155193F17A56DA0034341",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+      "sha256": "EC7F71E619C5E48CD86E055C5A91FEC8DE91F45F909EF82BF71FB67BAFD9862C",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+      "sha256": "0E021034C57BF9A9FD205BDEE5DC0525AEBA987D1682CB362C864415C6D84577",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "D779B5867428EFBDC7A903D0060DB95CCC01EB57DD91470BA15DB0E2EAFD22CD",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "CA2B56AC83E2F0813992C6371DBE6A85F8CED7DECA79316CE4D92D31845B8F8B",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "sha256": "2A279A94C9ADA5F63ED0B0FEE5A5A24349B0D29C3F2E5111192EA1804D24F408",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+      "sha256": "498AA48F73158CBE3D08C57966BCDBEE16CC771C18389DF9955C39C3CC913FCE",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "sha256": "5DFB795FE57F1A4FF30A92A6EAE5AFF2981FCA57238E0DC3FD7DA622D725FF79",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "7285FFBD8712031A3F0CE44C15CA0311BC22C86935EF1BD7ECF05916A45A7098",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::tests/NovaCore.Graphics.Tests/Program.cs"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+      "sha256": "6093CAA06B9F7261ED1375443874747F8B53172AE658AF1FC6CDFDC879178CB0",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+      "sha256": "019BD1F3313A68EE8607CB5757CDE0601C42E02900DA079D385F70DC4E13037A",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+      "sha256": "44AF9E51BF9EC26C288FCCC4D244D6B706C7EDE3AE054D699405A44D48DF77FD",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+      "sha256": "69B4364DAF6838F060D8924CE1966DA18CC9FC57B94355887699C9604BFE8BE2",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDepartureMeasurements.cs",
+      "sha256": "C90466A8A0F9351A1AEB46E4E5A35D46EB6345FD91347652C569C862A5EF3E8B",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDepartureProofTests.cs",
+      "sha256": "63A445D47250BD2541004907C1A74F20A0B0999BC61579F85A880A875761C748",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs",
+      "sha256": "78BBA1393E3F626B74E8CADF0C08B8C39AD7B0956ACCF405F2B0E6B6BE740748",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDevelopmentPropulsionTests.cs",
+      "sha256": "5F61F0F6AEB662B83BB0D3B32883734AE68A0134DAA52BCB06C403C91BDC1F0D",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+      "sha256": "C329B171DEB8F0C29925811FEBC3C68D5393C5FDC6E3AC41E2F28F928D946EEF",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs",
+      "sha256": "76AF3726851549834747DBB6E2C4A83586E5B8F9EEE5BF6F891EBBFB98DA3E87",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "67D5BB1CE7C87EFE521D160D9415613F8365E568CEB5A4B976450AAA5AFAA87C",
+      "preservedAt": "current"
+    }
+  ],
+  "stage3Preservation": [
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "BEC89735D34AE7529AC7F01AA0889E4558B6B42B4B67A8F4FCEEFD37077DED23",
+      "preservedAt": "current"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "sha256": "405BB302532CE68CB930DB18F897A81385D84222C0FC89678390CD9F865136F9",
+      "preservedAt": "current"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "BACBE961FBCFF1F9D550A643A937D41EB095CABC4D5D70338AAE05F8519A1A63",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "sha256": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "sha256": "6D36E5782E22471EF4CAC15B88CF1E4F404F80C0E5E09A8E394F56C0A4E9A467",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs",
+      "sha256": "0CD49904A64988F2C6B152CC6B29E5F905DDA22038DA41F8CBF1654F796817C7",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+      "sha256": "A89F0108D4E2EDFBF4DB4C34344FAF125D02769F301C2E503E812086FC6511A1",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/pre-stage4-overlap.zip::src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "sha256": "58A13A44972C0ED4933403996D251F294D20FA268A0E11051225064A83D3B90B",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/pre-stage4-overlap.zip::src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+      "sha256": "3D41BD5EC9A74A15997C4D88DDF992684BEE19FBF6BBC26C2F0F9099695C9A06",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "sha256": "F0101D77D9A2D7AF81C4ABE1A1CD22515FF764B2E3F8B0B33E42ACF63D3FD491",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "C22866B767C888ECC1085812734B9AC7BD136FC7059155193F17A56DA0034341",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+      "sha256": "EC7F71E619C5E48CD86E055C5A91FEC8DE91F45F909EF82BF71FB67BAFD9862C",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+      "sha256": "0E021034C57BF9A9FD205BDEE5DC0525AEBA987D1682CB362C864415C6D84577",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "D779B5867428EFBDC7A903D0060DB95CCC01EB57DD91470BA15DB0E2EAFD22CD",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "CA2B56AC83E2F0813992C6371DBE6A85F8CED7DECA79316CE4D92D31845B8F8B",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "sha256": "B4DABFDB04D2E3B24206E315B4363A2392DB92D06ADAC99228794127255AEE85",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/pre-stage4-overlap.zip::src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+      "sha256": "498AA48F73158CBE3D08C57966BCDBEE16CC771C18389DF9955C39C3CC913FCE",
+      "preservedAt": "current"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "sha256": "41D625512960921783DC8DD9090732D797AFEC1BA1101088A3454CAEE1482A82",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/pre-stage4-overlap.zip::src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "7285FFBD8712031A3F0CE44C15CA0311BC22C86935EF1BD7ECF05916A45A7098",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip::tests/NovaCore.Graphics.Tests/Program.cs"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+      "sha256": "6093CAA06B9F7261ED1375443874747F8B53172AE658AF1FC6CDFDC879178CB0",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+      "sha256": "019BD1F3313A68EE8607CB5757CDE0601C42E02900DA079D385F70DC4E13037A",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+      "sha256": "44AF9E51BF9EC26C288FCCC4D244D6B706C7EDE3AE054D699405A44D48DF77FD",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+      "sha256": "69B4364DAF6838F060D8924CE1966DA18CC9FC57B94355887699C9604BFE8BE2",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDepartureMeasurements.cs",
+      "sha256": "C90466A8A0F9351A1AEB46E4E5A35D46EB6345FD91347652C569C862A5EF3E8B",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDepartureProofTests.cs",
+      "sha256": "63A445D47250BD2541004907C1A74F20A0B0999BC61579F85A880A875761C748",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs",
+      "sha256": "78BBA1393E3F626B74E8CADF0C08B8C39AD7B0956ACCF405F2B0E6B6BE740748",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+      "sha256": "C329B171DEB8F0C29925811FEBC3C68D5393C5FDC6E3AC41E2F28F928D946EEF",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs",
+      "sha256": "76AF3726851549834747DBB6E2C4A83586E5B8F9EEE5BF6F891EBBFB98DA3E87",
+      "preservedAt": "current"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "EABAC83187F69D56BF0EB5E7B9AFDF17FF20F3F173D0C3BCE027DA0BAB1CEAC9",
+      "preservedAt": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/pre-stage4-overlap.zip::tests/NovaCore.Simulation.Tests/Program.cs"
+    }
+  ],
+  "stage5Changes": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "beforeStage5": "776638487AFF398047F057C7EADACC7C33441851D04D7469B7C2851B120C0520",
+      "current": "46D332AD8650C7E90386A19EAF9BF47A60BA5C5898F0A20B36FFF37EEA6430A6",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "beforeStage5": "6D36E5782E22471EF4CAC15B88CF1E4F404F80C0E5E09A8E394F56C0A4E9A467",
+      "current": "9377192CDA38C72FC01C2931DC1EB5E844167459632C0193FF6BD2A14F1EDCFA",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "beforeStage5": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67",
+      "current": "F7D856E597172ECBEBFF2F98CF61F79D4B6403603B641E793CF830E10CB538CF",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+      "beforeStage5": "CA95752706E7785E77A02A896F5331C73490DDCD6D69AD87A18CD6A3005708C5",
+      "current": "58974FB037D70B2A222818E0E93E333439B86CC3E39D18C0D241E601E0FC203C",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "beforeStage5": "2551EA1CE3B7CC3004C4649FCE0D6FA56591935E0A18EDF5E52C1B8EBDC13DAA",
+      "current": "CAF6BFBEEC427F9E9686EED15F492D6CABDFE132A93DA04EC1ACB89397ABD84F",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "beforeStage5": "2D75A905E514E4E140B74B662A61A29CAB0278CE72A08C51CD44EF6DD10F032D",
+      "current": "EF786C5992A50754FA1CBF7B6857AA8454BC4B9D95DA39219DDAF5DC5A53C0C9",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "beforeStage5": "C22866B767C888ECC1085812734B9AC7BD136FC7059155193F17A56DA0034341",
+      "current": "CD5DCCA0D1F223494E36B33866A688657922A7C33DB2DC1090FC4714CD573E35",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "beforeStage5": "CA2B56AC83E2F0813992C6371DBE6A85F8CED7DECA79316CE4D92D31845B8F8B",
+      "current": "A0913FBFF97FFC094596CE30A6B75F23E991487F8A9D3009B00045ECD1A9FFA6",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "beforeStage5": "8D9A1A16F869603567A112D46D5E9404A71618F0C1E6FDACBE41C0A587E6F3DA",
+      "current": "338DEAC1FA8AC890385ABAA3C2FEDAFF1972651265B715A4B00389FE4F456917",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "beforeStage5": "2A279A94C9ADA5F63ED0B0FEE5A5A24349B0D29C3F2E5111192EA1804D24F408",
+      "current": "581DF1DB441963DEE754F871324362C0412A02DADC0C034BD1A83C02337144AE",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "beforeStage5": "7285FFBD8712031A3F0CE44C15CA0311BC22C86935EF1BD7ECF05916A45A7098",
+      "current": "BDBB250FC427900F862B2BFBA01302A4BECFFFB960422D53AE661F59C8C698F7",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs",
+      "current": "7ACD86FA21483247C3AAF1BE823426D57939F28D0196217CFB9F1AEFF931A472",
+      "status": "new unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Site.cs",
+      "current": "7CF0DF021B292084102E3EB2B093308B610F7AA68EED9876A1562A82323EB882",
+      "status": "new unqualified draft"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+      "current": "E32119C299CD400C616C2D82A1DCBC9611E81C479AC84CACA1E352060962C225",
+      "status": "new unqualified draft"
+    }
+  ],
+  "archives": [
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip",
+      "sha256": "2D7D9B1C30E32ACE7EAF13FC50C73F09D2FEAEB4C02D728045BE473AD4843557",
+      "bytes": 148610
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/pre-stage4-overlap.zip",
+      "sha256": "91DE35606677BCC1DB355C12AEE98B89342EBF2494049C02428D6D85F9D99330",
+      "bytes": 58469
+    }
+  ],
+  "ksaRoot": "E:\\Kitten Space Agency",
+  "ksaHashes": {
+    "KSA.dll": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8",
+    "BepuPhysics.dll": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "BepuUtilities.dll": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+  },
+  "stage5Qualification": "UNQUALIFIED - material settled support failure",
+  "correctedTestExecuted": false,
+  "sourceCaveat": "Stage5 production draft bytes unchanged after the executed contact run. Current test has corrected independent settled predicates and has not been rebuilt or rerun."
+}

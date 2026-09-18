@@ -1,0 +1,15 @@
+# Final live capture plan — declared before process 1
+
+Exactly three fresh Release processes. No fourth run, retry-to-green or replacement of a valid bad process. A technically invalid capture is retained and explicitly classified before any replacement decision. The original first live process remains unchanged and historically UNKNOWN as to correlation.
+
+Route `--scene=srv01-florida-support --benchmark-frames=4000 --log=renderer,vulkan`; 960×540, same Vulkan backend/RX6800XT, default fixed camera, no manual input, auto-start and auto-close as in the original timing population. Same stock 705 kg /30+45 kg stores, engine/RCS OFF, 1,200 original intervals /20 simulated seconds. No solver/frame/force/policy changes. Run sequentially with no other build/test job overlapping.
+
+The isolated compile overlay replaces only the sample's existing timing wrapper with a diagnostic observer. It does not change candidate source, admission, stepping, publication, host-time conversion or render calls. Preparation allocates observer storage and caches native readback before host sampling. Sensor methods are warmed without any physical step. Per-callback reporting is deferred until after episode completion; no logging/serialization is inside the measured operation.
+
+Preserve index, absolute Stopwatch start tick, before/after publication frontier, display interval, same operation's service elapsed time, bracketing current-thread CPU time, per-thread allocation delta, GC0/1/2 deltas, native pool bytes, body constraint counts, world/generation/body/shape identity, pending/invalidation and site identity. Native constraint-count changes indicate first solver-facing manifold/constraint admission; they do not expose internal manifold cache timing. Site/frame evaluation at each publication remains ordinary workload, distinct from one-time site construction before READY.
+
+Timing alignment: display[n] = callbackStart[n]−callbackStart[n−1]. Service[n] occurs after callbackStart[n], so its delay contributes primarily to display[n+1]. Retain both same-index and following-interval association; do not equate sorted maxima by magnitude. Current-thread CPU is a coarse Windows accounting bracket, not a stack trace or exact descheduling attribution. Readback/sensor work is outside the original service stopwatch but can affect total display cost. Instrumented allocation counts are diagnostics, not a replacement zero-allocation qualification.
+
+Cold/first-use classification retains exact frontier and call index. Report pre-128-publication and >=128-publication tails separately; a large warmed event cannot be relabelled cold. Keep every event >1 ms and the highest events for boundary review; retain all absolute population statistics and source/binary/log hashes. Do not invent a new 1 ms acceptance budget; it is only an evidence selection threshold.
+
+No KSA responsibility changes: **NO NEW KSA GATE REQUIRED**. If the bounded evidence remains unresolved, STOP FOR PROJECT CONTROL. Launcher, further regression and manual acceptance stay gated on timing closure.

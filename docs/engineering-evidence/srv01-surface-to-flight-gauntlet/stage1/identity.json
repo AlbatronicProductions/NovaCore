@@ -1,0 +1,67 @@
+{
+  "baseline": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "codex/srv01-supported-contact-admission",
+  "status": "UNQUALIFIED DRAFT - PHYSICAL DRIFT FAILURE",
+  "files": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "bytes": 2614,
+      "sha256": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "bytes": 5449,
+      "sha256": "E1B5C807A005FBAE55B25B560DB678C6B401E703916B795AE1F5BE306235E20B"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "bytes": 12430,
+      "sha256": "BB27E0E8B8F653C99B76027A74DC3FCE1A6928C7859651A18C89D164E0AAB948"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "bytes": 18464,
+      "sha256": "DB2763336B3FA5AF8303AC888C3FCF3680FE4326DDCF90007BEBDB9E0AB2F6E9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+      "bytes": 3649,
+      "sha256": "3EFCDE639465C5D38AA5F0B3446830B1CB84F8C58917B75347098DF7A34D33C6"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "bytes": 15558,
+      "sha256": "6A967B8BF8251D5D96406283CC92BA6D4C7FCBF776B4FDF1472C114C0B33E97E"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "bytes": 10697,
+      "sha256": "D779B5867428EFBDC7A903D0060DB95CCC01EB57DD91470BA15DB0E2EAFD22CD"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "bytes": 18974,
+      "sha256": "5E21CBA232B52E44828FD114AEBF9B310B803345BDED55A7E21C017E4220193C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+      "bytes": 2429,
+      "sha256": "7EB55A3C4C2597F9755D9F551636DE91595331F3F25AEACC34362B34B033EB41"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "bytes": 6352,
+      "sha256": "41D625512960921783DC8DD9090732D797AFEC1BA1101088A3454CAEE1482A82"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+      "bytes": 17497,
+      "sha256": "E67D772028ED6B1A597C36C459E2466B974526EB1A484F7A00BB6319987E8955"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 259685,
+      "sha256": "F5DEA1AC5B33B1C42C1845127B3B70FDB0A2FD18A297649249BCD32FBA868F3B"
+    }
+  ]
+}

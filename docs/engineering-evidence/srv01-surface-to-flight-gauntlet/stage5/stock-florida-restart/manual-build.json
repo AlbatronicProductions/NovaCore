@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/NovaCore.Triangle.exe",
+      "sha256": "7950CED63BDE459FBD49AD27805F972395DACAE2EC889BFD6722508CE2A9915A"
+    },
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/NovaCore.Triangle.dll",
+      "sha256": "AD5BA7C1988B8C2D5FB100CD81FC3DEEF2666A7F3CB598AE408385F98F268A30"
+    },
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/NovaCore.Native.dll",
+      "sha256": "0D31A6EB05F050D438B724755465C02E15C6B1C0F51C938C7755035A16A05FED"
+    },
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/NovaCore.Simulation.dll",
+      "sha256": "3287AE149EC9E383B276325F5B6418294BD4B6DF9DAED3BAC052F89DE082A3F0"
+    },
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/NovaCore.Graphics.dll",
+      "sha256": "C22F6946F501E8CA716A903A70C5B28BE09F966B53E2BD990E57343851474284"
+    },
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/NovaCore.Core.dll",
+      "sha256": "63265524EC1B8695C555FF62115195622D7129FDB29648B216CCC44ABC850E10"
+    },
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "build/srv01-stage5-stock/artifacts/bin/NovaCore.Triangle/release/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    }
+  ],
+  "mode": "Release, no diagnostic instrumentation; explicit manual Space"
+}

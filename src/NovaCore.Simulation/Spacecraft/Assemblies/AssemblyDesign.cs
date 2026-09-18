@@ -133,12 +133,14 @@ internal static class AssemblyJson
 }
 
 /// <summary>Immutable compiled catalog/design. Compilation never constructs live state.</summary>
-internal sealed class CompiledAssemblyDesign
+internal sealed partial class CompiledAssemblyDesign
 {
     internal const string Profile="assembled-point-stores/1";
     internal CatalogDesignData Data {get;}
     internal ImmutableArray<CompiledPart> Parts {get;}
     internal string Digest {get;}
+    internal AssemblyDevelopmentPropulsion? Development {get;}
+    internal double MaximumMass {get;}
     internal double DryMass {get;}
     internal Double3 FirstMoment {get;}
     internal Matrix3 OriginInertia {get;}
@@ -146,10 +148,12 @@ internal sealed class CompiledAssemblyDesign
     internal CompiledPart Tank {get;}
     internal ImmutableArray<CompiledAssemblyJet> Jets {get;}
     internal bool HasIndependentBlockJets=>Data.Schema=="novacore.assembly/2";
-    internal byte[] Save()=>AssemblyJson.Write(Data);
-    private CompiledAssemblyDesign(CatalogDesignData data,ImmutableArray<CompiledPart> parts,double dry,Double3 first,Matrix3 origin)
+    internal byte[] Save()=>Development is null?AssemblyJson.Write(Data):throw new InvalidDataException("Development configuration requires its explicit profile; not a stock catalog document.");
+    private CompiledAssemblyDesign(CatalogDesignData data,ImmutableArray<CompiledPart> parts,double dry,Double3 first,Matrix3 origin,AssemblyDevelopmentPropulsion? development=null)
     {
-        Data=data;Parts=parts;DryMass=dry;FirstMoment=first;OriginInertia=origin;Digest=AssemblyJson.Digest(data);
+        Data=data;Parts=parts;DryMass=dry;FirstMoment=first;OriginInertia=origin;Development=development;
+        Digest=development is null?AssemblyJson.Digest(data):AssemblyJson.Digest(new {Profile=development.Data,Effective=data});
+        MaximumMass=dry+(development is null?100:development.Data.FuelCapacityKg+development.Data.OxidizerCapacityKg);
         Main=parts.Single(p=>p.Definition.Role==AssemblyRole.MainEngine);Tank=parts.Single(p=>p.Definition.Role==AssemblyRole.Tank);
         Jets=parts.Where(p=>p.Definition.Role is AssemblyRole.RcsJet or AssemblyRole.RcsBlock)
             .SelectMany(p=>p.Definition.JetActuators is {} jets ? jets.Select(j=>new CompiledAssemblyJet(p,j)) : [new CompiledAssemblyJet(p,p.Definition.Propulsion!)])
@@ -157,7 +161,7 @@ internal sealed class CompiledAssemblyDesign
     }
     internal AssemblyMass ObserveMass(double totalMass)
     {
-        if(!double.IsFinite(totalMass)||totalMass<DryMass||totalMass>DryMass+100)throw new InvalidDataException("Mass outside qualified profile.");
+        if(!double.IsFinite(totalMass)||totalMass<DryMass||totalMass>MaximumMass)throw new InvalidDataException("Mass outside qualified profile.");
         var c=FirstMoment/totalMass;return new(totalMass,c,OriginInertia-Matrix3.Parallel(c)*totalMass);
     }
     internal CompiledPart Part(string id)=>Parts.Single(p=>p.Instance.Id==id);

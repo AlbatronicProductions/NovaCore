@@ -1,0 +1,1548 @@
+{
+  "scope": "Exact proposed changed documentation/evidence paths; source/runtime inputs independently sealed in identity.json.",
+  "selfExclusion": "evidence-identity.json is excluded to prevent a self-referential hash. Seal its SHA256 externally in the Project Control report.",
+  "files": [
+    {
+      "path": "docs/CODEX_HANDOFF.md",
+      "bytes": 20305,
+      "sha256": "945e3ffaddb74b58de790d51940f24b769a9fc59f5aafdc16d68be4ab83c1707"
+    },
+    {
+      "path": "docs/NOVACORE_CURRENT_STATE.md",
+      "bytes": 41962,
+      "sha256": "db0d41fc92e4326e256e5c4d5c91ac8e974ae65a36e1e8a3f3ecf488489cb803"
+    },
+    {
+      "path": "docs/architecture.md",
+      "bytes": 37141,
+      "sha256": "5e9c7ae8c3ad412b27803cb2844decca52f05ff93c3f36f30d3cee1600507c16"
+    },
+    {
+      "path": "docs/engineering-evidence/README.md",
+      "bytes": 12497,
+      "sha256": "1d4df602f27a376e204544c4a79a8182c7f24ccad188924ce147490246864a30"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/README.md",
+      "bytes": 18211,
+      "sha256": "695fbd92436d5cfee1f68b6cb3f0ba9b52d66ee51a78ad275a96bd51c5be74d2"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/cleanup.md",
+      "bytes": 2046,
+      "sha256": "afca5e359733ae81b4488809750a4d2ec9f9fbad1ab9a859de978e52027f090a"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/closeout.json",
+      "bytes": 1563,
+      "sha256": "d999f655f22a7a61aecfa31ec522b6eab854c2605b2127029383e1d709230e48"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/disposable.json",
+      "bytes": 3414,
+      "sha256": "408628c55776d52218d59161993dfd6c1356459a563e04d2459996a7ea00414c"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/identity.json",
+      "bytes": 3923,
+      "sha256": "1e0352415f16c5c26ece8bed50877f47f97b2b25d93af61700f28aea3a636e98"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/measurements.json",
+      "bytes": 272974,
+      "sha256": "8072661fbd9f06e23776ab420d634ff4f1a4c181f4285ebdc77be748c8ca256f"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/ownership-readiness.md",
+      "bytes": 9700,
+      "sha256": "cdc5322aef286817e78a9c125f9a9a9a90d9c87a6afb6d2c3b6ba29aed68f4fe"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/prepare-diagnostic.py",
+      "bytes": 5794,
+      "sha256": "12bcf3a5bc391a9aca1d062a8aaed7b93675bff1f2b9ab8423278bab40816506"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/repo-truth.json",
+      "bytes": 23534,
+      "sha256": "68e9d0fdac712d5754a378a531d627222417e4ff984954ccc6e8ffb564ac46ea"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/reproduce.md",
+      "bytes": 6933,
+      "sha256": "89d895125bf8db83987f51c95761cd28b3c84499770ad883e5d352b59ae411db"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/summarize.py",
+      "bytes": 5435,
+      "sha256": "eceb165d771e7f12b5ad75e709f67ecdf9130d87c6eb6e39da0d251d8e5609c3"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/verification.md",
+      "bytes": 5687,
+      "sha256": "09667452fcbc0e508c15041d7e4662f86009c4f3564e1a0678f94817b01401c3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/README.md",
+      "bytes": 6289,
+      "sha256": "e5e53ccb7a552ad56b2b177785530d9c7e4f205c371be7e213f90d49be9b8b00"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/admission-contract.md",
+      "bytes": 7844,
+      "sha256": "607b7bce64040eaf45fef8a12976fa15c61fe34c8867b1bf599e906d8a42ce33"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/closeout.json",
+      "bytes": 1797,
+      "sha256": "3854c5c0cc04258f460404238e4369ebf3aab79bfa30a5d43d5507740b4dec1c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/equivalence-matrix.md",
+      "bytes": 4997,
+      "sha256": "2b60c4e9eddfc6dce959cc67ecfc664e08e43ba6dd1975a2937dc46f475156c8"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/failure-invalidation.md",
+      "bytes": 4962,
+      "sha256": "f8a7e6723e4768838d37d08731ad6420e2dbe47dc66213addf3e04fc1d81610a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/file-impact.md",
+      "bytes": 5174,
+      "sha256": "84349a4a82cef4c06c7e7f3fb74e03bfd15af04b68f4cf7deec48f57c71d9984"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/identity.json",
+      "bytes": 14035,
+      "sha256": "e8b244a294201dd8966fc9876d37979e08449ac11b533a3a1c82230b474c8200"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/implementation-slice.md",
+      "bytes": 4499,
+      "sha256": "daac991b26c55f70794e3272c50bbce3b50e0db9241b39d2cbd8eb7788936a66"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/ksa-current-owner-map.md",
+      "bytes": 10657,
+      "sha256": "9a254166552d8c7c100ff6992151cc7060ca05413101e301fe578373da4f3469"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/ksa-live-history.md",
+      "bytes": 5764,
+      "sha256": "dc00663ef8aa684bbbb7fe645bdc010b6b69d0bc0b336871808c2f94a9bbf469"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/ksa-supersession-check.md",
+      "bytes": 2311,
+      "sha256": "0fbb71972071a821816c830bdd1b2fb63646c7530ef994ef6b4dd6ae8f5db2d5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/mass-resource-publication.md",
+      "bytes": 8407,
+      "sha256": "e4aeea1c231b644145947368f0cd1071cbcb76e047fed65b4b73c1138fd9e037"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/novacore-owner-map.md",
+      "bytes": 9199,
+      "sha256": "b6dd880b9bddf23afd7375d8862ea573006614912fc5187c07c4d1e519a529c0"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/qualification-plan.md",
+      "bytes": 9432,
+      "sha256": "0af20e1bb9281ab9c66b0b0f6e80a531cde938d153961116b0737b66bb28b592"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/repo-truth.json",
+      "bytes": 6744,
+      "sha256": "33801ddb38165589023f1979d61ad99ce110a013e1e8f6e53bee6fa0879f9c1a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/reproduce.md",
+      "bytes": 4473,
+      "sha256": "b343a12de9065dbcb9eb80fc3fb1c3a9dcb180c6cc3250cab502a95845d837db"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/verification.md",
+      "bytes": 7541,
+      "sha256": "ef42b908c457f410cbb2db4a176663ae17571c92b070e1ae8a7baa1a6631a920"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/README.md",
+      "bytes": 3495,
+      "sha256": "e00ba7a956281e7b82c363f120bf3bcb0859e400e7c6c83adb09328bdd05d147"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/allocation.json",
+      "bytes": 28465,
+      "sha256": "f46b6617e5bce398bccc96690b4918f4a4aa8d778d3d53c62bc700d736d524bc"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/bank-manifest.json",
+      "bytes": 34895,
+      "sha256": "cd4d873932012e198d9b44978384f8000ba7668c39fa881aeeaf0ac18505081e"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/bank-plan.py",
+      "bytes": 3877,
+      "sha256": "b0326ee4ccf11cd34d929f132d7236d1a3f26819d47bf3156f27aba300cfabed"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/bank-prep.json",
+      "bytes": 8424,
+      "sha256": "c879ffcf5a710d1ea230e616b3eea58217bb605f8de0ccb19f2cf3265fc11840"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/build.ps1",
+      "bytes": 1152,
+      "sha256": "83ad41c06b37cc6a1ac0f4b39ac1430065725e6972e05ce860751604d3fd7c87"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/check-history.py",
+      "bytes": 2605,
+      "sha256": "b3cda77281fd422ad38c89c6d23e4040a96d522fa9cfaad9c64d6c4bd32f4cd5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/cleanup-inventory.json",
+      "bytes": 7147,
+      "sha256": "e3a779e9718a2b3a89e125efd0aa5f51a55bbd518f7c9d3035737b89b95b0d2a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/cleanup.md",
+      "bytes": 5251,
+      "sha256": "1921d30f56e23bc7589c8a82c3285764673373ae3ec0725eb4a8b1b8d2b4c8b6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/consolidate.py",
+      "bytes": 5946,
+      "sha256": "5aaf889c281c9d2cdecb019fe531864c8974890de66746125450afd8af0f4951"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/determinism.json",
+      "bytes": 5728,
+      "sha256": "5964ed4bc668c1cabbc3d1b968526064ab5356ef366b5cd2c9f0a9c909d6329c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/duplicate-evidence-retirement.json",
+      "bytes": 967,
+      "sha256": "4f384d4d4febe0a1620ba6de67f373f0e750a33e35eb67d3136452aeb3526caf"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/entry-source-seals.json",
+      "bytes": 133189,
+      "sha256": "e3382e91756be87210fbae48b7c22fa2adcc94a8b7f2aec3fa3c6c491d402899"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/evidence-retention.json",
+      "bytes": 108300,
+      "sha256": "bbf354269048456417279ba422afcf1369c42d271b96034956b54b83c5c8bad6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/final-physical-results.json",
+      "bytes": 21075,
+      "sha256": "6ad36b5f9acb70eca0b43fecc4bb8611b85f8897d92d27af3e8fd75e21cac973"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/historical-source-resolution.json",
+      "bytes": 41392,
+      "sha256": "f46be2680ff0ac0c6df90d09e1e93da2f5c3216a381e81a6af605e7eb7e20a37"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/historical-stock-test-inputs.zip",
+      "bytes": 123397,
+      "sha256": "9534fcd525845138640edc572638142687cf68fac8c346e51a9b4a0aa14f3c96"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/historical-stock-test-recovery.json",
+      "bytes": 1203,
+      "sha256": "31def951361f7ac526fd6ff069abe357b64b584078b8343e73a0fc540aaaff00"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/identity.json",
+      "bytes": 141171,
+      "sha256": "cab378ef6c87a050f441698cf35b74ce4bddd4886d6b40eafeceb8b7976b79f6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/inventory.py",
+      "bytes": 5013,
+      "sha256": "6410f8e69b7fcaf546482294532ce360b36a9ace973215fe10cfb5ea3af5646c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/known-residuals.md",
+      "bytes": 2081,
+      "sha256": "3ce7288fb6a443c4a69c08a1a59ca1ce0d7e95d72de91eb541141e1cafd139b5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/ksa-convergence.md",
+      "bytes": 4094,
+      "sha256": "6aad8f5c8eeee287551a2fa7ec506f8d4d8d63736bb9c764c2caee3491f7eeec"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/manual-acceptance.md",
+      "bytes": 1451,
+      "sha256": "2613f513762f6403b5357108eb56c88f51da9617cd9042c76b191e21addfe294"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/performance.json",
+      "bytes": 34815,
+      "sha256": "9b66f31b104fe3ed7542e52dd7ef8f4d6107c4f54605446559b1a2834c705007"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/performance.md",
+      "bytes": 5378,
+      "sha256": "ae6616e3a58bc9c5dd4aa6e30222f9c37297a9541888ad06578ad115c248832f"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/preflight.json",
+      "bytes": 16394,
+      "sha256": "f1ecd85b1646ad934a575c261bbdbfbea87cc182b26856680337d7a66310f96f"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/preflight.py",
+      "bytes": 1783,
+      "sha256": "2fcdcb0f1bb4e0b182b8a2e02eba511428f8e7d8b30e8ebf15406d335d1181d3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/prepare-launcher.ps1",
+      "bytes": 1290,
+      "sha256": "ef44022f0c98336ff5c29ce2fce161660042163ba3e07e8e58de10a00db4486a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/prospective.py",
+      "bytes": 1765,
+      "sha256": "439c8daf330d28752b6bae2ea065fbd3514b0385de6726ccf15c75802454f867"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/qualified-responsibilities.md",
+      "bytes": 3416,
+      "sha256": "a0f30793031e5e382bea2e06a5267ac6c118307e0f0b9080cde52add966ff4c6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/regression.json",
+      "bytes": 140562,
+      "sha256": "39269550e6d83a94924b816b5cc201b9601a1890295a13a5472b8dc28032a7a0"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/repo-truth.md",
+      "bytes": 1092,
+      "sha256": "aed110f6abc70a62b1881db61720a79cac7b15303c2700c5ea619d062eca64f2"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/reproduce.md",
+      "bytes": 4053,
+      "sha256": "107200a2fdf3b75ad8aefe54853944734caa0d930461536066d5f6a8060214f1"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/source-map.md",
+      "bytes": 3853,
+      "sha256": "7f5060353a54b9d12c41fc72b77d393ca45a8d2692488d132ecf8f6781591db5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/storage.json",
+      "bytes": 3181,
+      "sha256": "5f26428c96adb79986cb3729385c4bc06ea889e045fa9ac12a9e770b5152253b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/validate.ps1",
+      "bytes": 2988,
+      "sha256": "79471dbc0b19e27e069ed1a7c7b9b7f23256d5317745cd4fa829611c485e89e3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/verification.json",
+      "bytes": 14284,
+      "sha256": "2dda165ccba8f4b87eb2cc690c55b285432c9393e8dbeef95ef7794a712bef1d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-foundation-final/verification.md",
+      "bytes": 3788,
+      "sha256": "96c33d9a682ee490dd4ac06b7f0c7f80e9edd5677d66b2deccf09c9bd878cd6f"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/post-stage5-promotion.json",
+      "bytes": 3348,
+      "sha256": "6fc9dd0313ff76aec9447da3877df3e2302d04d9b2a14f265cf1b461d89c2561"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/post-stage5-promotion.md",
+      "bytes": 4736,
+      "sha256": "335461dce3e60204bd1c97cd405132eb8472e75113df6c7223286e2e090f325b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/README.md",
+      "bytes": 6949,
+      "sha256": "ab169abfbc2e0f91533faf20ee0ca9cbc88d3a327058f5f0792bfff57982ce2f"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/cleanup.md",
+      "bytes": 1649,
+      "sha256": "4c03b28b764156ef14b2a84d77e885ab9c30931e4aae2eabacc2be914d5df5bd"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/closeout.json",
+      "bytes": 2994,
+      "sha256": "cac7e32a3a15b23baf83901d504df1909aad27821372c8335900f4852e2aceaf"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/README.md",
+      "bytes": 18095,
+      "sha256": "c044fa55626a02bf3229e6fba9122a198e56ff8d6b68f0cc5fea54c929692e09"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/causal-measurements.json",
+      "bytes": 26056,
+      "sha256": "337c4e76acb90b89ebd5038f3e7f3241324fae9c3239a8f03951a0f752e6b784"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/cleanup.json",
+      "bytes": 19678,
+      "sha256": "05e9765a2a21a9464e94a4a92d872e3ecad4b02e1ebd57edd2cd81342e0697b8"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/cleanup.md",
+      "bytes": 8211,
+      "sha256": "44e0be3d7f47522a1550d3112fc7da193d314d0ee00eb8f0444431f8cedb4524"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/diagnostic-probe.cs.txt",
+      "bytes": 9248,
+      "sha256": "078d160cc2aeca1b34466f72da3680601203f09a8249c1d910e13e215b3f7c93"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/gpu-storage.cpp.txt",
+      "bytes": 1867,
+      "sha256": "3c58fbea008e339e3a6c2cf36379b4eb5517f2ffd41ac572ac258beb42c5cb7c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/identity.json",
+      "bytes": 8486,
+      "sha256": "1b4527cf7e03933fab0b59165c472c600ce81adb87219c9d05f21ee60643304a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/launch.ps1",
+      "bytes": 579,
+      "sha256": "535fa6413d347e709b2948b0d3567eb9c573ef98f18a79edbeb9054df84c40e4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/live-frame.json",
+      "bytes": 5368,
+      "sha256": "7bdac8a14c5a8c10dc37126eacfc12e246bf567fa7a23d7d11e812c55a5e2947"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/manual-acceptance.md",
+      "bytes": 2724,
+      "sha256": "f60b4f75ac1454ab99b88a8b741f85a2a97fd98fb33eed4da85d5f8cc970ef1d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/performance.json",
+      "bytes": 2150,
+      "sha256": "c2e6a43436bfe22a760a871af7de81ca0cabd4305e8eb60be3dd687e485add32"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/preflight.json",
+      "bytes": 11551,
+      "sha256": "c9c733d9db05854f21fec5e2723964089d9cd1fd635ab8211cc51cef12727965"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/reproduce.ps1",
+      "bytes": 5581,
+      "sha256": "829d9431c26ab1e9e81242cd081d0a1720291de12c71a453efe92ff89832b156"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/drift-closure/validation.json",
+      "bytes": 10308,
+      "sha256": "fe19ce838791e7033e83e3e783b91bd2c845386cfb852526d6023cb697ebc7ed"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/geometry.md",
+      "bytes": 2946,
+      "sha256": "e3f23a06168da5a3c76a4267cedbbb09fb21e1ddff887c817a1ad42a71e14caf"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/identity.json",
+      "bytes": 2748,
+      "sha256": "c288a0956d21315baaf90e48a6c899bd2366ff4fb94b07c412c1b3dd3bfe4329"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/preflight.json",
+      "bytes": 18870,
+      "sha256": "da6a02d5cbd9b4afa77f7ae5182481d443d349b53b503884fd9adafeeb5a2f83"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/reproduce.ps1",
+      "bytes": 932,
+      "sha256": "15729138b2f9acc13258e0c2466c68c4907b2e3e528bd10942faa3c9777e6f30"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/review.md",
+      "bytes": 3070,
+      "sha256": "b6f95a745a75c04baaade404ffbf81883d61b0a75d5b7a9dc26901efbbb669dd"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage1/validation.json",
+      "bytes": 1937,
+      "sha256": "57fc436ec86414f14c71b898068368a029b9978fe4ba594bcbf05faa2ad0a6f7"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/README.md",
+      "bytes": 10500,
+      "sha256": "363a25dc100c918b71829fa0439514fdd7dfc6abd84eb47b71b54d264d8f0ff0"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/analytical-outcome.json",
+      "bytes": 812,
+      "sha256": "cd0f7f19b52d4d7be80aa395b7f1dc30e3c400b11154a859dfb81a7f6cdbd45c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/cleanup.json",
+      "bytes": 887,
+      "sha256": "99c0f586c77562d350f29fc333dc2ccd1d90b9a200775698846eb3e96c72689e"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/README.md",
+      "bytes": 13041,
+      "sha256": "78d620c8e1c8d7d107691bf0e83e6d9cb91abbe73a04b0b527b79435ee56be8a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/cleanup.json",
+      "bytes": 2810,
+      "sha256": "cf6d778de6f7f290eee212db8d53a0f3377fbcf6a2ef0a29062fa5f5de559a39"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/cleanup.md",
+      "bytes": 796,
+      "sha256": "5526680768584c330e484b8ccbcb4d2907565e62eceeb17a8b0033b49b4fa0de"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/identity.json",
+      "bytes": 8852,
+      "sha256": "30ba6c69a2c0bc3c5f17e153a2cfe6a5a98724598785adde2c6dea5afe725bca"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/ksa.md",
+      "bytes": 3107,
+      "sha256": "b5a586faa279cea71c106913b8108b8cf22ef8274ac4456457f8da37ea1d0bf9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/launch.ps1",
+      "bytes": 789,
+      "sha256": "9a7fd52ed7208153f746d078ba5d085e9b1d8860c01a8775123342103f9d5380"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/manual-acceptance.md",
+      "bytes": 1119,
+      "sha256": "d1ba0c8f7fed0c4339a395bd91b4e28fa3ed2b6e91db837abf493745f4623bd9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/measurements.json",
+      "bytes": 11088,
+      "sha256": "41910c9bfa15245652f2a79f7abaa357149d2ddc257dec5a6655995cf24210d7"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/plan.md",
+      "bytes": 4321,
+      "sha256": "498f1ddb65878db0b5aae9bb0ade7ae5c2c14f60fffc8dabc7c5b6c8ef8a5169"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/reproduce.ps1",
+      "bytes": 2873,
+      "sha256": "24d398bbe26997913e237462efa582ff964d13bca47e16afccc3927ab753ea79"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/validation.json",
+      "bytes": 10456,
+      "sha256": "0e296b4d72e5f1f59e70a1ee2223bd38bedcfdec169c6b6de362a8692568609d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/coordinate-attribution.cs.txt",
+      "bytes": 1090,
+      "sha256": "4d09f903f42c33732349a9a229072d0070ef9c6c8527f17aeee9f0bf23ec49fb"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/coordinate-attribution.json",
+      "bytes": 600,
+      "sha256": "89bf60d66a41f4a97ee01bfdf4f3b1a709ea90ca6d2ed82fb577353fab029572"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/design.md",
+      "bytes": 6241,
+      "sha256": "ecbf5745c1f02020ba09f2615fc6fe533d1a737a7c5f3a6d0964ecd69f3abb35"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/README.md",
+      "bytes": 10545,
+      "sha256": "dec08810d1eb7c3f25e419923462b37c733b1bcd32f554c58f5551a6fca1bf3d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/build-probe.ps1",
+      "bytes": 8336,
+      "sha256": "7597c4171ebcd14e468e48ee80ee59d52707d95737063a3b4708320d26e10dd2"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/cleanup.md",
+      "bytes": 2185,
+      "sha256": "b9c1c96346531e9c3451fa675bf1b3eef665d9354e8ebe73f9ce0ac7ba2dd100"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/identity.json",
+      "bytes": 9911,
+      "sha256": "cf6cbd223f6435b48470054901eadd5a04b8f55b92722ce56cdf7a4ef8ef0474"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/managed-probe.cs.txt",
+      "bytes": 3701,
+      "sha256": "2f8bcfd51e5b31e1c0b60e95b58872f8644797fff8186481b9bdbb1a30376a43"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/measurements.json",
+      "bytes": 39239,
+      "sha256": "6982f7b81bab62c7da0fb9fc0c1e588f033634fb71151acf171c5b13efdec900"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/native-probe.h",
+      "bytes": 2515,
+      "sha256": "c00b389cdb5498c4598048b20ae0887239d4216799fd1598b8d16f5c6d4a46f6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/plan.md",
+      "bytes": 3628,
+      "sha256": "f1f0b963376b191ab494776766d83d03a1f50604c579f723639cbf7316580b80"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/README.md",
+      "bytes": 11472,
+      "sha256": "df55f1041ef29965cc42fd1a48afd18c4aa383b46a30350a6ecade707fe31f10"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/analyze.py",
+      "bytes": 7412,
+      "sha256": "f06529a4f4b7f02a996963ec5c1ae9770fa9257a9fd3c593e743b8e09231c415"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/build-observer.ps1",
+      "bytes": 4065,
+      "sha256": "062748cb3600b49430cd9b8444e45dd579bf5b95598610addfd239a68f4a0899"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/capture.ps1",
+      "bytes": 2510,
+      "sha256": "b29798abfb8e5e3256d2f8895f4f6c030342387c065407bf56722d25954c109d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/captures.json",
+      "bytes": 209098,
+      "sha256": "e7acb05af3e5c75e9b3fc1086096dffaf7e58bba80b6af62299a66ee88f198d1"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/cleanup.json",
+      "bytes": 5668,
+      "sha256": "4353ee085d25e12d5489d54dcb29441e11d80a04a8d4abedd3b78f235675c4d8"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/cleanup.md",
+      "bytes": 1646,
+      "sha256": "8080eac4abea0b736eb52e4ae261b961edd890fd1543fee536d46b69968789ad"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/environment.md",
+      "bytes": 2936,
+      "sha256": "3e77c739bf594a5acd53955172aaf0134989c604c4991d23a3407617abf156e3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/identity.json",
+      "bytes": 22529,
+      "sha256": "76b1d08fd9c5abbcb31d1933ace59a5800e8c70345e22e9072b5019334ebda0a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/managed-observer.cs.txt",
+      "bytes": 6682,
+      "sha256": "ef7c043a3e8719ab75777d8ee8ba75865e9105087d2a10bc3b697146964f8150"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/plan.md",
+      "bytes": 3959,
+      "sha256": "fa70f805f02480feaa12ee570b056823dcf7de2ebf6d884495909e3fe423830a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/preflight.json",
+      "bytes": 15381,
+      "sha256": "0f0c4d064880fdaf852652b515879929bdeee28d56d57980dc40b73959f67484"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/protocol-note.md",
+      "bytes": 1022,
+      "sha256": "e6e1c5c82b640dc8a9a288dc0230dd5186046a67c8ff6c1faccad38498c92bb6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/red-team.md",
+      "bytes": 3191,
+      "sha256": "f6e88591441a012c9644595b641a72d840925666602248ede0c54a4dca776974"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-population/reproduce.md",
+      "bytes": 2944,
+      "sha256": "130f236f8020995072ec636ff1fad365dc070ce3a1ba60e21663c8fccae40eae"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/README.md",
+      "bytes": 13512,
+      "sha256": "a3428c1013aca08405ac0d842d96a04d67da096f95e27c4745466dd4a55efe68"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/cleanup.json",
+      "bytes": 1248,
+      "sha256": "32952bf3c3c1375e5ddf3a64add5d7331f7a0d5efa19d7daefc91787bc75cea4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/cleanup.md",
+      "bytes": 2530,
+      "sha256": "05918309e291fcaca3d5abd4001edb6a9e09217b78508738668b5da243fea991"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/identity.json",
+      "bytes": 14207,
+      "sha256": "3d11739f4d90e56b2820c7c3ca1cfc1dfb8edc4267e5621a9be5756a9e690305"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/launch.ps1",
+      "bytes": 3370,
+      "sha256": "4016071a10351e74049400064d4662273a689aba79f6d1596118f3d62269bad3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/manual-acceptance.md",
+      "bytes": 2743,
+      "sha256": "58283b9b43a5e22ccec5e8cfbca99c66c1695336b5ff0955c64ead746f9e0655"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/manual-build.json",
+      "bytes": 5956,
+      "sha256": "79c1b94de5b443c0a219b8fe4c5055165f97730cdb66872d85016fc1ceb3cf46"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/manual-result.json",
+      "bytes": 2713,
+      "sha256": "59db99a46bd5587db05ac4b2185f11c000e01a1225940aaa9090f07d7a024a85"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/final-acceptance/red-team.md",
+      "bytes": 2149,
+      "sha256": "9c20ab0dae6fc1d285cc593e3b708343aeef5fd7c55eec2aa12a3b2b79e26dbf"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/identity.json",
+      "bytes": 6995,
+      "sha256": "396d6b3b883414d8317d0201a4aee8a2dd3d6a1d48630b8ce38656b293564ac6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/preflight.json",
+      "bytes": 10525,
+      "sha256": "896779c86c5ed44a8dab384c35fba66e7b382a23fe9b6e40d1926bffa5be680f"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/promotion.md",
+      "bytes": 1350,
+      "sha256": "df15fb8b45b7801d03c9b94e420a28bf6572905aeb2a9d9768bb76f7551de3b6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/reproduce.ps1",
+      "bytes": 1654,
+      "sha256": "0a8ae79e729b454180922ea2201a74215c8267e8d204bae7607981f273102dc2"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/results.json",
+      "bytes": 11049,
+      "sha256": "35c7ae303d80ac1f4d650e098d40cf9b3767a578caf5222572668e412fae9b7d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/README.md",
+      "bytes": 15480,
+      "sha256": "68186c40a36f462791cf1b369332def6bcde2275f61011542c2d5731c687de34"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/analyze.py",
+      "bytes": 5598,
+      "sha256": "f1e3a2cc2c440c0289d4a18f781b3bd9c38204d27e40e489b75f72bc43475b7e"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/build-probe.ps1",
+      "bytes": 7714,
+      "sha256": "5ddd2cc1f840a1d5315e75103e4c6f784ff0613d2ce5036a0f9d596aeae454c4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/capture.ps1",
+      "bytes": 2458,
+      "sha256": "139f7a65367d5f6c85eec171c35e2609da918b7daaa43d9a6a7d68f64f4dbf1a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/captures.json",
+      "bytes": 99472,
+      "sha256": "8b21408f581b775db90f35d92634c73d5e126f4b29e54275910a60202c6ae5ca"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/cleanup.md",
+      "bytes": 1174,
+      "sha256": "d8d122eadf92cc0382b57f8e1e4738a764f25ece18f2057ca369381824a86070"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/identity.json",
+      "bytes": 9651,
+      "sha256": "5144c51724690b713913c9cd250b35ec141281101d3f942d2e64765953ecb036"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/managed-startup.cs.txt",
+      "bytes": 4562,
+      "sha256": "79f4dbba4bb5afe0fc4cc0a6aab80364c283241285e0499c8bed2cb8a14a9d9c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/native-startup.h",
+      "bytes": 913,
+      "sha256": "ff7a451750659bdf0bf4f66e404d6a8303b8fb6946c0b2c86eb11d6bf8700aca"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/plan.md",
+      "bytes": 3831,
+      "sha256": "4c0e308a047675481a7aa29c41a63d76f5f4eaa09f2d8b75c991f547d8fe8382"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/preflight.json",
+      "bytes": 14132,
+      "sha256": "b21f0da1f1963adf0141537b1c77c1308d189c195f8ea999a05dfa13c658f848"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/red-team.md",
+      "bytes": 3418,
+      "sha256": "319efef60591da4743105076d51f885330c3c7d18fc6b54fe41fb3e3f597f804"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/startup-first-present-correlation/reproduce.md",
+      "bytes": 3371,
+      "sha256": "a2dac01fa42b23b5976bb9e2280caaa89624862ffd66b1037c069751ac30645a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/README.md",
+      "bytes": 8191,
+      "sha256": "58ed8b6483f33ca70207ff55ab9b7550cb83a94e54c7daa2a300602292b87b70"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/README.md",
+      "bytes": 15965,
+      "sha256": "9a9bb999537eae17ff2b64f69ab643652f411c12b3818d3eefaf9b98aa3419f3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/allocation-ledger.json",
+      "bytes": 3460,
+      "sha256": "3bc9f44e33d3af62e551273edf22cf53afb0462a92be95f3587bef8448b4d645"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/attribute.py",
+      "bytes": 6977,
+      "sha256": "54887b3e34d3c02805bcf3cfd6d0cbd44adf5357d7dced728a15a9a48780ead1"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/attribution-restoration.json",
+      "bytes": 444,
+      "sha256": "db4a6562ee81249fdf42f22e3a3f65dc3eeae9f70735159fa0e32cceefd025f9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/binary-seals.json",
+      "bytes": 1137,
+      "sha256": "427324460dfbb19c518de432d2e268be2e16303b893b50d88ec70da66a733044"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/cleanup-inventory.json",
+      "bytes": 552,
+      "sha256": "ed53d6708d9c8f4976147f8cc6306f03a8df712f8679abe5933a710e2af504a3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/cleanup.md",
+      "bytes": 2502,
+      "sha256": "267b9d99246e8532e5505d629c9735de4bd55e7e1b6a89f669a7e5b4730e4e05"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/closeout.json",
+      "bytes": 3832,
+      "sha256": "53a74adf52929ae3b97cb166abbdfda941ffdef69c0791d72490acf9f23599a3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/collect-results.py",
+      "bytes": 6422,
+      "sha256": "80c0e71ced264edce8b2dfbe4644abcbb71fcaaee50f34d6617022aa0e9cf2fa"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/exact-accounting.json",
+      "bytes": 1574,
+      "sha256": "bcdc13c0df7bed8ab8750bee34df021296687b9141798a838e8d292a641c22fb"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/identity.json",
+      "bytes": 22974,
+      "sha256": "1e474c6f7ec0799b4ef06cf589245ab2a772f80aed0127aa4f5c748dc24aa733"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/measurements.json",
+      "bytes": 7729,
+      "sha256": "4f0cd927c38a7329171335491299061f3e04c4c01c24cc91841ca9de2263bd01"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/performance-plan.md",
+      "bytes": 1745,
+      "sha256": "c52519beb34d00cd5d59b2c7ef511fba5a1c7443b8df7fa59f6f5d5901a46e26"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/pre-correction-world.zip",
+      "bytes": 4450,
+      "sha256": "cb6c97f20fc496ddd0460ed514fbf8b5b3288d83439add93aa5abca80da8c6a3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/proofs.json",
+      "bytes": 20905,
+      "sha256": "6b47efdde539e556c7799be5e24f2ebd4c4c3b6d007b6c052e5f8ab2952303b1"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/reproduce.md",
+      "bytes": 4861,
+      "sha256": "e511b5e4f3c9125f8a638eddf67f336d391a6cb62e82c6e1c15779b5d21f951b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/allocation-closure/validation.json",
+      "bytes": 13267,
+      "sha256": "f2c2564c317f3b2a1a30da6b9e19e89aecb0f1548fc39781cf4fb9b4058825b7"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/cleanup.md",
+      "bytes": 291,
+      "sha256": "c77a8babdef0ae6859b3d0a15b313100e3be69768c3cc4b929126d7953d3f607"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/identity.json",
+      "bytes": 11376,
+      "sha256": "ccee83f3747326b2f9b8dce1a70b9e1ebd5a5d614ab22701c3f7b75457792790"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/plan.md",
+      "bytes": 6947,
+      "sha256": "b0e2bcb578e365c501e178c5327a88dada73c3ee5fc0008feb19907aa24f74ce"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/qualified-stage2-overlap.zip",
+      "bytes": 59178,
+      "sha256": "82d8d5dc48c353090d1f8066d6a48c5850b104708c1bffc4cf384ed6d973f01c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/source-preservation.json",
+      "bytes": 2009,
+      "sha256": "d17d0d221c6cee96503398b93cb7c560eb539d5b052a91ba5f4da82212e79810"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage3/validation.json",
+      "bytes": 1607,
+      "sha256": "0a00f28988115410c25f259ef5b739bf7a1f1ec0802cc677df3cf17b7f1f65f5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4-promotion.md",
+      "bytes": 7543,
+      "sha256": "cb03607e7405ac8715a1f2c4b1a3522444648ea7860b7aef90e638b077f5c235"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/README.md",
+      "bytes": 10973,
+      "sha256": "8c3f7c719f32ef98f4ba9c0777a3a162e05ab11342c0104cbe25ae792289c1ae"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/collect-results.py",
+      "bytes": 5140,
+      "sha256": "aaac5d5954c3e59fd44529bf277eadabfb23951ce8382cb46334105eb3cc4ef7"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/derivation.md",
+      "bytes": 5653,
+      "sha256": "c72e30734f13c4b600693f71acb4d27e0539bfc880de207857058870877ee655"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/derive-profile.py",
+      "bytes": 1612,
+      "sha256": "1ed3a1154e121af01b6ff513017303054dbd7ef89690d998c2f2ec01f1585d13"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/identity.json",
+      "bytes": 13526,
+      "sha256": "9ce17fcc5af8236fc9bd583ab2c747f409f6c2984a66943de9e6947317a638a4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/initial-profile-rejected.json",
+      "bytes": 802,
+      "sha256": "1730795aea3f579501b9b67793d435a82afb846494817fe43eb5d32aa9fa4553"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/initial-sizing-rejected.md",
+      "bytes": 4220,
+      "sha256": "cb564b8aad40702cf3eb65dd0dcaed22588f1472a899fdf548992b0143f00632"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/ksa-chain.md",
+      "bytes": 15668,
+      "sha256": "fc0725e1dd271d09b13ea3a05ddea3068445e1961ac0b22e7eba7c7e8a14645a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/measurements.json",
+      "bytes": 10876,
+      "sha256": "f44d4fd70ee38a9d95074c66ad5c81e45b5a32bc1854a10c314ada646f347957"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/mission-values.json",
+      "bytes": 820,
+      "sha256": "1903ae11812da1b6078aba2db9f043c39e183482a273dae2984ab476b9bd90f5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/performance-plan.md",
+      "bytes": 1345,
+      "sha256": "c592fe3a9d87f04bcea0d2bdc5fa83dd65131d7c1b0cc0d880b6e7353a110ea0"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/pre-stage4-overlap.zip",
+      "bytes": 58469,
+      "sha256": "91de35606677bcc1db355c12aee98b89342ebf2494049c02428d6d85f9d99330"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/preflight.json",
+      "bytes": 14890,
+      "sha256": "080d365b02f024666c4e8349c6c37ab79ddafa807c03451700c3fe42ef5ef4ea"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/reproduction.md",
+      "bytes": 4701,
+      "sha256": "ed5c0e9a9a964ba74a3099eae6ce1536d500bcc077cb58b1e8ad0c244ca78376"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage4/validation.json",
+      "bytes": 32742,
+      "sha256": "349518506527ad7c034b7f05a29d90ef1c26feb6480482c0553808b8cdcd9137"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/README.md",
+      "bytes": 8977,
+      "sha256": "6080604e537d3ac5009507c90e99829d2fcb7f16df22f79b4ff58fef08e78a1d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/cleanup.md",
+      "bytes": 3018,
+      "sha256": "b6bd361185f8a0f54f8090f83bd560da430e8c99d9b799954fb6ccb5ff7eefbf"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/closeout.py",
+      "bytes": 8048,
+      "sha256": "30f4d282abd380a28b99da265c73d58fc1778efabb4d8630141bf4a0bdc09497"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/development-profile-feasibility/README.md",
+      "bytes": 14415,
+      "sha256": "339b8cb9a0a23a338d80f5c28fe07c6f55ea8190c1f37b8dcca78d3c6c211063"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/development-profile-feasibility/derive.py",
+      "bytes": 6158,
+      "sha256": "14d42872d6266eef910a4434e5bb74bc0145c315989269661e60d8c6eb9f4ce5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/development-profile-feasibility/results.json",
+      "bytes": 4145,
+      "sha256": "782040fe8c31e895d5e7c3fa1628ce9a1186194ee34aea8103fcccfd2f9a3949"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/disposable-inventory.json",
+      "bytes": 668,
+      "sha256": "7d49c950cd6ce8803de056d6786764de232ba681650059301e17f448636e6b21"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/FloridaTimingProbe.cs",
+      "bytes": 5050,
+      "sha256": "cf1b40d3fa74be9eefacd84e46c101b6af4a083a9c6e71aa88221811c3a2b676"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/README.md",
+      "bytes": 13501,
+      "sha256": "47aeb6e6fe73261f0ecfba4a0b2974263af8228ab00e3559382cbdb853b3cf9b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/TerminalCreditProof.cs",
+      "bytes": 2457,
+      "sha256": "551e275bc7a211c952ef6f9b2c45b273d9e2a2f553942529f9a9f1f66afbeddc"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/analyze-captures.py",
+      "bytes": 3754,
+      "sha256": "c301868be69e2a0c5d69dab62c991fbe91a7a973034b9ff13cf5bb4a494b5077"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/build-inputs.py",
+      "bytes": 3128,
+      "sha256": "29a78ddcec0f041fbde71b3103bf48a05d6570b2e2ad96925491dbf611e5f2f2"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/capture-plan.md",
+      "bytes": 3080,
+      "sha256": "66716670e7c7a582986a2340b224c3171b7ce0240ee82beafeedfbf59e59649b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/capture-preflight.json",
+      "bytes": 5513,
+      "sha256": "5e2da57909cc16c4e39ae5b38e8dad055bbcadd35bc15f59a636c8f32641da4c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/capture-results.json",
+      "bytes": 51174,
+      "sha256": "adb0a13a4f51a5388d6b6628b68d7e57819b65ccc995922ee9de2fd816656c5a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/cleanup-inventory.json",
+      "bytes": 2336,
+      "sha256": "4f1ca028c32847481b222102603ea13129048fa89e0a0e3a57fdf6a8bae2bb61"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/cleanup.md",
+      "bytes": 3173,
+      "sha256": "aa10e5c1c9b1a1214c56582437cd146321b963f89feb6ef0b7518c9e7c987b5b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/closure-verification.json",
+      "bytes": 4909,
+      "sha256": "e437417598318a55a4eae6d006933e2c82a2fb693d9d428bb71aa71e280ad878"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/finalize.py",
+      "bytes": 7731,
+      "sha256": "93822d9b9e15781bacb0d8080ee2598c29db6e8f654de340c53eda3921ff8365"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/launch.ps1",
+      "bytes": 2098,
+      "sha256": "0b6f65d7c2c8a2daf02f74c94c25db10dcd2631e590d5c5a654681888f647957"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/manual-acceptance.md",
+      "bytes": 3743,
+      "sha256": "b8d89f8632c4725632a715c59b99dd617546c3389d4f36ce97e7252152ab23ea"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/manual-result.json",
+      "bytes": 3344,
+      "sha256": "a1e6875caabb36eadf65211b553166f77fddc9c6320a8458021ce989b68e2e63"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/manual-route-ownership.md",
+      "bytes": 9665,
+      "sha256": "651392ce85713206ecfb8f580774b3f4e4e95708032baa48480c2ef2544a9e5d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/reproduction.md",
+      "bytes": 4933,
+      "sha256": "2100a3a19c4d85a353f3cb3f6233557aeac3c74b62bb119990b774b30a281d89"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/final-closure/validation.json",
+      "bytes": 40437,
+      "sha256": "eb6f5a8149a4bf1361bac4dba58bb987e984d2c4e8c31c961be38111b67a7f43"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/README.md",
+      "bytes": 10235,
+      "sha256": "f6e90f7f7916d1284f106db78d9d946309263cb4614873b5476a6b7a3f7a1098"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/disposable.json",
+      "bytes": 117,
+      "sha256": "51bf6942a39c11604e49f74cc9945d0d4d83586df283aff9da703cf50c0381b5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/entry-source-identities.json",
+      "bytes": 85959,
+      "sha256": "b198f0da55d8f5165c74bf04240ce408a9bd4b1a5b124e554ef90781b6de8628"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/git-status.txt",
+      "bytes": 3807,
+      "sha256": "7057fd335ff9a8a5dd68b343be7a7c678c54ee5bb1ddd7ec40ce65dd275f92c5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/ground-placement-witness.png",
+      "bytes": 22630,
+      "sha256": "78b5c77a62dca384397e7f32ef56eaa01bf47daa613879e9ca5ee7af63a04f6e"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/live-results.json",
+      "bytes": 6102,
+      "sha256": "d0b1acf59c62c1dd9a491147b2983087df2bfdf2c0e4cb494814e904d649a7b5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/predecessor-NovaCoreNative.h.txt",
+      "bytes": 18558,
+      "sha256": "5d917747dec4b83f95d71cdb7296680366ccd9bea1e33ba49e7efb473a08709c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/predecessor-SampleOptions.cs.txt",
+      "bytes": 5775,
+      "sha256": "ee532e4a52c4b198ed7a4a66ee7bda2b8f4c7f96f297ec79ac11d08095816ae4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/predecessor-seals.json",
+      "bytes": 1272,
+      "sha256": "b7cf733b43cb9ecd78c3ab831ead93aaaee12b42d923af9b10c44716aa098f36"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/predecessor-source.zip",
+      "bytes": 101780,
+      "sha256": "707558d3133a3c269a18b8ee16a98a1f3cdde1c4a48b5b18b9b89a9e4fce62aa"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/presentation-source-seals.json",
+      "bytes": 1590,
+      "sha256": "2c97b49b6f471e078488bc3d457b8174b56488ba44780d5a20d5a9b5141b642b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/reproduction.md",
+      "bytes": 4116,
+      "sha256": "9f040460a0d52a4d0e9f059a7649bfdad0d3889e593e69716c24dc6964a2c852"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/source-identity-comparison.json",
+      "bytes": 134162,
+      "sha256": "47f4ec6cf06870ce0edcd2e3de3f821e896ff22f36a6d0f19e9b59fd5ae30230"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/validation-results.json",
+      "bytes": 226201,
+      "sha256": "9c54a8ad366be2f601b4c779b036c60c2ac569246ca8cf15d6ad86a6125917b9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/identity.json",
+      "bytes": 26247,
+      "sha256": "5bc58a04970e5e280ab1e68f090e43fb13df5c00cd5974c780fbfff87485305b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/ksa-site-chain.md",
+      "bytes": 6207,
+      "sha256": "500388fd9fefcfd66b716a9d5fe9679c1d754a740df5aa8325ffcbf90ecc19c7"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/pre-stage5-overlap.zip",
+      "bytes": 148610,
+      "sha256": "2d7d9b1c30e32ace7eaf13fc50c73f09d2feaeb4c02d728045be473ad4843557"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/preflight.json",
+      "bytes": 15053,
+      "sha256": "5e8ce67b0e23f66ffac4fd71093ac505806c534bd7cdb25c6c8a588300ca4b0f"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/reproduction.md",
+      "bytes": 2525,
+      "sha256": "f56ae5d1a8d964fcad3cc4148f63a1f1325079c4e69ff50107a42f90afa38db0"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/results.json",
+      "bytes": 8176,
+      "sha256": "909f96294fb723d224a4a1b4184266723be6a557f7b2e12f944f2052cadb84d9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/README.md",
+      "bytes": 11261,
+      "sha256": "15a61475218cc5c4956039630934c97db90230b1cb30f601182dff46c7a72b95"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/analyze.py",
+      "bytes": 8423,
+      "sha256": "413cd4c345e4dfbe935dcbc50d5d024939ac03c891e0aa7ec678ee8d84fb3aff"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/cleanup.md",
+      "bytes": 3124,
+      "sha256": "53fe6ad67a898165547d3328b20344483aed0f09669652b917208b96f8fcc10d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/contact-analysis.json",
+      "bytes": 2821,
+      "sha256": "152b712b81b975f1b1e486a39d8553c9c70c0cf8e1f827ca7971f7c2f5eca4ff"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/controls.json",
+      "bytes": 28102,
+      "sha256": "871e73bd82cc73fcbd801af91843f1e80d918ad8db8fc8f4605facd2ab08c3a8"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/failed-witness.json",
+      "bytes": 62899,
+      "sha256": "17dda74815b4dcea45e5220d3d6120fa1ff4bce1c98ea3c96bdc7e38c126f2c6"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/final-verification.json",
+      "bytes": 21805,
+      "sha256": "a7818fb9023df8debf2875f5a3c3a88ba476209e80c7ecf1288675bad82d783e"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/finalize.py",
+      "bytes": 6845,
+      "sha256": "0fd3e7e3b6c7ba28dcdb84f836850c47ae054d672c45ba5a892257b570248061"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/ksa-source-history.md",
+      "bytes": 11730,
+      "sha256": "c19d12e1b8e40e4c189838a210b2f790e4297a469858787232c93ecd69a66739"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/mass-oracle.json",
+      "bytes": 9973,
+      "sha256": "433472d4b0c69c93d94d4a54c2653630641ee5ee6c25191577d19dc812528291"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/mass-oracle.py",
+      "bytes": 6466,
+      "sha256": "ec6a9778486b3f173fd8ec6e282b163eb83fee4f9406abcc434a74299ae30c06"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/preflight.json",
+      "bytes": 16355,
+      "sha256": "a24819055ca2d5212d810561796f0276bc6e181213a3b2d2824e7955fbf6337b"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/preflight.py",
+      "bytes": 1886,
+      "sha256": "47dd9104fd41b6169eb00f9a73c4add98346bab4019912444be114ada53551fd"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/reproduce.md",
+      "bytes": 4343,
+      "sha256": "8a1b3d2dc529abc52454dfab9d70521821edbd2b0b60ef07f8f69d016336bbcd"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/reproduction/Probe.cs",
+      "bytes": 10137,
+      "sha256": "7b2aa713fb6c406caeaa26dcb6aca5b27db6dc0580f8a9c9debb6c0c6a257db5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/reproduction/Probe.csproj",
+      "bytes": 1324,
+      "sha256": "c4cc1513937e2876ee99f49cf7b9c54cf3ce2b53e82a7704e22244145d1c5761"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/site-oracle.json",
+      "bytes": 5637,
+      "sha256": "c2868e25c6bbbf27ec54cb1b3a9276d3c23e8ce8c1d641ce7b5db8a8b52c18e9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/rotating-florida-contact-closure/spatial-resource-authority.md",
+      "bytes": 12055,
+      "sha256": "9344c4e78a6bead214ffb06a9e8d1e16addb77ddd0f0d24b5f8ec0bf1483b64c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/README.md",
+      "bytes": 10021,
+      "sha256": "4d931589c18c7ce13a5da7f699aeb02631f418e4e9c702386f919c976b67a670"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/architecture.md",
+      "bytes": 4708,
+      "sha256": "727814947a2e7b8fc67ac7e10fd568dad529306c2333aa200a3920c2c338b54c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/build-observer.ps1",
+      "bytes": 3580,
+      "sha256": "656ced98be83fb8c9b946a76408bc6cfb9c90dd7eec3737b8e17712f256bae13"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/build.ps1",
+      "bytes": 1164,
+      "sha256": "5c342787fb58a40394ce243d77bd040468124d13c863da8adfdfbf59f847dccd"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/capture.ps1",
+      "bytes": 1646,
+      "sha256": "2093e455d6394adc97006368ce7985f095277d74524e07dfe5fb88bfa16a9fdf"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/cleanup.md",
+      "bytes": 2137,
+      "sha256": "755ae8e3151022b79ea0c7f22fa5a7e3cf4cbb27b8cc44f53f800b43f645cd80"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/closeout.json",
+      "bytes": 574,
+      "sha256": "43832282e8829f08963f35affd659a915a20478a1a56e269710d1fb762610833"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/consolidate.ps1",
+      "bytes": 5093,
+      "sha256": "fcd29c894638ea26c47b05a39d1c8be6c9862ee46007b667b71f28537d2df1db"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/disposable.json",
+      "bytes": 799,
+      "sha256": "551f9c999078e202d8a354c014105d2300144c406508f54ca1a77ab641ffe5c4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/entry-changes.json",
+      "bytes": 2729,
+      "sha256": "1ff2540ef305472f4e82bb934d71abbbedbbceafaa8e04ee4aa7d07e8c48ce27"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/entry-seals.json",
+      "bytes": 551443,
+      "sha256": "c9e790293aba950c6f85a8ccf858ace5297cde5ffcd32a1b3f36a4ab2f6726d0"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/git-status.txt",
+      "bytes": 4215,
+      "sha256": "c90ce2da5fd6d484c6dff7221877603345969f08c8ed7566385c8d90e8cc5da9"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/ksa-convergence.md",
+      "bytes": 5296,
+      "sha256": "8a73a8d2c749f0e2506c7531d89b1ead18382a3a52049f73d715187cfd8611e7"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/launch.ps1",
+      "bytes": 983,
+      "sha256": "3db6135f35f53fb70989d3a35c4ad7868850f6ff16cd552224079134bcdd5450"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/manual-acceptance.md",
+      "bytes": 3088,
+      "sha256": "f2aba0115032e6c2f73cc745c1f6e6517194fc217cf8bd8a6b7c6bbac3cdd033"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/manual-binary-seals.json",
+      "bytes": 17137,
+      "sha256": "6bbf308b060df9dc1b73434806289ed05fabe4bd0ad0dfe8266ca1cda6f2e167"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/preflight.json",
+      "bytes": 4490,
+      "sha256": "9a7d26552407b7f7f50bd4bf432eca8cbef995a7ae07f5ba95317d9dc4daa39f"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/prepare-launcher.ps1",
+      "bytes": 1277,
+      "sha256": "045b1100693c20870628b589f89ef5aa80e97ad11b723cfd7ba299c7942cd289"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/red-team.md",
+      "bytes": 2554,
+      "sha256": "6cc113c507339175f7098affba6735317ea933678cc912abaef283ac54943ee3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/results.json",
+      "bytes": 75942,
+      "sha256": "e2166beedfaea0964320154c246052612899a18f50c3e4edcc77bf8644a8e7bf"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/source-seals.json",
+      "bytes": 3054,
+      "sha256": "3d815adc8ae00c742bb2615d971891603620f32057ef49ebe789b84dde0324eb"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/tag-refs-before.txt",
+      "bytes": 5487,
+      "sha256": "dd070f10374f656e3c6eb7d27ef764778733e529bdd0ea164d370aefc440dfd8"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/validate.ps1",
+      "bytes": 2466,
+      "sha256": "8c592455af600ee4c13900eec2829a93507b9b728408b080e66206749fe1e9be"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/README.md",
+      "bytes": 13390,
+      "sha256": "69882d4e459e5e0c888a2e933a99398ef66f2ce28ad482f9c7a0734f87a17fc4"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/candidate-seals.json",
+      "bytes": 1774,
+      "sha256": "8291de7502f8d78919b76e6c43fd243dc4954c43323cdd48f5d1fad01d8a001e"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/cleanup-inventory.json",
+      "bytes": 2073,
+      "sha256": "521acf947a29d4bf403fc353fb06e58ad52f8ff1be41fa32b2b1aba3bbc4f53c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/cleanup.md",
+      "bytes": 3662,
+      "sha256": "9b980c7f2635d0e54e0254b98f4bffeeb87ea4d9cb10dab4ae9ce084c6bcf35e"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/collect-results.py",
+      "bytes": 5419,
+      "sha256": "2719235540eafe353df1968c98a22c6d6422758d166df44a82e6439aac2aa5ee"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/final-verification.json",
+      "bytes": 28142,
+      "sha256": "647a14c163f1cdb56a5a6f9d512515ee2fc57e58225ee4c938882d0a3df16ac5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/finalize.py",
+      "bytes": 4785,
+      "sha256": "74c4c49f55fd5ca8b3d04ba88f430a620fd0d6a250fce06a1244c6c0b4069d1c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/first-live-process.txt",
+      "bytes": 10963,
+      "sha256": "1d73a81bfadf9e442fb491d473e15285cae462a7b2485e389598c3437218fe12"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/ksa-and-scope.md",
+      "bytes": 5447,
+      "sha256": "a849a0fc3936d613fcf09c2a3076301f84870028634a3c4beab333755a0bd80c"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/launch.ps1",
+      "bytes": 1849,
+      "sha256": "f0b52912d6d7c099b2e75fad78b88765d7b390637598b967f7fa57540b638040"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/manual-acceptance.md",
+      "bytes": 2564,
+      "sha256": "7290eb7c6ea731e7c9c55ebe6f5d1d64606aaaa1e03a8a43ad17c9a555d9009a"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/manual-build.json",
+      "bytes": 1718,
+      "sha256": "01a4aed829f19af5daae2b5667a49d85f309a37edf7ae81978f1bafdda17476d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/preflight.json",
+      "bytes": 101308,
+      "sha256": "debdbcfd897cc2c861f42b27d0b8bb136ee5d59f6c70e64bd442241780db0860"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/preflight.py",
+      "bytes": 2274,
+      "sha256": "2bb62b327032416b3a5e1933c08133b37708b80c9449ba4439a119b8c15f6b65"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/preserve-sample-predecessors.py",
+      "bytes": 2570,
+      "sha256": "75b80c3e88fbbabf9fabcffef6bfea6feb183d7e65a935dd74ac4cb21001be77"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/prior-sample-inputs.zip",
+      "bytes": 22911,
+      "sha256": "5356261eda374586e840a51a6978acba71af16d3c669a1c8690b345484501b89"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/prior-stage5-inputs.zip",
+      "bytes": 156843,
+      "sha256": "10fde85161b973f8698d58177a64ad3dac26f01958e19424da3c67238aad6f3d"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/reproduction.md",
+      "bytes": 5137,
+      "sha256": "fe15417ae7cffb022dcaeea3ec2a2802c63b778cb2dbb8791f9955906150c127"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/stock-florida-restart/results.json",
+      "bytes": 79640,
+      "sha256": "071ed77532c0b2611099e655a414a4e4bd862cd2cb241002ae1e91bb38953235"
+    }
+  ],
+  "count": 308,
+  "bytes": 5235507
+}

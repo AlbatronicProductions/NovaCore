@@ -365,6 +365,9 @@ public static partial class NativeRuntime
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer_with_visual_meshes")]
     public static unsafe partial NativeResult RunRendererWithVisualMeshes(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity);
 
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer_with_assets_and_visual_meshes")]
+    public static unsafe partial NativeResult RunRendererWithAssetsAndVisualMeshes(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeRuntimeAssets* assets, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity);
+
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_get_abi_layout")]
     public static partial NativeResult GetAbiLayout(out NativeAbiLayout layout);
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_validate_planetary_patches")]

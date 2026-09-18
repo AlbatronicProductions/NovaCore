@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "build/srv01-stage3/artifacts/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.dll",
+    "Sha256": "B8ACD5E22F4163683A3E948663A0E79E9FDEF01D501B789F6FEDE56A6E24D093"
+  },
+  {
+    "Path": "build/srv01-stage3/artifacts/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.dll",
+    "Sha256": "BF74DD6A14A5B90CE5DB364458159A77FA368E8462908A2C4C861CBC4549469B"
+  },
+  {
+    "Path": "build/srv01-stage3/native-debug/NovaCore.Native.dll",
+    "Sha256": "9B9892068CCF3C255FBC38D540024DF57C9CB3FE3E3570325261E1E86D3AB346"
+  },
+  {
+    "Path": "build/srv01-stage3/artifacts/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.dll",
+    "Sha256": "E50C5716E38BBE5D1F9DD16599BE936BA8A8984F8AE972E540A779EB5F2DB0B2"
+  },
+  {
+    "Path": "build/srv01-stage3/artifacts/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.dll",
+    "Sha256": "4B2113390EB019FFC96FD652E25C73BE54536D54E0B4114FBA7F4CB98878ACA0"
+  },
+  {
+    "Path": "build/srv01-stage3/native-release/NovaCore.Native.dll",
+    "Sha256": "0D31A6EB05F050D438B724755465C02E15C6B1C0F51C938C7755035A16A05FED"
+  }
+]

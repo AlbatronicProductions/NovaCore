@@ -1,0 +1,33 @@
+{
+  "reviewed": "2026-09-17T18:27:02.5108489-04:00",
+  "retainedEvidence": "All source/results/reproduction under stage2 retained; no evidence folders deleted",
+  "paths": [
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population",
+      "beforeFiles": 400,
+      "beforeBytes": 106016279,
+      "disposition": "RETAINED - automatic approval review blocked deletion; manual cleanup required; no retry",
+      "remainingFiles": 400,
+      "remainingBytes": 106016279.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-startup-first-present",
+      "beforeFiles": 386,
+      "beforeBytes": 103968588,
+      "disposition": "RETAINED - automatic approval review blocked deletion; manual cleanup required; no retry",
+      "remainingFiles": 386,
+      "remainingBytes": 103968588.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-stage2-manual",
+      "beforeFiles": 371,
+      "beforeBytes": 103439190,
+      "disposition": "RETAINED - automatic approval review blocked deletion; manual cleanup required; no retry",
+      "remainingFiles": 371,
+      "remainingBytes": 103439190.0
+    }
+  ],
+  "finalVerified": "2026-09-17T18:33:34.4118250-04:00",
+  "deletedFiles": 0,
+  "deletedBytes": 0
+}

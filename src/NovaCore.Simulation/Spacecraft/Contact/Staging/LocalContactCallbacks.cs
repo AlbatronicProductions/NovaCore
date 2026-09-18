@@ -4,6 +4,8 @@ using BepuPhysics.Collidables;
 using BepuPhysics.CollisionDetection;
 using BepuPhysics.Constraints;
 using BepuUtilities;
+using NovaCore.Core;
+using NovaCore.Simulation.Spacecraft.Assemblies;
 
 namespace NovaCore.Simulation.Spacecraft.Contact.Staging;
 
@@ -48,6 +50,10 @@ internal struct LocalContactCallbacks(LocalContactMetrics metrics) : INarrowPhas
 internal sealed class LocalContactStepInput
 {
     internal Vector3 Linear, Angular;
+    internal AssemblyFloridaSite? Site;
+    internal AssemblySiteFrame SiteFrame;
+    internal Matrix3 SiteInertia;
+    internal Double3 SiteOrigin;
 }
 
 internal struct LocalContactIntegrator(Vector3 acceleration, LocalContactStepInput? prepared = null) : IPoseIntegratorCallbacks
@@ -62,6 +68,30 @@ internal struct LocalContactIntegrator(Vector3 acceleration, LocalContactStepInp
         BodyInertiaWide localInertia, Vector<int> integrationMask, int workerIndex, Vector<float> dt,
         ref BodyVelocityWide velocity)
     {
+        if(prepared?.Site is {} site)
+        {
+            // Only the bounded engine-off site profile. All frame/model values were
+            // prepared at the exact source epoch by the transaction owner.
+            for(var i=0;i<Vector<float>.Count;i++)
+            {
+                if(integrationMask[i]==0)continue;
+                var p=new Double3(position.X[i],position.Y[i],position.Z[i])+prepared.SiteOrigin;
+                var v=new Double3(velocity.Linear.X[i],velocity.Linear.Y[i],velocity.Linear.Z[i]);
+                var w=new Double3(velocity.Angular.X[i],velocity.Angular.Y[i],velocity.Angular.Z[i]);
+                var q=(new DoubleQuaternion(orientation.X[i],orientation.Y[i],orientation.Z[i],orientation.W[i])*AssemblyContactProfile.Upright).Normalized();
+                var a=site.LinearAcceleration(prepared.SiteFrame,p,v);
+                // BEPU retains its relative-rate gyro solve. This is the difference
+                // needed for physical absolute angular momentum in rotating axes.
+                var alpha=AssemblyFloridaSite.AngularCorrection(prepared.SiteFrame,q,w,prepared.SiteInertia);
+                velocity.Linear.X=Vector.WithElement(velocity.Linear.X,i,velocity.Linear.X[i]+(float)a.X*dt[i]);
+                velocity.Linear.Y=Vector.WithElement(velocity.Linear.Y,i,velocity.Linear.Y[i]+(float)a.Y*dt[i]);
+                velocity.Linear.Z=Vector.WithElement(velocity.Linear.Z,i,velocity.Linear.Z[i]+(float)a.Z*dt[i]);
+                velocity.Angular.X=Vector.WithElement(velocity.Angular.X,i,velocity.Angular.X[i]+(float)alpha.X*dt[i]);
+                velocity.Angular.Y=Vector.WithElement(velocity.Angular.Y,i,velocity.Angular.Y[i]+(float)alpha.Y*dt[i]);
+                velocity.Angular.Z=Vector.WithElement(velocity.Angular.Z,i,velocity.Angular.Z[i]+(float)alpha.Z*dt[i]);
+            }
+            return;
+        }
         // No hidden gravity: source force / source mass, transformed once into the fixed local frame.
         var linear = prepared is null ? acceleration : prepared.Linear;
         velocity.Linear.X += new Vector<float>(linear.X) * dt;

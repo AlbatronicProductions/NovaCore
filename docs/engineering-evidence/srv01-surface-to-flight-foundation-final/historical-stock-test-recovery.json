@@ -1,0 +1,19 @@
+{
+  "reason": "Exact historical test snapshots recovered in memory before disposable build review. Current source was never overwritten.",
+  "method": "Prior-stage5-inputs.zip plus already-executed stock/mass witness, numeric comparison correction and partial declaration; current Program minus later slab selectors. Raw newline representation selected only by pre-existing SHA256 seals.",
+  "provenance": "Retained current-task executed edit records86528/86537/86654. No transcript is copied or required to consume this archive.",
+  "acceptance": "Both hashes exactly match stock-florida-restart/candidate-seals.json. Intermediate reconstruction hash refusals wrote no candidate files; no test execution/retry.",
+  "files": [
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+      "bytes": 9649,
+      "sha256": "6d29503ef7289b78a35ff86a0dc40e8c26ce6043acb0978cfc8dce864599ce95"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "bytes": 569437,
+      "sha256": "970c68109369708f431b05852992f66afaafb9c3bc9432e8849380275712e72b"
+    }
+  ],
+  "zipSha256": "9534fcd525845138640edc572638142687cf68fac8c346e51a9b4a0aa14f3c96"
+}

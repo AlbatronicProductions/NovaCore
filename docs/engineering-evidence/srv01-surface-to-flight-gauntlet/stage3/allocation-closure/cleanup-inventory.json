@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "E:\\NovaCore\\build\\srv01-display-gap-population",
+    "Files": 400,
+    "Bytes": 106016279.0,
+    "Exists": true
+  },
+  {
+    "Path": "E:\\NovaCore\\build\\srv01-startup-first-present",
+    "Files": 386,
+    "Bytes": 103968588.0,
+    "Exists": true
+  },
+  {
+    "Path": "E:\\NovaCore\\build\\srv01-stage2-manual",
+    "Files": 371,
+    "Bytes": 103439190.0,
+    "Exists": true
+  },
+  {
+    "Path": "E:\\NovaCore\\build\\srv01-stage3",
+    "Files": 1867,
+    "Bytes": 388109071.0,
+    "Exists": true
+  }
+]

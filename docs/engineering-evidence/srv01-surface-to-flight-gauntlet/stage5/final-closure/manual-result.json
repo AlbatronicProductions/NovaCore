@@ -1,0 +1,31 @@
+{
+  "schema": "novacore.stage5.manual-acceptance/1",
+  "recordedUtc": "2026-09-18T03:04:24.492179+00:00",
+  "decisionSource": "Project Control message in this task",
+  "decisionVerbatim": "Project Control manual acceptance: PASS. Stage 5 is fully qualified. Perform the next-responsibility promotion review only. Do not implement yet, do not assign M15.3, and do not bank.",
+  "decisionStatus": "SUPERSEDED by the subsequent Project Control manual-acceptance correction in this task",
+  "currentDecision": "Project Control observed existing Florida presentation but rejected spacecraft ground placement near the orange arm; middle-pad-top manual acceptance failed/pending.",
+  "supportedCraftVisualPhysicalBehavior": "PASS",
+  "manualAcceptance": "FAILED / PENDING \u2014 REQUIRED PAD-TOP PLACEMENT NOT IMPLEMENTED",
+  "stage5": "ENGINEERING PASS; NOT FULLY QUALIFIED",
+  "engineeringEvidence": "closure-verification.json",
+  "engineeringEvidenceStatus": "Historical engineering closure remains unchanged and engineering PASS remains accepted; Florida manual acceptance remains pending after Project Control correction.",
+  "candidateAndOtherSourceSealsVerified": 482,
+  "manualBinarySealsVerified": 8,
+  "manualLog": {
+    "path": "build\\srv01-stage5-stock\\manual-final-1.log",
+    "bytes": 13088,
+    "sha256": "894677921269FE85F792653B619FA74C844445CB93C0F388E3A8930ED4341E84",
+    "witnesses": [
+      "SRV01_FLORIDA_SITE identity=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } ground=terrain-v5-full-weight-grade presentation=site-local-patch",
+      "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+      "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=78"
+    ]
+  },
+  "manualLogInterpretation": "Completed with failed=False; failure=Invalid is the unused default status, not an observed failure. The 78 ticks are retained excess host credit under the already-proven terminal contract. This log corroborates completion; only Project Control grants visual acceptance.",
+  "agentLaunchedProcessesThisReview": 0,
+  "caveats": "Physical domain and all retained timing/startup limitations remain unchanged. Rotating-site runtime departure and future launch-stack contact are not qualified.",
+  "banking": "UNBANKED",
+  "nextScope": "STOP FOR PROJECT CONTROL: existing middle-pad top requires truthful physical support admission and finite coverage before relocation.",
+  "latestPlacementEvidence": "../florida-presentation-closure/README.md"
+}

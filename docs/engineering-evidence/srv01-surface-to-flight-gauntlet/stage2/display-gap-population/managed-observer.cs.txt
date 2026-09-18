@@ -1,0 +1,76 @@
+    // Disposable observer injected only for the comparative executable. No production policy.
+    private struct PopulationRow
+    {
+        internal long Stamp,DebtBefore,Credit,DebtAfter;
+        internal int Before,After,PhaseBefore,PhaseAfter,LegacyCount;
+        internal double Service;
+        internal AssemblyFlightObservation Observation;
+    }
+    private readonly PopulationRow[] populationRows=new PopulationRow[4096];
+    private int populationCount,populationG0,populationG1,populationG2;
+    private (long Generation,long Frontier,int Body,int Shape,bool Pending,bool Invalidated) populationIdentity;
+    private static bool populationReplaying;
+    private int PopulationPhase()=>Failed?3:Completed?2:started?1:0;
+    private void PopulationBegin()
+    {
+        var stamp=Stopwatch.GetTimestamp();
+        if(populationCount==0)
+        {
+            populationG0=GC.CollectionCount(0);populationG1=GC.CollectionCount(1);populationG2=GC.CollectionCount(2);
+            if(supportedContact)populationIdentity=session.Engine.AssemblyContactWorldForTest(session.Authority)!.AssemblyIdentityForTest;
+        }
+        if(populationCount==populationRows.Length)throw new InvalidDataException("Population observer capacity");
+        ref var row=ref populationRows[populationCount];row.Stamp=stamp;row.Before=observation.State.Frontier;
+        row.DebtBefore=observation.Clock.Debt.Ticks;row.PhaseBefore=PopulationPhase();row.LegacyCount=frameCount;
+    }
+    private void PopulationEnd()
+    {
+        ref var row=ref populationRows[populationCount++];row.After=observation.State.Frontier;row.DebtAfter=observation.Clock.Debt.Ticks;
+        long Epoch(int n)=>supportedContact?(long)n*1_000_000/60:(long)n*15625;
+        row.Credit=row.DebtAfter-row.DebtBefore+Epoch(row.After)-Epoch(row.Before);
+        row.PhaseAfter=PopulationPhase();row.Observation=observation;
+        row.Service=frameCount>row.LegacyCount?serviceMilliseconds[frameCount-1]:0;
+    }
+    private static bool PopulationBits(double a,double b)=>BitConverter.DoubleToInt64Bits(a)==BitConverter.DoubleToInt64Bits(b);
+    private static bool PopulationVector(Double3 a,Double3 b)=>PopulationBits(a.X,b.X)&&PopulationBits(a.Y,b.Y)&&PopulationBits(a.Z,b.Z);
+    private static bool PopulationMotion(AssemblyMotion a,AssemblyMotion b)=>PopulationVector(a.PositionO,b.PositionO)&&PopulationVector(a.VelocityO,b.VelocityO)&&PopulationVector(a.AngularVelocityBody,b.AngularVelocityBody)&&PopulationBits(a.BodyToWorld.X,b.BodyToWorld.X)&&PopulationBits(a.BodyToWorld.Y,b.BodyToWorld.Y)&&PopulationBits(a.BodyToWorld.Z,b.BodyToWorld.Z)&&PopulationBits(a.BodyToWorld.W,b.BodyToWorld.W);
+    private double PopulationMinimum(in AssemblyFlightObservation v)
+    {
+        var q=v.State.Motion.BodyToWorld;var p=v.State.Motion.PositionO;var ry0=2*(q.X*q.Y+q.Z*q.W);var ry1=1-2*(q.X*q.X+q.Z*q.Z);var ry2=2*(q.Y*q.Z-q.X*q.W);
+        var minimum=double.MaxValue;
+        foreach(var child in session.Launch.ContactProfile!.Children)for(var i=0;i<8;i++)
+        {
+            var x=child.Dimensions.X*.5*((i&1)==0?-1:1);var y=child.Dimensions.Y*.5*((i&2)==0?-1:1);var z=child.Dimensions.Z*.5*((i&4)==0?-1:1);
+            var m=child.AtOrigin.Rotation;var o=child.AtOrigin.Position;
+            var ax=o.X+m.A*x+m.B*y+m.C*z;var ay=o.Y+m.D*x+m.E*y+m.F*z;var az=o.Z+m.G*x+m.H*y+m.I*z;
+            minimum=Math.Min(minimum,p.Y+ry0*ax+ry1*ay+ry2*az+1.7);
+        }
+        return minimum;
+    }
+    private void PopulationDump()
+    {
+        if(populationReplaying||populationCount==0)return;
+        var gc=new[]{GC.CollectionCount(0)-populationG0,GC.CollectionCount(1)-populationG1,GC.CollectionCount(2)-populationG2};
+        var identity=supportedContact?session.Engine.AssemblyContactWorldForTest(session.Authority)!.AssemblyIdentityForTest:default;
+        var identityPass=!supportedContact||(identity.Generation==populationIdentity.Generation&&identity.Body==populationIdentity.Body&&identity.Shape==populationIdentity.Shape&&!identity.Invalidated&&!identity.Pending&&identity.Frontier==observation.State.Frontier);
+        populationReplaying=true;
+        var matches=0;var maxPenetration=0d;var maxFinalSupport=0d;
+        try
+        {
+            using var reference=new StockAssemblyDevelopmentScene(supportedContact:supportedContact,poweredSupport:poweredSupport);reference.Start();
+            for(var i=0;i<populationCount;i++)
+            {
+                var actual=populationRows[i].Observation;
+                while(reference.Observation.State.Frontier<actual.State.Frontier){var n=reference.Observation.State.Frontier;reference.Advance(new SimulationDuration(supportedContact?(long)(n+1)*1_000_000/60-(long)n*1_000_000/60:15625));}
+                var expected=reference.Observation;
+                if(!PopulationMotion(expected.State.Motion,actual.State.Motion)||expected.State.Stores!=actual.State.Stores||expected.State.Mass!=actual.State.Mass||expected.StateRevision!=actual.StateRevision||expected.TimelineRevision!=actual.TimelineRevision||expected.HistoryCount!=actual.HistoryCount)throw new InvalidDataException($"Population replay mismatch at {actual.State.Frontier}");
+                matches++;
+                if(supportedContact){var min=PopulationMinimum(actual);maxPenetration=Math.Max(maxPenetration,-min);if(actual.State.Frontier>=600)maxFinalSupport=Math.Max(maxFinalSupport,Math.Abs(min));}
+            }
+        }
+        finally{populationReplaying=false;}
+        long credits=0;var maxPublications=0;var rows=new long[populationCount][];var services=new double[populationCount];
+        for(var i=0;i<populationCount;i++){var r=populationRows[i];credits+=r.Credit;maxPublications=Math.Max(maxPublications,r.After-r.Before);rows[i]=new[]{r.Stamp,(long)r.PhaseBefore,r.PhaseAfter,r.Before,r.After,r.DebtBefore,r.Credit,r.DebtAfter};services[i]=r.Service;}
+        observation.State.Stores.Fuel.TryToKilograms(out var fuel);observation.State.Stores.Oxidizer.TryToKilograms(out var oxide);
+        Console.WriteLine("POPULATION_REPORT "+System.Text.Json.JsonSerializer.Serialize(new{frequency=Stopwatch.Frequency,callbacks=populationCount,completed=Completed,failed=Failed,frontier=observation.State.Frontier,time=observation.Clock.Time.Ticks,debt=observation.Clock.Debt.Ticks,credits,maxPublications,revision=observation.StateRevision.Value,timelineRevision=observation.TimelineRevision.Value,history=observation.HistoryCount,fuel,oxide,mass=observation.State.Mass.Mass,com=observation.State.Mass.Com,identityPass,generation=identity.Generation,body=identity.Body,shape=identity.Shape,replayMatches=matches,maxPenetration,maxFinalSupport,gcDelta=gc,rows,services}));
+    }

@@ -1,0 +1,343 @@
+{
+  "head": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "main",
+  "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "originMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "remoteMain": [
+    "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5\trefs/heads/main"
+  ],
+  "tags": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e refs/tags/m14.23-prepared-single-engine-actuation",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73 refs/tags/m14.24-exact-finite-propellant-segmentation",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3 refs/tags/m15.0-segmented-powered-free-flight",
+    "a1852cc3113b40763544968ea65a346530f54d17 refs/tags/m15.1-finite-fuel-retained-powered-contact",
+    "eb86bab80bdcae1f2c745ae82f3a016d71c260b4 refs/tags/m15.2-srv01-reusable-production-spacecraft-integration",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "remoteTags": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94\trefs/tags/m11b-7h1-gpu-terrain-baseline",
+    "828d92ff4afd30e407574c213f4552f3332f06f6\trefs/tags/m11b-7h1-gpu-terrain-baseline^{}",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372\trefs/tags/m12b-procedural-surface-baseline",
+    "29abf1eed2f592e8959365c53bddd5b3df0455c8\trefs/tags/m12b-procedural-surface-baseline^{}",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b\trefs/tags/m12c-phase1b-stable",
+    "dccb101af1053b9e44f9e12d5738ca064488efe5\trefs/tags/m12c-phase1b-stable^{}",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca\trefs/tags/m12d-p2s2-foundation",
+    "6c1df683a02eb1796e7da569faa4e4920fcc1bc8\trefs/tags/m12d-p2s2-foundation^{}",
+    "827cb9b7f329337bb72bce28abad5d585d837524\trefs/tags/m12d-p2s3-gpu-runtime",
+    "f22bf5f836c237c06f6ce0354379689462b2a28c\trefs/tags/m12d-p2s3-gpu-runtime^{}",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec\trefs/tags/m12d-p2s4-canonical-terrain",
+    "0f2e730dabcc3fd615503410d177f8c3632a22d8\trefs/tags/m12d-p2s4-canonical-terrain^{}",
+    "6409949114f3797471b131d8005b7feac7d3fd54\trefs/tags/m12d-p2s5b-production-topology",
+    "fb236c4095b85116710349efa5630ac080ef633f\trefs/tags/m12d-p2s5b-production-topology^{}",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b\trefs/tags/m12d-p2s5c1-interactive-billboard",
+    "4caa7406fd4578b5b92e364945454f1acfe066e0\trefs/tags/m12d-p2s5c1-interactive-billboard^{}",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443\trefs/tags/m12d-p2s5c2-moving-billboard",
+    "2be3abd8e059339a8f82e8f0834a0802e3c16e14\trefs/tags/m12d-p2s5c2-moving-billboard^{}",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4\trefs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "e9b35e4c9f475adffb38f22ac705835d8d5f4181\trefs/tags/m12d-p2s5c3-production-billboard-stabilization^{}",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a\trefs/tags/m12d-p2s5f-new-earth-renderer",
+    "950fabb5dccc21461c647134f023f901fb368459\trefs/tags/m12d-p2s5f-new-earth-renderer^{}",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147\trefs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "7bb03b0e635fa3444a4243bbad82758a1770ea60\trefs/tags/m12d-p2s5g-surface-workload-efficiency^{}",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a\trefs/tags/m12d-p2s5h-earth-route-convergence",
+    "32ffac50ab5c06518ede24edfb5c531976d4ec99\trefs/tags/m12d-p2s5h-earth-route-convergence^{}",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff\trefs/tags/m13.1-ncsm1-tes-hotpath",
+    "fade1384c1c7df93d954e7223b1cc8f17db17f98\trefs/tags/m13.1-ncsm1-tes-hotpath^{}",
+    "add1c94658c1de869124c75606ce0a084c77ba25\trefs/tags/m13.2-ordinary-terrain-shading",
+    "4accf92fd080c16cc8656080aa69def3fa65db53\trefs/tags/m13.2-ordinary-terrain-shading^{}",
+    "bb08cba20947f863391649e68e2e4fe7035520db\trefs/tags/m13.3-prepared-physical-terrain",
+    "180eaf150ba5db6364e17dd48336690778f058f9\trefs/tags/m13.3-prepared-physical-terrain^{}",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751\trefs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "047ae479b33831eae1c0dfa3f37c657a7f70148f\trefs/tags/m13.4-zero-contribution-terrain-material-noise^{}",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1\trefs/tags/m13.5-local-gpu-terrain-working-data",
+    "d4baab6940a57a46e478b98e36f5e45d1c4b558f\trefs/tags/m13.5-local-gpu-terrain-working-data^{}",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe\trefs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "90fef759243dd67918cd556e19027159e5a5eada\trefs/tags/m13.6-cpu-cached-terrain-residency-keys^{}",
+    "3ccb998031e15cb1898394589c27244d55e06e24\trefs/tags/m14.1-canonical-surface-point-queries",
+    "5b9b02ab1d2ba0e903809510908e4819984d4de2\trefs/tags/m14.1-canonical-surface-point-queries^{}",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5\trefs/tags/m14.10-certified-root-contact-kinematics",
+    "fce80a520240293a0373857986c607caf187eacd\trefs/tags/m14.10-certified-root-contact-kinematics^{}",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d\trefs/tags/m14.11-certified-response-proposal",
+    "556ca77af88257b5727561709c3a091aaec8cee7\trefs/tags/m14.11-certified-response-proposal^{}",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04\trefs/tags/m14.12-certified-preimpact-velocity",
+    "e5fde08bcae834d8abc107cd26e7601fbfa3e1e0\trefs/tags/m14.12-certified-preimpact-velocity^{}",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2\trefs/tags/m14.13-certified-postimpact-velocity",
+    "704c77f1aab899ccf3452ee3fc88471d1e311aca\trefs/tags/m14.13-certified-postimpact-velocity^{}",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577\trefs/tags/m14.14-private-root-postimpact-state",
+    "f64dc07f23a0a765b9b07dd49b895a8f3cb5ebfe\trefs/tags/m14.14-private-root-postimpact-state^{}",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72\trefs/tags/m14.15-private-canonical-propagation",
+    "dc274639f670d122764bb0e8f3d0c95ae201c7a4\trefs/tags/m14.15-private-canonical-propagation^{}",
+    "a864be12e42cb98cbd38c17905833f781a579253\trefs/tags/m14.16-postimpact-terrain-clearance",
+    "dd3e5f2998c2148e675a0120abd599ef6f05cc4f\trefs/tags/m14.16-postimpact-terrain-clearance^{}",
+    "3f48fe441ac54458e9b413a909fae134abb112de\trefs/tags/m14.17-certified-continuation-publication",
+    "a890a12c5cfb6c1eb4ee15906a21161bc4930988\trefs/tags/m14.17-certified-continuation-publication^{}",
+    "2faa9e568ef5f1e723f22d9635447179e4585053\trefs/tags/m14.18-staged-finite-body-bepu-contact",
+    "e66d3a5d30dab14a60f28e9cc77a0c854ad53127\trefs/tags/m14.18-staged-finite-body-bepu-contact^{}",
+    "684ed841de1432e89772282d8951f7cd8f70a625\trefs/tags/m14.19-persistent-bepu-contact-publication",
+    "fc6fbf269d7a8022ce2fe184aea0dfc94716db05\trefs/tags/m14.19-persistent-bepu-contact-publication^{}",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91\trefs/tags/m14.2-spacecraft-translational-authority",
+    "caa6d93ccd7c4e5924381e077a62585f99e5a32a\trefs/tags/m14.2-spacecraft-translational-authority^{}",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5\trefs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "49712256756e7d5433fc3ecf6aa1d1880a9f36a8\trefs/tags/m14.20-host-paced-canonical-contact-servicing^{}",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b\trefs/tags/m14.21-authored-compound-spacecraft-contact",
+    "b6e8fa568585706ce38c0609aeb14db4a643123e\trefs/tags/m14.21-authored-compound-spacecraft-contact^{}",
+    "e943a128ef425ff7427b917f2bb04056e58282f5\trefs/tags/m14.22-canonical-spacecraft-command-authority",
+    "899f11f727205340bdd550dd65a853e253de0ed3\trefs/tags/m14.22-canonical-spacecraft-command-authority^{}",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e\trefs/tags/m14.23-prepared-single-engine-actuation",
+    "6c9830237bc29bbd3c9cf5f4644b6409c32eaa9b\trefs/tags/m14.23-prepared-single-engine-actuation^{}",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73\trefs/tags/m14.24-exact-finite-propellant-segmentation",
+    "89a432ce3b96a5dcb0751cfdc26bfd6776c883a1\trefs/tags/m14.24-exact-finite-propellant-segmentation^{}",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8\trefs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "79978cf8b0fd783d43a661df6df53a2c0202af4a\trefs/tags/m14.3-spacecraft-terrain-contact-observations^{}",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896\trefs/tags/m14.4-atomic-contact-response",
+    "28b92f724f8decd3c9356aa5f9f5bbd6c9dd069c\trefs/tags/m14.4-atomic-contact-response^{}",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5\trefs/tags/m14.5-isolated-analytical-contact-response",
+    "b53d48025cfb8142cb32a6fc6fceb6018e33cfcd\trefs/tags/m14.5-isolated-analytical-contact-response^{}",
+    "07adc9983252f2cabf0af9da0a1281457af606bf\trefs/tags/m14.6-physical-event-epochs",
+    "d0b9f9d69d55b8ba85a7b24a44f93e03cea2dcf6\trefs/tags/m14.6-physical-event-epochs^{}",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877\trefs/tags/m14.7-exact-event-spacecraft-motion",
+    "56c0ae95b7f514e2f0440dfe272dd2836f32506e\trefs/tags/m14.7-exact-event-spacecraft-motion^{}",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086\trefs/tags/m14.8-exact-event-earth-relative-observation",
+    "2657bb16cdee2a42d1e5f9be830d247fb3c607f6\trefs/tags/m14.8-exact-event-earth-relative-observation^{}",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf\trefs/tags/m14.9-florida-monotone-contact-certification",
+    "9698a08b84b9b40b0fa03bec8f8ba80d1d7404e7\trefs/tags/m14.9-florida-monotone-contact-certification^{}",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3\trefs/tags/m15.0-segmented-powered-free-flight",
+    "4607d8c802006d5e1a01c595ab608cf53a4dab6b\trefs/tags/m15.0-segmented-powered-free-flight^{}",
+    "a1852cc3113b40763544968ea65a346530f54d17\trefs/tags/m15.1-finite-fuel-retained-powered-contact",
+    "09463ec6c323daf233205cb08306d38611c22e6e\trefs/tags/m15.1-finite-fuel-retained-powered-contact^{}",
+    "eb86bab80bdcae1f2c745ae82f3a016d71c260b4\trefs/tags/m15.2-srv01-reusable-production-spacecraft-integration",
+    "c3de150db8563864d23c4951b4630559453d8f56\trefs/tags/m15.2-srv01-reusable-production-spacecraft-integration^{}",
+    "88a108cafaab3b030c0e48568d98330dd07607b7\trefs/tags/milestone-10A",
+    "b1ba73ed2849ef611034b4d302d9be5bc7ee37ba\trefs/tags/milestone-10A^{}",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228\trefs/tags/milestone-10A-2A-2",
+    "866995f85d31f3f77bd67e1a8b1eb7abad410a54\trefs/tags/milestone-10A-2A-2^{}",
+    "14693e902933430df890b5a0e39170a5b247eb97\trefs/tags/milestone-10A-3",
+    "00bf3edfd8d961339744e39484da8bfbe852e20d\trefs/tags/milestone-10A-3^{}",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7\trefs/tags/milestone-10A-4",
+    "50e9b61c701319bb484615408932f89224a94e86\trefs/tags/milestone-10A-4^{}",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870\trefs/tags/milestone-10A-5",
+    "f107074e34e6db2212754f2a9ca541edb10d674c\trefs/tags/milestone-10A-5^{}",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00\trefs/tags/milestone-10A-6",
+    "248dcc3c5c72893394382bf04fd93f58f710ec09\trefs/tags/milestone-10A-6^{}",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b\trefs/tags/milestone-10A-7",
+    "0bfdb2ada90117bf4410267b009c4d4c6e4a3eda\trefs/tags/milestone-10A-7^{}",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc\trefs/tags/milestone-10B-1",
+    "afe816ffb3a7cf740fd17e448f91f986e2aca549\trefs/tags/milestone-10B-1^{}",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1\trefs/tags/milestone-10B-2A",
+    "edd559d5b6f91abc43bf026d8334100f2cc9f9fd\trefs/tags/milestone-10B-2A^{}",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8\trefs/tags/milestone-10B-2B",
+    "1e5dae2428f4aa2340259e772366bf32273766f5\trefs/tags/milestone-10B-2B^{}",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a\trefs/tags/milestone-11A",
+    "aa6373554af5fa5d723be97b1d130462a949a4b7\trefs/tags/milestone-11A^{}",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a\trefs/tags/milestone-11B-7F",
+    "10852ebb96f33f82ed9820cbdeeb1811ae83afe1\trefs/tags/milestone-11B-7F^{}",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1\trefs/tags/milestone-9A-4E-3",
+    "c78aff91e05202e0c59779c3f489abaf1beac6e2\trefs/tags/milestone-9A-4E-3^{}",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1\trefs/tags/milestone-9A-4E-5A",
+    "f9c34f3ad188337a0d5290b51edd1f7a29a351f2\trefs/tags/milestone-9A-4E-5A^{}",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8\trefs/tags/milestone-9A-celestial-v3",
+    "6a6137557684ba4b08ce7de1f8638aef66f6cff3\trefs/tags/milestone-9A-celestial-v3^{}",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c\trefs/tags/v0.2.0",
+    "32c20ae2cb36c30ea50ea1d49c2b95ed0ac888dc\trefs/tags/v0.2.0^{}",
+    "764637f7662420e7c3494aee8c9e748b04db6626\trefs/tags/v0.2.1",
+    "f3c1f8cab58f4f59494aaf8a6bddf548da39a8b3\trefs/tags/v0.2.1^{}",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631\trefs/tags/v0.3.0",
+    "a76f5c1b9338e5868896443061314d5ed0da1187\trefs/tags/v0.3.0^{}",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd\trefs/tags/v0.4.0",
+    "d2b5dc294cb25bc22ab4f05d14ae97e1c825fa6e\trefs/tags/v0.4.0^{}",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a\trefs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad\trefs/tags/v0.5.0",
+    "a1c8301f6eeb41ae59833f6ff42c8a3de32d11a4\trefs/tags/v0.5.0^{}"
+  ],
+  "untracked": [
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "sha256": "F9F8C81D7F8C1DC94F8C80F3F62D857593A5F3D2B0E4150EDCC4CA595E414C48"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "sha256": "C71E2149375B41C29DA6D3177FBE7137C6443E9006508740B85AA6BA118F5D1D"
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "sha256": "45D6A9966A89962BBBE0CA167FD62A07E39FE74B37621C73FF4558F852A44D0C"
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "sha256": "BC6A94CE816093A0A72C27975DB20C7F22F5F7EB9A36DC28ABE49837A8C019FE"
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "sha256": "BF7D6144200EAE6EDDA286B19C0AA83E3D262F0E1ED956FE881E3B9333313AD7"
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "sha256": "9768C62CFC86E4EF8A090CA1EE8F4E1DEC9DA9486A8EA5E63C3075953D47180C"
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "sha256": "2D9A9B426232826FE19D1678AEF8FEADB7A241B4ABBA5FA9A9B201325D5B58C3"
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "sha256": "25D48B0A2C5E8EFA243DEE627A17685D16A4F2DDC7C84337559BDDDB1D6CE81F"
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "sha256": "F46F7B4215CD7C4311233DEB3B36434798941B602478ED9AB20539BFF3A2263B"
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "sha256": "8923E3630C2D44DB6DD9B13E41FEA51CD847403BEE3F9EDFCE56543D5609E364"
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "sha256": "5CB5AC5616369CC6F399C323B9C6351EAB0D4E2253BBBF08C6F8E317A7C06E00"
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "sha256": "41EAD10AB96F1E1987AC847109D442E158B290F82CFB6F598047ADA3C1DEFA62"
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "sha256": "6F5440BD5D0C28487E48591C88D6A21761514823E5855F4598072D679E5AD433"
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "sha256": "6C0F70CDDE3DCD6EFDE8904A9CB592AA4517C2C5793627C665984AF6BC9BFABA"
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "sha256": "16A305F5992222FE8A998B3C052DA505D439E863B140CDBB9951DE7D3A17DCE5"
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "sha256": "EA6FA514E054B018868F3A6266C036C1E426126EA18507C9AE31B514962E1F6A"
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "sha256": "031471F49DE563EBCC56CEEF5DC3817C2506226858E4B09A8898978D9853B075"
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "sha256": "D55E23207DD1FB93B51B097CAAFC3003E733DD4D8B281E66884078B3372E0CE2"
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "sha256": "4CD4B3C87F0DF2F833772A2FA1E03AB4BE69E4EC8CF449BE7F75D1CC99F3298F"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "sha256": "255BBF8B40BC0558CA51CC4314705D3BE7BD15E3509749086C6918483EA9E585"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "sha256": "9303CF44C330801D9E73B52A905E780762D69538B6B8131840F190CABAA31E4E"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "sha256": "4ADADD439E0BC32E2A67504DE8568997D418582C7906F3EFE7E52ED9F1A3146D"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "sha256": "2DF837472BF5AAB7E7320F7E191A50D28F5F0074B6F6F43BB00714C00FD739E6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "sha256": "466650DDEA93B66B73216F0470AC59C4A28693372CBEB0F95EB5FE9E41A8D497"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "sha256": "25CC007BFDD7E09929527F566A908945A86EDD4D3F341E46D4AF24438A0DB363"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "sha256": "AAD2D98BC7EBA715FF9E6E9A30DE798BF6D33B95EEA6BA2F9176CEE2BA51CF1C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "sha256": "E8EB8AF4105E9C97475DF9CF8AE53CBA68BA23A71EF9B9AA7749C0B97A9891B3"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "sha256": "DF5F0D2378AC6A50EEA2133D2C9F38584E623F7679DF7CD2EB827FD971BA97EB"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "sha256": "85D493C3748A3BE0D9BCD57C6DB01DB16FE29B56D39AC6D6B749E4DB434D8E5A"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "sha256": "1AA52F7883FC10B4657DD0A86097FA2E28A9C09145CE6135771F410222B9E2A6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "sha256": "70B12C49D710E6B8BED292B4743469F4479822E01A2BFC3621BBFA79F848961C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "sha256": "F3E079029EF026043F6F995149EDDE307EA688A4AC12EB121B9F2E32ECDD9396"
+    }
+  ]
+}

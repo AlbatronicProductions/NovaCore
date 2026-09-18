@@ -1,0 +1,49 @@
+{
+  "scope": "Ground-placement route, not middle-pad acceptance",
+  "processes": [
+    {
+      "process": 1,
+      "logSha256": "9d302f8df2c467bc277b81402179bcc144e607d9dfc2fb3cadd854fc3ebbc86d",
+      "lines": [
+        "FLORIDA_PRESENTATION_READY site=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=48 schematicSlab=false coldMs=44.9122",
+        "SRV01_COLD_PREPARATION ms=470.1436 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "Florida seating: body=6; id=0x4E435F464C5F5044; direction=(0.1433224599406355,0.4788205718227514,0.8661348234979923); physicalGeneration=4; terrainVersion=5; H=15.134892258793116; slabRootHeight=21.970461536198854; foundationDepth=6.835569277405739; foundationBottomLocalZ=-6.835569277405739; foundationBottomCenterHeight=15.134892258793116; minimumContactLocalZ=-6.585569277405739; embed=0.25; regionalLoaded=True; regionalResidual=15.001533002687239; regionalSha=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; authority=canonical-H; publicationDependent=false.",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97",
+        "[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=961",
+        "STOCK_ASSEMBLY_FRAME samples=3452 median_ms=5.554 p95_ms=5.7757 p99_ms=6.1931 max_ms=685.2025 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3452 median_ms=0.0031 p95_ms=0.0757 p99_ms=0.164 max_ms=60.715 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.744 ms (4800 frames)",
+        "[native] Frame pacing: p50=5.504 ms; p95=5.853 ms; p99=6.160 ms; max=83.311 ms; samples=4800",
+        "[native] Fence wait pacing: average=4.893 ms; p95=5.191 ms; max=18.746 ms; samples=4800",
+        "[native] CPU timings: update=5.156 ms; fence=4.893; inspection=0.048; hostCallback=0.167; validationUpload=0.049; record=0.060; submit=0.021; present=0.204",
+        "[native] GPU timing averages: total=2.840 ms; anchoredCompute=0.000; anchoredDraw=1.707; background=0.216; preSurface=0.000; toneMap=0.053",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=645.493; recordReadDecodeVerifyMs=228.922; contributingRecords=670; anchoredDemandRequired=false"
+      ],
+      "stderr": ""
+    },
+    {
+      "process": 2,
+      "logSha256": "887ea1ae6ec12426caf173ab9a72ac7ceb1c848e153ba187e2b8753aa3226f16",
+      "lines": [
+        "FLORIDA_PRESENTATION_READY site=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=48 schematicSlab=false coldMs=43.3721",
+        "SRV01_COLD_PREPARATION ms=416.4042 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "Florida seating: body=6; id=0x4E435F464C5F5044; direction=(0.1433224599406355,0.4788205718227514,0.8661348234979923); physicalGeneration=4; terrainVersion=5; H=15.134892258793116; slabRootHeight=21.970461536198854; foundationDepth=6.835569277405739; foundationBottomLocalZ=-6.835569277405739; foundationBottomCenterHeight=15.134892258793116; minimumContactLocalZ=-6.585569277405739; embed=0.25; regionalLoaded=True; regionalResidual=15.001533002687239; regionalSha=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; authority=canonical-H; publicationDependent=false.",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4",
+        "[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97",
+        "[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=36",
+        "STOCK_ASSEMBLY_FRAME samples=3550 median_ms=5.5588 p95_ms=5.7992 p99_ms=6.2224 max_ms=117.6839 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3550 median_ms=0.0037 p95_ms=0.0917 p99_ms=0.2192 max_ms=69.5613 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.614 ms (4800 frames)",
+        "[native] Frame pacing: p50=5.477 ms; p95=5.887 ms; p99=6.321 ms; max=95.253 ms; samples=4800",
+        "[native] Fence wait pacing: average=4.832 ms; p95=5.171 ms; max=7.996 ms; samples=4800",
+        "[native] CPU timings: update=5.112 ms; fence=4.832; inspection=0.054; hostCallback=0.173; validationUpload=0.053; record=0.074; submit=0.024; present=0.216",
+        "[native] GPU timing averages: total=2.534 ms; anchoredCompute=0.000; anchoredDraw=1.462; background=0.186; preSurface=0.000; toneMap=0.024",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=666.242; recordReadDecodeVerifyMs=232.204; contributingRecords=670; anchoredDemandRequired=false"
+      ],
+      "stderr": ""
+    }
+  ]
+}

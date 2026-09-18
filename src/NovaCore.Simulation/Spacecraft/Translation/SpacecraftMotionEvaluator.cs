@@ -22,7 +22,12 @@ internal static class SpacecraftMotionEvaluator
         motion=default;
         if(!state.Spacecraft.TryGetAssembly(subject,out var launch,out var value))return SpacecraftTranslationStatus.SubjectNotFound;
         if(time!=value.Epoch)return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
-        motion=new(subject,launch!.Spacecraft.CarrierFrame,time,state.Revision,value.Motion,value.Mass);
+        if(launch!.Site is {} site)
+        {
+            if(!site.Applicable)return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
+            motion=new(subject,site.EarthFrame,time,state.Revision,site.ToEarth(value.Motion,time),value.Mass);
+        }
+        else motion=new(subject,launch.Spacecraft.CarrierFrame,time,state.Revision,value.Motion,value.Mass);
         return SpacecraftTranslationStatus.Success;
     }
     /// <summary>Call within the simulation single-writer phase using a fresh state view. Output is complete or default.</summary>

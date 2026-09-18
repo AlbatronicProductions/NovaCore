@@ -14,7 +14,22 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Time;
 
+if(args.Any(a=>a.StartsWith("--florida-slab-",StringComparison.Ordinal)))PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
+if(args.Contains("--florida-slab-correctness",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Qualification(true);return 0;}
+if(args.Contains("--florida-slab-allocation",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Allocation(true);return 0;}
+if(args.Contains("--florida-slab-solar",StringComparer.Ordinal)){AssemblyFloridaSiteTests.SolarConsumer();return 0;}
+if(args.Contains("--florida-slab-costs",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Costs(true);return 0;}
+if(args.Contains("--assembly-florida-site-cheap",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Cheap();return 0;}
+if(args.Contains("--assembly-florida-qualification",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Qualification();return 0;}
+if(args.Contains("--assembly-florida-allocation",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Allocation();return 0;}
+if(args.Contains("--assembly-florida-costs",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Costs();return 0;}
+if(args.Contains("--assembly-florida-presentation",StringComparer.Ordinal)){AssemblyFloridaSiteTests.Presentation();return 0;}
+if(args.Contains("--assembly-florida-presentation-storage",StringComparer.Ordinal)){AssemblyFloridaSiteTests.PresentationStorage();return 0;}
 if(args.Contains("--assembly-presentation",StringComparer.Ordinal)){StockAssemblyPresentationTests.Run();return 0;}
+if(args.Contains("--assembly-supported-storage",StringComparer.Ordinal)){StockAssemblyPresentationTests.SupportedStorage();return 0;}
+if(args.Contains("--assembly-powered-support",StringComparer.Ordinal)){StockAssemblyPresentationTests.PoweredSupport();return 0;}
+if(args.Contains("--assembly-powered-storage",StringComparer.Ordinal)){StockAssemblyPresentationTests.SupportedStorage(true);return 0;}
+if(args.Contains("--certified-continuation-regression",StringComparer.Ordinal)){CertifiedContinuationPublicationTests.Run();ContinuationAcceptanceTests.Run();ContinuationAllocationTests.Run();return 0;}
 
 if(args.Contains("--powered-free-flight-presentation",StringComparer.Ordinal)){PoweredFlightPresentationTests.Run();return 0;}
 if(args.Contains("--powered-contact-presentation",StringComparer.Ordinal)){PoweredContactPresentationTests.Run();return 0;}

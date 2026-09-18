@@ -1,0 +1,1400 @@
+{
+  "reliedOnRetainedEvidence": true,
+  "newTimingCampaign": false,
+  "equivalence": "Only three closeout source edits: status strings and removal of an uncalled rejected-profile factory. Stock computations, tested workloads, solver policy and numerical order are unchanged. Historical checkpoint timings remain labelled, never recast as fresh timing of the new assembly image.",
+  "operations": [
+    {
+      "stage": 1,
+      "process": 1,
+      "population": "supported contact",
+      "result": {
+        "median": 0.0463,
+        "p95": 0.0486,
+        "p99": 0.0519,
+        "maximum": 0.0887,
+        "coldMs": 156.6552,
+        "firstMs": 50.2598,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 134,
+            "ms": 0.0887
+          },
+          {
+            "index": 455,
+            "ms": 0.0859
+          },
+          {
+            "index": 497,
+            "ms": 0.0831
+          },
+          {
+            "index": 166,
+            "ms": 0.0828
+          },
+          {
+            "index": 498,
+            "ms": 0.0773
+          },
+          {
+            "index": 839,
+            "ms": 0.0762
+          },
+          {
+            "index": 764,
+            "ms": 0.0757
+          },
+          {
+            "index": 517,
+            "ms": 0.056
+          }
+        ]
+      }
+    },
+    {
+      "stage": 1,
+      "process": 2,
+      "population": "supported contact",
+      "result": {
+        "median": 0.0467,
+        "p95": 0.059,
+        "p99": 0.1062,
+        "maximum": 0.2276,
+        "coldMs": 172.9001,
+        "firstMs": 60.2308,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 713,
+            "ms": 0.2276
+          },
+          {
+            "index": 35,
+            "ms": 0.1487
+          },
+          {
+            "index": 383,
+            "ms": 0.1458
+          },
+          {
+            "index": 714,
+            "ms": 0.1432
+          },
+          {
+            "index": 128,
+            "ms": 0.1339
+          },
+          {
+            "index": 470,
+            "ms": 0.1293
+          },
+          {
+            "index": 241,
+            "ms": 0.1186
+          },
+          {
+            "index": 797,
+            "ms": 0.1164
+          }
+        ]
+      }
+    },
+    {
+      "stage": 1,
+      "process": 3,
+      "population": "supported contact",
+      "result": {
+        "median": 0.0461,
+        "p95": 0.0523,
+        "p99": 0.0949,
+        "maximum": 0.1432,
+        "coldMs": 159.1119,
+        "firstMs": 52.2345,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 228,
+            "ms": 0.1432
+          },
+          {
+            "index": 927,
+            "ms": 0.1326
+          },
+          {
+            "index": 574,
+            "ms": 0.1069
+          },
+          {
+            "index": 319,
+            "ms": 0.1028
+          },
+          {
+            "index": 231,
+            "ms": 0.1027
+          },
+          {
+            "index": 1021,
+            "ms": 0.1011
+          },
+          {
+            "index": 554,
+            "ms": 0.0985
+          },
+          {
+            "index": 670,
+            "ms": 0.0973
+          }
+        ]
+      }
+    },
+    {
+      "stage": 2,
+      "process": 1,
+      "population": "powered support",
+      "result": {
+        "median": 0.09,
+        "p95": 0.0923,
+        "p99": 0.0937,
+        "maximum": 0.1169,
+        "coldMs": 161.6714,
+        "firstMs": 55.3482,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 801,
+            "ms": 0.1169
+          },
+          {
+            "index": 467,
+            "ms": 0.1052
+          },
+          {
+            "index": 640,
+            "ms": 0.101
+          },
+          {
+            "index": 652,
+            "ms": 0.0961
+          },
+          {
+            "index": 462,
+            "ms": 0.096
+          },
+          {
+            "index": 1006,
+            "ms": 0.0952
+          },
+          {
+            "index": 96,
+            "ms": 0.0949
+          },
+          {
+            "index": 135,
+            "ms": 0.0946
+          }
+        ]
+      }
+    },
+    {
+      "stage": 2,
+      "process": 2,
+      "population": "powered support",
+      "result": {
+        "median": 0.0904,
+        "p95": 0.0935,
+        "p99": 0.1019,
+        "maximum": 0.1392,
+        "coldMs": 161.6721,
+        "firstMs": 55.9424,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 244,
+            "ms": 0.1392
+          },
+          {
+            "index": 284,
+            "ms": 0.1378
+          },
+          {
+            "index": 243,
+            "ms": 0.1301
+          },
+          {
+            "index": 931,
+            "ms": 0.128
+          },
+          {
+            "index": 283,
+            "ms": 0.1153
+          },
+          {
+            "index": 296,
+            "ms": 0.1148
+          },
+          {
+            "index": 930,
+            "ms": 0.1128
+          },
+          {
+            "index": 951,
+            "ms": 0.1108
+          }
+        ]
+      }
+    },
+    {
+      "stage": 2,
+      "process": 3,
+      "population": "powered support",
+      "result": {
+        "median": 0.0913,
+        "p95": 0.0935,
+        "p99": 0.0947,
+        "maximum": 0.1013,
+        "coldMs": 156.5045,
+        "firstMs": 55.281,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 660,
+            "ms": 0.1013
+          },
+          {
+            "index": 664,
+            "ms": 0.0994
+          },
+          {
+            "index": 15,
+            "ms": 0.0984
+          },
+          {
+            "index": 661,
+            "ms": 0.0976
+          },
+          {
+            "index": 995,
+            "ms": 0.0972
+          },
+          {
+            "index": 3,
+            "ms": 0.0961
+          },
+          {
+            "index": 132,
+            "ms": 0.096
+          },
+          {
+            "index": 16,
+            "ms": 0.0955
+          }
+        ]
+      }
+    },
+    {
+      "stage": 3,
+      "process": 1,
+      "population": "complete-contact-handoff",
+      "result": {
+        "population": "complete-contact-handoff",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.1137,
+        "p95": 0.1436,
+        "p99": 0.1988,
+        "maximum": 2.0464,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "coldMs": 161.5762,
+        "firstMs": 48.4227,
+        "wholeHarnessCpuMs": 2500,
+        "tails": [
+          {
+            "index": 55,
+            "ms": 2.0464
+          },
+          {
+            "index": 410,
+            "ms": 0.2655
+          },
+          {
+            "index": 832,
+            "ms": 0.2648
+          },
+          {
+            "index": 267,
+            "ms": 0.224
+          },
+          {
+            "index": 57,
+            "ms": 0.2239
+          },
+          {
+            "index": 84,
+            "ms": 0.2216
+          },
+          {
+            "index": 277,
+            "ms": 0.2192
+          },
+          {
+            "index": 406,
+            "ms": 0.2122
+          }
+        ]
+      }
+    },
+    {
+      "stage": 3,
+      "process": 1,
+      "population": "complete-first-free-flight",
+      "result": {
+        "population": "complete-first-free-flight",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.10725,
+        "p95": 0.1335,
+        "p99": 0.1843,
+        "maximum": 0.3203,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "coldMs": 161.5762,
+        "firstMs": 48.4227,
+        "wholeHarnessCpuMs": 2500,
+        "tails": [
+          {
+            "index": 56,
+            "ms": 0.3203
+          },
+          {
+            "index": 520,
+            "ms": 0.2566
+          },
+          {
+            "index": 228,
+            "ms": 0.2297
+          },
+          {
+            "index": 321,
+            "ms": 0.222
+          },
+          {
+            "index": 230,
+            "ms": 0.1925
+          },
+          {
+            "index": 600,
+            "ms": 0.1895
+          },
+          {
+            "index": 372,
+            "ms": 0.1893
+          },
+          {
+            "index": 326,
+            "ms": 0.1889
+          }
+        ]
+      }
+    },
+    {
+      "stage": 3,
+      "process": 2,
+      "population": "complete-contact-handoff",
+      "result": {
+        "population": "complete-contact-handoff",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.124,
+        "p95": 0.1418,
+        "p99": 0.1772,
+        "maximum": 0.2518,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "coldMs": 163.0153,
+        "firstMs": 47.4733,
+        "wholeHarnessCpuMs": 2531.25,
+        "tails": [
+          {
+            "index": 494,
+            "ms": 0.2518
+          },
+          {
+            "index": 552,
+            "ms": 0.2353
+          },
+          {
+            "index": 458,
+            "ms": 0.2279
+          },
+          {
+            "index": 83,
+            "ms": 0.2087
+          },
+          {
+            "index": 594,
+            "ms": 0.1887
+          },
+          {
+            "index": 509,
+            "ms": 0.1835
+          },
+          {
+            "index": 617,
+            "ms": 0.1805
+          },
+          {
+            "index": 436,
+            "ms": 0.1795
+          }
+        ]
+      }
+    },
+    {
+      "stage": 3,
+      "process": 2,
+      "population": "complete-first-free-flight",
+      "result": {
+        "population": "complete-first-free-flight",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.1196,
+        "p95": 0.128,
+        "p99": 0.1499,
+        "maximum": 0.2091,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "coldMs": 163.0153,
+        "firstMs": 47.4733,
+        "wholeHarnessCpuMs": 2531.25,
+        "tails": [
+          {
+            "index": 458,
+            "ms": 0.2091
+          },
+          {
+            "index": 480,
+            "ms": 0.1803
+          },
+          {
+            "index": 604,
+            "ms": 0.1739
+          },
+          {
+            "index": 777,
+            "ms": 0.1681
+          },
+          {
+            "index": 512,
+            "ms": 0.1579
+          },
+          {
+            "index": 430,
+            "ms": 0.1567
+          },
+          {
+            "index": 778,
+            "ms": 0.1557
+          },
+          {
+            "index": 506,
+            "ms": 0.1535
+          }
+        ]
+      }
+    },
+    {
+      "stage": 3,
+      "process": 3,
+      "population": "complete-contact-handoff",
+      "result": {
+        "population": "complete-contact-handoff",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.1255,
+        "p95": 0.151,
+        "p99": 0.1717,
+        "maximum": 0.5861,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "coldMs": 165.8213,
+        "firstMs": 47.3125,
+        "wholeHarnessCpuMs": 2578.125,
+        "tails": [
+          {
+            "index": 56,
+            "ms": 0.5861
+          },
+          {
+            "index": 221,
+            "ms": 0.3449
+          },
+          {
+            "index": 224,
+            "ms": 0.2616
+          },
+          {
+            "index": 222,
+            "ms": 0.2559
+          },
+          {
+            "index": 223,
+            "ms": 0.2549
+          },
+          {
+            "index": 85,
+            "ms": 0.2106
+          },
+          {
+            "index": 520,
+            "ms": 0.2043
+          },
+          {
+            "index": 310,
+            "ms": 0.189
+          }
+        ]
+      }
+    },
+    {
+      "stage": 3,
+      "process": 3,
+      "population": "complete-first-free-flight",
+      "result": {
+        "population": "complete-first-free-flight",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.1214,
+        "p95": 0.142,
+        "p99": 0.1658,
+        "maximum": 0.2899,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "coldMs": 165.8213,
+        "firstMs": 47.3125,
+        "wholeHarnessCpuMs": 2578.125,
+        "tails": [
+          {
+            "index": 221,
+            "ms": 0.2899
+          },
+          {
+            "index": 56,
+            "ms": 0.2641
+          },
+          {
+            "index": 222,
+            "ms": 0.26
+          },
+          {
+            "index": 223,
+            "ms": 0.2556
+          },
+          {
+            "index": 224,
+            "ms": 0.2391
+          },
+          {
+            "index": 266,
+            "ms": 0.1911
+          },
+          {
+            "index": 312,
+            "ms": 0.1756
+          },
+          {
+            "index": 230,
+            "ms": 0.1726
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 1,
+      "population": "wet-powered",
+      "result": {
+        "population": "wet-powered",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.0859,
+        "p95": 0.0901,
+        "p99": 0.103,
+        "maximum": 1.6261,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 16.0333,
+        "wholeHarnessCpuMs": 203.125,
+        "tails": [
+          {
+            "index": 996,
+            "ms": 1.6261
+          },
+          {
+            "index": 149,
+            "ms": 0.2323
+          },
+          {
+            "index": 148,
+            "ms": 0.1734
+          },
+          {
+            "index": 1000,
+            "ms": 0.1114
+          },
+          {
+            "index": 1007,
+            "ms": 0.1113
+          },
+          {
+            "index": 1006,
+            "ms": 0.1079
+          },
+          {
+            "index": 566,
+            "ms": 0.1067
+          },
+          {
+            "index": 1011,
+            "ms": 0.1055
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 1,
+      "population": "interior-exhaustion",
+      "result": {
+        "population": "interior-exhaustion",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.1586,
+        "p95": 0.1621,
+        "p99": 0.1682,
+        "maximum": 0.1883,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 0.1039,
+        "wholeHarnessCpuMs": 296.875,
+        "tails": [
+          {
+            "index": 688,
+            "ms": 0.1883
+          },
+          {
+            "index": 785,
+            "ms": 0.1789
+          },
+          {
+            "index": 79,
+            "ms": 0.1752
+          },
+          {
+            "index": 620,
+            "ms": 0.1728
+          },
+          {
+            "index": 146,
+            "ms": 0.1727
+          },
+          {
+            "index": 550,
+            "ms": 0.1712
+          },
+          {
+            "index": 418,
+            "ms": 0.1708
+          },
+          {
+            "index": 282,
+            "ms": 0.1704
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 1,
+      "population": "dry",
+      "result": {
+        "population": "dry",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.0502,
+        "p95": 0.0524,
+        "p99": 0.0539,
+        "maximum": 0.0616,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 0.0395,
+        "wholeHarnessCpuMs": 156.25,
+        "tails": [
+          {
+            "index": 540,
+            "ms": 0.0616
+          },
+          {
+            "index": 417,
+            "ms": 0.0567
+          },
+          {
+            "index": 74,
+            "ms": 0.0558
+          },
+          {
+            "index": 249,
+            "ms": 0.0554
+          },
+          {
+            "index": 327,
+            "ms": 0.0549
+          },
+          {
+            "index": 502,
+            "ms": 0.0548
+          },
+          {
+            "index": 285,
+            "ms": 0.0546
+          },
+          {
+            "index": 493,
+            "ms": 0.0545
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 2,
+      "population": "wet-powered",
+      "result": {
+        "population": "wet-powered",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.08615,
+        "p95": 0.0973,
+        "p99": 0.1346,
+        "maximum": 0.1456,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 17.0575,
+        "wholeHarnessCpuMs": 187.5,
+        "tails": [
+          {
+            "index": 923,
+            "ms": 0.1456
+          },
+          {
+            "index": 45,
+            "ms": 0.1413
+          },
+          {
+            "index": 222,
+            "ms": 0.1383
+          },
+          {
+            "index": 82,
+            "ms": 0.1382
+          },
+          {
+            "index": 118,
+            "ms": 0.1381
+          },
+          {
+            "index": 155,
+            "ms": 0.1365
+          },
+          {
+            "index": 407,
+            "ms": 0.1365
+          },
+          {
+            "index": 479,
+            "ms": 0.1363
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 2,
+      "population": "interior-exhaustion",
+      "result": {
+        "population": "interior-exhaustion",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.1516,
+        "p95": 0.1632,
+        "p99": 0.1776,
+        "maximum": 1.668,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 0.0969,
+        "wholeHarnessCpuMs": 281.25,
+        "tails": [
+          {
+            "index": 785,
+            "ms": 1.668
+          },
+          {
+            "index": 791,
+            "ms": 0.3353
+          },
+          {
+            "index": 790,
+            "ms": 0.3187
+          },
+          {
+            "index": 788,
+            "ms": 0.273
+          },
+          {
+            "index": 794,
+            "ms": 0.2012
+          },
+          {
+            "index": 795,
+            "ms": 0.1872
+          },
+          {
+            "index": 804,
+            "ms": 0.1804
+          },
+          {
+            "index": 516,
+            "ms": 0.1803
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 2,
+      "population": "dry",
+      "result": {
+        "population": "dry",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.0186,
+        "p95": 0.023,
+        "p99": 0.0242,
+        "maximum": 0.0457,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 0.0317,
+        "wholeHarnessCpuMs": 93.75,
+        "tails": [
+          {
+            "index": 39,
+            "ms": 0.0457
+          },
+          {
+            "index": 369,
+            "ms": 0.028
+          },
+          {
+            "index": 177,
+            "ms": 0.0266
+          },
+          {
+            "index": 320,
+            "ms": 0.0257
+          },
+          {
+            "index": 56,
+            "ms": 0.0248
+          },
+          {
+            "index": 266,
+            "ms": 0.0246
+          },
+          {
+            "index": 314,
+            "ms": 0.0245
+          },
+          {
+            "index": 282,
+            "ms": 0.0243
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 3,
+      "population": "wet-powered",
+      "result": {
+        "population": "wet-powered",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.0857,
+        "p95": 0.0885,
+        "p99": 0.0995,
+        "maximum": 0.1872,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 17.3947,
+        "wholeHarnessCpuMs": 203.125,
+        "tails": [
+          {
+            "index": 72,
+            "ms": 0.1872
+          },
+          {
+            "index": 73,
+            "ms": 0.1844
+          },
+          {
+            "index": 74,
+            "ms": 0.1707
+          },
+          {
+            "index": 5,
+            "ms": 0.1149
+          },
+          {
+            "index": 899,
+            "ms": 0.105
+          },
+          {
+            "index": 61,
+            "ms": 0.1039
+          },
+          {
+            "index": 51,
+            "ms": 0.1033
+          },
+          {
+            "index": 0,
+            "ms": 0.1016
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 3,
+      "population": "interior-exhaustion",
+      "result": {
+        "population": "interior-exhaustion",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.1515,
+        "p95": 0.159,
+        "p99": 0.1796,
+        "maximum": 1.5849,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 0.0922,
+        "wholeHarnessCpuMs": 265.625,
+        "tails": [
+          {
+            "index": 800,
+            "ms": 1.5849
+          },
+          {
+            "index": 802,
+            "ms": 0.4481
+          },
+          {
+            "index": 805,
+            "ms": 0.3768
+          },
+          {
+            "index": 801,
+            "ms": 0.327
+          },
+          {
+            "index": 808,
+            "ms": 0.2208
+          },
+          {
+            "index": 804,
+            "ms": 0.2086
+          },
+          {
+            "index": 806,
+            "ms": 0.2084
+          },
+          {
+            "index": 803,
+            "ms": 0.1982
+          }
+        ]
+      }
+    },
+    {
+      "stage": 4,
+      "process": 3,
+      "population": "dry",
+      "result": {
+        "population": "dry",
+        "warm": 128,
+        "count": 1024,
+        "median": 0.0203,
+        "p95": 0.0215,
+        "p99": 0.0277,
+        "maximum": 0.0604,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "cold": 0.0454,
+        "wholeHarnessCpuMs": 93.75,
+        "tails": [
+          {
+            "index": 863,
+            "ms": 0.0604
+          },
+          {
+            "index": 404,
+            "ms": 0.0349
+          },
+          {
+            "index": 408,
+            "ms": 0.0348
+          },
+          {
+            "index": 417,
+            "ms": 0.0296
+          },
+          {
+            "index": 405,
+            "ms": 0.0293
+          },
+          {
+            "index": 410,
+            "ms": 0.0293
+          },
+          {
+            "index": 411,
+            "ms": 0.0292
+          },
+          {
+            "index": 415,
+            "ms": 0.0289
+          }
+        ]
+      }
+    },
+    {
+      "stage": 5,
+      "process": 1,
+      "population": "stock Florida slab",
+      "result": {
+        "median": 0.0683,
+        "p95": 0.0707,
+        "p99": 0.0733,
+        "maximum": 0.1508,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.1508,
+            "index": 0
+          },
+          {
+            "ms": 0.1085,
+            "index": 884
+          },
+          {
+            "ms": 0.0887,
+            "index": 321
+          },
+          {
+            "ms": 0.0876,
+            "index": 883
+          },
+          {
+            "ms": 0.083,
+            "index": 766
+          },
+          {
+            "ms": 0.075,
+            "index": 14
+          },
+          {
+            "ms": 0.0744,
+            "index": 116
+          },
+          {
+            "ms": 0.0741,
+            "index": 963
+          }
+        ]
+      }
+    },
+    {
+      "stage": 5,
+      "process": 2,
+      "population": "stock Florida slab",
+      "result": {
+        "median": 0.0677,
+        "p95": 0.0684,
+        "p99": 0.0718,
+        "maximum": 0.1345,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.1345,
+            "index": 0
+          },
+          {
+            "ms": 0.0951,
+            "index": 339
+          },
+          {
+            "ms": 0.0889,
+            "index": 51
+          },
+          {
+            "ms": 0.0819,
+            "index": 340
+          },
+          {
+            "ms": 0.0819,
+            "index": 493
+          },
+          {
+            "ms": 0.0814,
+            "index": 280
+          },
+          {
+            "ms": 0.0797,
+            "index": 946
+          },
+          {
+            "ms": 0.078,
+            "index": 717
+          }
+        ]
+      }
+    },
+    {
+      "stage": 5,
+      "process": 3,
+      "population": "stock Florida slab",
+      "result": {
+        "median": 0.0679,
+        "p95": 0.0804,
+        "p99": 0.1239,
+        "maximum": 0.171,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.171,
+            "index": 654
+          },
+          {
+            "ms": 0.1704,
+            "index": 2
+          },
+          {
+            "ms": 0.1532,
+            "index": 185
+          },
+          {
+            "ms": 0.1507,
+            "index": 894
+          },
+          {
+            "ms": 0.1482,
+            "index": 448
+          },
+          {
+            "ms": 0.1417,
+            "index": 425
+          },
+          {
+            "ms": 0.1383,
+            "index": 0
+          },
+          {
+            "ms": 0.1361,
+            "index": 14
+          }
+        ]
+      }
+    }
+  ],
+  "finalSlabLive": [
+    {
+      "route": "manual",
+      "identity": {
+        "name": "manual",
+        "exit": 0,
+        "arguments": [
+          "--scene=srv01-florida-support",
+          "--benchmark-frames=4800",
+          "--log=renderer,vulkan"
+        ],
+        "observer": true
+      },
+      "sha256": "3732D17B676069DA9117902183626448CA8F816847CA1DF77DA0A1D8B9BA6BB7",
+      "stderr": null,
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=39.6555",
+        "SRV01_COLD_PREPARATION ms=461.1624 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=152",
+        "SLAB_LIVE_GC total=0,0,0 warm=0,0,0 warmStart=371",
+        "SLAB_LIVE_FIRST index=0 displayMs=14.808 serviceMs=2.4638",
+        "SLAB_LIVE_FIRST index=1 displayMs=5.9616 serviceMs=63.8015",
+        "SLAB_LIVE_FIRST index=2 displayMs=67.1873 serviceMs=1.2684",
+        "SLAB_LIVE_FIRST index=3 displayMs=4.4517 serviceMs=0.0261",
+        "SLAB_LIVE_FIRST index=4 displayMs=3.367 serviceMs=0.033",
+        "SLAB_LIVE_FIRST index=5 displayMs=4.2644 serviceMs=0.1834",
+        "SLAB_LIVE_FIRST index=6 displayMs=5.8633 serviceMs=0.0445",
+        "SLAB_LIVE_FIRST index=7 displayMs=5.4155 serviceMs=0.0481",
+        "SLAB_LIVE_WARM {\"population\":\"display\",\"samples\":3215,\"median\":5.5552,\"p95\":5.8726,\"p99\":6.3053,\"maximum\":6.4408,\"tails\":[{\"ms\":6.4408,\"index\":2025},{\"ms\":6.4391,\"index\":1773},{\"ms\":6.4304,\"index\":1665},{\"ms\":6.4153,\"index\":1605},{\"ms\":6.4149,\"index\":1593},{\"ms\":6.4046,\"index\":1905},{\"ms\":6.4044,\"index\":2097},{\"ms\":6.3891,\"index\":2217}]}",
+        "SLAB_LIVE_WARM {\"population\":\"service\",\"samples\":3215,\"median\":0.0026,\"p95\":0.0511,\"p99\":0.0707,\"maximum\":0.1817,\"tails\":[{\"ms\":0.1817,\"index\":2310},{\"ms\":0.115,\"index\":1410},{\"ms\":0.0986,\"index\":2334},{\"ms\":0.0955,\"index\":2349},{\"ms\":0.0866,\"index\":2358},{\"ms\":0.086,\"index\":1890},{\"ms\":0.0859,\"index\":1896},{\"ms\":0.0846,\"index\":2346}]}",
+        "STOCK_ASSEMBLY_FRAME samples=3586 median_ms=5.5551 p95_ms=5.919 p99_ms=6.312 max_ms=67.1873 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3586 median_ms=0.0027 p95_ms=0.0572 p99_ms=0.1405 max_ms=63.8015 includes=host_admission_bounded_service_copied_observation",
+        "Solar workload: bodies=10; representation=production; dynamicTerrain=True; orbitCurveBuilds=1; orbitCurveReuses=9",
+        "[native] Frame pacing: p50=5.549 ms; p95=5.947 ms; p99=6.355 ms; max=67.298 ms; samples=4800",
+        "[native] CPU timings: update=5.260 ms; fence=5.035; inspection=0.035; hostCallback=0.142; validationUpload=0.047; record=0.052; submit=0.026; present=0.181",
+        "[native] GPU timing averages: total=1.796 ms; anchoredCompute=0.000; anchoredDraw=0.916; background=0.102; preSurface=0.000; toneMap=0.014",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=578.837; recordReadDecodeVerifyMs=223.934; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "route": "solar",
+      "identity": {
+        "name": "solar",
+        "exit": 0,
+        "arguments": [
+          "--scene=sol",
+          "--focus=earth",
+          "--surface-site=florida-launch",
+          "--physical-surface=m12d-natural-candidate",
+          "--benchmark-frames=4800",
+          "--log=renderer,vulkan"
+        ],
+        "observer": true
+      },
+      "sha256": "6DA1F849F6ED4305DAB1612AB2D002C4E4EFC9E8DB9FEE9439DDD126D0DFBFFF",
+      "stderr": null,
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3c4ee876aed18b83cde2a1b15eb8d60715151a03df1eb4e4c770fdaa47dd8998 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=842976986380894 east=0 support=authored-base-footing-union coldMs=0.6073",
+        "SRV01_COLD_PREPARATION ms=307.3013 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "Scene: sol; bodies=10; instant=842976986380894; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=842977006380894 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=5735",
+        "SLAB_LIVE_GC total=0,0,0 warm=0,0,0 warmStart=362",
+        "SLAB_LIVE_FIRST index=0 displayMs=25.6024 serviceMs=82.5204",
+        "SLAB_LIVE_FIRST index=1 displayMs=88.4521 serviceMs=1.5604",
+        "SLAB_LIVE_FIRST index=2 displayMs=6.5498 serviceMs=0.3781",
+        "SLAB_LIVE_FIRST index=3 displayMs=11.6826 serviceMs=0.0376",
+        "SLAB_LIVE_FIRST index=4 displayMs=5.1567 serviceMs=0.2618",
+        "SLAB_LIVE_FIRST index=5 displayMs=5.3863 serviceMs=0.0292",
+        "SLAB_LIVE_FIRST index=6 displayMs=5.1683 serviceMs=0.035",
+        "SLAB_LIVE_FIRST index=7 displayMs=4.8693 serviceMs=0.2703",
+        "SLAB_LIVE_WARM {\"population\":\"display\",\"samples\":3215,\"median\":5.555,\"p95\":5.7923,\"p99\":6.0123,\"maximum\":11.3598,\"tails\":[{\"ms\":11.3598,\"index\":968},{\"ms\":6.7157,\"index\":952},{\"ms\":6.4145,\"index\":3222},{\"ms\":6.3717,\"index\":950},{\"ms\":6.2964,\"index\":1182},{\"ms\":6.2532,\"index\":886},{\"ms\":6.2435,\"index\":2502},{\"ms\":6.2107,\"index\":2591}]}",
+        "SLAB_LIVE_WARM {\"population\":\"service\",\"samples\":3215,\"median\":0.0026,\"p95\":0.0595,\"p99\":0.0765,\"maximum\":0.1414,\"tails\":[{\"ms\":0.1414,\"index\":1023},{\"ms\":0.0941,\"index\":974},{\"ms\":0.0914,\"index\":1071},{\"ms\":0.0906,\"index\":1029},{\"ms\":0.0887,\"index\":1671},{\"ms\":0.088,\"index\":2219},{\"ms\":0.0874,\"index\":3485},{\"ms\":0.0871,\"index\":3491}]}",
+        "STOCK_ASSEMBLY_FRAME samples=3577 median_ms=5.5555 p95_ms=5.8365 p99_ms=6.2107 max_ms=88.4521 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3577 median_ms=0.0027 p95_ms=0.0665 p99_ms=0.2007 max_ms=82.5204 includes=host_admission_bounded_service_copied_observation",
+        "Solar workload: bodies=10; representation=production; dynamicTerrain=True; orbitCurveBuilds=1; orbitCurveReuses=9",
+        "[native] Frame pacing: p50=5.545 ms; p95=5.923 ms; p99=6.251 ms; max=88.600 ms; samples=4800",
+        "[native] CPU timings: update=5.256 ms; fence=4.896; inspection=0.048; hostCallback=0.263; validationUpload=0.048; record=0.056; submit=0.020; present=0.190",
+        "[native] GPU timing averages: total=2.024 ms; anchoredCompute=0.000; anchoredDraw=0.922; background=0.300; preSurface=0.000; toneMap=0.022",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=635; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=622.473; recordReadDecodeVerifyMs=259.872; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    }
+  ]
+}

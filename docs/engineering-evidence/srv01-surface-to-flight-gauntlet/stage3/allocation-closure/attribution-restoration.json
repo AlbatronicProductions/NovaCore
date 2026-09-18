@@ -1,0 +1,5 @@
+{
+  "src\\NovaCore.Simulation\\Spacecraft\\Contact\\Staging\\LocalContactWorld.cs": "8e5f69238593ee6f978ce02e5b7e4371e60a0d13e24ec2acd0a2f5c51ab59c1d",
+  "src\\NovaCore.Simulation\\Transactions\\SimulationTransactionEngine.Assemblies.cs": "b4dabfdb04d2e3b24206e315b4363a2392db92d06adac99228794127255aee85",
+  "tests\\NovaCore.Simulation.Tests\\AssemblyDepartureTests.cs": "054ec50060eaa6b1a24e09f15deaf95a97052e84fee8bc93f9e87f375c386f70"
+}

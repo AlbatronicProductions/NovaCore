@@ -1,0 +1,22 @@
+{
+  "path": "E:\\NovaCore\\build\\srv01-powered-support",
+  "classification": "DISPOSE: generated build/bin/obj and logs; concise results and source/reproduction retained",
+  "files": 248,
+  "bytes": 47292499.0,
+  "command": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\srv01-powered-support' -Recurse -Force -ErrorAction Stop",
+  "verification": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\srv01-powered-support'",
+  "priorStage1Roots": [
+    {
+      "path": "E:\\NovaCore\\build\\srv01-drift-closure",
+      "exists": false
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-surface-to-flight-stage1",
+      "exists": false
+    }
+  ],
+  "removed": false,
+  "remainingFiles": 248,
+  "remainingBytes": 47292499.0,
+  "automaticAttempt": "One attempt rejected before execution: blocked by policy. No retry or workaround. Manual reviewed cleanup required."
+}

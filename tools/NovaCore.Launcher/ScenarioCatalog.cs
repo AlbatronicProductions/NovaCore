@@ -50,7 +50,7 @@ public static class ScenarioCatalog
             NovaCoreDiagnosticsMode.PerformanceTelemetry,
             NovaCorePhysicalSurface.M12DNaturalTerrainCandidate, true, null),
         new(NovaCoreScenarioPreset.FloridaLaunchSite, "Florida Launch Site",
-            "Solar scene focused on the existing anchored Florida launch site.", NovaCoreScene.Solar,
+            "Explore the Solar world from stock SRV-01 on the authenticated Florida support slab. Engine/RCS OFF; no departure controls.", NovaCoreScene.Solar,
             NovaCoreStartingBody.Earth, null, "florida-launch", NovaCoreWindowMode.Windowed,
             NovaCoreResolutionPreset.Resolution960x540, NovaCoreDiagnosticsMode.Normal, NovaCorePhysicalSurface.M12DNaturalTerrainCandidate, true, null),
         new(NovaCoreScenarioPreset.SubdivisionDiagnostic, "Development — Subdivision Diagnostic",

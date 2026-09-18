@@ -1,0 +1,51 @@
+    // Temporary observer only; no changes to legacy clock or physical operations.
+    internal static long StartupManagedEntry;
+    private struct StartupRow
+    {
+        internal long Entry,AfterTitle,Sample,Elapsed,Start,ServiceIn,ServiceOut,Observed,Exit,DebtBefore,Credit,DebtAfter;
+        internal int Before,After;
+        internal AssemblyFlightObservation Observation;
+    }
+    private readonly StartupRow[] startupRows=new StartupRow[256];
+    private int startupCount;
+    private static bool startupReplay;
+    private (long Generation,long Frontier,int Body,int Shape,bool Pending,bool Invalidated) startupIdentity;
+    private void StartupEnter()
+    {
+        var now=Stopwatch.GetTimestamp();
+        if(startupCount>=startupRows.Length)throw new InvalidDataException("Startup observer capacity");
+        ref var r=ref startupRows[startupCount];r.Entry=now;r.Before=observation.State.Frontier;r.DebtBefore=observation.Clock.Debt.Ticks;
+        if(startupCount==0)startupIdentity=session.Engine.AssemblyContactWorldForTest(session.Authority)!.AssemblyIdentityForTest;
+    }
+    private void StartupExit()
+    {
+        ref var r=ref startupRows[startupCount++];r.After=observation.State.Frontier;r.DebtAfter=observation.Clock.Debt.Ticks;r.Observation=observation;r.Exit=Stopwatch.GetTimestamp();
+    }
+    private static bool StartupBits(double a,double b)=>BitConverter.DoubleToInt64Bits(a)==BitConverter.DoubleToInt64Bits(b);
+    private static bool StartupVector(Double3 a,Double3 b)=>StartupBits(a.X,b.X)&&StartupBits(a.Y,b.Y)&&StartupBits(a.Z,b.Z);
+    private static bool StartupMotion(AssemblyMotion a,AssemblyMotion b)=>StartupVector(a.PositionO,b.PositionO)&&StartupVector(a.VelocityO,b.VelocityO)&&StartupVector(a.AngularVelocityBody,b.AngularVelocityBody)&&StartupBits(a.BodyToWorld.X,b.BodyToWorld.X)&&StartupBits(a.BodyToWorld.Y,b.BodyToWorld.Y)&&StartupBits(a.BodyToWorld.Z,b.BodyToWorld.Z)&&StartupBits(a.BodyToWorld.W,b.BodyToWorld.W);
+    private void StartupDump()
+    {
+        if(startupReplay||startupCount==0)return;
+        var identity=session.Engine.AssemblyContactWorldForTest(session.Authority)!.AssemblyIdentityForTest;
+        var identityPass=identity.Generation==startupIdentity.Generation&&identity.Body==startupIdentity.Body&&identity.Shape==startupIdentity.Shape&&!identity.Pending&&!identity.Invalidated&&identity.Frontier==observation.State.Frontier;
+        if(!reported){Report();reported=true;}
+        var matches=0;startupReplay=true;
+        try
+        {
+            using var reference=new StockAssemblyDevelopmentScene(supportedContact:true,poweredSupport:poweredSupport);reference.Start();
+            for(var i=0;i<startupCount;i++)
+            {
+                var actual=startupRows[i].Observation;
+                while(reference.Observation.State.Frontier<actual.State.Frontier){var n=reference.Observation.State.Frontier;reference.Advance(new SimulationDuration((long)(n+1)*1_000_000/60-(long)n*1_000_000/60));}
+                var e=reference.Observation;
+                if(!StartupMotion(e.State.Motion,actual.State.Motion)||e.State.Stores!=actual.State.Stores||e.State.Mass!=actual.State.Mass||e.StateRevision!=actual.StateRevision||e.TimelineRevision!=actual.TimelineRevision||e.HistoryCount!=actual.HistoryCount)throw new InvalidDataException("Startup canonical replay mismatch");
+                matches++;
+            }
+        }
+        finally{startupReplay=false;}
+        var rows=new long[startupCount][];long credits=0;var maxPublications=0;
+        for(var i=0;i<startupCount;i++){var r=startupRows[i];credits+=r.Credit;maxPublications=Math.Max(maxPublications,r.After-r.Before);rows[i]=new[]{r.Entry,r.AfterTitle,r.Start,r.Sample,r.Elapsed,r.ServiceIn,r.ServiceOut,r.Observed,r.Exit,(long)r.Before,r.After,r.DebtBefore,r.Credit,r.DebtAfter};}
+        observation.State.Stores.Fuel.TryToKilograms(out var fuel);observation.State.Stores.Oxidizer.TryToKilograms(out var oxide);
+        Console.WriteLine("STARTUP_MANAGED "+System.Text.Json.JsonSerializer.Serialize(new{frequency=Stopwatch.Frequency,managedEntry=StartupManagedEntry,poweredSupport,callbacks=startupCount,legacySamples=frameCount,failed=Failed,completed=Completed,frontier=observation.State.Frontier,time=observation.Clock.Time.Ticks,debt=observation.Clock.Debt.Ticks,credits,maxPublications,revision=observation.StateRevision.Value,timelineRevision=observation.TimelineRevision.Value,history=observation.HistoryCount,fuel,oxide,mass=observation.State.Mass.Mass,identityPass,replayMatches=matches,rows}));
+    }

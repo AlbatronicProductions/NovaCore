@@ -1,0 +1,17 @@
+{
+  "head": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "originMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "remoteMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5\trefs/heads/main",
+  "branch": "codex/srv01-supported-contact-admission",
+  "staged": [],
+  "diffCheckExit": 0,
+  "sourceSealMismatches": [],
+  "manualBinarySealMismatches": [],
+  "tagCount": 67,
+  "tagsUnchanged": true,
+  "disposableBuildExists": true,
+  "manualAcceptance": "PENDING",
+  "stage6": "CLOSED",
+  "banked": false
+}

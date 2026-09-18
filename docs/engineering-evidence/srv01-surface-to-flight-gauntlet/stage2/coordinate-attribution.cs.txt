@@ -1,0 +1,23 @@
+using System;
+using System.Numerics;
+public static class ContactCoordinateAttribution {
+ public static double[] Run(bool compensate) {
+  var q=Quaternion.Normalize(new Quaternion(.1f,.07f,-.05f,1));
+  double l=Math.Sqrt((double)q.X*q.X+(double)q.Y*q.Y+(double)q.Z*q.Z+(double)q.W*q.W);
+  double x=q.X/l,y=q.Y/l,z=q.Z/l,w=q.W/l;
+  // Independent rotation-matrix column for B*(delta COM)=(0,delta,0).
+  double[] axis={2*(x*y-z*w),1-2*(x*x+z*z),2*(y*z+x*w)};
+  double c0=734.4/705,c=c0;double[] initial={0,(float)(1.7+c0),0};
+  double[] p=(double[])initial.Clone(), residue=new double[3], rounding=new double[3];
+  for(int n=1;n<=1200;n++) {
+   double next=734.4/(705-.1953125*((long)n*1000000/60)/1000000d);
+   for(int j=0;j<3;j++) {
+    double exact=p[j]+axis[j]*(next-c)+(compensate?residue[j]:0);
+    double fp=(float)exact;residue[j]=exact-fp;rounding[j]+=fp-exact;p[j]=fp;
+   }
+   c=next;
+  }
+  double e=0,r=0;for(int j=0;j<3;j++){double d=p[j]-initial[j]-axis[j]*(c-c0);e+=d*d;r+=rounding[j]*rounding[j];}
+  return new[]{Math.Sqrt(e),Math.Sqrt(r),residue[0],residue[1],residue[2]};
+ }
+}

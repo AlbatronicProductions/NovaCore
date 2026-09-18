@@ -24,7 +24,17 @@ internal static class AssemblyResources
     }
     internal static AssemblyConsumption Calculate(CompiledAssemblyDesign d,AssemblyStores s,PropellantInteger k,long ticks)
     {
-        Validate(d,s);if(ticks<=0||ticks>15625)throw new InvalidDataException("Unsupported command interval.");
+        if(ticks<=0||ticks>15625)throw new InvalidDataException("Unsupported command interval.");
+        return CalculateAdmitted(d,s,k,ticks);
+    }
+    internal static AssemblyConsumption CalculateContact(CompiledAssemblyDesign d,AssemblyStores s,PropellantInteger k,long ticks)
+    {
+        if(ticks is not (16666 or 16667))throw new InvalidDataException("Unsupported contact interval.");
+        return CalculateAdmitted(d,s,k,ticks);
+    }
+    private static AssemblyConsumption CalculateAdmitted(CompiledAssemblyDesign d,AssemblyStores s,PropellantInteger k,long ticks)
+    {
+        Validate(d,s);
         var one=PropellantInteger.FromUInt64(1);
         if(k.IsZero)return new(s,s,k,default,new(default,one),new(PropellantInteger.FromUInt64((ulong)ticks),one),PropellantClassification.NoDemand);
         var fuelRate=Times(k,2);var required=Times(fuelRate,(ulong)ticks);var comparison=PropellantInteger.Compare(s.Fuel,required);

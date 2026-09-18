@@ -1,0 +1,88 @@
+{
+  "date": "2026-09-17T12:29:52.8015174-04:00",
+  "machine": "ALBATRONIC007",
+  "cpu": "AMD Ryzen 9 9900X 12-Core Processor            ",
+  "gpu": "AMD Radeon RX 6800 XT",
+  "sdk": "10.0.303",
+  "source": [
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "C75C86806AF101A19C15F5C353FFFF9E9040F6288BB7B55BF48098EBDA3A73F1"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "F9FFEBF66BA032C611937078B819188E1F87CCF03E90F785566BE3703D41FDEC"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/PoweredContactDevelopmentScene.cs",
+      "sha256": "2E132FA95BEA56A6EB21C5F82040EC3C0B9C7AC2419A812CBDFDD316A1389956"
+    },
+    {
+      "path": "src/NovaCore.Graphics/ReusablePartVisuals.cs",
+      "sha256": "2DBCD5FDD5829A964E04829831E9C7654454098095ECD38E40FF54EC4752A929"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "sha256": "167DA48B5DB2862AFB128B494C6F3B380F7EAB26099BFA36B2471AAE4B909FCA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+      "sha256": "9266404C38F8BFEE639CD6422CB5F84E0796C093C99E05CA0B4562C56DAB1B27"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "sha256": "6E314E6D9EDA1B4DCD0238A9645D56FD8A1C67BE162E34DF08E1771FA856B79B"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-FourHorn.json",
+      "sha256": "AC23C15AE52ADC5E8E836BD954D9084B10A2699CC01F0A6906A992724EA67FCF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "sha256": "961BF9C5905903E1E805C9A950969A9678951DDBCD9E91A7C406B1314DF98829"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "sha256": "81C967C2555066111BA466093466CF3D3A0A82575CCA522D161BED80F0B9FDDB"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyProductionMeasurements.cs",
+      "sha256": "6B9C1711ED3105A7BCA5D34948D2BDC6176F7D9BC7F2A7BAF97152C418EF8166"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "4C468B0302603B59397A1D82C6E6E08577A2853F166FFEE7D2552107363C99B6"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust.frag",
+      "sha256": "4544F0E9FF9E305E9BA5D42FE7594026A9F84978FF408267517F6A3494D52909"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/exhaust_resolve.frag",
+      "sha256": "1822A003F72AC07CB33E86A0159BEED682A5E9D1499E94DB67AE42A84BAECED1"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement/artifacts/bin/NovaCore.Triangle/release/NovaCore.Triangle.dll",
+      "sha256": "AFACC3A6313FFC62EA2ECE0D8BDC1F17983B9E494D7438C04789B2D7E4C2AD2F"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement/artifacts/bin/NovaCore.Triangle/release/NovaCore.Simulation.dll",
+      "sha256": "21DE1BC083FAD407071069013901594887F1AFC6F1A93AC409665547C035300C"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement/artifacts/bin/NovaCore.Triangle/release/NovaCore.Native.dll",
+      "sha256": "5798AA55DF75C268D4278C07837C584FDDB588581FB143FD0E9C2AE2A1599A71"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement/diagnostic-artifacts/bin/NovaCore.Triangle/release/NovaCore.Triangle.dll",
+      "sha256": "5FA0D3DA366383D6FF2A891A4F3F0A8D50B10538721213BABEA72B3CDB51E4BE"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement/diagnostic-native/NovaCore.Native.dll",
+      "sha256": "3E8AACC10070114ABD1E19CBE54EE1200543AC32468D401A42A3FF932B65382F"
+    }
+  ],
+  "productionUnchangedSinceMilestone": []
+}

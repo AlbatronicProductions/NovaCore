@@ -1,0 +1,771 @@
+{
+  "debug": [
+    {
+      "speed": 0.2,
+      "initialPosition": 0.0008446691391317263,
+      "initialVelocity": 0.000792036997154355,
+      "gravityPosition": -0.001197509765625,
+      "thrustPosition": 0.00010389025723916981,
+      "positionTail": 2.4318491339589914e-27,
+      "velocityTail": 9.338300674402526e-25,
+      "rkPosition": 1.5449213304343648e-21,
+      "rkVelocity": 3.8910259870814974e-26,
+      "positionBound": 3.3559418548444316e-16,
+      "velocityBound": 2.4901477899481197e-14,
+      "positionError": 0,
+      "velocityError": 1.3877787807814457e-17,
+      "clearanceMarginRatio": 363534308033.0438,
+      "clearanceLower": 0.000200938930144079,
+      "tolerance": 6.1e-05,
+      "gravityRoot": {
+        "X": 0,
+        "Y": -9.81,
+        "Z": 0,
+        "LengthSquared": 96.23610000000001,
+        "IsFinite": true
+      },
+      "lastContact": {
+        "Epoch": {
+          "Ticks": 16666,
+          "SecondsSinceEpoch": 0.016666
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.996744921875,
+          "Com": {
+            "X": 1.0417069373581056,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851533433400042,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5971168708743,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5971168708743
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -3.083706382260386e-20,
+            "Y": 0.0008446691391317263,
+            "Z": 0,
+            "LengthSquared": 7.134659546015315e-07,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -1.8502977715481755e-18,
+            "Y": 0.05069036781787872,
+            "Z": 0,
+            "LengthSquared": 0.002569513389511835,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 16666
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 1,
+        "ResourceRevision": 1,
+        "ActuatorRevision": 1
+      },
+      "firstFlight": {
+        "Epoch": {
+          "Ticks": 32291,
+          "SecondsSinceEpoch": 0.032291
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.9936931640625,
+          "Com": {
+            "X": 1.0417114466711892,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851627381257818,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5938052313458,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5938052313458
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -7.330049365911291e-20,
+            "Y": 0.000543086627900251,
+            "Z": 0,
+            "LengthSquared": 2.949430854040657e-07,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -3.585021247524983e-18,
+            "Y": -0.08929291966155098,
+            "Z": 0,
+            "LengthSquared": 0.007973225501684198,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 15625
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 2,
+        "ResourceRevision": 2,
+        "ActuatorRevision": 2
+      }
+    },
+    {
+      "speed": 0.25,
+      "initialPosition": 0.0016779420730916872,
+      "initialVelocity": 0.0015732869505882263,
+      "gravityPosition": -0.001197509765625,
+      "thrustPosition": 0.00010389025723916981,
+      "positionTail": 2.4318491339589914e-27,
+      "velocityTail": 9.338300674402526e-25,
+      "rkPosition": 1.5449213304343648e-21,
+      "rkVelocity": 3.8910259870814974e-26,
+      "positionBound": 5.191441869814417e-16,
+      "velocityBound": 3.058581944674947e-14,
+      "positionError": 0,
+      "velocityError": 1.3877787807814457e-17,
+      "clearanceMarginRatio": 235002149806.14093,
+      "clearanceLower": 0.0015559420730910211,
+      "tolerance": 6.1e-05,
+      "gravityRoot": {
+        "X": 0,
+        "Y": -9.81,
+        "Z": 0,
+        "LengthSquared": 96.23610000000001,
+        "IsFinite": true
+      },
+      "lastContact": {
+        "Epoch": {
+          "Ticks": 16666,
+          "SecondsSinceEpoch": 0.016666
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.996744921875,
+          "Com": {
+            "X": 1.0417069373581056,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851533433400042,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5971168708743,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5971168708743
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -3.083706382260386e-20,
+            "Y": 0.0016779420730916872,
+            "Z": 0,
+            "LengthSquared": 2.815489600651229e-06,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -1.8502977715481755e-18,
+            "Y": 0.10069036483764648,
+            "Z": 0,
+            "LengthSquared": 0.010138549571138356,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 16666
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 1,
+        "ResourceRevision": 1,
+        "ActuatorRevision": 1
+      },
+      "firstFlight": {
+        "Epoch": {
+          "Ticks": 32291,
+          "SecondsSinceEpoch": 0.032291
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.9936931640625,
+          "Com": {
+            "X": 1.0417114466711892,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851627381257818,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5938052313458,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5938052313458
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -7.330049365911291e-20,
+            "Y": 0.002157609515294083,
+            "Z": 0,
+            "LengthSquared": 4.655278820487568e-06,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -3.585021247524983e-18,
+            "Y": -0.03929292264178322,
+            "Z": 0,
+            "LengthSquared": 0.0015439337697331602,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 15625
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 2,
+        "ResourceRevision": 2,
+        "ActuatorRevision": 2
+      }
+    }
+  ],
+  "release": [
+    {
+      "speed": 0.2,
+      "initialPosition": 0.0008446691391317263,
+      "initialVelocity": 0.000792036997154355,
+      "gravityPosition": -0.001197509765625,
+      "thrustPosition": 0.00010389025723916981,
+      "positionTail": 2.4318491339589914e-27,
+      "velocityTail": 9.338300674402526e-25,
+      "rkPosition": 1.5449213304343648e-21,
+      "rkVelocity": 3.8910259870814974e-26,
+      "positionBound": 3.3559418548444316e-16,
+      "velocityBound": 2.4901477899481197e-14,
+      "positionError": 0,
+      "velocityError": 1.3877787807814457e-17,
+      "clearanceMarginRatio": 363534308033.0438,
+      "clearanceLower": 0.000200938930144079,
+      "tolerance": 6.1e-05,
+      "gravityRoot": {
+        "X": 0,
+        "Y": -9.81,
+        "Z": 0,
+        "LengthSquared": 96.23610000000001,
+        "IsFinite": true
+      },
+      "lastContact": {
+        "Epoch": {
+          "Ticks": 16666,
+          "SecondsSinceEpoch": 0.016666
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.996744921875,
+          "Com": {
+            "X": 1.0417069373581056,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851533433400042,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5971168708743,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5971168708743
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -3.083706382260386e-20,
+            "Y": 0.0008446691391317263,
+            "Z": 0,
+            "LengthSquared": 7.134659546015315e-07,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -1.8502977715481755e-18,
+            "Y": 0.05069036781787872,
+            "Z": 0,
+            "LengthSquared": 0.002569513389511835,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 16666
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 1,
+        "ResourceRevision": 1,
+        "ActuatorRevision": 1
+      },
+      "firstFlight": {
+        "Epoch": {
+          "Ticks": 32291,
+          "SecondsSinceEpoch": 0.032291
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.9936931640625,
+          "Com": {
+            "X": 1.0417114466711892,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851627381257818,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5938052313458,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5938052313458
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -7.330049365911291e-20,
+            "Y": 0.000543086627900251,
+            "Z": 0,
+            "LengthSquared": 2.949430854040657e-07,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -3.585021247524983e-18,
+            "Y": -0.08929291966155098,
+            "Z": 0,
+            "LengthSquared": 0.007973225501684198,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 15625
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 2,
+        "ResourceRevision": 2,
+        "ActuatorRevision": 2
+      }
+    },
+    {
+      "speed": 0.25,
+      "initialPosition": 0.0016779420730916872,
+      "initialVelocity": 0.0015732869505882263,
+      "gravityPosition": -0.001197509765625,
+      "thrustPosition": 0.00010389025723916981,
+      "positionTail": 2.4318491339589914e-27,
+      "velocityTail": 9.338300674402526e-25,
+      "rkPosition": 1.5449213304343648e-21,
+      "rkVelocity": 3.8910259870814974e-26,
+      "positionBound": 5.191441869814417e-16,
+      "velocityBound": 3.058581944674947e-14,
+      "positionError": 0,
+      "velocityError": 1.3877787807814457e-17,
+      "clearanceMarginRatio": 235002149806.14093,
+      "clearanceLower": 0.0015559420730910211,
+      "tolerance": 6.1e-05,
+      "gravityRoot": {
+        "X": 0,
+        "Y": -9.81,
+        "Z": 0,
+        "LengthSquared": 96.23610000000001,
+        "IsFinite": true
+      },
+      "lastContact": {
+        "Epoch": {
+          "Ticks": 16666,
+          "SecondsSinceEpoch": 0.016666
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.996744921875,
+          "Com": {
+            "X": 1.0417069373581056,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851533433400042,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5971168708743,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5971168708743
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -3.083706382260386e-20,
+            "Y": 0.0016779420730916872,
+            "Z": 0,
+            "LengthSquared": 2.815489600651229e-06,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -1.8502977715481755e-18,
+            "Y": 0.10069036483764648,
+            "Z": 0,
+            "LengthSquared": 0.010138549571138356,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 16666
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 1,
+        "ResourceRevision": 1,
+        "ActuatorRevision": 1
+      },
+      "firstFlight": {
+        "Epoch": {
+          "Ticks": 32291,
+          "SecondsSinceEpoch": 0.032291
+        },
+        "Stores": {
+          "Fuel": {},
+          "Oxidizer": {}
+        },
+        "Mass": {
+          "Mass": 704.9936931640625,
+          "Com": {
+            "X": 1.0417114466711892,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0851627381257818,
+            "IsFinite": true
+          },
+          "Inertia": {
+            "A": 190.47255,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 731.5938052313458,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 731.5938052313458
+          }
+        },
+        "Motion": {
+          "PositionO": {
+            "X": -7.330049365911291e-20,
+            "Y": 0.002157609515294083,
+            "Z": 0,
+            "LengthSquared": 4.655278820487568e-06,
+            "IsFinite": true
+          },
+          "VelocityO": {
+            "X": -3.585021247524983e-18,
+            "Y": -0.03929292264178322,
+            "Z": 0,
+            "LengthSquared": 0.0015439337697331602,
+            "IsFinite": true
+          },
+          "BodyToWorld": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0.7071067811865476,
+            "W": 0.7071067811865476,
+            "IsFinite": true,
+            "LengthSquared": 1.0000000000000002
+          },
+          "AngularVelocityBody": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          }
+        },
+        "Gimbal": {
+          "ActualY": 0,
+          "ActualZ": 0,
+          "TargetY": 0,
+          "TargetZ": 0
+        },
+        "AppliedCommand": {
+          "MainOn": true,
+          "Pair": null,
+          "GimbalTargetY": 0,
+          "GimbalTargetZ": 0,
+          "Ticks": 15625
+        },
+        "Actual": {
+          "MainOn": true,
+          "Jets": 0,
+          "Feed": 1
+        },
+        "Frontier": 2,
+        "ResourceRevision": 2,
+        "ActuatorRevision": 2
+      }
+    }
+  ],
+  "note": "Default JSON omits internal PropellantInteger limbs. See exact-accounting.json for independent exact amounts; tests compare actual exact stores/history across partitions, moving frames and refusal/retry."
+}

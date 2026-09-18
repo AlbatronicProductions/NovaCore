@@ -1,0 +1,254 @@
+{
+  "head": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "originMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "remoteMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "codex/srv01-supported-contact-admission",
+  "tags": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e refs/tags/m14.23-prepared-single-engine-actuation",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73 refs/tags/m14.24-exact-finite-propellant-segmentation",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3 refs/tags/m15.0-segmented-powered-free-flight",
+    "a1852cc3113b40763544968ea65a346530f54d17 refs/tags/m15.1-finite-fuel-retained-powered-contact",
+    "eb86bab80bdcae1f2c745ae82f3a016d71c260b4 refs/tags/m15.2-srv01-reusable-production-spacecraft-integration",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "status": [
+    "M samples/NovaCore.Triangle/Program.cs",
+    " M samples/NovaCore.Triangle/SampleOptions.cs",
+    " M samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    " M src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    " M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+    " M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    " M tests/NovaCore.Graphics.Tests/Program.cs",
+    " M tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/post-m15.2-production-remeasurement/",
+    "?? docs/engineering-evidence/srv01-production-integration/closeout.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+    "?? docs/engineering-evidence/srv01-supported-contact-admission-design/",
+    "?? docs/engineering-evidence/srv01-surface-to-flight-gauntlet/",
+    "?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+    "?? docs/legal/LEGAL-REVIEW-TODO.md",
+    "?? docs/legal/MODDING-POLICY-DRAFT.md",
+    "?? docs/legal/ROOT-LICENSE-CANDIDATE.md",
+    "?? docs/legal/finalization/",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDevelopmentPropulsion.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-Development-Propulsion-v1.json",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Site.cs",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+    "?? tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDepartureMeasurements.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDepartureProofTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDevelopmentPropulsionTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs"
+  ],
+  "priorStage5Seals": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "beforeStage5": "776638487AFF398047F057C7EADACC7C33441851D04D7469B7C2851B120C0520",
+      "current": "46D332AD8650C7E90386A19EAF9BF47A60BA5C5898F0A20B36FFF37EEA6430A6",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "beforeStage5": "6D36E5782E22471EF4CAC15B88CF1E4F404F80C0E5E09A8E394F56C0A4E9A467",
+      "current": "9377192CDA38C72FC01C2931DC1EB5E844167459632C0193FF6BD2A14F1EDCFA",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "beforeStage5": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67",
+      "current": "F7D856E597172ECBEBFF2F98CF61F79D4B6403603B641E793CF830E10CB538CF",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+      "beforeStage5": "CA95752706E7785E77A02A896F5331C73490DDCD6D69AD87A18CD6A3005708C5",
+      "current": "58974FB037D70B2A222818E0E93E333439B86CC3E39D18C0D241E601E0FC203C",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+      "beforeStage5": "2551EA1CE3B7CC3004C4649FCE0D6FA56591935E0A18EDF5E52C1B8EBDC13DAA",
+      "current": "CAF6BFBEEC427F9E9686EED15F492D6CABDFE132A93DA04EC1ACB89397ABD84F",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "beforeStage5": "2D75A905E514E4E140B74B662A61A29CAB0278CE72A08C51CD44EF6DD10F032D",
+      "current": "EF786C5992A50754FA1CBF7B6857AA8454BC4B9D95DA39219DDAF5DC5A53C0C9",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "beforeStage5": "C22866B767C888ECC1085812734B9AC7BD136FC7059155193F17A56DA0034341",
+      "current": "CD5DCCA0D1F223494E36B33866A688657922A7C33DB2DC1090FC4714CD573E35",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "beforeStage5": "CA2B56AC83E2F0813992C6371DBE6A85F8CED7DECA79316CE4D92D31845B8F8B",
+      "current": "A0913FBFF97FFC094596CE30A6B75F23E991487F8A9D3009B00045ECD1A9FFA6",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "beforeStage5": "8D9A1A16F869603567A112D46D5E9404A71618F0C1E6FDACBE41C0A587E6F3DA",
+      "current": "338DEAC1FA8AC890385ABAA3C2FEDAFF1972651265B715A4B00389FE4F456917",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "beforeStage5": "2A279A94C9ADA5F63ED0B0FEE5A5A24349B0D29C3F2E5111192EA1804D24F408",
+      "current": "581DF1DB441963DEE754F871324362C0412A02DADC0C034BD1A83C02337144AE",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "beforeStage5": "7285FFBD8712031A3F0CE44C15CA0311BC22C86935EF1BD7ECF05916A45A7098",
+      "current": "BDBB250FC427900F862B2BFBA01302A4BECFFFB960422D53AE661F59C8C698F7",
+      "status": "unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs",
+      "current": "7ACD86FA21483247C3AAF1BE823426D57939F28D0196217CFB9F1AEFF931A472",
+      "status": "new unqualified draft"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Site.cs",
+      "current": "7CF0DF021B292084102E3EB2B093308B610F7AA68EED9876A1562A82323EB882",
+      "status": "new unqualified draft"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+      "current": "E32119C299CD400C616C2D82A1DCBC9611E81C479AC84CACA1E352060962C225",
+      "status": "new unqualified draft"
+    }
+  ],
+  "stage4Preserved": 35,
+  "stage3Preserved": 29,
+  "binaryInputs": [
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.Core.dll",
+      "sha256": "2B40A940F3FEE13D2B394FE2EDAAC170BC8B719C8491C2C5487B8D1497956BDF"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.EphemerisFormat.dll",
+      "sha256": "0DDB62BDE7CD07AAE49439AFD05787F5D095AD3442028799B83EB213E5AEA7A4"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.Graphics.dll",
+      "sha256": "2734D1B9B7433027E2F45F73B5D0AE72AE808D4AC1E4CF6B2CC8B8E1FD888E94"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.Graphics.Tests.dll",
+      "sha256": "5A476681A1AE46638649DCED5ED14D65A196F20F963B0F06C7DDB24E78BE9F89"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.Interop.dll",
+      "sha256": "12D68D61E2012EAD60EEFAA7EAD3E0F65E0E5154715E235EAFED0829F93B2726"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.Native.dll",
+      "sha256": "9B9892068CCF3C255FBC38D540024DF57C9CB3FE3E3570325261E1E86D3AB346"
+    },
+    {
+      "path": "build\\srv01-stage5\\artifacts\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.Simulation.dll",
+      "sha256": "F7EC448F4E1797AEAD2198C9CB675D7C7747FAB4CCFA4F0FC989F6B85BD4804E"
+    }
+  ],
+  "staged": [],
+  "diffCheck": "PASS"
+}

@@ -1,0 +1,251 @@
+{
+  "result": "REVISE",
+  "stop": "Repeated unexplained integrated display-callback gap; no third capture",
+  "isolated": [
+    {
+      "run": 1,
+      "sha256": "30548F21FDC1A0EE4F1C7A66203D3A99088308889FA1AACF018B00E36DA98047",
+      "data": {
+        "median": 0.09,
+        "p95": 0.0923,
+        "p99": 0.0937,
+        "maximum": 0.1169,
+        "coldMs": 161.6714,
+        "firstMs": 55.3482,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 801,
+            "ms": 0.1169
+          },
+          {
+            "index": 467,
+            "ms": 0.1052
+          },
+          {
+            "index": 640,
+            "ms": 0.101
+          },
+          {
+            "index": 652,
+            "ms": 0.0961
+          },
+          {
+            "index": 462,
+            "ms": 0.096
+          },
+          {
+            "index": 1006,
+            "ms": 0.0952
+          },
+          {
+            "index": 96,
+            "ms": 0.0949
+          },
+          {
+            "index": 135,
+            "ms": 0.0946
+          }
+        ]
+      }
+    },
+    {
+      "run": 2,
+      "sha256": "ACC1BD12142FE1827BB8A0170EC6530DD6AF3DBC73F47DDAB16827B3722ED338",
+      "data": {
+        "median": 0.0904,
+        "p95": 0.0935,
+        "p99": 0.1019,
+        "maximum": 0.1392,
+        "coldMs": 161.6721,
+        "firstMs": 55.9424,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 244,
+            "ms": 0.1392
+          },
+          {
+            "index": 284,
+            "ms": 0.1378
+          },
+          {
+            "index": 243,
+            "ms": 0.1301
+          },
+          {
+            "index": 931,
+            "ms": 0.128
+          },
+          {
+            "index": 283,
+            "ms": 0.1153
+          },
+          {
+            "index": 296,
+            "ms": 0.1148
+          },
+          {
+            "index": 930,
+            "ms": 0.1128
+          },
+          {
+            "index": 951,
+            "ms": 0.1108
+          }
+        ]
+      }
+    },
+    {
+      "run": 3,
+      "sha256": "C9BB2E3C048BC044EBAE269ADD64E485A01AFC1B2C8147026FA0D3C5BA3FF8D1",
+      "data": {
+        "median": 0.0913,
+        "p95": 0.0935,
+        "p99": 0.0947,
+        "maximum": 0.1013,
+        "coldMs": 156.5045,
+        "firstMs": 55.281,
+        "warm": 128,
+        "measured": 1024,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "tails": [
+          {
+            "index": 660,
+            "ms": 0.1013
+          },
+          {
+            "index": 664,
+            "ms": 0.0994
+          },
+          {
+            "index": 15,
+            "ms": 0.0984
+          },
+          {
+            "index": 661,
+            "ms": 0.0976
+          },
+          {
+            "index": 995,
+            "ms": 0.0972
+          },
+          {
+            "index": 3,
+            "ms": 0.0961
+          },
+          {
+            "index": 132,
+            "ms": 0.096
+          },
+          {
+            "index": 16,
+            "ms": 0.0955
+          }
+        ]
+      }
+    }
+  ],
+  "live": [
+    {
+      "run": 1,
+      "sha256": "44283575D8B43BC84A7D8EBC2748AF6237955AF1F11FB0F3D7FB38C07131DCB4",
+      "observations": [
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV01_COLD_PREPARATION ms=206.3044 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+        "[native] Native host callback is active",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=28.4375 oxidizer_kg=42.65625 mass_kg=701.09375 com_x=1.0475061288165812 debt=3763",
+        "STOCK_ASSEMBLY_FRAME samples=3477 median_ms=5.5557 p95_ms=5.7121 p99_ms=5.9289 max_ms=595.898 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3477 median_ms=0.0038 p95_ms=0.0796 p99_ms=0.1513 max_ms=57.7075 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.737 ms (4000 frames)",
+        "[native] Frame pacing: p50=5.517 ms; p95=5.821 ms; p99=5.959 ms; max=59.259 ms; samples=4000",
+        "[native] Fence wait pacing: average=4.959 ms; p95=5.193 ms; max=16.742 ms; samples=4000",
+        "[native] CPU timings: update=5.130 ms; fence=4.959; inspection=0.033; hostCallback=0.136; validationUpload=0.002; record=0.053; submit=0.031; present=0.252",
+        "[native] GPU timing averages: total=0.096 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.030; preSurface=0.002; toneMap=0.023"
+      ]
+    },
+    {
+      "run": 2,
+      "sha256": "5C7FFB76C1B40E87A3DD0BD712F8F72B56EE07B3A56FC1B6C4495C5066A54E31",
+      "observations": [
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV01_COLD_PREPARATION ms=184.6588 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+        "[native] Native host callback is active",
+        "[native] Swapchain: format=37 colorSpace=0 extent=1280x720; HDR scene format=97",
+        "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=9896672 extent=1280x720 physics_bytes=0",
+        "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=28.4375 oxidizer_kg=42.65625 mass_kg=701.09375 com_x=1.0475061288165812 debt=4631",
+        "STOCK_ASSEMBLY_FRAME samples=3362 median_ms=5.5569 p95_ms=5.7154 p99_ms=5.9315 max_ms=1228.1696 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3362 median_ms=0.0038 p95_ms=0.0812 p99_ms=0.189 max_ms=62.5022 includes=host_admission_bounded_service_copied_observation",
+        "[native] Average frame time: 5.891 ms (4000 frames)",
+        "[native] Frame pacing: p50=5.509 ms; p95=5.799 ms; p99=5.931 ms; max=64.332 ms; samples=4000",
+        "[native] Fence wait pacing: average=4.967 ms; p95=5.193 ms; max=10.998 ms; samples=4000",
+        "[native] CPU timings: update=5.142 ms; fence=4.967; inspection=0.033; hostCallback=0.140; validationUpload=0.002; record=0.052; submit=0.026; present=0.243",
+        "[native] GPU timing averages: total=0.094 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.027; preSurface=0.001; toneMap=0.021"
+      ]
+    }
+  ],
+  "physical": [
+    "POWERED_CONTACT_PHYSICAL peak=8.743492921081675E-05 final600Drift=1.5038193842160926E-07 height=7.124804200930868E-05 speed=5.875414892227578E-06 angular=2.263770778435268E-06 orientationRadians=8.846353931362544E-08 supported=600 minContacts=4 featureChanges=0 thrustResidualNs=2.8595232464567744E-05 fuel=28.4375 oxidizer=42.65625 mass=701.09375"
+  ],
+  "thrust": [
+    "POWERED_CONTACT_COORDINATES positionError=9.559997806718457E-07 velocityError=2.7120522716472806E-08",
+    "POWERED_CONTACT_INTERLEAVED positionError=1.1915037946566817E-07 velocityError=1.5918912064681076E-10",
+    "POWERED_CONTACT_THRUST nativeImpulseResidualMax=1.688568467805851E-05 Ns expected=600*dt samples=64",
+    "POWERED_CONTACT_MISSING_THRUST_CONTROL residual=9.999615233368175 Ns rejection=PASS canonicalUnchanged=True",
+    "POWERED_CONTACT_CLOSURE PASS prepared ownership/order; physical thrust; post-burn/dry numerical properties",
+    "POWERED_CONTACT_CHEAP PASS"
+  ],
+  "schedules": [
+    "POWERED_CONTACT_SCHEDULE fps=30 frontiers=1200 exactBits=PASS",
+    "POWERED_CONTACT_SCHEDULE fps=60 frontiers=1200 exactBits=PASS",
+    "POWERED_CONTACT_SCHEDULE fps=150 frontiers=1200 exactBits=PASS",
+    "POWERED_CONTACT_SCHEDULE fps=240 frontiers=1200 exactBits=PASS",
+    "POWERED_CONTACT_SCHEDULE fps=0 frontiers=1200 exactBits=PASS",
+    "POWERED_CONTACT_MOVING_FRAME PASS 1200 intervals"
+  ],
+  "allocation": [
+    "POWERED_SUPPORTED_ASSEMBLY_ALLOCATION",
+    "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+    "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+    "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+  ],
+  "storage": [
+    "POWERED_SUPPORTED_ASSEMBLY_STORAGE",
+    "ASSEMBLY_CONTACT_STORAGE managedCold=2912784 managedConstructionWarmUpperBound=2913464 nativePool=475136 combinedUpperBound=3388600 historyPayloadIncluded=1881600 creditPayloadIncluded=76816 limit=8388608 coldPreparedMs=2.2971"
+  ],
+  "sceneStorage": [
+    "ASSEMBLY_SUPPORTED_STORAGE retainedManagedSceneDelta=4431416 nativePool=475136 ownedCpuRetained=4906552 gpuMeshPayload=1359096 ownedCpuPlusGpuPayload=6265648 limit=8388608 sharedRendererDeviceSwapchainExcluded=true",
+    "ASSEMBLY_SUPPORTED_GPU_BUFFERS 9600,4752,46080,13824,46176,18432,23136,6912,46080,13824,23136,6912,27744,9216,335808,53664,46080,13824,6528,3216,6528,3216,78432,32256,18528,4608,9216,1104,9216,1104,27744,9216,46080,13824,52320,21504,52320,21504,52320,21504,52320,21504,36912,10344,384,144"
+  ],
+  "manual": "PENDING: not performed after live stop",
+  "thirdLive": "NOT RUN"
+}

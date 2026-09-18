@@ -1,0 +1,50 @@
+[
+  {
+    "path": "E:\\NovaCore\\build\\srv01-powered-support",
+    "files": 248,
+    "bytes": 47292499,
+    "classification": "DISPOSE: rebuildable outputs or generated test-only Vulkan validation manifest",
+    "automaticDeletionAuthorizedThisPass": false,
+    "manualCommand": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\srv01-powered-support' -Recurse -Force -ErrorAction Stop",
+    "verification": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\srv01-powered-support'",
+    "removed": false,
+    "exists": true,
+    "disposition": "Prior policy-blocked root preserved. No retry in this pass; exact prior manual cleanup retained."
+  },
+  {
+    "path": "E:\\NovaCore\\build\\srv01-stage2-closure",
+    "files": 1749,
+    "bytes": 363674552,
+    "classification": "DISPOSE: rebuildable outputs or generated test-only Vulkan validation manifest",
+    "automaticDeletionAuthorizedThisPass": true,
+    "manualCommand": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\srv01-stage2-closure' -Recurse -Force -ErrorAction Stop",
+    "verification": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\srv01-stage2-closure'",
+    "removed": false,
+    "exists": true,
+    "disposition": "One automatic attempt rejected before execution: blocked by policy. No retry/workaround; manual cleanup required."
+  },
+  {
+    "path": "E:\\NovaCore\\build\\srv01-display-gap-closure",
+    "files": 376,
+    "bytes": 103897192,
+    "classification": "DISPOSE: rebuildable outputs or generated test-only Vulkan validation manifest",
+    "automaticDeletionAuthorizedThisPass": true,
+    "manualCommand": "Remove-Item -LiteralPath 'E:\\NovaCore\\build\\srv01-display-gap-closure' -Recurse -Force -ErrorAction Stop",
+    "verification": "Test-Path -LiteralPath 'E:\\NovaCore\\build\\srv01-display-gap-closure'",
+    "removed": false,
+    "exists": true,
+    "disposition": "One automatic attempt rejected before execution: blocked by policy. No retry/workaround; manual cleanup required."
+  },
+  {
+    "path": "C:\\Users\\Tyler\\AppData\\Local\\Temp\\NovaCore-vulkan-ce7a5b94889c43b9830b7ee4b2897f6a",
+    "files": 1,
+    "bytes": 57598,
+    "classification": "DISPOSE: rebuildable outputs or generated test-only Vulkan validation manifest",
+    "automaticDeletionAuthorizedThisPass": true,
+    "manualCommand": "Remove-Item -LiteralPath 'C:\\Users\\Tyler\\AppData\\Local\\Temp\\NovaCore-vulkan-ce7a5b94889c43b9830b7ee4b2897f6a' -Recurse -Force -ErrorAction Stop",
+    "verification": "Test-Path -LiteralPath 'C:\\Users\\Tyler\\AppData\\Local\\Temp\\NovaCore-vulkan-ce7a5b94889c43b9830b7ee4b2897f6a'",
+    "removed": false,
+    "exists": true,
+    "disposition": "One automatic attempt rejected before execution: blocked by policy. No retry/workaround; manual cleanup required."
+  }
+]

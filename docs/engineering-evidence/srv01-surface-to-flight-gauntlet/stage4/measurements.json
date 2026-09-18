@@ -1,0 +1,476 @@
+{
+  "performance": [
+    {
+      "process": 1,
+      "rows": [
+        {
+          "population": "wet-powered",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.0859,
+          "p95": 0.0901,
+          "p99": 0.103,
+          "maximum": 1.6261,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 16.0333,
+          "wholeHarnessCpuMs": 203.125,
+          "tails": [
+            {
+              "index": 996,
+              "ms": 1.6261
+            },
+            {
+              "index": 149,
+              "ms": 0.2323
+            },
+            {
+              "index": 148,
+              "ms": 0.1734
+            },
+            {
+              "index": 1000,
+              "ms": 0.1114
+            },
+            {
+              "index": 1007,
+              "ms": 0.1113
+            },
+            {
+              "index": 1006,
+              "ms": 0.1079
+            },
+            {
+              "index": 566,
+              "ms": 0.1067
+            },
+            {
+              "index": 1011,
+              "ms": 0.1055
+            }
+          ]
+        },
+        {
+          "population": "interior-exhaustion",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.1586,
+          "p95": 0.1621,
+          "p99": 0.1682,
+          "maximum": 0.1883,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 0.1039,
+          "wholeHarnessCpuMs": 296.875,
+          "tails": [
+            {
+              "index": 688,
+              "ms": 0.1883
+            },
+            {
+              "index": 785,
+              "ms": 0.1789
+            },
+            {
+              "index": 79,
+              "ms": 0.1752
+            },
+            {
+              "index": 620,
+              "ms": 0.1728
+            },
+            {
+              "index": 146,
+              "ms": 0.1727
+            },
+            {
+              "index": 550,
+              "ms": 0.1712
+            },
+            {
+              "index": 418,
+              "ms": 0.1708
+            },
+            {
+              "index": 282,
+              "ms": 0.1704
+            }
+          ]
+        },
+        {
+          "population": "dry",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.0502,
+          "p95": 0.0524,
+          "p99": 0.0539,
+          "maximum": 0.0616,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 0.0395,
+          "wholeHarnessCpuMs": 156.25,
+          "tails": [
+            {
+              "index": 540,
+              "ms": 0.0616
+            },
+            {
+              "index": 417,
+              "ms": 0.0567
+            },
+            {
+              "index": 74,
+              "ms": 0.0558
+            },
+            {
+              "index": 249,
+              "ms": 0.0554
+            },
+            {
+              "index": 327,
+              "ms": 0.0549
+            },
+            {
+              "index": 502,
+              "ms": 0.0548
+            },
+            {
+              "index": 285,
+              "ms": 0.0546
+            },
+            {
+              "index": 493,
+              "ms": 0.0545
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "process": 2,
+      "rows": [
+        {
+          "population": "wet-powered",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.08615,
+          "p95": 0.0973,
+          "p99": 0.1346,
+          "maximum": 0.1456,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 17.0575,
+          "wholeHarnessCpuMs": 187.5,
+          "tails": [
+            {
+              "index": 923,
+              "ms": 0.1456
+            },
+            {
+              "index": 45,
+              "ms": 0.1413
+            },
+            {
+              "index": 222,
+              "ms": 0.1383
+            },
+            {
+              "index": 82,
+              "ms": 0.1382
+            },
+            {
+              "index": 118,
+              "ms": 0.1381
+            },
+            {
+              "index": 155,
+              "ms": 0.1365
+            },
+            {
+              "index": 407,
+              "ms": 0.1365
+            },
+            {
+              "index": 479,
+              "ms": 0.1363
+            }
+          ]
+        },
+        {
+          "population": "interior-exhaustion",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.1516,
+          "p95": 0.1632,
+          "p99": 0.1776,
+          "maximum": 1.668,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 0.0969,
+          "wholeHarnessCpuMs": 281.25,
+          "tails": [
+            {
+              "index": 785,
+              "ms": 1.668
+            },
+            {
+              "index": 791,
+              "ms": 0.3353
+            },
+            {
+              "index": 790,
+              "ms": 0.3187
+            },
+            {
+              "index": 788,
+              "ms": 0.273
+            },
+            {
+              "index": 794,
+              "ms": 0.2012
+            },
+            {
+              "index": 795,
+              "ms": 0.1872
+            },
+            {
+              "index": 804,
+              "ms": 0.1804
+            },
+            {
+              "index": 516,
+              "ms": 0.1803
+            }
+          ]
+        },
+        {
+          "population": "dry",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.0186,
+          "p95": 0.023,
+          "p99": 0.0242,
+          "maximum": 0.0457,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 0.0317,
+          "wholeHarnessCpuMs": 93.75,
+          "tails": [
+            {
+              "index": 39,
+              "ms": 0.0457
+            },
+            {
+              "index": 369,
+              "ms": 0.028
+            },
+            {
+              "index": 177,
+              "ms": 0.0266
+            },
+            {
+              "index": 320,
+              "ms": 0.0257
+            },
+            {
+              "index": 56,
+              "ms": 0.0248
+            },
+            {
+              "index": 266,
+              "ms": 0.0246
+            },
+            {
+              "index": 314,
+              "ms": 0.0245
+            },
+            {
+              "index": 282,
+              "ms": 0.0243
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "process": 3,
+      "rows": [
+        {
+          "population": "wet-powered",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.0857,
+          "p95": 0.0885,
+          "p99": 0.0995,
+          "maximum": 0.1872,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 17.3947,
+          "wholeHarnessCpuMs": 203.125,
+          "tails": [
+            {
+              "index": 72,
+              "ms": 0.1872
+            },
+            {
+              "index": 73,
+              "ms": 0.1844
+            },
+            {
+              "index": 74,
+              "ms": 0.1707
+            },
+            {
+              "index": 5,
+              "ms": 0.1149
+            },
+            {
+              "index": 899,
+              "ms": 0.105
+            },
+            {
+              "index": 61,
+              "ms": 0.1039
+            },
+            {
+              "index": 51,
+              "ms": 0.1033
+            },
+            {
+              "index": 0,
+              "ms": 0.1016
+            }
+          ]
+        },
+        {
+          "population": "interior-exhaustion",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.1515,
+          "p95": 0.159,
+          "p99": 0.1796,
+          "maximum": 1.5849,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 0.0922,
+          "wholeHarnessCpuMs": 265.625,
+          "tails": [
+            {
+              "index": 800,
+              "ms": 1.5849
+            },
+            {
+              "index": 802,
+              "ms": 0.4481
+            },
+            {
+              "index": 805,
+              "ms": 0.3768
+            },
+            {
+              "index": 801,
+              "ms": 0.327
+            },
+            {
+              "index": 808,
+              "ms": 0.2208
+            },
+            {
+              "index": 804,
+              "ms": 0.2086
+            },
+            {
+              "index": 806,
+              "ms": 0.2084
+            },
+            {
+              "index": 803,
+              "ms": 0.1982
+            }
+          ]
+        },
+        {
+          "population": "dry",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.0203,
+          "p95": 0.0215,
+          "p99": 0.0277,
+          "maximum": 0.0604,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "cold": 0.0454,
+          "wholeHarnessCpuMs": 93.75,
+          "tails": [
+            {
+              "index": 863,
+              "ms": 0.0604
+            },
+            {
+              "index": 404,
+              "ms": 0.0349
+            },
+            {
+              "index": 408,
+              "ms": 0.0348
+            },
+            {
+              "index": 417,
+              "ms": 0.0296
+            },
+            {
+              "index": 405,
+              "ms": 0.0293
+            },
+            {
+              "index": 410,
+              "ms": 0.0293
+            },
+            {
+              "index": 411,
+              "ms": 0.0292
+            },
+            {
+              "index": 415,
+              "ms": 0.0289
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cautions": [
+    "No timed-region GC in any population.",
+    "Run1 wet maximum1.6261ms at996; exhaustion maxima1.668ms at785/run2 and1.5849ms at800/run3, with following clusters. Cause UNATTRIBUTED; no retry or optimization.",
+    "Dry median varies0.0186..0.0502ms across fresh processes.",
+    "No GPU/display measurement for this headless data/authority change. Cold values exclude already-loaded catalog/profile; harness CPU includes cold setup/disposal.",
+    "Current integrated-operation context applies, not historical50us micro-gates. Stage3 first-flight medians0.10725..0.1214ms and handoff maximum2.0464ms are context only, not matched A/B proof. No whole-frame claim."
+  ]
+}

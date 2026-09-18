@@ -1,0 +1,70 @@
+[
+  {
+    "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+    "sha256": "FE9145E174A66C8257FE43ACA818E3E01251C5BCBD2A17F6F18DDEACE04552AF"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/Program.cs",
+    "sha256": "62D386CD46B3119782B9B259C08B3431626EADC80568772500EF1CD331153E15"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+    "sha256": "5D95C8F1C282B7C4EE3F39919D0C9FD735D52D71C8708123CF2B4EDBF4F2462F"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/SolarSystemScene.cs",
+    "sha256": "07A8AD33636416D843BB3213D5ADED1DB4BEA41A52FF0F88C8B15F4640984888"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    "sha256": "CABA9080794241B4A9C1D996B2FE3E426A90462BE3109C8BD6D3CAD050878FB9"
+  },
+  {
+    "path": "src/NovaCore.Graphics/AssemblyInfo.cs",
+    "sha256": "6B7A1EC3341073AA1204466F060EBC043BB930213ACC09B6D1E1E4C6EE708CAE"
+  },
+  {
+    "path": "src/NovaCore.Graphics/FloridaLaunchSite.cs",
+    "sha256": "06561913A383633F9CE1FDDDC45904764A5733EA4FDD607B57D8276EF96EB7E1"
+  },
+  {
+    "path": "src/NovaCore.Graphics/RenderObject.cs",
+    "sha256": "7B7E1B8E02ECDB8AC0BCFB96DB12B18D03F5AB95C21C9640395198A09F6715B9"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs",
+    "sha256": "7176320DDB06D8853811FE9B88170420FF7051D2EB26A1896DEFCA9EE50E0D9D"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    "sha256": "26C736BD40561A226E71BA205A73D75ADB85D2FB88FE7B5B4CDB9372BF3A1E8F"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    "sha256": "5A461C27066CAF9D61F7CD54D38D4B1AF7C15F2127CD81F09C2E100D054381DA"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaQualificationTests.cs",
+    "sha256": "9ADD35225E70FEA9D94590C5D6EF67F86600FE108BA1A451DF797F819232630F"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+    "sha256": "34F14E14D0E2BFDD2641EA324A4C9A63D6158A33202EDA12C9F9D47D94077AAD"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "sha256": "55C90FA2D724958606F247836FE9910AD30EA50235DD6005FE00494233E35DF3"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+    "sha256": "77C5DB939A1666A3B107BAEE5CF6909962366CD01A4EC0C01C33C90B4D519788"
+  },
+  {
+    "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+    "sha256": "D5E7B7A499405A00602B4636A35476D50FCBB8C6278BC038DF884A7999EEEDBE"
+  },
+  {
+    "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs",
+    "sha256": "BD54270F4414448FB6FFE3EA39FABE45E3EED6D725C1AE2BFD5E27E21044994C"
+  }
+]

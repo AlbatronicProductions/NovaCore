@@ -1,0 +1,66 @@
+{
+  "schema": "novacore.post-stage5.promotion-review/1",
+  "recordedUtc": "2026-09-18T03:04:24.492179+00:00",
+  "branch": "codex/srv01-supported-contact-admission",
+  "refs": {
+    "HEAD": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+    "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+    "origin/main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5"
+  },
+  "remoteMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "historicalTagCount": 67,
+  "historicalTagsSha256": "4EABB8A142C30BA4FB1F969B4FBDCB9D55892383B8D226F64A34076783DCE54A",
+  "historicalTagsUnchanged": true,
+  "staged": [],
+  "candidateSealsVerified": 7,
+  "otherSourceTestSampleSealsVerified": 475,
+  "predecessorCheckpointsVerified": 64,
+  "priorSamplesVerified": 3,
+  "manualBinarySealsVerified": 8,
+  "sealSources": [
+    "stage5/stock-florida-restart/candidate-seals.json",
+    "stage5/stock-florida-restart/preflight.json",
+    "stage5/stock-florida-restart/final-verification.json",
+    "stage5/stock-florida-restart/manual-build.json"
+  ],
+  "governingInputs": {
+    "campaign": {
+      "path": "C:\\Users\\Tyler\\.codex\\attachments\\5a085dbe-3464-44c5-8b9a-3b0020feee1f\\pasted-text.txt",
+      "sha256": "26DE4AD471B8CD55977ECE69A3DDFB49781BA67DA4C00FA1EFD43B0B17362875"
+    },
+    "roleDecision": {
+      "path": "C:\\Users\\Tyler\\.codex\\attachments\\d5884645-91f7-4c0d-ac0b-3b7fde657c5f\\pasted-text.txt",
+      "sha256": "DF99FAF5C283626692BDC393004D0F3FFA3A5CE2D12EC92110D1C7D1FBEBE63B"
+    },
+    "finalClosure": {
+      "path": "C:\\Users\\Tyler\\.codex\\attachments\\c531ceff-ba1f-4558-93fb-f838f0ee023d\\pasted-text.txt",
+      "sha256": "E7C5BD11A2C05694249FF14D6874A4806D75737F5EF5CF2992A6268DB345DFF5"
+    }
+  },
+  "ksa": {
+    "root": "E:\\Kitten Space Agency",
+    "dllSha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8",
+    "product": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+    "inspection": "Installation presence and DLL identity only; launch-stack methods and live history not inspected by this promotion review."
+  },
+  "stage5": "ENGINEERING PASS; NOT FULLY QUALIFIED",
+  "manualAcceptance": "PENDING / NOT YET TESTED CORRECTLY",
+  "nextResponsibility": "DEVELOPMENT EARTH-LAUNCH STACK ARCHITECTURE (conditional future nomination only)",
+  "promotion": "ON HOLD: Project Control corrected Florida manual acceptance before this review completed",
+  "implementationAuthorized": false,
+  "stage6": "CLOSED",
+  "milestoneAssigned": false,
+  "banking": "UNBANKED",
+  "newBuildsTestsBenchmarks": 0,
+  "newDisposablePaths": [],
+  "cleanupAttempted": false,
+  "independentReview": {
+    "reviewer": "/root/mass_domain_review",
+    "result": "Conditional next-gate nomination reviewed; superseded manual PASS does not permit promotion. Current route check confirms intentional schematic cube; presentation correction required."
+  },
+  "historicalEvidenceRewritten": false,
+  "supportedCraftVisualPhysicalBehavior": "PASS",
+  "currentResponsibility": "Presentation/scenario-route ownership check only",
+  "judgment": "REVISE \u2014 ROUTE/PRESENTATION FIX REQUIRED",
+  "latestPlacementCorrection": "Stage5 middle-pad-top manual acceptance failed/pending; physical terrain-ground admission does not authorize authored pad-top contact. No promotion."
+}

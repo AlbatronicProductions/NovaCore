@@ -249,6 +249,7 @@ enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 
 NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission* submission, NcHostCallback callback, void* userData);
 NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets);
 NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity);
+NC_API NcResult __cdecl nc_run_renderer_with_assets_and_visual_meshes(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity);
 NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch* patches, uint32_t count);
 NC_API NcResult __cdecl nc_validate_terrain_asset(const char* pathUtf8, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount);
 NC_API NcResult __cdecl nc_query_planetary_physical_heights(const NcPlanetaryHeightQuery* queries, uint32_t count, NcPlanetaryHeightResult* results, const NcPlanetaryHeightQueryAssets* assets, NcPlanetaryHeightQueryMetrics* metrics);

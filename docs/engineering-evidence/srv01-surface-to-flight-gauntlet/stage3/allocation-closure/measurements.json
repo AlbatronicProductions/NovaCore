@@ -1,0 +1,341 @@
+{
+  "storage": {
+    "managedConstructionUpperBound": 606424,
+    "nativeCold": 442368,
+    "nativeAfter": 458752,
+    "combinedUpperBound": 1065176,
+    "profileBytes": 80,
+    "historyPayload": 6304,
+    "creditPayload": 76816,
+    "coldMs": 1.9788,
+    "limit": 8388608
+  },
+  "performance": [
+    {
+      "process": 1,
+      "rows": [
+        {
+          "population": "complete-contact-handoff",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.1137,
+          "p95": 0.1436,
+          "p99": 0.1988,
+          "maximum": 2.0464,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "coldMs": 161.5762,
+          "firstMs": 48.4227,
+          "wholeHarnessCpuMs": 2500,
+          "tails": [
+            {
+              "index": 55,
+              "ms": 2.0464
+            },
+            {
+              "index": 410,
+              "ms": 0.2655
+            },
+            {
+              "index": 832,
+              "ms": 0.2648
+            },
+            {
+              "index": 267,
+              "ms": 0.224
+            },
+            {
+              "index": 57,
+              "ms": 0.2239
+            },
+            {
+              "index": 84,
+              "ms": 0.2216
+            },
+            {
+              "index": 277,
+              "ms": 0.2192
+            },
+            {
+              "index": 406,
+              "ms": 0.2122
+            }
+          ]
+        },
+        {
+          "population": "complete-first-free-flight",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.10725,
+          "p95": 0.1335,
+          "p99": 0.1843,
+          "maximum": 0.3203,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "coldMs": 161.5762,
+          "firstMs": 48.4227,
+          "wholeHarnessCpuMs": 2500,
+          "tails": [
+            {
+              "index": 56,
+              "ms": 0.3203
+            },
+            {
+              "index": 520,
+              "ms": 0.2566
+            },
+            {
+              "index": 228,
+              "ms": 0.2297
+            },
+            {
+              "index": 321,
+              "ms": 0.222
+            },
+            {
+              "index": 230,
+              "ms": 0.1925
+            },
+            {
+              "index": 600,
+              "ms": 0.1895
+            },
+            {
+              "index": 372,
+              "ms": 0.1893
+            },
+            {
+              "index": 326,
+              "ms": 0.1889
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "process": 2,
+      "rows": [
+        {
+          "population": "complete-contact-handoff",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.124,
+          "p95": 0.1418,
+          "p99": 0.1772,
+          "maximum": 0.2518,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "coldMs": 163.0153,
+          "firstMs": 47.4733,
+          "wholeHarnessCpuMs": 2531.25,
+          "tails": [
+            {
+              "index": 494,
+              "ms": 0.2518
+            },
+            {
+              "index": 552,
+              "ms": 0.2353
+            },
+            {
+              "index": 458,
+              "ms": 0.2279
+            },
+            {
+              "index": 83,
+              "ms": 0.2087
+            },
+            {
+              "index": 594,
+              "ms": 0.1887
+            },
+            {
+              "index": 509,
+              "ms": 0.1835
+            },
+            {
+              "index": 617,
+              "ms": 0.1805
+            },
+            {
+              "index": 436,
+              "ms": 0.1795
+            }
+          ]
+        },
+        {
+          "population": "complete-first-free-flight",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.1196,
+          "p95": 0.128,
+          "p99": 0.1499,
+          "maximum": 0.2091,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "coldMs": 163.0153,
+          "firstMs": 47.4733,
+          "wholeHarnessCpuMs": 2531.25,
+          "tails": [
+            {
+              "index": 458,
+              "ms": 0.2091
+            },
+            {
+              "index": 480,
+              "ms": 0.1803
+            },
+            {
+              "index": 604,
+              "ms": 0.1739
+            },
+            {
+              "index": 777,
+              "ms": 0.1681
+            },
+            {
+              "index": 512,
+              "ms": 0.1579
+            },
+            {
+              "index": 430,
+              "ms": 0.1567
+            },
+            {
+              "index": 778,
+              "ms": 0.1557
+            },
+            {
+              "index": 506,
+              "ms": 0.1535
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "process": 3,
+      "rows": [
+        {
+          "population": "complete-contact-handoff",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.1255,
+          "p95": 0.151,
+          "p99": 0.1717,
+          "maximum": 0.5861,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "coldMs": 165.8213,
+          "firstMs": 47.3125,
+          "wholeHarnessCpuMs": 2578.125,
+          "tails": [
+            {
+              "index": 56,
+              "ms": 0.5861
+            },
+            {
+              "index": 221,
+              "ms": 0.3449
+            },
+            {
+              "index": 224,
+              "ms": 0.2616
+            },
+            {
+              "index": 222,
+              "ms": 0.2559
+            },
+            {
+              "index": 223,
+              "ms": 0.2549
+            },
+            {
+              "index": 85,
+              "ms": 0.2106
+            },
+            {
+              "index": 520,
+              "ms": 0.2043
+            },
+            {
+              "index": 310,
+              "ms": 0.189
+            }
+          ]
+        },
+        {
+          "population": "complete-first-free-flight",
+          "warm": 128,
+          "count": 1024,
+          "median": 0.1214,
+          "p95": 0.142,
+          "p99": 0.1658,
+          "maximum": 0.2899,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "coldMs": 165.8213,
+          "firstMs": 47.3125,
+          "wholeHarnessCpuMs": 2578.125,
+          "tails": [
+            {
+              "index": 221,
+              "ms": 0.2899
+            },
+            {
+              "index": 56,
+              "ms": 0.2641
+            },
+            {
+              "index": 222,
+              "ms": 0.26
+            },
+            {
+              "index": 223,
+              "ms": 0.2556
+            },
+            {
+              "index": 224,
+              "ms": 0.2391
+            },
+            {
+              "index": 266,
+              "ms": 0.1911
+            },
+            {
+              "index": 312,
+              "ms": 0.1756
+            },
+            {
+              "index": 230,
+              "ms": 0.1726
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cautions": [
+    "Unattributed 2.0464 ms maximum; early ~55/56 tails and run3 221-224 cluster retained.",
+    "firstMs is cold first handoff in both rows, not a cold free-flight measurement.",
+    "Whole-harness CPU includes cold preparation/disposal. No whole-game FPS inference."
+  ]
+}

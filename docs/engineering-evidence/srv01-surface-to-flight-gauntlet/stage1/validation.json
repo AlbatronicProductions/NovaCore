@@ -1,0 +1,58 @@
+{
+  "configuration": "Debug",
+  "sdk": "10.0.303",
+  "buildScope": "Simulation test project and referenced managed projects only",
+  "build": {
+    "result": "PASS",
+    "warnings": 0,
+    "errors": 0
+  },
+  "geometry": "PASS",
+  "cheap120": "PASS",
+  "implementedAuthoritySubset": "PASS",
+  "physical1200": {
+    "result": "FAIL",
+    "exitCode": 1,
+    "firstFailure": "final600 drift <= one feature-derived tolerance",
+    "peakPenetrationM": 9.574638975773375E-05,
+    "finalWindowMaximumAbsoluteMinimumHeightM": 7.777242906348292E-05,
+    "finalWindowHorizontalDriftM": 0.00011947824532399198,
+    "driftLimitM": 6.1E-05,
+    "finalWindowMaximumLinearSpeedMps": 7.476454218704725E-06,
+    "finalWindowMaximumAngularSpeedRadps": 4.3980790432743215E-06,
+    "independentHeightSupportedIntervals": 600,
+    "requiredSupportedIntervals": 600,
+    "intervals16666": 400,
+    "intervals16667": 800,
+    "targetTicks": 20000000,
+    "cause": "UNPROVEN",
+    "correctionAfterFailure": "NONE",
+    "retryAfterFailure": "NONE",
+    "laterAssertionsUnreached": [
+      "settled speed assertion",
+      "final combined accounting assertion"
+    ]
+  },
+  "notRun": [
+    "full failure/mutation matrix",
+    "normal/support impulse qualification",
+    "private-only versus publish trajectory comparison",
+    "30/60/150/240 Hz and backlog partitions",
+    "moving-frame sequence",
+    "allocation and positive control",
+    "retained storage qualification",
+    "Release/performance campaigns",
+    "full solution Debug/Release builds",
+    "full Simulation/regression/dependency suites",
+    "presentation implementation",
+    "manual acceptance",
+    "Stages 2-6"
+  ],
+  "draftCorrectionsBeforePhysicalRun": [
+    "actual catalog lookup ID",
+    "accepted -9.81 gravity",
+    "null authority guards",
+    "poststep support-domain admission",
+    "separate contact abort consumer"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "configuration": "Debug",
+  "build": "PASS 0 warnings/errors after correcting two test-only API names",
+  "firstFocusedCheap": "PASS",
+  "expandedFocusedExit": -532462766,
+  "output": [
+    "DEPARTURE_PREPARE status=Prepared",
+    "DEPARTURE_FIRST_FLIGHT tick=32291 heightO=0.002157609515294083 vy=-0.03929292264178322 oracleError=3.251288127614771E-13 nativeFrontier=1",
+    "DEPARTURE_CLEARANCE_HOLD frontier=3 tick=47916 debt=15625",
+    "DEPARTURE_FAILURES PASS authority/consumer/receipt/refusal/retry/terminal/capacity/save boundaries",
+    "DEPARTURE_SCHEDULES PASS 6 equal-time host partitions / same frontier bits / moving frame",
+    "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=624 entry=PASS exit=PASS",
+    "Unhandled exception. System.InvalidOperationException: departure-contact-handoff: expected zero managed allocation, actual=624",
+    "   at OrdinaryAllocationMeasurement.RequireZero(Int64 bytes, String gate) in /_/tests/NovaCore.Simulation.Tests/OrdinaryAllocationMeasurement.cs:line 44",
+    "   at AssemblyContactAdmissionTests.DepartureAllocation() in /_/tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs:line 204",
+    "   at Program.<Main>$(String[] args) in /_/tests/NovaCore.Simulation.Tests/Program.cs:line 19"
+  ],
+  "logSha256": "75889085AD54FC44F53FD6B34A1BD1184D26CE4EE158369D31BB2F13AD543813",
+  "allocationBytes": 624,
+  "allocationExpected": 0,
+  "entry": "PASS",
+  "exit": "PASS",
+  "retried": false,
+  "attribution": "NOT INVESTIGATED",
+  "remainingGates": "NOT RUN",
+  "independentPositionAngularProof": "PENDING"
+}

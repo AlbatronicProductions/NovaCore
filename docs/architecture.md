@@ -1,6 +1,32 @@
 # Architecture
 
-## Accepted SRV-01 integration — awaiting bank authorization
+## Accepted unbanked surface-to-flight foundation
+
+Canonical assembled SRV-01 → explicit collision/source admission → one retained
+subordinate BEPU world/body → ordinary supported or powered interval → sealed paired
+physical/resource/mass/actuator successor → single canonical owner publication →
+same-phase acknowledgement → copied display observation. Exact debt, events,
+revisions, history and source authority stay canonical. Support status, physical
+consumer permission and native storage lifetime are separate responsibilities.
+
+Qualified fixed-slab separation transfers consumer permission once to existing free
+flight with the same spacecraft/resources and local gravity, without double evolution.
+It does not certify rotating Florida departure or general recontact. Historical
+provisional development-resource mechanics remain explicitly isolated from stock
+contact admission; oversized sizing is not a current Earth launch vehicle.
+
+Florida stock support binds authenticated terrain-v5 site authority to one immutable
+finite base/footing slab. Its physical and visible box share dimensions/site pose.
+Launcher FL Launchpad and the bounded manual route share construction; the GUI retains
+its Solar owner and camera/focus/overview/zoom capabilities. Copied canonical endpoints
+drive presentation, never live BEPU bodies. One display render follows bounded servicing.
+
+Stage1–5 and final manual support/presentation acceptance are accepted, **UNBANKED**.
+No milestone assigned. Lighting/shadows, startup response, rotating-site departure,
+launch-stack/control/navigation and atmosphere remain deferred. See the
+[final contract, evidence and source map](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md).
+
+## Banked M15.2 — SRV-01 reusable production integration
 
 Immutable reusable part definitions → persistent named part instances →
 deterministic structural assembly and explicit typed feed graph → exact fuel and

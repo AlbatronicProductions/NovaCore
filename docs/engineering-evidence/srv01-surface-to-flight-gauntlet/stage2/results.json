@@ -1,0 +1,160 @@
+{
+  "stage1Manual": "PASS, supplied by Project Control",
+  "stage2": "UNQUALIFIED; STOP at first fresh Release performance failure",
+  "correctionCount": 1,
+  "performance": {
+    "median": 0.0905,
+    "p95": 0.1308,
+    "p99": 0.1839,
+    "maximum": 0.2248,
+    "coldMs": 157.2076,
+    "firstMs": 58.6285,
+    "warm": 128,
+    "measured": 1024,
+    "gc": [
+      0,
+      0,
+      0
+    ],
+    "tails": [
+      {
+        "index": 84,
+        "ms": 0.2248
+      },
+      {
+        "index": 766,
+        "ms": 0.2128
+      },
+      {
+        "index": 83,
+        "ms": 0.2111
+      },
+      {
+        "index": 483,
+        "ms": 0.2073
+      },
+      {
+        "index": 193,
+        "ms": 0.2056
+      },
+      {
+        "index": 543,
+        "ms": 0.1999
+      },
+      {
+        "index": 311,
+        "ms": 0.1911
+      },
+      {
+        "index": 426,
+        "ms": 0.1873
+      }
+    ]
+  },
+  "runsExecuted": 1,
+  "runs2and3": "NOT EXECUTED",
+  "fullSolutionAndFullRegression": "DEFERRED after failure",
+  "independentSupportQualification": "INCOMPLETE: final independent height/speed and thrust-load witness absent; printed support count is admitted intervals",
+  "logs": [
+    {
+      "name": "allocation-focused-debug.log",
+      "sha256": "651AC39D97A5DA04E91742CBEFA169DC70368B12D5A76E9964B5B93FDBA8C9E2",
+      "output": "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS\r\nORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    },
+    {
+      "name": "allocation-release.log",
+      "sha256": "B33B0B50C34A9F355F239B378EDB88505F0042B172C04B54842FC04507B517CB",
+      "output": "POWERED_SUPPORTED_ASSEMBLY_ALLOCATION\r\nORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS\r\nORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS\r\nORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    },
+    {
+      "name": "cheap-correction-debug.log",
+      "sha256": "D0541524AABBF8D38F6A45CF4F34239EC656820107D3034F01C34D74E0999523",
+      "output": "POWERED_CONTACT_COORDINATES positionError=9.559997806718457E-07 velocityError=2.7120522716472806E-08\r\nPOWERED_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "cheap-debug.log",
+      "sha256": "BCCD6BD4E85DC4538CE4E86ABFC8D5F7283D0B09BD7C4D19905C91F62EA9697B",
+      "output": "POWERED_CONTACT_COORDINATES positionError=6.127363303676248E-05 velocityError=2.9066814022371545E-07\r\nUnhandled exception. System.InvalidOperationException: ASSEMBLY CONTACT: 1200 coordinate updates preserve 64 material positions and velocities within existing local tolerance\r\n   at AssemblyContactAdmissionTests.Check(Boolean condition, String label) in /_/tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs:line 45\r\n   at AssemblyContactAdmissionTests.PoweredCheap() in /_/tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs:line 83\r\n   at Program.<Main>$(String[] args) in /_/tests/NovaCore.Simulation.Tests/Program.cs:line 18"
+    },
+    {
+      "name": "cheap-focused-debug.log",
+      "sha256": "90F6AA4EC3CCA7ED702BF2759F23A1FFC33CFE02CE2A34253AC4D731F5B196A9",
+      "output": "POWERED_CONTACT_COORDINATES positionError=9.559997806718457E-07 velocityError=2.7120522716472806E-08\r\nPOWERED_CONTACT_INTERLEAVED positionError=1.1915037946566817E-07 velocityError=1.5918912064681076E-10\r\nPOWERED_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "cheap-release.log",
+      "sha256": "90F6AA4EC3CCA7ED702BF2759F23A1FFC33CFE02CE2A34253AC4D731F5B196A9",
+      "output": "POWERED_CONTACT_COORDINATES positionError=9.559997806718457E-07 velocityError=2.7120522716472806E-08\r\nPOWERED_CONTACT_INTERLEAVED positionError=1.1915037946566817E-07 velocityError=1.5918912064681076E-10\r\nPOWERED_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "compile-correction-debug.log",
+      "sha256": "1CA930D8E4E5E5224B87E04CAB7B0D2A8762093177720832D8C45E5B6F5A9FBB",
+      "output": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.34"
+    },
+    {
+      "name": "compile-debug.log",
+      "sha256": "79556BA58ABB47F5B6A3A8DB5D0F87CC6C808813DA3A7E712B0120DA4853CC80",
+      "output": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:02.65"
+    },
+    {
+      "name": "compile-focused-debug.log",
+      "sha256": "342C0F905C35CD2946E87CBB045EEC1FB63F49653C247672E50FCCD60A28777B",
+      "output": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:01.27"
+    },
+    {
+      "name": "compile-release.log",
+      "sha256": "96AE40DC4D20F4BA3D978C62EEF3C387A355195AA60519682810A696094C53CE",
+      "output": "Build succeeded.\r\n    0 Warning(s)\r\n    0 Error(s)\r\n\r\nTime Elapsed 00:00:02.25"
+    },
+    {
+      "name": "failures-focused-debug.log",
+      "sha256": "F6E99C1BBFC4D3CCDC59FB0B58F2DB45E90510367957A4F9FAB651652B13A3C1",
+      "output": "ASSEMBLY_CONTACT_AUTHORITY PASS input/owner/consumer/pending/retry/terminal/capacity/external-clock-event\r\nASSEMBLY_CONTACT_ADDITIONAL_FAILURES PASS mutable authority / native receipts / terminal exports / arithmetic / cold consumer boundaries"
+    },
+    {
+      "name": "failures-release.log",
+      "sha256": "F6E99C1BBFC4D3CCDC59FB0B58F2DB45E90510367957A4F9FAB651652B13A3C1",
+      "output": "ASSEMBLY_CONTACT_AUTHORITY PASS input/owner/consumer/pending/retry/terminal/capacity/external-clock-event\r\nASSEMBLY_CONTACT_ADDITIONAL_FAILURES PASS mutable authority / native receipts / terminal exports / arithmetic / cold consumer boundaries"
+    },
+    {
+      "name": "performance-release-1.log",
+      "sha256": "8A4FE4981768AF2CDA2ADC4FA3F0BA910B922175CEFE38AF287453702B47B75B",
+      "output": "POWERED_SUPPORTED_ASSEMBLY_PERFORMANCE\r\nASSEMBLY_CONTACT_PERFORMANCE {\"median\":0.0905,\"p95\":0.1308,\"p99\":0.1839,\"maximum\":0.2248,\"coldMs\":157.2076,\"firstMs\":58.6285,\"warm\":128,\"measured\":1024,\"gc\":[0,0,0],\"tails\":[{\"index\":84,\"ms\":0.2248},{\"index\":766,\"ms\":0.2128},{\"index\":83,\"ms\":0.2111},{\"index\":483,\"ms\":0.2073},{\"index\":193,\"ms\":0.2056},{\"index\":543,\"ms\":0.1999},{\"index\":311,\"ms\":0.1911},{\"index\":426,\"ms\":0.1873}]}\r\nUnhandled exception. System.InvalidOperationException: ASSEMBLY CONTACT: unchanged complete-operation ceilings\r\n   at AssemblyContactAdmissionTests.Check(Boolean condition, String label) in /_/tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs:line 45\r\n   at AssemblyContactAdmissionTests.Performance(Boolean powered) in /_/tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs:line 176\r\n   at Program.<Main>$(String[] args) in /_/tests/NovaCore.Simulation.Tests/Program.cs:line 24"
+    },
+    {
+      "name": "physical-debug.log",
+      "sha256": "EC7F214F8A4F28D5AFE9542E8AFF87FAEEA9D0DF5F0F9936669790069CF13FA9",
+      "output": "POWERED_CONTACT_PHYSICAL peak=8.743492921081675E-05 final600Drift=1.725024559378626E-07 supported=600 fuel=28.4375 oxidizer=42.65625 mass=701.09375"
+    },
+    {
+      "name": "physical-release.log",
+      "sha256": "EC7F214F8A4F28D5AFE9542E8AFF87FAEEA9D0DF5F0F9936669790069CF13FA9",
+      "output": "POWERED_CONTACT_PHYSICAL peak=8.743492921081675E-05 final600Drift=1.725024559378626E-07 supported=600 fuel=28.4375 oxidizer=42.65625 mass=701.09375"
+    },
+    {
+      "name": "prior-cheap-debug.log",
+      "sha256": "EDE2547FA4054F84EE6564C58C34B01576FF6A392B164153DE09347A05D5BDFE",
+      "output": "ASSEMBLY_CONTACT_GEOMETRY PASS parts=7 children=8 supportCorners=4 mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } minFeature=0.061 digest=cd21bff65805e758df0c3bf5b187f93e82cc4feb2396f4e7d5a75d684a344c74\r\nASSEMBLY_CONTACT_NATIVE_BASIS PASS 64 world corners and independent inertia response\r\nASSEMBLY_CONTACT_CHEAP intervals=120 peakPenetration=9.573634067638892E-05 finalPenetration=7.804795231947104E-05 position=Double3 { X = 3.2815602901692387E-07, Y = -7.801076198088452E-05, Z = -7.969540399546932E-08, LengthSquared = 6.085793022575016E-09, IsFinite = True } velocity=Double3 { X = 2.6568278882861985E-06, Y = -2.3683844040708075E-07, Z = 1.2795054810843137E-07, LengthSquared = 7.131198217591007E-12, IsFinite = True } omega=Double3 { X = 1.0915335907215922E-14, Y = -7.526857693581442E-08, Z = -1.5629118477801563E-06, LengthSquared = 2.4483588026055252E-12, IsFinite = True }\r\nASSEMBLY_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "schedules-focused-debug.log",
+      "sha256": "A6389DE9DEE4784E1FB9019D540B660B575AB72CC3285D65BFEE7660E0F4CAE9",
+      "output": "POWERED_CONTACT_SCHEDULE fps=30 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=60 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=150 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=240 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=0 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_MOVING_FRAME PASS 1200 intervals"
+    },
+    {
+      "name": "schedules-release.log",
+      "sha256": "A6389DE9DEE4784E1FB9019D540B660B575AB72CC3285D65BFEE7660E0F4CAE9",
+      "output": "POWERED_CONTACT_SCHEDULE fps=30 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=60 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=150 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=240 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_SCHEDULE fps=0 frontiers=1200 exactBits=PASS\r\nPOWERED_CONTACT_MOVING_FRAME PASS 1200 intervals"
+    },
+    {
+      "name": "storage-focused-debug.log",
+      "sha256": "2EDCD9F6BCBF364993C88C272ADB4EB6E63A345C7335EDC455D8041D493F9412",
+      "output": "ASSEMBLY_CONTACT_STORAGE managedCold=2913240 managedConstructionWarmUpperBound=2913920 nativePool=475136 combinedUpperBound=3389056 historyPayloadIncluded=1881600 creditPayloadIncluded=76816 limit=8388608 coldPreparedMs=2.3328"
+    },
+    {
+      "name": "storage-release.log",
+      "sha256": "B984AA19BE92826AE08271E053F185724F7642263BC32160AF466C48E1DB86E4",
+      "output": "POWERED_SUPPORTED_ASSEMBLY_STORAGE\r\nASSEMBLY_CONTACT_STORAGE managedCold=2912664 managedConstructionWarmUpperBound=2913344 nativePool=475136 combinedUpperBound=3388480 historyPayloadIncluded=1881600 creditPayloadIncluded=76816 limit=8388608 coldPreparedMs=2.3287"
+    }
+  ]
+}

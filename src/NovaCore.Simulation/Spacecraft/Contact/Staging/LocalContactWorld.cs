@@ -28,7 +28,8 @@ internal sealed partial class LocalContactWorld : IDisposable
     internal readonly record struct Export(SpacecraftMotion Motion, SimulationInstant Source,
         TimelineRevision TimelineRevision, long Generation, long Frontier, int ContactPoints, float MaximumDepth,
         double LocalPositionMagnitude, double LocalSpeed, double ImportPositionError, double ImportVelocityError,
-        int ConstraintCount = 0, int ArticleContactChildMask = 0);
+        int ConstraintCount = 0, int ArticleContactChildMask = 0,
+        Spacecraft.Assemblies.AssemblyMass? AssemblyProperties = null);
 
     private static long nextGeneration;
     private readonly int ownerThread = Environment.CurrentManagedThreadId;
@@ -56,18 +57,39 @@ internal sealed partial class LocalContactWorld : IDisposable
         this.source = source; configuration = source.Configuration;
         ImportPositionError = positionError; ImportVelocityError = velocityError;
         pool = new BufferPool(16384); metrics = new();
-        simulation = BepuPhysics.Simulation.Create(pool, new LocalContactCallbacks(metrics), new LocalContactIntegrator(acceleration),
+        if(source.AssemblyAuthority?.Launch.PoweredSupport==true||configuration.Site is not null)assemblyInput=new(){Linear=acceleration,Site=configuration.Site,SiteOrigin=configuration.OriginRoot};
+        simulation = BepuPhysics.Simulation.Create(pool, new LocalContactCallbacks(metrics), new LocalContactIntegrator(acceleration,assemblyInput),
             new SolveDescription(8, 1), initialAllocationSizes: new SimulationAllocationSizes(128, 32, 16, 128, 2048, 128, 8));
         try
         {
+            if (source.AssemblyAuthority?.Launch.Departure is not null)
+            {
+                // Cold workspace for this bounded first-step handoff. These are the
+                // measured high-water capacities of its BEPU collision pipeline.
+                // Prepare per-world workers before any body/static/shape exists;
+                // CollisionDetection does not integrate or solve an empty world.
+                pool.EnsureCapacityForPower(32768, 11);
+                pool.EnsureCapacityForPower(32768, 12);
+                pool.EnsureCapacityForPower(81920, 14);
+                simulation.CollisionDetection(16666 / 1_000_000f);
+            }
             var d = configuration.BoxDimensions;
-            bodyShape = configuration.Article is { } article ? CreateArticleShape(simulation.Shapes, pool, article) :
+            bodyShape = configuration.AssemblyProfile is {} assemblyProfile ? CreateAssemblyShape(simulation.Shapes,pool,assemblyProfile) :
+                configuration.Article is { } article ? CreateArticleShape(simulation.Shapes, pool, article) :
                 simulation.Shapes.Add(new Box((float)d.X, (float)d.Y, (float)d.Z));
             var inertia = source.Motion.Inertia;
             var bodyInertia = new BodyInertia { InverseMass = (float)(1 / source.Motion.Properties.MassKilograms) };
             bodyInertia.InverseInertiaTensor.XX = (float)(1 / inertia.X);
             bodyInertia.InverseInertiaTensor.YY = (float)(1 / inertia.Y);
             bodyInertia.InverseInertiaTensor.ZZ = (float)(1 / inertia.Z);
+            if(configuration.AssemblyProfile is {} profile)
+            {
+                // Full canonical tensor, independent of collision-box mass and shape builders.
+                var inverse=AssemblyToNativeBody*profile.Mass.Inertia.Inverse()*AssemblyToNativeBody.Transpose();
+                bodyInertia.InverseInertiaTensor.XX=(float)inverse.A;bodyInertia.InverseInertiaTensor.YX=(float)inverse.D;
+                bodyInertia.InverseInertiaTensor.YY=(float)inverse.E;bodyInertia.InverseInertiaTensor.ZX=(float)inverse.G;
+                bodyInertia.InverseInertiaTensor.ZY=(float)inverse.H;bodyInertia.InverseInertiaTensor.ZZ=(float)inverse.I;
+            }
             body = simulation.Bodies.Add(BodyDescription.CreateDynamic(new RigidPose(position, orientation),
                 new BodyVelocity(velocity, angularVelocity), bodyInertia,
                 new CollidableDescription(bodyShape, (float)configuration.MaximumSpeculativeMargin), new BodyActivityDescription(-1)));
@@ -75,21 +97,27 @@ internal sealed partial class LocalContactWorld : IDisposable
             // The two-triangle version dropped the advancing corner manifold at its internal seam.
             // A single convex face preserves that planar coverage without changing solver quality settings.
             // Legacy box thickness is retained; engineering-article thickness is explicitly 2 m.
-            var h = (float)configuration.PlaneHalfExtent;
+            var support = configuration.SupportDimensions;
             var halfThickness = (float)configuration.SlabHalfThickness;
-            surfaceShape = simulation.Shapes.Add(new Box(2 * h, 2 * halfThickness, 2 * h));
+            surfaceShape = simulation.Shapes.Add(new Box((float)support.X, 2 * halfThickness, (float)support.Z));
             plane = simulation.Statics.Add(new StaticDescription(new Vector3(0, -halfThickness, 0), surfaceShape));
             if (bodyShape.Type == Compound.Id)
                 metrics.Coverage = new(simulation, body, plane, bodyShape, acceleration, (float)configuration.ContactTolerance);
             // Initial receipt retains the original FP64 source, without a needless float round trip.
             export = new(source.Motion, source.Motion.Time, source.TimelineRevision, Generation, 0, 0, 0,
                 position.Length(), velocity.Length(), positionError, velocityError);
+            if(source.AssemblyAuthority is {} authority)
+            {
+                assembly=new(authority,source.Motion.Revision,source.AssemblyClock);
+                assemblyMass=authority.Launch.Initial.Mass;
+                export=export with {AssemblyProperties=assemblyMass};
+            }
         }
         catch
         {
             try
             {
-                if (configuration.Article is not null && bodyShape.Exists)
+                if ((configuration.Article is not null || configuration.AssemblyProfile is not null) && bodyShape.Exists)
                     simulation.Shapes.RecursivelyRemoveAndDispose(bodyShape, pool);
                 simulation.Dispose();
             }
@@ -110,7 +138,9 @@ internal sealed partial class LocalContactWorld : IDisposable
         var v = rootToLocal.Rotate(motion.VelocityRoot - configuration.OriginVelocityRoot);
         var w = rootToLocal.Rotate(motion.BodyToRoot.Rotate(motion.AngularVelocityBody));
         var a = rootToLocal.Rotate(source.ForceRoot / motion.Properties.MassKilograms);
+        if(configuration.Site is {} site)a=site.LinearAcceleration(site.At(motion.Time),motion.PositionRoot,motion.VelocityRoot);
         var q = rootToLocal * motion.BodyToRoot;
+        if(configuration.AssemblyProfile is not null) q *= AssemblyToNativeRotation.Conjugate();
         if (!Within(configuration, p, v, w) || !a.IsFinite || !Finite(ToFloat(a)) ||
             !PositiveFloat(1 / motion.Properties.MassKilograms) ||
             !PositiveFloat(1 / motion.Inertia.X) || !PositiveFloat(1 / motion.Inertia.Y) || !PositiveFloat(1 / motion.Inertia.Z))
@@ -127,7 +157,9 @@ internal sealed partial class LocalContactWorld : IDisposable
         next = default;
         var status = Validate(engine, configuration, previous, target);
         if (status != LocalContactStatus.Success) return status;
-        if ((publication is not null && publication.Pending) || powered?.Pending == true) return LocalContactStatus.PublicationPending;
+        if ((publication is not null && publication.Pending) || powered?.Pending == true || assembly?.Pending==true) return LocalContactStatus.PublicationPending;
+        if(assembly is not null&&!engine.OwnsPersistentPublicationPhase)return LocalContactStatus.WrongThread;
+        if(assemblyInput is not null&&assemblyPreparedFrontier!=frontier+1)return LocalContactStatus.InvalidSource;
         if (powered is { } activePower && (!engine.OwnsPersistentPublicationPhase || activePower.PreparedFrontier != frontier + 1))
             return LocalContactStatus.InvalidSource;
         if (frontier == long.MaxValue || !source.TryEndpoint(frontier + 1, out var expected) || target != expected ||
@@ -138,6 +170,7 @@ internal sealed partial class LocalContactWorld : IDisposable
         // All admissions precede mutation. Once advanced, any failed export destroys continuation permission.
         invalidated = true;
         if (powered is not null) powered.PreparedFrontier = 0;
+        assemblyPreparedFrontier=0;
         try { simulation.Timestep(dt); }
         catch (Exception) { return LocalContactStatus.SolverFailure; }
         if (metrics.Coverage?.Failed == true) return LocalContactStatus.SolverFailure;
@@ -146,8 +179,10 @@ internal sealed partial class LocalContactWorld : IDisposable
         var state = simulation.Bodies.GetBodyReference(body);
         var p = FromFloat(state.Pose.Position); var v = FromFloat(state.Velocity.Linear); var w = FromFloat(state.Velocity.Angular);
         var fq = state.Pose.Orientation;
+        var bodyToRoot = configuration.LocalToRoot * new DoubleQuaternion(fq.X, fq.Y, fq.Z, fq.W);
+        if(configuration.AssemblyProfile is not null) bodyToRoot *= AssemblyToNativeRotation;
         if (!Within(configuration, p, v, w) ||
-            SpacecraftRigidBodyRotationEvaluator.TryCanonicalize(configuration.LocalToRoot * new DoubleQuaternion(fq.X, fq.Y, fq.Z, fq.W), out var q)
+            SpacecraftRigidBodyRotationEvaluator.TryCanonicalize(bodyToRoot, out var q)
                 != SpacecraftRigidBodyRotationEvaluationStatus.Success) return LocalContactStatus.PrecisionEnvelopeExceeded;
         var elapsed = (target.Ticks - source.Motion.Time.Ticks) / (double)SimulationInstant.TicksPerSecond;
         var rootPosition = configuration.OriginRoot + configuration.OriginVelocityRoot * elapsed + configuration.LocalToRoot.Rotate(p);
@@ -155,15 +190,18 @@ internal sealed partial class LocalContactWorld : IDisposable
         var omega = q.Conjugate().Rotate(configuration.LocalToRoot.Rotate(w));
         if (!LocalContactConfiguration.RootSpacingFits(rootPosition, configuration.ContactTolerance) ||
             !rootVelocity.IsFinite || !omega.IsFinite) return LocalContactStatus.PrecisionEnvelopeExceeded;
-        var paired = source.Motion with { Time = target, Revision = powered?.Expected.StateRevision ?? publication?.Revision ?? source.Motion.Revision,
-            Properties = powered?.Physical.Properties ?? source.Motion.Properties,
+        var paired = source.Motion with { Time = target, Revision = assembly?.Revision ?? powered?.Expected.StateRevision ?? publication?.Revision ?? source.Motion.Revision,
+            Properties = assembly is not null ? new(assemblyMass.Mass) : powered?.Physical.Properties ?? source.Motion.Properties,
+            Inertia = assembly is not null ? new(assemblyMass.Inertia.A,assemblyMass.Inertia.E,assemblyMass.Inertia.I) : source.Motion.Inertia,
             PositionRoot = rootPosition, VelocityRoot = rootVelocity, BodyToRoot = q, AngularVelocityBody = omega };
         frontier++;
         export = new(paired, source.Motion.Time, source.TimelineRevision, Generation, frontier, metrics.Contacts,
             metrics.MaximumDepth, Math.Sqrt(p.LengthSquared), Math.Sqrt(v.LengthSquared), ImportPositionError, ImportVelocityError,
-            state.Constraints.Count, configuration.Article is null ? 0 : metrics.ArticleChildMask);
+            state.Constraints.Count, configuration.Article is null ? 0 : metrics.ArticleChildMask,
+            assembly is not null ? assemblyMass : null);
         if (publication is not null) publication.Pending = true;
         if (powered is not null) powered.Pending = true;
+        if (assembly is not null) assembly.Pending=true;
         invalidated = false; next = new(this, frontier, receiptIdentity); return LocalContactStatus.Success;
     }
 
@@ -182,7 +220,7 @@ internal sealed partial class LocalContactWorld : IDisposable
         if (invalidated) return LocalContactStatus.Invalidated;
         if (!ReferenceEquals(receipt.Owner, this)) return LocalContactStatus.GenerationMismatch;
         if (receipt.Step != frontier) return LocalContactStatus.FrontierMismatch;
-        if ((publication is not null || powered is not null) && (!receipt.IsIssuedBy(receiptIdentity) || receipt.Generation != Generation))
+        if ((publication is not null || powered is not null || assembly is not null) && (!receipt.IsIssuedBy(receiptIdentity) || receipt.Generation != Generation))
             return LocalContactStatus.GenerationMismatch;
         return ValidateAuthority(engine, configuration, target);
     }
@@ -197,7 +235,7 @@ internal sealed partial class LocalContactWorld : IDisposable
         {
             simulation.Statics.Remove(plane);
             simulation.Shapes.RemoveAndDispose(surfaceShape, pool);
-            if (configuration.Article is not null)
+            if (configuration.Article is not null || configuration.AssemblyProfile is not null)
             {
                 simulation.Bodies.Remove(body);
                 simulation.Shapes.RecursivelyRemoveAndDispose(bodyShape, pool);

@@ -1,0 +1,22 @@
+{
+  "kind": "Analytical design check, not numerical solver qualification",
+  "mainN": 600,
+  "extentKgPerSecond": 0.0390625,
+  "totalFlowKgPerSecond": 0.1953125,
+  "seconds": 20,
+  "fuelBefore": 30,
+  "fuelAfter": 28.4375,
+  "oxidizerBefore": 45,
+  "oxidizerAfter": 42.65625,
+  "massBefore": 705.0,
+  "massAfter": 701.09375,
+  "comBefore": 1.0417021276595744,
+  "comAfter": 1.0475061288165812,
+  "deltaComMetres": 0.005804001157006855,
+  "secondsToExhaust": 384,
+  "initialThrustWeightRatio": 0.08675472271021753,
+  "finalThrustWeightRatio": 0.08723808978571462,
+  "sourceLaw": "existing material-O co-moving point-removal; source mass through constrained solve",
+  "requiredMapping": "p1=p0+R(c1-c0); v1=v0+omega cross R(c1-c0); child1=B(rO-c1); no c-dot",
+  "stage1ScratchAbsent": true
+}

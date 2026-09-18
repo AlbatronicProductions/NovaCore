@@ -1,0 +1,21 @@
+{
+  "schema": "novacore.development-propulsion/1",
+  "id": "novacore.SRV01.development-propulsion/1",
+  "status": "PROVISIONAL-DEVELOPMENT-NOT-FINAL-BALANCE",
+  "vehicle": "novacore.stock.SRV01.FourHorn",
+  "baseDigest": "ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf",
+  "engineConfiguration": "novacore.SRV01.development-main/1",
+  "fuelIdentity": "novacore.fixture.MMH_like/1",
+  "oxidizerIdentity": "novacore.fixture.NTO_like/1",
+  "fuelCapacityKg": 18244,
+  "oxidizerCapacityKg": 27366,
+  "initialFuelKg": 18244,
+  "initialOxidizerKg": 27366,
+  "thrustN": 680640,
+  "extentRateKgS": 44.3125,
+  "exhaustSpeed": 3072,
+  "fuelShare": 2,
+  "oxidizerShare": 3,
+  "performanceDomain": "ideal-fixed-effective-exhaust-speed-no-atmosphere-model",
+  "maximumQualificationTicks": 125000
+}

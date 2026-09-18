@@ -1,0 +1,2489 @@
+{
+  "input": {
+    "mode": "canonical",
+    "Authority": {
+      "BodyId": 6,
+      "Terrain": {
+        "SourceId": 2,
+        "Version": 5,
+        "IsValid": true
+      },
+      "PhysicalGeneration": 4,
+      "ReferenceRadiusMetres": 6371008.8,
+      "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+      "CompositionIdentity": 86364352542676184,
+      "FacilitySupportIdentity": 5597594574148789740,
+      "QueryPolicyVersion": 1
+    },
+    "Digest": "4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290",
+    "OriginBodyFixed": {
+      "X": 913158.4223759136,
+      "Y": 3050578.137596519,
+      "Z": 5518159.327603761,
+      "LengthSquared": 40589967642758.31,
+      "IsFinite": true
+    },
+    "LocalToBodyFixed": {
+      "X": 0.5087648724154991,
+      "Y": 0.07042666844321097,
+      "Z": -0.04180931337232564,
+      "W": 0.8570007994648348,
+      "IsFinite": true,
+      "LengthSquared": 1.0000000000000002
+    },
+    "Mu": 398600435507022.6,
+    "f0": {
+      "Epoch": {
+        "Ticks": 0,
+        "SecondsSinceEpoch": 0
+      },
+      "Position": {
+        "X": -5270974.75875348,
+        "Y": -1871033.3406329644,
+        "Z": 3050578.137596519,
+        "LengthSquared": 40589967642758.31,
+        "IsFinite": true
+      },
+      "Velocity": {
+        "X": 136.4379126343022,
+        "Y": -384.3655420139789,
+        "Z": 1.6237513762668097e-05,
+        "LengthSquared": 166352.1738917055,
+        "IsFinite": true
+      },
+      "Orientation": {
+        "X": 0.7915325514529246,
+        "Y": -0.5589567183967302,
+        "Z": -0.14251991759564056,
+        "W": 0.20182091080488535,
+        "IsFinite": true,
+        "LengthSquared": 0.9999999999999999
+      },
+      "Omega": {
+        "X": -2.9030875231159892e-12,
+        "Y": 3.491614592575382e-05,
+        "Z": -6.401841061959949e-05,
+        "LengthSquared": 5.317494144568192e-09,
+        "IsFinite": true
+      },
+      "Alpha": {
+        "X": 7.51436779331513e-17,
+        "Y": -1.8585106537443353e-16,
+        "Z": -1.0136463986552819e-16,
+        "LengthSquared": 5.046198104920136e-32,
+        "IsFinite": true
+      }
+    },
+    "f20": {
+      "Epoch": {
+        "Ticks": 20000000,
+        "SecondsSinceEpoch": 20
+      },
+      "Position": {
+        "X": -5268240.395793649,
+        "Y": -1878718.6589066838,
+        "Z": 3050578.137921099,
+        "LengthSquared": 40589967642758.31,
+        "IsFinite": true
+      },
+      "Velocity": {
+        "X": 136.99833488237357,
+        "Y": -384.16614913562523,
+        "Z": 1.6220649803247692e-05,
+        "LengthSquared": 166352.1739022387,
+        "IsFinite": true
+      },
+      "Orientation": {
+        "X": 0.7919399386320408,
+        "Y": -0.5583793751885938,
+        "Z": -0.14237270961116338,
+        "W": 0.20192478431695884,
+        "IsFinite": true,
+        "LengthSquared": 1
+      },
+      "Omega": {
+        "X": -2.9015815513302093e-12,
+        "Y": 3.491614592203774e-05,
+        "Z": -6.401841062162624e-05,
+        "LengthSquared": 5.317494144568189e-09,
+        "IsFinite": true
+      },
+      "Alpha": {
+        "X": 7.54523409859966e-17,
+        "Y": -1.8575465617094542e-16,
+        "Z": -1.0131205752400865e-16,
+        "LengthSquared": 5.04619810492013e-32,
+        "IsFinite": true
+      }
+    },
+    "OriginRoot": {
+      "X": 0,
+      "Y": -1.7,
+      "Z": 0,
+      "LengthSquared": 2.8899999999999997,
+      "IsFinite": true
+    },
+    "LocalToRoot": {
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "W": 1,
+      "IsFinite": true,
+      "LengthSquared": 1
+    },
+    "OriginVelocityRoot": {
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "LengthSquared": 0,
+      "IsFinite": true
+    },
+    "ContactTolerance": 6.1e-05,
+    "PlaneHalfExtent": 8,
+    "mass": {
+      "Mass": 2018900,
+      "Com": {
+        "X": 0.0003637624448957353,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 1.3232311631652283e-07,
+        "IsFinite": true
+      },
+      "Inertia": {
+        "A": 190.47255,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 1496.3595445271355,
+        "F": 0,
+        "G": 0,
+        "H": 0,
+        "I": 1496.3595445271355
+      }
+    },
+    "profileDigest": "1344ebebe26768f543c90a728aaa46021df3f1f1836e688a2cf7b470c32c72bf",
+    "SmallestFeature": 0.061,
+    "BoundingRadius": 2.568988037872607,
+    "children": [
+      {
+        "Part": "capsule_01",
+        "DefinitionDigest": "b7b792f69e9e17cfd89185da48e7113b1eb74df8b1a55df69bae9405d9d3d7eb",
+        "Dimensions": {
+          "X": 1.354,
+          "Y": 1.44,
+          "Z": 1.456,
+          "LengthSquared": 6.026852,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0.677,
+            "Y": 0,
+            "Z": -0.008,
+            "LengthSquared": 0.45839300000000005,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 1.677,
+            "Y": 0,
+            "Z": -0.008,
+            "LengthSquared": 2.812393,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "tank_01",
+        "DefinitionDigest": "02c6139a7a0d8fbcd5df7af96716b35275045f215c4e8e2a65ecee3af3f0e209",
+        "Dimensions": {
+          "X": 2,
+          "Y": 1.4,
+          "Z": 1.4,
+          "LengthSquared": 7.92,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "main_01",
+        "DefinitionDigest": "2c20fa1a9dc497036898571e061b518505c1bd320e910087d8f65aafa64655e5",
+        "Dimensions": {
+          "X": 0.639,
+          "Y": 0.52,
+          "Z": 0.52,
+          "LengthSquared": 0.9491210000000001,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": -0.3805,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0.14478025,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": -1.3805,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.90578025,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "main_01",
+        "DefinitionDigest": "2c20fa1a9dc497036898571e061b518505c1bd320e910087d8f65aafa64655e5",
+        "Dimensions": {
+          "X": 0.061,
+          "Y": 0.56,
+          "Z": 0.56,
+          "LengthSquared": 0.6309210000000001,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": -0.0305,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0.00093025,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": -1.0305,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0619302499999999,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "rcs_01",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": 0.5603821240903389,
+            "Z": 0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": -0.7071067811865476,
+            "E": 0.7071067811865476,
+            "F": 0,
+            "G": 0.7071067811865476,
+            "H": 0.7071067811865476,
+            "I": 0
+          }
+        }
+      },
+      {
+        "Part": "rcs_03",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": -0.5603821240903389,
+            "Z": -0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": 0.7071067811865476,
+            "E": -0.7071067811865476,
+            "F": 0,
+            "G": -0.7071067811865476,
+            "H": -0.7071067811865476,
+            "I": 0
+          }
+        }
+      },
+      {
+        "Part": "rcs_02",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": -0.5603821240903389,
+            "Z": 0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": -0.7071067811865476,
+            "E": -0.7071067811865476,
+            "F": 0,
+            "G": -0.7071067811865476,
+            "H": 0.7071067811865476,
+            "I": 0
+          }
+        }
+      },
+      {
+        "Part": "rcs_04",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": 0.5603821240903389,
+            "Z": -0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": 0.7071067811865476,
+            "E": 0.7071067811865476,
+            "F": 0,
+            "G": 0.7071067811865476,
+            "H": -0.7071067811865476,
+            "I": 0
+          }
+        }
+      }
+    ],
+    "initial": {
+      "PositionO": {
+        "X": 0,
+        "Y": -7.21876043701308e-09,
+        "Z": 0,
+        "LengthSquared": 5.211050224698527e-17,
+        "IsFinite": true
+      },
+      "VelocityO": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "BodyToWorld": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0.7071067811865476,
+        "W": 0.7071067811865476,
+        "IsFinite": true,
+        "LengthSquared": 1.0000000000000002
+      },
+      "AngularVelocityBody": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      }
+    },
+    "nativePose": {
+      "Orientation": {
+        "IsIdentity": true,
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "W": 1
+      },
+      "Position": {
+        "X": -5.421011e-20,
+        "Y": 1.7003638,
+        "Z": 0
+      }
+    },
+    "nativeVelocity": {
+      "Linear": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Angular": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      }
+    },
+    "nativeInertia": {
+      "InverseInertiaTensor": {
+        "XX": 0.00066828856,
+        "YX": 0,
+        "YY": 0.0052501005,
+        "ZX": 0,
+        "ZY": 0,
+        "ZZ": 0.00066828856
+      },
+      "InverseMass": 4.953192e-07
+    },
+    "identity": {
+      "Item1": 1,
+      "Item2": 0,
+      "Item3": 0,
+      "Item4": 0,
+      "Item5": false,
+      "Item6": false
+    },
+    "geometry": "same production convex slab, top at local y=0",
+    "material": "mu=.5 recovery=2 spring=30 damping=1",
+    "solver": "8 iterations / 1 substep"
+  },
+  "terms": [
+    {
+      "ticks": 0,
+      "gravity": {
+        "X": -7.398623856613717e-05,
+        "Y": -9.820171303371513,
+        "Z": 1.7763568394002505e-15,
+        "LengthSquared": 96.43576443303533,
+        "IsFinite": true
+      },
+      "originA": {
+        "X": -2.5523971886046105e-07,
+        "Y": -0.026110736859759523,
+        "Z": -0.014241001283080921,
+        "LengthSquared": 0.0008845766969694643,
+        "IsFinite": true
+      },
+      "centrifugal": {
+        "X": 3.687191274371476e-20,
+        "Y": 1.4907987403096013e-12,
+        "Z": 8.130933876487663e-13,
+        "LengthSquared": 2.8836017411468425e-24,
+        "IsFinite": true
+      },
+      "euler": {
+        "X": -3.687191749640828e-20,
+        "Y": -5.494988137770822e-36,
+        "Z": -2.7333905559211464e-20,
+        "LengthSquared": 2.1066806929818306e-39,
+        "IsFinite": true
+      },
+      "coriolis": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "sum": {
+        "X": -7.373099884727671e-05,
+        "Y": -9.794060566510263,
+        "Z": 0.01424100128389579,
+        "LengthSquared": 95.92382519202516,
+        "IsFinite": true
+      },
+      "actual": {
+        "X": -7.373099884727671e-05,
+        "Y": -9.794060566510263,
+        "Z": 0.01424100128389579,
+        "LengthSquared": 95.92382519202516,
+        "IsFinite": true
+      },
+      "angular": {
+        "X": 1.950746379146728e-09,
+        "Y": 1.8585106537443353e-16,
+        "Z": 1.2902779741340154e-17,
+        "LengthSquared": 3.805411435754105e-18,
+        "IsFinite": true
+      },
+      "earth": {
+        "PositionO": {
+          "X": -5270974.758753475,
+          "Y": -1871033.3406329623,
+          "Z": 3050578.137596516,
+          "LengthSquared": 40589967642758.22,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 136.43791263430205,
+          "Y": -384.3655420139784,
+          "Z": 1.623751376266808e-05,
+          "LengthSquared": 166352.1738917051,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 0.16445594869414548,
+          "Y": -0.9549401206303603,
+          "Z": 0.04193213442935438,
+          "W": 0.24348573480140517,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": 3.491614592575382e-05,
+          "Y": 2.9030875197278566e-12,
+          "Z": -6.401841061959949e-05,
+          "LengthSquared": 5.317494144568192e-09,
+          "IsFinite": true
+        }
+      }
+    },
+    {
+      "ticks": 20000000,
+      "gravity": {
+        "X": -7.398623856613717e-05,
+        "Y": -9.820171303371513,
+        "Z": 1.7763568394002505e-15,
+        "LengthSquared": 96.43576443303533,
+        "IsFinite": true
+      },
+      "originA": {
+        "X": -2.552397188579131e-07,
+        "Y": -0.026110736861412794,
+        "Z": -0.014241001280049634,
+        "LengthSquared": 0.0008845766969694635,
+        "IsFinite": true
+      },
+      "centrifugal": {
+        "X": 3.685278549672059e-20,
+        "Y": 1.4907987404039954e-12,
+        "Z": 8.130933875879715e-13,
+        "LengthSquared": 2.8836017413294243e-24,
+        "IsFinite": true
+      },
+      "euler": {
+        "X": -3.685279039487812e-20,
+        "Y": -5.4921376433253286e-36,
+        "Z": -2.744618335779882e-20,
+        "LengthSquared": 2.111421140798734e-39,
+        "IsFinite": true
+      },
+      "coriolis": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "sum": {
+        "X": -7.373099884727926e-05,
+        "Y": -9.79406056650861,
+        "Z": 0.014241001280864503,
+        "LengthSquared": 95.92382519199272,
+        "IsFinite": true
+      },
+      "actual": {
+        "X": -7.373099884727926e-05,
+        "Y": -9.794060566508609,
+        "Z": 0.014241001280864505,
+        "LengthSquared": 95.92382519199268,
+        "IsFinite": true
+      },
+      "angular": {
+        "X": 1.950746378692209e-09,
+        "Y": 1.8575465658453573e-16,
+        "Z": 1.2896086807785205e-17,
+        "LengthSquared": 3.805411433980802e-18,
+        "IsFinite": true
+      },
+      "earth": {
+        "PositionO": {
+          "X": -5268240.395793644,
+          "Y": -1878718.6589066817,
+          "Z": 3050578.137921096,
+          "LengthSquared": 40589967642758.234,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 136.99833488237343,
+          "Y": -384.1661491356248,
+          "Z": 1.6220649803247676e-05,
+          "LengthSquared": 166352.17390223828,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 0.1651522582286123,
+          "Y": -0.9548199435697367,
+          "Z": 0.04210967585819585,
+          "W": 0.2434550927021094,
+          "IsFinite": true,
+          "LengthSquared": 1.0000000000000002
+        },
+        "AngularVelocityBody": {
+          "X": 3.491614592203775e-05,
+          "Y": 2.901581549357747e-12,
+          "Z": -6.401841062162624e-05,
+          "LengthSquared": 5.3174941445681896e-09,
+          "IsFinite": true
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "mode": "canonical",
+      "n": 1,
+      "target": 16666,
+      "motion": {
+        "PositionO": {
+          "X": -1.8695090226384466e-05,
+          "Y": -0.002267725533862017,
+          "Z": 3.846399799239069e-06,
+          "LengthSquared": 5.142943398119759e-06,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": -0.001121750209333061,
+          "Y": -0.1360669881077904,
+          "Z": 0.00023079320461984388,
+          "LengthSquared": 0.01851553684176101,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 7.997234435844682e-07,
+          "Y": -7.997234435844682e-07,
+          "Z": 0.707110669681359,
+          "W": 0.707102892669448,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": 2.883977778811442e-17,
+          "Y": -0.00013572299212682995,
+          "Z": 0.0006599277257919312,
+          "LengthSquared": 4.539253338607698e-07,
+          "IsFinite": true
+        }
+      },
+      "minimumHeight": -0.0022711731086462184,
+      "speed": 0.1360718076669852,
+      "angular": 0.000673739811693483,
+      "drift": 1.908667571863268e-05,
+      "pass": false,
+      "bodyPose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 1.1309797e-06,
+          "Y": 0,
+          "Z": 5.499178e-06,
+          "W": 1
+        },
+        "Position": {
+          "X": -1.8699091e-05,
+          "Y": 1.698096,
+          "Z": 3.8472226e-06
+        }
+      },
+      "bodyVelocity": {
+        "Linear": {
+          "X": -0.0011219903,
+          "Y": -0.13606699,
+          "Z": 0.00023084258
+        },
+        "Angular": {
+          "X": 0.00013572299,
+          "Y": 0,
+          "Z": 0.0006599277
+        }
+      },
+      "body": 0,
+      "constraints": 1,
+      "raw": [
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.26,
+              "Y": -1.7003636,
+              "Z": -0.26
+            },
+            "Depth": 2.0980829e-07,
+            "Normal": {
+              "X": 0,
+              "Y": 1.0000002,
+              "Z": 0
+            },
+            "FeatureId": -529
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -17
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26000005,
+              "Y": -1.7003636,
+              "Z": 0.26
+            },
+            "Depth": 1.4781948e-07,
+            "Normal": {
+              "X": 0,
+              "Y": 1.0000002,
+              "Z": 0
+            },
+            "FeatureId": -517
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.26,
+              "Y": -1.7003636,
+              "Z": 0.26
+            },
+            "Depth": 2.0980829e-07,
+            "Normal": {
+              "X": 0,
+              "Y": 1.0000002,
+              "Z": 0
+            },
+            "FeatureId": -533
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -21
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26000005,
+              "Y": -1.7003636,
+              "Z": -0.26
+            },
+            "Depth": 1.4781948e-07,
+            "Normal": {
+              "X": 0,
+              "Y": 1.0000002,
+              "Z": 0
+            },
+            "FeatureId": -513
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -1
+        }
+      ],
+      "predictions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "selected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Contacts": 4,
+      "MaximumDepth": 2.0980829e-07
+    },
+    {
+      "mode": "canonical",
+      "n": 2,
+      "target": 33333,
+      "motion": {
+        "PositionO": {
+          "X": -8.331264785117992e-05,
+          "Y": -0.006016023224784136,
+          "Z": 1.1422910398745079e-05,
+          "LengthSquared": 3.619960692131607e-05,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": -0.0038769757232105548,
+          "Y": -0.22489674385221003,
+          "Z": 0.0004545815793402401,
+          "LengthSquared": 0.050593782980497215,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 2.3771718531863186e-06,
+          "Y": -2.377158708353859e-06,
+          "Z": 0.7071241270578521,
+          "W": 0.7070894348817334,
+          "IsFinite": true,
+          "LengthSquared": 1.0000000000000002
+        },
+        "AngularVelocityBody": {
+          "X": 2.2261587280070043e-09,
+          "Y": -0.0002676954318426286,
+          "Z": 0.0022837817668889568,
+          "LengthSquared": 5.2873200030088125e-06,
+          "IsFinite": true
+        }
+      },
+      "minimumHeight": -0.006030525444355117,
+      "speed": 0.2249306181481241,
+      "angular": 0.0022994173181501466,
+      "drift": 8.409209340926454e-05,
+      "pass": false,
+      "bodyPose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 3.3618194e-06,
+          "Y": 9.2948e-12,
+          "Z": 2.4531073e-05,
+          "W": 1
+        },
+        "Position": {
+          "X": -8.3330495e-05,
+          "Y": 1.6943477,
+          "Z": 1.1425356e-05
+        }
+      },
+      "bodyVelocity": {
+        "Linear": {
+          "X": -0.0038778065,
+          "Y": -0.22489674,
+          "Z": 0.00045467896
+        },
+        "Angular": {
+          "X": 0.00026769543,
+          "Y": 4.5474735e-12,
+          "Z": 0.0022837818
+        }
+      },
+      "body": 0,
+      "constraints": 1,
+      "raw": [
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.25998127,
+              "Y": -1.698096,
+              "Z": -0.26000383
+            },
+            "Depth": 0.0022700718,
+            "Normal": {
+              "X": -2.80299e-17,
+              "Y": 1.0000002,
+              "Z": 2.2737368e-13
+            },
+            "FeatureId": -529
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -17
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26001877,
+              "Y": -1.698096,
+              "Z": 0.25999615
+            },
+            "Depth": 0.0022654831,
+            "Normal": {
+              "X": -2.80299e-17,
+              "Y": 1.0000002,
+              "Z": 2.2737368e-13
+            },
+            "FeatureId": -517
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.25998127,
+              "Y": -1.698096,
+              "Z": 0.25999615
+            },
+            "Depth": 0.002271248,
+            "Normal": {
+              "X": -2.80299e-17,
+              "Y": 1.0000002,
+              "Z": 2.2737368e-13
+            },
+            "FeatureId": -533
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -21
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26001877,
+              "Y": -1.698096,
+              "Z": -0.26000383
+            },
+            "Depth": 0.0022643069,
+            "Normal": {
+              "X": -2.80299e-17,
+              "Y": 1.0000002,
+              "Z": 2.2737368e-13
+            },
+            "FeatureId": -513
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -1
+        }
+      ],
+      "predictions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "selected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Contacts": 4,
+      "MaximumDepth": 0.002271248
+    },
+    {
+      "mode": "canonical",
+      "n": 4,
+      "target": 66666,
+      "motion": {
+        "PositionO": {
+          "X": -0.0004431847865266235,
+          "Y": -0.014259226375818237,
+          "Z": 3.748205755553125e-05,
+          "LengthSquared": 0.00020352335449647777,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": -0.013425437329922539,
+          "Y": -0.2370006732482871,
+          "Z": 0.0008900596008169771,
+          "LengthSquared": 0.056350353693734034,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 7.823185285671803e-06,
+          "Y": -7.822872569024926e-06,
+          "Z": 0.7071993496474707,
+          "W": 0.707014200519194,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": 3.789987756248024e-08,
+          "Y": -0.0005266900421627498,
+          "Z": 0.007945563643984407,
+          "LengthSquared": 6.340938402255657e-05,
+          "IsFinite": true
+        }
+      },
+      "minimumHeight": -0.01433299917429598,
+      "speed": 0.23738229439815858,
+      "angular": 0.007963000943272364,
+      "drift": 0.0004447669722981294,
+      "pass": false,
+      "bodyPose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 1.1063434e-05,
+          "Y": 2.2112406e-10,
+          "Z": 0.0001309202,
+          "W": 1
+        },
+        "Position": {
+          "X": -0.00044328003,
+          "Y": 1.6861045,
+          "Z": 3.7490106e-05
+        }
+      },
+      "bodyVelocity": {
+        "Linear": {
+          "X": -0.013428328,
+          "Y": -0.23700067,
+          "Z": 0.0008902512
+        },
+        "Angular": {
+          "X": 0.00052669004,
+          "Y": -1.8189894e-12,
+          "Z": 0.007945564
+        }
+      },
+      "body": 0,
+      "constraints": 1,
+      "raw": [
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.2597799,
+              "Y": -1.6900544,
+              "Z": -0.2600227
+            },
+            "Depth": 0.010339616,
+            "Normal": {
+              "X": -1.3215363e-14,
+              "Y": 1.0000002,
+              "Z": 1.8189894e-12
+            },
+            "FeatureId": -529
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -17
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26022014,
+              "Y": -1.6900544,
+              "Z": 0.25997728
+            },
+            "Depth": 0.010279175,
+            "Normal": {
+              "X": -1.3215363e-14,
+              "Y": 1.0000002,
+              "Z": 1.8189894e-12
+            },
+            "FeatureId": -517
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.2597799,
+              "Y": -1.6900544,
+              "Z": 0.25997728
+            },
+            "Depth": 0.010346557,
+            "Normal": {
+              "X": -1.3215363e-14,
+              "Y": 1.0000002,
+              "Z": 1.8189894e-12
+            },
+            "FeatureId": -533
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -21
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26022014,
+              "Y": -1.6900544,
+              "Z": -0.2600227
+            },
+            "Depth": 0.010272234,
+            "Normal": {
+              "X": -1.3215363e-14,
+              "Y": 1.0000002,
+              "Z": 1.8189894e-12
+            },
+            "FeatureId": -513
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -1
+        }
+      ],
+      "predictions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "selected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Contacts": 4,
+      "MaximumDepth": 0.010346557
+    },
+    {
+      "mode": "canonical",
+      "n": 35,
+      "target": 583333,
+      "motion": {
+        "PositionO": {
+          "X": -0.004380020435532518,
+          "Y": -0.013174539695941708,
+          "Z": 0.0014745295632259308,
+          "LengthSquared": 0.00019492731264845355,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.015168811742688542,
+          "Y": 0.0009679325063378364,
+          "Z": 0.0021189950400285745,
+          "LengthSquared": 0.00023551988300161695,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 0.0003085118541758953,
+          "Y": -0.0003093912057277654,
+          "Z": 0.7080247611250857,
+          "W": 0.7061874727940752,
+          "IsFinite": true,
+          "LengthSquared": 0.9999999999999998
+        },
+        "AngularVelocityBody": {
+          "X": -1.112215437223344e-05,
+          "Y": -0.001256167168881319,
+          "Z": -0.00899267984508112,
+          "LengthSquared": 8.244637045462137e-05,
+          "IsFinite": true
+        }
+      },
+      "minimumHeight": -0.014070914381734134,
+      "speed": 0.015346657062748778,
+      "angular": 0.009079998373051693,
+      "drift": 0.004621559958337631,
+      "pass": false,
+      "bodyPose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 0.00043692344,
+          "Y": -6.2179544e-07,
+          "Z": 0.001299159,
+          "W": 0.99999905
+        },
+        "Position": {
+          "X": -0.0043809656,
+          "Y": 1.6871892,
+          "Z": 0.0014748474
+        }
+      },
+      "bodyVelocity": {
+        "Linear": {
+          "X": 0.015172083,
+          "Y": 0.0009679406,
+          "Z": 0.002119452
+        },
+        "Angular": {
+          "X": 0.0012561928,
+          "Y": 3.7971404e-11,
+          "Z": -0.008992683
+        }
+      },
+      "body": 0,
+      "constraints": 1,
+      "raw": [
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.2553261,
+              "Y": -1.6871731,
+              "Z": -0.26145077
+            },
+            "Depth": 0.013676479,
+            "Normal": {
+              "X": 9.133259e-10,
+              "Y": 1.0000005,
+              "Z": 1.7462298e-10
+            },
+            "FeatureId": -529
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -17
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26467204,
+              "Y": -1.6871731,
+              "Z": 0.25855026
+            },
+            "Depth": 0.012690873,
+            "Normal": {
+              "X": 9.133259e-10,
+              "Y": 1.0000005,
+              "Z": 1.7462298e-10
+            },
+            "FeatureId": -517
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.2553261,
+              "Y": -1.6871731,
+              "Z": 0.25854903
+            },
+            "Depth": 0.014119993,
+            "Normal": {
+              "X": 9.133259e-10,
+              "Y": 1.0000005,
+              "Z": 1.7462298e-10
+            },
+            "FeatureId": -533
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -21
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26467204,
+              "Y": -1.6871731,
+              "Z": -0.26144955
+            },
+            "Depth": 0.012247359,
+            "Normal": {
+              "X": 9.133259e-10,
+              "Y": 1.0000005,
+              "Z": 1.7462298e-10
+            },
+            "FeatureId": -513
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -1
+        }
+      ],
+      "predictions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "selected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Contacts": 4,
+      "MaximumDepth": 0.014119993
+    },
+    {
+      "mode": "canonical",
+      "n": 600,
+      "target": 10000000,
+      "motion": {
+        "PositionO": {
+          "X": 0.013734748880251071,
+          "Y": -0.012481446209180899,
+          "Z": 0.0002898763885751463,
+          "LengthSquared": 0.0003445138545968877,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.01090992709947859,
+          "Y": -0.0010511940682400237,
+          "Z": -0.00827449205472903,
+          "LengthSquared": 0.00018859873704881418,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 2.822902243343692e-05,
+          "Y": -9.309308959631306e-05,
+          "Z": 0.704224508327984,
+          "W": 0.7099773464041005,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": -4.0997050350906686e-05,
+          "Y": 0.0049029757911557385,
+          "Z": -0.006464330308668128,
+          "LengthSquared": 6.58284187063621e-05,
+          "IsFinite": true
+        }
+      },
+      "minimumHeight": -0.014584949005717274,
+      "speed": 0.013733125538231061,
+      "angular": 0.008113471433755227,
+      "drift": 0,
+      "pass": false,
+      "bodyPose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 8.578769e-05,
+          "Y": -4.586582e-05,
+          "Z": -0.004067871,
+          "W": 0.9999917
+        },
+        "Position": {
+          "X": 0.013737708,
+          "Y": 1.6878823,
+          "Z": 0.00028993894
+        }
+      },
+      "bodyVelocity": {
+        "Linear": {
+          "X": 0.010912279,
+          "Y": -0.0010512129,
+          "Z": -0.008276275
+        },
+        "Angular": {
+          "X": -0.0049025496,
+          "Y": 5.820766e-11,
+          "Z": -0.0064647836
+        }
+      },
+      "body": 0,
+      "constraints": 1,
+      "raw": [
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.24631734,
+              "Y": -1.6878998,
+              "Z": 0.25959218
+            },
+            "Depth": 0.014562103,
+            "Normal": {
+              "X": 2.3371472e-08,
+              "Y": 1.0000006,
+              "Z": 8.731149e-11
+            },
+            "FeatureId": -517
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.27361798,
+              "Y": -1.6878998,
+              "Z": -0.2604548
+            },
+            "Depth": 0.010256184,
+            "Normal": {
+              "X": 2.3371472e-08,
+              "Y": 1.0000006,
+              "Z": 8.731149e-11
+            },
+            "FeatureId": -529
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -17
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.24636538,
+              "Y": -1.6878998,
+              "Z": -0.2604078
+            },
+            "Depth": 0.014430584,
+            "Normal": {
+              "X": 2.3371472e-08,
+              "Y": 1.0000006,
+              "Z": 8.731149e-11
+            },
+            "FeatureId": -513
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -1
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.27366602,
+              "Y": -1.6878998,
+              "Z": 0.25954518
+            },
+            "Depth": 0.010387704,
+            "Normal": {
+              "X": 2.3371472e-08,
+              "Y": 1.0000006,
+              "Z": 8.731149e-11
+            },
+            "FeatureId": -533
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -21
+        }
+      ],
+      "predictions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "selected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Contacts": 4,
+      "MaximumDepth": 0.014562103
+    },
+    {
+      "mode": "canonical",
+      "n": 601,
+      "target": 10016666,
+      "motion": {
+        "PositionO": {
+          "X": 0.013848378340555353,
+          "Y": -0.012504572615136765,
+          "Z": 0.00015397123285653923,
+          "LengthSquared": 0.0003481656260909383,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.006818022737291954,
+          "Y": -0.0013852623330202305,
+          "Z": -0.008154635236132012,
+          "LengthSquared": 0.00011490246161188051,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": -3.5888617404776773e-07,
+          "Y": -6.474088231160342e-05,
+          "Z": 0.704200610908527,
+          "W": 0.7100010531010126,
+          "IsFinite": true,
+          "LengthSquared": 1.0000000000000002
+        },
+        "AngularVelocityBody": {
+          "X": -4.0002610193962986e-05,
+          "Y": 0.004831785016931952,
+          "Z": -0.004039327529712449,
+          "LengthSquared": 3.966391355096331e-05,
+          "IsFinite": true
+        }
+      },
+      "minimumHeight": -0.014603723232924137,
+      "speed": 0.010719256579254016,
+      "angular": 0.006297929306602552,
+      "drift": 0.00017714927490661958,
+      "pass": false,
+      "bodyPose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 4.5524946e-05,
+          "Y": -4.6032488e-05,
+          "Z": -0.004101532,
+          "W": 0.9999916
+        },
+        "Position": {
+          "X": 0.013851362,
+          "Y": 1.6878592,
+          "Z": 0.00015400449
+        }
+      },
+      "bodyVelocity": {
+        "Linear": {
+          "X": 0.006819492,
+          "Y": -0.0013852742,
+          "Z": -0.008156393
+        },
+        "Angular": {
+          "X": -0.004831577,
+          "Y": 1.1641532e-10,
+          "Z": -0.004039774
+        }
+      },
+      "body": 0,
+      "constraints": 1,
+      "raw": [
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.24613386,
+              "Y": -1.6878824,
+              "Z": 0.2597313
+            },
+            "Depth": 0.014584912,
+            "Normal": {
+              "X": 1.5823893e-08,
+              "Y": 1.0000002,
+              "Z": 4.3655746e-11
+            },
+            "FeatureId": -517
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.2738009,
+              "Y": -1.6878824,
+              "Z": -0.26031604
+            },
+            "Depth": 0.010265453,
+            "Normal": {
+              "X": 1.5823893e-08,
+              "Y": 1.0000002,
+              "Z": 4.3655746e-11
+            },
+            "FeatureId": -529
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -17
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.2461819,
+              "Y": -1.6878824,
+              "Z": -0.2602687
+            },
+            "Depth": 0.014495887,
+            "Normal": {
+              "X": 1.5823893e-08,
+              "Y": 1.0000002,
+              "Z": 4.3655746e-11
+            },
+            "FeatureId": -513
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -1
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.27384895,
+              "Y": -1.6878824,
+              "Z": 0.25968394
+            },
+            "Depth": 0.010354477,
+            "Normal": {
+              "X": 1.5823893e-08,
+              "Y": 1.0000002,
+              "Z": 4.3655746e-11
+            },
+            "FeatureId": -533
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -21
+        }
+      ],
+      "predictions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "selected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Contacts": 4,
+      "MaximumDepth": 0.014584912
+    },
+    {
+      "mode": "canonical",
+      "n": 1200,
+      "target": 20000000,
+      "motion": {
+        "PositionO": {
+          "X": -0.005514223376111688,
+          "Y": -0.012993577971503106,
+          "Z": 0.00475202257594932,
+          "LengthSquared": 0.00022182144650551936,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.13680320220602227,
+          "Y": -0.0018795684388216859,
+          "Z": -0.011012865703827182,
+          "LengthSquared": 0.018839932122348562,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 0.0007979676471914103,
+          "Y": -0.0011924810650682542,
+          "Z": 0.7082623223065352,
+          "W": 0.7059478904547397,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": -0.0002068077434545408,
+          "Y": 0.006575534975447907,
+          "Z": -0.08108537076623575,
+          "LengthSquared": 0.00661811778195401,
+          "IsFinite": true
+        }
+      },
+      "minimumHeight": -0.014560651361285926,
+      "speed": 0.13725863223254325,
+      "angular": 0.08135181486576688,
+      "drift": 0.019759394766128875,
+      "pass": false,
+      "bodyPose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 0.0014074598,
+          "Y": -0.00027896313,
+          "Z": 0.0016365505,
+          "W": 0.9999977
+        },
+        "Position": {
+          "X": -0.0055154143,
+          "Y": 1.6873702,
+          "Z": 0.004753046
+        }
+      },
+      "bodyVelocity": {
+        "Linear": {
+          "X": 0.1368327,
+          "Y": -0.0018794652,
+          "Z": -0.011015241
+        },
+        "Angular": {
+          "X": -0.0065299557,
+          "Y": -6.9849193e-10,
+          "Z": -0.08108932
+        }
+      },
+      "body": 0,
+      "constraints": 1,
+      "raw": [
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.25198948,
+              "Y": -1.6874015,
+              "Z": -0.26511508
+            },
+            "Depth": 0.013378547,
+            "Normal": {
+              "X": 1.709816e-08,
+              "Y": 1.0000005,
+              "Z": 9.313226e-10
+            },
+            "FeatureId": -529
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -17
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.26771933,
+              "Y": -1.6874015,
+              "Z": 0.25517532
+            },
+            "Depth": 0.012495281,
+            "Normal": {
+              "X": 1.709816e-08,
+              "Y": 1.0000005,
+              "Z": 9.313226e-10
+            },
+            "FeatureId": -517
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -5
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": -0.25227517,
+              "Y": -1.6874015,
+              "Z": 0.25488257
+            },
+            "Depth": 0.014899757,
+            "Normal": {
+              "X": 1.709816e-08,
+              "Y": 1.0000005,
+              "Z": 9.313226e-10
+            },
+            "FeatureId": -533
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -21
+        },
+        {
+          "Contact": {
+            "Offset": {
+              "X": 0.268005,
+              "Y": -1.6874015,
+              "Z": -0.26482233
+            },
+            "Depth": 0.010974071,
+            "Normal": {
+              "X": 1.709816e-08,
+              "Y": 1.0000005,
+              "Z": 9.313226e-10
+            },
+            "FeatureId": -513
+          },
+          "ChildA": 2,
+          "ChildB": 0,
+          "RawFeature": -1
+        }
+      ],
+      "predictions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "selected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Contacts": 4,
+      "MaximumDepth": 0.014899757
+    }
+  ],
+  "solverFacing": [
+    {
+      "mode": "canonical",
+      "n": 1,
+      "handle": 0,
+      "description": {
+        "Contact0": {
+          "OffsetA": {
+            "X": -0.26,
+            "Y": -1.7003636,
+            "Z": -0.26
+          },
+          "PenetrationDepth": 2.0980829e-07
+        },
+        "Contact1": {
+          "OffsetA": {
+            "X": 0.26000005,
+            "Y": -1.7003636,
+            "Z": 0.26
+          },
+          "PenetrationDepth": 1.4781948e-07
+        },
+        "Contact2": {
+          "OffsetA": {
+            "X": -0.26,
+            "Y": -1.7003636,
+            "Z": 0.26
+          },
+          "PenetrationDepth": 2.0980829e-07
+        },
+        "Contact3": {
+          "OffsetA": {
+            "X": 0.26000005,
+            "Y": -1.7003636,
+            "Z": -0.26
+          },
+          "PenetrationDepth": 1.4781948e-07
+        },
+        "Normal": {
+          "X": 0,
+          "Y": 1.0000002,
+          "Z": 0
+        },
+        "FrictionCoefficient": 0.5,
+        "SpringSettings": {
+          "Frequency": 30,
+          "DampingRatio": 1,
+          "AngularFrequency": 188.49556,
+          "TwiceDampingRatio": 2
+        },
+        "MaximumRecoveryVelocity": 2
+      },
+      "impulses": [
+        13.118744,
+        -2262.7053,
+        10062.067,
+        17505.355,
+        9954.684,
+        17312.959,
+        -3.9096903e-07
+      ]
+    },
+    {
+      "mode": "canonical",
+      "n": 2,
+      "handle": 0,
+      "description": {
+        "Contact0": {
+          "OffsetA": {
+            "X": -0.25998127,
+            "Y": -1.698096,
+            "Z": -0.26000383
+          },
+          "PenetrationDepth": 0.0022700718
+        },
+        "Contact1": {
+          "OffsetA": {
+            "X": 0.26001877,
+            "Y": -1.698096,
+            "Z": 0.25999615
+          },
+          "PenetrationDepth": 0.0022654831
+        },
+        "Contact2": {
+          "OffsetA": {
+            "X": -0.25998127,
+            "Y": -1.698096,
+            "Z": 0.25999615
+          },
+          "PenetrationDepth": 0.002271248
+        },
+        "Contact3": {
+          "OffsetA": {
+            "X": 0.26001877,
+            "Y": -1.698096,
+            "Z": -0.26000383
+          },
+          "PenetrationDepth": 0.0022643069
+        },
+        "Normal": {
+          "X": -2.80299e-17,
+          "Y": 1.0000002,
+          "Z": 2.2737368e-13
+        },
+        "FrictionCoefficient": 0.5,
+        "SpringSettings": {
+          "Frequency": 30,
+          "DampingRatio": 1,
+          "AngularFrequency": 188.49556,
+          "TwiceDampingRatio": 2
+        },
+        "MaximumRecoveryVelocity": 2
+      },
+      "impulses": [
+        27.289663,
+        -5561.822,
+        28597.406,
+        46849.02,
+        28351.826,
+        46423.746,
+        -0.021896906
+      ]
+    },
+    {
+      "mode": "canonical",
+      "n": 4,
+      "handle": 0,
+      "description": {
+        "Contact0": {
+          "OffsetA": {
+            "X": -0.2597799,
+            "Y": -1.6900544,
+            "Z": -0.2600227
+          },
+          "PenetrationDepth": 0.010339616
+        },
+        "Contact1": {
+          "OffsetA": {
+            "X": 0.26022014,
+            "Y": -1.6900544,
+            "Z": 0.25997728
+          },
+          "PenetrationDepth": 0.010279175
+        },
+        "Contact2": {
+          "OffsetA": {
+            "X": -0.2597799,
+            "Y": -1.6900544,
+            "Z": 0.25997728
+          },
+          "PenetrationDepth": 0.010346557
+        },
+        "Contact3": {
+          "OffsetA": {
+            "X": 0.26022014,
+            "Y": -1.6900544,
+            "Z": -0.2600227
+          },
+          "PenetrationDepth": 0.010272234
+        },
+        "Normal": {
+          "X": -1.3215363e-14,
+          "Y": 1.0000002,
+          "Z": 1.8189894e-12
+        },
+        "FrictionCoefficient": 0.5,
+        "SpringSettings": {
+          "Frequency": 30,
+          "DampingRatio": 1,
+          "AngularFrequency": 188.49556,
+          "TwiceDampingRatio": 2
+        },
+        "MaximumRecoveryVelocity": 2
+      },
+      "impulses": [
+        41.8636,
+        -10616.645,
+        75782.24,
+        110291.23,
+        75416.74,
+        109621.93,
+        -0.25034496
+      ]
+    },
+    {
+      "mode": "canonical",
+      "n": 35,
+      "handle": 0,
+      "description": {
+        "Contact0": {
+          "OffsetA": {
+            "X": -0.2553261,
+            "Y": -1.6871731,
+            "Z": -0.26145077
+          },
+          "PenetrationDepth": 0.013676479
+        },
+        "Contact1": {
+          "OffsetA": {
+            "X": 0.26467204,
+            "Y": -1.6871731,
+            "Z": 0.25855026
+          },
+          "PenetrationDepth": 0.012690873
+        },
+        "Contact2": {
+          "OffsetA": {
+            "X": -0.2553261,
+            "Y": -1.6871731,
+            "Z": 0.25854903
+          },
+          "PenetrationDepth": 0.014119993
+        },
+        "Contact3": {
+          "OffsetA": {
+            "X": 0.26467204,
+            "Y": -1.6871731,
+            "Z": -0.26144955
+          },
+          "PenetrationDepth": 0.012247359
+        },
+        "Normal": {
+          "X": 9.133259e-10,
+          "Y": 1.0000005,
+          "Z": 1.7462298e-10
+        },
+        "FrictionCoefficient": 0.5,
+        "SpringSettings": {
+          "Frequency": 30,
+          "DampingRatio": 1,
+          "AngularFrequency": 188.49556,
+          "TwiceDampingRatio": 2
+        },
+        "MaximumRecoveryVelocity": 2
+      },
+      "impulses": [
+        880.37994,
+        2438.2534,
+        89418.445,
+        82231.81,
+        93449.414,
+        78631.85,
+        -0.5775406
+      ]
+    },
+    {
+      "mode": "canonical",
+      "n": 600,
+      "handle": 0,
+      "description": {
+        "Contact0": {
+          "OffsetA": {
+            "X": 0.24631734,
+            "Y": -1.6878998,
+            "Z": 0.25959218
+          },
+          "PenetrationDepth": 0.014562103
+        },
+        "Contact1": {
+          "OffsetA": {
+            "X": -0.27361798,
+            "Y": -1.6878998,
+            "Z": -0.2604548
+          },
+          "PenetrationDepth": 0.010256184
+        },
+        "Contact2": {
+          "OffsetA": {
+            "X": 0.24636538,
+            "Y": -1.6878998,
+            "Z": -0.2604078
+          },
+          "PenetrationDepth": 0.014430584
+        },
+        "Contact3": {
+          "OffsetA": {
+            "X": -0.27366602,
+            "Y": -1.6878998,
+            "Z": 0.25954518
+          },
+          "PenetrationDepth": 0.010387704
+        },
+        "Normal": {
+          "X": 2.3371472e-08,
+          "Y": 1.0000006,
+          "Z": 8.731149e-11
+        },
+        "FrictionCoefficient": 0.5,
+        "SpringSettings": {
+          "Frequency": 30,
+          "DampingRatio": 1,
+          "AngularFrequency": 188.49556,
+          "TwiceDampingRatio": 2
+        },
+        "MaximumRecoveryVelocity": 2
+      },
+      "impulses": [
+        322.60193,
+        -8146.9653,
+        100211.805,
+        63819.164,
+        99117.586,
+        65357.62,
+        0.8884531
+      ]
+    },
+    {
+      "mode": "canonical",
+      "n": 601,
+      "handle": 0,
+      "description": {
+        "Contact0": {
+          "OffsetA": {
+            "X": 0.24613386,
+            "Y": -1.6878824,
+            "Z": 0.2597313
+          },
+          "PenetrationDepth": 0.014584912
+        },
+        "Contact1": {
+          "OffsetA": {
+            "X": -0.2738009,
+            "Y": -1.6878824,
+            "Z": -0.26031604
+          },
+          "PenetrationDepth": 0.010265453
+        },
+        "Contact2": {
+          "OffsetA": {
+            "X": 0.2461819,
+            "Y": -1.6878824,
+            "Z": -0.2602687
+          },
+          "PenetrationDepth": 0.014495887
+        },
+        "Contact3": {
+          "OffsetA": {
+            "X": -0.27384895,
+            "Y": -1.6878824,
+            "Z": 0.25968394
+          },
+          "PenetrationDepth": 0.010354477
+        },
+        "Normal": {
+          "X": 1.5823893e-08,
+          "Y": 1.0000002,
+          "Z": 4.3655746e-11
+        },
+        "FrictionCoefficient": 0.5,
+        "SpringSettings": {
+          "Frequency": 30,
+          "DampingRatio": 1,
+          "AngularFrequency": 188.49556,
+          "TwiceDampingRatio": 2
+        },
+        "MaximumRecoveryVelocity": 2
+      },
+      "impulses": [
+        237.15962,
+        -8260.475,
+        100352.4,
+        63831.215,
+        99650.57,
+        65031.934,
+        0.8643101
+      ]
+    },
+    {
+      "mode": "canonical",
+      "n": 1200,
+      "handle": 0,
+      "description": {
+        "Contact0": {
+          "OffsetA": {
+            "X": -0.25198948,
+            "Y": -1.6874015,
+            "Z": -0.26511508
+          },
+          "PenetrationDepth": 0.013378547
+        },
+        "Contact1": {
+          "OffsetA": {
+            "X": 0.26771933,
+            "Y": -1.6874015,
+            "Z": 0.25517532
+          },
+          "PenetrationDepth": 0.012495281
+        },
+        "Contact2": {
+          "OffsetA": {
+            "X": -0.25227517,
+            "Y": -1.6874015,
+            "Z": 0.25488257
+          },
+          "PenetrationDepth": 0.014899757
+        },
+        "Contact3": {
+          "OffsetA": {
+            "X": 0.268005,
+            "Y": -1.6874015,
+            "Z": -0.26482233
+          },
+          "PenetrationDepth": 0.010974071
+        },
+        "Normal": {
+          "X": 1.709816e-08,
+          "Y": 1.0000005,
+          "Z": 9.313226e-10
+        },
+        "FrictionCoefficient": 0.5,
+        "SpringSettings": {
+          "Frequency": 30,
+          "DampingRatio": 1,
+          "AngularFrequency": 188.49556,
+          "TwiceDampingRatio": 2
+        },
+        "MaximumRecoveryVelocity": 2
+      },
+      "impulses": [
+        3160.432,
+        5518.57,
+        87151.82,
+        77677.19,
+        101014.055,
+        64679.85,
+        2.571409
+      ]
+    }
+  ],
+  "result": {
+    "mode": "canonical",
+    "peak": 0.01904372859831338,
+    "settledHeight": 0.017571673420194722,
+    "speed": 0.13725863223254325,
+    "angular": 0.08135181486576688,
+    "drift": 0.046097076867651327,
+    "compliant": 0,
+    "firstCompliant": 0,
+    "regressions": 0,
+    "final": {
+      "PositionO": {
+        "X": -0.005514223376111688,
+        "Y": -0.012993577971503106,
+        "Z": 0.00475202257594932,
+        "LengthSquared": 0.00022182144650551936,
+        "IsFinite": true
+      },
+      "VelocityO": {
+        "X": 0.13680320220602227,
+        "Y": -0.0018795684388216859,
+        "Z": -0.011012865703827182,
+        "LengthSquared": 0.018839932122348562,
+        "IsFinite": true
+      },
+      "BodyToWorld": {
+        "X": 0.0007979676471914103,
+        "Y": -0.0011924810650682542,
+        "Z": 0.7082623223065352,
+        "W": 0.7059478904547397,
+        "IsFinite": true,
+        "LengthSquared": 1
+      },
+      "AngularVelocityBody": {
+        "X": -0.0002068077434545408,
+        "Y": 0.006575534975447907,
+        "Z": -0.08108537076623575,
+        "LengthSquared": 0.00661811778195401,
+        "IsFinite": true
+      }
+    },
+    "height": -0.014560651361285926,
+    "nativePose": {
+      "Orientation": {
+        "IsIdentity": false,
+        "X": 0.0014074598,
+        "Y": -0.00027896313,
+        "Z": 0.0016365505,
+        "W": 0.9999977
+      },
+      "Position": {
+        "X": -0.0055154143,
+        "Y": 1.6873702,
+        "Z": 0.004753046
+      }
+    },
+    "nativeVelocity": {
+      "Linear": {
+        "X": 0.1368327,
+        "Y": -0.0018794652,
+        "Z": -0.011015241
+      },
+      "Angular": {
+        "X": -0.0065299557,
+        "Y": -6.9849193e-10,
+        "Z": -0.08108932
+      }
+    },
+    "worldIdentity": {
+      "Item1": 1,
+      "Item2": 1200,
+      "Item3": 0,
+      "Item4": 0,
+      "Item5": false,
+      "Item6": false
+    },
+    "qualification": "DIAGNOSTIC ONLY; count uses all inherited support predicates; raw modes do not publish"
+  },
+  "exactNativeReplay": true,
+  "accounting": {
+    "publications": 1200,
+    "ticks": 20000000,
+    "stateRevision": 1200,
+    "history": 1200,
+    "timelineRevision": 0,
+    "debt": 0,
+    "engine": "OFF",
+    "stores": "UNCHANGED",
+    "mass": "UNCHANGED"
+  },
+  "note": "Diagnostic reconstruction of unchanged production. Selected scratch array is not a convex-manifold contact index map. SolverFacing descriptions are authoritative."
+}

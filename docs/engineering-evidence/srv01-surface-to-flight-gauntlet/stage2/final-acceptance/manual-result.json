@@ -1,0 +1,36 @@
+{
+  "observed": "2026-09-17T18:24:35.5906285-04:00",
+  "manualStatus": "PASS - Project Control reported",
+  "userReport": "I think it PASSED, when I hold title bar the running numbers pause until I release it and it completed as normal.",
+  "source": "Project Control reply to Stage2 manual checklist",
+  "route": "srv01-powered-support",
+  "instrumentation": "NONE",
+  "exitCode": 0,
+  "log": {
+    "path": "E:\\NovaCore\\build\\srv01-stage2-manual\\manual-1.log",
+    "bytes": 18163,
+    "sha256": "FC32F5EC86180FB142F8897CE708B63938D72E2196AE7040B03FF67BB8E1AE4F"
+  },
+  "records": [
+    "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+    "SRV01_COLD_PREPARATION ms=197.4616 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+    "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=28.4375 oxidizer_kg=42.65625 mass_kg=701.09375 com_x=1.0475061288165812 debt=143994",
+    "STOCK_ASSEMBLY_FRAME samples=2357 median_ms=5.5557 p95_ms=5.7081 p99_ms=5.9278 max_ms=3581.5295 measurement=display_callback_interval_including_present_host_scheduling",
+    "SRV01_LIVE_SERVICE samples=2357 median_ms=0.0038 p95_ms=0.0852 p99_ms=0.1797 max_ms=55.4152 includes=host_admission_bounded_service_copied_observation"
+  ],
+  "presentation": [
+    "[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97",
+    "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=6071008 extent=960x540 physics_bytes=0",
+    "[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97",
+    "[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=6071008 extent=960x540 physics_bytes=0",
+    "[native] Average frame time: 6.452 ms (8999 frames)",
+    "[native] Frame pacing: p50=5.530 ms; p95=5.830 ms; p99=6.028 ms; max=61.446 ms; samples=8192"
+  ],
+  "interpretation": [
+    "Title-bar pause/recovery is user-observed; no more precise modal timestamps were instrumented.",
+    "Intentional interaction means this is not another timing population or explanation of historical spikes.",
+    "Native pacing buffer holds last8192 of8999 frames; do not equate its max to a complete manual-run maximum.",
+    "No per-item visual detail beyond the user overall report is invented.",
+    "failed=False plus completed=True; failure=Invalid is the inactive default enum, not a reported failure."
+  ]
+}

@@ -15,6 +15,29 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--assembly-development-cheap", StringComparer.Ordinal)) { AssemblyDevelopmentPropulsionTests.Cheap(); return; }
+if (args.Contains("--assembly-development-validation", StringComparer.Ordinal)) { AssemblyDevelopmentPropulsionTests.Cheap(); AssemblyDevelopmentPropulsionTests.Determinism(); AssemblyDevelopmentPropulsionTests.Allocation(); return; }
+if (args.Contains("--assembly-development-performance", StringComparer.Ordinal)) { AssemblyDevelopmentPropulsionTests.Performance(); return; }
+if (args.Contains("--assembly-departure-cheap", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.DepartureCheap(); return; }
+if (args.Contains("--assembly-departure-storage", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.DepartureStorage(); return; }
+if (args.Contains("--assembly-departure-performance", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.DeparturePerformance(); return; }
+if (args.Contains("--assembly-departure-validation", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.DepartureCheap(); AssemblyContactAdmissionTests.DepartureFailures(); AssemblyContactAdmissionTests.DepartureSchedules(); AssemblyContactAdmissionTests.DepartureAllocation(); AssemblyContactAdmissionTests.DepartureProofs(); return; }
+if (args.Contains("--assembly-powered-contact-cheap", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.PoweredCheap(); return; }
+if (args.Contains("--assembly-powered-contact-physical", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.PoweredPhysical(); return; }
+if (args.Contains("--assembly-powered-contact-failures", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Authority(true); AssemblyContactAdmissionTests.AdditionalFailures(true); return; }
+if (args.Contains("--assembly-powered-contact-schedules", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.PoweredSchedules(); return; }
+if (args.Contains("--assembly-powered-contact-allocation", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Allocation(true); return; }
+if (args.Contains("--assembly-powered-contact-storage", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Storage(true); return; }
+if (args.Contains("--assembly-powered-contact-performance", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Performance(true); return; }
+if (args.Contains("--assembly-contact-geometry", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Geometry(); return; }
+if (args.Contains("--assembly-contact-cheap", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Cheap(); return; }
+if (args.Contains("--assembly-contact-authority", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Authority(); return; }
+if (args.Contains("--assembly-contact-failures", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.AdditionalFailures(); return; }
+if (args.Contains("--assembly-contact-physical", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Physical(); return; }
+if (args.Contains("--assembly-contact-schedules", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Schedules(); return; }
+if (args.Contains("--assembly-contact-allocation", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Allocation(); return; }
+if (args.Contains("--assembly-contact-storage", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Storage(); return; }
+if (args.Contains("--assembly-contact-performance", StringComparer.Ordinal)) { AssemblyContactAdmissionTests.Performance(); return; }
 if (args.Length==2&&args[0]=="--author-srv01") { Srv01IntegrationTests.Author(args[1]); return; }
 if (args.Contains("--srv01-integration",StringComparer.Ordinal)) { Srv01IntegrationTests.Run(); return; }
 if (args.Contains("--assembly-production", StringComparer.Ordinal)) { AssemblyProductionTests.Run(); return; }
@@ -118,6 +141,10 @@ if (args.Contains("--orientation-only", StringComparer.Ordinal))
 
 var tests = new (string Name, Action Test)[]
 {
+    ("Canonical assembly contact departure", () => { AssemblyContactAdmissionTests.DepartureCheap(); AssemblyContactAdmissionTests.DepartureFailures(); AssemblyContactAdmissionTests.DepartureSchedules(); AssemblyContactAdmissionTests.DepartureAllocation(); AssemblyContactAdmissionTests.DepartureProofs(); }),
+    ("Provisional finite development propulsion", () => { AssemblyDevelopmentPropulsionTests.Cheap(); AssemblyDevelopmentPropulsionTests.Determinism(); AssemblyDevelopmentPropulsionTests.Allocation(); }),
+    ("Canonical assembly supported contact", () => { AssemblyContactAdmissionTests.Cheap(); AssemblyContactAdmissionTests.Authority(); AssemblyContactAdmissionTests.AdditionalFailures(); AssemblyContactAdmissionTests.Physical(); AssemblyContactAdmissionTests.Schedules(); AssemblyContactAdmissionTests.Allocation(); }),
+    ("Canonical assembly powered supported contact", () => { AssemblyContactAdmissionTests.PoweredCheap(); AssemblyContactAdmissionTests.Authority(true); AssemblyContactAdmissionTests.AdditionalFailures(true); AssemblyContactAdmissionTests.PoweredPhysical(); AssemblyContactAdmissionTests.PoweredSchedules(); AssemblyContactAdmissionTests.Allocation(true); }),
     ("Stock assembly production path", AssemblyProductionTests.Run),
     ("SRV01 sixteen-jet integration", Srv01IntegrationTests.Run),
     ("Segmented powered free flight", ()=>{PoweredFreeFlightTests.Physics();PoweredFreeFlightTests.Authority();}),

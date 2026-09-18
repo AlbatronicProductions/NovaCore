@@ -14,6 +14,8 @@ public readonly record struct MeshHandle(uint Value)
     public static MeshHandle FloridaLaunchPad { get; } = new(3);
     /// <summary>Unit Florida footing: X/Y=-0.5..0.5, Z=-1..0; scaled from the canonical footprint survey.</summary>
     public static MeshHandle FloridaLaunchFoundation { get; } = new(4);
+    /// <summary>Centred unit box; the explicit Florida slab support owner supplies its dimensions and pose.</summary>
+    public static MeshHandle FloridaSupportSlab { get; } = new(7);
     public bool IsValid => Value != 0;
 }
 

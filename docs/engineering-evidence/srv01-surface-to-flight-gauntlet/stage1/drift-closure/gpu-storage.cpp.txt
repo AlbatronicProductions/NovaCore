@@ -1,0 +1,17 @@
+#include <vulkan/vulkan.h>
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+int main(int argc,char**argv){
+ VkInstanceCreateInfo ic{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};VkInstance in{};
+ if(vkCreateInstance(&ic,nullptr,&in))return 1;
+ uint32_t n=0;vkEnumeratePhysicalDevices(in,&n,nullptr);std::vector<VkPhysicalDevice> ps(n);vkEnumeratePhysicalDevices(in,&n,ps.data());
+ for(auto p:ps){VkPhysicalDeviceProperties prop{};vkGetPhysicalDeviceProperties(p,&prop);
+  uint32_t qn=0;vkGetPhysicalDeviceQueueFamilyProperties(p,&qn,nullptr);std::vector<VkQueueFamilyProperties> qs(qn);vkGetPhysicalDeviceQueueFamilyProperties(p,&qn,qs.data());uint32_t qi=0;while(qi<qn&&!(qs[qi].queueFlags&VK_QUEUE_GRAPHICS_BIT))++qi;if(qi==qn)continue;
+  float priority=1;VkDeviceQueueCreateInfo qc{VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO};qc.queueFamilyIndex=qi;qc.queueCount=1;qc.pQueuePriorities=&priority;
+  VkDeviceCreateInfo dc{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};dc.queueCreateInfoCount=1;dc.pQueueCreateInfos=&qc;VkDevice d{};if(vkCreateDevice(p,&dc,nullptr,&d))return 2;
+  unsigned long long requested=0,allocated=0;
+  for(int i=1;i<argc;i++){VkBufferCreateInfo bc{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};bool storage=argv[i][0]=='s';bc.size=strtoull(argv[i]+(storage?1:0),nullptr,10);bc.usage=storage?VK_BUFFER_USAGE_STORAGE_BUFFER_BIT:(i%2?VK_BUFFER_USAGE_VERTEX_BUFFER_BIT:VK_BUFFER_USAGE_INDEX_BUFFER_BIT);bc.sharingMode=VK_SHARING_MODE_EXCLUSIVE;VkBuffer b{};if(vkCreateBuffer(d,&bc,nullptr,&b))return 3;VkMemoryRequirements r{};vkGetBufferMemoryRequirements(d,b,&r);requested+=bc.size;allocated+=r.size;vkDestroyBuffer(d,b,nullptr);}
+  printf("GPU_BUFFER_REQUIREMENTS device=%s buffers=%d payload=%llu required=%llu driverInternalExcluded=true\n",prop.deviceName,argc-1,requested,allocated);vkDestroyDevice(d,nullptr);
+ }vkDestroyInstance(in,nullptr);return 0;
+}

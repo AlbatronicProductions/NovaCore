@@ -1,4 +1,5 @@
 using NovaCore.Core;
+using NovaCore.Simulation.Spacecraft.Assemblies;
 using NovaCore.Simulation.Spacecraft.Rotation;
 using NovaCore.Simulation.Spacecraft.Translation;
 using NovaCore.Simulation.Time;
@@ -25,19 +26,23 @@ internal sealed class LocalContactConfiguration
     internal DoubleQuaternion LocalToRoot { get; }
     internal Double3 BoxDimensions { get; }
     internal EngineeringContactArticle? Article { get; }
+    internal AssemblyContactProfile? AssemblyProfile { get; private init; }
     internal bool ResourceAwareNumericalFixture { get; private init; }
+    internal AssemblyFloridaSite? Site {get; private init;}
     // The new article uses the original 2 m thick slab. Legacy box fixtures retain their exact geometry.
-    internal double SlabHalfThickness => Article is null && !ResourceAwareNumericalFixture ? BoxDimensions.Y : 1;
+    internal double SlabHalfThickness => Site?.Slab is {} slab ? slab.Dimensions.Y*.5 : Article is null && AssemblyProfile is null && !ResourceAwareNumericalFixture ? BoxDimensions.Y : 1;
+    internal Double3 SupportDimensions => Site?.Slab?.Dimensions ?? new(2*PlaneHalfExtent,2*SlabHalfThickness,2*PlaneHalfExtent);
     internal double PlaneHalfExtent { get; }
     internal double ContactTolerance { get; }
     internal double MaximumCoordinate { get; }
-    internal double MaximumSpeed { get; }
-    internal double MaximumAngularSpeed { get; }
+    internal double MaximumSpeed { get; private init; }
+    internal double MaximumAngularSpeed { get; private init; }
     internal double Margin => 20 * ContactTolerance;
     // Speculative reach must cover the admitted surface speed over a whole exact step.
     // Margin alone is a geometric/depth cushion, not the motion horizon.
     internal double MaximumSpeculativeMargin => ResourceAwareNumericalFixture ? .01 : MaximumSpeed * (16667d / 1_000_000) + Margin;
-    internal double BoundingRadius => Article?.BoundingRadius ?? Math.Sqrt(BoxDimensions.LengthSquared) * .5;
+    private double? assemblyRadius;
+    internal double BoundingRadius => assemblyRadius ?? AssemblyProfile?.BoundingRadius ?? Article?.BoundingRadius ?? Math.Sqrt(BoxDimensions.LengthSquared) * .5;
 
     private LocalContactConfiguration(long revision, ReferenceFrameId root, Double3 origin, Double3 velocity,
         DoubleQuaternion rotation, Double3 dimensions, double planeHalfExtent, double tolerance, double coordinate,
@@ -56,6 +61,24 @@ internal sealed class LocalContactConfiguration
         Double3 velocity, DoubleQuaternion rotation, Double3 dimensions, double planeHalfExtent,
         out LocalContactConfiguration? configuration)
         => TryCreateCore(revision, root, origin, velocity, rotation, dimensions, planeHalfExtent, null, out configuration);
+
+    internal static LocalContactStatus TryCreateAssembly(AssemblyLaunch launch, out LocalContactConfiguration? configuration)
+    {
+        configuration=null;
+        if(launch.Consumer!=AssemblyPhysicalConsumer.SupportedContact||launch.ContactProfile is not {} profile)
+            return LocalContactStatus.InvalidConfiguration;
+        var tolerance=profile.SmallestFeature/1000;
+        var bound=Math.Pow(2,Math.Floor(Math.Log2(tolerance/8))+23);
+        var speed=profile.SmallestFeature*.5/(16667d/1_000_000);
+        var origin=new Double3(0,AssemblyContactProfile.SupportPlaneAtOrigin,0);
+        var radius=launch.PoweredSupport?Math.Max(profile.BoundingRadius,profile.RadiusAbout(launch.Design.ObserveMass(launch.Design.DryMass).Com)):profile.BoundingRadius;
+        if(!RootSpacingFits(origin,tolerance)||radius*2>=8)return LocalContactStatus.InvalidConfiguration;
+        foreach(var child in profile.Children)
+            if(!FloatGeometryFits(child.Dimensions,8,tolerance))return LocalContactStatus.InvalidConfiguration;
+        configuration=new(1,launch.Spacecraft.CarrierFrame,origin,launch.Departure?.FrameVelocity??launch.Initial.Motion.VelocityO,DoubleQuaternion.Identity,
+            new(1,1,1),8,tolerance,bound,null){AssemblyProfile=profile,assemblyRadius=radius,MaximumSpeed=speed,MaximumAngularSpeed=speed/radius,Site=launch.Site};
+        return LocalContactStatus.Success;
+    }
 
     internal static LocalContactStatus TryCreateArticle(long revision, ReferenceFrameId root, Double3 origin,
         Double3 velocity, DoubleQuaternion rotation, EngineeringContactArticle? article, double planeHalfExtent,
@@ -139,11 +162,14 @@ internal sealed class LocalContactSource
     private readonly SimulationTransactionEngine engine;
     private readonly SpacecraftTranslationState linear;
     private readonly SpacecraftRigidBodyRotationState angular;
+    internal AssemblyFlightAuthority? AssemblyAuthority { get; private init; }
+    internal ContinuationClockState AssemblyClock {get;private init;}
+    private Double3 assemblyForce;
     internal SpacecraftMotion Motion { get; }
     internal LocalContactConfiguration Configuration { get; }
     internal SimulationInstant End { get; }
     internal TimelineRevision TimelineRevision { get; }
-    internal Double3 ForceRoot => linear.ConstantForceRoot;
+    internal Double3 ForceRoot => AssemblyAuthority is null ? linear.ConstantForceRoot : assemblyForce;
 
     private LocalContactSource(SimulationTransactionEngine engine, LocalContactConfiguration configuration,
         SpacecraftTranslationState linear, SpacecraftRigidBodyRotationState angular, SpacecraftMotion motion,
@@ -181,6 +207,12 @@ internal sealed class LocalContactSource
         if (!ReferenceEquals(current, engine)) return LocalContactStatus.ForeignEngine;
         if (!current.IsContactProofOwnerThread) return LocalContactStatus.WrongThread;
         if (!ReferenceEquals(configuration, Configuration)) return LocalContactStatus.ConfigurationMismatch;
+        if(AssemblyAuthority is {} assembly)
+        {
+            if(target<Motion.Time||target>End)return LocalContactStatus.InvalidInterval;
+            if(current.CheckAssemblyContactSource(assembly)!=AssemblyFlightStatus.Ready)return LocalContactStatus.ChangedAuthority;
+            return current.HasContactProofBoundaryThrough(target)?LocalContactStatus.PendingEvent:LocalContactStatus.Success;
+        }
         if (current.ContactProofTimelineRevision != TimelineRevision) return LocalContactStatus.TimelineConflict;
         var view = current.State;
         if (view.Revision != Motion.Revision || current.ContactProofCurrentTime != Motion.Time ||
@@ -225,5 +257,17 @@ internal sealed class LocalContactSource
         var ticks = (Int128)Motion.Time.Ticks + (Int128)step * SimulationInstant.TicksPerSecond / 60;
         if (ticks < long.MinValue || ticks > long.MaxValue || ticks > End.Ticks) return false;
         endpoint = new((long)ticks); return true;
+    }
+
+    internal static LocalContactSource CaptureAssembly(SimulationTransactionEngine engine,AssemblyFlightAuthority authority,LocalContactConfiguration configuration)
+    {
+        if(!engine.OwnsPersistentPublicationPhase||engine.CheckAssemblyContactSource(authority)!=AssemblyFlightStatus.Ready)
+            throw new InvalidOperationException("Assembly source requires prepared owner authority.");
+        var launch=authority.Launch;var state=launch.Initial;var mass=state.Mass;
+        var com=AssemblyContactProfile.ToCom(state.Motion,mass.Com);
+        var motion=new SpacecraftMotion(launch.Spacecraft.Id,state.Epoch,engine.State.Revision,launch.Spacecraft.CarrierFrame,
+            com.Position,com.Velocity,state.Motion.BodyToWorld,state.Motion.AngularVelocityBody,new(mass.Mass),new(mass.Inertia.A,mass.Inertia.E,mass.Inertia.I));
+        return new(engine,configuration,default,default,motion,engine.ContactProofTimelineRevision,launch.End)
+        {AssemblyAuthority=authority,AssemblyClock=engine.CaptureContinuationClock(),assemblyForce=new(0,-9.81*mass.Mass,0)};
     }
 }

@@ -1,0 +1,20 @@
+{
+  "scope": "Independent scalar rotation-matrix / binary32 projection, no solver, same1200COM schedule",
+  "uncompensated": [
+    6.066321747704139E-05,
+    6.0663217485384545E-05,
+    -2.0209316425184864E-11,
+    -2.4193784753379077E-08,
+    4.6969090509302314E-11
+  ],
+  "projectionResidue": [
+    1.0489839639006838E-07,
+    8.129581284759547E-07,
+    6.360145916872728E-12,
+    -1.0489839352700869E-07,
+    4.8068447876595255E-11
+  ],
+  "fullNativeWitnessPositionError": 6.127363303676248E-05,
+  "fullNativeWitnessVelocityError": 2.9066814022371545E-07,
+  "limit": 6.1E-05
+}

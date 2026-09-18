@@ -1,0 +1,53 @@
+[
+  {
+    "observations": [
+      "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+      "SRV01_COLD_PREPARATION ms=201.8133 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+      "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+      "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=126",
+      "STOCK_ASSEMBLY_FRAME samples=3585 median_ms=5.5534 p95_ms=5.7125 p99_ms=5.8215 max_ms=64.6243 measurement=display_callback_interval_including_present_host_scheduling",
+      "SRV01_LIVE_SERVICE samples=3585 median_ms=0.0042 p95_ms=0.0725 p99_ms=0.1167 max_ms=63.0101 includes=host_admission_bounded_service_copied_observation",
+      "[native] Frame pacing: p50=5.546 ms; p95=5.847 ms; p99=5.982 ms; max=64.414 ms; samples=4000",
+      "[native] Fence wait pacing: average=5.024 ms; p95=5.211 ms; max=7.047 ms; samples=4000",
+      "[native] CPU timings: update=5.204 ms; fence=5.024; inspection=0.029; hostCallback=0.149; validationUpload=0.002; record=0.054; submit=0.026; present=0.219",
+      "[native] GPU timing averages: total=0.090 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.030; preSurface=0.002; toneMap=0.017"
+    ],
+    "run": 1,
+    "sha256": "CBA78817025BC78E067EDBFFE6184D8180447B9C54A716CF5CD311EE19C4F267"
+  },
+  {
+    "observations": [
+      "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+      "SRV01_COLD_PREPARATION ms=181.3738 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+      "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+      "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=3735",
+      "STOCK_ASSEMBLY_FRAME samples=3588 median_ms=5.5554 p95_ms=5.7234 p99_ms=5.8169 max_ms=53.8809 measurement=display_callback_interval_including_present_host_scheduling",
+      "SRV01_LIVE_SERVICE samples=3588 median_ms=0.0041 p95_ms=0.0665 p99_ms=0.1197 max_ms=51.7013 includes=host_admission_bounded_service_copied_observation",
+      "[native] Frame pacing: p50=5.547 ms; p95=5.839 ms; p99=5.976 ms; max=53.295 ms; samples=4000",
+      "[native] Fence wait pacing: average=5.030 ms; p95=5.217 ms; max=5.694 ms; samples=4000",
+      "[native] CPU timings: update=5.205 ms; fence=5.030; inspection=0.029; hostCallback=0.144; validationUpload=0.002; record=0.053; submit=0.026; present=0.217",
+      "[native] GPU timing averages: total=0.089 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.031; preSurface=0.002; toneMap=0.017"
+    ],
+    "run": 2,
+    "sha256": "90C22982793EC6E62D8B23B952FCDA6F392D88CF255412126FA91579FCE3A6B5"
+  },
+  {
+    "observations": [
+      "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+      "SRV01_COLD_PREPARATION ms=181.3234 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+      "[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38",
+      "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=3050",
+      "STOCK_ASSEMBLY_FRAME samples=3588 median_ms=5.5541 p95_ms=5.7283 p99_ms=5.8261 max_ms=56.7202 measurement=display_callback_interval_including_present_host_scheduling",
+      "SRV01_LIVE_SERVICE samples=3588 median_ms=0.0043 p95_ms=0.0801 p99_ms=0.1338 max_ms=55.185 includes=host_admission_bounded_service_copied_observation",
+      "[native] Frame pacing: p50=5.548 ms; p95=5.842 ms; p99=5.977 ms; max=56.568 ms; samples=4000",
+      "[native] Fence wait pacing: average=5.017 ms; p95=5.207 ms; max=6.569 ms; samples=4000",
+      "[native] CPU timings: update=5.195 ms; fence=5.017; inspection=0.029; hostCallback=0.147; validationUpload=0.002; record=0.056; submit=0.026; present=0.221",
+      "[native] GPU timing averages: total=0.089 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.030; preSurface=0.002; toneMap=0.017"
+    ],
+    "run": 3,
+    "sha256": "2A998AA48CD21927949BBDA2DC5F58630C5024F40954DDAECE98E43DAB28622E"
+  }
+]

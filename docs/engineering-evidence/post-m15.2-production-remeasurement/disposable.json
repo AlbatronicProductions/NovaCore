@@ -1,0 +1,162 @@
+{
+  "root": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement",
+  "files": 983,
+  "bytes": 233028573.0,
+  "reparsePoints": 0,
+  "buckets": [
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement\\artifacts",
+      "files": 356,
+      "bytes": 118569565.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement\\diagnostic-artifacts",
+      "files": 271,
+      "bytes": 97672520.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement\\diagnostic-host",
+      "files": 20,
+      "bytes": 387742.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement\\diagnostic-native",
+      "files": 96,
+      "bytes": 5817038.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement\\diagnostic-native-source",
+      "files": 114,
+      "bytes": 891720.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\post-m15.2-production-remeasurement\\native-release",
+      "files": 96,
+      "bytes": 5798313.0
+    }
+  ],
+  "rootFiles": [
+    {
+      "Name": "allocation.log",
+      "Length": 1436
+    },
+    {
+      "Name": "app-build.log",
+      "Length": 1705
+    },
+    {
+      "Name": "baseline-1.log",
+      "Length": 4419
+    },
+    {
+      "Name": "baseline-2.log",
+      "Length": 4421
+    },
+    {
+      "Name": "baseline-3.log",
+      "Length": 4420
+    },
+    {
+      "Name": "diagnostic-1.log",
+      "Length": 140951
+    },
+    {
+      "Name": "diagnostic-2.log",
+      "Length": 140934
+    },
+    {
+      "Name": "diagnostic-3.log",
+      "Length": 140954
+    },
+    {
+      "Name": "diagnostic-camera.log",
+      "Length": 140946
+    },
+    {
+      "Name": "diagnostic-configure.log",
+      "Length": 653
+    },
+    {
+      "Name": "diagnostic-contact.log",
+      "Length": 1009749
+    },
+    {
+      "Name": "diagnostic-host-build.log",
+      "Length": 1814
+    },
+    {
+      "Name": "diagnostic-native-build.log",
+      "Length": 3736
+    },
+    {
+      "Name": "diagnostic-native-flush-build.log",
+      "Length": 135
+    },
+    {
+      "Name": "graphics-build.log",
+      "Length": 1134
+    },
+    {
+      "Name": "interleaved-1.log",
+      "Length": 140924
+    },
+    {
+      "Name": "interleaved-2.log",
+      "Length": 140954
+    },
+    {
+      "Name": "interleaved-3.log",
+      "Length": 140723
+    },
+    {
+      "Name": "interleaved-camera.log",
+      "Length": 140916
+    },
+    {
+      "Name": "interleaved-contact.log",
+      "Length": 1009375
+    },
+    {
+      "Name": "manual-current.err",
+      "Length": 0
+    },
+    {
+      "Name": "manual-current.log",
+      "Length": 37385
+    },
+    {
+      "Name": "native-build.log",
+      "Length": 3736
+    },
+    {
+      "Name": "native-configure.log",
+      "Length": 650
+    },
+    {
+      "Name": "operations.log",
+      "Length": 661936
+    },
+    {
+      "Name": "presentation.log",
+      "Length": 3745
+    },
+    {
+      "Name": "srv01-correctness.log",
+      "Length": 220
+    },
+    {
+      "Name": "storage.log",
+      "Length": 1940
+    },
+    {
+      "Name": "summary.txt",
+      "Length": 10897
+    },
+    {
+      "Name": "tests-build.log",
+      "Length": 867
+    }
+  ],
+  "rootFilesCount": 30,
+  "rootFilesBytes": 3891675.0
+}

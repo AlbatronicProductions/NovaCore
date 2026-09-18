@@ -179,5 +179,7 @@ public sealed unsafe class ReusablePartVisuals : IDisposable
     {ObjectDisposedException.ThrowIf(disposed,this);return Assets.Single(a=>a.Identity==identity);}
     public NativeResult Run(NativeFrameSubmission* submission,NativeRuntime.HostCallback callback,IntPtr userData,uint preparedObjectCapacity)
     {ObjectDisposedException.ThrowIf(disposed,this);fixed(NativeVisualMesh* p=uploads)return NativeRuntime.RunRendererWithVisualMeshes(submission,callback,userData,p,(uint)uploads.Length,preparedObjectCapacity);}
+    public NativeResult Run(NativeFrameSubmission* submission,NativeRuntime.HostCallback callback,IntPtr userData,uint preparedObjectCapacity,NativeRuntimeAssets* assets)
+    {ObjectDisposedException.ThrowIf(disposed,this);fixed(NativeVisualMesh* p=uploads)return NativeRuntime.RunRendererWithAssetsAndVisualMeshes(submission,callback,userData,assets,p,(uint)uploads.Length,preparedObjectCapacity);}
     public void Dispose(){if(disposed)return;disposed=true;foreach(var p in pins)if(p.IsAllocated)p.Free();}
 }

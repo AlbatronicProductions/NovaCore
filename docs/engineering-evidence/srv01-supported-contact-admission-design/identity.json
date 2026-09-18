@@ -1,0 +1,322 @@
+{
+  "observedUtc": "2026-09-17T17:10:36.7055924Z",
+  "ksa": [
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "bytes": 4936792,
+      "product": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+      "sha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\BepuPhysics.dll",
+      "bytes": 880640,
+      "product": "2.5.0-beta.29+f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\BepuUtilities.dll",
+      "bytes": 163328,
+      "product": "2.5.0-beta.29+f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.deps.json",
+      "bytes": 73752,
+      "product": null,
+      "sha256": "23FCAA825C40F828349310C8DC480F292F9BE65DE6C4D378B36FBA64F7EE37B3"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Versions\\v2026.9.X.5438.json",
+      "bytes": 21758,
+      "product": null,
+      "sha256": "67B3CB67A10FB12ACC46E9403E06E3AD5B209D1B5EAFB0D8286A20DB65D6E8D3"
+    }
+  ],
+  "preexistingUntracked": [
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/README.md",
+      "sha256": "695FBD92436D5CFEE1F68B6CB3F0BA9B52D66EE51A78AD275A96BD51C5BE74D2"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/cleanup.md",
+      "sha256": "AFCA5E359733AE81B4488809750A4D2EC9F9FBAD1AB9A859DE978E52027F090A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/closeout.json",
+      "sha256": "D999F655F22A7A61AECFA31EC522B6EAB854C2605B2127029383E1D709230E48"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/disposable.json",
+      "sha256": "408628C55776D52218D59161993DFD6C1356459A563E04D2459996A7EA00414C"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/identity.json",
+      "sha256": "1E0352415F16C5C26ECE8BED50877F47F97B2B25D93AF61700F28AEA3A636E98"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/measurements.json",
+      "sha256": "8072661FBD9F06E23776AB420D634FF4F1A4C181F4285EBDC77BE748C8CA256F"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/ownership-readiness.md",
+      "sha256": "CDC5322AEF286817E78A9C125F9A9A9A90D9C87A6AFB6D2C3B6BA29AED68F4FE"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/prepare-diagnostic.py",
+      "sha256": "12BCF3A5BC391A9ACA1D062A8AAED7B93675BFF1F2B9AB8423278BAB40816506"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/repo-truth.json",
+      "sha256": "68E9D0FDAC712D5754A378A531D627222417E4FF984954CCC6E8FFB564AC46EA"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/reproduce.md",
+      "sha256": "89D895125BF8DB83987F51C95761CD28B3C84499770AD883E5D352B59AE411DB"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/summarize.py",
+      "sha256": "ECEB165D771E7F12B5AD75E709F67ECDF9130D87C6EB6E39DA0D251D8E5609C3"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/verification.md",
+      "sha256": "09667452FCBC0E508C15041D7E4662F86009C4F3564E1A0678F94817B01401C3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "sha256": "F9F8C81D7F8C1DC94F8C80F3F62D857593A5F3D2B0E4150EDCC4CA595E414C48"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "sha256": "C71E2149375B41C29DA6D3177FBE7137C6443E9006508740B85AA6BA118F5D1D"
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "sha256": "45D6A9966A89962BBBE0CA167FD62A07E39FE74B37621C73FF4558F852A44D0C"
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "sha256": "BC6A94CE816093A0A72C27975DB20C7F22F5F7EB9A36DC28ABE49837A8C019FE"
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "sha256": "BF7D6144200EAE6EDDA286B19C0AA83E3D262F0E1ED956FE881E3B9333313AD7"
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "sha256": "9768C62CFC86E4EF8A090CA1EE8F4E1DEC9DA9486A8EA5E63C3075953D47180C"
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "sha256": "2D9A9B426232826FE19D1678AEF8FEADB7A241B4ABBA5FA9A9B201325D5B58C3"
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "sha256": "25D48B0A2C5E8EFA243DEE627A17685D16A4F2DDC7C84337559BDDDB1D6CE81F"
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "sha256": "F46F7B4215CD7C4311233DEB3B36434798941B602478ED9AB20539BFF3A2263B"
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "sha256": "8923E3630C2D44DB6DD9B13E41FEA51CD847403BEE3F9EDFCE56543D5609E364"
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "sha256": "5CB5AC5616369CC6F399C323B9C6351EAB0D4E2253BBBF08C6F8E317A7C06E00"
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "sha256": "41EAD10AB96F1E1987AC847109D442E158B290F82CFB6F598047ADA3C1DEFA62"
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "sha256": "6F5440BD5D0C28487E48591C88D6A21761514823E5855F4598072D679E5AD433"
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "sha256": "6C0F70CDDE3DCD6EFDE8904A9CB592AA4517C2C5793627C665984AF6BC9BFABA"
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "sha256": "16A305F5992222FE8A998B3C052DA505D439E863B140CDBB9951DE7D3A17DCE5"
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "sha256": "EA6FA514E054B018868F3A6266C036C1E426126EA18507C9AE31B514962E1F6A"
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "sha256": "031471F49DE563EBCC56CEEF5DC3817C2506226858E4B09A8898978D9853B075"
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "sha256": "D55E23207DD1FB93B51B097CAAFC3003E733DD4D8B281E66884078B3372E0CE2"
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "sha256": "4CD4B3C87F0DF2F833772A2FA1E03AB4BE69E4EC8CF449BE7F75D1CC99F3298F"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "sha256": "255BBF8B40BC0558CA51CC4314705D3BE7BD15E3509749086C6918483EA9E585"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "sha256": "9303CF44C330801D9E73B52A905E780762D69538B6B8131840F190CABAA31E4E"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "sha256": "4ADADD439E0BC32E2A67504DE8568997D418582C7906F3EFE7E52ED9F1A3146D"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "sha256": "2DF837472BF5AAB7E7320F7E191A50D28F5F0074B6F6F43BB00714C00FD739E6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "sha256": "466650DDEA93B66B73216F0470AC59C4A28693372CBEB0F95EB5FE9E41A8D497"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "sha256": "25CC007BFDD7E09929527F566A908945A86EDD4D3F341E46D4AF24438A0DB363"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "sha256": "AAD2D98BC7EBA715FF9E6E9A30DE798BF6D33B95EEA6BA2F9176CEE2BA51CF1C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "sha256": "E8EB8AF4105E9C97475DF9CF8AE53CBA68BA23A71EF9B9AA7749C0B97A9891B3"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "sha256": "DF5F0D2378AC6A50EEA2133D2C9F38584E623F7679DF7CD2EB827FD971BA97EB"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "sha256": "85D493C3748A3BE0D9BCD57C6DB01DB16FE29B56D39AC6D6B749E4DB434D8E5A"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "sha256": "1AA52F7883FC10B4657DD0A86097FA2E28A9C09145CE6135771F410222B9E2A6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "sha256": "70B12C49D710E6B8BED292B4743469F4479822E01A2BFC3621BBFA79F848961C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "sha256": "F3E079029EF026043F6F995149EDDE307EA688A4AC12EB121B9F2E32ECDD9396"
+    }
+  ],
+  "newDisposablePaths": [],
+  "evidenceBudgetBytes": 196608,
+  "productionInspectionStarted": true,
+  "gateOrder": [
+    "baseline and retained audit",
+    "actual KSA installed methods and authenticated live history",
+    "independent KSA gate PASS",
+    "current NovaCore source inspection",
+    "bounded design",
+    "final independent design review PASS after three documented clarifications"
+  ],
+  "inspectedSourceInputs": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "sha256": "6E314E6D9EDA1B4DCD0238A9645D56FD8A1C67BE162E34DF08E1771FA856B79B"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "sha256": "167DA48B5DB2862AFB128B494C6F3B380F7EAB26099BFA36B2471AAE4B909FCA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+      "sha256": "881908D8654C874ED7A7C2DBC8A04B586F0FCCAEED1EBBF7559BF244D21B2E20"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+      "sha256": "9266404C38F8BFEE639CD6422CB5F84E0796C093C99E05CA0B4562C56DAB1B27"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "sha256": "19817756EAA34F03A85A1435C931346FB28339DEFB2FE8BD12906D648F19E8AB"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+      "sha256": "6FBD449E88EE529747DCA8E4AED5134E5C0000029D4CDBEC9DED51E1DAD68798"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+      "sha256": "CA95752706E7785E77A02A896F5331C73490DDCD6D69AD87A18CD6A3005708C5"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftAppliedEndpoint.cs",
+      "sha256": "E53FBEE3AE992A645DEDD713C993C6986287516E6BF169384D4CB29DB69271CA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+      "sha256": "2D75A905E514E4E140B74B662A61A29CAB0278CE72A08C51CD44EF6DD10F032D"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+      "sha256": "36AD86812A1055EFD0A90037A0063E2DB9FE4CE1D1FFF313518A612D919E32EF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "sha256": "961BF9C5905903E1E805C9A950969A9678951DDBCD9E91A7C406B1314DF98829"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "sha256": "81C967C2555066111BA466093466CF3D3A0A82575CCA522D161BED80F0B9FDDB"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredContact.cs",
+      "sha256": "4082E3629F9E4395549FDBA30733956D865A00899C9157754C65B28BFAE09E3C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.PoweredFreeFlight.cs",
+      "sha256": "16C35B44FC42FDCAF6803A8F41EB11B65FFFBC22BF1C9226A864F91AB9117C3A"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ContactServicing.cs",
+      "sha256": "0881493EC1E74187652F8C23D91CD5AE400A3C4DF6EF4A05A39EA0A5BE29AF87"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/ContinuationPublicationPhase.cs",
+      "sha256": "852C3E80A5CDF371B0E03DF6FEA31C20B4954B27C7F368E6AC22DEA6EF881F9C"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "816211B25A97BB1D5225D42CA6D71E7BA6DFB8FC8D91C55BF253251B2940128F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "E1578E377B02CC76D18CA59D5D7B40EBB1FF89FF7CB07B69EDE7D9B825AF8AA8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Article.cs",
+      "sha256": "0D0BA22FD45EB647695C41905557BC50609B4FADB75E7480AD2E8D7E4287B3AF"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Powered.cs",
+      "sha256": "D1E472E2925FEE703B1A1441E8763C4F0AA1FC061A3747EA6173A05A82951869"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "sha256": "8D9A1A16F869603567A112D46D5E9404A71618F0C1E6FDACBE41C0A587E6F3DA"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "sha256": "DACBF31F495A2A2FEBA07CF9BC62022898FA7954929276E27871FDAB8AAC0A2F"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactSelector.cs",
+      "sha256": "4B4837D88E914EE5FFF081935A85125FCCB6052247A2B8283C6876671B137DCF"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "F9FFEBF66BA032C611937078B819188E1F87CCF03E90F785566BE3703D41FDEC"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "utc": "2026-09-18T02:37:50.226499+00:00",
+  "expectedProcesses": 3,
+  "command": [
+    "E:\\NovaCore\\build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Triangle.exe",
+    "--scene=srv01-florida-support",
+    "--benchmark-frames=4000",
+    "--log=renderer,vulkan"
+  ],
+  "sourceSeals": [
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs",
+      "before": "E32119C299CD400C616C2D82A1DCBC9611E81C479AC84CACA1E352060962C225",
+      "sha256": "6D29503EF7289B78A35FF86A0DC40E8C26CE6043ACB0978CFC8DCE864599CE95"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "before": "BEC89735D34AE7529AC7F01AA0889E4558B6B42B4B67A8F4FCEEFD37077DED23",
+      "sha256": "DF0F68476591963A6BA74A96DEA7299C10AADC98C0C1F053E92C3EF584806811"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "before": "405BB302532CE68CB930DB18F897A81385D84222C0FC89678390CD9F865136F9",
+      "sha256": "EE532E4A52C4B198ED7A4A66EE7BDA2B8F4C7F96F297EC79AC11D08095816AE4"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "before": "BACBE961FBCFF1F9D550A643A937D41EB095CABC4D5D70338AAE05F8519A1A63",
+      "sha256": "3DCB30E2299580A6C9D74FFEED318402C8276EA0F135AB98F64C7B636424CDE8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "before": "46D332AD8650C7E90386A19EAF9BF47A60BA5C5898F0A20B36FFF37EEA6430A6",
+      "sha256": "29DEA2B14CD0834D5234A36005874878C9BDD4FBA358DF2F56F1E7E6F20BFAB3"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "before": "BDBB250FC427900F862B2BFBA01302A4BECFFFB960422D53AE661F59C8C698F7",
+      "sha256": "970C68109369708F431B05852992F66AFAAFB9C3BC9432E8849380275712E72B"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaQualificationTests.cs",
+      "before": null,
+      "sha256": "17679CCCDAF193E0450B08C068E17245C9494C3E96D8536D464543DF476834B9"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs\\engineering-evidence\\srv01-surface-to-flight-gauntlet\\stage5\\final-closure\\capture-plan.md",
+      "sha256": "66716670E7C7A582986A2340B224C3171B7CE0240EE82BEAFEEDFBF59E59649B"
+    },
+    {
+      "path": "docs\\engineering-evidence\\srv01-surface-to-flight-gauntlet\\stage5\\final-closure\\FloridaTimingProbe.cs",
+      "sha256": "CF1B40D3FA74BE9EEFACD84E46C101B6AF4A083A9C6E71AA88221811C3A2B676"
+    },
+    {
+      "path": "docs\\engineering-evidence\\srv01-surface-to-flight-gauntlet\\stage5\\final-closure\\build-inputs.py",
+      "sha256": "29A78DDCEC0F041FBDE71B3103BF48A05D6570B2E2AD96925491DBF611E5F2F2"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\generated\\closure.targets",
+      "sha256": "0DEEB3FEBA6FC26646D86B3279A3F16BBE891D0C01CC2092A5EF3DA15AE17D85"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\generated\\StockAssemblyDevelopmentScene.cs",
+      "sha256": "6D69265EE6CE5692AA6736CFD69AB2F823DB9E41364F5C6F1FBEFE57EB9CD3C6"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Core.dll",
+      "sha256": "CB906D54D2F99043C0C741D8663EA40F334DB165304A298AD68C8A98CF7D69AF"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.EphemerisFormat.dll",
+      "sha256": "8077661407E33CBDF62DC5B4573AA43807CAAA7704AA3BC0D3A84199762EB7F0"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Graphics.dll",
+      "sha256": "0053980796C1B6D133CB4D9E935E334793BB0A2B7530612494E80B88EAB5F310"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Interop.dll",
+      "sha256": "EC3930F4F73569C3C7DF6224D88250C4D9C133274A5CCF190F801E75BC02C035"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Native.dll",
+      "sha256": "0D31A6EB05F050D438B724755465C02E15C6B1C0F51C938C7755035A16A05FED"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Platform.dll",
+      "sha256": "A514AE03EBE959EB8519E1803D6C6380BBB570C7EA1A187783F393BAD2C9A310"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Simulation.dll",
+      "sha256": "FF7459F1B3B8FF32094FC459F0D3C9118CB2A9D4E2A380144FA0C35B45E164A2"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Triangle.dll",
+      "sha256": "1887C0A4F66C691479CDD24607F5B66034DA3665C9CD61E7124E0F1854BD0518"
+    },
+    {
+      "path": "build\\srv01-stage5-final-closure\\artifacts\\bin\\NovaCore.Triangle\\release\\NovaCore.Triangle.exe",
+      "sha256": "7950CED63BDE459FBD49AD27805F972395DACAE2EC889BFD6722508CE2A9915A"
+    }
+  ]
+}

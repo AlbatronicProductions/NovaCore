@@ -1,0 +1,66 @@
+Physical surface authority: generation=3; mode=Generation3.
+SRV01_FLORIDA_SITE identity=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } ground=terrain-v5-full-weight-grade presentation=site-local-patch
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+Stock SRV-01 Florida graded ground: site-local view of the authoritative terrain-v5 16m patch, 48m east of the site anchor, outside the existing platform. Space starts 20 seconds; engine/RCS OFF; Earth rotates in canonical inertial publication. Camera WASD/QE, mouse look, R reset. No launch, departure or launch-stack qualification.
+SRV01_COLD_PREPARATION ms=668.5228 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+[native] Loaded runtime paths: module=E:\NovaCore\build\srv01-stage5-stock\artifacts\bin\NovaCore.Triangle\release\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\build\srv01-stage5-stock\artifacts\bin\NovaCore.Triangle\release\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\build\srv01-stage5-stock\artifacts\bin\NovaCore.Triangle\release\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] REUSABLE_VISUAL_MESHES count=23 vertices=21931 indices=76602 gpu_buffer_bytes=1359096
+[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97
+[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=6071008 extent=960x540 physics_bytes=0
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38
+[native] Terrain residency: capacity=8192; samples=289; persistentBytes=19398656
+[native] Native host callback is active
+[native] Planetary context transition: epoch=1; body=0; surfaceMode=0; terrainVersion=0; physicalGeneration=3; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=960x540; HDR scene format=97
+[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=6071008 extent=960x540 physics_bytes=0
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] PREPARED_VISUAL_SUBMISSION capacity=54 bytes=4416 initial_active=38
+[native] Swapchain recreated after resize
+[native] GPU timings: total=0.082 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.011; preSurface=0.000; scene=0.072; toneMap=0.010; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.084 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.072; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.057
+[native] GPU timings: total=0.082 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.011; preSurface=0.000; scene=0.071; toneMap=0.010; regionalCompute=0.002; materialsOverlays=0.059
+[native] GPU timings: total=0.083 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.071; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.056
+[native] GPU timings: total=0.085 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.073; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.080 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.028; preSurface=0.001; scene=0.068; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.037
+[native] GPU timings: total=0.081 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.026; preSurface=0.002; scene=0.069; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.039
+[native] GPU timings: total=0.080 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.022; preSurface=0.007; scene=0.068; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.037
+[native] GPU timings: total=0.085 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.073; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.084 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.073; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.082 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.070; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.056
+[native] GPU timings: total=0.086 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.013; preSurface=0.000; scene=0.074; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.059
+[native] GPU timings: total=0.076 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.019; preSurface=0.004; scene=0.066; toneMap=0.010; regionalCompute=0.002; materialsOverlays=0.041
+[native] GPU timings: total=0.086 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.075; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.060
+[native] GPU timings: total=0.094 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.082; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.067
+[native] GPU timings: total=0.080 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.020; preSurface=0.001; scene=0.068; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.044
+[native] GPU timings: total=0.086 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.074; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.059
+[native] GPU timings: total=0.075 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.019; preSurface=0.002; scene=0.065; toneMap=0.010; regionalCompute=0.002; materialsOverlays=0.042
+[native] GPU timings: total=0.086 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.074; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.059
+[native] GPU timings: total=0.084 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.072; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.085 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.013; preSurface=0.000; scene=0.072; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.082 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.070; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.056
+[native] GPU timings: total=0.083 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.013; preSurface=0.000; scene=0.069; toneMap=0.013; regionalCompute=0.002; materialsOverlays=0.054
+[native] GPU timings: total=0.080 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.025; preSurface=0.003; scene=0.068; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.038
+[native] GPU timings: total=0.085 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.073; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.083 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.071; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.056
+[native] GPU timings: total=0.083 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.071; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.056
+[native] GPU timings: total=0.085 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.073; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.058
+[native] GPU timings: total=0.083 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.071; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.056
+[native] GPU timings: total=0.098 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.086; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.071
+STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=4094
+STOCK_ASSEMBLY_FRAME samples=3585 median_ms=5.5568 p95_ms=5.707 p99_ms=5.8366 max_ms=74.5905 measurement=display_callback_interval_including_present_host_scheduling
+SRV01_LIVE_SERVICE samples=3585 median_ms=0.004 p95_ms=0.0867 p99_ms=0.1944 max_ms=72.4557 includes=host_admission_bounded_service_copied_observation
+[native] GPU timings: total=0.089 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.077; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.062
+[native] GPU timings: total=0.087 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.075; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.060
+[native] GPU timings: total=0.086 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.013; preSurface=0.000; scene=0.074; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.059
+[native] GPU timings: total=0.081 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; scene=0.069; toneMap=0.012; regionalCompute=0.002; materialsOverlays=0.054
+[native] Average frame time: 5.578 ms (4000 frames)
+[native] Frame pacing: p50=5.547 ms; p95=5.825 ms; p99=5.961 ms; max=74.266 ms; samples=4000
+[native] Fence wait pacing: average=5.005 ms; p95=5.195 ms; max=7.503 ms; samples=4000
+[native] CPU timings: update=5.198 ms; fence=5.005; inspection=0.033; hostCallback=0.157; validationUpload=0.002; record=0.056; submit=0.026; present=0.224
+[native] GPU timing averages: total=0.083 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.015; preSurface=0.000; toneMap=0.012

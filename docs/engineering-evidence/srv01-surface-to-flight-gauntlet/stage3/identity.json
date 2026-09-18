@@ -1,0 +1,216 @@
+{
+  "observed": "2026-09-17T18:50:31.6056187-04:00",
+  "head": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "originMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "remoteMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "codex/srv01-supported-contact-admission",
+  "stage2SealsInCurrentTree": [
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "stage2Sha256": "BEC89735D34AE7529AC7F01AA0889E4558B6B42B4B67A8F4FCEEFD37077DED23",
+      "sha256": "BEC89735D34AE7529AC7F01AA0889E4558B6B42B4B67A8F4FCEEFD37077DED23",
+      "matchesStage2": true
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "stage2Sha256": "405BB302532CE68CB930DB18F897A81385D84222C0FC89678390CD9F865136F9",
+      "sha256": "405BB302532CE68CB930DB18F897A81385D84222C0FC89678390CD9F865136F9",
+      "matchesStage2": true
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "stage2Sha256": "BACBE961FBCFF1F9D550A643A937D41EB095CABC4D5D70338AAE05F8519A1A63",
+      "sha256": "BACBE961FBCFF1F9D550A643A937D41EB095CABC4D5D70338AAE05F8519A1A63",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "stage2Sha256": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67",
+      "sha256": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "stage2Sha256": "6D36E5782E22471EF4CAC15B88CF1E4F404F80C0E5E09A8E394F56C0A4E9A467",
+      "sha256": "6D36E5782E22471EF4CAC15B88CF1E4F404F80C0E5E09A8E394F56C0A4E9A467",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "stage2Sha256": "1452B9B9AB921C467D79FA8725B2ED818A9FF41BECA43FB0079AB4A576CCAF5B",
+      "sha256": "58A13A44972C0ED4933403996D251F294D20FA268A0E11051225064A83D3B90B",
+      "matchesStage2": false
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+      "stage2Sha256": "3D41BD5EC9A74A15997C4D88DDF992684BEE19FBF6BBC26C2F0F9099695C9A06",
+      "sha256": "3D41BD5EC9A74A15997C4D88DDF992684BEE19FBF6BBC26C2F0F9099695C9A06",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "stage2Sha256": "F0101D77D9A2D7AF81C4ABE1A1CD22515FF764B2E3F8B0B33E42ACF63D3FD491",
+      "sha256": "F0101D77D9A2D7AF81C4ABE1A1CD22515FF764B2E3F8B0B33E42ACF63D3FD491",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "stage2Sha256": "4371DA8D9030EC1DC123CF693902A6C0CA2B73CC8C3B749A337EC39511AB0DDD",
+      "sha256": "C22866B767C888ECC1085812734B9AC7BD136FC7059155193F17A56DA0034341",
+      "matchesStage2": false
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+      "stage2Sha256": "EC7F71E619C5E48CD86E055C5A91FEC8DE91F45F909EF82BF71FB67BAFD9862C",
+      "sha256": "EC7F71E619C5E48CD86E055C5A91FEC8DE91F45F909EF82BF71FB67BAFD9862C",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+      "stage2Sha256": "0E021034C57BF9A9FD205BDEE5DC0525AEBA987D1682CB362C864415C6D84577",
+      "sha256": "0E021034C57BF9A9FD205BDEE5DC0525AEBA987D1682CB362C864415C6D84577",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "stage2Sha256": "8E5F69238593EE6F978CE02E5B7E4371E60A0D13E24EC2ACD0A2F5C51AB59C1D",
+      "sha256": "8E5F69238593EE6F978CE02E5B7E4371E60A0D13E24EC2ACD0A2F5C51AB59C1D",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "stage2Sha256": "D779B5867428EFBDC7A903D0060DB95CCC01EB57DD91470BA15DB0E2EAFD22CD",
+      "sha256": "D779B5867428EFBDC7A903D0060DB95CCC01EB57DD91470BA15DB0E2EAFD22CD",
+      "matchesStage2": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "stage2Sha256": "C5AFAFDF3FA8A6DBAA0D6802A61AF9DD64A1B0AF290B6A8FB3E6488668D8046B",
+      "sha256": "B4DABFDB04D2E3B24206E315B4363A2392DB92D06ADAC99228794127255AEE85",
+      "matchesStage2": false
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+      "stage2Sha256": "7EB55A3C4C2597F9755D9F551636DE91595331F3F25AEACC34362B34B033EB41",
+      "sha256": "498AA48F73158CBE3D08C57966BCDBEE16CC771C18389DF9955C39C3CC913FCE",
+      "matchesStage2": false
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "stage2Sha256": "41D625512960921783DC8DD9090732D797AFEC1BA1101088A3454CAEE1482A82",
+      "sha256": "41D625512960921783DC8DD9090732D797AFEC1BA1101088A3454CAEE1482A82",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "stage2Sha256": "7285FFBD8712031A3F0CE44C15CA0311BC22C86935EF1BD7ECF05916A45A7098",
+      "sha256": "7285FFBD8712031A3F0CE44C15CA0311BC22C86935EF1BD7ECF05916A45A7098",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+      "stage2Sha256": "6093CAA06B9F7261ED1375443874747F8B53172AE658AF1FC6CDFDC879178CB0",
+      "sha256": "6093CAA06B9F7261ED1375443874747F8B53172AE658AF1FC6CDFDC879178CB0",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+      "stage2Sha256": "019BD1F3313A68EE8607CB5757CDE0601C42E02900DA079D385F70DC4E13037A",
+      "sha256": "019BD1F3313A68EE8607CB5757CDE0601C42E02900DA079D385F70DC4E13037A",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+      "stage2Sha256": "44AF9E51BF9EC26C288FCCC4D244D6B706C7EDE3AE054D699405A44D48DF77FD",
+      "sha256": "44AF9E51BF9EC26C288FCCC4D244D6B706C7EDE3AE054D699405A44D48DF77FD",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+      "stage2Sha256": "69B4364DAF6838F060D8924CE1966DA18CC9FC57B94355887699C9604BFE8BE2",
+      "sha256": "69B4364DAF6838F060D8924CE1966DA18CC9FC57B94355887699C9604BFE8BE2",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+      "stage2Sha256": "C329B171DEB8F0C29925811FEBC3C68D5393C5FDC6E3AC41E2F28F928D946EEF",
+      "sha256": "C329B171DEB8F0C29925811FEBC3C68D5393C5FDC6E3AC41E2F28F928D946EEF",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs",
+      "stage2Sha256": "76AF3726851549834747DBB6E2C4A83586E5B8F9EEE5BF6F891EBBFB98DA3E87",
+      "sha256": "76AF3726851549834747DBB6E2C4A83586E5B8F9EEE5BF6F891EBBFB98DA3E87",
+      "matchesStage2": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "stage2Sha256": "CFC3DC2F2F33B02FC169469B01BA549CA6EFD2DE0B95A902B08C67F142D2BD90",
+      "sha256": "0B3CDE890AF222D8494B277E666D58E072197727F58B502076C7A8F2590D8B08",
+      "matchesStage2": false
+    }
+  ],
+  "additionalDraftSources": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+      "sha256": "A89F0108D4E2EDFBF4DB4C34344FAF125D02769F301C2E503E812086FC6511A1"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs",
+      "sha256": "0CD49904A64988F2C6B152CC6B29E5F905DDA22038DA41F8CBF1654F796817C7"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs",
+      "sha256": "054EC50060EAA6B1A24E09F15DEAF95A97052E84FEE8BC93F9E87F375C386F70"
+    }
+  ],
+  "nativeSha256": "4C468B0302603B59397A1D82C6E6E08577A2853F166FFEE7D2552107363C99B6",
+  "historicalTagsUnchanged": true,
+  "tagCount": 67,
+  "staged": [],
+  "status": [
+    " M samples/NovaCore.Triangle/Program.cs",
+    " M samples/NovaCore.Triangle/SampleOptions.cs",
+    " M samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    " M tests/NovaCore.Graphics.Tests/Program.cs",
+    " M tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/post-m15.2-production-remeasurement/",
+    "?? docs/engineering-evidence/srv01-production-integration/closeout.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+    "?? docs/engineering-evidence/srv01-supported-contact-admission-design/",
+    "?? docs/engineering-evidence/srv01-surface-to-flight-gauntlet/",
+    "?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+    "?? docs/legal/LEGAL-REVIEW-TODO.md",
+    "?? docs/legal/MODDING-POLICY-DRAFT.md",
+    "?? docs/legal/ROOT-LICENSE-CANDIDATE.md",
+    "?? docs/legal/finalization/",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs"
+  ],
+  "diffCheckExit": 0,
+  "cachedDiffCheckExit": 0,
+  "stage2": "FULLY QUALIFIED at retained seals",
+  "stage3": "REVISE - first allocation gate 624 B; no retry",
+  "banking": "UNBANKED"
+}

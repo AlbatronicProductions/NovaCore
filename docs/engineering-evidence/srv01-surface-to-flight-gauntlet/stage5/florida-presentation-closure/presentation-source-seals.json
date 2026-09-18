@@ -1,0 +1,47 @@
+[
+  {
+    "path": "samples/NovaCore.Triangle/Program.cs",
+    "sha256": "c9558e1a30b7b2013bd8da9cb1ccc126cdfaa94a6a4834cfab8a4f3b7bd0b48f",
+    "bytes": 62983
+  },
+  {
+    "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    "sha256": "56968798a19f14343c974c222ea000af1a9bc6418f6a8ae75407775cf9c817ad",
+    "bytes": 23085
+  },
+  {
+    "path": "samples/NovaCore.Triangle/EarthRoutePolicy.cs",
+    "sha256": "5ef3581b4c6a7425b4b8f5f077f3cdd34241150b09d68f7082d7abfb5f4bba8a",
+    "bytes": 258
+  },
+  {
+    "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+    "sha256": "c6c1aa8f5b78a0ec535436a7c76b7153a03ddc342b46879d37c16a0ddb860f50",
+    "bytes": 5783
+  },
+  {
+    "path": "src/NovaCore.Graphics/ReusablePartVisuals.cs",
+    "sha256": "1d7a3faf3ed73a4ed030d0f52e5edf54f399544417d1fbb0fe45ef3f66847cce",
+    "bytes": 14915
+  },
+  {
+    "path": "src/NovaCore.Interop/NativeRuntime.cs",
+    "sha256": "a95b5ade4c797669d8f54ddfcc14fea96f505b49fe6ec979710f79ad3878c986",
+    "bytes": 23386
+  },
+  {
+    "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+    "sha256": "a9241058e8f52bb0b98be3218417bc0ac1d651f15367ae9bec14e623c5124535",
+    "bytes": 299091
+  },
+  {
+    "path": "native/NovaCore.Native/NovaCoreNative.h",
+    "sha256": "81667733e09fc19d09591abc45c5899bbf776cd97bf95707631b9cde83e39271",
+    "bytes": 18809
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/AssemblyFloridaQualificationTests.cs",
+    "sha256": "1d90b9cbee44e69d25912275074114b35e9b82b4d680a6e9b531f1a5437f7fcc",
+    "bytes": 28542
+  }
+]

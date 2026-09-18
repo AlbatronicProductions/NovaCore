@@ -16,6 +16,9 @@
     <ProjectReference Include="..\..\src\NovaCore.Simulation\NovaCore.Simulation.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\tools\NovaCore.Launcher\LaunchConfiguration.cs" Link="Launcher/LaunchConfiguration.cs" />
+    <Compile Include="..\..\tools\NovaCore.Launcher\LaunchCommandBuilder.cs" Link="Launcher/LaunchCommandBuilder.cs" />
+    <Compile Include="..\..\tools\NovaCore.Launcher\ScenarioCatalog.cs" Link="Launcher/ScenarioCatalog.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\ContactGenerationFixture.cs" Link="ContactGenerationFixture.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\OrdinaryAllocationMeasurement.cs" Link="OrdinaryAllocationMeasurement.cs" />
     <Compile Include="..\NovaCore.Simulation.Tests\PostImpactCoverageCost.cs" Link="PostImpactCoverageCost.cs" />

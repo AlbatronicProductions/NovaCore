@@ -1,0 +1,194 @@
+{
+  "path": "E:\\NovaCore\\build\\srv01-display-gap-population",
+  "classification": "DISPOSE: reproducible observer build, copied assets, temporary source backups, raw capture/build logs; all concise results and reproduction inputs retained",
+  "files": 400,
+  "bytes": 106016279.0,
+  "children": [
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\artifacts",
+      "files": 271,
+      "bytes": 97606956.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\native-release",
+      "files": 95,
+      "bytes": 5846880.0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A1.process.json",
+      "files": 1,
+      "bytes": 452
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A1.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A1.stdout.txt",
+      "files": 1,
+      "bytes": 261164
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A2.process.json",
+      "files": 1,
+      "bytes": 452
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A2.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A2.stdout.txt",
+      "files": 1,
+      "bytes": 258875
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A3.process.json",
+      "files": 1,
+      "bytes": 452
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A3.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\A3.stdout.txt",
+      "files": 1,
+      "bytes": 258718
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B1.process.json",
+      "files": 1,
+      "bytes": 456
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B1.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B1.stdout.txt",
+      "files": 1,
+      "bytes": 258563
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B2.process.json",
+      "files": 1,
+      "bytes": 456
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B2.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B2.stdout.txt",
+      "files": 1,
+      "bytes": 258348
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B3.process.json",
+      "files": 1,
+      "bytes": 456
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B3.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\B3.stdout.txt",
+      "files": 1,
+      "bytes": 255243
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C1.process.json",
+      "files": 1,
+      "bytes": 438
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C1.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C1.stdout.txt",
+      "files": 1,
+      "bytes": 229009
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C2.process.json",
+      "files": 1,
+      "bytes": 438
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C2.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C2.stdout.txt",
+      "files": 1,
+      "bytes": 229016
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C3.process.json",
+      "files": 1,
+      "bytes": 438
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C3.stderr.txt",
+      "files": 1,
+      "bytes": 0
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\C3.stdout.txt",
+      "files": 1,
+      "bytes": 228996
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\managed-build.log",
+      "files": 1,
+      "bytes": 82
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\native-build.log",
+      "files": 1,
+      "bytes": 3736
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\native-configure.log",
+      "files": 1,
+      "bytes": 643
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\native-env.log",
+      "files": 1,
+      "bytes": 241
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\native-source-backup.cpp",
+      "files": 1,
+      "bytes": 298780
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\observer-source-identity.json",
+      "files": 1,
+      "bytes": 406
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population\\scene-source-backup.cs",
+      "files": 1,
+      "bytes": 16585
+    }
+  ],
+  "status": "RETAINED: one automatic cleanup attempt rejected before execution by approval review: blocked by policy. No retry or workaround.",
+  "remainingFiles": 400,
+  "remainingBytes": 106016279.0,
+  "resolvedPath": "E:\\NovaCore\\build\\srv01-display-gap-population",
+  "reparsePointCount": 0,
+  "trackedFiles": []
+}

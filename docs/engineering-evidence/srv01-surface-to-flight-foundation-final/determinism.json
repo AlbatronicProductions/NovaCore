@@ -1,0 +1,77 @@
+{
+  "domain": "Same build/machine, matching canonical frontiers; no cross-platform bit claim.",
+  "witnesses": [
+    {
+      "gate": "florida-slab-correctness-debug",
+      "witness": [
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=7.861267317148919E-09 maxVelocity=5.796914039811765E-13 maxOrientationMatrix=1.887379141862766E-15 maxAngular=1.258635097526423E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ]
+    },
+    {
+      "gate": "florida-slab-solar-debug",
+      "witness": [
+        "FLORIDA_SOLAR_CONSUMER PASS launcher=sol sharedCanonicalScenario=true siteSlabSpacecraft=EQUAL manualHarnessSeparate=true planetFocus=PASS zoom=PASS overview=PASS celestialProgression=PASS physicalNonmutation=PASS",
+        "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=842979488835529 intervals=1200 support=600/600 peak=9.750102195815735E-05 maxPositionError=7.823248215211295E-09"
+      ]
+    },
+    {
+      "gate": "Simulation-debug",
+      "witness": [
+        "DEPARTURE_SCHEDULES PASS 6 equal-time host partitions / same frontier bits / moving frame",
+        "DEVELOPMENT_DETERMINISM PASS five host partitions / same exact stores and endpoint bits",
+        "ASSEMBLY_CONTACT_PRIVATE_NATIVE PASS 1200 intervals all native pose/velocity bits identical; canonical control unchanged",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=30 inputs=600 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=60 inputs=1200 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=150 inputs=3000 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=240 inputs=4800 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=0 inputs=40 budgetExhausted=40 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "POWERED_CONTACT_SCHEDULE fps=30 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=60 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=150 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=240 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=0 frontiers=1200 exactBits=PASS"
+      ]
+    },
+    {
+      "gate": "florida-slab-correctness-release",
+      "witness": [
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=7.861267317148919E-09 maxVelocity=5.796914039811765E-13 maxOrientationMatrix=1.887379141862766E-15 maxAngular=1.258635097526423E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ]
+    },
+    {
+      "gate": "florida-slab-solar-release",
+      "witness": [
+        "FLORIDA_SOLAR_CONSUMER PASS launcher=sol sharedCanonicalScenario=true siteSlabSpacecraft=EQUAL manualHarnessSeparate=true planetFocus=PASS zoom=PASS overview=PASS celestialProgression=PASS physicalNonmutation=PASS",
+        "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=842979565708772 intervals=1200 support=600/600 peak=9.750102195815735E-05 maxPositionError=6.0007553402613256E-09"
+      ]
+    },
+    {
+      "gate": "Simulation-release",
+      "witness": [
+        "DEPARTURE_SCHEDULES PASS 6 equal-time host partitions / same frontier bits / moving frame",
+        "DEVELOPMENT_DETERMINISM PASS five host partitions / same exact stores and endpoint bits",
+        "ASSEMBLY_CONTACT_PRIVATE_NATIVE PASS 1200 intervals all native pose/velocity bits identical; canonical control unchanged",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=30 inputs=600 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=60 inputs=1200 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=150 inputs=3000 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=240 inputs=4800 budgetExhausted=0 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "ASSEMBLY_CONTACT_SCHEDULE fps=0 inputs=40 budgetExhausted=40 ticks=20000000 publications=1200 debt=0 allFrontierBits=EXACT",
+        "POWERED_CONTACT_SCHEDULE fps=30 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=60 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=150 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=240 frontiers=1200 exactBits=PASS",
+        "POWERED_CONTACT_SCHEDULE fps=0 frontiers=1200 exactBits=PASS"
+      ]
+    }
+  ]
+}

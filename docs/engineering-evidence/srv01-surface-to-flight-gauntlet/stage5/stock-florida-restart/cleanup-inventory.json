@@ -1,0 +1,59 @@
+{
+  "paths": [
+    {
+      "path": "E:\\NovaCore\\build\\srv01-display-gap-population",
+      "files": 400,
+      "bytes": 106016279,
+      "disposition": "DISPOSE: results and exact source/reproduction inputs retained outside build"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-startup-first-present",
+      "files": 386,
+      "bytes": 103968588,
+      "disposition": "DISPOSE: results and exact source/reproduction inputs retained outside build"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-stage2-manual",
+      "files": 371,
+      "bytes": 103439190,
+      "disposition": "DISPOSE: results and exact source/reproduction inputs retained outside build"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-stage3",
+      "files": 1867,
+      "bytes": 388109071,
+      "disposition": "KEEP NOW: native DLLs/shaders used by the current build; retain pending next decision"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-stage4",
+      "files": 1536,
+      "bytes": 328974343,
+      "disposition": "DISPOSE: results and exact source/reproduction inputs retained outside build"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-stage5",
+      "files": 193,
+      "bytes": 33692955,
+      "disposition": "KEEP NOW: exact previous failing-population binaries directly referenced by the retained causal harness"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-stage5-closure",
+      "files": 53,
+      "bytes": 9556239,
+      "disposition": "DISPOSE: results and exact source/reproduction inputs retained outside build"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\srv01-stage5-stock",
+      "files": 1510,
+      "bytes": 327237644,
+      "disposition": "KEEP NOW: current stopped executable and logs for Project Control; prepared manual route not authorized to run"
+    }
+  ],
+  "removedFiles": 0,
+  "removedBytes": 0,
+  "totalFiles": 6316,
+  "totalBytes": 1400994309,
+  "newRoot": "E:\\NovaCore\\build\\srv01-stage5-stock",
+  "newFiles": 1510,
+  "newBytes": 327237644
+}

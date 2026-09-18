@@ -1,0 +1,305 @@
+{
+  "fullSolution": {
+    "Release": "PASS 0 warnings/errors",
+    "Debug": "PASS 0 warnings/errors"
+  },
+  "simulation": {
+    "Release": "78/78 registered groups PASS",
+    "Debug": "78/78 registered groups PASS"
+  },
+  "focused": "Debug/Release cheap, failures, physical, schedules, allocation, storage PASS",
+  "protected": "Debug/Release M14.17 focused graphics, assembly presentation, ReferenceFrames, Precision, BEPU dependency and 18 launcher tests PASS",
+  "exceptions": [
+    "New oracle authoring: owned-phase Observe correctly refused; moved after phase exit.",
+    "New oracle authoring: native normal is not exactly unit/up; corrected full native normal+tangent impulse formula, unchanged residual bar.",
+    "Launcher initial isolated depth incorrectly resolved repository; same binaries passed at normal five-parent layout.",
+    "Accidental full Debug Graphics run stopped when recognized; no full Graphics PASS claimed."
+  ],
+  "logs": [
+    {
+      "name": "allocation-debug-final.log",
+      "bytes": 498,
+      "sha256": "B33B0B50C34A9F355F239B378EDB88505F0042B172C04B54842FC04507B517CB"
+    },
+    {
+      "name": "allocation-release.log",
+      "bytes": 498,
+      "sha256": "B33B0B50C34A9F355F239B378EDB88505F0042B172C04B54842FC04507B517CB"
+    },
+    {
+      "name": "build-debug-2.log",
+      "bytes": 82,
+      "sha256": "746E9B56A80568830E9BD73AE930C8EF1F5229A9787CE96432425288E189E76E"
+    },
+    {
+      "name": "build-debug-3.log",
+      "bytes": 82,
+      "sha256": "A87347125AC2779B8B8F6942A64C265B69940E35FD3FC2138DD95D948C0604B4"
+    },
+    {
+      "name": "build-debug-4.log",
+      "bytes": 82,
+      "sha256": "BD8A1EA12AFFBEA7172DC681C77BC0210B552B443D02C7F27A262845E15463FF"
+    },
+    {
+      "name": "build-debug-5.log",
+      "bytes": 82,
+      "sha256": "C82E66DDEA0073EF9C452D5B8278C62E83A216646870E43A959640E82B25D444"
+    },
+    {
+      "name": "build-debug-final.log",
+      "bytes": 82,
+      "sha256": "C56256DC9ECEEFD35B0574AE0ED7F97D3E32B20C40142908B1AC3E6810FA364A"
+    },
+    {
+      "name": "build-debug.log",
+      "bytes": 82,
+      "sha256": "A21D91BB2B0EC09E79743E9845703CBCAB22FF854B8AC96E5631602307D37FF3"
+    },
+    {
+      "name": "build-release.log",
+      "bytes": 82,
+      "sha256": "A81C7701AB5428AD2D8315A7AAB950D82C4468B1BF9385E3230A9FBF1E771E1D"
+    },
+    {
+      "name": "cheap-debug-2.log",
+      "bytes": 1630,
+      "sha256": "0749A46B67513556D3C5EA4C6C75201170C6F713504834491F32EB660D424BAC"
+    },
+    {
+      "name": "cheap-debug-4.log",
+      "bytes": 1628,
+      "sha256": "58E1FD29825FE4C3945E3DCBFB640F635BD4C106085294123BDD9A92EB699A86"
+    },
+    {
+      "name": "cheap-debug-5.log",
+      "bytes": 442,
+      "sha256": "001297226541D144BFFE6ABF7DFB2AC02721321AF6DBA887B6E943872E2439C4"
+    },
+    {
+      "name": "cheap-debug-final.log",
+      "bytes": 551,
+      "sha256": "C9652E2ACEBFEE04C23E7F2BB51D03DA1EAF6C02D7B635CA80E63EA654660454"
+    },
+    {
+      "name": "cheap-debug.log",
+      "bytes": 970,
+      "sha256": "A39E59F20B2232E94DD4F48CF4F2BFA912C0D5313FC3F21FCF2B1D33BEC60504"
+    },
+    {
+      "name": "cheap-normal-diagnostic.log",
+      "bytes": 1649,
+      "sha256": "2009A476FE70B9F2B9649E323370F4E3ECDA9FA3E98FC50C4AF734DB34B913BC"
+    },
+    {
+      "name": "cheap-release.log",
+      "bytes": 551,
+      "sha256": "C9652E2ACEBFEE04C23E7F2BB51D03DA1EAF6C02D7B635CA80E63EA654660454"
+    },
+    {
+      "name": "failures-debug-final.log",
+      "bytes": 245,
+      "sha256": "F6E99C1BBFC4D3CCDC59FB0B58F2DB45E90510367957A4F9FAB651652B13A3C1"
+    },
+    {
+      "name": "failures-release.log",
+      "bytes": 245,
+      "sha256": "F6E99C1BBFC4D3CCDC59FB0B58F2DB45E90510367957A4F9FAB651652B13A3C1"
+    },
+    {
+      "name": "graphics-assembly-powered-storage-debug.log",
+      "bytes": 1767,
+      "sha256": "4003DD323BC6E8B480F9DB3D31C22A8278FFDB23E931C03EC3E258476855CFEC"
+    },
+    {
+      "name": "graphics-assembly-powered-storage-release.log",
+      "bytes": 1767,
+      "sha256": "BB70DB30477A83756A3E4EDE10DCC78DE40329F0A63B7B3BA09EF59BA76D6421"
+    },
+    {
+      "name": "graphics-assembly-powered-support-debug.log",
+      "bytes": 1632,
+      "sha256": "17D3CFA07403F2F13C5FC08246B7099212FE0E697063ABA166A884C0FABBE58D"
+    },
+    {
+      "name": "graphics-assembly-powered-support-release.log",
+      "bytes": 1633,
+      "sha256": "56D71307FA2E7173132A2AB3FD6D30C4CC8654F499D367B88B4162EF016C9785"
+    },
+    {
+      "name": "launcher-depth-corrected-debug.log",
+      "bytes": 647,
+      "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A"
+    },
+    {
+      "name": "launcher-depth-corrected-release.log",
+      "bytes": 647,
+      "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A"
+    },
+    {
+      "name": "live-1.log",
+      "bytes": 10253,
+      "sha256": "44283575D8B43BC84A7D8EBC2748AF6237955AF1F11FB0F3D7FB38C07131DCB4"
+    },
+    {
+      "name": "live-2.log",
+      "bytes": 10254,
+      "sha256": "5C7FFB76C1B40E87A3DD0BD712F8F72B56EE07B3A56FC1B6C4495C5066A54E31"
+    },
+    {
+      "name": "native-build-debug.log",
+      "bytes": 3736,
+      "sha256": "C4E72A9DB4B2AD7D5AFBE4BD2C08CF75D467D78A3A041997D7931CFA363C83CB"
+    },
+    {
+      "name": "native-build-release.log",
+      "bytes": 3736,
+      "sha256": "70AFBB3C7969EF3E680C3006FC3B7AABB6D8668F90C1B770A48E5020531B9513"
+    },
+    {
+      "name": "native-configure-debug.log",
+      "bytes": 633,
+      "sha256": "69C01A0FA470E549132086653475A4A27E7DD59FC92552FB56AE49F3DD01601E"
+    },
+    {
+      "name": "native-configure-release.log",
+      "bytes": 635,
+      "sha256": "D7726EAC2706FE2A20720FC9E97722870D6D8B80E26946DCBF8BEBF542B74483"
+    },
+    {
+      "name": "native-env.log",
+      "bytes": 241,
+      "sha256": "43CE651E3856CFAF3E45D33DB31B547EFC2ADBD3575F75EDF3683225AA7A6B0F"
+    },
+    {
+      "name": "NovaCore.BepuDependency.Tests-debug.log",
+      "bytes": 2215,
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00"
+    },
+    {
+      "name": "NovaCore.BepuDependency.Tests-release.log",
+      "bytes": 2215,
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00"
+    },
+    {
+      "name": "NovaCore.Graphics.Tests-debug.log",
+      "bytes": 152570,
+      "sha256": "6F2C15BF8B3E4FC949488B6B7971CDF29470FC6B5D1E7CD8952C904373AD5AC4"
+    },
+    {
+      "name": "NovaCore.Launcher.Tests-debug.log",
+      "bytes": 842,
+      "sha256": "10D65D2E07C67EA8E22099124C45A954D5FA78C2EAD461B3E125D63328300BF4"
+    },
+    {
+      "name": "NovaCore.Precision.Tests-debug.log",
+      "bytes": 693,
+      "sha256": "DB9B7E986ECF782B06A15280B01EF34008C37C3C9BF024863700D5569D8EA846"
+    },
+    {
+      "name": "NovaCore.Precision.Tests-release.log",
+      "bytes": 692,
+      "sha256": "1CF87155B8E1FEDC863F6ECF081FDC57B8357B30D48129CA7BCB005F36EF33AA"
+    },
+    {
+      "name": "NovaCore.ReferenceFrames.Tests-debug.log",
+      "bytes": 934,
+      "sha256": "3E475A107520F64E2C4973C42BC243EDE8BC86642FDAFB73965FBCE4741FEB5B"
+    },
+    {
+      "name": "NovaCore.ReferenceFrames.Tests-release.log",
+      "bytes": 934,
+      "sha256": "C696F1B2971853D6D5BB90B459585F66578228469C97662E8E3D8EB796BCF79B"
+    },
+    {
+      "name": "performance-release-1.log",
+      "bytes": 521,
+      "sha256": "30548F21FDC1A0EE4F1C7A66203D3A99088308889FA1AACF018B00E36DA98047"
+    },
+    {
+      "name": "performance-release-2.log",
+      "bytes": 524,
+      "sha256": "ACC1BD12142FE1827BB8A0170EC6530DD6AF3DBC73F47DDAB16827B3722ED338"
+    },
+    {
+      "name": "performance-release-3.log",
+      "bytes": 519,
+      "sha256": "C9BB2E3C048BC044EBAE269ADD64E485A01AFC1B2C8147026FA0D3C5BA3FF8D1"
+    },
+    {
+      "name": "physical-debug-final.log",
+      "bytes": 349,
+      "sha256": "081841E3929FA4982C5DE6CD96C9476D6D7EB826CEFC8ED6DAE921DC5D483CFD"
+    },
+    {
+      "name": "physical-debug.log",
+      "bytes": 349,
+      "sha256": "081841E3929FA4982C5DE6CD96C9476D6D7EB826CEFC8ED6DAE921DC5D483CFD"
+    },
+    {
+      "name": "physical-release.log",
+      "bytes": 349,
+      "sha256": "081841E3929FA4982C5DE6CD96C9476D6D7EB826CEFC8ED6DAE921DC5D483CFD"
+    },
+    {
+      "name": "regression-assembly-presentation-debug.log",
+      "bytes": 7011,
+      "sha256": "22F9CC89EA3FC73A137F61AD39D18931853A4687B4C85D48FCB7645A106357C0"
+    },
+    {
+      "name": "regression-assembly-presentation-release.log",
+      "bytes": 7006,
+      "sha256": "6710408CDEFBE13DA01628B3A95D49ABFD3F3DA2B91BB50559BA7C62E7561282"
+    },
+    {
+      "name": "regression-certified-continuation-regression-debug.log",
+      "bytes": 13295,
+      "sha256": "72321F80DA447CA6777990F4607BF14E0575D951BB2B85DE7EC41B6F98E16C9A"
+    },
+    {
+      "name": "regression-certified-continuation-regression-release.log",
+      "bytes": 13295,
+      "sha256": "6F2ADD8EBCC2BEBFA9B46C65C6A565343097ED9EAF6DF489AB584C2D1508EDD3"
+    },
+    {
+      "name": "schedules-debug-final.log",
+      "bytes": 366,
+      "sha256": "A6389DE9DEE4784E1FB9019D540B660B575AB72CC3285D65BFEE7660E0F4CAE9"
+    },
+    {
+      "name": "schedules-release.log",
+      "bytes": 366,
+      "sha256": "A6389DE9DEE4784E1FB9019D540B660B575AB72CC3285D65BFEE7660E0F4CAE9"
+    },
+    {
+      "name": "simulation-full-debug.log",
+      "bytes": 58448,
+      "sha256": "69BEDDCA0D3D1038FA8591997B86AB15C3C84B3C4F7AC6170D77D02B928C8BF8"
+    },
+    {
+      "name": "simulation-full-release.log",
+      "bytes": 58443,
+      "sha256": "D5C85D19BCAB2057657F2F305079CBDD5E74FAB9CABFCE19E8101A7E0E7C0DF8"
+    },
+    {
+      "name": "solution-debug.log",
+      "bytes": 82,
+      "sha256": "5E9A300081B117ED924B0F9BA5578E6643E7DD5DBD4D05410D56132023EFB7F6"
+    },
+    {
+      "name": "solution-release.log",
+      "bytes": 82,
+      "sha256": "04DCAA625C93F25BFEAE9A8B35C6715CC5E66A15FBCE6B76A4EF4148849512A4"
+    },
+    {
+      "name": "storage-debug-final.log",
+      "bytes": 264,
+      "sha256": "13873239C1BE4C7ACB2403D61653CB267A81EFEB606CBC7F152463F1C4919503"
+    },
+    {
+      "name": "storage-release.log",
+      "bytes": 264,
+      "sha256": "648A7A1C32633E1FAA646D09D6BFE21676DC043DC83EA9A9D9E904C51B88A986"
+    }
+  ]
+}

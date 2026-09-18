@@ -1,0 +1,357 @@
+{
+  "head": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "originMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "codex/srv01-supported-contact-admission",
+  "tags": [
+    "3ceaff9c9f1a3ac4fa5cb8fcb62d02a6d3d0dd94 refs/tags/m11b-7h1-gpu-terrain-baseline",
+    "ed1a3fbe764ea6141ebdfa988a6fdd4d167e0372 refs/tags/m12b-procedural-surface-baseline",
+    "2ca86cce99b70a56ac0a58e6f891392a09cd723b refs/tags/m12c-phase1b-stable",
+    "b65d73b15460ec356ae6e67dcb14cd8f4f8945ca refs/tags/m12d-p2s2-foundation",
+    "827cb9b7f329337bb72bce28abad5d585d837524 refs/tags/m12d-p2s3-gpu-runtime",
+    "a9f3e3172617708c3b5c0eef59d5290f91a2abec refs/tags/m12d-p2s4-canonical-terrain",
+    "6409949114f3797471b131d8005b7feac7d3fd54 refs/tags/m12d-p2s5b-production-topology",
+    "a90b024777e3b8fe8259dc7b0fa15b4a9e0f349b refs/tags/m12d-p2s5c1-interactive-billboard",
+    "37e74ad58bf53a03c35c3abeff256803dbcb4443 refs/tags/m12d-p2s5c2-moving-billboard",
+    "b04c5f3415ff4f4c5e30ca8d87515f8b610eaef4 refs/tags/m12d-p2s5c3-production-billboard-stabilization",
+    "724b779917f1cac665f6537b18edbfd70a6bfe8a refs/tags/m12d-p2s5f-new-earth-renderer",
+    "b9eb5e0628cf84f7d83c896c2fd962b426780147 refs/tags/m12d-p2s5g-surface-workload-efficiency",
+    "5d7efb2f035ccf22700b03380b4193fc82220f8a refs/tags/m12d-p2s5h-earth-route-convergence",
+    "b534d149b74b0ca854e4fb09267fc84321cc52ff refs/tags/m13.1-ncsm1-tes-hotpath",
+    "add1c94658c1de869124c75606ce0a084c77ba25 refs/tags/m13.2-ordinary-terrain-shading",
+    "bb08cba20947f863391649e68e2e4fe7035520db refs/tags/m13.3-prepared-physical-terrain",
+    "668efe2b06d2fcc907a0f46674c493b7670a2751 refs/tags/m13.4-zero-contribution-terrain-material-noise",
+    "75712e4bc990e11c3072a37299c55187cc30e0a1 refs/tags/m13.5-local-gpu-terrain-working-data",
+    "81dadf42fa9e91d8f946ebc30c3cbe3b621761fe refs/tags/m13.6-cpu-cached-terrain-residency-keys",
+    "3ccb998031e15cb1898394589c27244d55e06e24 refs/tags/m14.1-canonical-surface-point-queries",
+    "b07c511aab7109e3d240d9c7c31a444f58e069a5 refs/tags/m14.10-certified-root-contact-kinematics",
+    "8ac99fbfad4f8dd6365d696053fc3edfeea2249d refs/tags/m14.11-certified-response-proposal",
+    "98831b08e07d1bcc251f7aa900f463b98570ef04 refs/tags/m14.12-certified-preimpact-velocity",
+    "7c94f38cab9cf605c69b3b1874fee0c0091fbbb2 refs/tags/m14.13-certified-postimpact-velocity",
+    "412084a0acda2fa96c4be166e1f9f29020ffc577 refs/tags/m14.14-private-root-postimpact-state",
+    "6da3eba1410b05ea46a133bb2cf1c81425f8bf72 refs/tags/m14.15-private-canonical-propagation",
+    "a864be12e42cb98cbd38c17905833f781a579253 refs/tags/m14.16-postimpact-terrain-clearance",
+    "3f48fe441ac54458e9b413a909fae134abb112de refs/tags/m14.17-certified-continuation-publication",
+    "2faa9e568ef5f1e723f22d9635447179e4585053 refs/tags/m14.18-staged-finite-body-bepu-contact",
+    "684ed841de1432e89772282d8951f7cd8f70a625 refs/tags/m14.19-persistent-bepu-contact-publication",
+    "ae2f203b97224ff88b38b7c68902ac2d31108a91 refs/tags/m14.2-spacecraft-translational-authority",
+    "ac96f952b9c44220cd93042c0d7c6e8e07d227d5 refs/tags/m14.20-host-paced-canonical-contact-servicing",
+    "d8c13e46a9272e5ef6eb89acbe23c29709e3c55b refs/tags/m14.21-authored-compound-spacecraft-contact",
+    "e943a128ef425ff7427b917f2bb04056e58282f5 refs/tags/m14.22-canonical-spacecraft-command-authority",
+    "cd22cc96d88d2b6cf3ca48740ad41baecbbe7c9e refs/tags/m14.23-prepared-single-engine-actuation",
+    "50aa4e984e6646a9334e4e87356a43ffdf138e73 refs/tags/m14.24-exact-finite-propellant-segmentation",
+    "b9ad79c38b322c8e1e095039d5b69c035a1bcca8 refs/tags/m14.3-spacecraft-terrain-contact-observations",
+    "b198d3b381ba4a82577ba89bd5e31e6050d3a896 refs/tags/m14.4-atomic-contact-response",
+    "c2964fe4531b8e383d2d89beec2e8c055f3541a5 refs/tags/m14.5-isolated-analytical-contact-response",
+    "07adc9983252f2cabf0af9da0a1281457af606bf refs/tags/m14.6-physical-event-epochs",
+    "315da29c4eff5562f9040f7a0aedbb4e961fa877 refs/tags/m14.7-exact-event-spacecraft-motion",
+    "27a32989cef714a204d0d7ecfbd4618e53de0086 refs/tags/m14.8-exact-event-earth-relative-observation",
+    "944cb5c1f2011b5944745b210e561d0b9e8b4aaf refs/tags/m14.9-florida-monotone-contact-certification",
+    "72c387e0bbe512a569650978522bbb3a0022ffc3 refs/tags/m15.0-segmented-powered-free-flight",
+    "a1852cc3113b40763544968ea65a346530f54d17 refs/tags/m15.1-finite-fuel-retained-powered-contact",
+    "eb86bab80bdcae1f2c745ae82f3a016d71c260b4 refs/tags/m15.2-srv01-reusable-production-spacecraft-integration",
+    "88a108cafaab3b030c0e48568d98330dd07607b7 refs/tags/milestone-10A",
+    "5ba3f5bdb97cb7efa831b8be3a681894a0338228 refs/tags/milestone-10A-2A-2",
+    "14693e902933430df890b5a0e39170a5b247eb97 refs/tags/milestone-10A-3",
+    "52762291bf25446cd2c37594d74302eebd1dd4f7 refs/tags/milestone-10A-4",
+    "c485b158ee8e35e105aaf452afd8b8ff3890a870 refs/tags/milestone-10A-5",
+    "a9d15d10d5e077d74807bed196c3ea5e9bb03e00 refs/tags/milestone-10A-6",
+    "dfa242e0c67574b8659de1ecd1c742e1daabd89b refs/tags/milestone-10A-7",
+    "f95eed79f60201f2ffce78533fe205bee2ebbabc refs/tags/milestone-10B-1",
+    "15cd78446c87be9423aaa2067068bcb6360f57b1 refs/tags/milestone-10B-2A",
+    "209954827f6c824bc7e6d796a781d72aa6e983e8 refs/tags/milestone-10B-2B",
+    "f1ecd38f2211ee98566b35dec6d92b37a3d47b7a refs/tags/milestone-11A",
+    "16dbfd0f3e7b438101781d3d6d0642272efb7b2a refs/tags/milestone-11B-7F",
+    "4a022dbeac91708b69d5f77fb6034da06f40bbf1 refs/tags/milestone-9A-4E-3",
+    "586dc57df705a4a0f1a5812c114aa981c3e500d1 refs/tags/milestone-9A-4E-5A",
+    "3f26635d2da0e4dd5773589a4299eb82fc0c8ca8 refs/tags/milestone-9A-celestial-v3",
+    "4997e30bd40ebae011a20dd6b58c88a9caed7a6c refs/tags/v0.2.0",
+    "764637f7662420e7c3494aee8c9e748b04db6626 refs/tags/v0.2.1",
+    "18c8a6d2e78e1b8a2bfaddd88dba955bf00b1631 refs/tags/v0.3.0",
+    "435e4cab66df0ce6885c84282ca014295e2c3cdd refs/tags/v0.4.0",
+    "141f7f623220ec3f0d5a79b30cebdcb48605a76a refs/tags/v0.4.1-docs",
+    "3759e1df199ae28acfc51376fa89295730798cad refs/tags/v0.5.0"
+  ],
+  "preexistingUntracked": [
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/README.md",
+      "sha256": "695FBD92436D5CFEE1F68B6CB3F0BA9B52D66EE51A78AD275A96BD51C5BE74D2"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/cleanup.md",
+      "sha256": "AFCA5E359733AE81B4488809750A4D2EC9F9FBAD1AB9A859DE978E52027F090A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/closeout.json",
+      "sha256": "D999F655F22A7A61AECFA31EC522B6EAB854C2605B2127029383E1D709230E48"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/disposable.json",
+      "sha256": "408628C55776D52218D59161993DFD6C1356459A563E04D2459996A7EA00414C"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/identity.json",
+      "sha256": "1E0352415F16C5C26ECE8BED50877F47F97B2B25D93AF61700F28AEA3A636E98"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/measurements.json",
+      "sha256": "8072661FBD9F06E23776AB420D634FF4F1A4C181F4285EBDC77BE748C8CA256F"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/ownership-readiness.md",
+      "sha256": "CDC5322AEF286817E78A9C125F9A9A9A90D9C87A6AFB6D2C3B6BA29AED68F4FE"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/prepare-diagnostic.py",
+      "sha256": "12BCF3A5BC391A9ACA1D062A8AAED7B93675BFF1F2B9AB8423278BAB40816506"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/repo-truth.json",
+      "sha256": "68E9D0FDAC712D5754A378A531D627222417E4FF984954CCC6E8FFB564AC46EA"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/reproduce.md",
+      "sha256": "89D895125BF8DB83987F51C95761CD28B3C84499770AD883E5D352B59AE411DB"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/summarize.py",
+      "sha256": "ECEB165D771E7F12B5AD75E709F67ECDF9130D87C6EB6E39DA0D251D8E5609C3"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.2-production-remeasurement/verification.md",
+      "sha256": "09667452FCBC0E508C15041D7E4662F86009C4F3564E1A0678F94817B01401C3"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "sha256": "F9F8C81D7F8C1DC94F8C80F3F62D857593A5F3D2B0E4150EDCC4CA595E414C48"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "sha256": "C71E2149375B41C29DA6D3177FBE7137C6443E9006508740B85AA6BA118F5D1D"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/README.md",
+      "sha256": "E5E53CCB7A552AD56B2B177785530D9C7E4F205C371BE7E213F90D49BE9B8B00"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/admission-contract.md",
+      "sha256": "607B7BCE64040EAF45FEF8A12976FA15C61FE34C8867B1BF599E906D8A42CE33"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/closeout.json",
+      "sha256": "3854C5C0CC04258F460404238E4369EBF3AAB79BFA30A5D43D5507740B4DEC1C"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/equivalence-matrix.md",
+      "sha256": "2B60C4E9EDDFC6DCE959CC67ECFC664E08E43BA6DD1975A2937DC46F475156C8"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/failure-invalidation.md",
+      "sha256": "F8A7E6723E4768838D37D08731AD6420E2DBE47DC66213ADDF3E04FC1D81610A"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/file-impact.md",
+      "sha256": "84349A4A82CEF4C06C7E7F3FB74E03BFD15AF04B68F4CF7DEEC48F57C71D9984"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/identity.json",
+      "sha256": "E8B244A294201DD8966FC9876D37979E08449AC11B533A3A1C82230B474C8200"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/implementation-slice.md",
+      "sha256": "DAAC991B26C55F70794E3272C50BBCE3B50E0DB9241B39D2CBD8EB7788936A66"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/ksa-current-owner-map.md",
+      "sha256": "9A254166552D8C7C100FF6992151CC7060CA05413101E301FE578373DA4F3469"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/ksa-live-history.md",
+      "sha256": "DC00663EF8AA684BBBB7FE645BDC010B6B69D0BC0B336871808C2F94A9BBF469"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/ksa-supersession-check.md",
+      "sha256": "0FBB71972071A821816C830BDD1B2FB63646C7530EF994EF6B4DD6AE8F5DB2D5"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/mass-resource-publication.md",
+      "sha256": "E4AEEA1C231B644145947368F0CD1071CBCB76E047FED65B4B73C1138FD9E037"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/novacore-owner-map.md",
+      "sha256": "B6DD880B9BDDF23AFD7375D8862EA573006614912FC5187C07C4D1E519A529C0"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/qualification-plan.md",
+      "sha256": "0AF20E1BB9281AB9C66B0B0F6E80A531CDE938D153961116B0737B66BB28B592"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/repo-truth.json",
+      "sha256": "33801DDB38165589023F1979D61AD99CE110A013E1E8F6E53BEE6FA0879F9C1A"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/reproduce.md",
+      "sha256": "B343A12DE9065DBCB9EB80FC3FB1C3A9DCB180C6CC3250CAB502A95845D837DB"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-supported-contact-admission-design/verification.md",
+      "sha256": "EF42B908C457F410CBB2DB4A176663AE17571C92B070E1AE8A7BAA1A6631A920"
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "sha256": "45D6A9966A89962BBBE0CA167FD62A07E39FE74B37621C73FF4558F852A44D0C"
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "sha256": "BC6A94CE816093A0A72C27975DB20C7F22F5F7EB9A36DC28ABE49837A8C019FE"
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "sha256": "BF7D6144200EAE6EDDA286B19C0AA83E3D262F0E1ED956FE881E3B9333313AD7"
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "sha256": "9768C62CFC86E4EF8A090CA1EE8F4E1DEC9DA9486A8EA5E63C3075953D47180C"
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "sha256": "2D9A9B426232826FE19D1678AEF8FEADB7A241B4ABBA5FA9A9B201325D5B58C3"
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "sha256": "25D48B0A2C5E8EFA243DEE627A17685D16A4F2DDC7C84337559BDDDB1D6CE81F"
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "sha256": "F46F7B4215CD7C4311233DEB3B36434798941B602478ED9AB20539BFF3A2263B"
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "sha256": "8923E3630C2D44DB6DD9B13E41FEA51CD847403BEE3F9EDFCE56543D5609E364"
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "sha256": "5CB5AC5616369CC6F399C323B9C6351EAB0D4E2253BBBF08C6F8E317A7C06E00"
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "sha256": "41EAD10AB96F1E1987AC847109D442E158B290F82CFB6F598047ADA3C1DEFA62"
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "sha256": "6F5440BD5D0C28487E48591C88D6A21761514823E5855F4598072D679E5AD433"
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "sha256": "6C0F70CDDE3DCD6EFDE8904A9CB592AA4517C2C5793627C665984AF6BC9BFABA"
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "sha256": "16A305F5992222FE8A998B3C052DA505D439E863B140CDBB9951DE7D3A17DCE5"
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "sha256": "EA6FA514E054B018868F3A6266C036C1E426126EA18507C9AE31B514962E1F6A"
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "sha256": "031471F49DE563EBCC56CEEF5DC3817C2506226858E4B09A8898978D9853B075"
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "sha256": "D55E23207DD1FB93B51B097CAAFC3003E733DD4D8B281E66884078B3372E0CE2"
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "sha256": "4CD4B3C87F0DF2F833772A2FA1E03AB4BE69E4EC8CF449BE7F75D1CC99F3298F"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "sha256": "255BBF8B40BC0558CA51CC4314705D3BE7BD15E3509749086C6918483EA9E585"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "sha256": "9303CF44C330801D9E73B52A905E780762D69538B6B8131840F190CABAA31E4E"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "sha256": "4ADADD439E0BC32E2A67504DE8568997D418582C7906F3EFE7E52ED9F1A3146D"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "sha256": "2DF837472BF5AAB7E7320F7E191A50D28F5F0074B6F6F43BB00714C00FD739E6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "sha256": "466650DDEA93B66B73216F0470AC59C4A28693372CBEB0F95EB5FE9E41A8D497"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "sha256": "25CC007BFDD7E09929527F566A908945A86EDD4D3F341E46D4AF24438A0DB363"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "sha256": "AAD2D98BC7EBA715FF9E6E9A30DE798BF6D33B95EEA6BA2F9176CEE2BA51CF1C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "sha256": "E8EB8AF4105E9C97475DF9CF8AE53CBA68BA23A71EF9B9AA7749C0B97A9891B3"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "sha256": "DF5F0D2378AC6A50EEA2133D2C9F38584E623F7679DF7CD2EB827FD971BA97EB"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "sha256": "85D493C3748A3BE0D9BCD57C6DB01DB16FE29B56D39AC6D6B749E4DB434D8E5A"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "sha256": "1AA52F7883FC10B4657DD0A86097FA2E28A9C09145CE6135771F410222B9E2A6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "sha256": "70B12C49D710E6B8BED292B4743469F4479822E01A2BFC3621BBFA79F848961C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "sha256": "F3E079029EF026043F6F995149EDDE307EA688A4AC12EB121B9F2E32ECDD9396"
+    }
+  ],
+  "ksa": [
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.dll",
+      "bytes": 4936792,
+      "product": "2026.9.10.5438+c9291b5dd3347e847020c8fb3dd11dfce6a728e9",
+      "sha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\BepuPhysics.dll",
+      "bytes": 880640,
+      "product": "2.5.0-beta.29+f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\BepuUtilities.dll",
+      "bytes": 163328,
+      "product": "2.5.0-beta.29+f73164bb3c9ca733eb3329f1f6b1cea4e216ece7",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\KSA.deps.json",
+      "bytes": 73752,
+      "product": null,
+      "sha256": "23FCAA825C40F828349310C8DC480F292F9BE65DE6C4D378B36FBA64F7EE37B3"
+    },
+    {
+      "path": "E:\\Kitten Space Agency\\Content\\Versions\\v2026.9.X.5438.json",
+      "bytes": 21758,
+      "product": null,
+      "sha256": "67B3CB67A10FB12ACC46E9403E06E3AD5B209D1B5EAFB0D8286A20DB65D6E8D3"
+    }
+  ],
+  "acceptedDesign": "docs/engineering-evidence/srv01-supported-contact-admission-design",
+  "stage": 1,
+  "newDisposableRoot": "E:\\NovaCore\\build\\srv01-surface-to-flight-stage1",
+  "evidenceBudgetBytes": 262144
+}

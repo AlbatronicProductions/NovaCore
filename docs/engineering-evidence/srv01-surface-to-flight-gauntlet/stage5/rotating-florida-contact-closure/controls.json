@@ -1,0 +1,1056 @@
+{
+  "results": [
+    {
+      "mode": "canonical",
+      "peak": 0.01904372859831338,
+      "settledHeight": 0.017571673420194722,
+      "speed": 0.13725863223254325,
+      "angular": 0.08135181486576688,
+      "drift": 0.046097076867651327,
+      "compliant": 0,
+      "firstCompliant": 0,
+      "regressions": 0,
+      "final": {
+        "PositionO": {
+          "X": -0.005514223376111688,
+          "Y": -0.012993577971503106,
+          "Z": 0.00475202257594932,
+          "LengthSquared": 0.00022182144650551936,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.13680320220602227,
+          "Y": -0.0018795684388216859,
+          "Z": -0.011012865703827182,
+          "LengthSquared": 0.018839932122348562,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 0.0007979676471914103,
+          "Y": -0.0011924810650682542,
+          "Z": 0.7082623223065352,
+          "W": 0.7059478904547397,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": -0.0002068077434545408,
+          "Y": 0.006575534975447907,
+          "Z": -0.08108537076623575,
+          "LengthSquared": 0.00661811778195401,
+          "IsFinite": true
+        }
+      },
+      "height": -0.014560651361285926,
+      "nativePose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 0.0014074598,
+          "Y": -0.00027896313,
+          "Z": 0.0016365505,
+          "W": 0.9999977
+        },
+        "Position": {
+          "X": -0.0055154143,
+          "Y": 1.6873702,
+          "Z": 0.004753046
+        }
+      },
+      "nativeVelocity": {
+        "Linear": {
+          "X": 0.1368327,
+          "Y": -0.0018794652,
+          "Z": -0.011015241
+        },
+        "Angular": {
+          "X": -0.0065299557,
+          "Y": -6.9849193e-10,
+          "Z": -0.08108932
+        }
+      },
+      "worldIdentity": {
+        "Item1": 1,
+        "Item2": 1200,
+        "Item3": 0,
+        "Item4": 0,
+        "Item5": false,
+        "Item6": false
+      },
+      "qualification": "DIAGNOSTIC ONLY; count uses all inherited support predicates; raw modes do not publish"
+    },
+    {
+      "mode": "raw-full",
+      "peak": 0.01904372859831338,
+      "settledHeight": 0.017571673420194722,
+      "speed": 0.13725863223254325,
+      "angular": 0.08135181486576688,
+      "drift": 0.046097076867651327,
+      "compliant": 0,
+      "firstCompliant": 0,
+      "regressions": 0,
+      "final": {
+        "PositionO": {
+          "X": -0.005514223376111688,
+          "Y": -0.012993577971503106,
+          "Z": 0.00475202257594932,
+          "LengthSquared": 0.00022182144650551936,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.13680320220602227,
+          "Y": -0.0018795684388216859,
+          "Z": -0.011012865703827182,
+          "LengthSquared": 0.018839932122348562,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": 0.0007979676471914103,
+          "Y": -0.0011924810650682542,
+          "Z": 0.7082623223065352,
+          "W": 0.7059478904547397,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": -0.0002068077434545408,
+          "Y": 0.006575534975447907,
+          "Z": -0.08108537076623575,
+          "LengthSquared": 0.00661811778195401,
+          "IsFinite": true
+        }
+      },
+      "height": -0.014560651361285926,
+      "nativePose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": 0.0014074598,
+          "Y": -0.00027896313,
+          "Z": 0.0016365505,
+          "W": 0.9999977
+        },
+        "Position": {
+          "X": -0.0055154143,
+          "Y": 1.6873702,
+          "Z": 0.004753046
+        }
+      },
+      "nativeVelocity": {
+        "Linear": {
+          "X": 0.1368327,
+          "Y": -0.0018794652,
+          "Z": -0.011015241
+        },
+        "Angular": {
+          "X": -0.0065299557,
+          "Y": -6.9849193e-10,
+          "Z": -0.08108932
+        }
+      },
+      "worldIdentity": {
+        "Item1": 1,
+        "Item2": 0,
+        "Item3": 0,
+        "Item4": 0,
+        "Item5": false,
+        "Item6": false
+      },
+      "qualification": "DIAGNOSTIC ONLY; count uses all inherited support predicates; raw modes do not publish"
+    },
+    {
+      "mode": "zero-rotation",
+      "peak": 0.01907910194630702,
+      "settledHeight": 0.016721926739593718,
+      "speed": 0.1311751231647706,
+      "angular": 0.07774892043400088,
+      "drift": 0.04402555469221754,
+      "compliant": 0,
+      "firstCompliant": 0,
+      "regressions": 0,
+      "final": {
+        "PositionO": {
+          "X": -0.004879666800498524,
+          "Y": -0.013037925692072674,
+          "Z": -0.000231387640794549,
+          "LengthSquared": 0.0001938521946762087,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.1311559396407043,
+          "Y": -0.0018425723871192737,
+          "Z": -0.001279594175859719,
+          "LengthSquared": 0.017206912937292734,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": -4.272450181858332e-05,
+          "Y": 5.415826821508185e-05,
+          "Z": 0.7081286001853514,
+          "W": 0.7060834800793981,
+          "IsFinite": true,
+          "LengthSquared": 1
+        },
+        "AngularVelocityBody": {
+          "X": 1.2843681332558093e-05,
+          "Y": 0.0007571133706515048,
+          "Z": -0.07774523292804794,
+          "LengthSquared": 0.006044894628652599,
+          "IsFinite": true
+        }
+      },
+      "height": -0.013818409298698153,
+      "nativePose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": -6.8506466e-05,
+          "Y": 8.084894e-06,
+          "Z": 0.0014461183,
+          "W": 0.999999
+        },
+        "Position": {
+          "X": -0.004880719,
+          "Y": 1.6873258,
+          "Z": -0.00023143747
+        }
+      },
+      "nativeVelocity": {
+        "Linear": {
+          "X": 0.13118422,
+          "Y": -0.0018424906,
+          "Z": -0.00127987
+        },
+        "Angular": {
+          "X": -0.00075838907,
+          "Y": -2.910383e-11,
+          "Z": -0.07774522
+        }
+      },
+      "worldIdentity": {
+        "Item1": 1,
+        "Item2": 0,
+        "Item3": 0,
+        "Item4": 0,
+        "Item5": false,
+        "Item6": false
+      },
+      "qualification": "DIAGNOSTIC ONLY; count uses all inherited support predicates; raw modes do not publish"
+    },
+    {
+      "mode": "flat-local",
+      "peak": 0.01905944999692033,
+      "settledHeight": 0.016707423563664836,
+      "speed": 0.13114589875802946,
+      "angular": 0.077730991568767,
+      "drift": 0.04400884040998318,
+      "compliant": 0,
+      "firstCompliant": 0,
+      "regressions": 0,
+      "final": {
+        "PositionO": {
+          "X": -0.004871897567648784,
+          "Y": -0.0130248126752177,
+          "Z": -0.0002308017025381044,
+          "LengthSquared": 0.00019343440056006827,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": 0.1311267845832527,
+          "Y": -0.001839540546752012,
+          "Z": -0.0012764076486012613,
+          "LengthSquared": 0.01719924676105131,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": -4.262555047941808e-05,
+          "Y": 5.4013018829532286e-05,
+          "Z": 0.7081269282459292,
+          "W": 0.7060851568746089,
+          "IsFinite": true,
+          "LengthSquared": 1.0000000000000002
+        },
+        "AngularVelocityBody": {
+          "X": 1.2805343832851361e-05,
+          "Y": 0.0007552180640569997,
+          "Z": -0.07772732165694775,
+          "LengthSquared": 0.006042107050263727,
+          "IsFinite": true
+        }
+      },
+      "height": -0.013803998493421066,
+      "nativePose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": -6.8333786e-05,
+          "Y": 8.052156e-06,
+          "Z": 0.0014437503,
+          "W": 0.9999989
+        },
+        "Position": {
+          "X": -0.004872948,
+          "Y": 1.687339,
+          "Z": -0.00023085141
+        }
+      },
+      "nativeVelocity": {
+        "Linear": {
+          "X": 0.13115506,
+          "Y": -0.001839459,
+          "Z": -0.0012766828
+        },
+        "Angular": {
+          "X": -0.0007564883,
+          "Y": 0,
+          "Z": -0.07772731
+        }
+      },
+      "worldIdentity": {
+        "Item1": 1,
+        "Item2": 0,
+        "Item3": 0,
+        "Item4": 0,
+        "Item5": false,
+        "Item6": false
+      },
+      "qualification": "DIAGNOSTIC ONLY; count uses all inherited support predicates; raw modes do not publish"
+    },
+    {
+      "mode": "stock-local",
+      "peak": 9.573634067638892e-05,
+      "settledHeight": 7.805452374398669e-05,
+      "speed": 3.7391090706191823e-06,
+      "angular": 2.1928465893355694e-06,
+      "drift": 1.601069504782939e-07,
+      "compliant": 600,
+      "firstCompliant": 601,
+      "regressions": 0,
+      "final": {
+        "PositionO": {
+          "X": 1.872942863023752e-07,
+          "Y": -7.801076198954426e-05,
+          "Z": -8.63338787259685e-08,
+          "LengthSquared": 6.085721518877621e-09,
+          "IsFinite": true
+        },
+        "VelocityO": {
+          "X": -4.23723039593244e-07,
+          "Y": -1.8285619939732686e-07,
+          "Z": 1.1001329046345581e-07,
+          "LengthSquared": 2.2508052801876948e-13,
+          "IsFinite": true
+        },
+        "BodyToWorld": {
+          "X": -6.605557964222929e-10,
+          "Y": 2.1715493469242267e-09,
+          "Z": 0.7071067599463917,
+          "W": 0.7071068024267028,
+          "IsFinite": true,
+          "LengthSquared": 1.0000000000000002
+        },
+        "AngularVelocityBody": {
+          "X": 2.889595526310759e-15,
+          "Y": -6.471671500945327e-08,
+          "Z": 2.4926060873626976e-07,
+          "LengthSquared": 6.631910426919057e-14,
+          "IsFinite": true
+        }
+      },
+      "height": -7.802742315954347e-05,
+      "nativePose": {
+        "Orientation": {
+          "IsIdentity": false,
+          "X": -2.0026008e-09,
+          "Y": 1.0684338e-09,
+          "Z": -3.0038116e-08,
+          "W": 1
+        },
+        "Position": {
+          "X": 2.4987582e-07,
+          "Y": 2.741624,
+          "Z": -9.0506106e-08
+        }
+      },
+      "nativeVelocity": {
+        "Linear": {
+          "X": -6.8337835e-07,
+          "Y": -1.8285618e-07,
+          "Z": 1.7742883e-07
+        },
+        "Angular": {
+          "X": 6.4716716e-08,
+          "Y": -1.9058241e-21,
+          "Z": 2.492606e-07
+        }
+      },
+      "worldIdentity": {
+        "Item1": 1,
+        "Item2": 0,
+        "Item3": 0,
+        "Item4": 0,
+        "Item5": false,
+        "Item6": false
+      },
+      "qualification": "DIAGNOSTIC ONLY; count uses all inherited support predicates; raw modes do not publish"
+    }
+  ],
+  "stockInput": {
+    "mode": "stock-local",
+    "Authority": {
+      "BodyId": 6,
+      "Terrain": {
+        "SourceId": 2,
+        "Version": 5,
+        "IsValid": true
+      },
+      "PhysicalGeneration": 4,
+      "ReferenceRadiusMetres": 6371008.8,
+      "GlobalSha256": "4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317",
+      "RegionalSha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+      "CompositionIdentity": 86364352542676184,
+      "FacilitySupportIdentity": 5597594574148789740,
+      "QueryPolicyVersion": 1
+    },
+    "Digest": "4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290",
+    "OriginBodyFixed": {
+      "X": 913158.4223759136,
+      "Y": 3050578.137596519,
+      "Z": 5518159.327603761,
+      "LengthSquared": 40589967642758.31,
+      "IsFinite": true
+    },
+    "LocalToBodyFixed": {
+      "X": 0.5087648724154991,
+      "Y": 0.07042666844321097,
+      "Z": -0.04180931337232564,
+      "W": 0.8570007994648348,
+      "IsFinite": true,
+      "LengthSquared": 1.0000000000000002
+    },
+    "Mu": 398600435507022.6,
+    "f0": {
+      "Epoch": {
+        "Ticks": 0,
+        "SecondsSinceEpoch": 0
+      },
+      "Position": {
+        "X": -5270974.75875348,
+        "Y": -1871033.3406329644,
+        "Z": 3050578.137596519,
+        "LengthSquared": 40589967642758.31,
+        "IsFinite": true
+      },
+      "Velocity": {
+        "X": 136.4379126343022,
+        "Y": -384.3655420139789,
+        "Z": 1.6237513762668097e-05,
+        "LengthSquared": 166352.1738917055,
+        "IsFinite": true
+      },
+      "Orientation": {
+        "X": 0.7915325514529246,
+        "Y": -0.5589567183967302,
+        "Z": -0.14251991759564056,
+        "W": 0.20182091080488535,
+        "IsFinite": true,
+        "LengthSquared": 0.9999999999999999
+      },
+      "Omega": {
+        "X": -2.9030875231159892e-12,
+        "Y": 3.491614592575382e-05,
+        "Z": -6.401841061959949e-05,
+        "LengthSquared": 5.317494144568192e-09,
+        "IsFinite": true
+      },
+      "Alpha": {
+        "X": 7.51436779331513e-17,
+        "Y": -1.8585106537443353e-16,
+        "Z": -1.0136463986552819e-16,
+        "LengthSquared": 5.046198104920136e-32,
+        "IsFinite": true
+      }
+    },
+    "f20": {
+      "Epoch": {
+        "Ticks": 20000000,
+        "SecondsSinceEpoch": 20
+      },
+      "Position": {
+        "X": -5268240.395793649,
+        "Y": -1878718.6589066838,
+        "Z": 3050578.137921099,
+        "LengthSquared": 40589967642758.31,
+        "IsFinite": true
+      },
+      "Velocity": {
+        "X": 136.99833488237357,
+        "Y": -384.16614913562523,
+        "Z": 1.6220649803247692e-05,
+        "LengthSquared": 166352.1739022387,
+        "IsFinite": true
+      },
+      "Orientation": {
+        "X": 0.7919399386320408,
+        "Y": -0.5583793751885938,
+        "Z": -0.14237270961116338,
+        "W": 0.20192478431695884,
+        "IsFinite": true,
+        "LengthSquared": 1
+      },
+      "Omega": {
+        "X": -2.9015815513302093e-12,
+        "Y": 3.491614592203774e-05,
+        "Z": -6.401841062162624e-05,
+        "LengthSquared": 5.317494144568189e-09,
+        "IsFinite": true
+      },
+      "Alpha": {
+        "X": 7.54523409859966e-17,
+        "Y": -1.8575465617094542e-16,
+        "Z": -1.0131205752400865e-16,
+        "LengthSquared": 5.04619810492013e-32,
+        "IsFinite": true
+      }
+    },
+    "OriginRoot": {
+      "X": 0,
+      "Y": -1.7,
+      "Z": 0,
+      "LengthSquared": 2.8899999999999997,
+      "IsFinite": true
+    },
+    "LocalToRoot": {
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "W": 1,
+      "IsFinite": true,
+      "LengthSquared": 1
+    },
+    "OriginVelocityRoot": {
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "LengthSquared": 0,
+      "IsFinite": true
+    },
+    "ContactTolerance": 6.1e-05,
+    "PlaneHalfExtent": 8,
+    "mass": {
+      "Mass": 705,
+      "Com": {
+        "X": 1.0417021276595744,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 1.085143322770484,
+        "IsFinite": true
+      },
+      "Inertia": {
+        "A": 190.47255,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 731.6006491134758,
+        "F": 0,
+        "G": 0,
+        "H": 0,
+        "I": 731.6006491134758
+      }
+    },
+    "profileDigest": "cd21bff65805e758df0c3bf5b187f93e82cc4feb2396f4e7d5a75d684a344c74",
+    "SmallestFeature": 0.061,
+    "BoundingRadius": 2.7662484625956933,
+    "children": [
+      {
+        "Part": "capsule_01",
+        "DefinitionDigest": "b7b792f69e9e17cfd89185da48e7113b1eb74df8b1a55df69bae9405d9d3d7eb",
+        "Dimensions": {
+          "X": 1.354,
+          "Y": 1.44,
+          "Z": 1.456,
+          "LengthSquared": 6.026852,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0.677,
+            "Y": 0,
+            "Z": -0.008,
+            "LengthSquared": 0.45839300000000005,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 1.677,
+            "Y": 0,
+            "Z": -0.008,
+            "LengthSquared": 2.812393,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "tank_01",
+        "DefinitionDigest": "3416c6206b9b05d70e187a5920565cc00a17d2be0661a063f4706e190b9a0708",
+        "Dimensions": {
+          "X": 2,
+          "Y": 1.4,
+          "Z": 1.4,
+          "LengthSquared": 7.92,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "main_01",
+        "DefinitionDigest": "affb46f411c6b0671504824268c6845198b23410bcd78d794348e4ceb7ed5e0d",
+        "Dimensions": {
+          "X": 0.639,
+          "Y": 0.52,
+          "Z": 0.52,
+          "LengthSquared": 0.9491210000000001,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": -0.3805,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0.14478025,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": -1.3805,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.90578025,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "main_01",
+        "DefinitionDigest": "affb46f411c6b0671504824268c6845198b23410bcd78d794348e4ceb7ed5e0d",
+        "Dimensions": {
+          "X": 0.061,
+          "Y": 0.56,
+          "Z": 0.56,
+          "LengthSquared": 0.6309210000000001,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": -0.0305,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0.00093025,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": -1.0305,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 1.0619302499999999,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        }
+      },
+      {
+        "Part": "rcs_01",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": 0.5603821240903389,
+            "Z": 0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": -0.7071067811865476,
+            "E": 0.7071067811865476,
+            "F": 0,
+            "G": 0.7071067811865476,
+            "H": 0.7071067811865476,
+            "I": 0
+          }
+        }
+      },
+      {
+        "Part": "rcs_03",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": -0.5603821240903389,
+            "Z": -0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": 0.7071067811865476,
+            "E": -0.7071067811865476,
+            "F": 0,
+            "G": -0.7071067811865476,
+            "H": -0.7071067811865476,
+            "I": 0
+          }
+        }
+      },
+      {
+        "Part": "rcs_02",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": -0.5603821240903389,
+            "Z": 0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": -0.7071067811865476,
+            "E": -0.7071067811865476,
+            "F": 0,
+            "G": -0.7071067811865476,
+            "H": 0.7071067811865476,
+            "I": 0
+          }
+        }
+      },
+      {
+        "Part": "rcs_04",
+        "DefinitionDigest": "81e72b255d921b1dd6270a02cbaf969e10bc4f78a6ba9bdd805bf7aa8f35928c",
+        "Dimensions": {
+          "X": 0.368,
+          "Y": 0.185,
+          "Z": 0.368,
+          "LengthSquared": 0.305073,
+          "IsFinite": true
+        },
+        "PartLocal": {
+          "Position": {
+            "X": 0,
+            "Y": -0.2075,
+            "Z": 0,
+            "LengthSquared": 0.04305625,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 1,
+            "B": 0,
+            "C": 0,
+            "D": 0,
+            "E": 1,
+            "F": 0,
+            "G": 0,
+            "H": 0,
+            "I": 1
+          }
+        },
+        "AtOrigin": {
+          "Position": {
+            "X": 0,
+            "Y": 0.5603821240903389,
+            "Z": -0.5603821240903389,
+            "LengthSquared": 0.6280562500000001,
+            "IsFinite": true
+          },
+          "Rotation": {
+            "A": 0,
+            "B": 0,
+            "C": -1,
+            "D": 0.7071067811865476,
+            "E": 0.7071067811865476,
+            "F": 0,
+            "G": 0.7071067811865476,
+            "H": -0.7071067811865476,
+            "I": 0
+          }
+        }
+      }
+    ],
+    "initial": {
+      "PositionO": {
+        "X": 0,
+        "Y": -4.788662510968322e-08,
+        "Z": 0,
+        "LengthSquared": 2.2931288643953437e-15,
+        "IsFinite": true
+      },
+      "VelocityO": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "BodyToWorld": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0.7071067811865476,
+        "W": 0.7071067811865476,
+        "IsFinite": true,
+        "LengthSquared": 1.0000000000000002
+      },
+      "AngularVelocityBody": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      }
+    },
+    "nativePose": {
+      "Orientation": {
+        "IsIdentity": true,
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "W": 1
+      },
+      "Position": {
+        "X": 0,
+        "Y": 2.741702,
+        "Z": 0
+      }
+    },
+    "nativeVelocity": {
+      "Linear": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      },
+      "Angular": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      }
+    },
+    "nativeInertia": {
+      "InverseInertiaTensor": {
+        "XX": 0.0013668659,
+        "YX": 0,
+        "YY": 0.0052501005,
+        "ZX": 0,
+        "ZY": 0,
+        "ZZ": 0.0013668659
+      },
+      "InverseMass": 0.0014184397
+    },
+    "identity": {
+      "Item1": 1,
+      "Item2": 0,
+      "Item3": 0,
+      "Item4": 0,
+      "Item5": false,
+      "Item6": false
+    },
+    "geometry": "same production convex slab, top at local y=0",
+    "material": "mu=.5 recovery=2 spring=30 damping=1",
+    "solver": "8 iterations / 1 substep"
+  },
+  "changes": {
+    "raw-full": "Raw retained native stepping, same site inputs; omits canonical publication; exact endpoint match.",
+    "zero-rotation": "Only Omega/Alpha zeroed; same pure central gravity and Florida slab.",
+    "flat-local": "Site callback branch removed, constant (0,-9.81,0); development mass/geometry/8x1/contact material unchanged.",
+    "stock-local": "Existing stock profile/local factory: 705 kg with coherent stock COM/inertia; diagnostic comparison, not a Florida qualification."
+  }
+}

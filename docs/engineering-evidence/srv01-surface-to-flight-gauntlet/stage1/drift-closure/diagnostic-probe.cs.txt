@@ -1,0 +1,107 @@
+using System.Numerics;
+using System.Reflection;
+using System.Text.Json;
+using BepuPhysics;
+using BepuPhysics.Collidables;
+using BepuPhysics.CollisionDetection;
+using BepuPhysics.Constraints;
+using BepuPhysics.Constraints.Contact;
+using BepuUtilities;
+using NovaCore.Core;
+using NovaCore.Simulation.Spacecraft.Assemblies;
+using NovaCore.Simulation.Spacecraft.Contact.Staging;
+using NovaCore.Simulation.Transactions;
+
+var design=AssemblyStockCatalog.LoadDefault().Resolve("novacore.stock.SRV01.FourHorn");
+var profile=AssemblyContactProfile.Create(design);
+using var session=AssemblyApplicationSession.CreateSupported(AssemblyLaunch.CreateSupported(profile,new(new(201),new(1),new(2),"SRV-01 supported"),"reference-launch-01"));
+var engine=session.Engine;var authority=session.Authority;var world=engine.AssemblyContactWorldForTest(authority)!;
+var sim=(Simulation)Field(world,"simulation");var handle=(BodyHandle)Field(world,"body");
+var shape=(TypedIndex)Field(world,"bodyShape");var plane=(StaticHandle)Field(world,"plane");
+var config=(LocalContactConfiguration)Field(world,"configuration");
+var arm=args.Length==0?"unchanged":args[0];
+if(arm=="nearest-canonical")
+{
+    // Diagnostic only: nearest component projection of the same unit FP64 pose,
+    // omitting the additional float normalization. No pose search or step changes.
+    var canonical=session.Launch.Initial.Motion.BodyToWorld;
+    sim.Bodies[handle].Pose.Orientation=new((float)canonical.X,(float)canonical.Y,(float)canonical.Z,(float)canonical.W);
+}
+else if(arm!="unchanged")throw new Exception("Unreviewed diagnostic arm");
+var initialBody=sim.Bodies[handle];
+var nativeInitial=new {position=V(initialBody.Pose.Position),orientation=Q(initialBody.Pose.Orientation),linear=V(initialBody.Velocity.Linear),angular=V(initialBody.Velocity.Angular),inverseMass=initialBody.LocalInertia.InverseMass,inverseTensor=initialBody.LocalInertia.InverseInertiaTensor};
+var samples=new List<object>();var transitions=new List<object>();string previousFeatures="";int transitionCount=0,positiveX=0,negativeX=0;double peak=0,maxDrift=0;Double3 origin600=default,previous=default;object? maximum=null;
+var sampleSet=new HashSet<int>{0,1,2,3,10,60,120,300,599,600,601,900,1200};
+var frameSummaries=new List<object>();
+for(var n=0;n<=1200;n++)
+{
+    if(n>0)
+    {
+        var credit=engine.AdmitAssemblyHostTime(authority,n,new(session.Launch.Plan[n-1].Request.Ticks));
+        if(credit.Status!=AssemblyFlightStatus.AcceptedCredit)throw new Exception("credit: "+credit.Status);
+        var prepared=engine.PrepareAssemblyContact(authority,out var proposal);
+        if(prepared!=AssemblyFlightStatus.Prepared)throw new Exception("prepare: "+prepared+" interval "+n);
+        var publish=engine.PublishAssemblyContact(authority,proposal);
+        if(publish.Status!=AssemblyFlightStatus.Published)throw new Exception("publish: "+publish.Status);
+    }
+    engine.ObserveAssemblyFlight(authority,out var observed);var m=observed.State.Motion;var native=sim.Bodies[handle];
+    if(n==600)origin600=m.PositionO;
+    var drift=m.PositionO-origin600;var horizontal=Math.Sqrt(drift.X*drift.X+drift.Z*drift.Z);
+    var minHeight=Minimum(profile,m);peak=Math.Max(peak,-minHeight);
+    if(n>600){if(m.PositionO.X>previous.X)positiveX++;if(m.PositionO.X<previous.X)negativeX++;if(horizontal>maxDrift){maxDrift=horizontal;maximum=new{interval=n,vector=D(drift),magnitude=horizontal};}}
+    var raw=new CompoundContactSelector.Candidate[32];var prediction=new double[32];var features=new int[4];
+    var rawCount=world.CopyCompoundRawForTest(raw,prediction,features);
+    var featureKey=string.Join(";",raw.Take(rawCount).Select(c=>$"{c.ChildA}:{c.Contact.FeatureId}"));
+    if(n>0&&featureKey!=previousFeatures){transitionCount++;if(transitions.Count<24)transitions.Add(new{interval=n,features=featureKey});previousFeatures=featureKey;}
+    if(sampleSet.Contains(n))
+    {
+        var rows=new List<object>();
+        for(var i=0;i<native.Constraints.Count;i++)
+        {
+            var h=native.Constraints[i].ConnectingConstraintHandle;var extractor=new Rows();
+            if(!sim.NarrowPhase.TryExtractSolverContactPrestepAndImpulses(h,ref extractor))throw new Exception("extract");
+            rows.Add(new{handle=h.Value,convex=extractor.Convex,normal=extractor.Normal,contacts=extractor.Contacts,tangent=extractor.Tangent,twist=extractor.Twist});
+        }
+        var q=m.BodyToWorld;var error=profile is not null?AssemblyContactProfile.Upright.Conjugate()*q:default;
+        var com=AssemblyContactProfile.ToCom(m,profile!.Mass.Com);
+        samples.Add(new{interval=n,ticks=observed.State.Epoch.Ticks,origin=D(m.PositionO),velocityO=D(m.VelocityO),orientation=DQ(q),orientationError=2*Math.Atan2(Math.Sqrt(error.X*error.X+error.Y*error.Y+error.Z*error.Z),Math.Abs(error.W)),angularBody=D(m.AngularVelocityBody),comCanonical=D(com.Position),velocityCom=D(com.Velocity),nativePosition=V(native.Pose.Position),nativeOrientation=Q(native.Pose.Orientation),nativeLinear=V(native.Velocity.Linear),nativeAngular=V(native.Velocity.Angular),minimumHeight=minHeight,rows,raw=raw.Take(rawCount).Select(c=>new{child=c.ChildA,feature=c.Contact.FeatureId,rawFeature=c.RawFeature,offset=V(c.Contact.Offset),normal=V(c.Contact.Normal),depth=c.Contact.Depth}).ToArray()});
+    }
+    previous=m.PositionO;
+}
+var children=new List<object>();ref var compound=ref sim.Shapes.GetShape<Compound>(shape.Index);
+for(var i=0;i<compound.Children.Length;i++){ref var child=ref compound.Children[i];ref var box=ref sim.Shapes.GetShape<Box>(child.ShapeIndex.Index);children.Add(new{index=i,part=profile!.Children[i].Part,dimensions=new[]{box.Width,box.Height,box.Length},offset=V(child.LocalPosition),orientation=Q(child.LocalOrientation)});}
+Console.WriteLine(JsonSerializer.Serialize(new{arm,profile=profile!.Digest,body=handle.Value,worldGeneration=world.Generation,source=0,frameOrigin=D(config.OriginRoot),frameVelocity=D(config.OriginVelocityRoot),frameOrientation=DQ(config.LocalToRoot),gravity=new[]{0,-9.81,0},friction=.5,springHz=30,dampingRatio=1,recovery=2,iterations=sim.Solver.VelocityIterationCount,substeps=sim.Solver.SubstepCount,mass=profile.Mass,canonicalInitial=session.Launch.Initial,nativeInitial,children,slabPosition=V(sim.Statics[plane].Pose.Position),slabOrientation=Q(sim.Statics[plane].Pose.Orientation),peakPenetration=peak,maximumDrift=maximum,maxDrift,positiveX,negativeX,featureTransitions=transitionCount,transitions,samples},new JsonSerializerOptions{WriteIndented=true,IncludeFields=true}));
+
+static object Field(object x,string name)=>x.GetType().GetField(name,BindingFlags.Instance|BindingFlags.NonPublic)!.GetValue(x)!;
+static double[] D(Double3 v)=>[v.X,v.Y,v.Z];
+static float[] V(Vector3 v)=>[v.X,v.Y,v.Z];
+static double[] DQ(DoubleQuaternion q)=>[q.X,q.Y,q.Z,q.W];
+static float[] Q(Quaternion q)=>[q.X,q.Y,q.Z,q.W];
+static double Minimum(AssemblyContactProfile p,AssemblyMotion m)
+{
+    var min=double.MaxValue;var q=m.BodyToWorld;
+    var a=2*(q.X*q.Y+q.Z*q.W);var b=1-2*(q.X*q.X+q.Z*q.Z);var c=2*(q.Y*q.Z-q.X*q.W);
+    foreach(var ch in p.Children)for(var k=0;k<8;k++)
+    {
+        var x=((k&1)==0?-.5:.5)*ch.Dimensions.X;var y=((k&2)==0?-.5:.5)*ch.Dimensions.Y;var z=((k&4)==0?-.5:.5)*ch.Dimensions.Z;var r=ch.AtOrigin.Rotation;var o=ch.AtOrigin.Position;
+        min=Math.Min(min,m.PositionO.Y+a*(o.X+r.A*x+r.B*y+r.C*z)+b*(o.Y+r.D*x+r.E*y+r.F*z)+c*(o.Z+r.G*x+r.H*y+r.I*z)+1.7);
+    }
+    return min;
+}
+struct Rows:ISolverContactPrestepAndImpulsesExtractor
+{
+    internal bool Convex;internal object[]? Contacts;internal float[]? Normal,Tangent;internal float Twist;
+    public void ConvexOneBody<P,I>(ref P p,ref I i) where P:struct,IConvexContactPrestep<P> where I:struct,IConvexContactAccumulatedImpulses<I>
+    {
+        Convex=true;ref var normal=ref P.GetNormal(ref p);Normal=[normal.X[0],normal.Y[0],normal.Z[0]];Contacts=new object[P.ContactCount];
+        for(var j=0;j<P.ContactCount;j++){ref var c=ref P.GetContact(ref p,j);Contacts[j]=new{offset=new[]{c.OffsetA.X[0],c.OffsetA.Y[0],c.OffsetA.Z[0]},depth=c.Depth[0],impulse=I.GetPenetrationImpulseForContact(ref i,j)[0]};}
+        ref var t=ref I.GetTangentFriction(ref i);Tangent=[t.X[0],t.Y[0]];Twist=I.GetTwistFriction(ref i)[0];
+    }
+    public void NonconvexOneBody<P,I>(ref P p,ref I i) where P:struct,INonconvexContactPrestep<P> where I:struct,INonconvexContactAccumulatedImpulses<I>
+    {
+        Contacts=new object[P.ContactCount];
+        for(var j=0;j<P.ContactCount;j++){ref var c=ref P.GetContact(ref p,j);ref var impulse=ref I.GetImpulsesForContact(ref i,j);Contacts[j]=new{offset=new[]{c.Offset.X[0],c.Offset.Y[0],c.Offset.Z[0]},normal=new[]{c.Normal.X[0],c.Normal.Y[0],c.Normal.Z[0]},depth=c.Depth[0],impulse=impulse.Penetration[0],tangent=new[]{impulse.Tangent.X[0],impulse.Tangent.Y[0]}};}
+    }
+    public void ConvexTwoBody<P,I>(ref P p,ref I i) where P:struct,ITwoBodyConvexContactPrestep<P> where I:struct,IConvexContactAccumulatedImpulses<I> => throw new Exception("unexpected two body");
+    public void NonconvexTwoBody<P,I>(ref P p,ref I i) where P:struct,ITwoBodyNonconvexContactPrestep<P> where I:struct,INonconvexContactAccumulatedImpulses<I> => throw new Exception("unexpected two body");
+}

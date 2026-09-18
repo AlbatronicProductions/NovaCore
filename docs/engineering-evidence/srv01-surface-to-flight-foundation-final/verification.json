@@ -1,0 +1,245 @@
+{
+  "utc": "2026-09-18T05:25:36.569327+00:00",
+  "judgment": "PASS - SURFACE-TO-FLIGHT FOUNDATION READY FOR PROJECT CONTROL BANKING",
+  "refs": {
+    "HEAD": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+    "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+    "origin/main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+    "remote_main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5"
+  },
+  "branch": "codex/srv01-supported-contact-admission",
+  "tagCount": 67,
+  "historicalLocalRemoteTagsUnchanged": true,
+  "m152TagTarget": "c3de150db8563864d23c4951b4630559453d8f56",
+  "stagedPaths": [],
+  "status": "M docs/CODEX_HANDOFF.md\n M docs/NOVACORE_CURRENT_STATE.md\n M docs/architecture.md\n M docs/engineering-evidence/README.md\n M native/NovaCore.Native/NovaCoreNative.cpp\n M native/NovaCore.Native/NovaCoreNative.h\n M samples/NovaCore.Triangle/EarthRoutePolicy.cs\n M samples/NovaCore.Triangle/Program.cs\n M samples/NovaCore.Triangle/SampleOptions.cs\n M samples/NovaCore.Triangle/SolarSystemScene.cs\n M samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs\n M src/NovaCore.Graphics/AssemblyInfo.cs\n M src/NovaCore.Graphics/FloridaLaunchSite.cs\n M src/NovaCore.Graphics/RenderObject.cs\n M src/NovaCore.Graphics/ReusablePartVisuals.cs\n M src/NovaCore.Interop/NativeRuntime.cs\n M src/NovaCore.Simulation/NovaCore.Simulation.csproj\n M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs\n M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs\n M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs\n M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs\n M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs\n M src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs\n M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs\n M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs\n M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs\n M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs\n M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs\n M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs\n M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs\n M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs\n M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs\n M tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj\n M tests/NovaCore.Graphics.Tests/Program.cs\n M tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs\n M tests/NovaCore.Simulation.Tests/Program.cs\n M tools/NovaCore.Launcher/ScenarioCatalog.cs\n?? docs/engineering-evidence/post-m15.2-production-remeasurement/\n?? docs/engineering-evidence/srv01-production-integration/closeout.json\n?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md\n?? docs/engineering-evidence/srv01-supported-contact-admission-design/\n?? docs/engineering-evidence/srv01-surface-to-flight-foundation-final/\n?? docs/engineering-evidence/srv01-surface-to-flight-gauntlet/\n?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md\n?? docs/legal/LEGAL-REVIEW-TODO.md\n?? docs/legal/MODDING-POLICY-DRAFT.md\n?? docs/legal/ROOT-LICENSE-CANDIDATE.md\n?? docs/legal/finalization/\n?? src/NovaCore.Core/Surface/FloridaSlabSupport.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDevelopmentPropulsion.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-Development-Propulsion-v1.json\n?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs\n?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs\n?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Site.cs\n?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs\n?? tests/NovaCore.Graphics.Tests/AssemblyFloridaQualificationTests.cs\n?? tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs\n?? tests/NovaCore.Graphics.Tests/AssemblyFloridaSolarTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyDepartureMeasurements.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyDepartureProofTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyDevelopmentPropulsionTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs",
+  "unstagedTrackedPaths": [
+    "docs/CODEX_HANDOFF.md",
+    "docs/NOVACORE_CURRENT_STATE.md",
+    "docs/architecture.md",
+    "docs/engineering-evidence/README.md",
+    "native/NovaCore.Native/NovaCoreNative.cpp",
+    "native/NovaCore.Native/NovaCoreNative.h",
+    "samples/NovaCore.Triangle/EarthRoutePolicy.cs",
+    "samples/NovaCore.Triangle/Program.cs",
+    "samples/NovaCore.Triangle/SampleOptions.cs",
+    "samples/NovaCore.Triangle/SolarSystemScene.cs",
+    "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    "src/NovaCore.Graphics/AssemblyInfo.cs",
+    "src/NovaCore.Graphics/FloridaLaunchSite.cs",
+    "src/NovaCore.Graphics/RenderObject.cs",
+    "src/NovaCore.Graphics/ReusablePartVisuals.cs",
+    "src/NovaCore.Interop/NativeRuntime.cs",
+    "src/NovaCore.Simulation/NovaCore.Simulation.csproj",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs",
+    "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "tests/NovaCore.Graphics.Tests/Program.cs",
+    "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+    "tests/NovaCore.Simulation.Tests/Program.cs",
+    "tools/NovaCore.Launcher/ScenarioCatalog.cs"
+  ],
+  "checks": {
+    "worktree": {
+      "exit": 0,
+      "whitespaceErrors": 0
+    },
+    "index": {
+      "exit": 0,
+      "whitespaceErrors": 0
+    }
+  },
+  "finalInputSeals": {
+    "matched": 702,
+    "expected": 702
+  },
+  "sourceChangesSinceEntry": [
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "before": "62d386cd46b3119782b9b259c08b3431626eadc80568772500ef1cd331153e15",
+      "after": "6c31dcaf0b38c5eb227ed4bdd25bfaa0014e73a8977b443b7f30dd9bd8983f64"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "before": "caba9080794241b4a9c1d996b2fe3e426a90462be3109c8bd6d3cad050878fb9",
+      "after": "2722fa3737d684935f790834680fce198b74a0ae61aaba6cb8a09126e38647a8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "before": "9377192cda38c72fc01c2931dc1eb5e844167459632c0193ff6bd2a14f1edcfa",
+      "after": "5757992200ea2c73fea1f08dbbbf5d89ddd0b0726c5baf3a7f643fdfd3183f3a"
+    }
+  ],
+  "permanentTestChangesSinceEntry": 0,
+  "regression": {
+    "executed": 76,
+    "passed": 76,
+    "simulationPerConfiguration": 80,
+    "launcherPerConfiguration": 18,
+    "configurations": [
+      "Debug",
+      "Release"
+    ]
+  },
+  "prospectiveBank": {
+    "method": "Alternate index only; real index untouched",
+    "expectedPaths": 364,
+    "manifest": "bank-manifest.json",
+    "whitespaceErrors": 0,
+    "unexpectedPaths": 0,
+    "missingPaths": 0,
+    "treeIdentity": "Reported separately after final evidence hashing to avoid a self-referential tree seal."
+  },
+  "independentVerifier": {
+    "agent": "/root/closeout_verifier",
+    "role": "Read-only independent final bank-preparation reviewer",
+    "substantiveAttacksPassed": 20,
+    "sourceInputsIndependentlyHashed": 634,
+    "sourceHashMismatches": 0,
+    "archivesInspected": 8,
+    "archiveEntries": 49,
+    "forbiddenArchivePayloads": 0,
+    "attacks": [
+      {
+        "number": 1,
+        "attack": "Manual acceptance scope",
+        "result": "PASS",
+        "witness": "Latest Project Control ticket grants simplified Florida slab/launcher/Solar support acceptance; withdrawn passes remain historical."
+      },
+      {
+        "number": 2,
+        "attack": "Florida authentication",
+        "result": "PASS",
+        "witness": "Live physical query and terrain/site authority authenticate the slab; no generic proxy claim."
+      },
+      {
+        "number": 3,
+        "attack": "Launcher/manual convergence",
+        "result": "PASS",
+        "witness": "Both share site/slab/stock construction; GUI current epoch/navigation versus manual J2000 is explicit."
+      },
+      {
+        "number": 4,
+        "attack": "Obsolete facility ownership",
+        "result": "PASS",
+        "witness": "One physical static Box and base-slab mesh; obsolete full facility and caster bypassed."
+      },
+      {
+        "number": 5,
+        "attack": "Ground versus slab evidence",
+        "result": "PASS",
+        "witness": "Earlier east-offset graded-ground results remain historical, separate from final slab metrics."
+      },
+      {
+        "number": 6,
+        "attack": "Stock versus development profile",
+        "result": "PASS",
+        "witness": "Stock immutable digest and705kg identity remain distinct from the explicit Stage4 provisional profile."
+      },
+      {
+        "number": 7,
+        "attack": "Stage4 scope",
+        "result": "PASS",
+        "witness": "Finite125000-tick mechanics checkpoint; no orbital or entire-vehicle feasibility claim."
+      },
+      {
+        "number": 8,
+        "attack": "Stage3 scope",
+        "result": "PASS",
+        "witness": "Prescribed fixed-slab transfer and first successor; no rotating-site departure claim."
+      },
+      {
+        "number": 9,
+        "attack": "Startup residual",
+        "result": "PASS",
+        "witness": "16670.3851ms first-present witness and unresolved prior display gaps retained."
+      },
+      {
+        "number": 10,
+        "attack": "Shadows",
+        "result": "PASS",
+        "witness": "Desired production shadowing remains explicitly DEFERRED."
+      },
+      {
+        "number": 11,
+        "attack": "Allocation scope",
+        "result": "PASS",
+        "witness": "Checked0B warmed gates and152B control kept separate from cold setup."
+      },
+      {
+        "number": 12,
+        "attack": "Storage after work",
+        "result": "PASS",
+        "witness": "Florida storage measured after1200 steps and presentation submissions:6469952B."
+      },
+      {
+        "number": 13,
+        "attack": "Performance tails",
+        "result": "PASS",
+        "witness": "All operation/live/cold maxima and unresolved tails retained without a new timing campaign."
+      },
+      {
+        "number": 14,
+        "attack": "Tests unchanged",
+        "result": "PASS",
+        "witness": "No closeout test edits; prior tracked test changes add protection, not weakened thresholds."
+      },
+      {
+        "number": 15,
+        "attack": "KSA provenance",
+        "result": "PASS",
+        "witness": "Installed5438 identity distinguished from later5450 live history; no bulk protected source retained."
+      },
+      {
+        "number": 16,
+        "attack": "Temporary production dependencies",
+        "result": "PASS",
+        "witness": "No probe/build runtime dependency; uncalled rejected-profile factory removed and predecessor sealed."
+      },
+      {
+        "number": 17,
+        "attack": "No Stage6 claims",
+        "result": "PASS",
+        "witness": "Player launch controls and Stage6 remain closed."
+      },
+      {
+        "number": 18,
+        "attack": "No banking",
+        "result": "PASS",
+        "witness": "Real index remains empty; no commit, tag, merge or push."
+      },
+      {
+        "number": 19,
+        "attack": "No milestone invented",
+        "result": "PASS",
+        "witness": "Recommendation has an accomplishment title/tag suffix only."
+      },
+      {
+        "number": 20,
+        "attack": "Historical tags",
+        "result": "PASS",
+        "witness": "All67 historical tag objects and peeled targets remain identical."
+      }
+    ],
+    "finalArtifactReview": "PASS; all702 candidate and308 documentation/evidence seals independently matched, exact364-path prospective manifest and current cleanup inventory verified.",
+    "allCandidateInputsIndependentlyHashed": 702,
+    "documentationEvidenceInputsIndependentlyHashed": 308
+  },
+  "cleanup": "Manual disposition pending; automatic deletion stopped after policy rejection. See cleanup.md.",
+  "banking": "NOT AUTHORIZED; no commit/tag/push/merge",
+  "milestoneNumber": null,
+  "stage6": "CLOSED"
+}

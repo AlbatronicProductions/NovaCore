@@ -11,13 +11,48 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
+## Accepted unbanked candidate — canonical SRV-01 surface-to-flight foundation
+
+Project Control has accepted the Stage 1–5 responsibility, including the final
+simplified Florida slab manual route. The candidate remains **UNBANKED**, with no
+milestone number assigned and Stage 6 **CLOSED**. Baseline main is
+`ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5`; candidate branch is
+`codex/srv01-supported-contact-admission`. Banking requires separate authorization.
+
+Qualified now: canonical stock SRV-01 retained support and powered support; explicit
+consumer transfer to free flight in the bounded fixed-slab separation domain;
+preserved finite development-resource mechanics; authenticated rotating Florida
+stock support on one finite physical/visible slab. **FL Launchpad → Play** and the
+manual route share scenario construction. Solar world/focus/overview/zoom/camera
+capabilities remain. No elevated cube or blue/orange arm owns this route.
+
+Final Debug/Release full builds have zero warnings/errors; Simulation80/80 and
+Launcher18/18 pass in both, with76 final gates. Florida:705kg,30kg fuel,45kg oxidizer,
+main/RCS OFF,1,200 publications/20,000,000 ticks,600/600 final support. Peak penetration
+0.09750102006811368mm; settled height0.07901107027863397mm; settled speed
+5.5077650646174094e-6m/s. Contracted warmed allocation0B; positive control152B.
+Post-work inclusive contact/presentation storage6,469,952B <8MiB.
+
+Lighting/shadows are **DEFERRED** and manually accepted as a limitation. Startup /
+first-present responsiveness and disclosed cold/warm frame tails remain unresolved.
+Rotating-site powered departure is **NOT QUALIFIED**. A development Earth-launch
+stack, player launch/attitude controls, spacecraft-focus camera, SAS/navball/autopilot,
+atmosphere/aerodynamics/thermal/reentry remain future work. Stock SRV-01 is not
+required to be an entire Earth SSTO. Oversized Stage4 arithmetic is historical
+development-sizing evidence, not the current stock Florida vehicle or orbital proof.
+
+Use the [consolidated final record](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md)
+for exact source identities, regression, manual acceptance, performance/residuals,
+cleanup and proposed banking paths. Earlier child reports remain historical.
+No next implementation front is authorized by this closeout.
+
 ## Current bank — M15.2
 
 **M15.2 — SRV-01 Reusable Production Spacecraft Integration is BANKED** at
 `c3de150db8563864d23c4951b4630559453d8f56`, annotated tag
 `m15.2-srv01-reusable-production-spacecraft-integration`.
-The SRV-01 production-integration front is closed. No next major front is
-currently authorized until Project Control reviews current production.
+The original SRV-01 production-integration front is closed. The accepted unbanked
+Stage 1–5 foundation above is its subsequent bounded candidate.
 
 One capsule, tank/service body, gimbaled main engine and four reusable four-horn
 blocks form one explicit seven-part stock assembly with 16 physical RCS jets,

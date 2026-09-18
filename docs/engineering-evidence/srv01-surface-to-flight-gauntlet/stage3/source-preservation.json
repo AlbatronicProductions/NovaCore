@@ -1,0 +1,37 @@
+{
+  "purpose": "Exact sealed Stage2 source bytes for only the five Stage3-overlapped candidate files; reconstructed in memory and matched all retained pre-edit hashes. No working source rewritten.",
+  "files": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "stage2Sha256": "4371DA8D9030EC1DC123CF693902A6C0CA2B73CC8C3B749A337EC39511AB0DDD",
+      "stage3Sha256": "C22866B767C888ECC1085812734B9AC7BD136FC7059155193F17A56DA0034341"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "stage2Sha256": "CFC3DC2F2F33B02FC169469B01BA549CA6EFD2DE0B95A902B08C67F142D2BD90",
+      "stage3Sha256": "0B3CDE890AF222D8494B277E666D58E072197727F58B502076C7A8F2590D8B08"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+      "stage2Sha256": "7EB55A3C4C2597F9755D9F551636DE91595331F3F25AEACC34362B34B033EB41",
+      "stage3Sha256": "498AA48F73158CBE3D08C57966BCDBEE16CC771C18389DF9955C39C3CC913FCE"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "stage2Sha256": "1452B9B9AB921C467D79FA8725B2ED818A9FF41BECA43FB0079AB4A576CCAF5B",
+      "stage3Sha256": "58A13A44972C0ED4933403996D251F294D20FA268A0E11051225064A83D3B90B"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "stage2Sha256": "C5AFAFDF3FA8A6DBAA0D6802A61AF9DD64A1B0AF290B6A8FB3E6488668D8046B",
+      "stage3Sha256": "B4DABFDB04D2E3B24206E315B4363A2392DB92D06ADAC99228794127255AEE85"
+    }
+  ],
+  "archiveSha256": "82D8D5DC48C353090D1F8066D6A48C5850B104708C1BFFC4CF384ED6D973F01C",
+  "archiveBytes": 59178,
+  "bankedBaseFile": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs",
+  "stage3OnlyFiles": [
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs",
+    "tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs"
+  ]
+}

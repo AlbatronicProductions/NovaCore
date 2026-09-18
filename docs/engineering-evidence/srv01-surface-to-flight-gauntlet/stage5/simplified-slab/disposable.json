@@ -1,0 +1,23 @@
+[
+  {
+    "path": "E:\\NovaCore\\build\\srv01-stage5-simplified-slab",
+    "files": 1872,
+    "bytes": 442861426.0,
+    "state": "retained-manual-cleanup-required",
+    "reason": "Automatic approval review rejected the single deletion attempt as blocked by policy; no retry."
+  },
+  {
+    "path": "E:\\NovaCore\\samples\\NovaCore.Triangle\\bin\\Release\\net10.0",
+    "files": 79,
+    "bytes": 76647549.0,
+    "state": "retained",
+    "reason": "Verified manual acceptance executable closure; retain until manual review"
+  },
+  {
+    "path": "E:\\NovaCore\\tools\\NovaCore.Launcher\\bin\\Release\\net10.0-windows",
+    "files": 9,
+    "bytes": 1302998.0,
+    "state": "retained",
+    "reason": "Verified manual acceptance executable closure; retain until manual review"
+  }
+]

@@ -1,0 +1,57 @@
+ M native/NovaCore.Native/NovaCoreNative.cpp
+ M native/NovaCore.Native/NovaCoreNative.h
+ M samples/NovaCore.Triangle/EarthRoutePolicy.cs
+ M samples/NovaCore.Triangle/Program.cs
+ M samples/NovaCore.Triangle/SampleOptions.cs
+ M samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs
+ M src/NovaCore.Graphics/ReusablePartVisuals.cs
+ M src/NovaCore.Interop/NativeRuntime.cs
+ M src/NovaCore.Simulation/NovaCore.Simulation.csproj
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs
+ M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs
+ M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Assemblies.cs
+ M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs
+ M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs
+ M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs
+ M tests/NovaCore.Graphics.Tests/Program.cs
+ M tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs
+ M tests/NovaCore.Simulation.Tests/Program.cs
+?? docs/engineering-evidence/post-m15.2-production-remeasurement/
+?? docs/engineering-evidence/srv01-production-integration/closeout.json
+?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md
+?? docs/engineering-evidence/srv01-supported-contact-admission-design/
+?? docs/engineering-evidence/srv01-surface-to-flight-gauntlet/
+?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md
+?? docs/legal/LEGAL-REVIEW-TODO.md
+?? docs/legal/MODDING-POLICY-DRAFT.md
+?? docs/legal/ROOT-LICENSE-CANDIDATE.md
+?? docs/legal/finalization/
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDeparture.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDevelopmentPropulsion.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/Data/SRV01-Development-Propulsion-v1.json
+?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs
+?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs
+?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Site.cs
+?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs
+?? tests/NovaCore.Graphics.Tests/AssemblyFloridaQualificationTests.cs
+?? tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyDepartureMeasurements.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyDepartureProofTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyDepartureTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyDevelopmentPropulsionTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs

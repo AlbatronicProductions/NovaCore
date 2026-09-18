@@ -1,0 +1,252 @@
+{
+  "debug": {
+    "registeredGroups": 79,
+    "passedGroups": 79,
+    "missing": [],
+    "simulationLogSha256": "9679D81CD730E35C6559E6D25B177A62965FFFDA0CEB05B246EC9087F8BFCDDE",
+    "fullSuiteDepartureCounters": [
+      "DEPARTURE_COUNTER handoff before=31140032 after=31140032",
+      "DEPARTURE_COUNTER first-flight before=31140352 after=31140352"
+    ],
+    "focusedWitnesses": [
+      "DEPARTURE_PREPARE status=Prepared",
+      "DEPARTURE_FIRST_FLIGHT tick=32291 heightO=0.002157609515294083 vy=-0.03929292264178322 oracleError=3.251288127614771E-13 nativeFrontier=1",
+      "DEPARTURE_CLEARANCE_HOLD frontier=3 tick=47916 debt=15625",
+      "DEPARTURE_FAILURES PASS authority/consumer/receipt/refusal/retry/terminal/capacity/save boundaries",
+      "DEPARTURE_SCHEDULES PASS 6 equal-time host partitions / same frontier bits / moving frame",
+      "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "DEPARTURE_ANGULAR speed=0.2 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.000196924355350651",
+      "DEPARTURE_ANGULAR speed=0.2 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.00019290984035986422",
+      "DEPARTURE_ANGULAR speed=0.2 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_ANGULAR speed=0.25 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_FRAME speed=0.2 frameX=0.05 clearanceError=0 positionError=2.168404344971009E-19 velocityError=6.938893903907228E-18",
+      "DEPARTURE_PROOFS PASS independent position / angular limits / moving frame / native abort"
+    ],
+    "regressions": [
+      {
+        "log": "NovaCore.ReferenceFrames.Tests-debug.log",
+        "exitCode": 0,
+        "sha256": "5445B87800182C285C8BE4931058C0E95AFE78EB88986BAAB6362F9FDE870F85",
+        "summary": [
+          "PASS surface anchor authority",
+          "PASS validation",
+          "Benchmark: 10,000 root resolutions in 2.178 ms; managed allocations=0 bytes; final=4000000000009.999"
+        ]
+      },
+      {
+        "log": "NovaCore.Precision.Tests-debug.log",
+        "exitCode": 0,
+        "sha256": "458902081FFEBD508BDF7D9101F7D45F329F2AA6B082150D70193F8193EDD8ED",
+        "summary": [
+          "log options: parsing and verbose-input compatibility passed",
+          "",
+          "PASS"
+        ]
+      },
+      {
+        "log": "NovaCore.BepuDependency.Tests-debug.log",
+        "exitCode": 0,
+        "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+        "summary": [
+          "    }",
+          "  ]",
+          "}"
+        ]
+      },
+      {
+        "log": "launcher-debug.log",
+        "exitCode": 0,
+        "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A",
+        "summary": [
+          "PASS diagnostics arguments",
+          "PASS existing production scenarios",
+          "NovaCore launcher tests passed: 18"
+        ]
+      },
+      {
+        "log": "graphics-assembly-presentation-debug.log",
+        "exitCode": 0,
+        "sha256": "EECB6E5985AE2536D6B606686DC76C17AACAB7680E1F61A37CB6E1F6B1C68A15",
+        "summary": [
+          "SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.",
+          "SRV01_COLD_PREPARATION ms=14.7473 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+          "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+        ]
+      },
+      {
+        "log": "graphics-assembly-powered-support-debug.log",
+        "exitCode": 0,
+        "sha256": "E076D443C2C72E7C7DC0BB06AA2024F6BA04684B68864C4DD0CED77FEFE7E46E",
+        "summary": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion"
+        ]
+      },
+      {
+        "log": "graphics-certified-continuation-regression-debug.log",
+        "exitCode": 0,
+        "sha256": "72321F80DA447CA6777990F4607BF14E0575D951BB2B85DE7EC41B6F98E16C9A",
+        "summary": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "PUBLICATION_ALLOCATION_MATRIX PASS setup/preparation/success/recheck/commit/observation/stale/conflict/debt/capacity/ownership/replay"
+        ]
+      },
+      {
+        "log": "graphics-powered-contact-presentation-debug.log",
+        "exitCode": 0,
+        "sha256": "F1F346484F790773E94BC7D47789EB2C938FF4C00E0F2E5258B036D376FF279A",
+        "summary": [
+          "POWERED_CONTACT_VISIBLE_STATUS RUNNING - live dry contact | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=19500000",
+          "POWERED_CONTACT_VISIBLE_STATUS COMPLETED - final supported endpoint held | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=20000000",
+          "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+        ]
+      }
+    ],
+    "fullSolutionBuild": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0,
+      "log": "full-build-debug-prepared.log"
+    }
+  },
+  "release": {
+    "registeredGroups": 79,
+    "passedGroups": 79,
+    "missing": [],
+    "simulationLogSha256": "15EC27897E3844BDF7C02C8C69D58EE4C08A99582AC8225C615FABC220E95497",
+    "fullSuiteDepartureCounters": [
+      "DEPARTURE_COUNTER handoff before=31102648 after=31102648",
+      "DEPARTURE_COUNTER first-flight before=31102968 after=31102968"
+    ],
+    "focusedWitnesses": [
+      "DEPARTURE_PREPARE status=Prepared",
+      "DEPARTURE_FIRST_FLIGHT tick=32291 heightO=0.002157609515294083 vy=-0.03929292264178322 oracleError=3.251288127614771E-13 nativeFrontier=1",
+      "DEPARTURE_CLEARANCE_HOLD frontier=3 tick=47916 debt=15625",
+      "DEPARTURE_FAILURES PASS authority/consumer/receipt/refusal/retry/terminal/capacity/save boundaries",
+      "DEPARTURE_SCHEDULES PASS 6 equal-time host partitions / same frontier bits / moving frame",
+      "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+      "DEPARTURE_COUNTER handoff before=31091192 after=31091192",
+      "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+      "DEPARTURE_COUNTER first-flight before=31091512 after=31091512",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "DEPARTURE_ANGULAR speed=0.2 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.000196924355350651",
+      "DEPARTURE_ANGULAR speed=0.2 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.00019290984035986422",
+      "DEPARTURE_ANGULAR speed=0.2 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_ANGULAR speed=0.25 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_FRAME speed=0.2 frameX=0.05 clearanceError=0 positionError=2.168404344971009E-19 velocityError=6.938893903907228E-18",
+      "DEPARTURE_PROOFS PASS independent position / angular limits / moving frame / native abort"
+    ],
+    "regressions": [
+      {
+        "log": "NovaCore.ReferenceFrames.Tests-release.log",
+        "exitCode": 0,
+        "sha256": "134B0A6DC0764F6714BFCBD0DDBC0A6B3AA8E55B6B73BB540B9EB112155CED2E",
+        "summary": [
+          "PASS surface anchor authority",
+          "PASS validation",
+          "Benchmark: 10,000 root resolutions in 3.360 ms; managed allocations=0 bytes; final=4000000000009.999"
+        ]
+      },
+      {
+        "log": "NovaCore.Precision.Tests-release.log",
+        "exitCode": 0,
+        "sha256": "0F59AC8BC4DA20922A71B1D71199199B983F0CF909EFDA885B743340D2409A22",
+        "summary": [
+          "log options: parsing and verbose-input compatibility passed",
+          "",
+          "PASS"
+        ]
+      },
+      {
+        "log": "NovaCore.BepuDependency.Tests-release.log",
+        "exitCode": 0,
+        "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+        "summary": [
+          "    }",
+          "  ]",
+          "}"
+        ]
+      },
+      {
+        "log": "launcher-release.log",
+        "exitCode": 0,
+        "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A",
+        "summary": [
+          "PASS diagnostics arguments",
+          "PASS existing production scenarios",
+          "NovaCore launcher tests passed: 18"
+        ]
+      },
+      {
+        "log": "graphics-assembly-presentation-release.log",
+        "exitCode": 0,
+        "sha256": "02EE295CC86DDD5259E4C57EE1B9302FA1A525E4125F70E8951F9FF3EF567484",
+        "summary": [
+          "SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.",
+          "SRV01_COLD_PREPARATION ms=9.7201 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+          "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+        ]
+      },
+      {
+        "log": "graphics-assembly-powered-support-release.log",
+        "exitCode": 0,
+        "sha256": "5B7235907CC3CE4BB9F0449FFC6886E099143834E5F8B238473EC0E96D2F4643",
+        "summary": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion"
+        ]
+      },
+      {
+        "log": "graphics-certified-continuation-regression-release.log",
+        "exitCode": 0,
+        "sha256": "6F2ADD8EBCC2BEBFA9B46C65C6A565343097ED9EAF6DF489AB584C2D1508EDD3",
+        "summary": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "PUBLICATION_ALLOCATION_MATRIX PASS setup/preparation/success/recheck/commit/observation/stale/conflict/debt/capacity/ownership/replay"
+        ]
+      },
+      {
+        "log": "graphics-powered-contact-presentation-release.log",
+        "exitCode": 0,
+        "sha256": "3D9C96020E3713EDD47C6D3880B9BDBB51AC72032A70D92B5F1C5151323FF50A",
+        "summary": [
+          "POWERED_CONTACT_VISIBLE_STATUS RUNNING - live dry contact | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=19500000",
+          "POWERED_CONTACT_VISIBLE_STATUS COMPLETED - final supported endpoint held | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=20000000",
+          "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+        ]
+      }
+    ],
+    "fullSolutionBuild": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0,
+      "log": "full-build-release.log"
+    }
+  },
+  "preparationFailures": [
+    {
+      "log": "proof-build-debug.log",
+      "reason": "New test local cb definite-assignment error CS0165; corrected before runtime tests."
+    },
+    {
+      "log": "full-build-debug.log",
+      "reason": "MSB3030 missing default native/shader prerequisites; built unchanged native source in explicit isolated Debug/Release directories and selected NativeBuildDirectory."
+    }
+  ]
+}

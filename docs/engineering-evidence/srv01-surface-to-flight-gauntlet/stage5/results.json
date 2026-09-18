@@ -1,0 +1,118 @@
+{
+  "judgment": "REVISE - STOP FOR PROJECT CONTROL",
+  "run": {
+    "configuration": "Debug",
+    "intervals": 1200,
+    "tick": 20000000,
+    "publications": 1200,
+    "peakPenetrationMetres": 0.019043728598313825,
+    "finalPenetrationMetres": 0.014560651361285926,
+    "finalVelocityMetresPerSecond": [
+      0.13680320220602227,
+      -0.0018795684388216859,
+      -0.011012865703827182
+    ],
+    "finalSpeedMetresPerSecond": 0.13725863223254325,
+    "finalAngularRadiansPerSecond": [
+      -0.0002068077434545408,
+      0.006575534975447907,
+      -0.08108537076623575
+    ],
+    "stateRevision": 1200,
+    "historyCount": 1200,
+    "timelineRevision": 0,
+    "debtTicks": 0,
+    "unchangedStoresAndMassEachInterval": true,
+    "retainedWorldGenerationAndBody": true
+  },
+  "inheritedBars": {
+    "transientPenetrationMetres": 0.02,
+    "featureToleranceMetres": 6.1e-05,
+    "settledHeightMetres": 0.000122,
+    "settledDriftMetres": 6.1e-05,
+    "settledLinearSpeedMetresPerSecond": 0.0036599268014639703,
+    "settledAngularSurfaceSpeedMetresPerSecond": 0.0036599268014639703,
+    "requiredSupportedIntervals": 600
+  },
+  "actualProperlySupportedCount": null,
+  "unmeasured": [
+    "proper final600 support count",
+    "full settled-window maximum drift",
+    "full settled-window maximum speed/angular rate"
+  ],
+  "withdrawn": [
+    "FLORIDA_SITE_CHEAP PASS",
+    "support=600/600"
+  ],
+  "withdrawalReason": "Preliminary test accepted -20mm <= minimum height <= +0.122mm, not the inherited absolute settled-height limit. Final endpoint already disproves height and speed requirements.",
+  "currentTest": "Corrected independent matrix corner oracle and inherited height/drift/speed predicates; NOT rebuilt or rerun.",
+  "cause": "UNATTRIBUTED",
+  "notReached": [
+    "Release qualification",
+    "complete refusal matrix",
+    "host-partition determinism",
+    "allocation",
+    "storage",
+    "performance",
+    "full regression",
+    "presentation/manual acceptance",
+    "Stage6"
+  ],
+  "frameWitness": {
+    "positionRoundTripMetres": 4.0783538020105096e-10,
+    "velocityRoundTripMetresPerSecond": 3.0468225842716704e-14,
+    "centeredDerivativeErrorMetresPerSecond": 7.995158878049328e-07,
+    "inertialAccelerationBalanceBelowMetresPerSecondSquared": 2e-13
+  },
+  "originalOutput": {
+    "path": "build\\srv01-stage5\\cheap-debug-contact.txt",
+    "sha256": "8CD71AA73D21C7E3D5E6F14C84E99DDA3AAE5B21F5177A3ACFBCF4A56C661B2C",
+    "lines": [
+      "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=7.995158878049328E-07 gravity=Double3 { X = -8.18366632701711E-05, Y = -9.794044678203283, Z = 0.014248756826371613, LengthSquared = 95.92351419241038, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=48",
+      "FLORIDA_SITE_STEP n=1 status=AwaitingDebt published=1 tick=16666 penetration=0.0022711731086462184 velocity=Double3 { X = -0.001121750209333061, Y = -0.1360669881077904, Z = 0.00023079320461984388, LengthSquared = 0.01851553684176101, IsFinite = True } omega=Double3 { X = 2.883977778811442E-17, Y = -0.00013572299212682995, Z = 0.0006599277257919312, LengthSquared = 4.539253338607698E-07, IsFinite = True } private=(1, 1, 0, 0, False, False)",
+      "FLORIDA_SITE_STEP n=2 status=AwaitingDebt published=1 tick=33333 penetration=0.006030525444355339 velocity=Double3 { X = -0.0038769757232105548, Y = -0.22489674385221003, Z = 0.0004545815793402401, LengthSquared = 0.050593782980497215, IsFinite = True } omega=Double3 { X = 2.2261587280070043E-09, Y = -0.0002676954318426286, Z = 0.0022837817668889568, LengthSquared = 5.2873200030088125E-06, IsFinite = True } private=(1, 2, 0, 0, False, False)",
+      "FLORIDA_SITE_STEP n=3 status=AwaitingDebt published=1 tick=50000 penetration=0.010346451253060884 velocity=Double3 { X = -0.008167264836449277, Y = -0.25759184337613156, Z = 0.0006735113426997115, LengthSquared = 0.06642071560635095, IsFinite = True } omega=Double3 { X = 1.2928098907052411E-08, Y = -0.00039751688041227113, Z = 0.004821352660619856, LengthSquared = 2.3403461148446E-05, IsFinite = True } private=(1, 3, 0, 0, False, False)",
+      "FLORIDA_SITE_STEP n=4 status=AwaitingDebt published=1 tick=66666 penetration=0.01433299917429598 velocity=Double3 { X = -0.013425437329922539, Y = -0.2370006732482871, Z = 0.0008900596008169771, LengthSquared = 0.056350353693734034, IsFinite = True } omega=Double3 { X = 3.789987756248024E-08, Y = -0.0005266900421627498, Z = 0.007945563643984407, LengthSquared = 6.340938402255657E-05, IsFinite = True } private=(1, 4, 0, 0, False, False)",
+      "FLORIDA_SITE_STEP n=1200 status=Completed published=1 tick=20000000 penetration=0.014560651361285926 velocity=Double3 { X = 0.13680320220602227, Y = -0.0018795684388216859, Z = -0.011012865703827182, LengthSquared = 0.018839932122348562, IsFinite = True } omega=Double3 { X = -0.0002068077434545408, Y = 0.006575534975447907, Z = -0.08108537076623575, LengthSquared = 0.00661811778195401, IsFinite = True } private=(1, 1200, 0, 0, False, False)",
+      "FLORIDA_SITE_CHEAP PASS peakPenetration=0.019043728598313825 support=600/600 intervals=1200"
+    ]
+  },
+  "mechanicalFirstAttempt": {
+    "reason": "Wrong free-flight service route on contact owner; corrected only the test call. No native step.",
+    "sha256": "B4E0169F9B0548C8169CC92BBDA2FE6E78969AE406DDEC575526BA9BE9CBE2AA",
+    "lines": [
+      "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=7.995158878049328E-07 gravity=Double3 { X = -8.18366632701711E-05, Y = -9.794044678203283, Z = 0.014248756826371613, LengthSquared = 95.92351419241038, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=48",
+      "FLORIDA_SITE_STEP n=1 status=InvalidAuthority published=0 tick=0 penetration=6.661338147750939E-16 velocity=Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True } omega=Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True } private=(1, 0, 0, 0, False, False)",
+      "Unhandled exception. System.InvalidOperationException: FLORIDA SITE: first material contact result",
+      "   at AssemblyFloridaSiteTests.Check(Boolean value, String message) in /_/tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs:line 12",
+      "   at AssemblyFloridaSiteTests.Cheap() in /_/tests/NovaCore.Graphics.Tests/AssemblyFloridaSiteTests.cs:line 69",
+      "   at Program.<Main>$(String[] args) in /_/tests/NovaCore.Graphics.Tests/Program.cs:line 17"
+    ]
+  },
+  "builds": [
+    {
+      "path": "cheap-debug-build-corrected-route.txt",
+      "sha256": "996EF879C396E5230E78791209546F7817D2E51FA19F5A99C60D57D2B5FA6F78",
+      "lines": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:04.70"
+      ]
+    },
+    {
+      "path": "cheap-debug-build.txt",
+      "sha256": "9FA78D1E1669A1940B91A080A3181A570D0653E0EAC5A62BFFE79A3D459E1351",
+      "lines": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:08.26"
+      ]
+    }
+  ]
+}

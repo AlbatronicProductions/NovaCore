@@ -61,6 +61,14 @@ internal sealed partial class LocalContactWorld
     private LocalContactStatus ValidateAuthority(SimulationTransactionEngine engine, LocalContactConfiguration config,
         SimulationInstant target)
     {
+        if(assembly is {} bound)
+        {
+            var status=source.Validate(engine,config,target);
+            if(status!=LocalContactStatus.Success)return status;
+            return engine.State.Revision==bound.Revision&&engine.CaptureContinuationClock()==bound.Clock&&
+                frontier==bound.AcknowledgedFrontier+(bound.Pending?1:0)
+                ?LocalContactStatus.Success:LocalContactStatus.ChangedAuthority;
+        }
         if (powered is { } power)
         {
             if (!ReferenceEquals(config, configuration)) return LocalContactStatus.ConfigurationMismatch;

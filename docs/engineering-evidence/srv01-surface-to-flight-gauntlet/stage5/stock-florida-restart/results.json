@@ -1,0 +1,1315 @@
+{
+  "physical": {
+    "debug": {
+      "peakMetres": 9.773029136006528e-05,
+      "supportIntervals": 600,
+      "settledMaxima": {
+        "height": 7.900738777877336e-05,
+        "drift": 1.620506337545895e-07,
+        "speed": 5.580744646958632e-06,
+        "angular": 2.27449224037654e-06
+      },
+      "witnesses": [
+        "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=7.995158878049328E-07 gravity=Double3 { X = -8.18366632701711E-05, Y = -9.794044678203283, Z = 0.014248756826371613, LengthSquared = 95.92351419241038, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=48",
+        "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 origin=Double3 { X = -5270974.75875348, Y = -1871033.3406329644, Z = 3050578.137596519, LengthSquared = 40589967642758.31, IsFinite = True } velocity=Double3 { X = 136.4379126343022, Y = -384.3655420139789, Z = 1.6237513762668097E-05, LengthSquared = 166352.1738917055, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+        "FLORIDA_SITE_CHEAP PASS peakPenetration=9.773029136006528E-05 support=600/600 intervals=1200",
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=8.251539034149307E-09 maxVelocity=6.355287432313019E-13 maxOrientationMatrix=2.1094237467877974E-15 maxAngular=2.1779126191287486E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ],
+      "allocation": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ],
+      "presentation": [
+        "ORDINARY_ALLOCATION gate=florida-stock-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "FLORIDA_PRESENTATION PASS siteLocalCopiedCanonical=true visualMeshBytes=1359096 displaySampleArraysBytes=640000 engine=OFF manualAcceptance=NOT_GRANTED"
+      ]
+    },
+    "release": {
+      "peakMetres": 9.773029136006528e-05,
+      "supportIntervals": 600,
+      "settledMaxima": {
+        "height": 7.900738777877336e-05,
+        "drift": 1.620506337545895e-07,
+        "speed": 5.580744646958632e-06,
+        "angular": 2.27449224037654e-06
+      },
+      "witnesses": [
+        "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=7.995158878049328E-07 gravity=Double3 { X = -8.18366632701711E-05, Y = -9.794044678203283, Z = 0.014248756826371613, LengthSquared = 95.92351419241038, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=48",
+        "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 origin=Double3 { X = -5270974.75875348, Y = -1871033.3406329644, Z = 3050578.137596519, LengthSquared = 40589967642758.31, IsFinite = True } velocity=Double3 { X = 136.4379126343022, Y = -384.3655420139789, Z = 1.6237513762668097E-05, LengthSquared = 166352.1738917055, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+        "FLORIDA_SITE_CHEAP PASS peakPenetration=9.773029136006528E-05 support=600/600 intervals=1200",
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=8.251539034149307E-09 maxVelocity=6.355287432313019E-13 maxOrientationMatrix=2.1094237467877974E-15 maxAngular=2.1779126191287486E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ],
+      "allocation": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ],
+      "presentation": [
+        "ORDINARY_ALLOCATION gate=florida-stock-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "FLORIDA_PRESENTATION PASS siteLocalCopiedCanonical=true visualMeshBytes=1359096 displaySampleArraysBytes=640000 engine=OFF manualAcceptance=NOT_GRANTED"
+      ]
+    }
+  },
+  "completeOperationProcesses": [
+    {
+      "process": 1,
+      "performance": {
+        "median": 0.0771,
+        "p95": 0.0814,
+        "p99": 0.1006,
+        "maximum": 0.1926,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.1926,
+            "index": 587
+          },
+          {
+            "ms": 0.189,
+            "index": 790
+          },
+          {
+            "ms": 0.1508,
+            "index": 0
+          },
+          {
+            "ms": 0.1413,
+            "index": 789
+          },
+          {
+            "ms": 0.1322,
+            "index": 791
+          },
+          {
+            "ms": 0.1299,
+            "index": 171
+          },
+          {
+            "ms": 0.1213,
+            "index": 586
+          },
+          {
+            "ms": 0.1046,
+            "index": 730
+          }
+        ]
+      },
+      "storage": {
+        "managedConstructionWarmUpperBound": 3207984,
+        "native": 475136,
+        "combinedUpperBound": 3683120,
+        "historyPayloadIncluded": 1891200,
+        "creditPayloadIncluded": 76816,
+        "coldMs": 128.7613,
+        "limit": 8388608
+      },
+      "finalNativeWitness": "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3683120 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+    },
+    {
+      "process": 2,
+      "performance": {
+        "median": 0.0736,
+        "p95": 0.0778,
+        "p99": 0.1052,
+        "maximum": 0.2049,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.2049,
+            "index": 579
+          },
+          {
+            "ms": 0.1826,
+            "index": 792
+          },
+          {
+            "ms": 0.1771,
+            "index": 16
+          },
+          {
+            "ms": 0.1358,
+            "index": 0
+          },
+          {
+            "ms": 0.1348,
+            "index": 137
+          },
+          {
+            "ms": 0.1215,
+            "index": 688
+          },
+          {
+            "ms": 0.1205,
+            "index": 911
+          },
+          {
+            "ms": 0.118,
+            "index": 824
+          }
+        ]
+      },
+      "storage": {
+        "managedConstructionWarmUpperBound": 3207984,
+        "native": 475136,
+        "combinedUpperBound": 3683120,
+        "historyPayloadIncluded": 1891200,
+        "creditPayloadIncluded": 76816,
+        "coldMs": 127.6638,
+        "limit": 8388608
+      },
+      "finalNativeWitness": "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3683120 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+    },
+    {
+      "process": 3,
+      "performance": {
+        "median": 0.0664,
+        "p95": 0.0693,
+        "p99": 0.0858,
+        "maximum": 0.1575,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.1575,
+            "index": 802
+          },
+          {
+            "ms": 0.1506,
+            "index": 852
+          },
+          {
+            "ms": 0.1264,
+            "index": 0
+          },
+          {
+            "ms": 0.1235,
+            "index": 554
+          },
+          {
+            "ms": 0.1043,
+            "index": 422
+          },
+          {
+            "ms": 0.1007,
+            "index": 809
+          },
+          {
+            "ms": 0.0987,
+            "index": 181
+          },
+          {
+            "ms": 0.0942,
+            "index": 80
+          }
+        ]
+      },
+      "storage": {
+        "managedConstructionWarmUpperBound": 3207984,
+        "native": 475136,
+        "combinedUpperBound": 3683120,
+        "historyPayloadIncluded": 1891200,
+        "creditPayloadIncluded": 76816,
+        "coldMs": 126.5352,
+        "limit": 8388608
+      },
+      "finalNativeWitness": "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3683120 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+    }
+  ],
+  "presentationStorage": [
+    "FLORIDA_PRESENTATION_STORAGE managedRetainedDelta=4439832 nativePool=475136 gpuMeshPayload=1359096 combined=6274064 limit=8388608 sharedTerrainDatasetAndDeviceExcluded=true"
+  ],
+  "live": {
+    "processesExecuted": 1,
+    "furtherProcesses": "NOT RUN: material unclassified tail",
+    "manual": "NOT RUN: performance stop",
+    "status": "REVISE",
+    "cause": "UNCLASSIFIED",
+    "witness": [
+      "SRV01_COLD_PREPARATION ms=668.5228 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=4094",
+      "STOCK_ASSEMBLY_FRAME samples=3585 median_ms=5.5568 p95_ms=5.707 p99_ms=5.8366 max_ms=74.5905 measurement=display_callback_interval_including_present_host_scheduling",
+      "SRV01_LIVE_SERVICE samples=3585 median_ms=0.004 p95_ms=0.0867 p99_ms=0.1944 max_ms=72.4557 includes=host_admission_bounded_service_copied_observation",
+      "[native] Average frame time: 5.578 ms (4000 frames)",
+      "[native] Frame pacing: p50=5.547 ms; p95=5.825 ms; p99=5.961 ms; max=74.266 ms; samples=4000",
+      "[native] Fence wait pacing: average=5.005 ms; p95=5.195 ms; max=7.503 ms; samples=4000",
+      "[native] CPU timings: update=5.198 ms; fence=5.005; inspection=0.033; hostCallback=0.157; validationUpload=0.002; record=0.056; submit=0.026; present=0.224",
+      "[native] GPU timing averages: total=0.083 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.015; preSurface=0.000; toneMap=0.012"
+    ]
+  },
+  "fullSimulationGroups": {
+    "debug": 80,
+    "release": 80
+  },
+  "stoppedGates": [
+    "Further live populations",
+    "Manual Florida acceptance",
+    "Focused Launcher regression",
+    "Final Debug compilation of subsequently added presentation-storage-only test method"
+  ],
+  "buildHistory": [
+    "Initial new test double/string comparison CS0019 corrected before tests",
+    "Existing Stage4 native path absent; reused actual Stage3 native outputs",
+    "Debug and Release full solutions passed 0 warnings/errors",
+    "Later new presentation-storage-only test compiled/executed Release; Debug was not repeated after live stop"
+  ],
+  "runInventory": [
+    {
+      "file": "debug-allocation.log",
+      "bytes": 373,
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "debug-assembly-powered-support.log",
+      "bytes": 1633,
+      "sha256": "513C35CB845A15EB977323CDB38C52A222AB05FD0D2250D3959E77779B027835",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "debug-assembly-presentation.log",
+      "bytes": 7011,
+      "sha256": "676CF3F54D0A90B1FD4535E7050FA496D8512D5A2512686617962E8DE7D4E240",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=supported-assembly-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "file": "debug-build-fixed.log",
+      "bytes": 577,
+      "sha256": "D0B6950C76A7893138A34B5CA9203ABB1D8E4E2EA4EDBAFB3D7EFB760B20BC96",
+      "recordedResult": "BUILD FAILURE",
+      "witnesses": [
+        "Build FAILED.",
+        "    0 Warning(s)"
+      ]
+    },
+    {
+      "file": "debug-build-native-path.log",
+      "bytes": 82,
+      "sha256": "A4BC31F2E0001FAD9B053825B88523FAD2B41B7522AA249F5E6A5390E031384E",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "file": "debug-build.log",
+      "bytes": 1049,
+      "sha256": "A1764B8FB9E0D63EBA55E81FBDEA883C6ACB1E016D0761A5E3B3CE773ABC5CF6",
+      "recordedResult": "BUILD FAILURE",
+      "witnesses": [
+        "Build FAILED.",
+        "    0 Warning(s)"
+      ]
+    },
+    {
+      "file": "debug-certified-continuation-regression.log",
+      "bytes": 13295,
+      "sha256": "72321F80DA447CA6777990F4607BF14E0575D951BB2B85DE7EC41B6F98E16C9A",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=certified-publication-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=certified-publication-observation-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=full-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=stale-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=stale-clearance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline-conflict bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=insufficient-debt bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=history-capacity bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=reentrant bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=wrong-thread bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65360 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "debug-final-allocation.log",
+      "bytes": 373,
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "debug-final-presentation.log",
+      "bytes": 3156,
+      "sha256": "AC641340BE6B96D8CE89EC60539179B61959B9D93C78E52B95592373FFBFACE2",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=florida-stock-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "debug-final-qualification.log",
+      "bytes": 91472,
+      "sha256": "751C867C2A0B9C10C26B15CDA9D454366DDAF163A803F3021C68948689DFB77C",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "debug-NovaCore.BepuDependency.Tests.log",
+      "bytes": 2215,
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "debug-NovaCore.Precision.Tests.log",
+      "bytes": 693,
+      "sha256": "4E8798A69850ABC244AE95D5687182568A986445AAB9A441936B5B3595DB0B3E",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "debug-NovaCore.ReferenceFrames.Tests.log",
+      "bytes": 934,
+      "sha256": "D1FE3B3200CB14F0C48A09D2883ACAD5620941B30898AE1E1339B0FEDA2D713C",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "PASS transform algebra",
+        "PASS hierarchy and conversion",
+        "PASS reference-frame graph",
+        "PASS reference-frame paths",
+        "PASS transform resolution",
+        "PASS static universe fixture",
+        "PASS ORB",
+        "PASS CCI/CCF",
+        "PASS rotating velocity",
+        "PASS surface anchor authority",
+        "PASS validation"
+      ]
+    },
+    {
+      "file": "debug-powered-contact-presentation.log",
+      "bytes": 3640,
+      "sha256": "DD7CED6601A89AEB5705971B5B93652BD07AC4D8E465D2C925D66CC47014B270",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "debug-qualification-build.log",
+      "bytes": 82,
+      "sha256": "C2340B608BED25D8755ADD5374FD948FFCD3CC58C0A3CE94EC5A3F241215CAD4",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "file": "debug-qualification.log",
+      "bytes": 91472,
+      "sha256": "751C867C2A0B9C10C26B15CDA9D454366DDAF163A803F3021C68948689DFB77C",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "debug-simulation-full.log",
+      "bytes": 67112,
+      "sha256": "73B8BFF4C40A2E8BD58C876B65A404B8A542DC16EB8CD8EE3659EBE651B185A5",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Canonical assembly contact departure",
+        "ORDINARY_ALLOCATION gate=development-powered bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Provisional finite development propulsion",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Canonical assembly supported contact",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Canonical assembly powered supported contact",
+        "PASS Stock assembly production path",
+        "PASS SRV01 sixteen-jet integration",
+        "PASS Segmented powered free flight",
+        "PASS SimulationInstant",
+        "PASS SimulationDuration",
+        "PASS SimulationRate",
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "PASS Solar UTC and speed presets",
+        "PASS Event ordering",
+        "PASS Internal physical-event epochs",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "PASS Timeline topology",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "PASS Simulation clock",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "PASS Host-duration conversion",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "PASS Host-duration debt servicing",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "PASS Transaction contracts",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "PASS Canonical transaction groups",
+        "PASS Clock execution orchestration",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial contracts",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial system definitions",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial body catalog",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "PASS SolAnalytical dataset",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial system time and provenance",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial ephemeris catalogs",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial system evaluation",
+        "ORDINARY_ALLOCATION gate=timed-lunar-orientation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-all-body-orientation bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial body orientation",
+        "ORDINARY_ALLOCATION gate=timed-circular-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-elliptic-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "PASS Two-body propagation",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "PASS Spacecraft attitude",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "PASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations",
+        "PASS Spacecraft translational authority",
+        "PASS Contact generation: immutable identity, analytical point geometry, rotating frames, readiness, replay, no mutation, allocations",
+        "PASS Spacecraft contact generation",
+        "PASS Contact payload lifetime: explicit capacity, cancellation, retry, replacement, sequence ABA/overflow, history independence, 9900 slot reuses",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "PASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility",
+        "PASS Unified linear/angular contact transaction",
+        "PASS Isolated contact response: strict canonical-zero-gap admission, qualified receipt, conservative velocity sign, independent impulse oracle, atomic transaction, refusal, zero-allocation contracts",
+        "PASS Isolated analytical contact response policy",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "PASS Spacecraft attitude integration",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "PASS Rigid-body rotation",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "PASS Rigid-body torque transaction",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "PASS Flight reference and SAS guidance",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "PASS SAS sign/frame continuity proof",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "PASS Analytical orbit sampling",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial frame extraction",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial trajectory replacement",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial impulse events",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Allocation",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS",
+        "PASS Exact-event spacecraft motion: exact duration, canonical bits, rational oracle, rotation, failures, replay, immutability, allocation",
+        "PASS Exact-event spacecraft motion",
+        "ORDINARY_ALLOCATION gate=exact-event-earth-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Earth exact-event observation: canonical bits/status, orbit/Euler oracles, same-E frames, refusals, replay, authority",
+        "PASS Exact-event Earth-relative observation",
+        "ORDINARY_ALLOCATION gate=Florida mathematical enclosure bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Florida monotone contact proof",
+        "PASS Qualified root contact kinematics",
+        "PASS Certified isolated-contact response proposals",
+        "PASS Certified pre-impact velocity tuples",
+        "ORDINARY_ALLOCATION gate=post-impact response resolution bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=post-impact fixed-set exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Certified final post-impact velocity states",
+        "PASS Private root-time post-impact state",
+        "PASS Paired private canonical propagation",
+        "PASS Post-impact singleton terrain coverage",
+        "PASS continuation ownership: owner thread, exclusive phase, borrowed lifetime, copied observation, single engine",
+        "PASS Certified continuation ownership",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Local contact staging: authority, exact time, persistent finite-body contact, paired export, negatives, allocation/storage",
+        "PASS Private finite-body contact staging",
+        "PASS Compound contact selection",
+        "PASS persistent contact shared-body phase ownership",
+        "ORDINARY_ALLOCATION gate=persistent-contact-complete-path bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Persistent contact publication: exact paired authority, retained trajectory, 28 refusal/terminal responsibilities, allocation/storage",
+        "PASS Persistent contact publication",
+        "PASS contact servicing cheap: exact credit, no unfunded step, unchanged external-debt refusal, original moving epoch/lattice",
+        "PASS contact servicing refusal matrix",
+        "ORDINARY_ALLOCATION gate=contact-servicing-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS host-paced contact servicing",
+        "PASS Host-paced contact servicing",
+        "PASS engineering article analytical, geometry, identity, admission and lifetime gates",
+        "PASS Engineering article definition and lifetime",
+        "PASS Engineering article physical contact",
+        "PASS Engineering article schedules and private equivalence",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=article-centered-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-backlog bytes=0 entry=PASS exit=PASS",
+        "PASS Engineering article allocation",
+        "PASS Spacecraft command authority",
+        "PASS Spacecraft command accepted-stream replay",
+        "PASS Spacecraft command non-actuating article",
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Spacecraft command allocation",
+        "PASS Single-engine actuation preparation",
+        "ORDINARY_ALLOCATION gate=engine-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-no-edge-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-transition-capture bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preview bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-duplicate-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Single-engine actuation allocation",
+        "PASS Single-engine proposal article non-actuation",
+        "PASS Finite-propellant segmentation",
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Finite-propellant allocation",
+        "PASS Finite-propellant proposal article non-actuation",
+        "PASS Powered contact exact mapper and joint successor",
+        "PASS Powered contact physical bounds",
+        "PASS Powered contact discrete work",
+        "PASS Powered contact authority and terminal failures",
+        "PASS Powered contact ready lifetime",
+        "PASS Powered contact host partitions and moving frame",
+        "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Powered contact zero allocation"
+      ]
+    },
+    {
+      "file": "debug-solution.log",
+      "bytes": 82,
+      "sha256": "72BC5C89B61ED72D019B07598DCB2B07C66CD357F0F57433924C6B2B22CE5AD7",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "file": "debug-stage3-regression.log",
+      "bytes": 7516,
+      "sha256": "D64F61A3A8FF0E855B2134A93BC23DAC9C06564C83C6128E4F63EDCAD21A7AB8",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "live-frame-1.log",
+      "bytes": 10963,
+      "sha256": "1D73A81BFADF9E442FB491D473E15285CAE462A7B2485E389598C3437218FE12",
+      "recordedResult": "LIVE PERFORMANCE STOP",
+      "witnesses": []
+    },
+    {
+      "file": "release-allocation.log",
+      "bytes": 373,
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "release-assembly-powered-support.log",
+      "bytes": 1633,
+      "sha256": "DC01BB7316B8B8909B940B8833D50F61A24033C64C7E8439AB9558567237901C",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "release-assembly-presentation.log",
+      "bytes": 7010,
+      "sha256": "ABC952AD4D2C8CD161B40AF8F3366B0022D8387DE9763F969C2219671F28DBDB",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=supported-assembly-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "file": "release-build.log",
+      "bytes": 82,
+      "sha256": "071147EFFF92CA6C8E079B03785B7C6D7CD05EA00355E5CE8B813A662EC9A999",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "file": "release-certified-continuation-regression.log",
+      "bytes": 13295,
+      "sha256": "6F2ADD8EBCC2BEBFA9B46C65C6A565343097ED9EAF6DF489AB584C2D1508EDD3",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=certified-publication-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=certified-publication-observation-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=prepare-history bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=final-recheck bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=write-only-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=full-success bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=stale-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=stale-clearance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline-conflict bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=insufficient-debt bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=history-capacity bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=reentrant bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=wrong-thread bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-history-setup bytes=11600 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-source-proof-reconstruction bytes=65288 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-record-comparison bytes=45688 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=replay-publication-installation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "release-costs-1.log",
+      "bytes": 621,
+      "sha256": "CD8BAAF53B74074C849EB836C17718480B2741E2CFA1F54F7071560E0D6144BE",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "FLORIDA_STORAGE {\"managedConstructionWarmUpperBound\":2922424,\"native\":475136,\"combinedUpperBound\":3397560,\"historyPayloadIncluded\":1891200,\"creditPayloadIncluded\":76816,\"coldMs\":2.1691,\"limit\":8388608}",
+        "FLORIDA_PERFORMANCE {\"median\":0.0569,\"p95\":0.0577,\"p99\":0.0625,\"maximum\":0.1227,\"gc\":[0,0,0],\"warm\":128,\"measured\":1024,\"tails\":[{\"ms\":0.1227,\"index\":493},{\"ms\":0.1222,\"index\":214},{\"ms\":0.1174,\"index\":0},{\"ms\":0.0913,\"index\":569},{\"ms\":0.0721,\"index\":823},{\"ms\":0.0659,\"index\":356},{\"ms\":0.0641,\"index\":215},{\"ms\":0.0638,\"index\":19}]}"
+      ]
+    },
+    {
+      "file": "release-final-allocation.log",
+      "bytes": 373,
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "release-final-costs-1.log",
+      "bytes": 753,
+      "sha256": "0DB6831526D1EF05CB697DE7D8A417CE3B0A6BCBC467DD2287DF3252D011B045",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "FLORIDA_STORAGE {\"managedConstructionWarmUpperBound\":3207984,\"native\":475136,\"combinedUpperBound\":3683120,\"historyPayloadIncluded\":1891200,\"creditPayloadIncluded\":76816,\"coldMs\":128.7613,\"limit\":8388608}",
+        "FLORIDA_PERFORMANCE {\"median\":0.0771,\"p95\":0.0814,\"p99\":0.1006,\"maximum\":0.1926,\"gc\":[0,0,0],\"warm\":128,\"measured\":1024,\"tails\":[{\"ms\":0.1926,\"index\":587},{\"ms\":0.189,\"index\":790},{\"ms\":0.1508,\"index\":0},{\"ms\":0.1413,\"index\":789},{\"ms\":0.1322,\"index\":791},{\"ms\":0.1299,\"index\":171},{\"ms\":0.1213,\"index\":586},{\"ms\":0.1046,\"index\":730}]}",
+        "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3683120 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+      ]
+    },
+    {
+      "file": "release-final-costs-2.log",
+      "bytes": 752,
+      "sha256": "D5FEFDB81D0BE432B0B2928A29FA2ADA77D59A7014B470D51298BD7643F18EE1",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "FLORIDA_STORAGE {\"managedConstructionWarmUpperBound\":3207984,\"native\":475136,\"combinedUpperBound\":3683120,\"historyPayloadIncluded\":1891200,\"creditPayloadIncluded\":76816,\"coldMs\":127.6638,\"limit\":8388608}",
+        "FLORIDA_PERFORMANCE {\"median\":0.0736,\"p95\":0.0778,\"p99\":0.1052,\"maximum\":0.2049,\"gc\":[0,0,0],\"warm\":128,\"measured\":1024,\"tails\":[{\"ms\":0.2049,\"index\":579},{\"ms\":0.1826,\"index\":792},{\"ms\":0.1771,\"index\":16},{\"ms\":0.1358,\"index\":0},{\"ms\":0.1348,\"index\":137},{\"ms\":0.1215,\"index\":688},{\"ms\":0.1205,\"index\":911},{\"ms\":0.118,\"index\":824}]}",
+        "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3683120 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+      ]
+    },
+    {
+      "file": "release-final-costs-3.log",
+      "bytes": 753,
+      "sha256": "CC92F12334857390A182649EBB85B04D4EBC2AE1FAD94E4C91148B87E4D348A4",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "FLORIDA_STORAGE {\"managedConstructionWarmUpperBound\":3207984,\"native\":475136,\"combinedUpperBound\":3683120,\"historyPayloadIncluded\":1891200,\"creditPayloadIncluded\":76816,\"coldMs\":126.5352,\"limit\":8388608}",
+        "FLORIDA_PERFORMANCE {\"median\":0.0664,\"p95\":0.0693,\"p99\":0.0858,\"maximum\":0.1575,\"gc\":[0,0,0],\"warm\":128,\"measured\":1024,\"tails\":[{\"ms\":0.1575,\"index\":802},{\"ms\":0.1506,\"index\":852},{\"ms\":0.1264,\"index\":0},{\"ms\":0.1235,\"index\":554},{\"ms\":0.1043,\"index\":422},{\"ms\":0.1007,\"index\":809},{\"ms\":0.0987,\"index\":181},{\"ms\":0.0942,\"index\":80}]}",
+        "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3683120 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+      ]
+    },
+    {
+      "file": "release-final-presentation.log",
+      "bytes": 3155,
+      "sha256": "57542D59C44B827EA6D4DA9560121671182034B36CB89AF173DCEE707C9C1668",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=florida-stock-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "release-final-qualification.log",
+      "bytes": 91472,
+      "sha256": "751C867C2A0B9C10C26B15CDA9D454366DDAF163A803F3021C68948689DFB77C",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "release-NovaCore.BepuDependency.Tests.log",
+      "bytes": 2215,
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "release-NovaCore.Precision.Tests.log",
+      "bytes": 692,
+      "sha256": "53F4EF6F3BD2785BF414D18B4231C2488037EF7EE4DB75321E8311D877ACAE34",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "release-NovaCore.ReferenceFrames.Tests.log",
+      "bytes": 934,
+      "sha256": "CE5EC02166DC4FC3622B18631598B27E20AD029945136C6FDA53EA45C9AEF6CF",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "PASS transform algebra",
+        "PASS hierarchy and conversion",
+        "PASS reference-frame graph",
+        "PASS reference-frame paths",
+        "PASS transform resolution",
+        "PASS static universe fixture",
+        "PASS ORB",
+        "PASS CCI/CCF",
+        "PASS rotating velocity",
+        "PASS surface anchor authority",
+        "PASS validation"
+      ]
+    },
+    {
+      "file": "release-powered-contact-presentation.log",
+      "bytes": 3641,
+      "sha256": "5B18EEDECDE130E9F39958426792A88420D3DA8BA050531279EDADCE475A3D66",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "release-presentation-storage.log",
+      "bytes": 2950,
+      "sha256": "658483DF270B07B0CE923FEF4F6C48019D91A843BFE323C0925E4FC2562CC9B0",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "FLORIDA_PRESENTATION_STORAGE managedRetainedDelta=4439832 nativePool=475136 gpuMeshPayload=1359096 combined=6274064 limit=8388608 sharedTerrainDatasetAndDeviceExcluded=true"
+      ]
+    },
+    {
+      "file": "release-qualification.log",
+      "bytes": 91472,
+      "sha256": "751C867C2A0B9C10C26B15CDA9D454366DDAF163A803F3021C68948689DFB77C",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    },
+    {
+      "file": "release-simulation-full.log",
+      "bytes": 67113,
+      "sha256": "B5A64D5011B5CEC0873D64A298B796842FE08DDFDFCB314B54A1DBED4AA5AA6D",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Canonical assembly contact departure",
+        "ORDINARY_ALLOCATION gate=development-powered bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Provisional finite development propulsion",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Canonical assembly supported contact",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Canonical assembly powered supported contact",
+        "PASS Stock assembly production path",
+        "PASS SRV01 sixteen-jet integration",
+        "PASS Segmented powered free flight",
+        "PASS SimulationInstant",
+        "PASS SimulationDuration",
+        "PASS SimulationRate",
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "PASS Solar UTC and speed presets",
+        "PASS Event ordering",
+        "PASS Internal physical-event epochs",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "PASS Timeline topology",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "PASS Simulation clock",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "PASS Host-duration conversion",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "PASS Host-duration debt servicing",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "PASS Transaction contracts",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "PASS Canonical transaction groups",
+        "PASS Clock execution orchestration",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial contracts",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial system definitions",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial body catalog",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "PASS SolAnalytical dataset",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial system time and provenance",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial ephemeris catalogs",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial system evaluation",
+        "ORDINARY_ALLOCATION gate=timed-lunar-orientation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-all-body-orientation bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial body orientation",
+        "ORDINARY_ALLOCATION gate=timed-circular-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-elliptic-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "PASS Two-body propagation",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "PASS Spacecraft attitude",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "PASS Spacecraft translation: contracts, numerical oracle, transactions, cadence, frames, allocations",
+        "PASS Spacecraft translational authority",
+        "PASS Contact generation: immutable identity, analytical point geometry, rotating frames, readiness, replay, no mutation, allocations",
+        "PASS Spacecraft contact generation",
+        "PASS Contact payload lifetime: explicit capacity, cancellation, retry, replacement, sequence ABA/overflow, history independence, 9900 slot reuses",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "PASS Contact response: impulse contracts, coupled publication, analytical conservation, forgery/preflight rejection, exact-time replay and independent force/torque compatibility",
+        "PASS Unified linear/angular contact transaction",
+        "PASS Isolated contact response: strict canonical-zero-gap admission, qualified receipt, conservative velocity sign, independent impulse oracle, atomic transaction, refusal, zero-allocation contracts",
+        "PASS Isolated analytical contact response policy",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "PASS Spacecraft attitude integration",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "PASS Rigid-body rotation",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "PASS Rigid-body torque transaction",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "PASS Flight reference and SAS guidance",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "PASS SAS sign/frame continuity proof",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "PASS Analytical orbit sampling",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial frame extraction",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial trajectory replacement",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "PASS Celestial impulse events",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Allocation",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS",
+        "PASS Exact-event spacecraft motion: exact duration, canonical bits, rational oracle, rotation, failures, replay, immutability, allocation",
+        "PASS Exact-event spacecraft motion",
+        "ORDINARY_ALLOCATION gate=exact-event-earth-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Earth exact-event observation: canonical bits/status, orbit/Euler oracles, same-E frames, refusals, replay, authority",
+        "PASS Exact-event Earth-relative observation",
+        "ORDINARY_ALLOCATION gate=Florida mathematical enclosure bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Florida monotone contact proof",
+        "PASS Qualified root contact kinematics",
+        "PASS Certified isolated-contact response proposals",
+        "PASS Certified pre-impact velocity tuples",
+        "ORDINARY_ALLOCATION gate=post-impact response resolution bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=post-impact fixed-set exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Certified final post-impact velocity states",
+        "PASS Private root-time post-impact state",
+        "PASS Paired private canonical propagation",
+        "PASS Post-impact singleton terrain coverage",
+        "PASS continuation ownership: owner thread, exclusive phase, borrowed lifetime, copied observation, single engine",
+        "PASS Certified continuation ownership",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Local contact staging: authority, exact time, persistent finite-body contact, paired export, negatives, allocation/storage",
+        "PASS Private finite-body contact staging",
+        "PASS Compound contact selection",
+        "PASS persistent contact shared-body phase ownership",
+        "ORDINARY_ALLOCATION gate=persistent-contact-complete-path bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Persistent contact publication: exact paired authority, retained trajectory, 28 refusal/terminal responsibilities, allocation/storage",
+        "PASS Persistent contact publication",
+        "PASS contact servicing cheap: exact credit, no unfunded step, unchanged external-debt refusal, original moving epoch/lattice",
+        "PASS contact servicing refusal matrix",
+        "ORDINARY_ALLOCATION gate=contact-servicing-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS host-paced contact servicing",
+        "PASS Host-paced contact servicing",
+        "PASS engineering article analytical, geometry, identity, admission and lifetime gates",
+        "PASS Engineering article definition and lifetime",
+        "PASS Engineering article physical contact",
+        "PASS Engineering article schedules and private equivalence",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=article-centered-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-backlog bytes=0 entry=PASS exit=PASS",
+        "PASS Engineering article allocation",
+        "PASS Spacecraft command authority",
+        "PASS Spacecraft command accepted-stream replay",
+        "PASS Spacecraft command non-actuating article",
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Spacecraft command allocation",
+        "PASS Single-engine actuation preparation",
+        "ORDINARY_ALLOCATION gate=engine-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-no-edge-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-transition-capture bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preview bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-duplicate-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Single-engine actuation allocation",
+        "PASS Single-engine proposal article non-actuation",
+        "PASS Finite-propellant segmentation",
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Finite-propellant allocation",
+        "PASS Finite-propellant proposal article non-actuation",
+        "PASS Powered contact exact mapper and joint successor",
+        "PASS Powered contact physical bounds",
+        "PASS Powered contact discrete work",
+        "PASS Powered contact authority and terminal failures",
+        "PASS Powered contact ready lifetime",
+        "PASS Powered contact host partitions and moving frame",
+        "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PASS Powered contact zero allocation"
+      ]
+    },
+    {
+      "file": "release-solution.log",
+      "bytes": 82,
+      "sha256": "B795D305F7E885462A10E0CEEA711E7CB4A0EE6ADBB60A60B99E3C2EED9702BA",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "file": "release-stage3-regression.log",
+      "bytes": 7516,
+      "sha256": "184CB39C8639682A49586DDD7B0DCDFE86E0094E9665280BA0609EE866BCB4EB",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "file": "release-storage-build.log",
+      "bytes": 82,
+      "sha256": "C51FF6AB8BE88374A4FE3093751F34197A2431F409BABE1290212F50FDAB9ADA",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ]
+    },
+    {
+      "file": "stock-cheap.log",
+      "bytes": 90773,
+      "sha256": "6D10197B6644F83C1F68E728DB00455EE1258EB1B2692B4814D5638ABFE8696A",
+      "recordedResult": "COMPLETED; SEE WITNESSES",
+      "witnesses": []
+    }
+  ]
+}

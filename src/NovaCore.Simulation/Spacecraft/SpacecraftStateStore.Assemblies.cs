@@ -18,8 +18,10 @@ internal sealed partial class SpacecraftStateStore
         for(var i=0;i<launches.Length;i++)
         {
             var l=launches[i];definitions[i]=l.Spacecraft;
-            if(!keys.Add(l.LaunchId)||graph.RootCount!=1||!graph.TryGetNode(l.Spacecraft.CarrierFrame,out var root)||
-                root.ParentId is not null||root.Kind!=ReferenceFrameKind.Ecl||!graph.TryGetNode(l.Spacecraft.BodyFrame,out var body)||body.ParentId!=root.Id)
+            var validFrame=l.Site is {} site ? site.AdmitsGraph(graph,l.Spacecraft) :
+                graph.RootCount==1&&graph.TryGetNode(l.Spacecraft.CarrierFrame,out var root)&&root.ParentId is null&&root.Kind==ReferenceFrameKind.Ecl&&
+                graph.TryGetNode(l.Spacecraft.BodyFrame,out var body)&&body.ParentId==root.Id;
+            if(!keys.Add(l.LaunchId)||!validFrame)
                 throw new InvalidDataException("Invalid launch namespace or assembly material frame.");
             if(SpacecraftAttitudeState.TryCreate(l.Spacecraft.Id,l.Initial.Epoch,l.Initial.Motion.BodyToWorld,l.Initial.Motion.AngularVelocityBody,
                 SpacecraftAttitudeModel.ConstantBodyAngularVelocityV1,out attitudes[i])!=SpacecraftAttitudeEvaluationStatus.Success)

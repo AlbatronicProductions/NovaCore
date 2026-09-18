@@ -1,0 +1,1029 @@
+{
+  "engineering": "PASS",
+  "manual": "PENDING",
+  "stage6": "CLOSED",
+  "banked": false,
+  "head": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "originMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "codex/srv01-supported-contact-admission",
+  "historicalTagCount": 67,
+  "historicalTagsUnchanged": true,
+  "staged": [],
+  "entryFiles": 2935,
+  "entryChanged": 17,
+  "historicalEvidenceChanged": [],
+  "simulation": [
+    {
+      "configuration": "debug",
+      "groups": 80,
+      "passed": 80,
+      "missing": []
+    },
+    {
+      "configuration": "release",
+      "groups": 80,
+      "passed": 80,
+      "missing": []
+    }
+  ],
+  "builds": [
+    {
+      "configuration": "debug",
+      "full": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:03.38"
+      ],
+      "nativeSha256": "F563AEE13E352DA6DEAA1AA19AECE87D29C0B49F92B7F1C347302B37B778C443"
+    },
+    {
+      "configuration": "release",
+      "full": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:04.17"
+      ],
+      "nativeSha256": "6B0E21DD6400EEED5603780686D3C77FD9DC5E4FA630AA1CD948C14D696F7AFA"
+    }
+  ],
+  "validation": [
+    {
+      "name": "florida-slab-correctness-debug",
+      "exit": 0,
+      "sha256": "0B4B13C526A4F43058CB82BF769590192FCCD4445283682A552970F6DA952172",
+      "witness": [
+        "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=9.017920290485749E-07 gravity=Double3 { X = -8.105698039195347E-06, Y = -9.79401894838773, Z = 0.014248775455661259, LengthSquared = 95.92301018904558, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=0",
+        "FLORIDA_SLAB_INITIAL PASS minHeight=-6.661338147750939E-16 allCornerEdgeMargin=23.24410285091158 supportCorners=4 comProjection=(-2.313043373857347E-16,0) supportRectangle=(-0.2599999999999997,0.26000000000000045,-0.26,0.26)",
+        "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e origin=Double3 { X = -5270997.711609826, Y = -1870990.5537414225, Z = 3050582.128838567, LengthSquared = 40590073852774.91, IsFinite = True } velocity=Double3 { X = 136.4347925649703, Y = -384.3672157626637, Z = 1.6237584470144013E-05, LengthSquared = 166352.6091753888, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+        "FLORIDA_SITE_STEP n=1 status=AwaitingDebt published=1 tick=16666 penetration=1.1632370733760666E-05 velocity=Double3 { X = 0.0017438485223584465, Y = -0.00032104925036909493, Z = 0.0007433827035915709, LengthSquared = 3.696698134093409E-06, IsFinite = True } omega=Double3 { X = 5.242117503967414E-17, Y = -0.00043728388845920563, Z = -0.0010257934918627143, LengthSquared = 1.2434694870539035E-06, IsFinite = True } private=(1, 1, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=2 status=AwaitingDebt published=1 tick=33333 penetration=4.519891408105714E-05 velocity=Double3 { X = 0.0017207357881572545, Y = -0.0014547801639188949, Z = 0.0019079812761573433, LengthSquared = 8.71770952814406E-06, IsFinite = True } omega=Double3 { X = 1.18863236293551E-08, Y = -0.0011251445392992695, Z = -0.0010094009340242808, LengthSquared = 2.284840480065341E-06, IsFinite = True } private=(1, 2, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=3 status=AwaitingDebt published=1 tick=50000 penetration=7.286953757756898E-05 velocity=Double3 { X = 0.0008943278019797764, Y = -0.001189414309218159, Z = 0.0021988948642452204, LengthSquared = 7.049667240370896E-06, IsFinite = True } omega=Double3 { X = 3.017509151684479E-08, Y = -0.001293489592621556, Z = -0.000526084390267918, LengthSquared = 1.9498801128143824E-06, IsFinite = True } private=(1, 3, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=4 status=AwaitingDebt published=1 tick=66666 penetration=9.07351598706807E-05 velocity=Double3 { X = -0.00011393446891208101, Y = -0.0008533683474987432, Z = 0.0015115899004409287, LengthSquared = 3.0261226268340304E-06, IsFinite = True } omega=Double3 { X = 4.114803453763964E-08, Y = -0.000889196408942106, Z = 6.702208271781035E-05, LengthSquared = 7.951622149405306E-07, IsFinite = True } private=(1, 4, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=1200 status=Completed published=1 tick=20000000 penetration=7.898934219352505E-05 velocity=Double3 { X = 1.449634698116014E-06, Y = -3.8062909542743644E-06, Z = 4.530117568285254E-09, LengthSquared = 1.658931210853794E-11, IsFinite = True } omega=Double3 { X = -3.9278180563863434E-12, Y = -2.6833791645522324E-09, Z = -8.527654813249942E-07, LengthSquared = 7.272161666786176E-13, IsFinite = True } private=(1, 1200, 0, 0, False, False)",
+        "FLORIDA_SLAB_METRICS peak=9.750102006811368E-05 settledHeight=7.901107027863397E-05 drift=9.32385073805606E-08 speed=5.5077650646174094E-06 angular=2.1950650053798498E-06 orientationMatrixDrift=4.606867605723037E-06 minEdgeClearance=23.243980844171386 minContacts=4 geometricContactChildMask=4 settledGeometricFeatureChanges=0 support=600/600",
+        "FLORIDA_SITE_CHEAP PASS peakPenetration=9.750102006811368E-05 support=600/600 intervals=1200",
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=7.861267317148919E-09 maxVelocity=5.796914039811765E-13 maxOrientationMatrix=1.887379141862766E-15 maxAngular=1.258635097526423E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ]
+    },
+    {
+      "name": "florida-slab-solar-debug",
+      "exit": 0,
+      "sha256": "2864A9F5F6EBE44B6D501BEB6A07B538D61679F0B73C2E5B6D276ACD51ED7B7C",
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.7879",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=25.1496",
+        "FLORIDA_SOLAR_CONSUMER PASS launcher=sol sharedCanonicalScenario=true siteSlabSpacecraft=EQUAL manualHarnessSeparate=true planetFocus=PASS zoom=PASS overview=PASS celestialProgression=PASS physicalNonmutation=PASS",
+        "FLORIDA_PRESENTATION_READY site=2ba3a6fb7436dc9d5729453bd8731f3117203cd4556d621ed855df225b5d05e3 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=842976638729179 east=0 support=authored-base-footing-union coldMs=0.2454",
+        "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=842976638729179 intervals=1200 support=600/600 peak=9.750102006811368E-05 maxPositionError=6.719897356658155E-09"
+      ]
+    },
+    {
+      "name": "florida-slab-allocation-debug",
+      "exit": 0,
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "witness": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "name": "assembly-florida-presentation-debug",
+      "exit": 0,
+      "sha256": "1F2635C8D375C12347C6925A3C9FD744FED0FFF0EB9AD921E241EAE48F3E0E6E",
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=50.7862",
+        "FLORIDA_SLAB_DISPLAY PASS site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e source=novacore.florida.base-support/1 dimensions=Double3 { X = 64, Y = 8.335569277405739, Z = 48, LengthSquared = 6469.48171517843, IsFinite = True } nativeTop=0 materialOriginAboveTop=1.7 terrainIsNotContact=true",
+        "FLORIDA_SLAB_DISPLAY PASS site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e source=novacore.florida.base-support/1 dimensions=Double3 { X = 64, Y = 8.335569277405739, Z = 48, LengthSquared = 6469.48171517843, IsFinite = True } nativeTop=0 materialOriginAboveTop=1.7 terrainIsNotContact=true",
+        "FLORIDA_SLAB_TRAJECTORY motionHash=9E000764D5D7D902 intervals=1200 ticks=20000000 mass=705 fuel=30 oxidizer=45",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=24.7946",
+        "ORDINARY_ALLOCATION gate=florida-stock-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "FLORIDA_PRESENTATION PASS copiedCanonicalEarthFixedDisplay=true terrainV5=true singleAuthoredSlab=true visualMeshBytes=1359096 displaySampleArraysBytes=640000 engine=OFF manualAcceptance=NOT_GRANTED"
+      ]
+    },
+    {
+      "name": "assembly-florida-presentation-storage-debug",
+      "exit": 0,
+      "sha256": "222E2B5DC58EF958A9A04CCF31188888E96E97A6E9B53038D22D9C4C4CFE8B56",
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=51.5668",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=24.9987",
+        "FLORIDA_PRESENTATION_STORAGE managedRetainedDelta=4634424 nativePool=475136 gpuMeshPayload=1359096 slabMeshPayload=1296 combined=6469952 limit=8388608 sharedTerrainDatasetAndDeviceExcluded=true"
+      ]
+    },
+    {
+      "name": "assembly-florida-qualification-debug",
+      "exit": 0,
+      "sha256": "CABC66EEC1CBC861B58301780CD0D421FB430191C5B869E576BF9A1902773E0B",
+      "witness": [
+        "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=7.995158878049328E-07 gravity=Double3 { X = -8.18366632701711E-05, Y = -9.794044678203283, Z = 0.014248756826371613, LengthSquared = 95.92351419241038, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=48",
+        "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 origin=Double3 { X = -5270974.75875348, Y = -1871033.3406329644, Z = 3050578.137596519, LengthSquared = 40589967642758.31, IsFinite = True } velocity=Double3 { X = 136.4379126343022, Y = -384.3655420139789, Z = 1.6237513762668097E-05, LengthSquared = 166352.1738917055, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+        "FLORIDA_SITE_STEP n=1 status=AwaitingDebt published=1 tick=16666 penetration=1.1631014831037234E-05 velocity=Double3 { X = 0.0017433150457278703, Y = -0.00032107475649058954, Z = 0.0007433842897131364, LengthSquared = 3.694856550108962E-06, IsFinite = True } omega=Double3 { X = -5.149960319306146E-18, Y = -0.0004372849361971021, Z = -0.001025479519739747, LengthSquared = 1.2428263608305659E-06, IsFinite = True } private=(1, 1, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=2 status=AwaitingDebt published=1 tick=33333 penetration=4.519526194868284E-05 velocity=Double3 { X = 0.00171983005218361, Y = -0.0014547591262584806, Z = 0.0019079859472343685, LengthSquared = 8.714549898670046E-06, IsFinite = True } omega=Double3 { X = 1.1869785523184115E-08, Y = -0.0011251469840213248, Z = -0.0010088683339268094, LengthSquared = 2.2837710509934314E-06, IsFinite = True } private=(1, 2, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=3 status=AwaitingDebt published=1 tick=50000 penetration=7.286298088882148E-05 velocity=Double3 { X = 0.0008931812950435045, Y = -0.0011893996843956574, Z = 0.0021989011068791796, LengthSquared = 7.047610512890563E-06, IsFinite = True } omega=Double3 { X = 3.0174468642046176E-08, Y = -0.0012934934343271976, Z = -0.0005254099963089016, LengthSquared = 1.949180929779387E-06, IsFinite = True } private=(1, 3, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=4 status=AwaitingDebt published=1 tick=66666 penetration=9.072565512835418E-05 velocity=Double3 { X = -0.0001151356507871901, Y = -0.0008621014432375067, Z = 0.001511635359681553, LengthSquared = 3.04151657715396E-06, IsFinite = True } omega=Double3 { X = 4.116028969741725E-08, Y = -0.0008892229516355125, Z = 6.772902203504198E-05, LengthSquared = 7.953046798353657E-07, IsFinite = True } private=(1, 4, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=1200 status=Completed published=1 tick=20000000 penetration=7.898134331441042E-05 velocity=Double3 { X = 1.83821031288154E-07, Y = -3.801234445818985E-06, Z = 6.844108432754551E-09, LengthSquared = 1.4483220325444849E-11, IsFinite = True } omega=Double3 { X = -4.979094587969672E-13, Y = -4.070992697257657E-09, Z = -1.0813461414069168E-07, LengthSquared = 1.1709667757145316E-14, IsFinite = True } private=(1, 1200, 0, 0, False, False)",
+        "FLORIDA_SITE_CHEAP PASS peakPenetration=9.773029136006528E-05 support=600/600 intervals=1200",
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=8.251539034149307E-09 maxVelocity=6.355287432313019E-13 maxOrientationMatrix=2.1094237467877974E-15 maxAngular=2.1779126191287486E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ]
+    },
+    {
+      "name": "Simulation-debug",
+      "exit": 0,
+      "sha256": "2566BAD32B2BBE5DD683A166022570F88232A78534062F4A1365371E5090DB04",
+      "witness": [
+        "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=development-powered bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-lunar-orientation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-all-body-orientation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-circular-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-elliptic-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=exact-event-earth-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=Florida mathematical enclosure bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "FLORIDA_ANALYTICAL rational/irrational/oversized-denominator/tangent/multiple/boundary/refinement controls PASS",
+        "ORDINARY_ALLOCATION gate=post-impact response resolution bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=post-impact fixed-set exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=persistent-contact-complete-path bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=contact-servicing-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=article-centered-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=engine-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-no-edge-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-transition-capture bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preview bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-duplicate-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "name": "ReferenceFrames-debug",
+      "exit": 0,
+      "sha256": "ACA24530208C991FA89AF10FC83AC998C218C4D9214E295EEF6E3B1A423F7864",
+      "witness": []
+    },
+    {
+      "name": "Precision-debug",
+      "exit": 0,
+      "sha256": "004DB2035024F669FADE0BC7C09C4DED23F087F5AAB5208D6979ABD8B6CB1F86",
+      "witness": []
+    },
+    {
+      "name": "BepuDependency-debug",
+      "exit": 0,
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-0",
+      "exit": 0,
+      "sha256": "BBA3ECEAB237200B63F1F42894C5851B8C6950CCC756FBA43DE0AB22C454EB2F",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-1",
+      "exit": 0,
+      "sha256": "3A47348B1C05F8E1FA4AEAEC84697A8AC317B9EC4707D55C17E49B94676A5FEB",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-2",
+      "exit": 0,
+      "sha256": "88B149B2733FCD336FA26752F87D6A5323BB450E37E9A79B54A5D1B2EFD7DCCB",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-3",
+      "exit": 0,
+      "sha256": "239BA86D5D36DFA4A403418DB561EA9F9FC5A46EEA575125FF060A49FD4228FB",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-4",
+      "exit": 0,
+      "sha256": "09D9FA99EF1770C44208AD12E12B076871DF742B7085E89060C1A62C9E6B92A9",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-5",
+      "exit": 0,
+      "sha256": "4A60A2FCEB47D09242581239998D3CDA17F440CC4F3B0AEF06EA98359AE60CE4",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-6",
+      "exit": 0,
+      "sha256": "A862A46C90DBC3B57BCDF2630B7F023AEC614026779B13E77BB6B0777007E111",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-7",
+      "exit": 0,
+      "sha256": "51651C5784E6DE3C4C89225011989F48BF8DADB7152C60A90B9C7223838C7936",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-8",
+      "exit": 0,
+      "sha256": "96C8E06D70745B250673BEF78FF6F5A113A50E8D8FFA374508D8612C1B838A56",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-9",
+      "exit": 0,
+      "sha256": "F137C27F1D824F4C1B27C2E67FF81EFFBCA1EE22BE55AF1B414C903478BCD180",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-10",
+      "exit": 0,
+      "sha256": "1BACDB5BB5760B3B19394623B2A7836F6CAACDD56B0DDC69D5320E48B4CE643D",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-11",
+      "exit": 0,
+      "sha256": "8B6294B28255EB4111C727F996C2A9CA39BCB2DE593FB67354000140B2863444",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-12",
+      "exit": 0,
+      "sha256": "302C927D436B14AB0832F1DCE0091FCE21EBDFFD2307F369133EC48D2216A7B6",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-13",
+      "exit": 0,
+      "sha256": "7D882B4EA60CA42757A5C92B0DBB972E74DDCC5D4F6E233773E013B7DE94676A",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-14",
+      "exit": 0,
+      "sha256": "4F3C60FF1666854D6AA00116E902BD18AA77D8712E60B260EBD99430A8224D30",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-15",
+      "exit": 0,
+      "sha256": "C95C904520435DA0D8EDDC461E2E1A956D290D7623A2C90E19CD8BC388B06D5E",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-16",
+      "exit": 0,
+      "sha256": "F29A5EF3DD22EC9EA5FBAD510298590517285B89E0ECE9010D526D17B5FE9A38",
+      "witness": []
+    },
+    {
+      "name": "graphics-debug-17",
+      "exit": 0,
+      "sha256": "D70A25A7D251956C4A90CCF05F54A44022257CFCF7773E6E0B94BFFDECFDE1A8",
+      "witness": []
+    },
+    {
+      "name": "Launcher-debug",
+      "exit": 0,
+      "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A",
+      "witness": [
+        "NovaCore launcher tests passed: 18"
+      ]
+    },
+    {
+      "name": "florida-slab-correctness-release",
+      "exit": 0,
+      "sha256": "0B4B13C526A4F43058CB82BF769590192FCCD4445283682A552970F6DA952172",
+      "witness": [
+        "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=9.017920290485749E-07 gravity=Double3 { X = -8.105698039195347E-06, Y = -9.79401894838773, Z = 0.014248775455661259, LengthSquared = 95.92301018904558, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=0",
+        "FLORIDA_SLAB_INITIAL PASS minHeight=-6.661338147750939E-16 allCornerEdgeMargin=23.24410285091158 supportCorners=4 comProjection=(-2.313043373857347E-16,0) supportRectangle=(-0.2599999999999997,0.26000000000000045,-0.26,0.26)",
+        "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e origin=Double3 { X = -5270997.711609826, Y = -1870990.5537414225, Z = 3050582.128838567, LengthSquared = 40590073852774.91, IsFinite = True } velocity=Double3 { X = 136.4347925649703, Y = -384.3672157626637, Z = 1.6237584470144013E-05, LengthSquared = 166352.6091753888, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+        "FLORIDA_SITE_STEP n=1 status=AwaitingDebt published=1 tick=16666 penetration=1.1632370733760666E-05 velocity=Double3 { X = 0.0017438485223584465, Y = -0.00032104925036909493, Z = 0.0007433827035915709, LengthSquared = 3.696698134093409E-06, IsFinite = True } omega=Double3 { X = 5.242117503967414E-17, Y = -0.00043728388845920563, Z = -0.0010257934918627143, LengthSquared = 1.2434694870539035E-06, IsFinite = True } private=(1, 1, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=2 status=AwaitingDebt published=1 tick=33333 penetration=4.519891408105714E-05 velocity=Double3 { X = 0.0017207357881572545, Y = -0.0014547801639188949, Z = 0.0019079812761573433, LengthSquared = 8.71770952814406E-06, IsFinite = True } omega=Double3 { X = 1.18863236293551E-08, Y = -0.0011251445392992695, Z = -0.0010094009340242808, LengthSquared = 2.284840480065341E-06, IsFinite = True } private=(1, 2, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=3 status=AwaitingDebt published=1 tick=50000 penetration=7.286953757756898E-05 velocity=Double3 { X = 0.0008943278019797764, Y = -0.001189414309218159, Z = 0.0021988948642452204, LengthSquared = 7.049667240370896E-06, IsFinite = True } omega=Double3 { X = 3.017509151684479E-08, Y = -0.001293489592621556, Z = -0.000526084390267918, LengthSquared = 1.9498801128143824E-06, IsFinite = True } private=(1, 3, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=4 status=AwaitingDebt published=1 tick=66666 penetration=9.07351598706807E-05 velocity=Double3 { X = -0.00011393446891208101, Y = -0.0008533683474987432, Z = 0.0015115899004409287, LengthSquared = 3.0261226268340304E-06, IsFinite = True } omega=Double3 { X = 4.114803453763964E-08, Y = -0.000889196408942106, Z = 6.702208271781035E-05, LengthSquared = 7.951622149405306E-07, IsFinite = True } private=(1, 4, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=1200 status=Completed published=1 tick=20000000 penetration=7.898934219352505E-05 velocity=Double3 { X = 1.449634698116014E-06, Y = -3.8062909542743644E-06, Z = 4.530117568285254E-09, LengthSquared = 1.658931210853794E-11, IsFinite = True } omega=Double3 { X = -3.9278180563863434E-12, Y = -2.6833791645522324E-09, Z = -8.527654813249942E-07, LengthSquared = 7.272161666786176E-13, IsFinite = True } private=(1, 1200, 0, 0, False, False)",
+        "FLORIDA_SLAB_METRICS peak=9.750102006811368E-05 settledHeight=7.901107027863397E-05 drift=9.32385073805606E-08 speed=5.5077650646174094E-06 angular=2.1950650053798498E-06 orientationMatrixDrift=4.606867605723037E-06 minEdgeClearance=23.243980844171386 minContacts=4 geometricContactChildMask=4 settledGeometricFeatureChanges=0 support=600/600",
+        "FLORIDA_SITE_CHEAP PASS peakPenetration=9.750102006811368E-05 support=600/600 intervals=1200",
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=7.861267317148919E-09 maxVelocity=5.796914039811765E-13 maxOrientationMatrix=1.887379141862766E-15 maxAngular=1.258635097526423E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ]
+    },
+    {
+      "name": "florida-slab-solar-release",
+      "exit": 0,
+      "sha256": "EF98D5C3CAECA2D2388AC888538094806964977F2BD6D9CFCAA889895652CE28",
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.609",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=6.4264",
+        "FLORIDA_SOLAR_CONSUMER PASS launcher=sol sharedCanonicalScenario=true siteSlabSpacecraft=EQUAL manualHarnessSeparate=true planetFocus=PASS zoom=PASS overview=PASS celestialProgression=PASS physicalNonmutation=PASS",
+        "FLORIDA_PRESENTATION_READY site=18924cd63e2f6a42e50496042a33b76a5ef009986fd2a30778e7308e0aa61dd5 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=842976708458228 east=0 support=authored-base-footing-union coldMs=0.2218",
+        "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=842976708458228 intervals=1200 support=600/600 peak=9.750102006811368E-05 maxPositionError=6.071480368452751E-09"
+      ]
+    },
+    {
+      "name": "florida-slab-allocation-release",
+      "exit": 0,
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "witness": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "name": "assembly-florida-presentation-release",
+      "exit": 0,
+      "sha256": "AB1C44E5F7BD29A6835C55AB09CDDED48E56A278CC3040D1F865D88A2DF09A1C",
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=36.1868",
+        "FLORIDA_SLAB_DISPLAY PASS site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e source=novacore.florida.base-support/1 dimensions=Double3 { X = 64, Y = 8.335569277405739, Z = 48, LengthSquared = 6469.48171517843, IsFinite = True } nativeTop=0 materialOriginAboveTop=1.7 terrainIsNotContact=true",
+        "FLORIDA_SLAB_DISPLAY PASS site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e source=novacore.florida.base-support/1 dimensions=Double3 { X = 64, Y = 8.335569277405739, Z = 48, LengthSquared = 6469.48171517843, IsFinite = True } nativeTop=0 materialOriginAboveTop=1.7 terrainIsNotContact=true",
+        "FLORIDA_SLAB_TRAJECTORY motionHash=9E000764D5D7D902 intervals=1200 ticks=20000000 mass=705 fuel=30 oxidizer=45",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=24.069",
+        "ORDINARY_ALLOCATION gate=florida-stock-application-presentation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "FLORIDA_PRESENTATION PASS copiedCanonicalEarthFixedDisplay=true terrainV5=true singleAuthoredSlab=true visualMeshBytes=1359096 displaySampleArraysBytes=640000 engine=OFF manualAcceptance=NOT_GRANTED"
+      ]
+    },
+    {
+      "name": "assembly-florida-presentation-storage-release",
+      "exit": 0,
+      "sha256": "5E3F1F3D826AC3818FE2FF7F7370B96194FD4FE1F6B72586E3E510871B324FB9",
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=36.9004",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=20.6511",
+        "FLORIDA_PRESENTATION_STORAGE managedRetainedDelta=4634424 nativePool=475136 gpuMeshPayload=1359096 slabMeshPayload=1296 combined=6469952 limit=8388608 sharedTerrainDatasetAndDeviceExcluded=true"
+      ]
+    },
+    {
+      "name": "assembly-florida-qualification-release",
+      "exit": 0,
+      "sha256": "CABC66EEC1CBC861B58301780CD0D421FB430191C5B869E576BF9A1902773E0B",
+      "witness": [
+        "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=7.995158878049328E-07 gravity=Double3 { X = -8.18366632701711E-05, Y = -9.794044678203283, Z = 0.014248756826371613, LengthSquared = 95.92351419241038, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=48",
+        "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=4d94ff53de3222a0ca81815e37e96647a6b8cecc14e2f3a82f589da0c0c53290 origin=Double3 { X = -5270974.75875348, Y = -1871033.3406329644, Z = 3050578.137596519, LengthSquared = 40589967642758.31, IsFinite = True } velocity=Double3 { X = 136.4379126343022, Y = -384.3655420139789, Z = 1.6237513762668097E-05, LengthSquared = 166352.1738917055, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+        "FLORIDA_SITE_STEP n=1 status=AwaitingDebt published=1 tick=16666 penetration=1.1631014831037234E-05 velocity=Double3 { X = 0.0017433150457278703, Y = -0.00032107475649058954, Z = 0.0007433842897131364, LengthSquared = 3.694856550108962E-06, IsFinite = True } omega=Double3 { X = -5.149960319306146E-18, Y = -0.0004372849361971021, Z = -0.001025479519739747, LengthSquared = 1.2428263608305659E-06, IsFinite = True } private=(1, 1, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=2 status=AwaitingDebt published=1 tick=33333 penetration=4.519526194868284E-05 velocity=Double3 { X = 0.00171983005218361, Y = -0.0014547591262584806, Z = 0.0019079859472343685, LengthSquared = 8.714549898670046E-06, IsFinite = True } omega=Double3 { X = 1.1869785523184115E-08, Y = -0.0011251469840213248, Z = -0.0010088683339268094, LengthSquared = 2.2837710509934314E-06, IsFinite = True } private=(1, 2, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=3 status=AwaitingDebt published=1 tick=50000 penetration=7.286298088882148E-05 velocity=Double3 { X = 0.0008931812950435045, Y = -0.0011893996843956574, Z = 0.0021989011068791796, LengthSquared = 7.047610512890563E-06, IsFinite = True } omega=Double3 { X = 3.0174468642046176E-08, Y = -0.0012934934343271976, Z = -0.0005254099963089016, LengthSquared = 1.949180929779387E-06, IsFinite = True } private=(1, 3, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=4 status=AwaitingDebt published=1 tick=66666 penetration=9.072565512835418E-05 velocity=Double3 { X = -0.0001151356507871901, Y = -0.0008621014432375067, Z = 0.001511635359681553, LengthSquared = 3.04151657715396E-06, IsFinite = True } omega=Double3 { X = 4.116028969741725E-08, Y = -0.0008892229516355125, Z = 6.772902203504198E-05, LengthSquared = 7.953046798353657E-07, IsFinite = True } private=(1, 4, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=1200 status=Completed published=1 tick=20000000 penetration=7.898134331441042E-05 velocity=Double3 { X = 1.83821031288154E-07, Y = -3.801234445818985E-06, Z = 6.844108432754551E-09, LengthSquared = 1.4483220325444849E-11, IsFinite = True } omega=Double3 { X = -4.979094587969672E-13, Y = -4.070992697257657E-09, Z = -1.0813461414069168E-07, LengthSquared = 1.1709667757145316E-14, IsFinite = True } private=(1, 1200, 0, 0, False, False)",
+        "FLORIDA_SITE_CHEAP PASS peakPenetration=9.773029136006528E-05 support=600/600 intervals=1200",
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=8.251539034149307E-09 maxVelocity=6.355287432313019E-13 maxOrientationMatrix=2.1094237467877974E-15 maxAngular=2.1779126191287486E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ]
+    },
+    {
+      "name": "Simulation-release",
+      "exit": 0,
+      "sha256": "BAEDD4ECCE87C64F76AB8454223B68C68233F4A9C1FC6C2978C8285FB1C7B921",
+      "witness": [
+        "ORDINARY_ALLOCATION gate=departure-contact-handoff bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=departure-first-free-flight bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=development-powered bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=development-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=assembly-contact-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=assembly-contact-refusal-retry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=speed-presets bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timeline bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=clock bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=host-conversion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=single-debt-service bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=per-event-transactions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=canonical-group bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=celestial-store bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-definitions bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=body-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sol-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=system-time bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=ephemeris-catalog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sampled-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=solmini-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-lunar-orientation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-all-body-orientation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-circular-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=timed-elliptic-propagation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propagation-adapter bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-attitude bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=spacecraft-translation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-response bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=attitude-integration bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-rotation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=rigid-lookup bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=guidance bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=sas-proof bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=orbit-sampling bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=frame-extraction bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-candidate bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=trajectory-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-evaluation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=impulse-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=integral-arithmetic bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=exact-event-spacecraft-motion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=exact-event-earth-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=Florida mathematical enclosure bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "FLORIDA_ANALYTICAL rational/irrational/oversized-denominator/tangent/multiple/boundary/refinement controls PASS",
+        "ORDINARY_ALLOCATION gate=post-impact response resolution bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=post-impact fixed-set exhaustion bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=private-bepu-full-step-export bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=persistent-contact-complete-path bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=contact-servicing-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=contact-servicing-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=article-centered-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-centered-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=article-tilted-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-admission bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-commit bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-no-work-observation-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-pending-poll bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=command-funded-backlog-consumption bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=engine-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-no-edge-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-transition-capture bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preparation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-preview bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=engine-duplicate-refusal bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=propellant-full bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-endpoint bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-tiny-interior bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-empty bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-no-demand bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-copied-observation bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=propellant-refusals bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ]
+    },
+    {
+      "name": "ReferenceFrames-release",
+      "exit": 0,
+      "sha256": "CE39C29F635D10D38E641131ED675F6B9683B16F7EEEDD124D28EE2F603A6535",
+      "witness": []
+    },
+    {
+      "name": "Precision-release",
+      "exit": 0,
+      "sha256": "AD27ECFA2E6355282E10330CC46BE00AA860B7B7AC71989ED2FF75F61871B4CC",
+      "witness": []
+    },
+    {
+      "name": "BepuDependency-release",
+      "exit": 0,
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-0",
+      "exit": 0,
+      "sha256": "3387692F3758A24C53E438E241279B1B237466E224A4C7E0799258B8DBD68010",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-1",
+      "exit": 0,
+      "sha256": "9F59E892877350F04F0F1D877A84C498F08C6D9E96EB4E18D905D75B352276E2",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-2",
+      "exit": 0,
+      "sha256": "25DBB9859FE7A1E5EC4A9CC292B4E0C125432C7EB94628E27B5E6E952DEF23DB",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-3",
+      "exit": 0,
+      "sha256": "BA28E2C0F71343E4F9F6AD9E5D7F20F5CED7898B22A6A8824779BC586C660B09",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-4",
+      "exit": 0,
+      "sha256": "696830412D7E9A507AB018BF26D732E8D62B1D9B763B6AC6857EAAE8F78F55A2",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-5",
+      "exit": 0,
+      "sha256": "2B115B34E3FBF3D8FD71CC20E5E434B6BF88CF6C634AD95276CF300618A544CA",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-6",
+      "exit": 0,
+      "sha256": "EE576044CE3694F437F7B42890B20B56D4F7B8B5C10A9BF4A3FC4BBB00E95FEC",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-7",
+      "exit": 0,
+      "sha256": "10CC7A6CB250CF2AB99FA0F10ECB53E8F09F0C6E67214D47CBD0D076CAB76872",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-8",
+      "exit": 0,
+      "sha256": "D55DF2158E20D9FF14204B2DF7A5727C9C63908C1523E839DD379664E9AB79C6",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-9",
+      "exit": 0,
+      "sha256": "7822BC33E03EF11B56695537853003A25C92170D5012D9C2C3E1E6F44E9A1CC8",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-10",
+      "exit": 0,
+      "sha256": "F9F5362E2051E1B12543F055C9E2CD5DBA9173DFC06919AAE425331905B62B86",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-11",
+      "exit": 0,
+      "sha256": "24BFF6FDB370707629BE40F37B12E745571976AD94B819F0A0E96CA5C7B4B8AB",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-12",
+      "exit": 0,
+      "sha256": "CE5466FF089402472AE2D9DEB0283A5F6ACB185D6DEB53F1FFEE7F7E74A0D99E",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-13",
+      "exit": 0,
+      "sha256": "4CB75EAB76C561CA10F8514E18DF244DD43E3D71C8D1981A37C40632B8A5D329",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-14",
+      "exit": 0,
+      "sha256": "73B68065899588943A69E4108B9D643127295B92BD2375034E863BAA23333371",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-15",
+      "exit": 0,
+      "sha256": "37A9EFA0B69A60BEF5BA508D673CAD0743E07157F08FCD0E645B09CF17C81591",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-16",
+      "exit": 0,
+      "sha256": "AC0085C0E954726E2E730C5C5CE6CC6F8BABD797B2DA268E0D2EF22CC5FC7E4C",
+      "witness": []
+    },
+    {
+      "name": "graphics-release-17",
+      "exit": 0,
+      "sha256": "D738B646B4E7F43D0CC360EE2A92F1D9349948B1A0D3CCA20DF8DFA299ED5FEE",
+      "witness": []
+    },
+    {
+      "name": "Launcher-release",
+      "exit": 0,
+      "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A",
+      "witness": [
+        "NovaCore launcher tests passed: 18"
+      ]
+    }
+  ],
+  "performance": [
+    {
+      "run": 1,
+      "result": {
+        "median": 0.0683,
+        "p95": 0.0707,
+        "p99": 0.0733,
+        "maximum": 0.1508,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.1508,
+            "index": 0
+          },
+          {
+            "ms": 0.1085,
+            "index": 884
+          },
+          {
+            "ms": 0.0887,
+            "index": 321
+          },
+          {
+            "ms": 0.0876,
+            "index": 883
+          },
+          {
+            "ms": 0.083,
+            "index": 766
+          },
+          {
+            "ms": 0.075,
+            "index": 14
+          },
+          {
+            "ms": 0.0744,
+            "index": 116
+          },
+          {
+            "ms": 0.0741,
+            "index": 963
+          }
+        ]
+      },
+      "storage": [
+        "FLORIDA_STORAGE {\"managedConstructionWarmUpperBound\":3210368,\"native\":475136,\"combinedUpperBound\":3685504,\"historyPayloadIncluded\":1891200,\"creditPayloadIncluded\":76816,\"coldMs\":133.9169,\"limit\":8388608}",
+        "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3685504 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+      ],
+      "sha256": "7084F5FFAF68D4ACBABA17B3C21F2BBA158AD4B605880610A7F97BCDE7A934D8"
+    },
+    {
+      "run": 2,
+      "result": {
+        "median": 0.0677,
+        "p95": 0.0684,
+        "p99": 0.0718,
+        "maximum": 0.1345,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.1345,
+            "index": 0
+          },
+          {
+            "ms": 0.0951,
+            "index": 339
+          },
+          {
+            "ms": 0.0889,
+            "index": 51
+          },
+          {
+            "ms": 0.0819,
+            "index": 340
+          },
+          {
+            "ms": 0.0819,
+            "index": 493
+          },
+          {
+            "ms": 0.0814,
+            "index": 280
+          },
+          {
+            "ms": 0.0797,
+            "index": 946
+          },
+          {
+            "ms": 0.078,
+            "index": 717
+          }
+        ]
+      },
+      "storage": [
+        "FLORIDA_STORAGE {\"managedConstructionWarmUpperBound\":3210368,\"native\":475136,\"combinedUpperBound\":3685504,\"historyPayloadIncluded\":1891200,\"creditPayloadIncluded\":76816,\"coldMs\":134.4236,\"limit\":8388608}",
+        "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3685504 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+      ],
+      "sha256": "3C44704E0AF6C45B2F02769F767762CB5293BF2DCB8ED6609BD18295D5574F0C"
+    },
+    {
+      "run": 3,
+      "result": {
+        "median": 0.0679,
+        "p95": 0.0804,
+        "p99": 0.1239,
+        "maximum": 0.171,
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "warm": 128,
+        "measured": 1024,
+        "tails": [
+          {
+            "ms": 0.171,
+            "index": 654
+          },
+          {
+            "ms": 0.1704,
+            "index": 2
+          },
+          {
+            "ms": 0.1532,
+            "index": 185
+          },
+          {
+            "ms": 0.1507,
+            "index": 894
+          },
+          {
+            "ms": 0.1482,
+            "index": 448
+          },
+          {
+            "ms": 0.1417,
+            "index": 425
+          },
+          {
+            "ms": 0.1383,
+            "index": 0
+          },
+          {
+            "ms": 0.1361,
+            "index": 14
+          }
+        ]
+      },
+      "storage": [
+        "FLORIDA_STORAGE {\"managedConstructionWarmUpperBound\":3210368,\"native\":475136,\"combinedUpperBound\":3685504,\"historyPayloadIncluded\":1891200,\"creditPayloadIncluded\":76816,\"coldMs\":135.1483,\"limit\":8388608}",
+        "FLORIDA_STORAGE_FINAL native=475136 combinedUpperBound=3685504 ownedSiteAndQueryIncluded=true sharedPhysicalDatasetExcluded=true"
+      ],
+      "sha256": "46BCC01417E22AC7C14797517908CB8B13E6588919347337CDD5F29693989CD4"
+    }
+  ],
+  "live": [
+    {
+      "route": "manual",
+      "identity": {
+        "name": "manual",
+        "exit": 0,
+        "arguments": [
+          "--scene=srv01-florida-support",
+          "--benchmark-frames=4800",
+          "--log=renderer,vulkan"
+        ],
+        "observer": true
+      },
+      "sha256": "3732D17B676069DA9117902183626448CA8F816847CA1DF77DA0A1D8B9BA6BB7",
+      "stderr": null,
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=39.6555",
+        "SRV01_COLD_PREPARATION ms=461.1624 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=20000000 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=152",
+        "SLAB_LIVE_GC total=0,0,0 warm=0,0,0 warmStart=371",
+        "SLAB_LIVE_FIRST index=0 displayMs=14.808 serviceMs=2.4638",
+        "SLAB_LIVE_FIRST index=1 displayMs=5.9616 serviceMs=63.8015",
+        "SLAB_LIVE_FIRST index=2 displayMs=67.1873 serviceMs=1.2684",
+        "SLAB_LIVE_FIRST index=3 displayMs=4.4517 serviceMs=0.0261",
+        "SLAB_LIVE_FIRST index=4 displayMs=3.367 serviceMs=0.033",
+        "SLAB_LIVE_FIRST index=5 displayMs=4.2644 serviceMs=0.1834",
+        "SLAB_LIVE_FIRST index=6 displayMs=5.8633 serviceMs=0.0445",
+        "SLAB_LIVE_FIRST index=7 displayMs=5.4155 serviceMs=0.0481",
+        "SLAB_LIVE_WARM {\"population\":\"display\",\"samples\":3215,\"median\":5.5552,\"p95\":5.8726,\"p99\":6.3053,\"maximum\":6.4408,\"tails\":[{\"ms\":6.4408,\"index\":2025},{\"ms\":6.4391,\"index\":1773},{\"ms\":6.4304,\"index\":1665},{\"ms\":6.4153,\"index\":1605},{\"ms\":6.4149,\"index\":1593},{\"ms\":6.4046,\"index\":1905},{\"ms\":6.4044,\"index\":2097},{\"ms\":6.3891,\"index\":2217}]}",
+        "SLAB_LIVE_WARM {\"population\":\"service\",\"samples\":3215,\"median\":0.0026,\"p95\":0.0511,\"p99\":0.0707,\"maximum\":0.1817,\"tails\":[{\"ms\":0.1817,\"index\":2310},{\"ms\":0.115,\"index\":1410},{\"ms\":0.0986,\"index\":2334},{\"ms\":0.0955,\"index\":2349},{\"ms\":0.0866,\"index\":2358},{\"ms\":0.086,\"index\":1890},{\"ms\":0.0859,\"index\":1896},{\"ms\":0.0846,\"index\":2346}]}",
+        "STOCK_ASSEMBLY_FRAME samples=3586 median_ms=5.5551 p95_ms=5.919 p99_ms=6.312 max_ms=67.1873 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3586 median_ms=0.0027 p95_ms=0.0572 p99_ms=0.1405 max_ms=63.8015 includes=host_admission_bounded_service_copied_observation",
+        "Solar workload: bodies=10; representation=production; dynamicTerrain=True; orbitCurveBuilds=1; orbitCurveReuses=9",
+        "[native] Frame pacing: p50=5.549 ms; p95=5.947 ms; p99=6.355 ms; max=67.298 ms; samples=4800",
+        "[native] CPU timings: update=5.260 ms; fence=5.035; inspection=0.035; hostCallback=0.142; validationUpload=0.047; record=0.052; submit=0.026; present=0.181",
+        "[native] GPU timing averages: total=1.796 ms; anchoredCompute=0.000; anchoredDraw=0.916; background=0.102; preSurface=0.000; toneMap=0.014",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=634; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=578.837; recordReadDecodeVerifyMs=223.934; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    },
+    {
+      "route": "solar",
+      "identity": {
+        "name": "solar",
+        "exit": 0,
+        "arguments": [
+          "--scene=sol",
+          "--focus=earth",
+          "--surface-site=florida-launch",
+          "--physical-surface=m12d-natural-candidate",
+          "--benchmark-frames=4800",
+          "--log=renderer,vulkan"
+        ],
+        "observer": true
+      },
+      "sha256": "6DA1F849F6ED4305DAB1612AB2D002C4E4EFC9E8DB9FEE9439DDD126D0DFBFFF",
+      "stderr": null,
+      "witness": [
+        "FLORIDA_PRESENTATION_READY site=3c4ee876aed18b83cde2a1b15eb8d60715151a03df1eb4e4c770fdaa47dd8998 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=842976986380894 east=0 support=authored-base-footing-union coldMs=0.6073",
+        "SRV01_COLD_PREPARATION ms=307.3013 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "Scene: sol; bodies=10; instant=842976986380894; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.",
+        "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=1200 revision=1200 time=842977006380894 fuel_kg=30 oxidizer_kg=45 mass_kg=705 com_x=1.0417021276595744 debt=5735",
+        "SLAB_LIVE_GC total=0,0,0 warm=0,0,0 warmStart=362",
+        "SLAB_LIVE_FIRST index=0 displayMs=25.6024 serviceMs=82.5204",
+        "SLAB_LIVE_FIRST index=1 displayMs=88.4521 serviceMs=1.5604",
+        "SLAB_LIVE_FIRST index=2 displayMs=6.5498 serviceMs=0.3781",
+        "SLAB_LIVE_FIRST index=3 displayMs=11.6826 serviceMs=0.0376",
+        "SLAB_LIVE_FIRST index=4 displayMs=5.1567 serviceMs=0.2618",
+        "SLAB_LIVE_FIRST index=5 displayMs=5.3863 serviceMs=0.0292",
+        "SLAB_LIVE_FIRST index=6 displayMs=5.1683 serviceMs=0.035",
+        "SLAB_LIVE_FIRST index=7 displayMs=4.8693 serviceMs=0.2703",
+        "SLAB_LIVE_WARM {\"population\":\"display\",\"samples\":3215,\"median\":5.555,\"p95\":5.7923,\"p99\":6.0123,\"maximum\":11.3598,\"tails\":[{\"ms\":11.3598,\"index\":968},{\"ms\":6.7157,\"index\":952},{\"ms\":6.4145,\"index\":3222},{\"ms\":6.3717,\"index\":950},{\"ms\":6.2964,\"index\":1182},{\"ms\":6.2532,\"index\":886},{\"ms\":6.2435,\"index\":2502},{\"ms\":6.2107,\"index\":2591}]}",
+        "SLAB_LIVE_WARM {\"population\":\"service\",\"samples\":3215,\"median\":0.0026,\"p95\":0.0595,\"p99\":0.0765,\"maximum\":0.1414,\"tails\":[{\"ms\":0.1414,\"index\":1023},{\"ms\":0.0941,\"index\":974},{\"ms\":0.0914,\"index\":1071},{\"ms\":0.0906,\"index\":1029},{\"ms\":0.0887,\"index\":1671},{\"ms\":0.088,\"index\":2219},{\"ms\":0.0874,\"index\":3485},{\"ms\":0.0871,\"index\":3491}]}",
+        "STOCK_ASSEMBLY_FRAME samples=3577 median_ms=5.5555 p95_ms=5.8365 p99_ms=6.2107 max_ms=88.4521 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=3577 median_ms=0.0027 p95_ms=0.0665 p99_ms=0.2007 max_ms=82.5204 includes=host_admission_bounded_service_copied_observation",
+        "Solar workload: bodies=10; representation=production; dynamicTerrain=True; orbitCurveBuilds=1; orbitCurveReuses=9",
+        "[native] Frame pacing: p50=5.545 ms; p95=5.923 ms; p99=6.251 ms; max=88.600 ms; samples=4800",
+        "[native] CPU timings: update=5.256 ms; fence=4.896; inspection=0.048; hostCallback=0.263; validationUpload=0.048; record=0.056; submit=0.020; present=0.190",
+        "[native] GPU timing averages: total=2.024 ms; anchoredCompute=0.000; anchoredDraw=0.922; background=0.300; preSurface=0.000; toneMap=0.022",
+        "[native] NCSM1 regional physical totals: requests=670; hits=840; misses=670; loaded=670; readBytes=163158696; uploadedBytes=93392640; residentHighWater=670; allocatedBytes=119737728; maximumBytes=124895232; queueHighWater=635; readyCapacity=8; uploadBudget=8; demandDispatches=22; dependencyDelayMsMax=622.473; recordReadDecodeVerifyMs=259.872; contributingRecords=670; anchoredDemandRequired=false"
+      ]
+    }
+  ],
+  "setupFailures": [
+    "Focused test initially omitted required generation-4 selection; fixed before physics.",
+    "Test assumed optional compound-reducer callback always had four rows; use solver-facing export and independent geometry instead.",
+    "Test source nullable annotation fixed at compile.",
+    "Full solution exposed missing internal Graphics access for Triangle; narrow friend assembly added.",
+    "Current-epoch added oracle initially used a different full-epoch rounding contract; replaced by independent split-angle matrix, no production arithmetic/tolerance changed.",
+    "Observer deployment initially omitted managed closure: failed before Main/scene; copied qualified closure; no physical/performance sample from failed launch."
+  ]
+}

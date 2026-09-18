@@ -1,0 +1,88 @@
+{
+  "derivation": "At stationary four-point symmetry lambda=m*g*h/4. Zero row update gives depth*p*CFM/Kii=lambda*softness; softness/CFM=q and q/p=1/(h*omega^2). Thus depth=m*g*Kii/(4*omega^2), Kii=1/m+2a^2/I. See mass-oracle.py for independent authored-data reconstruction. Not a full dynamic trajectory prediction.",
+  "comparison": [
+    {
+      "mode": "stock-local",
+      "mass": 705,
+      "transverseInertia": 731.6006491134758,
+      "inverseRowEffectiveMass": 0.0016032399897451517,
+      "rotationalToTranslationalRowContribution": 0.13028419277033187,
+      "symmetricEquilibriumDepth": 7.80179301046554e-05,
+      "supportHeaveToPitchRatio": 15.351056467192828
+    },
+    {
+      "mode": "canonical",
+      "mass": 2018900,
+      "transverseInertia": 1496.3595445271355,
+      "inverseRowEffectiveMass": 9.084793568461116e-05,
+      "rotationalToTranslationalRowContribution": 182.4128973536615,
+      "symmetricEquilibriumDepth": 0.01266008557631657,
+      "supportHeaveToPitchRatio": 0.01096413701561029
+    }
+  ],
+  "source": "Accepted BEPU Contact4OneBodyFunctions, PenetrationLimitOneBody and SpringSettingsWide read directly from repository DLL.",
+  "actualConstraint": {
+    "mode": "canonical",
+    "n": 1200,
+    "handle": 0,
+    "description": {
+      "Contact0": {
+        "OffsetA": {
+          "X": -0.25198948,
+          "Y": -1.6874015,
+          "Z": -0.26511508
+        },
+        "PenetrationDepth": 0.013378547
+      },
+      "Contact1": {
+        "OffsetA": {
+          "X": 0.26771933,
+          "Y": -1.6874015,
+          "Z": 0.25517532
+        },
+        "PenetrationDepth": 0.012495281
+      },
+      "Contact2": {
+        "OffsetA": {
+          "X": -0.25227517,
+          "Y": -1.6874015,
+          "Z": 0.25488257
+        },
+        "PenetrationDepth": 0.014899757
+      },
+      "Contact3": {
+        "OffsetA": {
+          "X": 0.268005,
+          "Y": -1.6874015,
+          "Z": -0.26482233
+        },
+        "PenetrationDepth": 0.010974071
+      },
+      "Normal": {
+        "X": 1.709816e-08,
+        "Y": 1.0000005,
+        "Z": 9.313226e-10
+      },
+      "FrictionCoefficient": 0.5,
+      "SpringSettings": {
+        "Frequency": 30,
+        "DampingRatio": 1,
+        "AngularFrequency": 188.49556,
+        "TwiceDampingRatio": 2
+      },
+      "MaximumRecoveryVelocity": 2
+    },
+    "impulses": [
+      3160.432,
+      5518.57,
+      87151.82,
+      77677.19,
+      101014.055,
+      64679.85,
+      2.571409
+    ]
+  },
+  "normalImpulseSum": 330522.915,
+  "gravitationalImpulseAtFinalInterval": 329560.4057050298,
+  "limitation": "Does not prove FP32 error, an incorrect mass definition, or a sole cause of residual angular/linear motion. No iteration/spring tuning performed."
+}

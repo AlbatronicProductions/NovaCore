@@ -470,7 +470,7 @@ struct App {
   Mesh triangle{};
   Mesh floridaLaunchPad{};
   Mesh floridaLaunchFoundation{};
-  Mesh contactQualificationBody{}, contactQualificationSupport{};
+  Mesh contactQualificationBody{}, contactQualificationSupport{}, floridaSupportSlab{};
   std::vector<Mesh> visualMeshes;
   Mesh planetaryPatch{};
   Mesh distantPlanetary{};
@@ -733,10 +733,10 @@ void CreateMesh(App &a) {
   Buffer(a,sizeof(uint32_t)*padIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,a.floridaLaunchFoundation.ib,a.floridaLaunchFoundation.im,padIndices.data());
   a.floridaLaunchFoundation.indices=(uint32_t)padIndices.size();
   // Opt-in contact witness meshes: centered unit cubes, independent of facility geometry.
-  for(int kind=0;kind<2;kind++){
+  for(int kind=0;kind<3;kind++){
     padVertices.clear();padIndices.clear();
-    box(-.5f,-.5f,-.5f,.5f,.5f,.5f,kind==0?std::array<float,3>{.12f,.55f,.95f}:std::array<float,3>{.32f,.34f,.38f});
-    auto& mesh=kind==0?a.contactQualificationBody:a.contactQualificationSupport;
+    box(-.5f,-.5f,-.5f,.5f,.5f,.5f,kind==0?std::array<float,3>{.12f,.55f,.95f}:kind==1?std::array<float,3>{.32f,.34f,.38f}:nc::facility::LaunchPadBoxes[0].color);
+    auto& mesh=kind==0?a.contactQualificationBody:kind==1?a.contactQualificationSupport:a.floridaSupportSlab;
     Buffer(a,sizeof(Vertex)*padVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,mesh.vb,mesh.vm,padVertices.data());
     Buffer(a,sizeof(uint32_t)*padIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,mesh.ib,mesh.im,padIndices.data());
     mesh.indices=(uint32_t)padIndices.size();
@@ -791,7 +791,7 @@ void DestroyMesh(App &a) {
   if(a.floridaLaunchFoundation.ib)vkDestroyBuffer(a.device,a.floridaLaunchFoundation.ib,nullptr);
   if(a.floridaLaunchFoundation.im)vkFreeMemory(a.device,a.floridaLaunchFoundation.im,nullptr);
   a.floridaLaunchFoundation={};
-  for(auto* mesh:{&a.contactQualificationBody,&a.contactQualificationSupport}){
+  for(auto* mesh:{&a.contactQualificationBody,&a.contactQualificationSupport,&a.floridaSupportSlab}){
     if(mesh->vb)vkDestroyBuffer(a.device,mesh->vb,nullptr);
     if(mesh->vm)vkFreeMemory(a.device,mesh->vm,nullptr);
     if(mesh->ib)vkDestroyBuffer(a.device,mesh->ib,nullptr);
@@ -821,7 +821,7 @@ void DestroyMesh(App &a) {
 }
 Mesh *MeshFor(App &a, NcMeshHandle h) {
   if(h.value>=1024u&&h.value-1024u<a.visualMeshes.size())return &a.visualMeshes[h.value-1024u];
-  return h.value == 1 ? &a.triangle : h.value == 3 ? &a.floridaLaunchPad : h.value == 4 ? &a.floridaLaunchFoundation : h.value == 5 ? &a.contactQualificationBody : h.value == 6 ? &a.contactQualificationSupport : nullptr;
+  return h.value == 1 ? &a.triangle : h.value == 3 ? &a.floridaLaunchPad : h.value == 4 ? &a.floridaLaunchFoundation : h.value == 5 ? &a.contactQualificationBody : h.value == 6 ? &a.contactQualificationSupport : h.value == 7 ? &a.floridaSupportSlab : nullptr;
 }
 void Validate(App &a) {
   if(a.submission->objectCount>a.preparedObjectCapacity)throw std::runtime_error("render submission exceeds prepared capacity");
@@ -2694,3 +2694,4 @@ extern "C" NC_API NcResult __cdecl nc_shutdown_spherical_billboard_gpu_proof(){r
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission *s,NcHostCallback cb,void *data,const NcVisualMesh* meshes,uint32_t count,uint32_t preparedObjectCapacity){return RunRenderer(s,cb,data,nullptr,meshes,count,preparedObjectCapacity);}
+extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets_and_visual_meshes(NcFrameSubmission *s,NcHostCallback cb,void *data,const NcRuntimeAssets* assets,const NcVisualMesh* meshes,uint32_t count,uint32_t preparedObjectCapacity){return RunRenderer(s,cb,data,assets,meshes,count,preparedObjectCapacity);}

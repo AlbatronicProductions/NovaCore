@@ -7,9 +7,98 @@ using NovaCore.Simulation.Spacecraft.Assemblies;
 
 internal static class StockAssemblyPresentationTests
 {
+    internal static void SupportedStorage(bool powered=false)
+    {
+        // Cold full-heap measurement, separated from timing/allocation gates. Warm shared
+        // type metadata first; include the whole live scene, pins, submission and samples.
+        WarmSupportedStorage();
+        GC.Collect();GC.WaitForPendingFinalizers();GC.Collect();var before=GC.GetTotalMemory(true);
+        using var scene=new StockAssemblyDevelopmentScene(supportedContact:true,poweredSupport:powered);
+        var render=new RenderFrameSubmission(scene.RenderCapacity);var native=new NativeRenderObject[scene.RenderCapacity];
+        scene.Start();for(var i=0;i<1200;i++){scene.Advance(new(i%3==0?16666:16667));scene.BuildSubmission(default,new(default,new(1)),render);}
+        Check(scene.Completed&&!scene.Failed&&scene.Observation.State.Frontier==1200,"storage workload completed all 1200 intervals");
+        var session=(AssemblyApplicationSession)typeof(StockAssemblyDevelopmentScene).GetField("session",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)!.GetValue(scene)!;
+        var pool=(long)session.Engine.AssemblyContactWorldForTest(session.Authority)!.PoolBytes;
+        var managed=GC.GetTotalMemory(true)-before;var gpuMeshPayload=scene.Visuals.BufferBytes;
+        GC.KeepAlive(scene);GC.KeepAlive(render);GC.KeepAlive(native);
+        Console.WriteLine($"ASSEMBLY_SUPPORTED_STORAGE retainedManagedSceneDelta={managed} nativePool={pool} ownedCpuRetained={managed+pool} gpuMeshPayload={gpuMeshPayload} ownedCpuPlusGpuPayload={managed+pool+gpuMeshPayload} limit=8388608 sharedRendererDeviceSwapchainExcluded=true");
+        Console.WriteLine("ASSEMBLY_SUPPORTED_GPU_BUFFERS "+string.Join(',',scene.Visuals.Assets.SelectMany(a=>a.Meshes).SelectMany(m=>new long[]{m.VertexCount*48L,m.TriangleCount*12L}).Concat(new long[]{8*48,36*4})));
+        Check(managed>=640000+gpuMeshPayload&&managed+pool+gpuMeshPayload<=8L*1024*1024,"combined owned scene, native world and visual mesh payload <=8MiB");
+    }
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private static void WarmSupportedStorage()
+    {using var warm=new StockAssemblyDevelopmentScene(supportedContact:true);warm.Start();warm.Advance(new(16666));}
+    internal static unsafe void Supported()
+    {
+        using var scene=new StockAssemblyDevelopmentScene(supportedContact:true);var initial=scene.Observation;
+        Check(scene.InitialSnapshot.Count==38&&initial.State.Mass.Mass==705&&initial.Clock.Debt.Ticks==0,"same seven parts plus declared slab; zero initial debt");
+        Check(SampleOptions.TryParse(["--scene=srv01-supported-contact"],out var options,out _)&&options.Scene=="srv01-supported-contact","explicit supported CLI");
+        var render=new RenderFrameSubmission(scene.RenderCapacity);var native=new NativeRenderObject[scene.RenderCapacity];
+        void Draw()
+        {
+            scene.BuildSubmission(default,new(new(10,3,8),new(1)),render);
+            for(var i=0;i<render.ObjectCount;i++)native[i].Mesh=new(){Value=render.Objects[i].Mesh.Value};
+            fixed(NativeRenderObject* p=native)scene.WriteExhaustParameters(p,render.ObjectCount);
+        }
+        Draw();Check(render.ObjectCount==38&&render.Objects[37].Mesh==MeshHandle.ContactQualificationSupport,"physical slab represented, no exhaust");
+        Check((render.Objects[37].Position.Reconstruct()-(new Double3(0,-2.7,0)-new Double3(10,3,8))).LengthSquared<1e-24,"camera-relative slab centre matches 16x2x16 collider and top -1.7");
+        scene.Advance(new(20_000_000));Check(scene.Observation==initial,"READY ignores elapsed before start");scene.Start();
+        scene.Advance(new(16665));Check(scene.Observation.State.Frontier==0,"supported exact debt boundary");
+        scene.Advance(new(1));Check(scene.Observation.State.Frontier==1,"first16666 publication");
+        var first=scene.Observation;Draw();scene.BuildSubmission(default,new(new(-7,6,-9),new(1)),render);
+        Check(scene.Observation==first&&scene.PresentedPart(6).RootPosition.Value==first.State.Motion.PositionO,"camera-independent material-O presentation");
+        scene.Advance(new(20_000_000-16666));Check(scene.Observation.State.Frontier==5,"delayed frame is bounded to four intervals");
+        while(!scene.Completed&&!scene.Failed)scene.Advance(default);
+        var final=scene.Observation;Check(scene.Completed&&!scene.Failed&&final.State.Frontier==1200&&final.State.Stores==initial.State.Stores&&final.State.Mass==initial.State.Mass,"supported full episode exact resources");
+        Draw();scene.Advance(new(999));Check(scene.Observation==final&&render.ObjectCount==38&&!scene.ActiveExhaust,"held endpoint, no departure or exhaust");
+        using var measured=new StockAssemblyDevelopmentScene(supportedContact:true);measured.Start();
+        for(var i=0;i<128;i++){measured.Advance(new(i%3==0?16666:16667));measured.BuildSubmission(default,new(default,new(1)),render);}
+        using(var allocation=new OrdinaryAllocationMeasurement("supported-assembly-application-presentation"))
+        {
+            for(var i=128;i<1152;i++){measured.Advance(new(i%3==0?16666:16667));measured.BuildSubmission(default,new(default,new(1)),render);}
+            OrdinaryAllocationMeasurement.RequireZero(allocation.Complete(),"supported-assembly-application-presentation");
+        }
+        Check(!measured.Failed&&measured.Observation.State.Frontier==1152,"measured supported presentation advances correctly");
+        OrdinaryAllocationMeasurement.PositiveControl();
+        Console.WriteLine($"ASSEMBLY_SUPPORTED_PRESENTATION PASS copied-O/38-draws/no-exhaust/camera/backlog/held-endpoint visualMeshBytes={scene.Visuals.BufferBytes} displaySampleArraysBytes=640000 slabUsesExistingMesh=true");
+    }
     private static void Check(bool v,string name){if(!v)throw new InvalidOperationException("Assembly presentation: "+name);}
+    internal static unsafe void PoweredSupport()
+    {
+        Check(SampleOptions.TryParse(["--scene=srv01-powered-support"],out var options,out _)&&options.Scene=="srv01-powered-support","explicit powered support route");
+        using var scene=new StockAssemblyDevelopmentScene(supportedContact:true,poweredSupport:true);
+        var original=scene.Observation;var render=new RenderFrameSubmission(scene.RenderCapacity);var native=new NativeRenderObject[scene.RenderCapacity];
+        void Draw()
+        {
+            scene.BuildSubmission(default,new(new(10,3,8),new(1)),render);
+            for(var i=0;i<render.ObjectCount;i++)native[i].Mesh=new(){Value=render.Objects[i].Mesh.Value};
+            fixed(NativeRenderObject* p=native)scene.WriteExhaustParameters(p,render.ObjectCount);
+        }
+        scene.Advance(new(20_000_000));Draw();Check(scene.Observation==original&&render.ObjectCount==38,"READY has no prefunded credit/exhaust");
+        scene.Start();scene.Advance(new(16666));Draw();var first=scene.Observation;
+        Check(first.State.Actual.MainOn&&first.State.Actual.Jets==0&&first.State.Stores.Fuel!=original.State.Stores.Fuel&&render.ObjectCount==39,"main-only supported realized plume and finite resource debit");
+        scene.BuildSubmission(default,new(new(-7,6,-9),new(1)),render);
+        Check(scene.Observation==first&&scene.PresentedPart(6).RootPosition.Value==first.State.Motion.PositionO,"powered camera-independent material-O presentation");
+        scene.Advance(new(20_000_000-16666));Check(scene.Observation.State.Frontier==5,"powered backlog limited to4");
+        while(!scene.Completed&&!scene.Failed)scene.Advance(default);
+        Draw();var final=scene.Observation;scene.Advance(new(999));
+        Check(scene.Completed&&!scene.Failed&&final.State.Frontier==1200&&final.State.Mass.Mass==701.09375&&
+            final.State.Stores==new AssemblyStores(AssemblyResources.Mass(28.4375),AssemblyResources.Mass(42.65625))&&scene.Observation==final&&render.ObjectCount==38&&!scene.ActiveExhaust,
+            "bounded powered episode completes with exact fuel/mass and frozen endpoint, plume off");
+        using var measured=new StockAssemblyDevelopmentScene(supportedContact:true,poweredSupport:true);measured.Start();
+        for(var i=0;i<128;i++){measured.Advance(new(i%3==0?16666:16667));measured.BuildSubmission(default,new(default,new(1)),render);}
+        using(var allocation=new OrdinaryAllocationMeasurement("powered-supported-assembly-presentation"))
+        {
+            for(var i=128;i<1152;i++){measured.Advance(new(i%3==0?16666:16667));measured.BuildSubmission(default,new(default,new(1)),render);}
+            OrdinaryAllocationMeasurement.RequireZero(allocation.Complete(),"powered-supported-assembly-presentation");
+        }
+        Check(!measured.Failed&&measured.Observation.State.Frontier==1152,"powered measured visual workload");
+        OrdinaryAllocationMeasurement.PositiveControl();Console.WriteLine("ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion");
+    }
     internal static unsafe void Run()
     {
+        PoweredSupport();
+        Supported();
         Check(Marshal.SizeOf<NativeVisualVertex>()==48&&Marshal.OffsetOf<NativeVisualVertex>(nameof(NativeVisualVertex.R))==12&&Marshal.OffsetOf<NativeVisualVertex>(nameof(NativeVisualVertex.Nx))==24&&Marshal.OffsetOf<NativeVisualVertex>(nameof(NativeVisualVertex.Metallic))==36,"native vertex ABI");
         Check(Marshal.SizeOf<NativeVisualMesh>()==32&&Marshal.OffsetOf<NativeVisualMesh>(nameof(NativeVisualMesh.Indices))==8&&Marshal.OffsetOf<NativeVisualMesh>(nameof(NativeVisualMesh.VertexCount))==16&&Marshal.OffsetOf<NativeVisualMesh>(nameof(NativeVisualMesh.IndexCount))==20&&Marshal.OffsetOf<NativeVisualMesh>(nameof(NativeVisualMesh.PresentationKind))==24,"native mesh ABI");
         using var callbackStart=new StockAssemblyDevelopmentScene();var beforeCallback=callbackStart.Observation;

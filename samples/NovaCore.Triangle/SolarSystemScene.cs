@@ -1118,12 +1118,16 @@ internal sealed class SolarSystemScene
         position=pose.RootPosition;orientation=pose.RootOrientation;return true;
     }
 
-    internal bool TryStartAtFloridaLaunchSite(CameraState camera)
+    internal bool TryStartAtFloridaLaunchSite(CameraState camera) => TryStartAtFloridaSite(camera,new(115,-135,72),new(0,0,4));
+
+    internal bool TryStartAtFloridaSupportSlab(CameraState camera,double materialOriginAboveRoot) => TryStartAtFloridaSite(camera,new(12,-16,materialOriginAboveRoot+7),new(0,0,materialOriginAboveRoot));
+
+    private bool TryStartAtFloridaSite(CameraState camera,Double3 eye,Double3 pivot)
     {
         var earthIndex=-1;for(var index=0;index<Presentation.Count;index++)if(Presentation.Bodies[index].BodyId==SolarSystemBodyIds.Earth.Value){earthIndex=index;break;}
         if(earthIndex<0||!Focus(camera,earthIndex)||!_floridaLaunchSite.IsValid||
             !SurfaceEnuFrame.TryCreate(_floridaLaunchSite.Object.Anchor,out _))return false;
-        var eye=new Double3(115d,-135d,72d);var pivot=new Double3(0d,0d,4d);var view=pivot-eye;
+        var view=pivot-eye;
         var horizontal=Math.Sqrt(view.X*view.X+view.Y*view.Y);
         var yaw=Math.Atan2(view.X,view.Y);var pitch=Math.Atan2(view.Z,horizontal);
         if(!SurfaceCameraState.TryCreateFreeLook(_floridaLaunchSite.Object.Anchor,eye,pivot,yaw,pitch,out _surfaceCameraState))return false;

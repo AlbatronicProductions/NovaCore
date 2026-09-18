@@ -1,0 +1,578 @@
+{
+  "time": "2026-09-17T17:48:15.6632397-04:00",
+  "head": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "main": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "originMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "remoteMain": "ab14e3e0f8b53bf5e8bf580a99aea3f2b6fd21f5",
+  "branch": "codex/srv01-supported-contact-admission",
+  "historicalTagCount": 67,
+  "tagsUnchanged": true,
+  "staged": [],
+  "diffCheck": "PASS",
+  "sourceSeals": [
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "BEC89735D34AE7529AC7F01AA0889E4558B6B42B4B67A8F4FCEEFD37077DED23",
+      "matches": true
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "sha256": "405BB302532CE68CB930DB18F897A81385D84222C0FC89678390CD9F865136F9",
+      "matches": true
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "BACBE961FBCFF1F9D550A643A937D41EB095CABC4D5D70338AAE05F8519A1A63",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "sha256": "230C3A9BBC25D201ABAAAC9A90657B3B195AF7AEE2B61B2BD46EAFDBBA59CD67",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+      "sha256": "6D36E5782E22471EF4CAC15B88CF1E4F404F80C0E5E09A8E394F56C0A4E9A467",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "sha256": "1452B9B9AB921C467D79FA8725B2ED818A9FF41BECA43FB0079AB4A576CCAF5B",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+      "sha256": "3D41BD5EC9A74A15997C4D88DDF992684BEE19FBF6BBC26C2F0F9099695C9A06",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+      "sha256": "F0101D77D9A2D7AF81C4ABE1A1CD22515FF764B2E3F8B0B33E42ACF63D3FD491",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "sha256": "4371DA8D9030EC1DC123CF693902A6C0CA2B73CC8C3B749A337EC39511AB0DDD",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+      "sha256": "EC7F71E619C5E48CD86E055C5A91FEC8DE91F45F909EF82BF71FB67BAFD9862C",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+      "sha256": "0E021034C57BF9A9FD205BDEE5DC0525AEBA987D1682CB362C864415C6D84577",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "sha256": "8E5F69238593EE6F978CE02E5B7E4371E60A0D13E24EC2ACD0A2F5C51AB59C1D",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+      "sha256": "D779B5867428EFBDC7A903D0060DB95CCC01EB57DD91470BA15DB0E2EAFD22CD",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "sha256": "C5AFAFDF3FA8A6DBAA0D6802A61AF9DD64A1B0AF290B6A8FB3E6488668D8046B",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+      "sha256": "7EB55A3C4C2597F9755D9F551636DE91595331F3F25AEACC34362B34B033EB41",
+      "matches": true
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "sha256": "41D625512960921783DC8DD9090732D797AFEC1BA1101088A3454CAEE1482A82",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "7285FFBD8712031A3F0CE44C15CA0311BC22C86935EF1BD7ECF05916A45A7098",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+      "sha256": "6093CAA06B9F7261ED1375443874747F8B53172AE658AF1FC6CDFDC879178CB0",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+      "sha256": "019BD1F3313A68EE8607CB5757CDE0601C42E02900DA079D385F70DC4E13037A",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+      "sha256": "44AF9E51BF9EC26C288FCCC4D244D6B706C7EDE3AE054D699405A44D48DF77FD",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+      "sha256": "69B4364DAF6838F060D8924CE1966DA18CC9FC57B94355887699C9604BFE8BE2",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+      "sha256": "C329B171DEB8F0C29925811FEBC3C68D5393C5FDC6E3AC41E2F28F928D946EEF",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs",
+      "sha256": "76AF3726851549834747DBB6E2C4A83586E5B8F9EEE5BF6F891EBBFB98DA3E87",
+      "matches": true
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "CFC3DC2F2F33B02FC169469B01BA549CA6EFD2DE0B95A902B08C67F142D2BD90",
+      "matches": true
+    }
+  ],
+  "nativeSha256": "4C468B0302603B59397A1D82C6E6E08577A2853F166FFEE7D2552107363C99B6",
+  "observerBuild": {
+    "nativeOriginal": "4C468B0302603B59397A1D82C6E6E08577A2853F166FFEE7D2552107363C99B6",
+    "sceneOriginal": "BACBE961FBCFF1F9D550A643A937D41EB095CABC4D5D70338AAE05F8519A1A63",
+    "nativeObserver": "C811E22B18C146C34108DBB4E623010F721ED21041227F08BB8E1F2266714343",
+    "sceneObserver": "F6ABA497340CF9E58D2345058783A860FD8E4AC77AB6022181BF0788EFB8E0A4",
+    "patchUtc": "2026-09-17T21:34:46.6004298Z"
+  },
+  "outputFileCount": 79,
+  "outputTreeDigest": "26220A0CD683D701973E9A3AA9DEF33A56F5D4D53FA6FA65E913BBF94D5FB705",
+  "outputFiles": [
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Capsule_A.glb",
+      "sha256": "6B045A63186ED63FA1C6D48EF7E7AB89299F83B4F533897B8679B22068CEFF6A",
+      "bytes": 123968
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Main_A.glb",
+      "sha256": "3B02F9E3788A2BA85EA8C0238E2F61F8C916D7757E2C535B8348CB8E6C1AD46F",
+      "bytes": 130064
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Rcs_A.glb",
+      "sha256": "6118CB37BD8B7678D0EACC032391B1143143E2360E351CDCBD67508A3124CA5B",
+      "bytes": 143776
+    },
+    {
+      "path": "assets/visual/SRV01/NC_SRV_Tank_A.glb",
+      "sha256": "22CD027892F20596238D7A7580A4E73032071F6303A73CB211915BAB4C4DE378",
+      "bytes": 256312
+    },
+    {
+      "path": "BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "bytes": 880640
+    },
+    {
+      "path": "BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "bytes": 163328
+    },
+    {
+      "path": "earth-data/earth_elevation_8192x4096.r16",
+      "sha256": "4600BC01767EB81404756AF62C0EE87B4BC459B82DE15DCA6989DF34FEF76317",
+      "bytes": 67108864
+    },
+    {
+      "path": "NovaCore.Core.dll",
+      "sha256": "EAD15682C2B752B960D47FDABAEE7FE60854FC81CE9B0E2275D735A60BEC27A9",
+      "bytes": 93696
+    },
+    {
+      "path": "NovaCore.Core.pdb",
+      "sha256": "EEE694073563ED68DF5D7BAF0591DA91CCBC6DF6AF9DB3AB635A76E287E96714",
+      "bytes": 32296
+    },
+    {
+      "path": "NovaCore.EphemerisFormat.dll",
+      "sha256": "E7BE0A6B7EDB11B0E26B4EB6340EC6844BF790511B0E46A7FA545DE5B2454D1D",
+      "bytes": 77312
+    },
+    {
+      "path": "NovaCore.EphemerisFormat.pdb",
+      "sha256": "07DC6D8BFD4F335F77B6C6E3EF68DBBF1A33E4ED1D0255B9EA980C559932EE48",
+      "bytes": 27856
+    },
+    {
+      "path": "NovaCore.Graphics.dll",
+      "sha256": "3F46DA141F173AE129DC94613A33542ECB1CEE01BC8B245BC36A2BCFBA2AE88C",
+      "bytes": 660480
+    },
+    {
+      "path": "NovaCore.Graphics.pdb",
+      "sha256": "384DDB246BA54F6C7285F3DF4F0F337C6F5A2D6B32186F4DFCC82B395FA646C6",
+      "bytes": 148724
+    },
+    {
+      "path": "NovaCore.Interop.dll",
+      "sha256": "50318B8A47BA7E62B64002A7CC37DE6B244082FE0A3AECC2DCB137544B02071E",
+      "bytes": 23552
+    },
+    {
+      "path": "NovaCore.Interop.pdb",
+      "sha256": "39B7DE8CF7F0E7D64AD91917A3F61A9CA38EE6E9A09BA64F2481D1C29BA70718",
+      "bytes": 14320
+    },
+    {
+      "path": "NovaCore.Native.dll",
+      "sha256": "89C6A5836F00A5D21B2F8C476C40E1CCA3E8C4D5948F1B9A4E73A4A419144D17",
+      "bytes": 358400
+    },
+    {
+      "path": "NovaCore.Platform.dll",
+      "sha256": "699861F4270BBF27BFF1ACAF4F69B1DE0CE4ADFE959335F1188969E0230B017D",
+      "bytes": 6656
+    },
+    {
+      "path": "NovaCore.Platform.pdb",
+      "sha256": "D67788466E85F3132A3B13FCAF6D5FC6963557B7F190BC39A7F7DF57DCF41C71",
+      "bytes": 12152
+    },
+    {
+      "path": "NovaCore.Simulation.dll",
+      "sha256": "94553B3C0ED52762CECB63FC69BF1D06F3D458B6558FB7E12F524ABF1EC83DEA",
+      "bytes": 4459008
+    },
+    {
+      "path": "NovaCore.Simulation.pdb",
+      "sha256": "1496C9C648BBBBDEB560C344224225BF80B02A43F74D12041AA7CD839E422E90",
+      "bytes": 230724
+    },
+    {
+      "path": "NovaCore.Triangle.deps.json",
+      "sha256": "D284776C0505517A09E1BA848A176E17F255899309E78F9CEEF3774BEF0866E1",
+      "bytes": 3617
+    },
+    {
+      "path": "NovaCore.Triangle.dll",
+      "sha256": "90C472A054467F5640AA77ECE22B17A7A9A84F82006FB0BDCA47E31F6817A633",
+      "bytes": 303616
+    },
+    {
+      "path": "NovaCore.Triangle.exe",
+      "sha256": "7950CED63BDE459FBD49AD27805F972395DACAE2EC889BFD6722508CE2A9915A",
+      "bytes": 162304
+    },
+    {
+      "path": "NovaCore.Triangle.pdb",
+      "sha256": "3F12E24C33917FC82F0B42EBA575EEB17077F1AEFEE6315E188D8B134F5C9D52",
+      "bytes": 72060
+    },
+    {
+      "path": "NovaCore.Triangle.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "bytes": 342
+    },
+    {
+      "path": "shaders/body_forward.frag.spv",
+      "sha256": "FA706803F042FB5A9F7A3C9965A3E2DE3E8838E075D67876B78DF9BDC132CE0E",
+      "bytes": 440
+    },
+    {
+      "path": "shaders/distant_planet.frag.spv",
+      "sha256": "04137AFB1C632DFB7074480377D9F93136AB3127D382BAEEF07D52B09409EBA8",
+      "bytes": 35760
+    },
+    {
+      "path": "shaders/distant_planet.vert.spv",
+      "sha256": "CF28FE0A7C0797BD7D72076437BA78C4E0D97BB1A0AE3C065BAF3BFC5DB62CB8",
+      "bytes": 8428
+    },
+    {
+      "path": "shaders/exhaust_resolve.frag.spv",
+      "sha256": "DB6DDD09497866AA665393503F9F1603211481C307F013F1B9C0EF9A6020C31C",
+      "bytes": 3584
+    },
+    {
+      "path": "shaders/exhaust.frag.spv",
+      "sha256": "AE6B7B86CA55B33DDD01908AD89EC4FECE0C7CD29F225FC8516068794696EF80",
+      "bytes": 20292
+    },
+    {
+      "path": "shaders/exhaust.vert.spv",
+      "sha256": "492860487930E2013BEB4B247B026EEAF2F6E28956DA0553408FBAA1005DBE19",
+      "bytes": 4900
+    },
+    {
+      "path": "shaders/fullscreen.vert.spv",
+      "sha256": "A18F9B5E0B4A4E7A077B1017BAD7B1C5C40313B3F70113F1E0771CD202433130",
+      "bytes": 1308
+    },
+    {
+      "path": "shaders/orbit_previous.frag.spv",
+      "sha256": "C4935060E07E01742D59D8A5834241E2963DCC80ED8E35BAEAC5B08288761E61",
+      "bytes": 456
+    },
+    {
+      "path": "shaders/orbit.frag.spv",
+      "sha256": "B06F50708727144E8D0F08D35CD2E64D8B1CEF501ED20B10FEA4A34196026267",
+      "bytes": 456
+    },
+    {
+      "path": "shaders/orbit.vert.spv",
+      "sha256": "B4B9DD635F32156654E30D843C29EB864FEB09751D7B3027CF99A5D741B6A45B",
+      "bytes": 1756
+    },
+    {
+      "path": "shaders/planetary_natural_terrain_global_prepare.comp.spv",
+      "sha256": "5A5450321873F5FF8BED7DD9E4F06C342625724D629DA2232521FBACE01C7A85",
+      "bytes": 49540
+    },
+    {
+      "path": "shaders/planetary_production_terrain.comp.spv",
+      "sha256": "405E6E6DAAB609CA383297BA8BE706BFA96859C65DC2D9F42476A32CDDD85DF7",
+      "bytes": 368
+    },
+    {
+      "path": "shaders/planetary_production.frag.spv",
+      "sha256": "8C59838ABB3D7EE6418695EA40F044CA1F04F5C3C9216296D5CC19BBA6110D6B",
+      "bytes": 152228
+    },
+    {
+      "path": "shaders/planetary_ring_far.frag.spv",
+      "sha256": "343DB81BCCC310B21C600AB6EE6722438151694683BB0CF7BA01D54A9B68ADE6",
+      "bytes": 2692
+    },
+    {
+      "path": "shaders/planetary_ring_near.frag.spv",
+      "sha256": "48B8EF4E56B6BE9380CFBACA7DAA790035E704541B6B8A550B3CC7BED540244C",
+      "bytes": 2692
+    },
+    {
+      "path": "shaders/planetary_ring.vert.spv",
+      "sha256": "CCCEDE52D3C64DB872360912DB9EB29E60CB892C648ED53CE1C178F8623D0CFB",
+      "bytes": 7728
+    },
+    {
+      "path": "shaders/planetary_select.comp.spv",
+      "sha256": "8189BBD2A85FE23033F12C558D8B221B62B8969C17BA9FFCF07B7C8501FE8ADF",
+      "bytes": 91064
+    },
+    {
+      "path": "shaders/planetary_terrain_generate.comp.spv",
+      "sha256": "1FC8C24EA6B4A55E83997FADF80B4901F692B8BC2DE84A5CF6AC043E4DA531D1",
+      "bytes": 10292
+    },
+    {
+      "path": "shaders/planetary.frag.spv",
+      "sha256": "417F17B236834F0AC94FA3BBFDAE52AD164599FF14051E9B396809BEEA75CDA1",
+      "bytes": 18548
+    },
+    {
+      "path": "shaders/planetary.vert.spv",
+      "sha256": "DDB84030E2621DF8F05489E339989D66DE60D73435F490B4EC0AF4251D7A0338",
+      "bytes": 135600
+    },
+    {
+      "path": "shaders/production_nested_scale_mesh_cull.comp.spv",
+      "sha256": "497D88225A914B9601AD6C0F44733E834794A952854E71B26BE426EAD8780D94",
+      "bytes": 30484
+    },
+    {
+      "path": "shaders/production_nested_scale_mesh_incoming_cull.comp.spv",
+      "sha256": "23BD1B04D0291E6271138041433EEE07E57503482E8E5CF845E4B72C75967336",
+      "bytes": 30484
+    },
+    {
+      "path": "shaders/production_spherical_billboard_compact.comp.spv",
+      "sha256": "2AABD7633B333F86DF8A6EAE6B76ED2D13A7129443DCD9201531DE047B12F4D9",
+      "bytes": 3460
+    },
+    {
+      "path": "shaders/production_spherical_billboard_cull.comp.spv",
+      "sha256": "2827B58DCD7029695E0B33272018E54D19D6113B8D7AB9AC591C343B3D994398",
+      "bytes": 14624
+    },
+    {
+      "path": "shaders/production_spherical_billboard_incoming_compact.comp.spv",
+      "sha256": "6B0238138222112DDF1F945F5E6A31867D5DD11F57169481ECE9C05337F43E4E",
+      "bytes": 2940
+    },
+    {
+      "path": "shaders/production_spherical_billboard_incoming_cull.comp.spv",
+      "sha256": "8C677F08AE051CF525108A436066983D41961CE70757CA29A86DF165D2663CFB",
+      "bytes": 14624
+    },
+    {
+      "path": "shaders/production_spherical_billboard_incoming_prepare.comp.spv",
+      "sha256": "3B330D24DC873C2676DBB877208EFAE4D91347B66EF029706B8A3F0D3116F91C",
+      "bytes": 91824
+    },
+    {
+      "path": "shaders/production_spherical_billboard_incoming_reset.comp.spv",
+      "sha256": "5D750F929DCAB4F9F3138B4CDFA869AB26E3051D4B28485C02EE483F89E14D6E",
+      "bytes": 1736
+    },
+    {
+      "path": "shaders/production_spherical_billboard_prepare.comp.spv",
+      "sha256": "D178E6BA6B73045DC214E75000489C09A7F0982F9CFF7663489BA0818D30AE8B",
+      "bytes": 94876
+    },
+    {
+      "path": "shaders/production_spherical_billboard_reset.comp.spv",
+      "sha256": "CF583D16E14C8A8EC63B393D8752541648D932CF0165231CC48F6076E28FC027",
+      "bytes": 1736
+    },
+    {
+      "path": "shaders/production_spherical_billboard.tesc.spv",
+      "sha256": "0163498278F9523FD442434F05F056BE28252D16C2F2BA44B8D91642B33E4439",
+      "bytes": 12632
+    },
+    {
+      "path": "shaders/production_spherical_billboard.tese.spv",
+      "sha256": "D0BC5D7A450F336D45C26C499B0B3A79ECC0258E1FFB9DEE0B5BCFB8AA21D31E",
+      "bytes": 22836
+    },
+    {
+      "path": "shaders/production_spherical_billboard.vert.spv",
+      "sha256": "1BAA9043DB7A8B71DCF5931F4CB415FA84CE6341B07D850EA9BEB8BAA02D2B6A",
+      "bytes": 8028
+    },
+    {
+      "path": "shaders/regional_physical_demand.comp.spv",
+      "sha256": "7D80DBD70BE13CC55F00EF836CD8DA9D3783064411320697777F6B5C848D8F67",
+      "bytes": 22344
+    },
+    {
+      "path": "shaders/regional_physical_incoming_demand.comp.spv",
+      "sha256": "A56B62B5432206B8AB5EDED734B13A0DDF9F0C726A4B444F8D24139BDCC17A60",
+      "bytes": 22360
+    },
+    {
+      "path": "shaders/sas_target.frag.spv",
+      "sha256": "4E99FDA06F571590F950E91D93025CAFA83E4A454E68E3583CE59D869F0A3EF2",
+      "bytes": 440
+    },
+    {
+      "path": "shaders/solar_label.frag.spv",
+      "sha256": "673C5DC0CC1E199D497C7C927F282A02DA444FA258860B6CB94B6FD1ED12C90A",
+      "bytes": 47588
+    },
+    {
+      "path": "shaders/solar_label.vert.spv",
+      "sha256": "A13A7A8ACB3AE2DA2CAC129A203CAFFD86B5A7F434701D99B59284FDD01F1844",
+      "bytes": 11388
+    },
+    {
+      "path": "shaders/solar_marker.frag.spv",
+      "sha256": "D428743C08F96F4E508EAB131CFB54981C2628EECC7ACD3D2DF220B19103275B",
+      "bytes": 448
+    },
+    {
+      "path": "shaders/solar_marker.vert.spv",
+      "sha256": "50D948741D3CA6B59577A82D3346AB3CAC51EDCB9AB80047247AC61C345B6DB6",
+      "bytes": 7776
+    },
+    {
+      "path": "shaders/solar_orbit.frag.spv",
+      "sha256": "23B511270C196C2186F7935699CA7FDEDF3C92C629DA67C10E8AE7615286181F",
+      "bytes": 1412
+    },
+    {
+      "path": "shaders/solar_orbit.vert.spv",
+      "sha256": "D71520615E2533A06208C3CEC752D2689F524A30FB6A11BD2CA4AE00E2CC027F",
+      "bytes": 4008
+    },
+    {
+      "path": "shaders/solar_speed_hud.frag.spv",
+      "sha256": "E073B0AB31C69A3516D695146ADE0DBD618D3DEDE5A10699F390F10DA52C3586",
+      "bytes": 49400
+    },
+    {
+      "path": "shaders/solar_speed_hud.vert.spv",
+      "sha256": "A777A4DFECE073339EFCD97C7292D970F8C26D21F221EBD62CE244970F0A5FB4",
+      "bytes": 11036
+    },
+    {
+      "path": "shaders/space_background.frag.spv",
+      "sha256": "0C98EE3DF0BA8AD8F313CC352A02032528E6B0E36B2DFA8CC2BE1A6755B71CFC",
+      "bytes": 12108
+    },
+    {
+      "path": "shaders/stellar_glow.frag.spv",
+      "sha256": "E83A5E7458EC4BE4B835384C88EC3EA958AE13569EE9AC823A4E2B2DB17FACEE",
+      "bytes": 1736
+    },
+    {
+      "path": "shaders/stellar_glow.vert.spv",
+      "sha256": "43463716AD81D7C913273D498B6F46A00CFD8A877E2C000D31FA66D5742CF1F8",
+      "bytes": 6592
+    },
+    {
+      "path": "shaders/stellar_sun.frag.spv",
+      "sha256": "5C448C0DA4CADEB08BF2C85C74448D3B690FD3D6BCCAB1FC2C49DA7A0BF54769",
+      "bytes": 3208
+    },
+    {
+      "path": "shaders/stellar_sun.vert.spv",
+      "sha256": "3E124D5BABCB1D219499AA2DE1482F90FC7C9008E92B054F7CA0D268336346B6",
+      "bytes": 5168
+    },
+    {
+      "path": "shaders/tone_map.frag.spv",
+      "sha256": "D617345E95589ECB087ED40C20F4D04A427251A2B5249D8181CC63C421EE3979",
+      "bytes": 2700
+    },
+    {
+      "path": "shaders/triangle.frag.spv",
+      "sha256": "D0A96B210D4C61004E7BAE0ED931A37631613D93B53CECB3F805F5E56E8B3C51",
+      "bytes": 6852
+    },
+    {
+      "path": "shaders/triangle.vert.spv",
+      "sha256": "273B45834E3E19C54B2D3A06436D3513E6A2FE71B9D7BBC1C65A443FA11C53D9",
+      "bytes": 5276
+    },
+    {
+      "path": "third-party/Bepu/ATTRIBUTION.txt",
+      "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3",
+      "bytes": 374
+    },
+    {
+      "path": "third-party/Bepu/LICENSE.txt",
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD",
+      "bytes": 10140
+    }
+  ],
+  "status": [
+    " M samples/NovaCore.Triangle/Program.cs",
+    " M samples/NovaCore.Triangle/SampleOptions.cs",
+    " M samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyResources.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/CompoundContactCoverage.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs",
+    " M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+    " M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    " M tests/NovaCore.Graphics.Tests/Program.cs",
+    " M tests/NovaCore.Graphics.Tests/StockAssemblyPresentationTests.cs",
+    " M tests/NovaCore.Simulation.Tests/Program.cs",
+    "?? docs/engineering-evidence/post-m15.2-production-remeasurement/",
+    "?? docs/engineering-evidence/srv01-production-integration/closeout.json",
+    "?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+    "?? docs/engineering-evidence/srv01-supported-contact-admission-design/",
+    "?? docs/engineering-evidence/srv01-surface-to-flight-gauntlet/",
+    "?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+    "?? docs/legal/LEGAL-REVIEW-TODO.md",
+    "?? docs/legal/MODDING-POLICY-DRAFT.md",
+    "?? docs/legal/ROOT-LICENSE-CANDIDATE.md",
+    "?? docs/legal/finalization/",
+    "?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyContactProfile.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Assembly.cs",
+    "?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.AssemblyPower.cs",
+    "?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyContact.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactAdmissionTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactFailureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyContactQualificationTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactClosureTests.cs",
+    "?? tests/NovaCore.Simulation.Tests/AssemblyPoweredContactTests.cs"
+  ],
+  "sourcePolicy": "Only two temporary observer patches; both restored byte-for-byte before captures. New retained files confined to this evidence child."
+}

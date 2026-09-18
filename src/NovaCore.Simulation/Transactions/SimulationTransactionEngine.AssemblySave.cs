@@ -18,7 +18,7 @@ internal sealed partial class SimulationTransactionEngine
         try
         {
             var p=_assemblyFlight;
-            if(p is null||!ReferenceEquals(p.Authority,authority)||p.Active||_clock.Timeline.Revision.Value!=0||_clock.Timeline.PendingCount!=0)
+            if(p is null||!ReferenceEquals(p.Authority,authority)||authority.Launch.Consumer!=AssemblyPhysicalConsumer.FreeFlight||authority.Launch.Design.Development is not null||authority.Launch.GravityRoot!=NovaCore.Core.Double3.Zero||p.Active||_clock.Timeline.Revision.Value!=0||_clock.Timeline.PendingCount!=0)
                 throw new InvalidDataException("Unsaveable assembly authority/proposal/timeline.");
             if(!p.Invalidated&&CheckAssemblySource(authority)!=AssemblyFlightStatus.Ready)throw new InvalidDataException("Stale save source.");
             var view=_state.CreateView();

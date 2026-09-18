@@ -1,0 +1,51 @@
+{
+  "method": "Independent rational deduction from unchanged 30/45 kg initial stores, fuel flow5/64kg/s, oxidizer15/128kg/s; all sampled intervals fully powered. These are derived values, not default-JSON limb observations. Permanent tests compare exact record stores and projected mass/COM/inertia across all host partitions and moving frame.",
+  "endpoints": [
+    {
+      "tick": 0,
+      "fuelKgExact": "30",
+      "oxidizerKgExact": "45",
+      "fuelKgDecimal": "30",
+      "oxidizerKgDecimal": "45",
+      "totalMassKgExact": "705"
+    },
+    {
+      "tick": 16666,
+      "fuelKgExact": "191991667/6400000",
+      "oxidizerKgExact": "575975001/12800000",
+      "fuelKgDecimal": "29.99869796875",
+      "oxidizerKgDecimal": "44.998046953125",
+      "totalMassKgExact": "1804791667/2560000"
+    },
+    {
+      "tick": 32291,
+      "fuelKgExact": "383967709/12800000",
+      "oxidizerKgExact": "1151903127/25600000",
+      "fuelKgDecimal": "29.997477265625",
+      "oxidizerKgDecimal": "44.9962158984375",
+      "totalMassKgExact": "3609567709/5120000"
+    },
+    {
+      "tick": 47916,
+      "fuelKgExact": "95988021/3200000",
+      "oxidizerKgExact": "287964063/6400000",
+      "fuelKgDecimal": "29.9962565625",
+      "oxidizerKgDecimal": "44.99438484375",
+      "totalMassKgExact": "902388021/1280000"
+    }
+  ],
+  "partitions": [
+    1,
+    3,
+    7,
+    15,
+    24,
+    60
+  ],
+  "admittedTicks": 63541,
+  "publishedTicks": 47916,
+  "retainedDebt": 15625,
+  "revision": 3,
+  "history": 3,
+  "timelineRevision": 0
+}

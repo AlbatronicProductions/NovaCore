@@ -1,0 +1,57 @@
+{
+  "limitBytes": 8388608,
+  "method": "Final compiled candidate. Florida presentation scene advances 1200 intervals and builds submissions before GC-retained/native/GPU accounting. Construction upper bounds for other owners are labelled, not called exact retained managed sizes.",
+  "exclusions": "Shared terrain datasets, common renderer/device/driver resources, total process working set.",
+  "witnesses": [
+    {
+      "gate": "assembly-florida-presentation-storage-debug",
+      "witness": [
+        "FLORIDA_PRESENTATION_STORAGE managedRetainedDelta=4634424 nativePool=475136 gpuMeshPayload=1359096 slabMeshPayload=1296 combined=6469952 limit=8388608 sharedTerrainDatasetAndDeviceExcluded=true"
+      ]
+    },
+    {
+      "gate": "assembly-contact-storage-debug",
+      "witness": [
+        "ASSEMBLY_CONTACT_STORAGE managedCold=2922920 managedConstructionWarmUpperBound=2923600 nativePool=475136 combinedUpperBound=3398736 historyPayloadIncluded=1891200 creditPayloadIncluded=76816 limit=8388608 coldPreparedMs=2.1934"
+      ]
+    },
+    {
+      "gate": "assembly-powered-contact-storage-debug",
+      "witness": [
+        "POWERED_SUPPORTED_ASSEMBLY_STORAGE",
+        "ASSEMBLY_CONTACT_STORAGE managedCold=2935648 managedConstructionWarmUpperBound=2936328 nativePool=475136 combinedUpperBound=3411464 historyPayloadIncluded=1891200 creditPayloadIncluded=76816 limit=8388608 coldPreparedMs=2.2905"
+      ]
+    },
+    {
+      "gate": "assembly-departure-storage-debug",
+      "witness": [
+        "DEPARTURE_STORAGE {\"managedConstructionUpperBound\":607312,\"nativeCold\":442368,\"nativeAfter\":458752,\"combinedUpperBound\":1066064,\"profileBytes\":80,\"historyPayload\":6304,\"creditPayload\":76816,\"coldMs\":2.5104,\"limit\":8388608}"
+      ]
+    },
+    {
+      "gate": "assembly-florida-presentation-storage-release",
+      "witness": [
+        "FLORIDA_PRESENTATION_STORAGE managedRetainedDelta=4634424 nativePool=475136 gpuMeshPayload=1359096 slabMeshPayload=1296 combined=6469952 limit=8388608 sharedTerrainDatasetAndDeviceExcluded=true"
+      ]
+    },
+    {
+      "gate": "assembly-contact-storage-release",
+      "witness": [
+        "ASSEMBLY_CONTACT_STORAGE managedCold=2922344 managedConstructionWarmUpperBound=2923024 nativePool=475136 combinedUpperBound=3398160 historyPayloadIncluded=1891200 creditPayloadIncluded=76816 limit=8388608 coldPreparedMs=2.1932"
+      ]
+    },
+    {
+      "gate": "assembly-powered-contact-storage-release",
+      "witness": [
+        "POWERED_SUPPORTED_ASSEMBLY_STORAGE",
+        "ASSEMBLY_CONTACT_STORAGE managedCold=2922712 managedConstructionWarmUpperBound=2923392 nativePool=475136 combinedUpperBound=3398528 historyPayloadIncluded=1891200 creditPayloadIncluded=76816 limit=8388608 coldPreparedMs=2.3679"
+      ]
+    },
+    {
+      "gate": "assembly-departure-storage-release",
+      "witness": [
+        "DEPARTURE_STORAGE {\"managedConstructionUpperBound\":606736,\"nativeCold\":442368,\"nativeAfter\":458752,\"combinedUpperBound\":1065488,\"profileBytes\":80,\"historyPayload\":6304,\"creditPayload\":76816,\"coldMs\":2.2295,\"limit\":8388608}"
+      ]
+    }
+  ]
+}

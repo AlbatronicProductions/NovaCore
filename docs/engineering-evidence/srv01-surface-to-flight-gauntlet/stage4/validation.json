@@ -1,0 +1,339 @@
+{
+  "debug": {
+    "registeredGroups": 80,
+    "passedGroups": 80,
+    "missing": [],
+    "simulationSha256": "F6DA96BFD63BA4BE3F7D5CDEC9746EEC7E0914B4305E24454BE4ADBFE70CD8FA",
+    "fullSolutionBuild": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "focusedWitnesses": [
+      "DEVELOPMENT_CHEAP {\"profile\":\"novacore.SRV01.development-propulsion/1\",\"profileDigest\":\"5c763ba34a29732f6c166d8feb53fb2605568202f27c0791cc06d5152083a4f7\",\"configuration\":\"c3c84f9874c8d308a43de7167a732721240e3828656c7c2e836814e32efca653\",\"dryMass\":630,\"wetMass\":2018900,\"fuelKg\":807308,\"oxidizerKg\":1210962,\"thrustN\":29708160,\"totalFlowKgS\":9670.625,\"tw\":1.5000023478434603,\"isp\":313.25682062681955,\"deltaV\":24798.239377037527,\"burnSeconds\":208.7010922251664,\"maxVelocityError\":3.1019631308026874E-13,\"maxPositionError\":6.471384712825046E-11,\"finalVelocity\":0.6136787680578174,\"finalPosition\":0.03834344385779613}",
+      "DEVELOPMENT_DETERMINISM PASS five host partitions / same exact stores and endpoint bits",
+      "ORDINARY_ALLOCATION gate=development-powered bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=development-exhaustion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=development-dry bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ],
+    "regressions": [
+      {
+        "gate": "NovaCore.ReferenceFrames.Tests",
+        "exitCode": 0,
+        "sha256": "D28CDA27920C279BC94D01AE1A237A7A39F4E01E95094D6DDFC181ECF02E91B5",
+        "lastLines": [
+          "PASS surface anchor authority",
+          "PASS validation",
+          "Benchmark: 10,000 root resolutions in 1.906 ms; managed allocations=0 bytes; final=4000000000009.999"
+        ]
+      },
+      {
+        "gate": "NovaCore.Precision.Tests",
+        "exitCode": 0,
+        "sha256": "5404263C4B596C97E848190FE474B17C7D89791C5DB2AA46FEFDD7791239BFD9",
+        "lastLines": [
+          "log options: parsing and verbose-input compatibility passed",
+          "",
+          "PASS"
+        ]
+      },
+      {
+        "gate": "NovaCore.BepuDependency.Tests",
+        "exitCode": 0,
+        "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+        "lastLines": [
+          "    }",
+          "  ]",
+          "}"
+        ]
+      },
+      {
+        "gate": "launcher-correct-layout",
+        "exitCode": 0,
+        "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A",
+        "lastLines": [
+          "PASS diagnostics arguments",
+          "PASS existing production scenarios",
+          "NovaCore launcher tests passed: 18"
+        ]
+      },
+      {
+        "gate": "assembly-presentation",
+        "exitCode": 0,
+        "sha256": "DA18D5A62CDF9EB2874281889AB1EE30CAB8003C551531E6680D77D321DA245F",
+        "lastLines": [
+          "SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.",
+          "SRV01_COLD_PREPARATION ms=13.796 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+          "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+        ]
+      },
+      {
+        "gate": "assembly-powered-support",
+        "exitCode": 0,
+        "sha256": "CC7E877B6C8BB1E568457601C115B289B4B53ABA7B00167AB286579B69961F40",
+        "lastLines": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion"
+        ]
+      },
+      {
+        "gate": "certified-continuation-regression",
+        "exitCode": 0,
+        "sha256": "72321F80DA447CA6777990F4607BF14E0575D951BB2B85DE7EC41B6F98E16C9A",
+        "lastLines": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "PUBLICATION_ALLOCATION_MATRIX PASS setup/preparation/success/recheck/commit/observation/stale/conflict/debt/capacity/ownership/replay"
+        ]
+      },
+      {
+        "gate": "powered-contact-presentation",
+        "exitCode": 0,
+        "sha256": "557AB4E54A6B1058FD19FFDCC2E7302F34F22C92DF1DB31D5279F3B69E7539ED",
+        "lastLines": [
+          "POWERED_CONTACT_VISIBLE_STATUS RUNNING - live dry contact | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=19500000",
+          "POWERED_CONTACT_VISIBLE_STATUS COMPLETED - final supported endpoint held | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=20000000",
+          "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+        ]
+      }
+    ],
+    "stage2": [
+      "POWERED_CONTACT_COORDINATES positionError=9.559997806718457E-07 velocityError=2.7120522716472806E-08",
+      "POWERED_CONTACT_INTERLEAVED positionError=1.1915037946566817E-07 velocityError=1.5918912064681076E-10",
+      "POWERED_CONTACT_THRUST nativeImpulseResidualMax=1.688568467805851E-05 Ns expected=600*dt samples=64",
+      "POWERED_CONTACT_MISSING_THRUST_CONTROL residual=9.999615233368175 Ns rejection=PASS canonicalUnchanged=True",
+      "POWERED_CONTACT_CLOSURE PASS prepared ownership/order; physical thrust; post-burn/dry numerical properties",
+      "POWERED_CONTACT_CHEAP PASS",
+      "POWERED_CONTACT_PHYSICAL peak=8.743492921081675E-05 final600Drift=1.5038193842160926E-07 height=7.124804200930868E-05 speed=5.875414892227578E-06 angular=2.263770778435268E-06 orientationRadians=8.846353931362544E-08 supported=600 minContacts=4 featureChanges=0 thrustResidualNs=2.8595232464567744E-05 fuel=28.4375 oxidizer=42.65625 mass=701.09375",
+      "POWERED_CONTACT_SCHEDULE fps=30 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=60 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=150 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=240 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=0 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_MOVING_FRAME PASS 1200 intervals",
+      "POWERED_CONTACT_MAPPER PASS six_native_bits=PASS",
+      "POWERED_CONTACT_CHEAP PASS full=16666 endpoint_exhaustion=33333 dry=50000 exact_resource=PASS joint_successor=PASS",
+      "POWERED_CONTACT_PHYSICS CenteredBaseline velocity=6.91431425604005E-07 angularRate=1.1189353443798017E-07 position=9.316369897761485E-10 orientation=2.0805657665328786E-09 normalImpulse=2.062171813310698E-07 tangentImpulse=3.8736956753385413E-07 twistImpulse=1.550963648536927E-23 supportMoment=3.8743019104003906E-07 sourcePenetration=0.00041419279405352505 penetration=0.0004141937264614537 sourceOrientation=2.16038214836841E-10",
+      "POWERED_CONTACT_PHYSICS LowThrust velocity=0.0006718294117314919 angularRate=0.00013889689901787117 position=1.1205903167334408E-05 orientation=2.315071525277855E-06 normalImpulse=0.005352758963572235 tangentImpulse=0.0005550683837027727 twistImpulse=1.3100635078708636E-17 supportMoment=0.0005550682672718225 sourcePenetration=0.00041419279405352505 penetration=0.00040420464988599747 sourceOrientation=2.16038214836841E-10",
+      "POWERED_CONTACT_PHYSICS SlidingBaseline velocity=9.425805467478799E-06 angularRate=0.000924616180660514 position=0.00017031681160073142 orientation=1.5409662362315645E-05 normalImpulse=8.002587121591631E-05 tangentImpulse=1.044863496893117E-05 twistImpulse=4.951679691278521E-12 supportMoment=0.0019119542869001005 sourcePenetration=0.00041419271260845214 penetration=0.0004297488675396588 sourceOrientation=6.127359968334131E-11",
+      "POWERED_CONTACT_PHYSICS NearUnloading velocity=0.0008246755515590297 angularRate=0.0008725112887900726 position=0.00017038024756332783 orientation=1.4541270451728926E-05 normalImpulse=0.0065541947329712524 tangentImpulse=0.0008193316231005769 twistImpulse=4.6733307328128415E-12 supportMoment=0.0014046873645654446 sourcePenetration=0.00041419271260845214 penetration=0.00041598175221368994 sourceOrientation=6.127359968334131E-11",
+      "POWERED_CONTACT_PHYSICS YawBaseline velocity=9.251363841142824E-06 angularRate=0.000924647751412714 position=0.00017031867424062202 orientation=0.0007618612707889043 normalImpulse=8.005494046026129E-05 tangentImpulse=1.0445322254467256E-05 twistImpulse=1.1198631955811056E-05 supportMoment=0.001911987148070031 sourcePenetration=0.00041419269054632224 penetration=0.00042975076742157725 sourceOrientation=1.80223203941821E-11",
+      "POWERED_CONTACT_PHYSICS OffCom velocity=0.005552701937765838 angularRate=0.004255174893994246 position=0.00011038638339334947 orientation=0.0005764221449875955 normalImpulse=0.044101357249882955 tangentImpulse=0.005514372482788661 twistImpulse=0.006163353641131908 supportMoment=0.006058892130930111 sourcePenetration=0.00041419269054632224 penetration=0.00035549858727113026 sourceOrientation=1.80223203941821E-11",
+      "POWERED_CONTACT_PHYSICS NearEnd velocity=0.0010855602029493719 angularRate=0.0008625937726538606 position=7.931171643697851E-05 orientation=1.4375915159901824E-05 normalImpulse=0.00862492675732418 tangentImpulse=0.0010781983868226241 twistImpulse=1.7309242580920703E-11 supportMoment=0.001264812336867099 sourcePenetration=0.00041419281725707524 penetration=0.00041180176419031156 sourceOrientation=2.3049161304349646E-10",
+      "POWERED_CONTACT_PHYSICS MidEvent velocity=0.0027269346493188204 angularRate=0.0008818111381079758 position=7.066689556758448E-05 orientation=1.4696172631075475E-05 normalImpulse=0.021660856974589082 tangentImpulse=0.002707790636932614 twistImpulse=5.640465958883789E-12 supportMoment=0.001038617735733368 sourcePenetration=0.00041419277091458984 penetration=0.0003853541176173092 sourceOrientation=9.979494456015854E-11",
+      "POWERED_CONTACT_PHYSICS TinyEvent velocity=9.46278831314307E-06 angularRate=0.0009246404827949511 position=0.00017031867424091102 orientation=0.0007618488398786422 normalImpulse=8.012389785783114E-05 tangentImpulse=1.0453512263373325E-05 twistImpulse=1.1193517640534223E-05 supportMoment=0.0019119679520154104 sourcePenetration=0.0004141927622216546 penetration=0.00042975054010985225 sourceOrientation=8.294488639083642E-11",
+      "POWERED_CONTACT_PHYSICS ZeroEvent velocity=9.46278831314307E-06 angularRate=0.0009246404827949511 position=0.0001703186742409145 orientation=0.0007618488398786422 normalImpulse=8.01238978576091E-05 tangentImpulse=1.0453512263346752E-05 twistImpulse=1.1193517640534223E-05 supportMoment=0.0019119679520154243 sourcePenetration=0.0004141927622216546 penetration=0.00042975054010985225 sourceOrientation=8.294488639083642E-11",
+      "POWERED_CONTACT_PHYSICS CenteredEndpoint velocity=0.0008009621396915888 angularRate=0.00016555186135884945 position=1.3363116707101388E-05 orientation=2.7592826101394845E-06 normalImpulse=0.006380313116807201 tangentImpulse=0.0006616539487169728 twistImpulse=1.4501204056993622E-17 supportMoment=0.0006616562772698704 sourcePenetration=0.0004141928244800752 penetration=0.00040228104760986483 sourceOrientation=2.016308342847591E-10",
+      "POWERED_CONTACT_WORK OffCom applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.1048833757758171 twist=-0.012745794725816662 tangentError=0.004177657978519753 twistError=0.0006884086400016885",
+      "POWERED_CONTACT_WORK YawBaseline applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.16015435172999565 twist=-0.013582194484826894 tangentError=0.001671110138672799 twistError=3.2028185372595663E-07",
+      "POWERED_CONTACT_REFUSAL_CLOSEOUT PASS stale_command_after_step wrong_interval_before_input no_extra_debit_or_step",
+      "POWERED_CONTACT_AUTHORITY PASS precommit_nonmutation pending_retry joint_lease_once source_resource_world_guards terminal_physical terminal_credit export_failure property_only",
+      "POWERED_CONTACT_LIFECYCLE PASS fixtures=11 frontiers=3 exact_record_native_identity=PASS projection=PASS refusal_cleanup=PASS retry=PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+      "POWERED_CONTACT_MOVING CenteredEndpoint intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+      "POWERED_CONTACT_MOVING OffCom intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+      "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO"
+    ],
+    "stage3": [
+      "DEPARTURE_PREPARE status=Prepared",
+      "DEPARTURE_FIRST_FLIGHT tick=32291 heightO=0.002157609515294083 vy=-0.03929292264178322 oracleError=3.251288127614771E-13 nativeFrontier=1",
+      "DEPARTURE_CLEARANCE_HOLD frontier=3 tick=47916 debt=15625",
+      "DEPARTURE_FAILURES PASS authority/consumer/receipt/refusal/retry/terminal/capacity/save boundaries",
+      "DEPARTURE_SCHEDULES PASS 6 equal-time host partitions / same frontier bits / moving frame",
+      "DEPARTURE_COUNTER handoff before=31047728 after=31047728",
+      "DEPARTURE_COUNTER first-flight before=31048048 after=31048048",
+      "DEPARTURE_ANGULAR speed=0.2 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.000196924355350651",
+      "DEPARTURE_ANGULAR speed=0.2 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.00019290984035986422",
+      "DEPARTURE_ANGULAR speed=0.2 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_ANGULAR speed=0.25 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_FRAME speed=0.2 frameX=0.05 clearanceError=0 positionError=2.168404344971009E-19 velocityError=6.938893903907228E-18",
+      "DEPARTURE_PROOFS PASS independent position / angular limits / moving frame / native abort"
+    ]
+  },
+  "release": {
+    "registeredGroups": 80,
+    "passedGroups": 80,
+    "missing": [],
+    "simulationSha256": "9EC254A5BB41792E8FB608024D862CE76919774729FC8EF179EAB62135DA8548",
+    "fullSolutionBuild": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "focusedWitnesses": [
+      "DEVELOPMENT_CHEAP {\"profile\":\"novacore.SRV01.development-propulsion/1\",\"profileDigest\":\"5c763ba34a29732f6c166d8feb53fb2605568202f27c0791cc06d5152083a4f7\",\"configuration\":\"c3c84f9874c8d308a43de7167a732721240e3828656c7c2e836814e32efca653\",\"dryMass\":630,\"wetMass\":2018900,\"fuelKg\":807308,\"oxidizerKg\":1210962,\"thrustN\":29708160,\"totalFlowKgS\":9670.625,\"tw\":1.5000023478434603,\"isp\":313.25682062681955,\"deltaV\":24798.239377037527,\"burnSeconds\":208.7010922251664,\"maxVelocityError\":3.1019631308026874E-13,\"maxPositionError\":6.471384712825046E-11,\"finalVelocity\":0.6136787680578174,\"finalPosition\":0.03834344385779613}",
+      "DEVELOPMENT_DETERMINISM PASS five host partitions / same exact stores and endpoint bits",
+      "ORDINARY_ALLOCATION gate=development-powered bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=development-exhaustion bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=development-dry bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    ],
+    "regressions": [
+      {
+        "gate": "NovaCore.ReferenceFrames.Tests",
+        "exitCode": 0,
+        "sha256": "BD8C1A632FD6E07EC42CFAB4DF060E493885C8DD4F15E254053E381FEBDD54CB",
+        "lastLines": [
+          "PASS surface anchor authority",
+          "PASS validation",
+          "Benchmark: 10,000 root resolutions in 3.381 ms; managed allocations=0 bytes; final=4000000000009.999"
+        ]
+      },
+      {
+        "gate": "NovaCore.Precision.Tests",
+        "exitCode": 0,
+        "sha256": "935DDB7068F523F5BFE7A96FEF322F00017683FFDFB5DC357915AEC193965552",
+        "lastLines": [
+          "log options: parsing and verbose-input compatibility passed",
+          "",
+          "PASS"
+        ]
+      },
+      {
+        "gate": "NovaCore.BepuDependency.Tests",
+        "exitCode": 0,
+        "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+        "lastLines": [
+          "    }",
+          "  ]",
+          "}"
+        ]
+      },
+      {
+        "gate": "launcher-correct-layout",
+        "exitCode": 0,
+        "sha256": "C53FE4D88CACE22DD169941F7926AA88F1EC957356D9B765B94C42E6E308AA3A",
+        "lastLines": [
+          "PASS diagnostics arguments",
+          "PASS existing production scenarios",
+          "NovaCore launcher tests passed: 18"
+        ]
+      },
+      {
+        "gate": "assembly-presentation",
+        "exitCode": 0,
+        "sha256": "BBC1CD2E0AC65482E38698E8B62659881FF23AEA5BB5E51CD926B90A79189F55",
+        "lastLines": [
+          "SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.",
+          "SRV01_COLD_PREPARATION ms=9.6952 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+          "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+        ]
+      },
+      {
+        "gate": "assembly-powered-support",
+        "exitCode": 0,
+        "sha256": "B55751F8FDB40AD6EBF8396E564AE0F9A35F6188F6FAC776835764D8C87A00CA",
+        "lastLines": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion"
+        ]
+      },
+      {
+        "gate": "certified-continuation-regression",
+        "exitCode": 0,
+        "sha256": "6F2ADD8EBCC2BEBFA9B46C65C6A565343097ED9EAF6DF489AB584C2D1508EDD3",
+        "lastLines": [
+          "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+          "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+          "PUBLICATION_ALLOCATION_MATRIX PASS setup/preparation/success/recheck/commit/observation/stale/conflict/debt/capacity/ownership/replay"
+        ]
+      },
+      {
+        "gate": "powered-contact-presentation",
+        "exitCode": 0,
+        "sha256": "761F049E31CF6F7AACEC483F6487DBFEF33452F9FB82C2C101DC34051D0F2B94",
+        "lastLines": [
+          "POWERED_CONTACT_VISIBLE_STATUS RUNNING - live dry contact | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=19500000",
+          "POWERED_CONTACT_VISIBLE_STATUS COMPLETED - final supported endpoint held | actual=EnabledNoFeed throttle=0.0% fuel=0.000000 mg tick=20000000",
+          "POWERED_CONTACT_PRESENTATION PASS ready/inspection/powered/exhaustion/canonical_geometry/camera/bounded_backlog/completion"
+        ]
+      }
+    ],
+    "stage2": [
+      "POWERED_CONTACT_COORDINATES positionError=9.559997806718457E-07 velocityError=2.7120522716472806E-08",
+      "POWERED_CONTACT_INTERLEAVED positionError=1.1915037946566817E-07 velocityError=1.5918912064681076E-10",
+      "POWERED_CONTACT_THRUST nativeImpulseResidualMax=1.688568467805851E-05 Ns expected=600*dt samples=64",
+      "POWERED_CONTACT_MISSING_THRUST_CONTROL residual=9.999615233368175 Ns rejection=PASS canonicalUnchanged=True",
+      "POWERED_CONTACT_CLOSURE PASS prepared ownership/order; physical thrust; post-burn/dry numerical properties",
+      "POWERED_CONTACT_CHEAP PASS",
+      "POWERED_CONTACT_PHYSICAL peak=8.743492921081675E-05 final600Drift=1.5038193842160926E-07 height=7.124804200930868E-05 speed=5.875414892227578E-06 angular=2.263770778435268E-06 orientationRadians=8.846353931362544E-08 supported=600 minContacts=4 featureChanges=0 thrustResidualNs=2.8595232464567744E-05 fuel=28.4375 oxidizer=42.65625 mass=701.09375",
+      "POWERED_CONTACT_SCHEDULE fps=30 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=60 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=150 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=240 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_SCHEDULE fps=0 frontiers=1200 exactBits=PASS",
+      "POWERED_CONTACT_MOVING_FRAME PASS 1200 intervals",
+      "POWERED_CONTACT_MAPPER PASS six_native_bits=PASS",
+      "POWERED_CONTACT_CHEAP PASS full=16666 endpoint_exhaustion=33333 dry=50000 exact_resource=PASS joint_successor=PASS",
+      "POWERED_CONTACT_PHYSICS CenteredBaseline velocity=6.91431425604005E-07 angularRate=1.1189353443798017E-07 position=9.316369897761485E-10 orientation=2.0805657665328786E-09 normalImpulse=2.062171813310698E-07 tangentImpulse=3.8736956753385413E-07 twistImpulse=1.550963648536927E-23 supportMoment=3.8743019104003906E-07 sourcePenetration=0.00041419279405352505 penetration=0.0004141937264614537 sourceOrientation=2.16038214836841E-10",
+      "POWERED_CONTACT_PHYSICS LowThrust velocity=0.0006718294117314919 angularRate=0.00013889689901787117 position=1.1205903167334408E-05 orientation=2.315071525277855E-06 normalImpulse=0.005352758963572235 tangentImpulse=0.0005550683837027727 twistImpulse=1.3100635078708636E-17 supportMoment=0.0005550682672718225 sourcePenetration=0.00041419279405352505 penetration=0.00040420464988599747 sourceOrientation=2.16038214836841E-10",
+      "POWERED_CONTACT_PHYSICS SlidingBaseline velocity=9.425805467478799E-06 angularRate=0.000924616180660514 position=0.00017031681160073142 orientation=1.5409662362315645E-05 normalImpulse=8.002587121591631E-05 tangentImpulse=1.044863496893117E-05 twistImpulse=4.951679691278521E-12 supportMoment=0.0019119542869001005 sourcePenetration=0.00041419271260845214 penetration=0.0004297488675396588 sourceOrientation=6.127359968334131E-11",
+      "POWERED_CONTACT_PHYSICS NearUnloading velocity=0.0008246755515590297 angularRate=0.0008725112887900726 position=0.00017038024756332783 orientation=1.4541270451728926E-05 normalImpulse=0.0065541947329712524 tangentImpulse=0.0008193316231005769 twistImpulse=4.6733307328128415E-12 supportMoment=0.0014046873645654446 sourcePenetration=0.00041419271260845214 penetration=0.00041598175221368994 sourceOrientation=6.127359968334131E-11",
+      "POWERED_CONTACT_PHYSICS YawBaseline velocity=9.251363841142824E-06 angularRate=0.000924647751412714 position=0.00017031867424062202 orientation=0.0007618612707889043 normalImpulse=8.005494046026129E-05 tangentImpulse=1.0445322254467256E-05 twistImpulse=1.1198631955811056E-05 supportMoment=0.001911987148070031 sourcePenetration=0.00041419269054632224 penetration=0.00042975076742157725 sourceOrientation=1.80223203941821E-11",
+      "POWERED_CONTACT_PHYSICS OffCom velocity=0.005552701937765838 angularRate=0.004255174893994246 position=0.00011038638339334947 orientation=0.0005764221449875955 normalImpulse=0.044101357249882955 tangentImpulse=0.005514372482788661 twistImpulse=0.006163353641131908 supportMoment=0.006058892130930111 sourcePenetration=0.00041419269054632224 penetration=0.00035549858727113026 sourceOrientation=1.80223203941821E-11",
+      "POWERED_CONTACT_PHYSICS NearEnd velocity=0.0010855602029493719 angularRate=0.0008625937726538606 position=7.931171643697851E-05 orientation=1.4375915159901824E-05 normalImpulse=0.00862492675732418 tangentImpulse=0.0010781983868226241 twistImpulse=1.7309242580920703E-11 supportMoment=0.001264812336867099 sourcePenetration=0.00041419281725707524 penetration=0.00041180176419031156 sourceOrientation=2.3049161304349646E-10",
+      "POWERED_CONTACT_PHYSICS MidEvent velocity=0.0027269346493188204 angularRate=0.0008818111381079758 position=7.066689556758448E-05 orientation=1.4696172631075475E-05 normalImpulse=0.021660856974589082 tangentImpulse=0.002707790636932614 twistImpulse=5.640465958883789E-12 supportMoment=0.001038617735733368 sourcePenetration=0.00041419277091458984 penetration=0.0003853541176173092 sourceOrientation=9.979494456015854E-11",
+      "POWERED_CONTACT_PHYSICS TinyEvent velocity=9.46278831314307E-06 angularRate=0.0009246404827949511 position=0.00017031867424091102 orientation=0.0007618488398786422 normalImpulse=8.012389785783114E-05 tangentImpulse=1.0453512263373325E-05 twistImpulse=1.1193517640534223E-05 supportMoment=0.0019119679520154104 sourcePenetration=0.0004141927622216546 penetration=0.00042975054010985225 sourceOrientation=8.294488639083642E-11",
+      "POWERED_CONTACT_PHYSICS ZeroEvent velocity=9.46278831314307E-06 angularRate=0.0009246404827949511 position=0.0001703186742409145 orientation=0.0007618488398786422 normalImpulse=8.01238978576091E-05 tangentImpulse=1.0453512263346752E-05 twistImpulse=1.1193517640534223E-05 supportMoment=0.0019119679520154243 sourcePenetration=0.0004141927622216546 penetration=0.00042975054010985225 sourceOrientation=8.294488639083642E-11",
+      "POWERED_CONTACT_PHYSICS CenteredEndpoint velocity=0.0008009621396915888 angularRate=0.00016555186135884945 position=1.3363116707101388E-05 orientation=2.7592826101394845E-06 normalImpulse=0.006380313116807201 tangentImpulse=0.0006616539487169728 twistImpulse=1.4501204056993622E-17 supportMoment=0.0006616562772698704 sourcePenetration=0.0004141928244800752 penetration=0.00040228104760986483 sourceOrientation=2.016308342847591E-10",
+      "POWERED_CONTACT_WORK OffCom applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.1048833757758171 twist=-0.012745794725816662 tangentError=0.004177657978519753 twistError=0.0006884086400016885",
+      "POWERED_CONTACT_WORK YawBaseline applications=54 edges=108 exactTelescopes=PASS nativeBits=PASS tangent=-0.16015435172999565 twist=-0.013582194484826894 tangentError=0.001671110138672799 twistError=3.2028185372595663E-07",
+      "POWERED_CONTACT_REFUSAL_CLOSEOUT PASS stale_command_after_step wrong_interval_before_input no_extra_debit_or_step",
+      "POWERED_CONTACT_AUTHORITY PASS precommit_nonmutation pending_retry joint_lease_once source_resource_world_guards terminal_physical terminal_credit export_failure property_only",
+      "POWERED_CONTACT_LIFECYCLE PASS fixtures=11 frontiers=3 exact_record_native_identity=PASS projection=PASS refusal_cleanup=PASS retry=PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE CenteredEndpoint hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+      "POWERED_CONTACT_MOVING CenteredEndpoint intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=30 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=60 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=150 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=240 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=0 PASS",
+      "POWERED_CONTACT_SEQUENCE OffCom hz=-1 endpoints=1200 ticks=20000000 short=400 long=800 support=600 debt=0 budgetHits=200 PASS",
+      "POWERED_CONTACT_MOVING OffCom intervals=1200 original_frame_epoch=PASS nativeBits=PASS",
+      "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO"
+    ],
+    "stage3": [
+      "DEPARTURE_PREPARE status=Prepared",
+      "DEPARTURE_FIRST_FLIGHT tick=32291 heightO=0.002157609515294083 vy=-0.03929292264178322 oracleError=3.251288127614771E-13 nativeFrontier=1",
+      "DEPARTURE_CLEARANCE_HOLD frontier=3 tick=47916 debt=15625",
+      "DEPARTURE_FAILURES PASS authority/consumer/receipt/refusal/retry/terminal/capacity/save boundaries",
+      "DEPARTURE_SCHEDULES PASS 6 equal-time host partitions / same frontier bits / moving frame",
+      "DEPARTURE_COUNTER handoff before=31149856 after=31149856",
+      "DEPARTURE_COUNTER first-flight before=31150176 after=31150176",
+      "DEPARTURE_ANGULAR speed=0.2 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.000196924355350651",
+      "DEPARTURE_ANGULAR speed=0.2 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.00019290984035986422",
+      "DEPARTURE_ANGULAR speed=0.2 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_ANGULAR speed=0.25 omega=5E-05 cornerVerticalSpeed=-1.8384776310850244E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=9.9999E-05 cornerVerticalSpeed=-3.676918492617427E-05 clear=True lower=0.0015559420730910211",
+      "DEPARTURE_ANGULAR speed=0.25 omega=0.000100001 cornerVerticalSpeed=-3.6769920317226697E-05 clear=False lower=-\u221e",
+      "DEPARTURE_ANGULAR_COVERAGE unrotated=2.7176450234867657E-06 rotating=-5.3114447607279116E-06",
+      "DEPARTURE_FRAME speed=0.2 frameX=0.05 clearanceError=0 positionError=2.168404344971009E-19 velocityError=6.938893903907228E-18",
+      "DEPARTURE_PROOFS PASS independent position / angular limits / moving frame / native abort"
+    ]
+  },
+  "executionNotes": [
+    "Initial 13.197 km/s sizing was rejected by independent mission review; earlier software passes do not qualify the final profile. Initial-sizing-rejected.md and initial-profile-rejected.json retain its inputs.",
+    "Full Graphics default runner was invoked inadvertently, then interrupted before completion. It is not counted as qualification. Required focused presentation routes passed separately; no renderer change or optimization.",
+    "Initial Launcher invocation used the deeper artifacts path, violating its existing five-parent repository-root assumption (looked for build/samples). The same built output was copied to the documented five-parent layout; both configurations passed without source changes."
+  ]
+}

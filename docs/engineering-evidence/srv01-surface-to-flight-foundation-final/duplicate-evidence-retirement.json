@@ -1,0 +1,16 @@
+[
+  {
+    "dispose": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/display-gap-closure/cleanup.json",
+    "keep": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage2/closure/cleanup.json",
+    "bytes": 2810,
+    "sha256": "cf6d778de6f7f290eee212db8d53a0f3377fbcf6a2ef0a29062fa5f5de559a39",
+    "reason": "Byte-identical operational inventory/ref snapshot; useful bytes remain at keep path. No physical result removed."
+  },
+  {
+    "dispose": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/florida-presentation-closure/current-tag-refs.txt",
+    "keep": "docs/engineering-evidence/srv01-surface-to-flight-gauntlet/stage5/simplified-slab/tag-refs-before.txt",
+    "bytes": 5487,
+    "sha256": "dd070f10374f656e3c6eb7d27ef764778733e529bdd0ea164d370aefc440dfd8",
+    "reason": "Byte-identical operational inventory/ref snapshot; useful bytes remain at keep path. No physical result removed."
+  }
+]

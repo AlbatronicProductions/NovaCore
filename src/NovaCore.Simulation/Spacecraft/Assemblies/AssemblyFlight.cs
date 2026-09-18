@@ -10,6 +10,7 @@ namespace NovaCore.Simulation.Spacecraft.Assemblies;
 internal readonly record struct AssemblyCommand(bool MainOn,string? Pair,double GimbalTargetY,double GimbalTargetZ,long Ticks);
 internal readonly record struct CompiledAssemblyCommand(AssemblyCommand Request,ushort Jets,PropellantInteger ExtentRate);
 internal enum AssemblyFeedState { NoDemand,Available,Exhausted }
+internal enum AssemblyPhysicalConsumer { FreeFlight, SupportedContact }
 internal readonly record struct AssemblyRealization(bool MainOn,ushort Jets,AssemblyFeedState Feed);
 internal readonly record struct AssemblyRuntimeState(SimulationInstant Epoch,AssemblyStores Stores,AssemblyMass Mass,
     AssemblyMotion Motion,AssemblyGimbal Gimbal,AssemblyCommand AppliedCommand,AssemblyRealization Actual,
@@ -27,16 +28,27 @@ internal sealed class AssemblyLaunch
     internal ImmutableArray<CompiledAssemblyCommand> Plan {get;}
     internal AssemblyRuntimeState Initial {get;}
     internal SimulationInstant End {get;}
+    internal AssemblyPhysicalConsumer Consumer {get;}
+    internal AssemblyContactProfile? ContactProfile {get;}
+    internal bool PoweredSupport {get; private init;}
+    internal AssemblyDepartureProfile? Departure {get; private init;}
+    internal Double3 GravityRoot {get; private init;}
+    internal AssemblyFloridaSite? Site {get; private init;}
     internal AssemblyLaunch(CompiledAssemblyDesign design,SpacecraftDefinition spacecraft,string launchId,
         AssemblyMotion initial,AssemblyGimbal gimbal,ReadOnlySpan<AssemblyCommand> commands,SimulationInstant origin=default)
+        : this(design,spacecraft,launchId,initial,gimbal,commands,origin,null) { }
+    private AssemblyLaunch(CompiledAssemblyDesign design,SpacecraftDefinition spacecraft,string launchId,
+        AssemblyMotion initial,AssemblyGimbal gimbal,ReadOnlySpan<AssemblyCommand> commands,SimulationInstant origin,AssemblyContactProfile? contact,bool development=false)
     {
+        if((design.Development is not null)!=development)throw new InvalidDataException("Explicit development launch boundary required.");
         if(!spacecraft.Id.IsValid||spacecraft.CarrierFrame.Value==0||spacecraft.BodyFrame.Value==0||spacecraft.BodyFrame==spacecraft.CarrierFrame||
             string.IsNullOrWhiteSpace(spacecraft.DiagnosticName)||string.IsNullOrWhiteSpace(launchId)||launchId.Length>96||
-            launchId.Any(c=>!char.IsAsciiLetterOrDigit(c)&&c is not '_' and not '-')||commands.Length is <1 or >128)
+            launchId.Any(c=>!char.IsAsciiLetterOrDigit(c)&&c is not '_' and not '-')||commands.Length<1||commands.Length>(contact is null?128:1200))
             throw new InvalidDataException("Invalid assembly launch identity/capacity.");
         if(!AssemblyDynamics.InEnvelope(initial)||initial.PositionO!=Double3.Zero||initial.VelocityO.LengthSquared>.25*.25||initial.AngularVelocityBody.LengthSquared>.05*.05)
             throw new InvalidDataException("Initial motion exceeds the qualified envelope.");
         ValidateGimbal(gimbal);
+        ContactProfile=contact;Consumer=contact is null?AssemblyPhysicalConsumer.FreeFlight:AssemblyPhysicalConsumer.SupportedContact;
         Design=design;Spacecraft=spacecraft;LaunchId=launchId;
         PartKeys=design.Parts.Select(p=>RuntimeKey("part",launchId,p.Instance.Id)).ToImmutableArray();
         CapabilityKeys=design.Parts.Where(p=>p.Definition.Propulsion is not null).Select(p=>RuntimeKey("capability",launchId,p.Instance.Id,p.Definition.Propulsion!.Id))
@@ -46,8 +58,8 @@ internal sealed class AssemblyLaunch
         var compiled=ImmutableArray.CreateBuilder<CompiledAssemblyCommand>(commands.Length);long total=0;
         foreach(var command in commands)
         {
-            if(command.Ticks is <1 or >15625||!double.IsFinite(command.GimbalTargetY)||!double.IsFinite(command.GimbalTargetZ))throw new InvalidDataException("Unsupported scheduled command.");
-            total=checked(total+command.Ticks);if(total>2_000_000)throw new InvalidDataException("Episode exceeds qualified horizon.");
+            if(command.Ticks<1||command.Ticks>(contact is null?15625:16667)||!double.IsFinite(command.GimbalTargetY)||!double.IsFinite(command.GimbalTargetZ))throw new InvalidDataException("Unsupported scheduled command.");
+            total=checked(total+command.Ticks);if(total>(contact is null?2_000_000:20_000_000))throw new InvalidDataException("Episode exceeds qualified horizon.");
             ushort mask=0;var rate=default(PropellantInteger);
             if(command.MainOn)rate=AssemblyResources.Rate(design.Main.Definition.Propulsion!.ExtentRateKgS);
             if(command.Pair is {} name)
@@ -63,6 +75,52 @@ internal sealed class AssemblyLaunch
         var stores=new AssemblyStores(AssemblyResources.Mass(design.Data.Design.InitialFuelKg),AssemblyResources.Mass(design.Data.Design.InitialOxidizerKg));
         AssemblyResources.Validate(design,stores);
         Initial=new(origin,stores,ObserveMass(design,stores),initial,gimbal,default,default,0,0,0);
+    }
+    // Closed cold profile; ordinary command/resource integration remains bounded to 15,625 ticks.
+    internal static AssemblyLaunch CreateDevelopmentQualification(CompiledAssemblyDesign design,SpacecraftDefinition spacecraft,string launchId,
+        ReadOnlySpan<AssemblyCommand> commands,SimulationInstant origin=default)
+    {
+        var profile=design.Development??throw new InvalidDataException("Explicit development configuration required.");
+        profile.ValidateLaunch(design,commands);
+        return new(design,spacecraft,launchId,new(default,default,AssemblyContactProfile.Upright,default),default,commands,origin,null,true)
+            {GravityRoot=AssemblyDepartureProfile.Gravity};
+    }
+
+    internal static AssemblyLaunch CreateFloridaSupported(CompiledAssemblyDesign design, SpacecraftDefinition spacecraft, string launchId, AssemblyFloridaSite site)
+    {
+        if(!site.Applicable||spacecraft.CarrierFrame==site.EarthFrame||spacecraft.BodyFrame==site.EarthFrame)throw new InvalidDataException("Site/frame identity refused.");
+        var profile=AssemblyContactProfile.Create(design);
+        var commands=new AssemblyCommand[1200];
+        for(var n=1;n<=commands.Length;n++)commands[n-1]=new(false,null,0,0,(long)n*1_000_000/60-(long)(n-1)*1_000_000/60);
+        return new(design,spacecraft,launchId,new(default,default,AssemblyContactProfile.Upright,default),default,commands,site.Start,profile){Site=site};
+    }
+
+    // Closed cold profile; ordinary command/resource integration remains bounded to 15,625 ticks.
+    internal static AssemblyLaunch CreateSupported(AssemblyContactProfile profile,SpacecraftDefinition spacecraft,string launchId,
+        Double3 frameVelocity=default,SimulationInstant origin=default)
+    {
+        var commands=new AssemblyCommand[1200];
+        for(var n=1;n<=commands.Length;n++)commands[n-1]=new(false,null,0,0,(long)n*1_000_000/60-(long)(n-1)*1_000_000/60);
+        return new(profile.Design,spacecraft,launchId,new(default,frameVelocity,AssemblyContactProfile.Upright,default),default,commands,origin,profile);
+    }
+    // Bounded stock-main case: same physical profile, fixed gimbal, no RCS or runtime editing.
+    internal static AssemblyLaunch CreatePoweredSupported(AssemblyContactProfile profile,SpacecraftDefinition spacecraft,string launchId,
+        Double3 frameVelocity=default,SimulationInstant origin=default)
+    {
+        var commands=new AssemblyCommand[1200];
+        for(var n=1;n<=commands.Length;n++)commands[n-1]=new(true,null,0,0,(long)n*1_000_000/60-(long)(n-1)*1_000_000/60);
+        return new(profile.Design,spacecraft,launchId,new(default,frameVelocity,AssemblyContactProfile.Upright,default),default,commands,origin,profile){PoweredSupport=true};
+    }
+    // Prescribed separation qualification, not a new spacecraft/engine or powered liftoff.
+    // Contact owns the first ordinary interval; short free-flight intervals are distinct.
+    internal static AssemblyLaunch CreateDepartureQualification(AssemblyContactProfile profile,SpacecraftDefinition spacecraft,string launchId,
+        Double3 frameVelocity=default,double separatingSpeed=.25,SimulationInstant origin=default)
+    {
+        if(!frameVelocity.IsFinite||separatingSpeed<.2||separatingSpeed>.25||!double.IsFinite(separatingSpeed))
+            throw new InvalidDataException("Unsupported prescribed separation fixture.");
+        AssemblyCommand[] commands=[new(true,null,0,0,16666),new(true,null,0,0,15625),new(true,null,0,0,15625),new(true,null,0,0,15625)];
+        return new(profile.Design,spacecraft,launchId,new(default,frameVelocity+new Double3(0,separatingSpeed,0),AssemblyContactProfile.Upright,default),
+            default,commands,origin,profile){PoweredSupport=true,Departure=new(profile,frameVelocity)};
     }
     // Length-prefixed components preserve tuple identity even when authored IDs contain '/'.
     internal static string RuntimeKey(string kind,params string[] components)=>kind+":"+string.Concat(components.Select(x=>x.Length.ToString(System.Globalization.CultureInfo.InvariantCulture)+":"+x));
@@ -112,7 +170,7 @@ internal enum AssemblyFlightStatus
 {
     Invalid,Ready,Prepared,Published,AcceptedCredit,NoWork,AwaitingDebt,BudgetExhausted,Completed,
     InvalidAuthority,WrongOwnerThread,Reentrant,StaleSource,InvalidInput,InvalidSequence,OutstandingProposal,
-    InvalidProposal,PendingEvent,HistoryCapacity,Overflow,Invalidated,PreparationRefused,CanonicalCommittedPrivateInvalidated
+    InvalidProposal,PendingEvent,HistoryCapacity,Overflow,Invalidated,PreparationRefused,CanonicalCommittedPrivateInvalidated,OutsideContactDomain,ClearanceExpired
 }
 internal sealed class AssemblyFlightAuthority
 {
@@ -127,16 +185,19 @@ internal readonly struct AssemblyFlightProposal(long generation,object? seal=nul
 }
 internal readonly record struct AssemblyFlightRecord(int Index,AssemblyCommand Command,AssemblyGimbal HeldGimbal,
     AssemblyWrench Wrench,PropellantDuration Powered,PropellantClassification Classification,AssemblyRuntimeState Successor,
-    StateRevision BeforeRevision,StateRevision StateRevision,TimelineRevision TimelineRevision);
+    StateRevision BeforeRevision,StateRevision StateRevision,TimelineRevision TimelineRevision,
+    [property:System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] string? ContactProfile=null,
+    [property:System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] AssemblyPhysicalConsumer? NextConsumer=null);
 internal readonly record struct AssemblyFlightObservation(AssemblyRuntimeState State,StateRevision StateRevision,
-    TimelineRevision TimelineRevision,ContinuationClockState Clock,long HostSequence,int HistoryCount,bool PrivateInvalidated);
+    TimelineRevision TimelineRevision,ContinuationClockState Clock,long HostSequence,int HistoryCount,bool PrivateInvalidated,
+    AssemblyPhysicalConsumer Consumer=AssemblyPhysicalConsumer.FreeFlight);
 internal readonly record struct AssemblyFlightResult(AssemblyFlightStatus Status,int PublishedCount=0);
 internal readonly record struct AssemblyHostCredit(long HostTicks,int Frontier);
 
 /// <summary>Pure preparation. No canonical storage, clock, history or spending lease.</summary>
 internal static class AssemblyFlightPreparation
 {
-    internal static AssemblyFlightRecord Evaluate(AssemblyLaunch launch,in AssemblyRuntimeState source,StateRevision revision,TimelineRevision timeline)
+    internal static AssemblyFlightRecord Evaluate(AssemblyLaunch launch,in AssemblyRuntimeState source,StateRevision revision,TimelineRevision timeline,Double3 gravityRoot=default)
     {
         var command=launch.Plan[source.Frontier];var d=launch.Design;var request=command.Request;
         var nextGimbal=AssemblyActuation.Next(d,source.Gimbal,request.GimbalTargetY,request.GimbalTargetZ,request.Ticks);
@@ -145,7 +206,7 @@ internal static class AssemblyFlightPreparation
         for(var i=0;i<d.Jets.Length;i++)if((command.Jets&(1<<i))!=0)
         {var w=AssemblyActuation.Jet(d.Jets[i]);f+=w.Force;t+=w.MomentAtOrigin;}
         var used=AssemblyResources.Calculate(d,source.Stores,command.ExtentRate,request.Ticks);var wrench=new AssemblyWrench(f,t);
-        var motion=AssemblyDynamics.Evaluate(d,source.Motion,used,wrench);var available=!used.After.Fuel.IsZero;
+        var motion=AssemblyDynamics.Evaluate(d,source.Motion,used,wrench,gravityRoot);var available=!used.After.Fuel.IsZero;
         var actual=new AssemblyRealization(available&&request.MainOn,available?command.Jets:(ushort)0,
             command.ExtentRate.IsZero?AssemblyFeedState.NoDemand:available?AssemblyFeedState.Available:AssemblyFeedState.Exhausted);
         var successor=new AssemblyRuntimeState(new(checked(source.Epoch.Ticks+request.Ticks)),used.After,AssemblyLaunch.ObserveMass(d,used.After),
