@@ -1,0 +1,22 @@
+[
+  {
+    "sha256": "23EB41FDB67F927434063768D96DD2574C4D53D2B3C19CE50F06C04E9E85220F",
+    "path": "build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Triangle.exe"
+  },
+  {
+    "sha256": "F3606D47D127EB910EBE4178869FA634A729B7124F7ACA4220EDE13BDA1D3FDE",
+    "path": "build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Triangle.dll"
+  },
+  {
+    "sha256": "9FAEAEADD1EAABAFEB63C0F8FA6B1A2C21A4F39C1D2EB498DF22463CBD65572C",
+    "path": "build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Native.dll"
+  },
+  {
+    "sha256": "8A91DE0049C04124066419EE74170EE7B9C352D2B0D991D48C5593AE5B1901B1",
+    "path": "build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Simulation.dll"
+  },
+  {
+    "sha256": "F9D4C835E76E74FFA7717E9E018C4BD0CC8AA0D054C151E56051A83BF6D7FFC9",
+    "path": "build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Interop.dll"
+  }
+]

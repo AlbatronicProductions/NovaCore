@@ -1,0 +1,38 @@
+[
+  {
+    "sha256": "B77555E792F39EF14AA33E3BB8D95881344157A5A62A4246A9EBF533BF6FDAC6",
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyPilotAllocation.cs"
+  },
+  {
+    "sha256": "44728F92B29FCC31C29EC0CAB3FA9C2C20D8ED72E468556DBAB82F9189BDA8CE",
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyControl.cs"
+  },
+  {
+    "sha256": "E13DCEDD5701727E3438BA61E145FE2E2B9DB4AF61E9011C574542277F65DAE3",
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs"
+  },
+  {
+    "sha256": "EC2A8D06F87EA34720FF00D688BEA725A76797C9156F9CD4AECE4B6F54CA479C",
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs"
+  },
+  {
+    "sha256": "1BF2E4E5A19D30ADA4AD88888E841742AFC6D3D35F79CAF00AD3E3D3020AF57F",
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyControl.cs"
+  },
+  {
+    "sha256": "9071D7F9AD1FBE879101FD865EAC7721CBB78620BE3674E7E5C39C731589A347",
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs"
+  },
+  {
+    "sha256": "C514814C8C07CD00DBE5340FD2D1EABAC29C60B814BD1964A24EE277496A63E7",
+    "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs"
+  },
+  {
+    "sha256": "B66E0BB3AB28C174F86A79B8E048BBB26C023BC13EACF92B3B13588B38C2156A",
+    "path": "tests/NovaCore.Simulation.Tests/AssemblyPilotAllocationTests.cs"
+  },
+  {
+    "sha256": "3FFBCB0D09C0224BCB007EE2941590C873EF17CC0EF284D9E73454124ADFCE9D",
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs"
+  }
+]

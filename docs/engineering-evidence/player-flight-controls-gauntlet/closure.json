@@ -1,0 +1,393 @@
+{
+  "capturedUtc": "2026-09-18T22:54:19.627461+00:00",
+  "judgment": "ACCEPTED UNBANKED - ready for Project Control banking consideration - STOP FOR PROJECT CONTROL",
+  "stages": [
+    "PASS-PROMOTE",
+    "PASS-PROMOTE",
+    "PASS-PROMOTE",
+    "PASS-PROMOTE",
+    "PASS-PROMOTE",
+    "ENGINEERING-PASS"
+  ],
+  "manualAcceptance": "PASS - reported by Project Control",
+  "finalGates": 58,
+  "integratedChecksPerConfiguration": 3007,
+  "nativeRecoveryEpisodes": 17,
+  "nativeIntegratedEpisodes": 5,
+  "review": "Independent Stage5 22 attacks and Stage6 24 attacks PASS",
+  "deploymentHashes": 88,
+  "priorUntrackedPreserved": 55,
+  "indexEmpty": true,
+  "diffCheck": "PASS",
+  "publicBankUnchanged": true,
+  "productionRecoveryCorrection": "NONE",
+  "stage6ProductionCorrection": "NONE",
+  "milestone": "NOT ASSIGNED",
+  "bankingAuthorized": false,
+  "readyForBankingConsideration": true,
+  "manualAcceptanceEvidence": "manual-acceptance.json",
+  "closureProductionChanges": "NONE",
+  "evidenceBudgetBytes": 524288,
+  "files": [
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/build-candidate.ps1",
+      "sha256": "71F77A1AE594DDD0F5108D5A84CA893E692B8B134D6DA602D68865784BE9BBD6",
+      "bytes": 1164
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/campaign-allocation.json",
+      "sha256": "96F8558A73B900B5E1B420A0D5B5803B82620D700053F30E36C904E1C0159A9B",
+      "bytes": 1196
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/campaign-performance.json",
+      "sha256": "A40F165A14D329226B7B78C8F9158CF63522A444518F4701A7417ED2364D0D5A",
+      "bytes": 19302
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/campaign-regression.json",
+      "sha256": "CEF89D524A9097DF7A152132363F79551667D59A16DC8AA91842507C8F2F41C1",
+      "bytes": 25089
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/campaign-storage.json",
+      "sha256": "4ADE017A38D31F974C54E3456A989F838A69A0E0D4847870CA1E059901276D2B",
+      "bytes": 716
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/campaign-verification.md",
+      "sha256": "D4ECE027F3EE778DFEA656207D6A85BBF982C493E510E27E3881A884876C9C41",
+      "bytes": 7741
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/cleanup.md",
+      "sha256": "65747F98DADBD65685BB0E69DA789EDED020DF4C5BA09CA4769906602F7CF05D",
+      "bytes": 1991
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/deployment-check.json",
+      "sha256": "8EBC003D17F1E56B9198D77E501F35B909C4AA3D64CB5F7A1ECFA8954212660D",
+      "bytes": 25408
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/entry.json",
+      "sha256": "ADA0AE4A4E16793CE592B5445DC0C6764AA10F8AE578828EF181A73979142F60",
+      "bytes": 10128
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/identity.json",
+      "sha256": "7B549A302A7EFD8D3C4373587673D01F6B4288BF58636836579434CE0BDDC31B",
+      "bytes": 15747
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/launch-player-controls.ps1",
+      "sha256": "763A0875800885E437523DAC151F8572914C4AAB7AFC4E968CFE7DFA03CC8167",
+      "bytes": 763
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/launcher-provenance-reconciliation.json",
+      "sha256": "424CA856D4F3F26350789CE82B4EE9927D4B6B05A773286A6A3CF3FB255D0FB5",
+      "bytes": 951
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/manual-acceptance.json",
+      "sha256": "93E87361D02055871FAA1ED27D7EBB0D0BB1989A3BC97ED247CDB40ADF205288",
+      "bytes": 1920
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/manual-route.md",
+      "sha256": "FCD71EFBB997C47B9766121E7DEA9688BF6CD3E36AC5FCB2B84626F31451882A",
+      "bytes": 2789
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/README.md",
+      "sha256": "AB0065ECFA1C07E8F7A8A996EFBC6634631B993F5BEAE3BB7829349E0A04B3EE",
+      "bytes": 2934
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/reproduce.md",
+      "sha256": "DD9CA704AF7E151E3D5CBAD091A3B07425B1A3EAF46BF69B908CC8848E7A0A9F",
+      "bytes": 2912
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/seal-closure.py",
+      "sha256": "9CABC4AF6DBBE353DCCF581A07AC2451ABC7CA4D332BBD45CAFD509E91F33E27",
+      "bytes": 7422
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage1-command-authority/measurements.json",
+      "sha256": "19E7FFCB6EE53978CAE7CA62C978F04FE566D9EBAEFD0F2980051D2345519AC8",
+      "bytes": 1610
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage1-command-authority/README.md",
+      "sha256": "E807FCB8DBDF07FF0DA1DF02FE46FF5C95464234817784B865A764A1529E93FD",
+      "bytes": 6961
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage1-command-authority/regression.json",
+      "sha256": "B6D0855EBA54B45D785AF12BA226177B5C3467C362F92A7532DCF6150836DD74",
+      "bytes": 15047
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage1-command-authority/source.json",
+      "sha256": "4B7F91977E178E6BA5E148147F2967BA177C60B14EF2ED31CFA96066908D6DE2",
+      "bytes": 1425
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage2-engine-zx/keyboard.json",
+      "sha256": "948951C6F2FB33818710C964D8AE1BEC0BF66BE16D26BBC679D2C5FD798A3DB5",
+      "bytes": 2437
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage2-engine-zx/launcher-build-provenance.json",
+      "sha256": "F815B6211016F66BFF033844421707E82A8835A46FDDB6FBC6C00C020B1323E3",
+      "bytes": 3830
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage2-engine-zx/README.md",
+      "sha256": "B0935D8EAAB7282D90EBAB3E7D68154B218F9506F0C865D465FC479611DCAE03",
+      "bytes": 5321
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage2-engine-zx/regression.json",
+      "sha256": "2968236D476747C491DB00919587FA77BE897EDA080B2367E81A7FCCA226A587",
+      "bytes": 17677
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage2-engine-zx/runtime.json",
+      "sha256": "3C8A48FEF357F49454AEC898AD0AA4C6469E72B49D98F69EB0DB9F25DB03AC8E",
+      "bytes": 1079
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage2-engine-zx/source.json",
+      "sha256": "AC38FA4A791F085B96D85878B846FC27B4D44AC83F449551602F70739255B336",
+      "bytes": 2183
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage3-attitude-demand/measurement.json",
+      "sha256": "3E4A063AC8C84DF482B9F44B102B997ACA1F4F8476F9FC59BDA33F78F96288EE",
+      "bytes": 3447
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage3-attitude-demand/README.md",
+      "sha256": "B221FCB4256B871560D315654AF5B975BEE64F8CE0600741ADE39A30838A73B8",
+      "bytes": 5316
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage3-attitude-demand/regression.json",
+      "sha256": "9D700C3962170A40A1EBA35F1209AC5A8471816488C472149B102D058346B3C6",
+      "bytes": 18361
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage3-attitude-demand/source.json",
+      "sha256": "2D081E8913B063C3CA7281D8C5B54A3DB61C2312EBBB0965DD968AFA2A725C23",
+      "bytes": 1213
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage4-actuator-allocation/entry-geometry.json",
+      "sha256": "6CE2A246136604F4E24FC11B8DCCCEADF0E11D66C7D59F5F3C07BFFDF8CD65C3",
+      "bytes": 1031
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage4-actuator-allocation/measurement.json",
+      "sha256": "E6263871609CF6F1795EA9315B2036891B3C5A1673707F130254B604CD65056D",
+      "bytes": 1626
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage4-actuator-allocation/README.md",
+      "sha256": "C23995D4ABE1102A4FFED56CD4EF00A0CB381B1A955CD927C17FAB116006F3E0",
+      "bytes": 2059
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage4-actuator-allocation/regression.json",
+      "sha256": "3666D3056EF1C453E8F7B42C9EBF57B5BD926F206BF822779FAA500676820D35",
+      "bytes": 19069
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage4-actuator-allocation/source.json",
+      "sha256": "60272E3C26FD41441745B98A16373AFFBFE0CD0285B8AA9EB0B11447E1FF2B49",
+      "bytes": 1595
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/analyze-native-holds.py",
+      "sha256": "3A8C22B83BC7998FBDFE48238D3F175749B5EF4FB31C77D83947387FED894EB7",
+      "bytes": 6313
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/build-hold-oracle.py",
+      "sha256": "312FC166CB27E096CB29B7B76889C9A501816EF1576C82C72E0B38EBAE3A1AFA",
+      "bytes": 1005
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/build-input-driver.ps1",
+      "sha256": "AC1021E1C89A9C1978CD9EE08F3766BB2E6A76F0919C722D2F68E71DD4853DB6",
+      "bytes": 805
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/build-native-observer.ps1",
+      "sha256": "CCC1A13B4BC1064CBE9AAD2FD6B05229B36DC316E4E148A0902250990AC557F3",
+      "bytes": 1785
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/build-native-observer.py",
+      "sha256": "4DC57BF800289E941BC76BC1CA5570C1F0E8918D268C4F3516026BD89B9B0FBF",
+      "bytes": 3216
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/cause.md",
+      "sha256": "697F2168BB3A84DDE28CACD95A2443BCBB0A285C1E3720EE067765D6D1D9A786",
+      "bytes": 1508
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/focus-loss.json",
+      "sha256": "DDF2CEA69299BA040254237F8AA669B815EEE71B327ED62D98FC95E79F1FB145",
+      "bytes": 722
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/keyboard.json",
+      "sha256": "11FD9AA58B0A82BFEF2F079559D87F9E3A685C2B70F3629E36C6B582572AECF7",
+      "bytes": 4209
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/managed-observer.cs.txt",
+      "sha256": "E23345414A4AD3893F559EA60E9098BE7FD1AC1938D16F84D774868CF7498F49",
+      "bytes": 1609
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/measurement.json",
+      "sha256": "03BED0A3D9AE4429C940EDADF4861609BAD3B69BFDAE318EB5BEDAA1C6847CB1",
+      "bytes": 923
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/native-hold-oracle.cs.txt",
+      "sha256": "2FE55CFAB7187A3A06E354B2C8719DB4E13783642F56A77BAA19B8BD3CBABE11",
+      "bytes": 7317
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/native-hold-plan.md",
+      "sha256": "EC79B5125719B2E7EC80DAE1B11DAB9069253AC56CA48586E1AA7E7A693C8986",
+      "bytes": 3703
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/native-hold-results.json",
+      "sha256": "BDECB4A7B7163416FFF782E3C8D78CC3C0906BE26921EF770F551A730A83506B",
+      "bytes": 62345
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/native-input-driver.cs.txt",
+      "sha256": "AA823F126036FCC6039D38A9113FD33B7428BE3504FC4A4B0D4C1B3995F7B88C",
+      "bytes": 9661
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/native-trace.cpp.txt",
+      "sha256": "9737EAD756A3A8C8359AFCD1C84E7FDD37D5830510634D18F4AB19C69C142522",
+      "bytes": 922
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/physical-oracle-results.json",
+      "sha256": "614DEE5585A511B41CA45F1A450C196C1FE075D0715E8A06BD9188F4090BCE8F",
+      "bytes": 10785
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/README.md",
+      "sha256": "312D1BA27D9F61B2F29FE87EE965FB45363D9562EBAB0ED0A6FF206B85FE25EB",
+      "bytes": 4801
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/recovery-identity.json",
+      "sha256": "3A285B89A9B2268C9D9522AAE65F1D9D8593EB3DEEEBAE54AA21131F49319A77",
+      "bytes": 6430
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/regression.json",
+      "sha256": "34F804E387DD1C816D1C57C7915DA2A6746A011638C7766CF545828E5AE134F8",
+      "bytes": 24411
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/reproduce.md",
+      "sha256": "9564A287C8074032F2D33B61C9974EDBB78B477D5D2F3CE0BF162D2E32D5920B",
+      "bytes": 2695
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/source.json",
+      "sha256": "88F9A0B1DF0B1E45205A482BDE9DB3852B3EF11D7B26C95F70E77EE8091ECAEB",
+      "bytes": 1794
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage5-player-wasdqe/verification.md",
+      "sha256": "C3DC401AE2B8AD3DB8C60FABDC9F22C57B202BD02A8B65F9733ADCA64DDEFEF1",
+      "bytes": 2496
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/analyze.py",
+      "sha256": "07DC5C884B5A6CAC31BB031C400EB4FD0A0BB86FC44386674B672A1F7F602816",
+      "bytes": 3975
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/captured-session.json",
+      "sha256": "9AF5C97CA547534A5E57465C2A9467697A0240E33181D311E1EFDDBF453F3B3B",
+      "bytes": 26686
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/identity.json",
+      "sha256": "89AA464E04772C01D0B0D225BAB9AE08B4FB2D1DB9ADBB5C62C909D2D53DCAEF",
+      "bytes": 2078
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/native-results.json",
+      "sha256": "098302DB2B574F4FF6C933CD311865682227E11D244E47AFDCBAABC858D72176",
+      "bytes": 32102
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/physical-oracle-results.json",
+      "sha256": "47300F42D43A33FAF3AE0AEE35809ACB60CE03E3EB509212FA5EF1BEBE1F5430",
+      "bytes": 2353
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/plan.md",
+      "sha256": "E1EE2098195932506DA37852848AC9313AD29597DCDCDB2828D92F90A401AE71",
+      "bytes": 1714
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/scratch-cleanup.json",
+      "sha256": "7A3139A42274213E51E8AB0F570048F3206ECB31D089E4609FCE0EA4920BD6D1",
+      "bytes": 304
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/verification.md",
+      "sha256": "6EE8F0C011C1E4B140C83138BAD19A0F21559A7CE196639FA522DF62A5739E64",
+      "bytes": 3783
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/validate-stage1.ps1",
+      "sha256": "50BF032CBEA91364BE9BF9638296791AD7C2F71C205A64E10741773C6096E84C",
+      "bytes": 1779
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/validate-stage2.ps1",
+      "sha256": "EBC37C2C0AB42B1FCD741CE7E0DDC48311604D2CE71B006436F8AB0E29CC609A",
+      "bytes": 2281
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/validate-stage3.ps1",
+      "sha256": "0DDC4D0C087E00776E879D5125A85261D38607EBE890B8E43B883D64876D3CD1",
+      "bytes": 2296
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/validate-stage4.ps1",
+      "sha256": "A1445E6AE8270DAADA71A9A0DD9CE3E225E8AC899FEEFC0FF75CFC9E22082334",
+      "bytes": 2315
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/validate-stage5.ps1",
+      "sha256": "4568C5E62EB60C1296A2EBCCE603300C6B5629E32F1DF120FE7EB02DE283A6E5",
+      "bytes": 2333
+    },
+    {
+      "path": "docs/engineering-evidence/player-flight-controls-gauntlet/validate-stage6.ps1",
+      "sha256": "FCA54014D7E050E0CC0958BC1D41BA65602DB7F56AFB87B751CA3DB7C7F3360F",
+      "bytes": 2381
+    }
+  ]
+}

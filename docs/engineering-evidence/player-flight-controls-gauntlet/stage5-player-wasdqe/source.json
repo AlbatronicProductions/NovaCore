@@ -1,0 +1,52 @@
+[
+  {
+    "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+    "sha256": "662B46A549B94956FD51112CDB190E655298084221D09634FF5D5B3FF2AF24EC",
+    "bytes": 304239
+  },
+  {
+    "path": "native/NovaCore.Native/NovaCoreNative.h",
+    "sha256": "E9520E0AA25D1CADFC29898E6B57299A089BC131419D0A06077F4B97E0568E33",
+    "bytes": 19235
+  },
+  {
+    "path": "src/NovaCore.Interop/NativeRuntime.cs",
+    "sha256": "DCCB4A73C1DBE688616E2F3F5CC52A3DEB6DD8E52F4E074C6388328524DA8864",
+    "bytes": 24359
+  },
+  {
+    "path": "samples/NovaCore.Triangle/PlayerFlightControlInput.cs",
+    "sha256": "32F65BBF3DF474F32F093F16BB03F5EF3D8CB987C4CBB49CA28D4FF916D4E24E",
+    "bytes": 3949
+  },
+  {
+    "path": "samples/NovaCore.Triangle/Program.cs",
+    "sha256": "395F6AD0A6DCDB31730466675D8F34ABD1EA79797F8CFF8D52297FB6BD1C0281",
+    "bytes": 64665
+  },
+  {
+    "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+    "sha256": "F03184B824D075981A89C269FB10612E51940DC17A22974FC330B5DFB80636BF",
+    "bytes": 30682
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/PlayerAttitudeControlTests.cs",
+    "sha256": "49188DE19720D2F47C54FCF77297170BCF7A48AC9B3D4A4D253C070AE14B2A8C",
+    "bytes": 8995
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/PlayerEngineControlTests.cs",
+    "sha256": "A253CDD4DBDC737D28A3FEC3DCEDC3F41BABFCD846AC4445BED9EC7D21E180F5",
+    "bytes": 11684
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+    "sha256": "506023516FBAC1690A633C13CEA15174C46C9BD4DD93B32DED94F6F830C65316",
+    "bytes": 571552
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "sha256": "2E90D9AA37A4BD885FC0CC51D58BDED31A90821F15EB76C833A8E0C6D8032141",
+    "bytes": 4273
+  }
+]

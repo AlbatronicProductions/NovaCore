@@ -1,0 +1,449 @@
+{
+  "status": "PASS",
+  "manifest": "build/active-vessel-camera-warp-correction/deployment.json",
+  "manifestSha256": "7F137CB88E4BB1189049490BFF2DE0A3BA081CA09CC00277047A77B62F66A66B",
+  "scope": "Accepted manual warp-correction deployment; new controls candidate isolated",
+  "files": [
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "expected": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "expected": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Core.dll",
+      "sha256": "ADFD4B856DB508267B53DEEB677AAE4A06D6D73CA82048D93B2E3C62A7E18BD2",
+      "expected": "ADFD4B856DB508267B53DEEB677AAE4A06D6D73CA82048D93B2E3C62A7E18BD2"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Core.pdb",
+      "sha256": "86FDE13237DB3EFB138A8EAD4472D612788C89841D7BA9F44F063B9742A783B4",
+      "expected": "86FDE13237DB3EFB138A8EAD4472D612788C89841D7BA9F44F063B9742A783B4"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.EphemerisFormat.dll",
+      "sha256": "B0F045434B71F019C3047E678F1D79758633B807805C037271AA2742C91C2AA8",
+      "expected": "B0F045434B71F019C3047E678F1D79758633B807805C037271AA2742C91C2AA8"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb",
+      "sha256": "8860E6108209ABD3877DC36609C3616E0C611079BB43155FA924EB6AF7280B3E",
+      "expected": "8860E6108209ABD3877DC36609C3616E0C611079BB43155FA924EB6AF7280B3E"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Graphics.dll",
+      "sha256": "01D8F6E74E0850E8E20048281185B94491A54F3D579C4114FE4577A5E5DAEE1A",
+      "expected": "01D8F6E74E0850E8E20048281185B94491A54F3D579C4114FE4577A5E5DAEE1A"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Graphics.pdb",
+      "sha256": "525268B54C9A62E9A925A32D061168DCE1F50B541DCBA0DD3C751D70D5852842",
+      "expected": "525268B54C9A62E9A925A32D061168DCE1F50B541DCBA0DD3C751D70D5852842"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Interop.dll",
+      "sha256": "8DB7ADD299B96364B89930E825156A027F1FFAA936BF3063E732A3C1D4DB1858",
+      "expected": "8DB7ADD299B96364B89930E825156A027F1FFAA936BF3063E732A3C1D4DB1858"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Interop.pdb",
+      "sha256": "B926CB173E7DC11E025931243406C39E5E5AA6FE08AD4A82B9CD09707F1737DA",
+      "expected": "B926CB173E7DC11E025931243406C39E5E5AA6FE08AD4A82B9CD09707F1737DA"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Native.dll",
+      "sha256": "1050F56F51198B48D90C4140A8C54B02E646FE14C970AA8EDB373877EF6D4F20",
+      "expected": "1050F56F51198B48D90C4140A8C54B02E646FE14C970AA8EDB373877EF6D4F20"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Platform.dll",
+      "sha256": "07D70E0032AFBD7F850689E0BC8B0F5983926ACBD85564A7ACC2A94FE66C2497",
+      "expected": "07D70E0032AFBD7F850689E0BC8B0F5983926ACBD85564A7ACC2A94FE66C2497"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Platform.pdb",
+      "sha256": "DAD6FACFA19B3B1F9DE8C201EF58D7412E25EFDE83F84295FA2B74360098AC92",
+      "expected": "DAD6FACFA19B3B1F9DE8C201EF58D7412E25EFDE83F84295FA2B74360098AC92"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "A16B6BF3B2DABC926D1F6D4E1B900A0E9538F59B6973A61246C00A93959AC15E",
+      "expected": "A16B6BF3B2DABC926D1F6D4E1B900A0E9538F59B6973A61246C00A93959AC15E"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Simulation.pdb",
+      "sha256": "CDE9D0D3BF42634415C11DB0DD0460B6108F90BFFBC4BD7CADCF0CD4A65DC59E",
+      "expected": "CDE9D0D3BF42634415C11DB0DD0460B6108F90BFFBC4BD7CADCF0CD4A65DC59E"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.deps.json",
+      "sha256": "D284776C0505517A09E1BA848A176E17F255899309E78F9CEEF3774BEF0866E1",
+      "expected": "D284776C0505517A09E1BA848A176E17F255899309E78F9CEEF3774BEF0866E1"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.dll",
+      "sha256": "DC419A0FB162014216B776234E0DE14AA433E47B7FEAC56EB00D9B6AFA99C934",
+      "expected": "DC419A0FB162014216B776234E0DE14AA433E47B7FEAC56EB00D9B6AFA99C934"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.exe",
+      "sha256": "6ADF6FF099C4F0D2141CB4B947B7A85805F9EF5885707EC4D727340628069D30",
+      "expected": "6ADF6FF099C4F0D2141CB4B947B7A85805F9EF5885707EC4D727340628069D30"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.pdb",
+      "sha256": "2C6C6943FF8225F298681962697F6BF2C51D66775A479815ACA7A4B72CC4B90C",
+      "expected": "2C6C6943FF8225F298681962697F6BF2C51D66775A479815ACA7A4B72CC4B90C"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/NovaCore.Triangle.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097",
+      "expected": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/assets\\visual\\SRV01\\NC_SRV_Capsule_A.glb",
+      "sha256": "6B045A63186ED63FA1C6D48EF7E7AB89299F83B4F533897B8679B22068CEFF6A",
+      "expected": "6B045A63186ED63FA1C6D48EF7E7AB89299F83B4F533897B8679B22068CEFF6A"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/assets\\visual\\SRV01\\NC_SRV_Main_A.glb",
+      "sha256": "3B02F9E3788A2BA85EA8C0238E2F61F8C916D7757E2C535B8348CB8E6C1AD46F",
+      "expected": "3B02F9E3788A2BA85EA8C0238E2F61F8C916D7757E2C535B8348CB8E6C1AD46F"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/assets\\visual\\SRV01\\NC_SRV_Rcs_A.glb",
+      "sha256": "6118CB37BD8B7678D0EACC032391B1143143E2360E351CDCBD67508A3124CA5B",
+      "expected": "6118CB37BD8B7678D0EACC032391B1143143E2360E351CDCBD67508A3124CA5B"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/assets\\visual\\SRV01\\NC_SRV_Tank_A.glb",
+      "sha256": "22CD027892F20596238D7A7580A4E73032071F6303A73CB211915BAB4C4DE378",
+      "expected": "22CD027892F20596238D7A7580A4E73032071F6303A73CB211915BAB4C4DE378"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/earth-data\\earth_elevation_8192x4096.r16",
+      "sha256": "4600BC01767EB81404756AF62C0EE87B4BC459B82DE15DCA6989DF34FEF76317",
+      "expected": "4600BC01767EB81404756AF62C0EE87B4BC459B82DE15DCA6989DF34FEF76317"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\body_forward.frag.spv",
+      "sha256": "FA706803F042FB5A9F7A3C9965A3E2DE3E8838E075D67876B78DF9BDC132CE0E",
+      "expected": "FA706803F042FB5A9F7A3C9965A3E2DE3E8838E075D67876B78DF9BDC132CE0E"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\distant_planet.frag.spv",
+      "sha256": "04137AFB1C632DFB7074480377D9F93136AB3127D382BAEEF07D52B09409EBA8",
+      "expected": "04137AFB1C632DFB7074480377D9F93136AB3127D382BAEEF07D52B09409EBA8"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\distant_planet.vert.spv",
+      "sha256": "CF28FE0A7C0797BD7D72076437BA78C4E0D97BB1A0AE3C065BAF3BFC5DB62CB8",
+      "expected": "CF28FE0A7C0797BD7D72076437BA78C4E0D97BB1A0AE3C065BAF3BFC5DB62CB8"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\exhaust_resolve.frag.spv",
+      "sha256": "DB6DDD09497866AA665393503F9F1603211481C307F013F1B9C0EF9A6020C31C",
+      "expected": "DB6DDD09497866AA665393503F9F1603211481C307F013F1B9C0EF9A6020C31C"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\exhaust.frag.spv",
+      "sha256": "AE6B7B86CA55B33DDD01908AD89EC4FECE0C7CD29F225FC8516068794696EF80",
+      "expected": "AE6B7B86CA55B33DDD01908AD89EC4FECE0C7CD29F225FC8516068794696EF80"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\exhaust.vert.spv",
+      "sha256": "492860487930E2013BEB4B247B026EEAF2F6E28956DA0553408FBAA1005DBE19",
+      "expected": "492860487930E2013BEB4B247B026EEAF2F6E28956DA0553408FBAA1005DBE19"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\fullscreen.vert.spv",
+      "sha256": "A18F9B5E0B4A4E7A077B1017BAD7B1C5C40313B3F70113F1E0771CD202433130",
+      "expected": "A18F9B5E0B4A4E7A077B1017BAD7B1C5C40313B3F70113F1E0771CD202433130"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\orbit_previous.frag.spv",
+      "sha256": "C4935060E07E01742D59D8A5834241E2963DCC80ED8E35BAEAC5B08288761E61",
+      "expected": "C4935060E07E01742D59D8A5834241E2963DCC80ED8E35BAEAC5B08288761E61"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\orbit.frag.spv",
+      "sha256": "B06F50708727144E8D0F08D35CD2E64D8B1CEF501ED20B10FEA4A34196026267",
+      "expected": "B06F50708727144E8D0F08D35CD2E64D8B1CEF501ED20B10FEA4A34196026267"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\orbit.vert.spv",
+      "sha256": "B4B9DD635F32156654E30D843C29EB864FEB09751D7B3027CF99A5D741B6A45B",
+      "expected": "B4B9DD635F32156654E30D843C29EB864FEB09751D7B3027CF99A5D741B6A45B"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+      "sha256": "5A5450321873F5FF8BED7DD9E4F06C342625724D629DA2232521FBACE01C7A85",
+      "expected": "5A5450321873F5FF8BED7DD9E4F06C342625724D629DA2232521FBACE01C7A85"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_production_terrain.comp.spv",
+      "sha256": "405E6E6DAAB609CA383297BA8BE706BFA96859C65DC2D9F42476A32CDDD85DF7",
+      "expected": "405E6E6DAAB609CA383297BA8BE706BFA96859C65DC2D9F42476A32CDDD85DF7"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_production.frag.spv",
+      "sha256": "8C59838ABB3D7EE6418695EA40F044CA1F04F5C3C9216296D5CC19BBA6110D6B",
+      "expected": "8C59838ABB3D7EE6418695EA40F044CA1F04F5C3C9216296D5CC19BBA6110D6B"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_ring_far.frag.spv",
+      "sha256": "343DB81BCCC310B21C600AB6EE6722438151694683BB0CF7BA01D54A9B68ADE6",
+      "expected": "343DB81BCCC310B21C600AB6EE6722438151694683BB0CF7BA01D54A9B68ADE6"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_ring_near.frag.spv",
+      "sha256": "48B8EF4E56B6BE9380CFBACA7DAA790035E704541B6B8A550B3CC7BED540244C",
+      "expected": "48B8EF4E56B6BE9380CFBACA7DAA790035E704541B6B8A550B3CC7BED540244C"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_ring.vert.spv",
+      "sha256": "CCCEDE52D3C64DB872360912DB9EB29E60CB892C648ED53CE1C178F8623D0CFB",
+      "expected": "CCCEDE52D3C64DB872360912DB9EB29E60CB892C648ED53CE1C178F8623D0CFB"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_select.comp.spv",
+      "sha256": "8189BBD2A85FE23033F12C558D8B221B62B8969C17BA9FFCF07B7C8501FE8ADF",
+      "expected": "8189BBD2A85FE23033F12C558D8B221B62B8969C17BA9FFCF07B7C8501FE8ADF"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary_terrain_generate.comp.spv",
+      "sha256": "1FC8C24EA6B4A55E83997FADF80B4901F692B8BC2DE84A5CF6AC043E4DA531D1",
+      "expected": "1FC8C24EA6B4A55E83997FADF80B4901F692B8BC2DE84A5CF6AC043E4DA531D1"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary.frag.spv",
+      "sha256": "417F17B236834F0AC94FA3BBFDAE52AD164599FF14051E9B396809BEEA75CDA1",
+      "expected": "417F17B236834F0AC94FA3BBFDAE52AD164599FF14051E9B396809BEEA75CDA1"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\planetary.vert.spv",
+      "sha256": "DDB84030E2621DF8F05489E339989D66DE60D73435F490B4EC0AF4251D7A0338",
+      "expected": "DDB84030E2621DF8F05489E339989D66DE60D73435F490B4EC0AF4251D7A0338"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_nested_scale_mesh_cull.comp.spv",
+      "sha256": "497D88225A914B9601AD6C0F44733E834794A952854E71B26BE426EAD8780D94",
+      "expected": "497D88225A914B9601AD6C0F44733E834794A952854E71B26BE426EAD8780D94"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+      "sha256": "23BD1B04D0291E6271138041433EEE07E57503482E8E5CF845E4B72C75967336",
+      "expected": "23BD1B04D0291E6271138041433EEE07E57503482E8E5CF845E4B72C75967336"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_compact.comp.spv",
+      "sha256": "2AABD7633B333F86DF8A6EAE6B76ED2D13A7129443DCD9201531DE047B12F4D9",
+      "expected": "2AABD7633B333F86DF8A6EAE6B76ED2D13A7129443DCD9201531DE047B12F4D9"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_cull.comp.spv",
+      "sha256": "2827B58DCD7029695E0B33272018E54D19D6113B8D7AB9AC591C343B3D994398",
+      "expected": "2827B58DCD7029695E0B33272018E54D19D6113B8D7AB9AC591C343B3D994398"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+      "sha256": "6B0238138222112DDF1F945F5E6A31867D5DD11F57169481ECE9C05337F43E4E",
+      "expected": "6B0238138222112DDF1F945F5E6A31867D5DD11F57169481ECE9C05337F43E4E"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+      "sha256": "8C677F08AE051CF525108A436066983D41961CE70757CA29A86DF165D2663CFB",
+      "expected": "8C677F08AE051CF525108A436066983D41961CE70757CA29A86DF165D2663CFB"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+      "sha256": "3B330D24DC873C2676DBB877208EFAE4D91347B66EF029706B8A3F0D3116F91C",
+      "expected": "3B330D24DC873C2676DBB877208EFAE4D91347B66EF029706B8A3F0D3116F91C"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+      "sha256": "5D750F929DCAB4F9F3138B4CDFA869AB26E3051D4B28485C02EE483F89E14D6E",
+      "expected": "5D750F929DCAB4F9F3138B4CDFA869AB26E3051D4B28485C02EE483F89E14D6E"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_prepare.comp.spv",
+      "sha256": "D178E6BA6B73045DC214E75000489C09A7F0982F9CFF7663489BA0818D30AE8B",
+      "expected": "D178E6BA6B73045DC214E75000489C09A7F0982F9CFF7663489BA0818D30AE8B"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard_reset.comp.spv",
+      "sha256": "CF583D16E14C8A8EC63B393D8752541648D932CF0165231CC48F6076E28FC027",
+      "expected": "CF583D16E14C8A8EC63B393D8752541648D932CF0165231CC48F6076E28FC027"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard.tesc.spv",
+      "sha256": "0163498278F9523FD442434F05F056BE28252D16C2F2BA44B8D91642B33E4439",
+      "expected": "0163498278F9523FD442434F05F056BE28252D16C2F2BA44B8D91642B33E4439"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard.tese.spv",
+      "sha256": "D0BC5D7A450F336D45C26C499B0B3A79ECC0258E1FFB9DEE0B5BCFB8AA21D31E",
+      "expected": "D0BC5D7A450F336D45C26C499B0B3A79ECC0258E1FFB9DEE0B5BCFB8AA21D31E"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\production_spherical_billboard.vert.spv",
+      "sha256": "1BAA9043DB7A8B71DCF5931F4CB415FA84CE6341B07D850EA9BEB8BAA02D2B6A",
+      "expected": "1BAA9043DB7A8B71DCF5931F4CB415FA84CE6341B07D850EA9BEB8BAA02D2B6A"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\regional_physical_demand.comp.spv",
+      "sha256": "7D80DBD70BE13CC55F00EF836CD8DA9D3783064411320697777F6B5C848D8F67",
+      "expected": "7D80DBD70BE13CC55F00EF836CD8DA9D3783064411320697777F6B5C848D8F67"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\regional_physical_incoming_demand.comp.spv",
+      "sha256": "A56B62B5432206B8AB5EDED734B13A0DDF9F0C726A4B444F8D24139BDCC17A60",
+      "expected": "A56B62B5432206B8AB5EDED734B13A0DDF9F0C726A4B444F8D24139BDCC17A60"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\sas_target.frag.spv",
+      "sha256": "4E99FDA06F571590F950E91D93025CAFA83E4A454E68E3583CE59D869F0A3EF2",
+      "expected": "4E99FDA06F571590F950E91D93025CAFA83E4A454E68E3583CE59D869F0A3EF2"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_label.frag.spv",
+      "sha256": "673C5DC0CC1E199D497C7C927F282A02DA444FA258860B6CB94B6FD1ED12C90A",
+      "expected": "673C5DC0CC1E199D497C7C927F282A02DA444FA258860B6CB94B6FD1ED12C90A"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_label.vert.spv",
+      "sha256": "A13A7A8ACB3AE2DA2CAC129A203CAFFD86B5A7F434701D99B59284FDD01F1844",
+      "expected": "A13A7A8ACB3AE2DA2CAC129A203CAFFD86B5A7F434701D99B59284FDD01F1844"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_marker.frag.spv",
+      "sha256": "D428743C08F96F4E508EAB131CFB54981C2628EECC7ACD3D2DF220B19103275B",
+      "expected": "D428743C08F96F4E508EAB131CFB54981C2628EECC7ACD3D2DF220B19103275B"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_marker.vert.spv",
+      "sha256": "50D948741D3CA6B59577A82D3346AB3CAC51EDCB9AB80047247AC61C345B6DB6",
+      "expected": "50D948741D3CA6B59577A82D3346AB3CAC51EDCB9AB80047247AC61C345B6DB6"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_orbit.frag.spv",
+      "sha256": "23B511270C196C2186F7935699CA7FDEDF3C92C629DA67C10E8AE7615286181F",
+      "expected": "23B511270C196C2186F7935699CA7FDEDF3C92C629DA67C10E8AE7615286181F"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_orbit.vert.spv",
+      "sha256": "D71520615E2533A06208C3CEC752D2689F524A30FB6A11BD2CA4AE00E2CC027F",
+      "expected": "D71520615E2533A06208C3CEC752D2689F524A30FB6A11BD2CA4AE00E2CC027F"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_speed_hud.frag.spv",
+      "sha256": "E073B0AB31C69A3516D695146ADE0DBD618D3DEDE5A10699F390F10DA52C3586",
+      "expected": "E073B0AB31C69A3516D695146ADE0DBD618D3DEDE5A10699F390F10DA52C3586"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\solar_speed_hud.vert.spv",
+      "sha256": "A777A4DFECE073339EFCD97C7292D970F8C26D21F221EBD62CE244970F0A5FB4",
+      "expected": "A777A4DFECE073339EFCD97C7292D970F8C26D21F221EBD62CE244970F0A5FB4"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\space_background.frag.spv",
+      "sha256": "0C98EE3DF0BA8AD8F313CC352A02032528E6B0E36B2DFA8CC2BE1A6755B71CFC",
+      "expected": "0C98EE3DF0BA8AD8F313CC352A02032528E6B0E36B2DFA8CC2BE1A6755B71CFC"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\stellar_glow.frag.spv",
+      "sha256": "E83A5E7458EC4BE4B835384C88EC3EA958AE13569EE9AC823A4E2B2DB17FACEE",
+      "expected": "E83A5E7458EC4BE4B835384C88EC3EA958AE13569EE9AC823A4E2B2DB17FACEE"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\stellar_glow.vert.spv",
+      "sha256": "43463716AD81D7C913273D498B6F46A00CFD8A877E2C000D31FA66D5742CF1F8",
+      "expected": "43463716AD81D7C913273D498B6F46A00CFD8A877E2C000D31FA66D5742CF1F8"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\stellar_sun.frag.spv",
+      "sha256": "5C448C0DA4CADEB08BF2C85C74448D3B690FD3D6BCCAB1FC2C49DA7A0BF54769",
+      "expected": "5C448C0DA4CADEB08BF2C85C74448D3B690FD3D6BCCAB1FC2C49DA7A0BF54769"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\stellar_sun.vert.spv",
+      "sha256": "3E124D5BABCB1D219499AA2DE1482F90FC7C9008E92B054F7CA0D268336346B6",
+      "expected": "3E124D5BABCB1D219499AA2DE1482F90FC7C9008E92B054F7CA0D268336346B6"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\tone_map.frag.spv",
+      "sha256": "D617345E95589ECB087ED40C20F4D04A427251A2B5249D8181CC63C421EE3979",
+      "expected": "D617345E95589ECB087ED40C20F4D04A427251A2B5249D8181CC63C421EE3979"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\triangle.frag.spv",
+      "sha256": "D0A96B210D4C61004E7BAE0ED931A37631613D93B53CECB3F805F5E56E8B3C51",
+      "expected": "D0A96B210D4C61004E7BAE0ED931A37631613D93B53CECB3F805F5E56E8B3C51"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/shaders\\triangle.vert.spv",
+      "sha256": "273B45834E3E19C54B2D3A06436D3513E6A2FE71B9D7BBC1C65A443FA11C53D9",
+      "expected": "273B45834E3E19C54B2D3A06436D3513E6A2FE71B9D7BBC1C65A443FA11C53D9"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/third-party\\Bepu\\ATTRIBUTION.txt",
+      "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3",
+      "expected": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/bin/Release/net10.0/third-party\\Bepu\\LICENSE.txt",
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD",
+      "expected": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/BepuPhysics.dll",
+      "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+      "expected": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/BepuUtilities.dll",
+      "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+      "expected": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.deps.json",
+      "sha256": "1731818EAC7DBB7CF1670FA06969666DE1FC19CE8669317E3971725AD69BBD1D",
+      "expected": "1731818EAC7DBB7CF1670FA06969666DE1FC19CE8669317E3971725AD69BBD1D"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+      "sha256": "18260F8458ADE3AA2A41B0A5890C6701F20A34664F53527BB62F2AA998A9C1D5",
+      "expected": "18260F8458ADE3AA2A41B0A5890C6701F20A34664F53527BB62F2AA998A9C1D5"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.exe",
+      "sha256": "1326513FF85A2ECAC6D7D78626CB0507C51185D84C90FE941524B03C16AA018A",
+      "expected": "1326513FF85A2ECAC6D7D78626CB0507C51185D84C90FE941524B03C16AA018A"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.pdb",
+      "sha256": "FF420CA052E9EFC3230CD57994FDA912C02DCC4E5F93B4CA8BB20982FBCAE4F4",
+      "expected": "FF420CA052E9EFC3230CD57994FDA912C02DCC4E5F93B4CA8BB20982FBCAE4F4"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.runtimeconfig.json",
+      "sha256": "96BC2946DFF8790400D652EC7F8DE7BB043E954980D59470C112788B68A1FBD3",
+      "expected": "96BC2946DFF8790400D652EC7F8DE7BB043E954980D59470C112788B68A1FBD3"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/third-party\\Bepu\\ATTRIBUTION.txt",
+      "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3",
+      "expected": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3"
+    },
+    {
+      "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/third-party\\Bepu\\LICENSE.txt",
+      "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD",
+      "expected": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD"
+    }
+  ],
+  "verifiedUtc": "2026-09-18T22:54:19.627461+00:00"
+}

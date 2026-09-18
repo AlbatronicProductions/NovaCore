@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "authority": "Project Control",
+  "source": "Explicit user manual-acceptance report in this task",
+  "recordedUtc": "2026-09-18T22:52:37.261096+00:00",
+  "route": "Supplied bounded Release player-controls route across repeated fresh sessions",
+  "acceptedBehaviors": [
+    "READY",
+    "Z main-engine ignition",
+    "X main-engine cutoff",
+    "W/S physical pitch",
+    "A/D physical yaw",
+    "Q/E physical roll",
+    "combined attitude inputs",
+    "release",
+    "physical actuator response",
+    "camera follow/orbit/zoom",
+    "camera/control separation",
+    "celestial focus and F refocus",
+    "terminal non-restart"
+  ],
+  "terminalHold": "Canonical endpoint held after 128 intervals / 2 seconds. Accepted qualification-harness behavior; not loss of momentum caused by X.",
+  "candidateAssociation": "Project Control identifies the supplied Release route; sealed candidate/source identity verified unchanged at closure entry.",
+  "candidate": [
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Triangle/release/NovaCore.Triangle.dll",
+      "sha256": "B856C00229D78E258EF2F5D747607360457CFC8AF0036D0CDE4AA826D5B65628",
+      "bytes": 313344
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Triangle/release/NovaCore.Native.dll",
+      "sha256": "15F105092D3EF6BA421F0FBEA0920A8A5630BA40490155CBA892EAF0334570B3",
+      "bytes": 359936
+    }
+  ],
+  "priorEngineeringClosureSha256": "1784DBB50BD15793088740126AF2BBCCDF717223B61469E4B965B4A828656DAD",
+  "entryIntegrity": "PASS: all prior evidence, source/runtime and regression/build log hashes verified before documentation changes.",
+  "productionCorrectionRequested": false,
+  "judgment": "ACCEPTED UNBANKED; ready for Project Control banking consideration",
+  "milestone": "NOT ASSIGNED",
+  "bankingAuthorized": false
+}

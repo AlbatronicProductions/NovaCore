@@ -1,0 +1,428 @@
+[
+  {
+    "name": "stage2-assembly-control-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-control"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-control-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-control-measure-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-control-measure"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-control-measure-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-production-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-production"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-production-debug.txt"
+  },
+  {
+    "name": "stage2-srv01-integration-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--srv01-integration"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-srv01-integration-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-contact-cheap-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-contact-cheap"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-contact-cheap-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-powered-contact-cheap-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-powered-contact-cheap"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-powered-contact-cheap-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-departure-cheap-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-departure-cheap"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-departure-cheap-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-allocation-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-allocation"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-allocation-debug.txt"
+  },
+  {
+    "name": "stage2-player-engine-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--player-engine"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-player-engine-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-presentation-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--assembly-presentation"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-presentation-debug.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-static-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-static"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-static-debug.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-warp-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-warp"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-warp-debug.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-moving-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-moving"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-moving-debug.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-costs-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-costs"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-costs-debug.txt"
+  },
+  {
+    "name": "stage2-florida-slab-correctness-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-correctness"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-correctness-debug.txt"
+  },
+  {
+    "name": "stage2-florida-slab-solar-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-solar"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-solar-debug.txt"
+  },
+  {
+    "name": "stage2-florida-slab-allocation-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-allocation"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-allocation-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-florida-qualification-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--assembly-florida-qualification"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-florida-qualification-debug.txt"
+  },
+  {
+    "name": "stage2-layout-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--case=Transport layout"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-layout-debug.txt"
+  },
+  {
+    "name": "stage2-launcher-debug",
+    "exit": 0,
+    "executable": "tests/NovaCore.Launcher.Tests/bin/debug/net10.0-windows/NovaCore.Launcher.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-launcher-debug.txt"
+  },
+  {
+    "name": "stage2-Simulation-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-Simulation-debug.txt"
+  },
+  {
+    "name": "stage2-ReferenceFrames-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.ReferenceFrames.Tests/debug/NovaCore.ReferenceFrames.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-ReferenceFrames-debug.txt"
+  },
+  {
+    "name": "stage2-Precision-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Precision.Tests/debug/NovaCore.Precision.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-Precision-debug.txt"
+  },
+  {
+    "name": "stage2-Camera-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Camera.Tests/debug/NovaCore.Camera.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-Camera-debug.txt"
+  },
+  {
+    "name": "stage2-BepuDependency-debug",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.BepuDependency.Tests/debug/NovaCore.BepuDependency.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-BepuDependency-debug.txt"
+  },
+  {
+    "name": "stage2-assembly-control-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-control"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-control-release.txt"
+  },
+  {
+    "name": "stage2-assembly-control-measure-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-control-measure"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-control-measure-release.txt"
+  },
+  {
+    "name": "stage2-assembly-production-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-production"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-production-release.txt"
+  },
+  {
+    "name": "stage2-srv01-integration-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--srv01-integration"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-srv01-integration-release.txt"
+  },
+  {
+    "name": "stage2-assembly-contact-cheap-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-contact-cheap"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-contact-cheap-release.txt"
+  },
+  {
+    "name": "stage2-assembly-powered-contact-cheap-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-powered-contact-cheap"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-powered-contact-cheap-release.txt"
+  },
+  {
+    "name": "stage2-assembly-departure-cheap-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-departure-cheap"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-departure-cheap-release.txt"
+  },
+  {
+    "name": "stage2-assembly-allocation-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [
+      "--assembly-allocation"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-allocation-release.txt"
+  },
+  {
+    "name": "stage2-player-engine-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--player-engine"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-player-engine-release.txt"
+  },
+  {
+    "name": "stage2-assembly-presentation-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--assembly-presentation"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-presentation-release.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-static-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-static"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-static-release.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-warp-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-warp"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-warp-release.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-moving-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-moving"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-moving-release.txt"
+  },
+  {
+    "name": "stage2-florida-slab-camera-costs-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-camera-costs"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-camera-costs-release.txt"
+  },
+  {
+    "name": "stage2-florida-slab-correctness-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-correctness"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-correctness-release.txt"
+  },
+  {
+    "name": "stage2-florida-slab-solar-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-solar"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-solar-release.txt"
+  },
+  {
+    "name": "stage2-florida-slab-allocation-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--florida-slab-allocation"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-florida-slab-allocation-release.txt"
+  },
+  {
+    "name": "stage2-assembly-florida-qualification-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--assembly-florida-qualification"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-assembly-florida-qualification-release.txt"
+  },
+  {
+    "name": "stage2-layout-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.exe",
+    "arguments": [
+      "--case=Transport layout"
+    ],
+    "log": "build/player-flight-controls-gauntlet/stage2-layout-release.txt"
+  },
+  {
+    "name": "stage2-launcher-release",
+    "exit": 0,
+    "executable": "tests/NovaCore.Launcher.Tests/bin/release/net10.0-windows/NovaCore.Launcher.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-launcher-release.txt"
+  },
+  {
+    "name": "stage2-Simulation-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-Simulation-release.txt"
+  },
+  {
+    "name": "stage2-ReferenceFrames-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.ReferenceFrames.Tests/release/NovaCore.ReferenceFrames.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-ReferenceFrames-release.txt"
+  },
+  {
+    "name": "stage2-Precision-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Precision.Tests/release/NovaCore.Precision.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-Precision-release.txt"
+  },
+  {
+    "name": "stage2-Camera-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Camera.Tests/release/NovaCore.Camera.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-Camera-release.txt"
+  },
+  {
+    "name": "stage2-BepuDependency-release",
+    "exit": 0,
+    "executable": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.BepuDependency.Tests/release/NovaCore.BepuDependency.Tests.exe",
+    "arguments": [],
+    "log": "build/player-flight-controls-gauntlet/stage2-BepuDependency-release.txt"
+  }
+]

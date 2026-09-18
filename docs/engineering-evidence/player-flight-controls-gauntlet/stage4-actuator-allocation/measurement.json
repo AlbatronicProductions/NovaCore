@@ -1,0 +1,26 @@
+[
+  {
+    "log": "build/player-flight-controls-gauntlet/stage4-pilot-allocation-debug.txt",
+    "configuration": "debug",
+    "witness": [
+      "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+      "{\"stage\":4,\"samples\":1024,\"medianMs\":0.1214,\"p95Ms\":0.1257,\"p99Ms\":0.1478,\"maxMs\":0.1609,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+    ],
+    "sha256": "2562FD22206E1CC98712313CD3D1B4C365F124FA9985C93D75D86C0895C7D275"
+  },
+  {
+    "log": "build/player-flight-controls-gauntlet/stage4-pilot-allocation-release.txt",
+    "configuration": "release",
+    "witness": [
+      "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+      "{\"stage\":4,\"samples\":1024,\"medianMs\":0.1,\"p95Ms\":0.1185,\"p99Ms\":0.1459,\"maxMs\":0.1673,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+    ],
+    "sha256": "A7670DC0D223615CB85E2626B6FB7F1DDE1999D357938D2D55BBBBE2DA5A5CC6"
+  }
+]

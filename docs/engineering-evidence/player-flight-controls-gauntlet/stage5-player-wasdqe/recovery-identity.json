@@ -1,0 +1,175 @@
+{
+  "capturedUtc": "2026-09-18T21:40:53.534526+00:00",
+  "judgment": "PASS-PROMOTE",
+  "productionCorrection": "NONE",
+  "productionReadsetUnchanged": true,
+  "diagnosticOverlay": [
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sourceSha256": "662b46a549b94956fd51112cdb190e655298084221d09634ff5d5b3ff2af24ec",
+      "overlaySha256": "c96b7bb9834fecad85f4e3fa294df98e464e20e9261e8d714e998954d276a733"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sourceSha256": "395f6ad0a6dcdb31730466675d8f34abd1ea79797f8cff8d52297fb6bd1c0281",
+      "overlaySha256": "fa57cd07cd74cf9faa08e08906f7fd1f6481d73328242b9b1b9ca089a39d39b9"
+    }
+  ],
+  "runtime": [
+    {
+      "path": "build/player-flight-controls-gauntlet/native-hold-observer/runtime/NovaCore.Triangle.dll",
+      "sha256": "7C1EF7F4E72DBBB3128F3806F029493AE934A31161450A336EE3C2D44D6C5A86"
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/native-hold-observer/runtime/NovaCore.Native.dll",
+      "sha256": "23BD49FEEA8B92D8EF60EEB0E9BCE160A422A88FA29AC4DA43EE218ADB18DB75"
+    }
+  ],
+  "driverVersions": [
+    {
+      "case": "W",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "S",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "A",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "D",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "Q",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "E",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "off-WA",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "off-WQ",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "off-AQ",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "off-WAQ",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "opposed-WS",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "opposed-AD",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "opposed-QE",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    },
+    {
+      "case": "focus-W-retry1",
+      "driverDllSha256": "8C3D2868D9E9AF4FC7F526544BB2D30EC72AB41E16DC613F9D8C60019939D3A5"
+    },
+    {
+      "case": "focus-WAQ",
+      "driverDllSha256": "8C3D2868D9E9AF4FC7F526544BB2D30EC72AB41E16DC613F9D8C60019939D3A5"
+    },
+    {
+      "case": "celestial-earth",
+      "driverDllSha256": "8C3D2868D9E9AF4FC7F526544BB2D30EC72AB41E16DC613F9D8C60019939D3A5"
+    },
+    {
+      "case": "celestial-moon",
+      "driverDllSha256": "8C3D2868D9E9AF4FC7F526544BB2D30EC72AB41E16DC613F9D8C60019939D3A5"
+    },
+    {
+      "case": "focus-W",
+      "status": "preserved invalid harness trial",
+      "driverDllSha256": "4B7DB91459F691BBAD5CB9E6B627C039EAD43679D6AC84B814BC1864702DFCE4"
+    }
+  ],
+  "focusedRegression": [
+    {
+      "gate": "player-engine",
+      "configuration": "debug",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-player-engine-debug.txt",
+      "sha256": "2550B112311CF407D7A48AC8B15D156F0B4A0FFDEE0F0813974884E851241948"
+    },
+    {
+      "gate": "player-attitude",
+      "configuration": "debug",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-player-attitude-debug.txt",
+      "sha256": "9CA8DB023C3CB127569E85B630C76DEF1F00E01361C65D01E2B7DAFC760A7C52"
+    },
+    {
+      "gate": "pilot-allocation",
+      "configuration": "debug",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-pilot-allocation-debug.txt",
+      "sha256": "518041774AB69B7F40562F31DDCA4C1EF5E2E1B4AE01799215C0B0C2AD561F55"
+    },
+    {
+      "gate": "pilot-demand",
+      "configuration": "debug",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-pilot-demand-debug.txt",
+      "sha256": "B80FC1142BEB23AA8A012008E0DC05A4632A564D3D6F44999179FBAF30D576A8"
+    },
+    {
+      "gate": "layout",
+      "configuration": "debug",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-layout-debug.txt",
+      "sha256": "8AA2A6E517C8A98234D28EC1289675767901154D1060A33E83DAC7A92195BA67"
+    },
+    {
+      "gate": "player-engine",
+      "configuration": "release",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-player-engine-release.txt",
+      "sha256": "5F54DF4A1684968CE2CFEB32B7B132B69F1D61C74E0FC7CD3E5169BC2347DE27"
+    },
+    {
+      "gate": "player-attitude",
+      "configuration": "release",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-player-attitude-release.txt",
+      "sha256": "F2F3462D5929119701ADD5A5D6DF1E42F57119D5661B9B2E17145E8802DDEDAE"
+    },
+    {
+      "gate": "pilot-allocation",
+      "configuration": "release",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-pilot-allocation-release.txt",
+      "sha256": "9FAD42B53B0967BCB5AAAB2C59548AD0E0759F9211B4B8E6C4C6F7F979EEB27E"
+    },
+    {
+      "gate": "pilot-demand",
+      "configuration": "release",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-pilot-demand-release.txt",
+      "sha256": "81A5B63591BAADA236D0DCCB4354A57E550A0619C463DEBE1D73708989BC8773"
+    },
+    {
+      "gate": "layout",
+      "configuration": "release",
+      "status": "PASS",
+      "log": "build/player-flight-controls-gauntlet/recovery-layout-release.txt",
+      "sha256": "81A90072DF5875BCB33F4719742A04D31181B19D0B0DC485C3446B5DE81896ED"
+    }
+  ]
+}

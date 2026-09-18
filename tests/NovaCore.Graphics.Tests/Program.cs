@@ -14,6 +14,9 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Time;
 
+if(args.Contains("--player-integrated",StringComparer.Ordinal)){PlayerIntegratedControlTests.Run();return 0;}
+if(args.Contains("--player-attitude",StringComparer.Ordinal)){PlayerAttitudeControlTests.Run();return 0;}
+if(args.Contains("--player-engine",StringComparer.Ordinal)){PlayerEngineControlTests.Run();return 0;}
 if(args.Any(a=>a.StartsWith("--florida-slab-",StringComparison.Ordinal)))PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate);
 if(args.Contains("--florida-slab-camera-static",StringComparer.Ordinal)){ActiveVesselCameraTests.StaticFlorida();return 0;}
 if(args.Contains("--florida-slab-camera-warp",StringComparer.Ordinal)){ActiveVesselCameraTests.WarpFrames();return 0;}
@@ -4430,13 +4433,13 @@ static void LayoutTest()
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.ReservedSurface)).ToInt32()==576&&
         Marshal.OffsetOf<NativeFrameSubmission>(nameof(NativeFrameSubmission.ProductionBillboard)).ToInt32()==768,
         "native frame ABI and dynamic hierarchy offsets");
-    Check(Marshal.SizeOf<NativeInputState>()==88&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PresentationFocus)).ToInt32()==72&&
+    Check(Marshal.SizeOf<NativeInputState>()==100&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PresentationFocus)).ToInt32()==72&&
         Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.ViewportWidthPixels)).ToInt32()==76&&
         Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.ViewportHeightPixels)).ToInt32()==80&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.CameraActions)).ToInt32()==84&&
-        Marshal.SizeOf<NativeHostEvent>()==112&&Marshal.OffsetOf<NativeHostEvent>(nameof(NativeHostEvent.Input)).ToInt32()==16&&Marshal.OffsetOf<NativeHostEvent>(nameof(NativeHostEvent.Submission)).ToInt32()==104,"input and host layout");
-    Check(NativeRuntime.GetAbiLayout(out var abi)==NativeResult.Success&&abi.InputStateSize==88&&abi.FrameSubmissionSize==800&&
+        Marshal.SizeOf<NativeHostEvent>()==128&&Marshal.OffsetOf<NativeHostEvent>(nameof(NativeHostEvent.Input)).ToInt32()==16&&Marshal.OffsetOf<NativeHostEvent>(nameof(NativeHostEvent.Submission)).ToInt32()==120,"input and host layout");
+    Check(NativeRuntime.GetAbiLayout(out var abi)==NativeResult.Success&&abi.InputStateSize==100&&abi.FrameSubmissionSize==800&&
         abi.FramePlanetaryGpuOffset==208&&abi.FramePlanetaryModeOffset==304&&abi.FramePlanetaryPresentationOffset==320&&abi.FrameSolarLightingOffset==528&&
-        abi.InputViewportWidthOffset==76&&abi.InputViewportHeightOffset==80&&abi.InputCameraActionsOffset==84,
+        abi.InputViewportWidthOffset==76&&abi.InputViewportHeightOffset==80&&abi.InputCameraActionsOffset==84&&abi.InputEngineActionsOffset==88&&abi.InputControlActiveOffset==92&&abi.InputPilotKeysOffset==96&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.PilotKeys)).ToInt32()==96&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.EngineActions)).ToInt32()==88&&Marshal.OffsetOf<NativeInputState>(nameof(NativeInputState.ControlInputActive)).ToInt32()==92,
         "native frame ABI layout");
 }
 static void TransformTest() { var t = RenderTransform.FromAuthoritative(new DoubleQuaternion(0, 0, Math.Sqrt(.5), Math.Sqrt(.5)), new Double3(-1, 2, 3)); Check(t.Rotation.W > .7f && t.Scale.X == -1, "conversion/negative scale policy"); Check(FloatQuaternion.Identity == new FloatQuaternion(0, 0, 0, 1), "identity"); }

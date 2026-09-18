@@ -1,0 +1,58 @@
+[
+  {
+    "sha256": "B7441CBF8280822C850D866CDA7AC3E73ED7431EA18DCF37E9D55868E3259152",
+    "path": "native/NovaCore.Native/NovaCoreNative.cpp"
+  },
+  {
+    "sha256": "F196757EE2303636A5543B2911FC16F28BAC87BBD6ED74EB06380A016995FDED",
+    "path": "native/NovaCore.Native/NovaCoreNative.h"
+  },
+  {
+    "sha256": "5429695DADD9E2F404C5912F2E7F237C4FE9366607B1D0C5357FE70FEA3607ED",
+    "path": "src/NovaCore.Interop/NativeRuntime.cs"
+  },
+  {
+    "sha256": "F0920249335F609221D18332DB1C49BC90323CFD9C640FAF32C54EF494591894",
+    "path": "samples/NovaCore.Triangle/PlayerFlightControlInput.cs"
+  },
+  {
+    "sha256": "141B587CFB4F65F1707D57F66FB021B409FBB63BA9DFC3621BA880CA4BBE4D79",
+    "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs"
+  },
+  {
+    "sha256": "F621668399A9D67C5234DA07E953B9E0F7826ABAE7994BB86FA5823E2E170729",
+    "path": "samples/NovaCore.Triangle/SampleOptions.cs"
+  },
+  {
+    "sha256": "3E9B78CE50BFB5AF13A3D16E4B0D47B9F438633CF7491BD41950F9CCD16F3BA1",
+    "path": "samples/NovaCore.Triangle/Program.cs"
+  },
+  {
+    "sha256": "FC7BB2E1D3E1C92B1E8C5C0CF51CE2A826F7C70BD5A257A2D7B12FB1C1D0270B",
+    "path": "tools/NovaCore.Launcher/LaunchConfiguration.cs"
+  },
+  {
+    "sha256": "829D308AEA67E79EC03DB42E032EE647E9D13DD2EE7DEA9B6257661F67AE7265",
+    "path": "tools/NovaCore.Launcher/LaunchCommandBuilder.cs"
+  },
+  {
+    "sha256": "1F7CC8159CBA13156C6B1364BAACED3E3AF549DF1022E1FB699E7DE95072BD06",
+    "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs"
+  },
+  {
+    "sha256": "46EEB27D5BE7E3B68559685BA10D3477959E294CF4958BDA1D82367BB051546F",
+    "path": "tests/NovaCore.Graphics.Tests/PlayerEngineControlTests.cs"
+  },
+  {
+    "sha256": "9DA01FCDC35EFF038A4D88B80A6BBCFACD06E511E07B61F63D86520AEEBD8343",
+    "path": "tests/NovaCore.Graphics.Tests/Program.cs"
+  },
+  {
+    "sha256": "2E90D9AA37A4BD885FC0CC51D58BDED31A90821F15EB76C833A8E0C6D8032141",
+    "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj"
+  },
+  {
+    "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+    "sha256": "934A69A03C88EFCD2B6670F912AFE3680F20E2761FEECE5216A6B31013E3EEFC"
+  }
+]

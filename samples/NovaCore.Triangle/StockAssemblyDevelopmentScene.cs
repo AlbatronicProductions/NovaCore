@@ -29,10 +29,19 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
     internal ReusablePartVisuals Visuals {get;}
     internal int RenderCapacity=>presentedMeshes.Length+design.Jets.Length+1;
     internal FloridaContactPresentation? FloridaView {get;}
+    internal PlayerFlightControlInput? PlayerInput {get;}
+    private readonly SolarSystemScene? playerSolar;
+    private readonly Double3 playerOrigin;
+    private readonly bool traceControls;
+    private bool lastActualMain;
+    private AssemblyCommand lastTracedCommand;
+    internal bool UsesSolarCamera=>FloridaView?.SolarNavigation==true||PlayerInput is not null;
+    private UniversePosition DisplayPosition(Double3 local)=>playerSolar is not null?new(playerOrigin+local,session.Launch.Spacecraft.CarrierFrame):
+        FloridaView?.Position(local)??new(local,session.Launch.Spacecraft.CarrierFrame);
     private readonly double[] frameMilliseconds=new double[40000];
     private readonly double[] serviceMilliseconds=new double[40000];
     private readonly char[] title=new char[384];
-    private int titledFrontier=-1;
+    private int titledFrontier=-1,titledAdmission=-1;
     private bool titledStarted,titledCompleted,titledFailed;
     private long sequence,timestamp,remainder;
     private int frameCount;
@@ -44,12 +53,11 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
     internal SceneObjectFocusObservation PrepareFocusObservation()
     {
         FloridaView?.RefreshDisplayFrame();
-        var position = FloridaView?.Position(observation.State.Motion.PositionO) ??
-            new UniversePosition(observation.State.Motion.PositionO, session.Launch.Spacecraft.CarrierFrame);
+        var position = DisplayPosition(observation.State.Motion.PositionO);
         return new(session.Launch.Spacecraft.Id.Value, focusGeneration,
-            FloridaView?.Site.Authority.BodyId ?? 0, position,
+            playerSolar is not null?6:FloridaView?.Site.Authority.BodyId ?? 0, position,
             checked((long)observation.StateRevision.Value), observation.State.Epoch.Ticks,
-            FloridaView?.Solar.PresentationTicks ?? observation.State.Epoch.Ticks,
+            playerSolar?.PresentationTicks ?? FloridaView?.Solar.PresentationTicks ?? observation.State.Epoch.Ticks,
             disposed ? SceneObjectFocusStatus.Retired : Failed ? SceneObjectFocusStatus.Failed :
             Completed ? SceneObjectFocusStatus.Held : started ? SceneObjectFocusStatus.Active : SceneObjectFocusStatus.Prepared)
         {
@@ -61,8 +69,9 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
     // A terminal observation is historical. It is not an instruction to keep firing FX.
     internal bool ActiveExhaust=>started&&!Completed&&!Failed;
     internal ResolvedRenderSnapshot InitialSnapshot {get;}
-    internal StockAssemblyDevelopmentScene(string stockId="novacore.stock.SRV01.FourHorn",bool supportedContact=false,bool poweredSupport=false,bool floridaSupport=false,SolarSystemScene? solarWorld=null)
+    internal StockAssemblyDevelopmentScene(string stockId="novacore.stock.SRV01.FourHorn",bool supportedContact=false,bool poweredSupport=false,bool floridaSupport=false,SolarSystemScene? solarWorld=null,bool playerControls=false)
     {
+        if(playerControls&&(supportedContact||poweredSupport||floridaSupport||solarWorld is null))throw new ArgumentException("Player controls require the separate Solar free-flight proving route.");
         if(poweredSupport&&!supportedContact)throw new ArgumentException("Powered support requires the contact route.");
         if(floridaSupport&&(!supportedContact||poweredSupport))throw new ArgumentException("Florida qualification requires stock engine-OFF contact.");
         this.supportedContact=supportedContact;
@@ -74,13 +83,22 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
         design=d;
         // Fully recorded input schedule, selected before instantiation. No display-frame commands.
         var plan=new AssemblyCommand[128];
-        for(var i=0;i<plan.Length;i++)plan[i]=i<32?new(true,null,i<16?0:.025,0,15625):new(false,d.Data.Design.Pairs[(i-32)/16].Name,0,0,15625);
+        for(var i=0;i<plan.Length;i++)plan[i]=playerControls?new(false,null,0,0,15625):i<32?new(true,null,i<16?0:.025,0,15625):new(false,d.Data.Design.Pairs[(i-32)/16].Name,0,0,15625);
         var definition=new SpacecraftDefinition(new(201),new(1),new(2),"Registered reference assembly");
         var launch=floridaSupport?AssemblyLaunch.CreateFloridaSupported(d,definition,"florida-slab",PrepareFlorida(solarWorld?.CurrentTime??SimulationInstant.Zero)):
             poweredSupport?AssemblyLaunch.CreatePoweredSupported(AssemblyContactProfile.Create(d),definition,"powered-supported-01"):
             supportedContact?AssemblyLaunch.CreateSupported(AssemblyContactProfile.Create(d),definition,"reference-launch-01"):
             new AssemblyLaunch(d,definition,"reference-launch-01",new(default,default,DoubleQuaternion.Identity,default),default,plan);
         session=supportedContact?AssemblyApplicationSession.CreateSupported(launch):AssemblyApplicationSession.Create(launch);Observe();
+        if(playerControls)
+        {
+            session.EnableLiveControl(execution:AssemblyControlExecution.PhysicalActuators);PlayerInput=new(session);playerSolar=solarWorld;
+            if(!playerSolar!.Presentation.TryGetBody(6,out var earth))throw new InvalidDataException("Proving scene environmental Earth unavailable.");
+            // Fixed inertial display placement only. This finite, gravity-free
+            // physical episode makes no orbital or departure assertion.
+            playerOrigin=earth.Position.Value+new Double3(0,0,20_000_000);
+            traceControls=Environment.GetEnvironmentVariable("NOVACORE_CONTROL_TRACE")=="1";
+        }
         try
         {
             if(floridaSupport)FloridaView=new(session.Launch.Site!,session.Launch.Spacecraft.CarrierFrame,solarWorld);
@@ -96,7 +114,7 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
         }
         catch{Visuals?.Dispose();session.Dispose();throw;}
         Console.WriteLine("STOCK_ASSEMBLY_READY design="+d.Data.Design.Id+" digest="+d.Digest+(supportedContact?" intervals=1200 cadence_hz=60 supported_contact=true":" intervals=128 cadence_hz=64")+" max_service=4 parts=7 physical_jets=16 visual_mesh_instances="+presentedMeshes.Length+" shared_gpu_meshes="+Visuals.UniqueMeshCount+" mesh_buffer_bytes="+Visuals.BufferBytes);
-        Console.WriteLine(floridaSupport?(FloridaView!.SolarNavigation?
+        Console.WriteLine(playerControls?"SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.":floridaSupport?(FloridaView!.SolarNavigation?
             "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.":
             "Stock SRV-01 Florida support slab: authenticated terrain-v5 site, one finite authored base/footing slab, centred physical support on its top. Earth-fixed display and lighting held at ready epoch; Space starts 20 seconds; engine/RCS OFF; Earth rotates in canonical inertial publication. Camera WASD/QE, mouse look, R reset. No launch, departure or launch-stack qualification. Project Control manual support/presentation acceptance PASS; production shadows deferred."):
             poweredSupport?"SRV-01 powered support. Space starts 20 seconds: stock 600 N main, RCS OFF, finite fuel/oxidizer decrease. Sub-weight thrust: supported, no liftoff or departure. Camera WASD/QE, mouse look, R reset. Relaunch for a cold restart.":
@@ -115,7 +133,17 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
         Console.WriteLine($"SRV01_FLORIDA_SITE identity={site.Digest} authority={site.Authority} support=authored-base-footing-union presentation=single-finite-slab");
         return site;
     }
-    internal void Start(){if(started||Failed)return;started=true;timestamp=Stopwatch.GetTimestamp();}
+    internal void Start(){if(started||Failed||PlayerInput is {Started:false})return;started=true;timestamp=Stopwatch.GetTimestamp();remainder=0;}
+    internal void ApplyPlayerInput(in NativeInputState input)
+    {
+        if(PlayerInput is null||Failed||disposed)return;
+        var result=PlayerInput.Apply(input);
+        if(traceControls&&(input.EngineActions!=0||result.Status==AssemblyControlStatus.Admitted))
+            Console.WriteLine($"PLAYER_INPUT keys={(uint)input.PilotKeys} pilot={PlayerInput.Observation.Requested.Pilot} actions={(uint)input.EngineActions} active={input.ControlInputActive} result={result.Status} sequence={PlayerInput.Observation.AdmissionCount} frontier={observation.State.Frontier} requested={PlayerInput.Observation.Requested.MainOn} started={started}");
+        if(result.Status is not(AssemblyControlStatus.Ready or AssemblyControlStatus.Admitted or AssemblyControlStatus.Terminal))
+        {session.Engine.RetireAssemblyControl(session.Control!);Fail(AssemblyFlightStatus.Invalidated);return;}
+        if(PlayerInput.Started&&!started)Start();
+    }
     internal void AdvanceLive(bool startRequested=false)
     {
         UpdateTitle();
@@ -142,6 +170,17 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
         if(service.Status is not(AssemblyFlightStatus.Completed or AssemblyFlightStatus.AwaitingDebt or AssemblyFlightStatus.BudgetExhausted))
             {Fail(service.Status);return;}
         Observe();Completed=service.Status==AssemblyFlightStatus.Completed;
+        if(traceControls&&(observation.State.AppliedCommand!=lastTracedCommand||Completed))
+        {
+            Console.WriteLine($"PLAYER_ACTUATION frontier={observation.State.Frontier} command={observation.State.AppliedCommand} actual={observation.State.Actual} gimbal={observation.State.Gimbal} omega={observation.State.Motion.AngularVelocityBody} stores={observation.State.Stores}");
+            lastTracedCommand=observation.State.AppliedCommand;
+        }
+        if(traceControls&&observation.State.Actual.MainOn!=lastActualMain)
+        {
+            observation.State.Stores.Fuel.TryToKilograms(out var fuel);
+            Console.WriteLine($"PLAYER_REALIZED frontier={observation.State.Frontier} main={observation.State.Actual.MainOn} fuel={fuel:R} velocityX={observation.State.Motion.VelocityO.X:R} positionX={observation.State.Motion.PositionO.X:R}");
+            lastActualMain=observation.State.Actual.MainOn;
+        }
     }
     private void Fail(AssemblyFlightStatus status)
     {
@@ -161,7 +200,7 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
         if(binding.Mesh.Gimballed){position=p.Instance.Pose.Point(p.Definition.Gimbal!.Pivot);rotation*=GimbalRotation();}
         var value=new ResolvedRenderObject(new((uint)index+1),new(motion.PositionO+motion.BodyToWorld.Rotate(position),session.Launch.Spacecraft.CarrierFrame),
             motion.BodyToWorld*rotation,new(1,1,1),binding.Mesh.Handle);
-        return FloridaView?.Embed(value)??value;
+        return playerSolar is not null?value with {RootPosition=DisplayPosition(value.RootPosition.Value)}:FloridaView?.Embed(value)??value;
     }
     internal void BuildSubmission(in GpuCameraData camera,in UniversePosition cameraRoot,RenderFrameSubmission submission)
     {
@@ -206,7 +245,7 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
     private void AddExhaust(RenderFrameSubmission submission,Double3 local,Double3 outward,double length,double radius)
     {
         var axis=Double3.Cross(Double3.UnitX,outward);var q=axis.LengthSquared<1e-20?(outward.X>0?DoubleQuaternion.Identity:DoubleQuaternion.FromAxisAngle(Double3.UnitY,Math.PI)):DoubleQuaternion.FromAxisAngle(axis,Math.Acos(Math.Clamp(outward.X,-1,1)));
-        var m=observation.State.Motion;submission.Add(new(m.PositionO+m.BodyToWorld.Rotate(local),session.Launch.Spacecraft.CarrierFrame),m.BodyToWorld*q,new(length,radius,radius),Visuals.ExhaustMesh);
+        var m=observation.State.Motion;submission.Add(DisplayPosition(m.PositionO+m.BodyToWorld.Rotate(local)),(FloridaView?.Rotation??DoubleQuaternion.Identity)*m.BodyToWorld*q,new(length,radius,radius),Visuals.ExhaustMesh);
     }
     private void ValidateBindings()
     {
@@ -238,14 +277,14 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
     public void Dispose(){if(disposed)return;disposed=true;session.Dispose();Visuals.Dispose();}
     private unsafe void UpdateTitle()
     {
-        if(titledFrontier==observation.State.Frontier&&titledStarted==started&&titledCompleted==Completed&&titledFailed==Failed)return;
+        if(titledAdmission==(PlayerInput?.Observation.AdmissionCount??0)&&titledFrontier==observation.State.Frontier&&titledStarted==started&&titledCompleted==Completed&&titledFailed==Failed)return;
         var window=GetActiveWindow();if(window==IntPtr.Zero)return;
-        var status=Failed?"FAILED":Completed?"COMPLETED / HELD ENDPOINT":started?"RUNNING":FloridaView?.SolarNavigation==true?"READY / AUTO START":"READY / SPACE TO START";
+        var status=Failed?"FAILED":Completed?"TERMINAL / HELD ENDPOINT":started?"RUNNING":PlayerInput is not null?"READY / Z TO IGNITE":FloridaView?.SolarNavigation==true?"READY / AUTO START":"READY / SPACE TO START";
         observation.State.Stores.Fuel.TryToKilograms(out var fuel);observation.State.Stores.Oxidizer.TryToKilograms(out var oxidizer);
         var span=title.AsSpan();
-        if(!span.TryWrite(CultureInfo.InvariantCulture,$"NovaCore - SRV-01 {(floridaSupport?"Florida support slab":poweredSupport?"powered support":supportedContact?"supported contact":"reusable parts")} - {status} | interval {observation.State.Frontier}/{session.Launch.Plan.Length} | main {(ActiveExhaust&&observation.State.Actual.MainOn?"ON":"OFF")} | RCS {(ActiveExhaust?observation.State.Actual.Jets:0):X4} | fuel {fuel:F6} kg oxide {oxidizer:F6} kg",out var written)||written>=title.Length-1)throw new InvalidOperationException("SRV01 status capacity");
+        if(!span.TryWrite(CultureInfo.InvariantCulture,$"NovaCore - SRV-01 {(PlayerInput is not null?"control proving scene":floridaSupport?"Florida support slab":poweredSupport?"powered support":supportedContact?"supported contact":"reusable parts")} - {status} | interval {observation.State.Frontier}/{session.Launch.Plan.Length} | main {(ActiveExhaust&&observation.State.Actual.MainOn?"ON":"OFF")} | request {(PlayerInput?.Observation.Requested.MainOn==true?"ON":"OFF")} | pilot {PlayerInput?.Observation.Requested.Pilot.Pitch??0}/{PlayerInput?.Observation.Requested.Pilot.Yaw??0}/{PlayerInput?.Observation.Requested.Pilot.Roll??0} | RCS {(ActiveExhaust?observation.State.Actual.Jets:0):X4} | fuel {fuel:F6} kg oxide {oxidizer:F6} kg",out var written)||written>=title.Length-1)throw new InvalidOperationException("SRV01 status capacity");
         title[written]='\0';fixed(char* text=title)if(!SetWindowText(window,text))return;
-        titledFrontier=observation.State.Frontier;titledStarted=started;titledCompleted=Completed;titledFailed=Failed;
+        titledAdmission=PlayerInput?.Observation.AdmissionCount??0;titledFrontier=observation.State.Frontier;titledStarted=started;titledCompleted=Completed;titledFailed=Failed;
     }
     [DllImport("user32.dll")]private static extern IntPtr GetActiveWindow();
     [DllImport("user32.dll",EntryPoint="SetWindowTextW",CharSet=CharSet.Unicode)]

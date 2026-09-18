@@ -1,0 +1,80 @@
+[
+  {
+    "stage": 1,
+    "samples": 2048,
+    "medianMs": 0.0889,
+    "p95Ms": 0.123,
+    "p99Ms": 0.1568,
+    "maxMs": 1.2141,
+    "allocatedBytes": 0,
+    "gc": [
+      0,
+      0,
+      0
+    ],
+    "recordedBaseline": {
+      "medianMs": 0.0867,
+      "p95Ms": 0.0904,
+      "p99Ms": 0.1124,
+      "maxMs": 0.171
+    },
+    "refusalAllocatedBytes": 0,
+    "journalCapacity": 256,
+    "recordBytes": 48,
+    "journalPayloadBytes": 12288,
+    "coldControlBytes": 12392,
+    "capacitySaveBytes": 162428
+  },
+  {
+    "stage": 1,
+    "samples": 2048,
+    "medianMs": 0.0911,
+    "p95Ms": 0.0943,
+    "p99Ms": 0.0961,
+    "maxMs": 0.1335,
+    "allocatedBytes": 0,
+    "gc": [
+      0,
+      0,
+      0
+    ],
+    "recordedBaseline": {
+      "medianMs": 0.0551,
+      "p95Ms": 0.0916,
+      "p99Ms": 0.1059,
+      "maxMs": 1.3948
+    },
+    "refusalAllocatedBytes": 0,
+    "journalCapacity": 256,
+    "recordBytes": 48,
+    "journalPayloadBytes": 12288,
+    "coldControlBytes": 12392,
+    "capacitySaveBytes": 162428
+  },
+  {
+    "stage": 1,
+    "samples": 2048,
+    "medianMs": 0.006,
+    "p95Ms": 0.0069,
+    "p99Ms": 0.0078,
+    "maxMs": 0.0588,
+    "allocatedBytes": 0,
+    "gc": [
+      0,
+      0,
+      0
+    ],
+    "recordedBaseline": {
+      "medianMs": 0.0059,
+      "p95Ms": 0.0069,
+      "p99Ms": 0.0082,
+      "maxMs": 0.0528
+    },
+    "refusalAllocatedBytes": 0,
+    "journalCapacity": 256,
+    "recordBytes": 48,
+    "journalPayloadBytes": 12288,
+    "coldControlBytes": 12392,
+    "capacitySaveBytes": 162428
+  }
+]

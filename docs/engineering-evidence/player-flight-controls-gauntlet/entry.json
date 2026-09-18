@@ -1,0 +1,228 @@
+{
+  "capturedUtc": "2026-09-18T19:40:59.7956633Z",
+  "head": "6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae",
+  "tagObject": "fe240297fd83a64b234a1e47defbe162c85b3bec",
+  "index": [],
+  "priorUntracked": [
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/README.md",
+      "sha256": "2D1BD49F38246B63BC6811D46D9B03BB00C63D31DCAD38115D4DC311F26C52A8"
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/closure.json",
+      "sha256": "34A90A125B23D33E854A7C3AB8093DB246EBD24C2C8CFF68E43C4D6782300640"
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/entry.json",
+      "sha256": "3BF9C885A65DFA6CA7B6F1ABC841D82C185484A6D88E6E3E9BD54D2F674E4E79"
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/ksa.md",
+      "sha256": "5C2447AD8A87630651017DBE43C3FA1FDC82E232861FEED99711A3AA57222D2F"
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/verification.md",
+      "sha256": "3C131E9BFB206A6F88420BF755B6C3E0FE19B40C6B5C0F5A2BE71D1F50829C88"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/README.md",
+      "sha256": "85707966A3F693CA61116895C141F88A83401E6EC2BEF71D7DCD79B6C0E8729A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/candidate-comparison.md",
+      "sha256": "A55EEA05909208FFF544EBE0AB0D0662DA4AD87668D34B520EFB841C6EBCC42E"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/dependency-graph.md",
+      "sha256": "27F1B344A8509BC4680669BAFC5EFAF456DB5C0AF025556E0FA2A2E807C7E569"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/identity.json",
+      "sha256": "E8091133682A817EF396552A777F1089E2C288C6649C1AD98EBBAD6E66CC7D75"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-camera.md",
+      "sha256": "7BA26D11DE35F2039AFAD4E807901250B662640B16A9B3BC88838CFE1A187F4C"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-departure.md",
+      "sha256": "B54DF4E2892055D801CEA2C52A41C385BE42D2844ACE64AA386811134104DE3B"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-launch-stack.md",
+      "sha256": "49B49569309F349C668F78822E97380E0AACFBA0D14512C6EB7C292E7654FD90"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-live-history.md",
+      "sha256": "336A13A531F2D6CE45526C2412CF93D7774691C9DD963679BFF95404DEA3D18A"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-navigation-sas.md",
+      "sha256": "5501EC714E83903A1986F33C7B5656C194F3BD6DDBD6372917AC211B102D9C39"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-player-input.md",
+      "sha256": "62994C41B575F928866CFC3836A3FDC7F92C3877960479EAFDE1333A66003A22"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/novacore-owner-map.md",
+      "sha256": "AD51D35FF402E8F8A6B3C01743B9F7BD96F1B1A914A38FEA6BB4594CCF47B930"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/promotion-judgment.md",
+      "sha256": "E30320C2A893C2B720D770DBD663E9D93520E5CAA990D81285F114D936DAEA6D"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/red-team.md",
+      "sha256": "2DDB044D461F724D4491FEDAAE6DA40498C8B35163CFC17571470386E47071DF"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/repo-truth.md",
+      "sha256": "A500723D2064F0EE3E8A0D8001EB7B2C471845673C345AC5236724BEE0C84F90"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/reproduce.md",
+      "sha256": "B8A6CE6FF2920FD61AD98E855A8C559FF575877335A9E7F8526FA7B7076C6E98"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.json",
+      "sha256": "AE00BF0A73FD44FE5E246005C7FCB604C230F13BE8B03A6F961F7960F8CDD3B6"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.md",
+      "sha256": "4A1CC10CD407C0C49EC73555B2C31FDF3E0BA91B06A5DA40DE93CCFD86239BC9"
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verify-review.ps1",
+      "sha256": "C068516C73D263CEEEFA7A71631B1E66219DBD3EA67E6AF09DC291041803E812"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "sha256": "F9F8C81D7F8C1DC94F8C80F3F62D857593A5F3D2B0E4150EDCC4CA595E414C48"
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "sha256": "C71E2149375B41C29DA6D3177FBE7137C6443E9006508740B85AA6BA118F5D1D"
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "sha256": "45D6A9966A89962BBBE0CA167FD62A07E39FE74B37621C73FF4558F852A44D0C"
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "sha256": "BC6A94CE816093A0A72C27975DB20C7F22F5F7EB9A36DC28ABE49837A8C019FE"
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "sha256": "BF7D6144200EAE6EDDA286B19C0AA83E3D262F0E1ED956FE881E3B9333313AD7"
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "sha256": "9768C62CFC86E4EF8A090CA1EE8F4E1DEC9DA9486A8EA5E63C3075953D47180C"
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "sha256": "2D9A9B426232826FE19D1678AEF8FEADB7A241B4ABBA5FA9A9B201325D5B58C3"
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "sha256": "25D48B0A2C5E8EFA243DEE627A17685D16A4F2DDC7C84337559BDDDB1D6CE81F"
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "sha256": "F46F7B4215CD7C4311233DEB3B36434798941B602478ED9AB20539BFF3A2263B"
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "sha256": "8923E3630C2D44DB6DD9B13E41FEA51CD847403BEE3F9EDFCE56543D5609E364"
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "sha256": "5CB5AC5616369CC6F399C323B9C6351EAB0D4E2253BBBF08C6F8E317A7C06E00"
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "sha256": "41EAD10AB96F1E1987AC847109D442E158B290F82CFB6F598047ADA3C1DEFA62"
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "sha256": "6F5440BD5D0C28487E48591C88D6A21761514823E5855F4598072D679E5AD433"
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "sha256": "6C0F70CDDE3DCD6EFDE8904A9CB592AA4517C2C5793627C665984AF6BC9BFABA"
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "sha256": "16A305F5992222FE8A998B3C052DA505D439E863B140CDBB9951DE7D3A17DCE5"
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "sha256": "EA6FA514E054B018868F3A6266C036C1E426126EA18507C9AE31B514962E1F6A"
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "sha256": "031471F49DE563EBCC56CEEF5DC3817C2506226858E4B09A8898978D9853B075"
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "sha256": "D55E23207DD1FB93B51B097CAAFC3003E733DD4D8B281E66884078B3372E0CE2"
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "sha256": "4CD4B3C87F0DF2F833772A2FA1E03AB4BE69E4EC8CF449BE7F75D1CC99F3298F"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "sha256": "255BBF8B40BC0558CA51CC4314705D3BE7BD15E3509749086C6918483EA9E585"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "sha256": "9303CF44C330801D9E73B52A905E780762D69538B6B8131840F190CABAA31E4E"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "sha256": "4ADADD439E0BC32E2A67504DE8568997D418582C7906F3EFE7E52ED9F1A3146D"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "sha256": "2DF837472BF5AAB7E7320F7E191A50D28F5F0074B6F6F43BB00714C00FD739E6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "sha256": "466650DDEA93B66B73216F0470AC59C4A28693372CBEB0F95EB5FE9E41A8D497"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "sha256": "25CC007BFDD7E09929527F566A908945A86EDD4D3F341E46D4AF24438A0DB363"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "sha256": "AAD2D98BC7EBA715FF9E6E9A30DE798BF6D33B95EEA6BA2F9176CEE2BA51CF1C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "sha256": "E8EB8AF4105E9C97475DF9CF8AE53CBA68BA23A71EF9B9AA7749C0B97A9891B3"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "sha256": "DF5F0D2378AC6A50EEA2133D2C9F38584E623F7679DF7CD2EB827FD971BA97EB"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "sha256": "85D493C3748A3BE0D9BCD57C6DB01DB16FE29B56D39AC6D6B749E4DB434D8E5A"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "sha256": "1AA52F7883FC10B4657DD0A86097FA2E28A9C09145CE6135771F410222B9E2A6"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "sha256": "70B12C49D710E6B8BED292B4743469F4479822E01A2BFC3621BBFA79F848961C"
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "sha256": "F3E079029EF026043F6F995149EDDE307EA688A4AC12EB121B9F2E32ECDD9396"
+    }
+  ]
+}

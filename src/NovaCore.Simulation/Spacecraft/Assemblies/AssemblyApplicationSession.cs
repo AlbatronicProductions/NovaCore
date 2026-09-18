@@ -14,6 +14,8 @@ internal sealed class AssemblyApplicationSession : IDisposable
     internal SimulationClock Clock {get;}
     internal SimulationTransactionEngine Engine {get;}
     internal AssemblyFlightAuthority Authority {get;}
+    internal AssemblyControlAuthority? Control {get;private set;}
+    private bool disposed;
     private AssemblyApplicationSession(AssemblyLaunch launch,int capacity,SimulationRate rate,StateRevision revision,bool contact=false)
     {
         Launch=launch;
@@ -37,7 +39,21 @@ internal sealed class AssemblyApplicationSession : IDisposable
         new(launch,historyCapacity,rate==default?SimulationRate.One:rate,initialRevision);
     internal static AssemblyApplicationSession CreateSupported(AssemblyLaunch launch,int historyCapacity=1200,StateRevision initialRevision=default)=>
         new(launch,historyCapacity,SimulationRate.One,initialRevision,true);
-    public void Dispose(){if(Launch.Consumer==AssemblyPhysicalConsumer.SupportedContact)Engine.DisposeAssemblyContact(Authority);}
+    internal void EnableLiveControl(int capacity=SimulationTransactionEngine.AssemblyControlCapacity,AssemblyControlExecution execution=AssemblyControlExecution.DemandOnly)
+    {
+        ObjectDisposedException.ThrowIf(disposed,this);
+        if(Engine.BeginAssemblyControl(Authority,capacity,out var control,execution)!=AssemblyControlStatus.Ready)
+            throw new InvalidDataException("Live assembly control refused.");
+        Control=control;
+    }
+    public void Dispose()
+    {
+        if(disposed)return;
+        if(Launch.Consumer==AssemblyPhysicalConsumer.FreeFlight && Engine.RetireAssemblyFlight(Authority)!=AssemblyFlightStatus.Invalidated)
+            throw new InvalidOperationException("Assembly retirement outside owner phase.");
+        if(Launch.Consumer==AssemblyPhysicalConsumer.SupportedContact)Engine.DisposeAssemblyContact(Authority);
+        disposed=true;
+    }
     internal byte[] Save()=>Engine.SaveAssemblyFlight(Authority);
     internal static AssemblyApplicationSession Restore(AssemblyStockCatalog catalog,ReadOnlySpan<byte> bytes)=>SimulationTransactionEngine.RestoreAssemblyFlight(catalog,bytes);
 }

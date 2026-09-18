@@ -1,0 +1,30 @@
+[
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyControl.cs",
+    "sha256": "A58CB6EAAEFBE0B4C6E981E5051AAAD299605A558F8D5633F70AA925A08D3DD7"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyControl.cs",
+    "sha256": "61EACE1B489F853A054DCAC67787D266BD0F4E7A6824455ADAE1195DB03CBD99"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+    "sha256": "F6EE014A12B227D51ED275DA21BD8FF29AEBE705A7101BD42BF04B1A9DCEC25C"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/PlayerFlightControlInput.cs",
+    "sha256": "55AB62850EEF614A768CE2FCA551D821C172C62730CEF816AC3D7A524B6DAEB4"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/AssemblyPilotDemandTests.cs",
+    "sha256": "F82B3B067700703C459D34CBFB351C7910091D3BF65C558F09A59457529FCE05"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/PlayerEngineControlTests.cs",
+    "sha256": "74950BD524C53D1F76D3E8F09CEB99A811ED544C0C307D30589668EDE117B5F1"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "sha256": "DC4D428B6DA2AC3E7DCEBCDD580CAF554F76729A8BEDC47CE5734CF79F1AD0BF"
+  }
+]

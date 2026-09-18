@@ -1,0 +1,13 @@
+# Native proof reproduction
+
+Use the production candidate built by the root build-candidate.ps1 in Release. Run build-native-observer.ps1 and build-input-driver.ps1 here with PowerShell7. The observer generator copies production sources under build/player-flight-controls-gauntlet/native-hold-observer and adds observation-only fixed buffers plus shutdown serialization. Read generated diffs and source.json before running. No production source or deployed output is replaced.
+
+External driver: build/player-flight-controls-gauntlet/native-input-driver/bin/Release/net10.0-windows/NativeInputDriver.exe. Arguments: absolute observer runtime/NovaCore.Triangle.exe, absolute fresh output directory, scenario. Scenarios: W, S, A, D, Q, E, off-WA, off-WQ, off-AQ, off-WAQ, opposed-WS, opposed-AD, opposed-QE, focus-W, focus-WAQ, celestial-earth, celestial-moon. It owns one candidate, verifies foreground identity, injects distinct real Windows down/hold/up events, releases keys in finally, closes its process, and saves driver/native/managed/session records. Use the declared schedule; do not tune duration to results. Historical focus-W-retry1 is the successful corrected-driver focus-W trial.
+
+The original tap witness used the same documented Sky press_key mechanism as the failed prior attempt, on the observer window. Compact event/frame evidence is in native-hold-results.json; the separate-hold driver must not replace that tap attribution.
+
+Run analyze-native-holds.py on the declared case folders. Run build-hold-oracle.py from repository root, then dotnet build build/player-flight-controls-gauntlet/native-hold-oracle/NativeHoldOracle.csproj -c Release. Invoke its bin/Release/net10.0/NovaCore.Simulation.Tests.exe with the captured directories. It restores exact saves, independently resolves nozzle/wrench/resource effects, and replays admitted frontiers under changed host-credit fragmentation. This separate diagnostic executable never becomes a runtime dependency.
+
+Stage6 uses build-native-observer.ps1 -Variant native-hold-observer-stage6 and driver scenario integrated, five runs named run-1 through run-5. Run ../stage6-integrated-controls/analyze.py from repository root. Add --integrated to the oracle for reversal-aware checks: full independent wrench equality remains mandatory, but instantaneous requested-sign/absolute-omega assertions do not apply after reversal. Original single-axis sign gates are unchanged.
+
+Normal native timing includes observer overhead. Permanent timing/allocation gates use production binaries without overlays. Close test candidates and retain only bounded summaries, one integrated save, and reproducible helper sources in permanent evidence.

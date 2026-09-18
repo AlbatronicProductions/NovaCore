@@ -1,0 +1,342 @@
+{
+  "status": "PASS",
+  "checks": 24111,
+  "results": [
+    {
+      "scenario": "W",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0.02075723686557952,
+        "Z": 0,
+        "LengthSquared": 0.0004308628822937735,
+        "IsFinite": true
+      },
+      "historyDigest": "8feefe8122976b7f99b022b7d2ae758c0150cbea00a1a00e0174bf02d6a6b382",
+      "uniqueMasks": [
+        0
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "S",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0,
+        "Y": -0.02075723686557952,
+        "Z": 0,
+        "LengthSquared": 0.0004308628822937735,
+        "IsFinite": true
+      },
+      "historyDigest": "0f37a849e6743e5961dcc221ded430eda16f3a3334891bae7454599d7b0dc5fb",
+      "uniqueMasks": [
+        0
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "A",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 23,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0.022686937551493883,
+        "LengthSquared": 0.0005146971354653832,
+        "IsFinite": true
+      },
+      "historyDigest": "051a699d8d8ad99e32611c6d8defa3ffe6fc65c49f25c31f412c531fb065982b",
+      "uniqueMasks": [
+        0
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "D",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0,
+        "Z": -0.02075723686557952,
+        "LengthSquared": 0.0004308628822937735,
+        "IsFinite": true
+      },
+      "historyDigest": "33f7e604bafedac23f93b8a03bf58f40eb5790d58784120f6a21e0ccec0b2f3e",
+      "uniqueMasks": [
+        0
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "Q",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0.0655384791666831,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0.004295292251481754,
+        "IsFinite": true
+      },
+      "historyDigest": "f3206af4272cd6570bcd09a8105be1ce1ac981c1b2d7f3a0874f7b6a6728428b",
+      "uniqueMasks": [
+        0,
+        34
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "E",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": -0.0655384791666831,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0.004295292251481754,
+        "IsFinite": true
+      },
+      "historyDigest": "a7e0fbd63c03c30f9d87dde64560ed4095609def29be5a2682abbd2d5f915486",
+      "uniqueMasks": [
+        0,
+        17408
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "off-WA",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0.00603284187251983,
+        "Z": 0.00603284187251983,
+        "LengthSquared": 7.279036211765715e-05,
+        "IsFinite": true
+      },
+      "historyDigest": "0fbac403cb937bd438c1cba0e218ffa1d32fb5d97dd1ea36ea86b08a6d4958ae",
+      "uniqueMasks": [
+        0,
+        273
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "off-WQ",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0.06553847916668311,
+        "Y": 0.012028014729142392,
+        "Z": -0.0009524869203155369,
+        "LengthSquared": 0.004440872621139594,
+        "IsFinite": true
+      },
+      "historyDigest": "04ebde5439d2ae54b41f2dd70c552cdd76e7afd145859e88156c4f9395f046e2",
+      "uniqueMasks": [
+        0,
+        291
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "off-AQ",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0.0655384791666831,
+        "Y": 0.0009433819323873461,
+        "Z": 0.012028841854664253,
+        "LengthSquared": 0.004440875257316632,
+        "IsFinite": true
+      },
+      "historyDigest": "fb144fe53b8e86d814bcd9a71e1be5897da7474ece86c845ae37fb5f09357cd6",
+      "uniqueMasks": [
+        0,
+        306
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "off-WAQ",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0.06553847916668311,
+        "Y": 0.006490291048788289,
+        "Z": 0.005537800811494639,
+        "LengthSquared": 0.0043680833672075274,
+        "IsFinite": true
+      },
+      "historyDigest": "5aea61561897176849c982491a338a912d3dbc23fd09eea81dbcd8267976cdc7",
+      "uniqueMasks": [
+        0,
+        307
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "opposed-WS",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 32,
+      "admissions": 6,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0.017550082468043807,
+        "Z": 0,
+        "LengthSquared": 0.0003080053946351386,
+        "IsFinite": true
+      },
+      "historyDigest": "3ca7f24b822cee5aaade359c2e345b828063a27192ce8ab1a089a36a11511e5a",
+      "uniqueMasks": [
+        0,
+        257
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "opposed-AD",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 32,
+      "admissions": 6,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0.017550161915792156,
+        "LengthSquared": 0.0003080081832705214,
+        "IsFinite": true
+      },
+      "historyDigest": "d6a40a89a5165d39428626f7e942eb462825b489974478b0ed7ded69eb03a4f6",
+      "uniqueMasks": [
+        0,
+        272
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "opposed-QE",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 32,
+      "admissions": 6,
+      "finalOmega": {
+        "X": 0.09532869696972088,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0.009087560465944871,
+        "IsFinite": true
+      },
+      "historyDigest": "5d950ed6933236a22eaffb3f5758d249caf0a36ba4a8927639d9198835ebcd4f",
+      "uniqueMasks": [
+        0,
+        34
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "focus-W-retry1",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 46,
+      "admissions": 6,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0.039546736874412895,
+        "Z": 0,
+        "LengthSquared": 0.0015639443974140486,
+        "IsFinite": true
+      },
+      "historyDigest": "36ecd0509541f3ce0b886aace68229b18a77e41364557cd467c26f4b71f46431",
+      "uniqueMasks": [
+        0
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "focus-WAQ",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 46,
+      "admissions": 6,
+      "finalOmega": {
+        "X": 0.13703500189397372,
+        "Y": 0.04158345548172836,
+        "Z": 0.03429687857366701,
+        "LengthSquared": 0.021684051393779123,
+        "IsFinite": true
+      },
+      "historyDigest": "1c65e52ff441420f88ed8aaaeb3a838548e114c2f5902830e8cde72a6cf91ba1",
+      "uniqueMasks": [
+        0,
+        34
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "celestial-earth",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 22,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0,
+        "Y": 0.02075723686557952,
+        "Z": 0,
+        "LengthSquared": 0.0004308628822937735,
+        "IsFinite": true
+      },
+      "historyDigest": "c52817f6bae78bed58c45bd8f6d192add6dbfd110fa09b010a0de7a277f9f9b5",
+      "uniqueMasks": [
+        0
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    },
+    {
+      "scenario": "celestial-moon",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 23,
+      "admissions": 4,
+      "finalOmega": {
+        "X": 0.06851750094698687,
+        "Y": 0.024320769357420495,
+        "Z": 0.02091774217529956,
+        "LengthSquared": 0.005723699695869496,
+        "IsFinite": true
+      },
+      "historyDigest": "ec5a25f26aa74a391bea28ffa8e0678efc137c7b91546e5e206c4b3f83ae9da6",
+      "uniqueMasks": [
+        0,
+        34
+      ],
+      "checks": "all128 interval masks,wrench,heldgimbal,slew,exactdebit,signs,neutralmomentum,fragmentedhistory and finalstate/debt"
+    }
+  ],
+  "rawPath": "build\\player-flight-controls-gauntlet\\native-hold-observer\\physical-oracle.json",
+  "rawSha256": "5FF2E259E0F18ED4A3BF29DD343E178DD0092D6C878777A2B09FAEF175CDADA1"
+}

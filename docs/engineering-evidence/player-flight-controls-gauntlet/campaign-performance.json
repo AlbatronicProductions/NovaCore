@@ -1,0 +1,455 @@
+{
+  "scope": "Stage6 qualified managed subpaths plus real native integrated episodes",
+  "threshold": "report-only; no invented budget",
+  "phases": [
+    {
+      "configuration": "debug",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "request-sign-resolution",
+      "samples": 640,
+      "medianMs": 0,
+      "p95Ms": 0.0001,
+      "p99Ms": 0.0001,
+      "maxMs": 0.0002,
+      "repetitionMaxMs": [
+        0.0001,
+        0.0002,
+        0.0001,
+        0.0002,
+        0.0002
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "debug",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "input-plus-canonical-admission",
+      "samples": 640,
+      "medianMs": 0.0024,
+      "p95Ms": 0.0075,
+      "p99Ms": 0.0096,
+      "maxMs": 0.025,
+      "repetitionMaxMs": [
+        0.0169,
+        0.025,
+        0.0155,
+        0.0196,
+        0.0211
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "debug",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "allocation-table-lookup",
+      "samples": 640,
+      "medianMs": 0.0001,
+      "p95Ms": 0.0002,
+      "p99Ms": 0.0004,
+      "maxMs": 0.0011,
+      "repetitionMaxMs": [
+        0.0004,
+        0.001,
+        0.0008,
+        0.0011,
+        0.001
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "debug",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "host-credit-physical-service-observation",
+      "samples": 640,
+      "medianMs": 0.1153,
+      "p95Ms": 0.1221,
+      "p99Ms": 0.1386,
+      "maxMs": 0.1494,
+      "repetitionMaxMs": [
+        0.1448,
+        0.1478,
+        0.1386,
+        0.1494,
+        0.1488
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "debug",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "vessel-follow-and-render-submission",
+      "samples": 640,
+      "medianMs": 0.2921,
+      "p95Ms": 0.303,
+      "p99Ms": 0.3153,
+      "maxMs": 0.3419,
+      "repetitionMaxMs": [
+        0.3071,
+        0.3217,
+        0.3071,
+        0.3349,
+        0.3419
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "debug",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "combined-including-diagnostic-request-and-lookup",
+      "samples": 640,
+      "medianMs": 0.4095,
+      "p95Ms": 0.4246,
+      "p99Ms": 0.4547,
+      "maxMs": 0.4876,
+      "repetitionMaxMs": [
+        0.4559,
+        0.4742,
+        0.4494,
+        0.4876,
+        0.4765
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "release",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "request-sign-resolution",
+      "samples": 640,
+      "medianMs": 0,
+      "p95Ms": 0.0001,
+      "p99Ms": 0.0001,
+      "maxMs": 0.0004,
+      "repetitionMaxMs": [
+        0.0001,
+        0.0004,
+        0.0003,
+        0.0002,
+        0.0001
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "release",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "input-plus-canonical-admission",
+      "samples": 640,
+      "medianMs": 0.002,
+      "p95Ms": 0.0059,
+      "p99Ms": 0.0116,
+      "maxMs": 0.0194,
+      "repetitionMaxMs": [
+        0.0152,
+        0.0194,
+        0.0169,
+        0.0173,
+        0.0116
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "release",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "allocation-table-lookup",
+      "samples": 640,
+      "medianMs": 0.0001,
+      "p95Ms": 0.0002,
+      "p99Ms": 0.0007,
+      "maxMs": 0.0017,
+      "repetitionMaxMs": [
+        0.0009,
+        0.0017,
+        0.001,
+        0.0011,
+        0.0007
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "release",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "host-credit-physical-service-observation",
+      "samples": 640,
+      "medianMs": 0.0958,
+      "p95Ms": 0.1095,
+      "p99Ms": 0.1317,
+      "maxMs": 0.2674,
+      "repetitionMaxMs": [
+        0.1549,
+        0.2674,
+        0.127,
+        0.1248,
+        0.1126
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "release",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "vessel-follow-and-render-submission",
+      "samples": 640,
+      "medianMs": 0.2255,
+      "p95Ms": 0.2483,
+      "p99Ms": 0.2946,
+      "maxMs": 0.8978,
+      "repetitionMaxMs": [
+        0.3075,
+        0.8978,
+        0.2282,
+        0.2645,
+        0.2512
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    },
+    {
+      "configuration": "release",
+      "measurement": "PLAYER_INTEGRATED_COST",
+      "phase": "combined-including-diagnostic-request-and-lookup",
+      "samples": 640,
+      "medianMs": 0.3261,
+      "p95Ms": 0.3577,
+      "p99Ms": 0.4222,
+      "maxMs": 1.1675,
+      "repetitionMaxMs": [
+        0.45,
+        1.1675,
+        0.372,
+        0.4079,
+        0.359
+      ],
+      "normalBytes": 0,
+      "isolatedBytes": 0,
+      "collections": [
+        0,
+        0,
+        0
+      ],
+      "positiveBytes": 152
+    }
+  ],
+  "components": [
+    {
+      "configuration": "debug",
+      "gate": "pilot-demand",
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-demand-debug.txt",
+      "sha256": "8D6749056D6AAFC7C66E64EBAD6FA97C2C87D7AA4DB3BB1DA35C2D1A576E2897",
+      "bytes": 508,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+        "PILOT_PERFORMANCE samples=2048 median_ms=0.0023 p95_ms=0.0024 p99_ms=0.0026 max_ms=0.022 raw_counter_bytes=0 collections=0/0/0 normal_runtime=true",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "configuration": "debug",
+      "gate": "pilot-allocation",
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-allocation-debug.txt",
+      "sha256": "ECC2BA3E2DE4AC2081AA2C010771DA296023D02010E8A31D56DC481D08628655",
+      "bytes": 507,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+        "{\"stage\":4,\"samples\":1024,\"medianMs\":0.1191,\"p95Ms\":0.1219,\"p99Ms\":0.1282,\"maxMs\":0.1607,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "configuration": "debug",
+      "gate": "player-attitude",
+      "path": "build/player-flight-controls-gauntlet/stage6-player-attitude-debug.txt",
+      "sha256": "55261349A90169455C69D052CDB1F53DF5859C81DF48C8F49BE3AFB2ED8828A9",
+      "bytes": 184,
+      "witness": [
+        "PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0057 p95_ms=0.0058 p99_ms=0.0069 max_ms=0.009 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152"
+      ]
+    },
+    {
+      "configuration": "debug",
+      "gate": "florida-slab-camera-costs",
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-costs-debug.txt",
+      "sha256": "3CC0CAC30D827885CDBCB8A17B2F5380E7044FBE2C186F6D7DBA006C99102442",
+      "bytes": 4457,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ACTIVE_VESSEL_COST {\"route\":\"florida-vessel-follow-orbit-zoom\",\"warm\":512,\"count\":2048,\"median\":0.822,\"p95\":0.8609,\"p99\":0.8941,\"maximum\":1.2604,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":1.2604,\"index\":1951},{\"ms\":1.1206,\"index\":1619},{\"ms\":1.0941,\"index\":398},{\"ms\":0.9498,\"index\":1896},{\"ms\":0.943,\"index\":2042},{\"ms\":0.941,\"index\":1693},{\"ms\":0.936,\"index\":1823},{\"ms\":0.9292,\"index\":1684}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"F-refocus\",\"warm\":512,\"count\":2048,\"median\":0.2675,\"p95\":0.2956,\"p99\":0.3133,\"maximum\":0.4715,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.4715,\"index\":924},{\"ms\":0.4089,\"index\":697},{\"ms\":0.3824,\"index\":586},{\"ms\":0.3814,\"index\":926},{\"ms\":0.3457,\"index\":928},{\"ms\":0.343,\"index\":925},{\"ms\":0.3345,\"index\":1501},{\"ms\":0.3323,\"index\":302}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"celestial-vessel-switch\",\"warm\":512,\"count\":2048,\"median\":0.4275,\"p95\":0.4388,\"p99\":0.4896,\"maximum\":0.6968,\"collections\":[0,0,0],\"allocated\":98304,\"tails\":[{\"ms\":0.6968,\"index\":1696},{\"ms\":0.6625,\"index\":1769},{\"ms\":0.6058,\"index\":1155},{\"ms\":0.6026,\"index\":1154},{\"ms\":0.5975,\"index\":1120},{\"ms\":0.5785,\"index\":1121},{\"ms\":0.5731,\"index\":618},{\"ms\":0.5486,\"index\":767}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"solar-celestial-display\",\"warm\":512,\"count\":2048,\"median\":0.3169,\"p95\":0.3252,\"p99\":0.3669,\"maximum\":0.6582,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.6582,\"index\":1923},{\"ms\":0.6413,\"index\":383},{\"ms\":0.6139,\"index\":1924},{\"ms\":0.5244,\"index\":1925},{\"ms\":0.4831,\"index\":1502},{\"ms\":0.4283,\"index\":814},{\"ms\":0.4213,\"index\":1504},{\"ms\":0.4193,\"index\":862}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}"
+      ]
+    },
+    {
+      "configuration": "release",
+      "gate": "pilot-demand",
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-demand-release.txt",
+      "sha256": "81A5B63591BAADA236D0DCCB4354A57E550A0619C463DEBE1D73708989BC8773",
+      "bytes": 509,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+        "PILOT_PERFORMANCE samples=2048 median_ms=0.0018 p95_ms=0.0019 p99_ms=0.0019 max_ms=0.0217 raw_counter_bytes=0 collections=0/0/0 normal_runtime=true",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "configuration": "release",
+      "gate": "pilot-allocation",
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-allocation-release.txt",
+      "sha256": "834487C87929D9D7C7AF5C0A27C1FA392D68856202F3DD18972C1F67F93E3244",
+      "bytes": 507,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+        "{\"stage\":4,\"samples\":1024,\"medianMs\":0.0985,\"p95Ms\":0.1011,\"p99Ms\":0.1153,\"maxMs\":0.1384,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+      ]
+    },
+    {
+      "configuration": "release",
+      "gate": "player-attitude",
+      "path": "build/player-flight-controls-gauntlet/stage6-player-attitude-release.txt",
+      "sha256": "C4DF8F17F78099128EAD709028AD088C717975DA8D48AAA2E43C9836A1E63CFD",
+      "bytes": 185,
+      "witness": [
+        "PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0043 p95_ms=0.0044 p99_ms=0.0045 max_ms=0.0073 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152"
+      ]
+    },
+    {
+      "configuration": "release",
+      "gate": "florida-slab-camera-costs",
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-costs-release.txt",
+      "sha256": "0A40B1072A2B06E92DCEF07396CF72FE3B08936F3763F7B49E9072DE50ACDC58",
+      "bytes": 4445,
+      "witness": [
+        "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ACTIVE_VESSEL_COST {\"route\":\"florida-vessel-follow-orbit-zoom\",\"warm\":512,\"count\":2048,\"median\":0.1014,\"p95\":0.1032,\"p99\":0.1118,\"maximum\":0.2216,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.2216,\"index\":1851},{\"ms\":0.218,\"index\":1852},{\"ms\":0.1962,\"index\":1853},{\"ms\":0.1849,\"index\":2007},{\"ms\":0.1733,\"index\":1084},{\"ms\":0.1469,\"index\":2006},{\"ms\":0.1466,\"index\":2000},{\"ms\":0.1434,\"index\":2005}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"F-refocus\",\"warm\":512,\"count\":2048,\"median\":0.0313,\"p95\":0.0314,\"p99\":0.0332,\"maximum\":0.0451,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.0451,\"index\":365},{\"ms\":0.0399,\"index\":834},{\"ms\":0.039,\"index\":1807},{\"ms\":0.0345,\"index\":167},{\"ms\":0.034,\"index\":40},{\"ms\":0.034,\"index\":223},{\"ms\":0.034,\"index\":581},{\"ms\":0.034,\"index\":1329}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"celestial-vessel-switch\",\"warm\":512,\"count\":2048,\"median\":0.0524,\"p95\":0.0534,\"p99\":0.0553,\"maximum\":0.066,\"collections\":[0,0,0],\"allocated\":98304,\"tails\":[{\"ms\":0.066,\"index\":378},{\"ms\":0.0649,\"index\":373},{\"ms\":0.0635,\"index\":379},{\"ms\":0.0626,\"index\":362},{\"ms\":0.0625,\"index\":1607},{\"ms\":0.0615,\"index\":466},{\"ms\":0.061,\"index\":380},{\"ms\":0.0608,\"index\":488}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"solar-celestial-display\",\"warm\":512,\"count\":2048,\"median\":0.0415,\"p95\":0.0416,\"p99\":0.0438,\"maximum\":0.0685,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.0685,\"index\":704},{\"ms\":0.0527,\"index\":728},{\"ms\":0.0508,\"index\":1065},{\"ms\":0.0457,\"index\":934},{\"ms\":0.0456,\"index\":356},{\"ms\":0.0454,\"index\":226},{\"ms\":0.0442,\"index\":718},{\"ms\":0.0442,\"index\":766}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}"
+      ]
+    }
+  ],
+  "native": [
+    {
+      "run": "run-1",
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.552 p95_ms=5.7531 p99_ms=6.8012 max_ms=7.1137 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.006 p95_ms=0.1168 p99_ms=0.2383 max_ms=4.8882 includes=host_admission_bounded_service_copied_observation"
+      ]
+    },
+    {
+      "run": "run-2",
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5537 p95_ms=5.7404 p99_ms=6.7999 max_ms=7.0715 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0059 p95_ms=0.1486 p99_ms=0.2207 max_ms=5.3263 includes=host_admission_bounded_service_copied_observation"
+      ]
+    },
+    {
+      "run": "run-3",
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5522 p95_ms=5.7397 p99_ms=6.8927 max_ms=7.1238 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0046 p95_ms=0.1317 p99_ms=0.2543 max_ms=4.8928 includes=host_admission_bounded_service_copied_observation"
+      ]
+    },
+    {
+      "run": "run-4",
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5584 p95_ms=5.7223 p99_ms=6.7464 max_ms=7.111 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0052 p95_ms=0.1249 p99_ms=0.2509 max_ms=4.9698 includes=host_admission_bounded_service_copied_observation"
+      ]
+    },
+    {
+      "run": "run-5",
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5504 p95_ms=5.7254 p99_ms=6.7989 max_ms=6.8976 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0049 p95_ms=0.1166 p99_ms=0.2183 max_ms=4.7066 includes=host_admission_bounded_service_copied_observation"
+      ]
+    }
+  ],
+  "limits": [
+    "Phase bytes/GC are whole-route totals, not individual phase measurements.",
+    "Input adapter includes8 changing admissions per128 intervals; pure changing canonical admission is the pilot-demand component.",
+    "Combined includes diagnostic request resolution and allocation lookup.",
+    "Managed presentation covers vessel follow and assembly render submission with default camera snapshot; excludes full Solar publication, GPU/present and camera selection edges.",
+    "Native callback intervals include scheduling/present and observer overhead; service maxima4.71\u20135.33ms recur in all five processes with unestablished cause.",
+    "Prior Stage2 maximum6.0184ms is context only, not equivalent-workload improvement proof.",
+    "Tiny request/lookup intervals can round to timer resolution.",
+    "Existing focus-switch allocation is outside zero contract. Stage3 raw diagnostic cause remains unestablished."
+  ]
+}

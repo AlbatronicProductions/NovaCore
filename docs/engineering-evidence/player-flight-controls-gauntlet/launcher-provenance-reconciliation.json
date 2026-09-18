@@ -1,0 +1,16 @@
+[
+  {
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+    "source": "build/active-vessel-camera-warp-correction/candidate/bin/NovaCore.Launcher/release/NovaCore.Launcher.dll",
+    "before": "220711167FF78737C60ECC78637256CDFC1A5BDB735110667C6BB28678B115E7",
+    "after": "18260F8458ADE3AA2A41B0A5890C6701F20A34664F53527BB62F2AA998A9C1D5",
+    "expected": "18260F8458ADE3AA2A41B0A5890C6701F20A34664F53527BB62F2AA998A9C1D5"
+  },
+  {
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.pdb",
+    "source": "build/active-vessel-camera-warp-correction/candidate/bin/NovaCore.Launcher/release/NovaCore.Launcher.pdb",
+    "before": "7063029948DD20FBAECDEBB64D6B3F40440392A1419D602BB3F7B70B41B31A76",
+    "after": "FF420CA052E9EFC3230CD57994FDA912C02DCC4E5F93B4CA8BB20982FBCAE4F4",
+    "expected": "FF420CA052E9EFC3230CD57994FDA912C02DCC4E5F93B4CA8BB20982FBCAE4F4"
+  }
+]

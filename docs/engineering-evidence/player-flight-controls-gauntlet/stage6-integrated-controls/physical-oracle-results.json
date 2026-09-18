@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "checks": 6703,
+  "results": [
+    {
+      "scenario": "run-1",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 66,
+      "admissions": 8,
+      "finalOmega": {
+        "X": -1.734724698903998e-17,
+        "Y": 0.00761906926784154,
+        "Z": -0.004917481829139884,
+        "LengthSquared": 8.223184404808836e-05,
+        "IsFinite": true
+      },
+      "historyDigest": "20d2ab2b9a0dd5e037c64059d0fb8df6df72b243bc3ec8f8216e2f15ddc32b9d"
+    },
+    {
+      "scenario": "run-2",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 65,
+      "admissions": 8,
+      "finalOmega": {
+        "X": -0.00297902178030378,
+        "Y": 0.0072528236888916445,
+        "Z": -0.00521658690835014,
+        "LengthSquared": 8.869080120204218e-05,
+        "IsFinite": true
+      },
+      "historyDigest": "0db74f9031b6f5e8197e8b8ab716b427ab4495220cad050fa44257a584ee7793"
+    },
+    {
+      "scenario": "run-3",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 67,
+      "admissions": 8,
+      "finalOmega": {
+        "X": -1.733809208197288e-17,
+        "Y": 0.00761906926784154,
+        "Z": -0.0054660119648156915,
+        "LengthSquared": 8.792750330767572e-05,
+        "IsFinite": true
+      },
+      "historyDigest": "2f5224ae78a380d9c740f3ff090b31ecd8e76c66b673795eaef772e0705c4bce"
+    },
+    {
+      "scenario": "run-4",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 67,
+      "admissions": 8,
+      "finalOmega": {
+        "X": -1.0407759594861219e-17,
+        "Y": 0.007619006349121068,
+        "Z": -0.005466015304427082,
+        "LengthSquared": 8.792658105617824e-05,
+        "IsFinite": true
+      },
+      "historyDigest": "3edcfac893c3e42356d2d9ec357e90df660278308b4c8fab8400f8d68bae0b46"
+    },
+    {
+      "scenario": "run-5",
+      "status": "PASS",
+      "intervals": 128,
+      "nonzeroIntervals": 66,
+      "admissions": 8,
+      "finalOmega": {
+        "X": -9.97484379652926e-18,
+        "Y": 0.007609155672358571,
+        "Z": -0.004907126639539014,
+        "LengthSquared": 8.197914190266007e-05,
+        "IsFinite": true
+      },
+      "historyDigest": "75cb1cb83d30a6159ea1e3ed49bfc747ff649a19c2c492a7163a146d796e8a2f"
+    }
+  ]
+}

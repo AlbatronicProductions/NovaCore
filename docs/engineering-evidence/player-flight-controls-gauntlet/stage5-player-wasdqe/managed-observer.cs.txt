@@ -1,0 +1,21 @@
+file static class NativeHoldProbe
+{
+    private readonly record struct Row(long Tick,int Frame,uint Keys,uint Active,uint Engine,int Frontier,long Sequence,sbyte Pitch,sbyte Yaw,sbyte Roll,bool Main,long Vessel,long Generation,int ViewKind,ulong ViewBody,Double3 CameraPosition,DoubleQuaternion CameraOrientation);
+    private static readonly Row[] Rows=new Row[8192];
+    private static int count;private static bool overflow;
+    internal static void Capture(HostState s,in NativeInputState input)
+    {
+        if(s.Assembly?.PlayerInput is not {} player)return;
+        if(count==Rows.Length){overflow=true;return;}
+        var o=player.Observation;var p=o.Requested.Pilot;
+        Rows[count]=new(Environment.TickCount64,count+1,(uint)input.PilotKeys,input.ControlInputActive,(uint)input.EngineActions,s.Assembly.Observation.State.Frontier,o.AdmissionCount,p.Pitch,p.Yaw,p.Roll,o.Requested.MainOn,(long)o.Identity.Vessel.Value,o.Identity.Generation,(int)s.Sol!.CurrentFocusTarget.Kind,s.Sol.FocusedBody.BodyId,s.Camera.Position.Value,s.Camera.Orientation);count++;
+    }
+    internal static void Flush(HostState s)
+    {
+        var path=Environment.GetEnvironmentVariable("NOVACORE_HOLD_OUTPUT")!;
+        if(string.IsNullOrEmpty(path))throw new InvalidOperationException("Diagnostic output path required");
+        Directory.CreateDirectory(path);
+        File.WriteAllBytes(Path.Combine(path,"session.json"),s.Assembly!.Save());
+        File.WriteAllText(Path.Combine(path,"snapshots.json"),System.Text.Json.JsonSerializer.Serialize(new {overflow,count,rows=Rows.AsSpan(0,count).ToArray()}));
+    }
+}

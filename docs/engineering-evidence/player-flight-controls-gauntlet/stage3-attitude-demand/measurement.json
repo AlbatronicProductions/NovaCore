@@ -1,0 +1,69 @@
+[
+  {
+    "path": "build/player-flight-controls-gauntlet/stage3-pilot-demand-debug.txt",
+    "witness": [
+      "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+      "PILOT_PERFORMANCE samples=2048 median_ms=0.0024 p95_ms=0.0024 p99_ms=0.0024 max_ms=0.0109 raw_counter_bytes=0 collections=0/0/0 normal_runtime=true",
+      "PILOT_STORAGE admission_bytes=56 capacity=256 payload_bytes=14336 full_journal_save_bytes=76578 admission_allocation_bytes=0",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_DEMAND PASS checks=2939"
+    ],
+    "sha256": "36E86A43B144B7DB090BE9BB16E8F4ABC3360E62F79AEAC4C93D213CAE57418C"
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage3-pilot-demand-release.txt",
+    "witness": [
+      "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+      "PILOT_PERFORMANCE samples=2048 median_ms=0.0018 p95_ms=0.0019 p99_ms=0.0023 max_ms=0.0503 raw_counter_bytes=0 collections=0/0/0 normal_runtime=true",
+      "PILOT_STORAGE admission_bytes=56 capacity=256 payload_bytes=14336 full_journal_save_bytes=76578 admission_allocation_bytes=0",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_DEMAND PASS checks=2939"
+    ],
+    "sha256": "9C32F000CE147A801A125C1455B9467490949CA73F1D05883B5D7B3CFB642B32"
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage3-allocation-pilot.txt",
+    "witness": [
+      "PILOT_ALLOCATION_WITNESS mode=pilot bytes=280 gc=0/0/0",
+      "PILOT_ALLOCATION_SITE index=163 bytes=280"
+    ],
+    "sha256": "0002DB5A8B08ECC5EC562EE8C1D3DCCBAD55699C0C04C9E02AA5633B10904469"
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage3-allocation-engine.txt",
+    "witness": [
+      "PILOT_ALLOCATION_WITNESS mode=engine bytes=272 gc=0/0/0",
+      "PILOT_ALLOCATION_SITE index=236 bytes=272"
+    ],
+    "sha256": "DECF15629EE8EE48F91D6D0375DC5B381736C5CCA77EC86B418CE384F2D7D7AB"
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage3-allocation-noop.txt",
+    "witness": [
+      "PILOT_ALLOCATION_WITNESS mode=noop bytes=0 gc=0/0/0",
+      "PILOT_STORAGE admission_bytes=56 capacity=256 payload_bytes=14336 full_journal_save_bytes=12771 admission_allocation_bytes=0",
+      "PILOT_DEMAND PASS checks=2938"
+    ],
+    "sha256": "DA869D96E5B8F3B2C6B2FE7C888A6135CDBB7F891CB48FF59C5CF05C1DEF8FA1"
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage3-allocation-isolated.txt",
+    "witness": [
+      "ORDINARY_ALLOCATION gate=pilot-isolated-diagnostic bytes=1976 entry=PASS exit=PASS",
+      "PILOT_ALLOCATION_WITNESS mode=isolated bytes=0 gc=0/0/0",
+      "PILOT_STORAGE admission_bytes=56 capacity=256 payload_bytes=14336 full_journal_save_bytes=76578 admission_allocation_bytes=0",
+      "PILOT_DEMAND PASS checks=2938"
+    ],
+    "sha256": "FE7525DC7232CFDDE3E204A566E0749C8D03CDA0BA5C69454442B1E695D62782"
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage3-nontiered-diagnostic.txt",
+    "witness": [
+      "PILOT_ALLOCATION_WITNESS bytes=336",
+      "PILOT_ALLOCATION_SITE index=363 bytes=336"
+    ],
+    "sha256": "25010C530D2583FBD71D73CE761D76ECF2A3FC4069692A5C4428C23C523BC549"
+  }
+]

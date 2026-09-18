@@ -1,0 +1,28 @@
+[
+  {
+    "path": "build/player-flight-controls-gauntlet/stage2-keyboard-visible.txt",
+    "witness": [
+      "PLAYER_INPUT actions=1 active=1 result=Admitted sequence=1 frontier=0 requested=True started=False",
+      "PLAYER_REALIZED frontier=1 main=True fuel=29.998779296875 velocityX=0.013297901121987884 positionX=0.0001038897775634369",
+      "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.84375 oxidizer_kg=44.765625 mass_kg=704.609375 com_x=1.042279631888236 debt=3547",
+      "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5562 p95_ms=5.7092 p99_ms=5.9515 max_ms=7.4155 measurement=display_callback_interval_including_present_host_scheduling",
+      "SRV01_LIVE_SERVICE samples=362 median_ms=0.0036 p95_ms=0.0894 p99_ms=0.2223 max_ms=5.5125 includes=host_admission_bounded_service_copied_observation",
+      "PLAYER_INPUT actions=2 active=1 result=Terminal sequence=1 frontier=128 requested=True started=True",
+      "PLAYER_INPUT actions=1 active=1 result=Terminal sequence=1 frontier=128 requested=True started=True"
+    ],
+    "sha256": "9EF7E8C6CB03F5D05E36F7CDF54422471C0799242826CBDE67103FCB3CE947E5"
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage2-keyboard-cutoff.txt",
+    "witness": [
+      "PLAYER_INPUT actions=1 active=1 result=Admitted sequence=1 frontier=0 requested=True started=False",
+      "PLAYER_REALIZED frontier=1 main=True fuel=29.998779296875 velocityX=0.013297901121987884 positionX=0.0001038897775634369",
+      "PLAYER_INPUT actions=2 active=1 result=Admitted sequence=2 frontier=35 requested=False started=True",
+      "PLAYER_REALIZED frontier=36 main=False fuel=29.957275390625 velocityX=0.4654607927885563 positionX=0.13454404637140774",
+      "STOCK_ASSEMBLY_END completed=True failed=False failure=Invalid frontier=128 revision=128 time=2000000 fuel_kg=29.957275390625 oxidizer_kg=44.9359130859375 mass_kg=704.8931884765625 com_x=1.0418599753917448 debt=3040",
+      "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5556 p95_ms=5.7244 p99_ms=6.031 max_ms=7.794 measurement=display_callback_interval_including_present_host_scheduling",
+      "SRV01_LIVE_SERVICE samples=362 median_ms=0.0035 p95_ms=0.1101 p99_ms=0.2327 max_ms=6.0184 includes=host_admission_bounded_service_copied_observation"
+    ],
+    "sha256": "17759BD17EDFE10E7C30AF92E85774E588DE5F667091A106DB54EA3A5828E6BF"
+  }
+]

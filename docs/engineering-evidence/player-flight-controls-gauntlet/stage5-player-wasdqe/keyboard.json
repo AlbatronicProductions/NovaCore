@@ -1,0 +1,38 @@
+{
+  "status": "NOT ESTABLISHED",
+  "candidate": "pre-narrow-correction; embedded runtime fingerprints",
+  "attempts": [
+    "Z+W tap then X",
+    "READY W,S,A,D,Q,E taps"
+  ],
+  "observed": "No attitude admission; held lifecycle unproven",
+  "inference": "Press/release may drain before held snapshot; exact event timing unobserved",
+  "logs": [
+    {
+      "path": "build/player-flight-controls-gauntlet/stage5-key-w.txt",
+      "sha256": "4B22E719EDF6FC5EB0CDC7AC97D235514EF09B51D22BDE68E4DEAFCB72D33A56",
+      "bytes": 227525,
+      "witness": [
+        "Runtime managed: path=E:\\NovaCore\\build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Triangle.dll; bytes=313344; sha256=b856c00229d78e258ef2f5d747607360457cfc8af0036d0cde4aa826d5b65628",
+        "Runtime native-resolved: path=E:\\NovaCore\\build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Native.dll; bytes=359936; sha256=8e0d5cc7c114376f87c0e6f7490f0794056caa7fa69201b8de034ab3bc203285",
+        "PLAYER_INPUT keys=0 pilot=AssemblyPilotDemand { Pitch = 0, Yaw = 0, Roll = 0 } actions=1 active=1 result=Admitted sequence=1 frontier=0 requested=True started=False",
+        "PLAYER_ACTUATION frontier=1 command=AssemblyCommand { MainOn = True, Pair = , GimbalTargetY = 0, GimbalTargetZ = 0, Ticks = 15625, JetMask = 0 } actual=AssemblyRealization { MainOn = True, Jets = 0, Feed = Available } gimbal=AssemblyGimbal { ActualY = 0, ActualZ = 0, TargetY = 0, TargetZ = 0 } omega=Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True } stores=AssemblyStores { Fuel = NovaCore.Simulation.Spacecraft.Resources.PropellantInteger, Oxidizer = NovaCore.Simulation.Spacecraft.Resources.PropellantInteger }",
+        "PLAYER_REALIZED frontier=1 main=True fuel=29.998779296875 velocityX=0.013297901121987884 positionX=0.0001038897775634369",
+        "PLAYER_INPUT keys=0 pilot=AssemblyPilotDemand { Pitch = 0, Yaw = 0, Roll = 0 } actions=2 active=1 result=Admitted sequence=2 frontier=34 requested=False started=True",
+        "PLAYER_ACTUATION frontier=35 command=AssemblyCommand { MainOn = False, Pair = , GimbalTargetY = 0, GimbalTargetZ = 0, Ticks = 15625, JetMask = 0 } actual=AssemblyRealization { MainOn = False, Jets = 0, Feed = NoDemand } gimbal=AssemblyGimbal { ActualY = 0, ActualZ = 0, TargetY = 0, TargetZ = 0 } omega=Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True } stores=AssemblyStores { Fuel = NovaCore.Simulation.Spacecraft.Resources.PropellantInteger, Oxidizer = NovaCore.Simulation.Spacecraft.Resources.PropellantInteger }",
+        "PLAYER_REALIZED frontier=35 main=False fuel=29.95849609375 velocityX=0.4521609342294141 positionX=0.12716731641406742",
+        "PLAYER_ACTUATION frontier=128 command=AssemblyCommand { MainOn = False, Pair = , GimbalTargetY = 0, GimbalTargetZ = 0, Ticks = 15625, JetMask = 0 } actual=AssemblyRealization { MainOn = False, Jets = 0, Feed = NoDemand } gimbal=AssemblyGimbal { ActualY = 0, ActualZ = 0, TargetY = 0, TargetZ = 0 } omega=Double3 { X = 0, Y = 0, Z = 0, LengthSquared = 0, IsFinite = True } stores=AssemblyStores { Fuel = NovaCore.Simulation.Spacecraft.Resources.PropellantInteger, Oxidizer = NovaCore.Simulation.Spacecraft.Resources.PropellantInteger }",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0048 p95_ms=0.1227 p99_ms=0.6678 max_ms=6.5041 includes=host_admission_bounded_service_copied_observation"
+      ]
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/stage5-key-ready.txt",
+      "sha256": "2A689566BC721A74419B1A3E3A0085C05D6FB915924D8E241297146A48DDBEB8",
+      "bytes": 217381,
+      "witness": [
+        "Runtime managed: path=E:\\NovaCore\\build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Triangle.dll; bytes=313344; sha256=b856c00229d78e258ef2f5d747607360457cfc8af0036d0cde4aa826d5b65628",
+        "Runtime native-resolved: path=E:\\NovaCore\\build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Triangle\\release\\NovaCore.Native.dll; bytes=359936; sha256=8e0d5cc7c114376f87c0e6f7490f0794056caa7fa69201b8de034ab3bc203285"
+      ]
+    }
+  ]
+}

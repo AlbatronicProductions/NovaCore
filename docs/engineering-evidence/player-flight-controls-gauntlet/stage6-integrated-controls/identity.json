@@ -1,0 +1,51 @@
+{
+  "capturedUtc": "2026-09-18T22:54:19.627461+00:00",
+  "productionReadsetUnchanged": true,
+  "productionGameRuntimeUnchanged": true,
+  "diagnosticOverlay": [
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sourceSha256": "662b46a549b94956fd51112cdb190e655298084221d09634ff5d5b3ff2af24ec",
+      "overlaySha256": "c96b7bb9834fecad85f4e3fa294df98e464e20e9261e8d714e998954d276a733"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sourceSha256": "395f6ad0a6dcdb31730466675d8f34abd1ea79797f8cff8d52297fb6bd1c0281",
+      "overlaySha256": "d1d326afcffbf756e31f7df23944715c522f3dd18d75b8a6c4f10ee64495517e"
+    }
+  ],
+  "runtime": [
+    {
+      "path": "build/player-flight-controls-gauntlet/native-hold-observer-stage6/runtime/NovaCore.Triangle.dll",
+      "sha256": "509EBEC9E9E42C2EFAD39229DE144B44B453C08A77D6F87F50AB716D3520168E",
+      "bytes": 323072
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/native-hold-observer-stage6/runtime/NovaCore.Native.dll",
+      "sha256": "7D310BCC72ECA802EAB91CF8DCF150751EB00A920B502198CDA89FF3DABF1D7D",
+      "bytes": 360448
+    }
+  ],
+  "driver": {
+    "path": "build/player-flight-controls-gauntlet/native-input-driver/bin/Release/net10.0-windows/NativeInputDriver.dll",
+    "sha256": "BDC08A9E0BC18686F4E2DBECD2F9F4BEA953EEB02E80889917185583968DFBE6",
+    "bytes": 24064
+  },
+  "tests": [
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlayerIntegratedControlTests.cs",
+      "sha256": "D86355F381628BCFA07AEC1C7A046064E9FA869832A756CED315F525F4A03F7D",
+      "bytes": 11429
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "3BB6AA8C4C8E3E202BCD61D5B5C03B9DC2EF14148458BF1BFE363A6049B0B18E",
+      "bytes": 571661
+    }
+  ],
+  "retainedSave": {
+    "path": "docs/engineering-evidence/player-flight-controls-gauntlet/stage6-integrated-controls/captured-session.json",
+    "sha256": "9AF5C97CA547534A5E57465C2A9467697A0240E33181D311E1EFDDBF453F3B3B",
+    "bytes": 26686
+  }
+}

@@ -1,0 +1,13 @@
+// Diagnostic overlay only: bounded observation, no input or timing mutation.
+struct HoldTraceRow { uint64_t tick,frame; uint32_t kind,message,key,before,after,active; };
+static std::array<HoldTraceRow,8192> holdRows{};
+static uint32_t holdCount{}; static uint64_t holdFrame{}; static bool holdOverflow{};
+void HoldTrace(uint32_t kind,uint32_t message,uint32_t key,uint32_t before,uint32_t after,uint32_t active) {
+  if(holdCount==holdRows.size()){holdOverflow=true;return;}
+  holdRows[holdCount++]={GetTickCount64(),holdFrame,kind,message,key,before,after,active};
+}
+void HoldTraceFlush() {
+  std::printf("HOLD_TRACE count=%u overflow=%u\n",holdCount,holdOverflow?1u:0u);
+  for(uint32_t i=0;i<holdCount;i++){const auto&r=holdRows[i];std::printf("HOLD_NATIVE %llu %llu %u %u %u %u %u %u\n",(unsigned long long)r.tick,(unsigned long long)r.frame,r.kind,r.message,r.key,r.before,r.after,r.active);}
+  std::fflush(stdout);
+}

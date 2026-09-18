@@ -1,0 +1,35 @@
+{
+  "contract": "exact zero; normal timing separate from checked isolation on equivalent fresh warmed fixtures",
+  "stage5": {
+    "samples": 1024,
+    "normalBytes": 0,
+    "isolatedBytes": 0,
+    "gc0": 0,
+    "positiveBytes": 152,
+    "scope": "changing pilot input and canonical admission, both configurations"
+  },
+  "stage4": {
+    "samples": 1024,
+    "normalBytes": 0,
+    "isolatedBytes": 0,
+    "positiveBytes": 152,
+    "scope": "admission/allocation/resources/dynamics/publication"
+  },
+  "exceptions": [
+    "Existing celestial-vessel focus switch:98304 B over2048 operations; not a zero allocation contract",
+    "Opt-in console diagnostics allocate; excluded from normal input measurement"
+  ],
+  "unresolvedDiagnostic": "stage3-attitude-demand/measurement.json; no runtime cause asserted",
+  "stage6": {
+    "samplesPerConfiguration": 640,
+    "normalBytes": 0,
+    "isolatedBytes": 0,
+    "collections": [
+      0,
+      0,
+      0
+    ],
+    "positiveBytes": 152,
+    "scope": "combined request+input/admission+lookup+service+vessel-follow/render submission; independent fresh warmed fixtures; camera selection/native renderer excluded"
+  }
+}

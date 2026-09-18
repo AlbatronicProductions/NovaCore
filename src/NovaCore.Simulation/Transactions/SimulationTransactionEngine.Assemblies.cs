@@ -27,6 +27,7 @@ internal sealed partial class SimulationTransactionEngine
         // acknowledgement. A saved committed credit cannot be credited twice.
         internal long CanonicalHostSequence=>CreditCount;
         internal bool Active,Invalidated;
+        internal AssemblyControlStorage? Control;
         internal AssemblyFlightRecord Prepared;
         internal AssemblyRuntimeState ExpectedState;
         internal StateRevision ExpectedRevision;
@@ -216,7 +217,7 @@ internal sealed partial class SimulationTransactionEngine
             if(!departure.EndpointClear(authority.Launch,record.Successor,p.ContactConfiguration.ContactTolerance))
                 return AssemblyFlightStatus.ClearanceExpired;
         }
-        else record=AssemblyFlightPreparation.Evaluate(authority.Launch,p.ExpectedState,p.ExpectedRevision,p.ExpectedTimeline,authority.Launch.GravityRoot);
+        else record=AssemblyFlightPreparation.Evaluate(authority.Launch,p.ExpectedState,p.ExpectedRevision,p.ExpectedTimeline,ResolveAssemblyCommand(p),authority.Launch.GravityRoot);
         p.Prepared=record;p.Generation++;p.Active=true;proposal=new(p.Generation,p.Seal);return AssemblyFlightStatus.Prepared;
     }
     internal AssemblyFlightStatus AbortAssemblyFlight(AssemblyFlightAuthority authority,AssemblyFlightProposal proposal)

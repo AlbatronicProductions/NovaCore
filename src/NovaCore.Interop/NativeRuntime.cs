@@ -340,14 +340,16 @@ public struct NativeAbiLayout
     public uint EncodedPositionSize, CameraDataSize, CameraPositionOffset, CameraViewProjectionOffset, RenderTransformSize, RenderObjectSize, RenderObjectPositionOffset, RenderObjectTransformOffset, RenderObjectMeshOffset;
     public uint DrawBatchSize, OrbitLineVertexSize, FrameSubmissionSize, FrameObjectsOffset, FrameBatchesOffset, FrameOrbitVerticesOffset, FrameOrbitVertexCountOffset;
     public uint InputStateSize, InputDeltaSecondsOffset, InputMoveLeftOffset, InputMoveRightOffset, InputMoveForwardOffset, InputMoveBackwardOffset, InputMoveDownOffset, InputMoveUpOffset, InputResetOffset, InputLookActiveOffset, InputMouseDeltaXOffset, InputMouseDeltaYOffset, InputMouseWheelDetentsOffset, InputPauseToggleOffset, InputRateDecreaseOffset, InputRateIncreaseOffset, InputSasModeKeyOffset, InputFastModifierOffset, InputSlowModifierOffset;
-    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset, FramePlanetaryPresentationOffset, InputPresentationFocusOffset, FrameSolarLightingOffset, InputViewportWidthOffset, InputViewportHeightOffset, InputCameraActionsOffset;
+    public uint FramePlanetaryGpuOffset, FramePlanetaryModeOffset, FramePlanetaryPresentationOffset, InputPresentationFocusOffset, FrameSolarLightingOffset, InputViewportWidthOffset, InputViewportHeightOffset, InputCameraActionsOffset, InputEngineActionsOffset, InputControlActiveOffset, InputPilotKeysOffset;
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward, MoveDown, MoveUp, Reset, LookActive; public float MouseDeltaX, MouseDeltaY; public int MouseWheelDetents; public uint PauseToggle, RateDecrease, RateIncrease, SasModeKey, FastModifier, SlowModifier; public NativePresentationFocus PresentationFocus; public uint ViewportWidthPixels, ViewportHeightPixels; public NativeCameraActions CameraActions; }
+public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft, MoveRight, MoveForward, MoveBackward, MoveDown, MoveUp, Reset, LookActive; public float MouseDeltaX, MouseDeltaY; public int MouseWheelDetents; public uint PauseToggle, RateDecrease, RateIncrease, SasModeKey, FastModifier, SlowModifier; public NativePresentationFocus PresentationFocus; public uint ViewportWidthPixels, ViewportHeightPixels; public NativeCameraActions CameraActions; public NativeEngineActions EngineActions; public uint ControlInputActive; public NativePilotKeys PilotKeys; }
 
 // Bit 2 is reserved; FREE navigation is deferred pending a frame contract.
 [Flags] public enum NativeCameraActions : uint { None=0, FocusActiveVessel=1 }
+[Flags] public enum NativePilotKeys : uint { None=0, W=1, S=2, A=4, D=8, Q=16, E=32 }
+[Flags] public enum NativeEngineActions : uint { None=0, On=1, Off=2 }
 
 public enum NativeHostEventType : uint { Diagnostic = 1, UpdateFrame = 2 }
 

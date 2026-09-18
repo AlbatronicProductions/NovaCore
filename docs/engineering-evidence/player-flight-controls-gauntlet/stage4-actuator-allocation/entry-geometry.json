@@ -1,0 +1,29 @@
+{
+  "demands": 27,
+  "existingGlobalProof": {
+    "intervalLimit": 128,
+    "durationLimitSeconds": 2,
+    "torqueBoundNm": 132.34104608547636,
+    "forceBoundN": 645
+  },
+  "scope": "Current FourHorn authored geometry, independent read-only enumeration; no allocator implementation yet",
+  "judgment": "New combinations fit existing numerical envelope; require permanent oracle, resource, replay and admission tests",
+  "discriminator": "Select from current admitted MainOn, never prior realized MainOn; deduplicate each nozzle in force and exact flow",
+  "engineOff": {
+    "threeAxis": {
+      "forceN": 67.5,
+      "uniqueJets": 5,
+      "torqueNormNm": 40.60140430145244
+    },
+    "pitchYaw": {
+      "forceN": 67.5,
+      "pitchTorqueMagnitudeNm": 12.839291379394737,
+      "yawTorqueMagnitudeNm": 12.839291379394737,
+      "uniqueJets": 3
+    },
+    "maximumTorqueNm": 44.47661000458556,
+    "maximumUniqueJets": 5,
+    "maximumExtentRateKgS": 0.00732421875,
+    "maximumNetForceN": 67.5
+  }
+}

@@ -1,0 +1,123 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text.Json;
+using System.Windows.Forms;
+
+internal static class NativeInputDriver
+{
+    [StructLayout(LayoutKind.Explicit,Size=40)] private struct Input
+    { [FieldOffset(0)]public uint Type;[FieldOffset(8)]public ushort Key;[FieldOffset(12)]public uint Flags;
+      [FieldOffset(8)]public int Dx;[FieldOffset(12)]public int Dy;[FieldOffset(16)]public uint MouseData;[FieldOffset(20)]public uint MouseFlags; }
+    [DllImport("user32.dll",SetLastError=true)]private static extern uint SendInput(uint count,Input[] inputs,int size);
+    [DllImport("user32.dll")]private static extern bool SetForegroundWindow(IntPtr window);
+    [DllImport("user32.dll")]private static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")]private static extern uint GetWindowThreadProcessId(IntPtr window,out uint process);
+    [StructLayout(LayoutKind.Sequential)]private struct Rect {public int Left,Top,Right,Bottom;}
+    [DllImport("user32.dll")]private static extern bool GetWindowRect(IntPtr window,out Rect rect);
+    [DllImport("user32.dll")]private static extern bool SetCursorPos(int x,int y);
+    private static readonly HashSet<char> DownKeys=[];
+    private static readonly List<object> Events=[];
+    private static IntPtr target;private static long start;
+    private static void Key(char key,bool down,bool requireTarget=true)
+    {
+        if(requireTarget&&GetForegroundWindow()!=target)throw new InvalidOperationException("Candidate lost foreground before injected key");
+        var input=new Input{Type=1,Key=(ushort)char.ToUpperInvariant(key),Flags=down?0u:2u};
+        var inserted=SendInput(1,[input],Marshal.SizeOf<Input>());
+        Events.Add(new{kind=down?"down":"up",key,tick=Environment.TickCount64,elapsed=Environment.TickCount64-start,inserted});
+        if(inserted!=1)throw new InvalidOperationException("SendInput incomplete: "+Marshal.GetLastWin32Error());
+        if(down)DownKeys.Add(key);else DownKeys.Remove(key);
+    }
+    private static void At(int ms,Action action)
+    {
+        while(Environment.TickCount64-start<ms){Application.DoEvents();Thread.Sleep(1);}
+        var lag=Environment.TickCount64-start-ms;if(lag>40)throw new InvalidOperationException($"Schedule missed by {lag} ms at {ms}");
+        action();
+    }
+    private static void Chord(string keys,bool down){foreach(var c in keys)Key(c,down);}
+    private static bool mouseDown;
+    private static void Mouse(uint flags,int dx=0,int dy=0,uint data=0)
+    {
+        if(GetForegroundWindow()!=target)throw new InvalidOperationException("Candidate lost foreground before mouse input");
+        var inserted=SendInput(1,[new Input{Type=0,Dx=dx,Dy=dy,MouseData=data,MouseFlags=flags}],40);
+        Events.Add(new{kind="mouse",flags,dx,dy,data,tick=Environment.TickCount64,elapsed=Environment.TickCount64-start,inserted});
+        if(inserted!=1)throw new InvalidOperationException("Mouse injection incomplete");if(flags==2)mouseDown=true;if(flags==4)mouseDown=false;
+    }
+    private static void Focus(IntPtr window,string label)
+    {
+        var accepted=SetForegroundWindow(window);var deadline=Environment.TickCount64+100;
+        // Win32 activation is cross-thread: observe completion, not only the
+        // immediate foreground value. This waits in the driver, never the game.
+        while(GetForegroundWindow()!=window&&Environment.TickCount64<deadline){Application.DoEvents();Thread.Sleep(1);}
+        if(GetForegroundWindow()!=window)throw new InvalidOperationException("Foreground activation failed: "+label+" accepted="+accepted);
+        Events.Add(new{kind="focus",label,tick=Environment.TickCount64,elapsed=Environment.TickCount64-start});
+    }
+    [STAThread] private static int Main(string[] args)
+    {
+        if(args.Length!=3)throw new ArgumentException("driver exact-exe output-directory case");
+        var exe=Path.GetFullPath(args[0]);var output=Path.GetFullPath(args[1]);var scenario=args[2];
+        if(!exe.Contains("player-flight-controls-gauntlet",StringComparison.OrdinalIgnoreCase))throw new ArgumentException("Only isolated campaign runtime allowed");
+        Directory.CreateDirectory(output);start=Environment.TickCount64;
+        var info=new ProcessStartInfo(exe){WorkingDirectory=Path.GetFullPath("."),UseShellExecute=false,RedirectStandardOutput=true,RedirectStandardError=true,WindowStyle=ProcessWindowStyle.Normal};
+        foreach(var arg in new[]{"--scene=sol","--player-flight-controls","--solar-epoch=j2000","--physical-surface=m12d-natural-candidate"})info.ArgumentList.Add(arg);
+        info.Environment["NOVACORE_HOLD_OUTPUT"]=output;info.Environment["NOVACORE_CONTROL_TRACE"]="0";
+        info.Environment["NOVACORE_WINDOW_CLIENT_WIDTH"]="1280";info.Environment["NOVACORE_WINDOW_CLIENT_HEIGHT"]="720";info.Environment["NOVACORE_WINDOW_BORDERLESS"]="0";
+        using var process=Process.Start(info)!;var stdout=process.StandardOutput.ReadToEndAsync();var stderr=process.StandardError.ReadToEndAsync();
+        using var sink=new Form{Text="NovaCore diagnostic focus sink",Width=320,Height=100,StartPosition=FormStartPosition.Manual,Left=20,Top=20};
+        string? error=null;
+        try
+        {
+            var deadline=Environment.TickCount64+30000;
+            while(true)
+            {
+                process.Refresh();if(process.HasExited)throw new InvalidOperationException("Candidate exited before READY");
+                if(process.MainWindowTitle.Contains("READY / Z TO IGNITE")){target=process.MainWindowHandle;break;}
+                if(Environment.TickCount64>deadline)throw new TimeoutException("READY timeout");Thread.Sleep(10);
+            }
+            GetWindowThreadProcessId(target,out var pid);if(pid!=process.Id||!string.Equals(process.MainModule!.FileName,exe,StringComparison.OrdinalIgnoreCase))throw new InvalidOperationException("Wrong candidate window/process");
+            Focus(target,"candidate-ready");Thread.Sleep(500);
+            if(scenario.StartsWith("celestial-")){Key(scenario=="celestial-earth"?'4':'5',true);Thread.Sleep(100);Key(scenario=="celestial-earth"?'4':'5',false);Thread.Sleep(100);}
+            start=Environment.TickCount64;At(0,()=>Key('Z',true));At(10,()=>Key('Z',false));
+            if(scenario=="integrated")
+            {
+                GetWindowRect(target,out var bounds);if(!SetCursorPos((bounds.Left+bounds.Right)/2,(bounds.Top+bounds.Bottom)/2))throw new InvalidOperationException("Candidate pointer placement failed");
+                At(150,()=>Chord("WAQ",true));At(300,()=>Mouse(2));At(350,()=>Mouse(1,24,-12));At(400,()=>Mouse(1,24,-12));At(450,()=>Mouse(4));
+                At(500,()=>{Chord("WAQ",false);Mouse(0x800,data:120);});At(550,()=>Key('X',true));At(560,()=>Key('X',false));
+                At(650,()=>Chord("SDE",true));At(1000,()=>Chord("SDE",false));
+                At(1100,()=>Key('4',true));At(1150,()=>Key('D',true));At(1200,()=>Key('4',false));At(1500,()=>Key('D',false));
+                At(1550,()=>Key('F',true));At(1650,()=>Key('F',false));
+            }
+            else if(scenario.StartsWith("focus-"))
+            {
+                var keys=scenario[6..];At(150,()=>Chord(keys,true));
+                At(500,()=>{sink.Show();sink.Activate();Focus(sink.Handle,"sink");});
+                At(700,()=>Focus(target,"candidate-return-old-keys-down"));At(900,()=>Chord(keys,false));
+                At(1000,()=>Chord(keys,true));At(1350,()=>Chord(keys,false));At(1450,()=>Key('X',true));At(1460,()=>Key('X',false));
+            }
+            else if(scenario.StartsWith("opposed-"))
+            {
+                var keys=scenario[8..];At(100,()=>Key('X',true));At(110,()=>Key('X',false));
+                At(150,()=>Key(keys[0],true));At(300,()=>Key(keys[1],true));At(650,()=>Key(keys[1],false));At(1000,()=>Key(keys[0],false));
+            }
+            else
+            {
+                var off=scenario.StartsWith("off-");var keys=off?scenario[4..]:scenario.StartsWith("celestial-")?(scenario=="celestial-earth"?"W":"WAQ"):scenario;
+                if(off){At(100,()=>Key('X',true));At(110,()=>Key('X',false));}
+                At(150,()=>Chord(keys,true));At(500,()=>Chord(keys,false));
+                if(scenario.StartsWith("celestial-")){At(700,()=>Key('F',true));At(800,()=>Key('F',false));}
+                if(!off){At(900,()=>Key('X',true));At(910,()=>Key('X',false));}
+            }
+            At(2300,()=>{process.Refresh();if(!process.MainWindowTitle.Contains("TERMINAL"))throw new InvalidOperationException("Expected finite terminal");Key('Z',true);});At(2310,()=>Key('Z',false));At(2450,()=>{});
+        }
+        catch(Exception ex){error=ex.ToString();}
+        finally
+        {
+            foreach(var key in DownKeys.ToArray())try{Key(key,false,false);}catch(Exception ex){error??=ex.ToString();}
+            if(mouseDown)SendInput(1,[new Input{Type=0,MouseFlags=4}],40);
+            if(!process.HasExited){process.CloseMainWindow();if(!process.WaitForExit(10000)){process.Kill();error??="Owned diagnostic process close timeout";}}
+            File.WriteAllText(Path.Combine(output,"stdout.txt"),stdout.GetAwaiter().GetResult());File.WriteAllText(Path.Combine(output,"stderr.txt"),stderr.GetAwaiter().GetResult());
+            File.WriteAllText(Path.Combine(output,"driver.json"),JsonSerializer.Serialize(new{scenario,exe,exeSha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(exe))),events=Events,error,exit=process.ExitCode}));
+        }
+        Console.WriteLine($"{scenario}: {(error is null?"CAPTURED":"HARNESS FAILURE")} {error}");return error is null?0:1;
+    }
+}

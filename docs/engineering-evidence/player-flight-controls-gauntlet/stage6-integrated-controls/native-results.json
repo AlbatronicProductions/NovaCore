@@ -1,0 +1,1180 @@
+{
+  "status": "PASS",
+  "runs": [
+    {
+      "run": "run-1",
+      "status": "PASS",
+      "snapshots": 520,
+      "held": [
+        {
+          "key": "W",
+          "downTick": 14617921,
+          "downFrame": 108,
+          "upTick": 14618265,
+          "upFrame": 170,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 109,
+          "firstReleasedFrame": 171
+        },
+        {
+          "key": "S",
+          "downTick": 14618421,
+          "downFrame": 198,
+          "upTick": 14618765,
+          "upFrame": 260,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 199,
+          "firstReleasedFrame": 261
+        },
+        {
+          "key": "A",
+          "downTick": 14617921,
+          "downFrame": 108,
+          "upTick": 14618265,
+          "upFrame": 170,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 109,
+          "firstReleasedFrame": 171
+        },
+        {
+          "key": "D",
+          "downTick": 14618421,
+          "downFrame": 198,
+          "upTick": 14618765,
+          "upFrame": 260,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 199,
+          "firstReleasedFrame": 261
+        },
+        {
+          "key": "D",
+          "downTick": 14618921,
+          "downFrame": 287,
+          "upTick": 14619265,
+          "upFrame": 349,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 288,
+          "firstReleasedFrame": 350
+        },
+        {
+          "key": "Q",
+          "downTick": 14617921,
+          "downFrame": 108,
+          "upTick": 14618265,
+          "upFrame": 170,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 109,
+          "firstReleasedFrame": 171
+        },
+        {
+          "key": "E",
+          "downTick": 14618421,
+          "downFrame": 198,
+          "upTick": 14618765,
+          "upFrame": 260,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 199,
+          "firstReleasedFrame": 261
+        }
+      ],
+      "admissions": [
+        {
+          "frontier": 0,
+          "sequence": 1,
+          "requested": {
+            "mainOn": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 9,
+          "sequence": 2,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            }
+          }
+        },
+        {
+          "frontier": 31,
+          "sequence": 3,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 35,
+          "sequence": 4,
+          "requested": {
+            "mainOn": false
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 41,
+          "sequence": 5,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            }
+          }
+        },
+        {
+          "frontier": 63,
+          "sequence": 6,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 72,
+          "sequence": 7,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            }
+          }
+        },
+        {
+          "frontier": 94,
+          "sequence": 8,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        }
+      ],
+      "camera": {
+        "dragFrames": [
+          145,
+          154
+        ],
+        "delta": [
+          48,
+          -24
+        ],
+        "zoomBefore": 24,
+        "zoomAfter": 19.200000000000003,
+        "earthFrame": 279,
+        "refocusFrame": 361
+      },
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.552 p95_ms=5.7531 p99_ms=6.8012 max_ms=7.1137 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.006 p95_ms=0.1168 p99_ms=0.2383 max_ms=4.8882 includes=host_admission_bounded_service_copied_observation"
+      ],
+      "files": [
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-1\\driver.json",
+          "sha256": "D15FD025F0FD069ACAE033226779417159C87E5F6E25F707F0414296FD585FF2"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-1\\snapshots.json",
+          "sha256": "00B376AAE98121CBCD2862B04D1211454EF5F3BEC641503FA8118D7EDDA346C6"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-1\\session.json",
+          "sha256": "9AF5C97CA547534A5E57465C2A9467697A0240E33181D311E1EFDDBF453F3B3B"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-1\\stdout.txt",
+          "sha256": "1F8DBDDEA6E82F718E0B814D111F36C4DBA0056E8E2107A6DFC1E8AD3C6BE087"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-1\\stderr.txt",
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        }
+      ]
+    },
+    {
+      "run": "run-2",
+      "status": "PASS",
+      "snapshots": 519,
+      "held": [
+        {
+          "key": "W",
+          "downTick": 14624109,
+          "downFrame": 104,
+          "upTick": 14624453,
+          "upFrame": 165,
+          "heldSnapshots": 61,
+          "firstHeldFrame": 105,
+          "firstReleasedFrame": 166
+        },
+        {
+          "key": "S",
+          "downTick": 14624609,
+          "downFrame": 193,
+          "upTick": 14624953,
+          "upFrame": 255,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 194,
+          "firstReleasedFrame": 256
+        },
+        {
+          "key": "A",
+          "downTick": 14624109,
+          "downFrame": 104,
+          "upTick": 14624453,
+          "upFrame": 165,
+          "heldSnapshots": 61,
+          "firstHeldFrame": 105,
+          "firstReleasedFrame": 166
+        },
+        {
+          "key": "D",
+          "downTick": 14624609,
+          "downFrame": 193,
+          "upTick": 14624953,
+          "upFrame": 255,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 194,
+          "firstReleasedFrame": 256
+        },
+        {
+          "key": "D",
+          "downTick": 14625125,
+          "downFrame": 286,
+          "upTick": 14625453,
+          "upFrame": 347,
+          "heldSnapshots": 61,
+          "firstHeldFrame": 287,
+          "firstReleasedFrame": 348
+        },
+        {
+          "key": "Q",
+          "downTick": 14624109,
+          "downFrame": 104,
+          "upTick": 14624453,
+          "upFrame": 165,
+          "heldSnapshots": 61,
+          "firstHeldFrame": 105,
+          "firstReleasedFrame": 166
+        },
+        {
+          "key": "E",
+          "downTick": 14624609,
+          "downFrame": 193,
+          "upTick": 14624953,
+          "upFrame": 255,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 194,
+          "firstReleasedFrame": 256
+        }
+      ],
+      "admissions": [
+        {
+          "frontier": 0,
+          "sequence": 1,
+          "requested": {
+            "mainOn": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 9,
+          "sequence": 2,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            }
+          }
+        },
+        {
+          "frontier": 30,
+          "sequence": 3,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 35,
+          "sequence": 4,
+          "requested": {
+            "mainOn": false
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 40,
+          "sequence": 5,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            }
+          }
+        },
+        {
+          "frontier": 62,
+          "sequence": 6,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 73,
+          "sequence": 7,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            }
+          }
+        },
+        {
+          "frontier": 95,
+          "sequence": 8,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        }
+      ],
+      "camera": {
+        "dragFrames": [
+          141,
+          149
+        ],
+        "delta": [
+          48,
+          -24
+        ],
+        "zoomBefore": 24,
+        "zoomAfter": 19.200000000000003,
+        "earthFrame": 275,
+        "refocusFrame": 359
+      },
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5537 p95_ms=5.7404 p99_ms=6.7999 max_ms=7.0715 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0059 p95_ms=0.1486 p99_ms=0.2207 max_ms=5.3263 includes=host_admission_bounded_service_copied_observation"
+      ],
+      "files": [
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-2\\driver.json",
+          "sha256": "8E57DDF33C0181BD39D003B9F8C6416E50688500ADF039467C8AD4B2649794D5"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-2\\snapshots.json",
+          "sha256": "E1E20CCF39DC669E3E1711DB71294C80FCE2A1D77A2B6EF3F57A5268E8529573"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-2\\session.json",
+          "sha256": "5457262776369FA8CFDE74E11BFE8DD27B4135B98AE076788B720E6B23299B75"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-2\\stdout.txt",
+          "sha256": "A2BED7D4CBC7B8843EBF0EE1ACB23D744DFB6893D722B3814F6145D47A946DD3"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-2\\stderr.txt",
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        }
+      ]
+    },
+    {
+      "run": "run-3",
+      "status": "PASS",
+      "snapshots": 522,
+      "held": [
+        {
+          "key": "W",
+          "downTick": 14630312,
+          "downFrame": 107,
+          "upTick": 14630656,
+          "upFrame": 169,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 108,
+          "firstReleasedFrame": 170
+        },
+        {
+          "key": "S",
+          "downTick": 14630812,
+          "downFrame": 197,
+          "upTick": 14631156,
+          "upFrame": 259,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 198,
+          "firstReleasedFrame": 260
+        },
+        {
+          "key": "A",
+          "downTick": 14630312,
+          "downFrame": 107,
+          "upTick": 14630656,
+          "upFrame": 169,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 108,
+          "firstReleasedFrame": 170
+        },
+        {
+          "key": "D",
+          "downTick": 14630812,
+          "downFrame": 197,
+          "upTick": 14631156,
+          "upFrame": 259,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 198,
+          "firstReleasedFrame": 260
+        },
+        {
+          "key": "D",
+          "downTick": 14631312,
+          "downFrame": 287,
+          "upTick": 14631671,
+          "upFrame": 352,
+          "heldSnapshots": 65,
+          "firstHeldFrame": 288,
+          "firstReleasedFrame": 353
+        },
+        {
+          "key": "Q",
+          "downTick": 14630312,
+          "downFrame": 107,
+          "upTick": 14630656,
+          "upFrame": 169,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 108,
+          "firstReleasedFrame": 170
+        },
+        {
+          "key": "E",
+          "downTick": 14630812,
+          "downFrame": 197,
+          "upTick": 14631156,
+          "upFrame": 259,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 198,
+          "firstReleasedFrame": 260
+        }
+      ],
+      "admissions": [
+        {
+          "frontier": 0,
+          "sequence": 1,
+          "requested": {
+            "mainOn": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 9,
+          "sequence": 2,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            }
+          }
+        },
+        {
+          "frontier": 31,
+          "sequence": 3,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 35,
+          "sequence": 4,
+          "requested": {
+            "mainOn": false
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 41,
+          "sequence": 5,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            }
+          }
+        },
+        {
+          "frontier": 63,
+          "sequence": 6,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 73,
+          "sequence": 7,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            }
+          }
+        },
+        {
+          "frontier": 96,
+          "sequence": 8,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        }
+      ],
+      "camera": {
+        "dragFrames": [
+          145,
+          153
+        ],
+        "delta": [
+          48,
+          -24
+        ],
+        "zoomBefore": 24,
+        "zoomAfter": 19.200000000000003,
+        "earthFrame": 279,
+        "refocusFrame": 363
+      },
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5522 p95_ms=5.7397 p99_ms=6.8927 max_ms=7.1238 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0046 p95_ms=0.1317 p99_ms=0.2543 max_ms=4.8928 includes=host_admission_bounded_service_copied_observation"
+      ],
+      "files": [
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-3\\driver.json",
+          "sha256": "6E5B031A18604ED7BC1CFF360579BA8957442CA7CA9EE3C01A02F6E2569DB2B2"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-3\\snapshots.json",
+          "sha256": "99663E72FFCAA318B34D92421778DDCB0DF7972541100926CA601BDFFF9C715A"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-3\\session.json",
+          "sha256": "AAD53C0080F903A6501E04C2FC2C134FAA347099E8823940113F5E7968EC338D"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-3\\stdout.txt",
+          "sha256": "D4DF3064D7F7302F14ECB24B7FE3D8B6391893717C832E924274F31B3A62E6A9"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-3\\stderr.txt",
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        }
+      ]
+    },
+    {
+      "run": "run-4",
+      "status": "PASS",
+      "snapshots": 519,
+      "held": [
+        {
+          "key": "W",
+          "downTick": 14636468,
+          "downFrame": 106,
+          "upTick": 14636812,
+          "upFrame": 168,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 107,
+          "firstReleasedFrame": 169
+        },
+        {
+          "key": "S",
+          "downTick": 14636968,
+          "downFrame": 196,
+          "upTick": 14637312,
+          "upFrame": 258,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 197,
+          "firstReleasedFrame": 259
+        },
+        {
+          "key": "A",
+          "downTick": 14636468,
+          "downFrame": 106,
+          "upTick": 14636812,
+          "upFrame": 168,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 107,
+          "firstReleasedFrame": 169
+        },
+        {
+          "key": "D",
+          "downTick": 14636968,
+          "downFrame": 196,
+          "upTick": 14637312,
+          "upFrame": 258,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 197,
+          "firstReleasedFrame": 259
+        },
+        {
+          "key": "D",
+          "downTick": 14637468,
+          "downFrame": 285,
+          "upTick": 14637812,
+          "upFrame": 349,
+          "heldSnapshots": 64,
+          "firstHeldFrame": 286,
+          "firstReleasedFrame": 350
+        },
+        {
+          "key": "Q",
+          "downTick": 14636468,
+          "downFrame": 106,
+          "upTick": 14636812,
+          "upFrame": 168,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 107,
+          "firstReleasedFrame": 169
+        },
+        {
+          "key": "E",
+          "downTick": 14636968,
+          "downFrame": 196,
+          "upTick": 14637312,
+          "upFrame": 258,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 197,
+          "firstReleasedFrame": 259
+        }
+      ],
+      "admissions": [
+        {
+          "frontier": 0,
+          "sequence": 1,
+          "requested": {
+            "mainOn": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 8,
+          "sequence": 2,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            }
+          }
+        },
+        {
+          "frontier": 30,
+          "sequence": 3,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 34,
+          "sequence": 4,
+          "requested": {
+            "mainOn": false
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 40,
+          "sequence": 5,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            }
+          }
+        },
+        {
+          "frontier": 62,
+          "sequence": 6,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 72,
+          "sequence": 7,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            }
+          }
+        },
+        {
+          "frontier": 95,
+          "sequence": 8,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        }
+      ],
+      "camera": {
+        "dragFrames": [
+          144,
+          152
+        ],
+        "delta": [
+          48,
+          -24
+        ],
+        "zoomBefore": 24,
+        "zoomAfter": 19.200000000000003,
+        "earthFrame": 277,
+        "refocusFrame": 360
+      },
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5584 p95_ms=5.7223 p99_ms=6.7464 max_ms=7.111 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0052 p95_ms=0.1249 p99_ms=0.2509 max_ms=4.9698 includes=host_admission_bounded_service_copied_observation"
+      ],
+      "files": [
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-4\\driver.json",
+          "sha256": "87A3B124F41146237BB16E391EDBADED20B3D862BA37DED10F7B95C96397517F"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-4\\snapshots.json",
+          "sha256": "0A1F753EE2B027573FD216835204597A0454F820AA95AE8E65961BC092D49F19"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-4\\session.json",
+          "sha256": "B9E2D1D7DEF6DBBC00D890A16ED05AE6D3B26F6186720333F747E1AD046AAEAE"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-4\\stdout.txt",
+          "sha256": "EC4825D169E9E2449E2FA79AAABD439388776A9D899E85FDB43E12834D1F36B3"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-4\\stderr.txt",
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        }
+      ]
+    },
+    {
+      "run": "run-5",
+      "status": "PASS",
+      "snapshots": 521,
+      "held": [
+        {
+          "key": "W",
+          "downTick": 14642656,
+          "downFrame": 109,
+          "upTick": 14642984,
+          "upFrame": 171,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 110,
+          "firstReleasedFrame": 172
+        },
+        {
+          "key": "S",
+          "downTick": 14643140,
+          "downFrame": 198,
+          "upTick": 14643484,
+          "upFrame": 260,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 199,
+          "firstReleasedFrame": 261
+        },
+        {
+          "key": "A",
+          "downTick": 14642656,
+          "downFrame": 109,
+          "upTick": 14642984,
+          "upFrame": 171,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 110,
+          "firstReleasedFrame": 172
+        },
+        {
+          "key": "D",
+          "downTick": 14643140,
+          "downFrame": 198,
+          "upTick": 14643484,
+          "upFrame": 260,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 199,
+          "firstReleasedFrame": 261
+        },
+        {
+          "key": "D",
+          "downTick": 14643640,
+          "downFrame": 288,
+          "upTick": 14643984,
+          "upFrame": 350,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 289,
+          "firstReleasedFrame": 351
+        },
+        {
+          "key": "Q",
+          "downTick": 14642656,
+          "downFrame": 109,
+          "upTick": 14642984,
+          "upFrame": 171,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 110,
+          "firstReleasedFrame": 172
+        },
+        {
+          "key": "E",
+          "downTick": 14643140,
+          "downFrame": 198,
+          "upTick": 14643484,
+          "upFrame": 260,
+          "heldSnapshots": 62,
+          "firstHeldFrame": 199,
+          "firstReleasedFrame": 261
+        }
+      ],
+      "admissions": [
+        {
+          "frontier": 0,
+          "sequence": 1,
+          "requested": {
+            "mainOn": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 10,
+          "sequence": 2,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true,
+            "pilot": {
+              "pitch": 1,
+              "yaw": 1,
+              "roll": 1
+            }
+          }
+        },
+        {
+          "frontier": 32,
+          "sequence": 3,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": true
+          }
+        },
+        {
+          "frontier": 36,
+          "sequence": 4,
+          "requested": {
+            "mainOn": false
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 41,
+          "sequence": 5,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": -1,
+              "yaw": -1,
+              "roll": -1
+            }
+          }
+        },
+        {
+          "frontier": 63,
+          "sequence": 6,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        },
+        {
+          "frontier": 73,
+          "sequence": 7,
+          "requested": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            },
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false,
+            "pilot": {
+              "pitch": 0,
+              "yaw": -1,
+              "roll": 0
+            }
+          }
+        },
+        {
+          "frontier": 95,
+          "sequence": 8,
+          "requested": {
+            "mainOn": false,
+            "pilotOnly": true
+          },
+          "effective": {
+            "mainOn": false
+          }
+        }
+      ],
+      "camera": {
+        "dragFrames": [
+          146,
+          155
+        ],
+        "delta": [
+          48,
+          -24
+        ],
+        "zoomBefore": 24,
+        "zoomAfter": 19.200000000000003,
+        "earthFrame": 280,
+        "refocusFrame": 361
+      },
+      "timing": [
+        "STOCK_ASSEMBLY_FRAME samples=362 median_ms=5.5504 p95_ms=5.7254 p99_ms=6.7989 max_ms=6.8976 measurement=display_callback_interval_including_present_host_scheduling",
+        "SRV01_LIVE_SERVICE samples=362 median_ms=0.0049 p95_ms=0.1166 p99_ms=0.2183 max_ms=4.7066 includes=host_admission_bounded_service_copied_observation"
+      ],
+      "files": [
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-5\\driver.json",
+          "sha256": "438E39A816E31124CA2F76B2DFC93DCEA44D94A43E4470D36B212588C92D617D"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-5\\snapshots.json",
+          "sha256": "7D872D3B641607CD363CC88EE18898CF781A50B2CF444AB287DCBDC70CB553F6"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-5\\session.json",
+          "sha256": "964846C2C5C1FCA67D8716F9EE63AE30BA2BEF443EDCA1FE44BEDF6A03D9AC87"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-5\\stdout.txt",
+          "sha256": "624931A9A066780775C6B8B16D76B9BA33132E7824F9766301B37C5DFCB0F7C1"
+        },
+        {
+          "path": "build\\player-flight-controls-gauntlet\\native-hold-observer-stage6\\run-5\\stderr.txt",
+          "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+        }
+      ]
+    }
+  ]
+}

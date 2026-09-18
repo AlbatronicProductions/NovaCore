@@ -1,0 +1,22 @@
+{
+  "journalCapacity": 256,
+  "admissionRecordBytes": 56,
+  "journalPayloadBytes": 14336,
+  "coldControlAttachmentBytes": 14448,
+  "allocatorRows": 54,
+  "allocatorTablePayloadBytes": 17280,
+  "pilotFullJournalSaveBytes": 76578,
+  "engineJournalWithMaxHostCreditsSaveBytes": 162428,
+  "saveDecodeLimitBytes": 1048576,
+  "nativePilotStateBytes": 4,
+  "nativeInputBytes": 100,
+  "nativeHostEventBytes": 128,
+  "uiJournal": "none",
+  "physicalHorizon": {
+    "intervals": 128,
+    "ticks": 2000000
+  },
+  "evidenceBudgetBytes": 524288,
+  "limitations": "Named bounded payloads; Stage6 adds no production state/storage. Not a total process-memory census.",
+  "integratedCapturedSaveBytes": 26686
+}

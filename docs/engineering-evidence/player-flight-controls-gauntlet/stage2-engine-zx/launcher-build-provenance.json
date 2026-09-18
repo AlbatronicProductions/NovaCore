@@ -1,0 +1,65 @@
+[
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\BepuPhysics.dll",
+    "changed": false,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/BepuPhysics.dll",
+    "banked": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7",
+    "before": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\BepuUtilities.dll",
+    "changed": false,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/BepuUtilities.dll",
+    "banked": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68",
+    "before": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\NovaCore.Launcher.deps.json",
+    "changed": false,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.deps.json",
+    "banked": "1731818EAC7DBB7CF1670FA06969666DE1FC19CE8669317E3971725AD69BBD1D",
+    "before": "1731818EAC7DBB7CF1670FA06969666DE1FC19CE8669317E3971725AD69BBD1D"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\NovaCore.Launcher.dll",
+    "changed": true,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+    "banked": "220711167FF78737C60ECC78637256CDFC1A5BDB735110667C6BB28678B115E7",
+    "before": "42D868929496F53F0307F4A9BB5650216D6C086D24E88DE6AC7824524CA51687"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\NovaCore.Launcher.exe",
+    "changed": true,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.exe",
+    "banked": "1326513FF85A2ECAC6D7D78626CB0507C51185D84C90FE941524B03C16AA018A",
+    "before": "EA087128A46C4B9B3D0E9CD616AA6302755E40D4DECE86E3DDFB0C0D778AB773"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\NovaCore.Launcher.pdb",
+    "changed": true,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.pdb",
+    "banked": "7063029948DD20FBAECDEBB64D6B3F40440392A1419D602BB3F7B70B41B31A76",
+    "before": "26585A0B76DFE17E356921AA7D6A40F29A050FA6314BA9842123245000EAF44A"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\NovaCore.Launcher.runtimeconfig.json",
+    "changed": false,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/NovaCore.Launcher.runtimeconfig.json",
+    "banked": "96BC2946DFF8790400D652EC7F8DE7BB043E954980D59470C112788B68A1FBD3",
+    "before": "96BC2946DFF8790400D652EC7F8DE7BB043E954980D59470C112788B68A1FBD3"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\third-party\\Bepu\\ATTRIBUTION.txt",
+    "changed": false,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/third-party\\Bepu\\ATTRIBUTION.txt",
+    "banked": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3",
+    "before": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3"
+  },
+  {
+    "source": "build\\active-vessel-camera-free-correction\\candidate\\bin\\NovaCore.Launcher\\release\\third-party\\Bepu\\LICENSE.txt",
+    "changed": false,
+    "path": "tools/NovaCore.Launcher/bin/Release/net10.0-windows/third-party\\Bepu\\LICENSE.txt",
+    "banked": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD",
+    "before": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD"
+  }
+]

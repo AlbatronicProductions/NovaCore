@@ -1,0 +1,6 @@
+{
+  "filesRemoved": 74,
+  "bytesRemoved": 13373347,
+  "scope": "Only reviewed native recovery/integrated raw stdout, snapshot/save duplicates and per-interval oracle bulk",
+  "retained": "Compact timelines/results/hashes/helpers; one actual integrated save; candidates and final regression logs"
+}

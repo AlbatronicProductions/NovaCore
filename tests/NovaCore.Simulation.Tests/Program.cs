@@ -15,6 +15,11 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--assembly-control", StringComparer.Ordinal)) { AssemblyControlTests.Run(); return; }
+if (args.Contains("--pilot-demand", StringComparer.Ordinal)) { AssemblyPilotDemandTests.Run(); return; }
+if (args.Contains("--pilot-allocation", StringComparer.Ordinal)) { AssemblyPilotAllocationTests.Run(); return; }
+if (args.Contains("--assembly-control-measure", StringComparer.Ordinal)) { AssemblyControlTests.Measure(); return; }
+
 if (args.Contains("--assembly-development-cheap", StringComparer.Ordinal)) { AssemblyDevelopmentPropulsionTests.Cheap(); return; }
 if (args.Contains("--assembly-development-validation", StringComparer.Ordinal)) { AssemblyDevelopmentPropulsionTests.Cheap(); AssemblyDevelopmentPropulsionTests.Determinism(); AssemblyDevelopmentPropulsionTests.Allocation(); return; }
 if (args.Contains("--assembly-development-performance", StringComparer.Ordinal)) { AssemblyDevelopmentPropulsionTests.Performance(); return; }

@@ -1,0 +1,22 @@
+[
+  {
+    "path": "build/player-flight-controls-gauntlet/stage5-player-attitude-debug.txt",
+    "sha256": "E431D7B2CE564E664D14EEDBC8CA19624FC3D949C20A917F40DA1A46E54EC7FC",
+    "bytes": 372,
+    "configuration": "debug",
+    "witness": [
+      "PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0058 p95_ms=0.0058 p99_ms=0.0061 max_ms=0.0101 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152",
+      "PLAYER_ATTITUDE PASS checks=8264"
+    ]
+  },
+  {
+    "path": "build/player-flight-controls-gauntlet/stage5-player-attitude-release.txt",
+    "sha256": "B1E99EDC41668AF697268235100686345A9573E3CB26789FEF0D7C575A99D8E7",
+    "bytes": 368,
+    "configuration": "release",
+    "witness": [
+      "PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0028 p95_ms=0.003 p99_ms=0.003 max_ms=0.0054 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152",
+      "PLAYER_ATTITUDE PASS checks=8264"
+    ]
+  }
+]

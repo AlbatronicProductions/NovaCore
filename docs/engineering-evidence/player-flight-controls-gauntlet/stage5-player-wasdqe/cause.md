@@ -1,0 +1,7 @@
+# Cause: harness / event-duration mismatch
+
+Repeated **original Sky** W and Q taps were observed in the unmodified handler, using an observation-only native copy. W: keydown at tick 13838328/frame 3261 changed native bits 0→1; keyup at the same tick/frame changed 1→0. Q: tick 13838421/frame 3280 changed 0→16→0. There were **zero host snapshots between down and up** and zero managed held observations. Buffers did not overflow. This proves the mismatch for the reproduced original automation mechanism; the old uninstrumented trials themselves did not contain event timelines.
+
+Distinct SendInput down/350 ms hold/up crossed multiple actual native snapshots and reached canonical demand and physical realization. **No production input correction was required or made in this recovery.** No sampling delay, artificial hold mode, native-field mutation or managed-demand injection supplied the native evidence.
+
+Two diagnostic authoring repairs are retained transparently. The first focus-return driver checked foreground activation synchronously; Windows completed it cross-thread immediately afterward. That invalid trial is preserved as focus-W; a bounded driver-only activation-completion wait produced focus-W-retry1. The physical oracle initially demanded simultaneous pitch/yaw torque on the very first WAQ interval even though the source-held gimbal was zero; its per-axis sign precondition was corrected. Full independent wrench equality was never relaxed. Neither repair changed production.

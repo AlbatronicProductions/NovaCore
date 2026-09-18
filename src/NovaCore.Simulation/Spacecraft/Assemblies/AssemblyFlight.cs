@@ -7,7 +7,8 @@ using NovaCore.Simulation.Transactions;
 
 namespace NovaCore.Simulation.Spacecraft.Assemblies;
 
-internal readonly record struct AssemblyCommand(bool MainOn,string? Pair,double GimbalTargetY,double GimbalTargetZ,long Ticks);
+internal readonly record struct AssemblyCommand(bool MainOn,string? Pair,double GimbalTargetY,double GimbalTargetZ,long Ticks,
+    [property:System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] ushort JetMask=0);
 internal readonly record struct CompiledAssemblyCommand(AssemblyCommand Request,ushort Jets,PropellantInteger ExtentRate);
 internal enum AssemblyFeedState { NoDemand,Available,Exhausted }
 internal enum AssemblyPhysicalConsumer { FreeFlight, SupportedContact }
@@ -60,21 +61,28 @@ internal sealed class AssemblyLaunch
         {
             if(command.Ticks<1||command.Ticks>(contact is null?15625:16667)||!double.IsFinite(command.GimbalTargetY)||!double.IsFinite(command.GimbalTargetZ))throw new InvalidDataException("Unsupported scheduled command.");
             total=checked(total+command.Ticks);if(total>(contact is null?2_000_000:20_000_000))throw new InvalidDataException("Episode exceeds qualified horizon.");
-            ushort mask=0;var rate=default(PropellantInteger);
-            if(command.MainOn)rate=AssemblyResources.Rate(design.Main.Definition.Propulsion!.ExtentRateKgS);
-            if(command.Pair is {} name)
-            {
-                var pair=design.Pair(name);
-                for(var i=0;i<design.Jets.Length;i++)
-                    if(design.Jets[i].Matches(pair.First,pair.FirstActuator)||design.Jets[i].Matches(pair.Second,pair.SecondActuator))
-                    {mask|=(ushort)(1<<i);rate=AssemblyResources.Add(rate,AssemblyResources.Rate(design.Jets[i].Propulsion.ExtentRateKgS));}
-            }
-            compiled.Add(new(command,mask,rate));
+            compiled.Add(CompileCommand(design,command));
         }
         Plan=compiled.MoveToImmutable();End=new(checked(origin.Ticks+total));
         var stores=new AssemblyStores(AssemblyResources.Mass(design.Data.Design.InitialFuelKg),AssemblyResources.Mass(design.Data.Design.InitialOxidizerKg));
         AssemblyResources.Validate(design,stores);
         Initial=new(origin,stores,ObserveMass(design,stores),initial,gimbal,default,default,0,0,0);
+    }
+    internal static CompiledAssemblyCommand CompileCommand(CompiledAssemblyDesign design,AssemblyCommand command)
+    {
+        // Masks are emitted only by the qualified live allocation table. Recorded
+        // plans retain their original one-pair language, never arbitrary jet masks.
+        if(command.JetMask!=0)throw new InvalidDataException("Recorded jet-mask commands are unsupported.");
+        ushort mask=0;var rate=default(PropellantInteger);
+        if(command.MainOn)rate=AssemblyResources.Rate(design.Main.Definition.Propulsion!.ExtentRateKgS);
+        if(command.Pair is {} name)
+        {
+            var pair=design.Pair(name);
+            for(var i=0;i<design.Jets.Length;i++)
+                if(design.Jets[i].Matches(pair.First,pair.FirstActuator)||design.Jets[i].Matches(pair.Second,pair.SecondActuator))
+                {mask|=(ushort)(1<<i);rate=AssemblyResources.Add(rate,AssemblyResources.Rate(design.Jets[i].Propulsion.ExtentRateKgS));}
+        }
+        return new(command,mask,rate);
     }
     // Closed cold profile; ordinary command/resource integration remains bounded to 15,625 ticks.
     internal static AssemblyLaunch CreateDevelopmentQualification(CompiledAssemblyDesign design,SpacecraftDefinition spacecraft,string launchId,
@@ -198,8 +206,10 @@ internal readonly record struct AssemblyHostCredit(long HostTicks,int Frontier);
 internal static class AssemblyFlightPreparation
 {
     internal static AssemblyFlightRecord Evaluate(AssemblyLaunch launch,in AssemblyRuntimeState source,StateRevision revision,TimelineRevision timeline,Double3 gravityRoot=default)
+        =>Evaluate(launch,source,revision,timeline,launch.Plan[source.Frontier],gravityRoot);
+    internal static AssemblyFlightRecord Evaluate(AssemblyLaunch launch,in AssemblyRuntimeState source,StateRevision revision,TimelineRevision timeline,CompiledAssemblyCommand command,Double3 gravityRoot=default)
     {
-        var command=launch.Plan[source.Frontier];var d=launch.Design;var request=command.Request;
+        var d=launch.Design;var request=command.Request;
         var nextGimbal=AssemblyActuation.Next(d,source.Gimbal,request.GimbalTargetY,request.GimbalTargetZ,request.Ticks);
         var f=Double3.Zero;var t=Double3.Zero;
         if(request.MainOn){var w=AssemblyActuation.Main(d,source.Gimbal.ActualY,source.Gimbal.ActualZ);f=w.Force;t=w.MomentAtOrigin;}

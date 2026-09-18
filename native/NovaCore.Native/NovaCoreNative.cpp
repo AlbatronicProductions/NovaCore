@@ -112,7 +112,7 @@ static_assert(offsetof(NcFrameSubmission, productionBillboardFrame) == 784);
 static_assert(offsetof(NcFrameSubmission, facilityCaster) == 792);
 static_assert(sizeof(NcOrbitLineVertex) == 24);
 static_assert(sizeof(NcRuntimeAssets) == 32);
-static_assert(sizeof(NcInputState) == 88);
+static_assert(sizeof(NcInputState) == 100);
 static_assert(sizeof(NcPresentationFocus) == 4);
 static_assert(offsetof(NcInputState, deltaSeconds) == 0);
 static_assert(offsetof(NcInputState, moveLeft) == 4);
@@ -136,9 +136,12 @@ static_assert(offsetof(NcInputState, presentationFocus) == 72);
 static_assert(offsetof(NcInputState, viewportWidthPixels) == 76);
 static_assert(offsetof(NcInputState, viewportHeightPixels) == 80);
 static_assert(offsetof(NcInputState, cameraActions) == 84);
+static_assert(offsetof(NcInputState, engineActions) == 88);
+static_assert(offsetof(NcInputState, controlInputActive) == 92);
+static_assert(offsetof(NcInputState, pilotKeys) == 96);
 static_assert(offsetof(NcHostEvent, input) == 16);
-static_assert(offsetof(NcHostEvent, submission) == 104);
-static_assert(sizeof(NcHostEvent) == 112);
+static_assert(offsetof(NcHostEvent, submission) == 120);
+static_assert(sizeof(NcHostEvent) == 128);
 
 struct ProductionBillboardPublicationReadiness {
   bool fenceComplete{};
@@ -514,6 +517,8 @@ struct App {
   std::array<bool, 8> sasModeWasDown{};
   std::array<bool, 10> presentationFocusWasDown{};
   bool resetWasDown{}, focusVesselWasDown{};
+  uint32_t engineActions{};
+  uint32_t pilotKeys{};
   uint32_t surfaceDiagnostic{};
   void Log(uint32_t cat, const char *msg) const {
     if (cb) {
@@ -573,6 +578,8 @@ void ClearRawInput(App &a) {
   a.rateIncreaseWasDown = false;
   a.sasModeWasDown.fill(false);
   a.presentationFocusWasDown.fill(false);
+  a.engineActions = 0;
+  a.pilotKeys = 0;
 }
 void ClearLookInput(App &a) {
   a.rawMouseX = 0;
@@ -593,7 +600,20 @@ void RawInput(App &a, LPARAM l) {
     a.rawMouseY += raw->data.mouse.lLastY;
   }
 }
+uint32_t PilotKey(WPARAM key) {
+  switch(key) { case 'W': return 1u; case 'S': return 2u; case 'A': return 4u;
+    case 'D': return 8u; case 'Q': return 16u; case 'E': return 32u; default: return 0u; }
+}
 LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
+  if ((m == WM_KEYUP || m == WM_SYSKEYUP) && gApp) gApp->pilotKeys &= ~PilotKey(w);
+  // Press edges survive until one host callback; OS repeat/release never toggles
+  // an engine. This is requested input only, consumed by an explicit context.
+  if (m == WM_KEYDOWN && gApp && GetForegroundWindow() == h && GetFocus() == h &&
+      (GetCapture() == nullptr || GetCapture() == h) && (l & (1LL << 30)) == 0) {
+    if (w == 'Z') gApp->engineActions |= 1u;
+    if (w == 'X') gApp->engineActions |= 2u;
+    gApp->pilotKeys |= PilotKey(w);
+  }
   if (m == WM_SIZE && gApp)
     gApp->resized = true;
   if (m == WM_INPUT && gApp)
@@ -608,7 +628,7 @@ LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
                   static_cast<long>(gApp->wheelDeltaRaw));
     gApp->Log(NC_LOG_CAMERA, message);
   }
-  if ((m == WM_KILLFOCUS || m == WM_CAPTURECHANGED || m == WM_DESTROY) && gApp)
+  if ((m == WM_KILLFOCUS || m == WM_CAPTURECHANGED || m == WM_DESTROY || m == WM_ENTERMENULOOP || m == WM_ENTERSIZEMOVE || m == WM_CANCELMODE) && gApp)
     ClearRawInput(*gApp);
   if (m == WM_CLOSE)
     DestroyWindow(h);
@@ -2503,6 +2523,11 @@ void Update(App &a, float dt) {
   const bool focusVessel = rising('F', a.focusVesselWasDown);
   // HOME is unbound: surface free navigation needs an explicit frame owner.
   const uint32_t cameraActions = GetForegroundWindow() == a.window && focusVessel ? 1u : 0u;
+  const uint32_t controlInputActive = GetForegroundWindow() == a.window && GetFocus() == a.window && (GetCapture() == nullptr || GetCapture() == a.window) ? 1u : 0u;
+  // Per-frame player deactivation must not reset camera rising-edge history.
+  if (!controlInputActive) { a.engineActions = 0; a.pilotKeys = 0; }
+  const uint32_t engineActions = controlInputActive ? a.engineActions : 0u;
+  a.engineActions = 0;
   NcInputState in{dt,
                   (RegionalValidationKeyState('A') & 0x8000) != 0,
                   (RegionalValidationKeyState('D') & 0x8000) != 0,
@@ -2522,7 +2547,7 @@ void Update(App &a, float dt) {
                   (RegionalValidationKeyState(VK_CONTROL) & 0x8000) != 0,
                   static_cast<NcPresentationFocus>(presentationFocus),
                   a.extent.width,
-                  a.extent.height, cameraActions};
+                  a.extent.height, cameraActions, engineActions, controlInputActive, controlInputActive ? a.pilotKeys : 0u};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
   a.cb(&e, a.cbData);
   const auto callbackEnd=std::chrono::steady_clock::now();
@@ -2594,7 +2619,8 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, presentationFocus),
         (uint32_t)offsetof(NcFrameSubmission, solarLighting),
         (uint32_t)offsetof(NcInputState, viewportWidthPixels),
-        (uint32_t)offsetof(NcInputState, viewportHeightPixels), (uint32_t)offsetof(NcInputState, cameraActions)};
+        (uint32_t)offsetof(NcInputState, viewportHeightPixels), (uint32_t)offsetof(NcInputState, cameraActions),
+        (uint32_t)offsetof(NcInputState, engineActions), (uint32_t)offsetof(NcInputState, controlInputActive), (uint32_t)offsetof(NcInputState, pilotKeys)};
   return NC_SUCCESS;
 }
 static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets,const NcVisualMesh* meshes=nullptr,uint32_t meshCount=0,uint32_t preparedObjectCapacity=0) {

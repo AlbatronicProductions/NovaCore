@@ -1,0 +1,77 @@
+using System.Numerics;
+using System.Text.Json;
+using NovaCore.Core;
+using NovaCore.Simulation.Spacecraft.Assemblies;
+using NovaCore.Simulation.Transactions;
+
+internal static class NativeHoldOracle
+{
+    private static int checks;
+    private static void Check(bool pass,string message){if(!pass)throw new InvalidDataException(message);checks++;}
+    private static readonly AssemblyStockCatalog Catalog=AssemblyStockCatalog.LoadDefault();
+    private static void Near(Double3 a,Double3 b,string label)=>Check((a-b).LengthSquared<1e-18,label);
+    // The named-nozzle and quaternion oracle bodies below are generated verbatim
+    // from the qualified Stage-4 permanent test; no production allocator lookup.
+    ORACLE_METHODS
+    private static int Main(string[] args)
+    {
+        var results=new List<object>();
+        var integrated=args.Contains("--integrated");
+        foreach(var directory in args.Where(x=>x!="--integrated"))
+        {
+            var bytes=File.ReadAllBytes(Path.Combine(directory,"session.json"));
+            var data=AssemblyJson.Read<AssemblySaveData>(bytes,1_048_576);
+            using var original=AssemblyApplicationSession.Restore(Catalog,bytes);
+            Check(original.Save().AsSpan().SequenceEqual(bytes),"captured exact save continuation");
+            var design=Catalog.Resolve(data.DesignId);var launch=new AssemblyLaunch(design,data.Spacecraft,data.LaunchId,data.InitialMotion,data.InitialGimbal,data.Plan,new(data.OriginTicks));
+            using var fragmented=AssemblyApplicationSession.Create(launch,data.HistoryCapacity,new(data.RateNumerator,data.RateDenominator),new(data.InitialRevision));
+            fragmented.EnableLiveControl(execution:AssemblyControlExecution.PhysicalActuators);
+            var nextAdmission=0;long host=0;var requested=default(AssemblyControlRequest);var before=launch.Initial;
+            var records=new List<object>();var nonzero=0;
+            for(var i=0;i<data.Current.Frontier;i++)
+            {
+                while(nextAdmission<data.Live!.Admissions.Length&&data.Live.Admissions[nextAdmission].Frontier==i)
+                {
+                    var a=data.Live.Admissions[nextAdmission++];
+                    var admitted=fragmented.Engine.AdmitAssemblyControl(fragmented.Control!,a.Identity,a.Sequence,a.Requested);
+                    Check(admitted.Status==AssemblyControlStatus.Admitted&&admitted.Admission.Effective==a.Effective&&admitted.Admission.Frontier==a.Frontier,"captured admission at same frontier with changed host fragmentation");requested=a.Effective;
+                }
+                foreach(var ticks in new[]{625L,15000L+(i==data.Current.Frontier-1?data.DebtTicks:0)})
+                    Check(fragmented.Engine.AdmitAssemblyHostTime(fragmented.Authority,++host,new(ticks)).Status==AssemblyFlightStatus.AcceptedCredit,"fragmented credit");
+                Check(fragmented.Engine.PrepareAssemblyFlight(fragmented.Authority,out var proposal)==AssemblyFlightStatus.Prepared&&fragmented.Engine.PublishAssemblyFlight(fragmented.Authority,proposal).Status==AssemblyFlightStatus.Published,"fragmented canonical publication");
+                Check(original.Engine.TryGetAssemblyHistory(original.Authority,i,out var record)&&fragmented.Engine.TryGetAssemblyHistory(fragmented.Authority,i,out var replay)&&record==replay,"captured history exact under fragmentation");
+                var p=requested.Pilot;var mask=OracleMask(design,requested.MainOn,p);var expected=OracleWrench(design,requested.MainOn,mask,before.Gimbal);var after=record.Successor;
+                Check(record.Command.JetMask==mask&&after.Actual.Jets==mask,"actual captured unique nozzle union");
+                Near(record.Wrench.Force,expected.Force,"captured independent force");Near(record.Wrench.MomentAtOrigin,expected.MomentAtOrigin,"captured independent moment");
+                Check(record.HeldGimbal==before.Gimbal&&after.Gimbal.TargetY==(requested.MainOn?-p.Pitch*.05:0)&&after.Gimbal.TargetZ==(requested.MainOn?-p.Yaw*.05:0),"captured source-held gimbal and correct target");
+                Check(Math.Abs(after.Gimbal.ActualY-before.Gimbal.ActualY)<=.0015625+1e-15&&Math.Abs(after.Gimbal.ActualZ-before.Gimbal.ActualZ)<=.0015625+1e-15,"captured finite gimbal slew");
+                var extent=(requested.MainOn?5d/128:0)+BitOperations.PopCount((uint)mask)*3d/2048;
+                Check(AssemblyResources.Subtract(before.Stores.Fuel,after.Stores.Fuel)==AssemblyResources.Mass(extent*2/64)&&AssemblyResources.Subtract(before.Stores.Oxidizer,after.Stores.Oxidizer)==AssemblyResources.Mass(extent*3/64),"captured exact unique actuator debit");
+                var tau=expected.MomentAtOrigin-Double3.Cross(before.Mass.Com,expected.Force);
+                if(p!=default)
+                {
+                    nonzero++;
+                    // A reversal can retain angular momentum and source-held gimbal sign.
+                    // Integrated cases retain full independent wrench/resource/replay checks.
+                    if(!integrated&&(!requested.MainOn||Math.Abs(before.Gimbal.ActualY)>0||Math.Abs(before.Gimbal.ActualZ)>0||p.Roll!=0))
+                    {
+                        Check((p.Roll==0||tau.X*p.Roll>0)&&(p.Pitch==0||(requested.MainOn&&before.Gimbal.ActualY==0)||tau.Y*p.Pitch>0)&&(p.Yaw==0||(requested.MainOn&&before.Gimbal.ActualZ==0)||tau.Z*p.Yaw>0),$"captured torque direction case={directory} interval={i} pilot={p} held={before.Gimbal} tau={tau}");
+                        Check((p.Roll==0||after.Motion.AngularVelocityBody.X*p.Roll>0)&&(p.Pitch==0||(requested.MainOn&&before.Gimbal.ActualY==0)||after.Motion.AngularVelocityBody.Y*p.Pitch>0)&&(p.Yaw==0||(requested.MainOn&&before.Gimbal.ActualZ==0)||after.Motion.AngularVelocityBody.Z*p.Yaw>0),"captured angular response direction");
+                    }
+                }
+                if(!requested.MainOn&&p==default)
+                {
+                    var l0=before.Motion.BodyToWorld.Rotate(before.Mass.Inertia.Apply(before.Motion.AngularVelocityBody));var l1=after.Motion.BodyToWorld.Rotate(after.Mass.Inertia.Apply(after.Motion.AngularVelocityBody));
+                    Near(l0,l1,"neutral coast retains world angular momentum");
+                }
+                records.Add(new{index=i,pilot=p,main=requested.MainOn,mask,torque=tau,omega=after.Motion.AngularVelocityBody,gimbal=after.Gimbal,fuelDebit=extent*2/64,oxideDebit=extent*3/64});before=after;
+            }
+            Check(nextAdmission==data.Live!.Admissions.Length,"all captured admissions replayed");
+            fragmented.Engine.ObserveAssemblyFlight(fragmented.Authority,out var final);
+            Check(final.State==data.Current&&final.Clock.Debt.Ticks==data.DebtTicks,"captured final state/debt exact");
+            Check(data.Current.Frontier==128&&nonzero>0,"native episode physical attitude realized");
+            results.Add(new{scenario=Path.GetFileName(directory),status="PASS",intervals=data.Current.Frontier,nonzeroIntervals=nonzero,admissions=data.Live.Admissions.Length,finalOmega=data.Current.Motion.AngularVelocityBody,historyDigest=data.HistoryDigest,records});
+        }
+        Console.WriteLine(JsonSerializer.Serialize(new{status="PASS",checks,results}));return 0;
+    }
+}

@@ -1,0 +1,444 @@
+{
+  "capturedUtc": "2026-09-18T22:54:19.627461+00:00",
+  "head": "6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae",
+  "branch": "main",
+  "main": "6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae",
+  "tagObject": "fe240297fd83a64b234a1e47defbe162c85b3bec",
+  "public": [
+    "6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae\trefs/heads/main",
+    "fe240297fd83a64b234a1e47defbe162c85b3bec\trefs/tags/m15.4-unified-active-vessel-camera",
+    "6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae\trefs/tags/m15.4-unified-active-vessel-camera^{}"
+  ],
+  "indexEmpty": true,
+  "source": [
+    {
+      "path": "docs/NOVACORE_CURRENT_STATE.md",
+      "sha256": "5650F6BA4527BAEE0992DF1250C111FE3776EB52D8FFE440026EEAF9EE35D0F6",
+      "bytes": 43629
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "662B46A549B94956FD51112CDB190E655298084221D09634FF5D5B3FF2AF24EC",
+      "bytes": 304239
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "sha256": "E9520E0AA25D1CADFC29898E6B57299A089BC131419D0A06077F4B97E0568E33",
+      "bytes": 19235
+    },
+    {
+      "path": "samples/NovaCore.Triangle/PlayerFlightControlInput.cs",
+      "sha256": "32F65BBF3DF474F32F093F16BB03F5EF3D8CB987C4CBB49CA28D4FF916D4E24E",
+      "bytes": 3949
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "sha256": "395F6AD0A6DCDB31730466675D8F34ABD1EA79797F8CFF8D52297FB6BD1C0281",
+      "bytes": 64665
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SampleOptions.cs",
+      "sha256": "F621668399A9D67C5234DA07E953B9E0F7826ABAE7994BB86FA5823E2E170729",
+      "bytes": 6403
+    },
+    {
+      "path": "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs",
+      "sha256": "F03184B824D075981A89C269FB10612E51940DC17A22974FC330B5DFB80636BF",
+      "bytes": 30682
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "sha256": "DCCB4A73C1DBE688616E2F3F5CC52A3DEB6DD8E52F4E074C6388328524DA8864",
+      "bytes": 24359
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyApplicationSession.cs",
+      "sha256": "EC2A8D06F87EA34720FF00D688BEA725A76797C9156F9CD4AECE4B6F54CA479C",
+      "bytes": 3845
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyControl.cs",
+      "sha256": "44728F92B29FCC31C29EC0CAB3FA9C2C20D8ED72E468556DBAB82F9189BDA8CE",
+      "bytes": 2585
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs",
+      "sha256": "E13DCEDD5701727E3438BA61E145FE2E2B9DB4AF61E9011C574542277F65DAE3",
+      "bytes": 17323
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyPilotAllocation.cs",
+      "sha256": "B77555E792F39EF14AA33E3BB8D95881344157A5A62A4246A9EBF533BF6FDAC6",
+      "bytes": 4561
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Assemblies.cs",
+      "sha256": "87B8D69037B3B25788AB40590740AA2524360D8C1E6CD38DBBD5043FD66FEBC0",
+      "bytes": 24204
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyControl.cs",
+      "sha256": "1BF2E4E5A19D30ADA4AD88888E841742AFC6D3D35F79CAF00AD3E3D3020AF57F",
+      "bytes": 9118
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblySave.cs",
+      "sha256": "9071D7F9AD1FBE879101FD865EAC7721CBB78620BE3674E7E5C39C731589A347",
+      "bytes": 10760
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "sha256": "2E90D9AA37A4BD885FC0CC51D58BDED31A90821F15EB76C833A8E0C6D8032141",
+      "bytes": 4273
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlayerAttitudeControlTests.cs",
+      "sha256": "49188DE19720D2F47C54FCF77297170BCF7A48AC9B3D4A4D253C070AE14B2A8C",
+      "bytes": 8995
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlayerEngineControlTests.cs",
+      "sha256": "A253CDD4DBDC737D28A3FEC3DCEDC3F41BABFCD846AC4445BED9EC7D21E180F5",
+      "bytes": 11684
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "sha256": "3BB6AA8C4C8E3E202BCD61D5B5C03B9DC2EF14148458BF1BFE363A6049B0B18E",
+      "bytes": 571661
+    },
+    {
+      "path": "tests/NovaCore.Launcher.Tests/Program.cs",
+      "sha256": "934A69A03C88EFCD2B6670F912AFE3680F20E2761FEECE5216A6B31013E3EEFC",
+      "bytes": 17495
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyControlTests.cs",
+      "sha256": "544A9DAF06858CA4F208088DB6C1A957B90D4ACC2CFF7B29868495C67A4E5946",
+      "bytes": 19442
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPilotAllocationTests.cs",
+      "sha256": "B66E0BB3AB28C174F86A79B8E048BBB26C023BC13EACF92B3B13588B38C2156A",
+      "bytes": 15031
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyPilotDemandTests.cs",
+      "sha256": "F82B3B067700703C459D34CBFB351C7910091D3BF65C558F09A59457529FCE05",
+      "bytes": 10514
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "3FFBCB0D09C0224BCB007EE2941590C873EF17CC0EF284D9E73454124ADFCE9D",
+      "bytes": 264337
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchCommandBuilder.cs",
+      "sha256": "829D308AEA67E79EC03DB42E032EE647E9D13DD2EE7DEA9B6257661F67AE7265",
+      "bytes": 4709
+    },
+    {
+      "path": "tools/NovaCore.Launcher/LaunchConfiguration.cs",
+      "sha256": "FC7BB2E1D3E1C92B1E8C5C0CF51CE2A826F7C70BD5A257A2D7B12FB1C1D0270B",
+      "bytes": 2747
+    },
+    {
+      "path": "tools/NovaCore.Launcher/ScenarioCatalog.cs",
+      "sha256": "1F7CC8159CBA13156C6B1364BAACED3E3AF549DF1022E1FB699E7DE95072BD06",
+      "bytes": 9741
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/PlayerIntegratedControlTests.cs",
+      "sha256": "D86355F381628BCFA07AEC1C7A046064E9FA869832A756CED315F525F4A03F7D",
+      "bytes": 11429
+    }
+  ],
+  "priorUntrackedPreserved": [
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/README.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/closure.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/entry.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/ksa.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-camera-command-review/verification.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/README.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/candidate-comparison.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/dependency-graph.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/identity.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-camera.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-departure.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-launch-stack.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-live-history.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-navigation-sas.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/ksa-player-input.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/novacore-owner-map.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/promotion-judgment.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/red-team.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/repo-truth.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/reproduce.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verification.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/post-m15.3-first-playable-launch-review/verify-review.ps1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/closeout.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/LEGAL-REVIEW-TODO.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/MODDING-POLICY-DRAFT.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/ROOT-LICENSE-CANDIDATE.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/COMMERCIAL-LICENSING-PROPOSED.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/CREATOR-CONTENT-POLICY-PROPOSED.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/IDENTITY.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/INSTALLATION-PLAN.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/LEGAL-REVIEW-BRIEF.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/LICENSING-PROPOSED.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/MODDING-POLICY-PROPOSED.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/NOTICE-PROPOSED.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/PROJECT-CONTROL-DECISIONS.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/REPORT.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/RIGHTS-MATRIX.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/ROOT-LICENSE-PROPOSED.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/THIRD-PARTY-SCOPE.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/COMMERCIAL-LICENSING-preinstallation.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/FINAL-REPORT.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/commit.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/final-bank-paths.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/preflight.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/prospective.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/release-gates.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-tags-before.txt",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification-stop.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/remote-verification.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/rights-matrix.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/staged.json",
+      "unchanged": true
+    },
+    {
+      "path": "docs/legal/finalization/m15.1-release/withheld-paths.json",
+      "unchanged": true
+    }
+  ],
+  "ksaSha256": "A03E98153C6F353AF6F280CD3BDC1C71C718008E2049F508DC6FBE54457A0AA8",
+  "milestone": "NOT ASSIGNED",
+  "bankingAuthorized": false,
+  "manualAcceptance": "PASS - reported by Project Control",
+  "judgment": "ACCEPTED UNBANKED - ready for Project Control banking consideration - STOP FOR PROJECT CONTROL",
+  "productionCorrectionsByStage": [
+    1,
+    1,
+    0,
+    0,
+    1
+  ],
+  "stage6": "ENGINEERING PASS",
+  "runtime": [
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Triangle/debug/NovaCore.Triangle.dll",
+      "sha256": "33F96AF748FA76FD5A2C6D319D3EFD7AB8BE273FCFC176A50C4BE923A9C02541",
+      "bytes": 326144
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Triangle/debug/NovaCore.Native.dll",
+      "sha256": "023E5CCEE89BEFDFC2AB09DDE0A6FD7614CB8ED3890B20B9A54F3BB3C4A0E793",
+      "bytes": 1791488
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Graphics.Tests.dll",
+      "sha256": "87043F8DBE44D5A908099DA85998939EC42F2A0F168B2FB1FB5B0B8FD85A66CB",
+      "bytes": 1723904
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/debug/NovaCore.Native.dll",
+      "sha256": "023E5CCEE89BEFDFC2AB09DDE0A6FD7614CB8ED3890B20B9A54F3BB3C4A0E793",
+      "bytes": 1791488
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/debug/NovaCore.Simulation.Tests.dll",
+      "sha256": "AD0D51C0680BE62CC3082C2871B68B0290370FD574A3277F220D54BF0DFBF5A0",
+      "bytes": 1228800
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Triangle/release/NovaCore.Triangle.dll",
+      "sha256": "B856C00229D78E258EF2F5D747607360457CFC8AF0036D0CDE4AA826D5B65628",
+      "bytes": 313344
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Triangle/release/NovaCore.Native.dll",
+      "sha256": "15F105092D3EF6BA421F0FBEA0920A8A5630BA40490155CBA892EAF0334570B3",
+      "bytes": 359936
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Graphics.Tests.dll",
+      "sha256": "2B81B422F5ADDF61F04906368088CB9A36C3240EDC9DCD92A5FE76EC62FA3B73",
+      "bytes": 1669632
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Graphics.Tests/release/NovaCore.Native.dll",
+      "sha256": "15F105092D3EF6BA421F0FBEA0920A8A5630BA40490155CBA892EAF0334570B3",
+      "bytes": 359936
+    },
+    {
+      "path": "build/player-flight-controls-gauntlet/candidate/bin/NovaCore.Simulation.Tests/release/NovaCore.Simulation.Tests.dll",
+      "sha256": "29751689B5FC4CB514716DB980E0C855C67940CDBB1E80DCC556230B65165440",
+      "bytes": 1168384
+    }
+  ],
+  "productionRecoveryCorrection": "NONE",
+  "stage6ProductionCorrection": "NONE"
+}

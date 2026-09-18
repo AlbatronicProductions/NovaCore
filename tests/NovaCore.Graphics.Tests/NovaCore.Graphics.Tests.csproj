@@ -33,6 +33,7 @@
     <Compile Include="..\..\samples\NovaCore.Triangle\StockAssemblyDevelopmentScene.cs" Link="StockAssemblyDevelopmentScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\PoweredFlightDevelopmentScene.cs" Link="PoweredFlightDevelopmentScene.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\PoweredContactDevelopmentScene.cs" Link="PoweredContactDevelopmentScene.cs" />
+    <Compile Include="..\..\samples\NovaCore.Triangle\PlayerFlightControlInput.cs" Link="PlayerFlightControlInput.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\SampleOptions.cs" Link="SampleOptions.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\EarthRoutePolicy.cs" Link="EarthRoutePolicy.cs" />
     <Compile Include="..\..\samples\NovaCore.Triangle\EarthPlanetaryScene.cs" Link="EarthPlanetaryScene.cs" />

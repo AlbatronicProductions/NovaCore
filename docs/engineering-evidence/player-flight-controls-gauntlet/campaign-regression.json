@@ -1,0 +1,498 @@
+{
+  "status": "PASS",
+  "count": 58,
+  "gates": [
+    {
+      "name": "stage6-pilot-allocation-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-allocation-debug.txt",
+      "sha256": "ECC2BA3E2DE4AC2081AA2C010771DA296023D02010E8A31D56DC481D08628655",
+      "bytes": 507,
+      "witness": "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+    },
+    {
+      "name": "stage6-pilot-demand-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-demand-debug.txt",
+      "sha256": "8D6749056D6AAFC7C66E64EBAD6FA97C2C87D7AA4DB3BB1DA35C2D1A576E2897",
+      "bytes": 508,
+      "witness": "PILOT_DEMAND PASS checks=2939"
+    },
+    {
+      "name": "stage6-assembly-control-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-control-debug.txt",
+      "sha256": "C9AEF2B6EEB0D0F460376EE75A59F4E432DB4290FEA929A11817D7DE768B05C2",
+      "bytes": 42,
+      "witness": "Live command authority PASS: 1557 checks"
+    },
+    {
+      "name": "stage6-assembly-control-measure-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-control-measure-debug.txt",
+      "sha256": "C14A018E5EC6761AC32C4CA54812C04E71305CAFAA5C6AC1243532D22559186D",
+      "bytes": 352,
+      "witness": "{\"stage\":1,\"samples\":2048,\"medianMs\":0.0888,\"p95Ms\":0.1207,\"p99Ms\":0.1522,\"maxMs\":1.4037,\"allocatedBytes\":0,\"gc\":[0,0,0],\"recordedBaseline\":{\"medianMs\":0.0863,\"p95Ms\":0.0888,\"p99Ms\":0.0918,\"maxMs\":0.1239},\"refusalAllocatedBytes\":0,\"journalCapacity\":256,\"recordBytes\":56,\"journalPayloadBytes\":14336,\"coldControlBytes\":14448,\"capacitySaveBytes\":162428}"
+    },
+    {
+      "name": "stage6-assembly-production-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-production-debug.txt",
+      "sha256": "286A4EFD5BF6B0865E3B8B742348BDF09867875403E6D18871C9EE30F868D641",
+      "bytes": 110,
+      "witness": "ASSEMBLY_PRODUCTION PASS checks=41634 independent_trajectories=24 ordinary_owner=SimulationTransactionEngine"
+    },
+    {
+      "name": "stage6-srv01-integration-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-srv01-integration-debug.txt",
+      "sha256": "F672E14E501B8C2C67CE311A5406F280B6B7EE1EA386917AB5F0301E17D2F923",
+      "bytes": 220,
+      "witness": "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+    },
+    {
+      "name": "stage6-assembly-contact-cheap-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-contact-cheap-debug.txt",
+      "sha256": "EDE2547FA4054F84EE6564C58C34B01576FF6A392B164153DE09347A05D5BDFE",
+      "bytes": 981,
+      "witness": "ASSEMBLY_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "stage6-assembly-powered-contact-cheap-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-powered-contact-cheap-debug.txt",
+      "sha256": "C9652E2ACEBFEE04C23E7F2BB51D03DA1EAF6C02D7B635CA80E63EA654660454",
+      "bytes": 551,
+      "witness": "POWERED_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "stage6-assembly-departure-cheap-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-departure-cheap-debug.txt",
+      "sha256": "4B7A18FAC557F8019D476BF23A9AF413CB71CE1747AF274A374CFACB69A7153F",
+      "bytes": 233,
+      "witness": "DEPARTURE_CLEARANCE_HOLD frontier=3 tick=47916 debt=15625"
+    },
+    {
+      "name": "stage6-assembly-allocation-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-allocation-debug.txt",
+      "sha256": "8CD743DEE6994768F171B2456B8EB1C0146EDF93CADFA2E63A182E73265784EE",
+      "bytes": 1436,
+      "witness": "ASSEMBLY_ALLOCATION {\"windows\":14,\"bytes\":0,\"positiveControl\":\"nonzero required\",\"policy\":\"checked existing helper; no tolerance, subtraction or retry\"}"
+    },
+    {
+      "name": "stage6-player-integrated-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-player-integrated-debug.txt",
+      "sha256": "41D24302F613BE731AACB6AAB8CD49F7121B25D999AFC7BAA0A63ECDEF9EFCC0",
+      "bytes": 9782,
+      "witness": "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94"
+    },
+    {
+      "name": "stage6-player-attitude-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-player-attitude-debug.txt",
+      "sha256": "55261349A90169455C69D052CDB1F53DF5859C81DF48C8F49BE3AFB2ED8828A9",
+      "bytes": 184,
+      "witness": "PLAYER_ATTITUDE PASS checks=8264"
+    },
+    {
+      "name": "stage6-player-engine-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-player-engine-debug.txt",
+      "sha256": "1DF0CC9F1CA23F61F8D574DF5216F1A2D685CAA2737499CF150238D3E86359AF",
+      "bytes": 813,
+      "witness": "PLAYER_ENGINE PASS checks=9898"
+    },
+    {
+      "name": "stage6-assembly-presentation-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-presentation-debug.txt",
+      "sha256": "1062E2D05BF815345E1DD9305D896E4E7B0938E0DADAA89D6AC926258D4AC13E",
+      "bytes": 7011,
+      "witness": "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+    },
+    {
+      "name": "stage6-florida-slab-camera-static-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-static-debug.txt",
+      "sha256": "1F4F5BCA659045EED39ECBDBBC072432AD9B620B06DA444125CFE9892BE3985A",
+      "bytes": 2132,
+      "witness": "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792"
+    },
+    {
+      "name": "stage6-florida-slab-camera-warp-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-warp-debug.txt",
+      "sha256": "6059D3408070DEFB6D955B92740CF5062411CFC7529C38755081F2275D5246E3",
+      "bytes": 12923,
+      "witness": "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true"
+    },
+    {
+      "name": "stage6-florida-slab-camera-moving-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-moving-debug.txt",
+      "sha256": "BC9BF4EDFF02DD01FB530475A170F1010997E5BD21B831075D74E62736B538AC",
+      "bytes": 795,
+      "witness": "ACTIVE_VESSEL_MOVING {\"pass\":true,\"physicalIntervals\":128,\"comChanged\":true,\"maxFollowError\":0,\"translations\":[100,1000,100000],\"maximumRelativeEncodingError\":0,\"solarPaused\":true,\"held\":true,\"saveUnchanged\":true,\"largestRoot\":7000000000000}"
+    },
+    {
+      "name": "stage6-florida-slab-camera-costs-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-costs-debug.txt",
+      "sha256": "3CC0CAC30D827885CDBCB8A17B2F5380E7044FBE2C186F6D7DBA006C99102442",
+      "bytes": 4457,
+      "witness": "ACTIVE_VESSEL_STORAGE {\"targetSlots\":1,\"historySlots\":0,\"observationBytes\":128,\"retainedBefore\":257392896,\"retainedAfter\":257392656,\"refocusOperations\":10000,\"bindingUnchanged\":true}"
+    },
+    {
+      "name": "stage6-florida-slab-correctness-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-correctness-debug.txt",
+      "sha256": "0B4B13C526A4F43058CB82BF769590192FCCD4445283682A552970F6DA952172",
+      "bytes": 5269,
+      "witness": "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+    },
+    {
+      "name": "stage6-florida-slab-solar-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-solar-debug.txt",
+      "sha256": "DDF6DFB4A311BE47E9FF0350C531B683AF8625D3FA2F998458CAD66815B76D63",
+      "bytes": 5904,
+      "witness": "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=843040438085215 intervals=1200 support=600/600 peak=9.750102006811368E-05 maxPositionError=7.303611906877776E-09"
+    },
+    {
+      "name": "stage6-florida-slab-allocation-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-allocation-debug.txt",
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "bytes": 373,
+      "witness": "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    },
+    {
+      "name": "stage6-assembly-florida-qualification-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-florida-qualification-debug.txt",
+      "sha256": "CABC66EEC1CBC861B58301780CD0D421FB430191C5B869E576BF9A1902773E0B",
+      "bytes": 4702,
+      "witness": "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+    },
+    {
+      "name": "stage6-layout-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-layout-debug.txt",
+      "sha256": "8AA2A6E517C8A98234D28EC1289675767901154D1060A33E83DAC7A92195BA67",
+      "bytes": 324,
+      "witness": "Native identity: configuration=Debug; loaded=E:\\NovaCore\\build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Graphics.Tests\\debug\\NovaCore.Native.dll; sha256=023E5CCEE89BEFDFC2AB09DDE0A6FD7614CB8ED3890B20B9A54F3BB3C4A0E793; source=E:\\NovaCore\\build\\player-flight-controls-gauntlet/native-debug\\NovaCore.Native.dll"
+    },
+    {
+      "name": "stage6-launcher-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-launcher-debug.txt",
+      "sha256": "FB281D17E89B43C69B53ABC67CEF70F9C3DB8AA059C5B05DF40676DCB507127B",
+      "bytes": 684,
+      "witness": "NovaCore launcher tests passed: 19"
+    },
+    {
+      "name": "stage6-Simulation-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-Simulation-debug.txt",
+      "sha256": "AA60508D0AFC54430EC5E267AD82A65EDE3FA717A2E2BCFE1CE6461D341D344E",
+      "bytes": 67113,
+      "witness": "PASS Powered contact zero allocation"
+    },
+    {
+      "name": "stage6-ReferenceFrames-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-ReferenceFrames-debug.txt",
+      "sha256": "D03C3E8AE346EDF25DFDF66BA711497575CC533F97C3E63F94EDB971D7DE66D1",
+      "bytes": 934,
+      "witness": "Benchmark: 10,000 root resolutions in 2.227 ms; managed allocations=0 bytes; final=4000000000009.999"
+    },
+    {
+      "name": "stage6-Precision-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-Precision-debug.txt",
+      "sha256": "4BD972D348539EBEE119B82816A58351AD71B7F5C331AED909B72B487D9121A0",
+      "bytes": 693,
+      "witness": "PASS"
+    },
+    {
+      "name": "stage6-Camera-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-Camera-debug.txt",
+      "sha256": "02F5CC93A379AF15BADE18768A1AE3A44CC30E1B1218680A0CD577266A4C8848",
+      "bytes": 127,
+      "witness": "PASS camera controller: W delta=-0.099609375, S delta=0.099609375, wheel 1=1.189207115002721; update=292.37 ns, allocations=0"
+    },
+    {
+      "name": "stage6-BepuDependency-debug",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-BepuDependency-debug.txt",
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+      "bytes": 2215,
+      "witness": "}"
+    },
+    {
+      "name": "stage6-pilot-allocation-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-allocation-release.txt",
+      "sha256": "834487C87929D9D7C7AF5C0A27C1FA392D68856202F3DD18972C1F67F93E3244",
+      "bytes": 507,
+      "witness": "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+    },
+    {
+      "name": "stage6-pilot-demand-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-pilot-demand-release.txt",
+      "sha256": "81A5B63591BAADA236D0DCCB4354A57E550A0619C463DEBE1D73708989BC8773",
+      "bytes": 509,
+      "witness": "PILOT_DEMAND PASS checks=2939"
+    },
+    {
+      "name": "stage6-assembly-control-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-control-release.txt",
+      "sha256": "C9AEF2B6EEB0D0F460376EE75A59F4E432DB4290FEA929A11817D7DE768B05C2",
+      "bytes": 42,
+      "witness": "Live command authority PASS: 1557 checks"
+    },
+    {
+      "name": "stage6-assembly-control-measure-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-control-measure-release.txt",
+      "sha256": "F1F1A9FD2ED8A81F94EC523362334F44CB247D682BE580D7C59C77C45EE74578",
+      "bytes": 351,
+      "witness": "{\"stage\":1,\"samples\":2048,\"medianMs\":0.0911,\"p95Ms\":0.0957,\"p99Ms\":0.1052,\"maxMs\":0.1908,\"allocatedBytes\":0,\"gc\":[0,0,0],\"recordedBaseline\":{\"medianMs\":0.0562,\"p95Ms\":0.0935,\"p99Ms\":0.1079,\"maxMs\":1.587},\"refusalAllocatedBytes\":0,\"journalCapacity\":256,\"recordBytes\":56,\"journalPayloadBytes\":14336,\"coldControlBytes\":14448,\"capacitySaveBytes\":162428}"
+    },
+    {
+      "name": "stage6-assembly-production-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-production-release.txt",
+      "sha256": "286A4EFD5BF6B0865E3B8B742348BDF09867875403E6D18871C9EE30F868D641",
+      "bytes": 110,
+      "witness": "ASSEMBLY_PRODUCTION PASS checks=41634 independent_trajectories=24 ordinary_owner=SimulationTransactionEngine"
+    },
+    {
+      "name": "stage6-srv01-integration-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-srv01-integration-release.txt",
+      "sha256": "F672E14E501B8C2C67CE311A5406F280B6B7EE1EA386917AB5F0301E17D2F923",
+      "bytes": 220,
+      "witness": "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+    },
+    {
+      "name": "stage6-assembly-contact-cheap-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-contact-cheap-release.txt",
+      "sha256": "EDE2547FA4054F84EE6564C58C34B01576FF6A392B164153DE09347A05D5BDFE",
+      "bytes": 981,
+      "witness": "ASSEMBLY_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "stage6-assembly-powered-contact-cheap-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-powered-contact-cheap-release.txt",
+      "sha256": "C9652E2ACEBFEE04C23E7F2BB51D03DA1EAF6C02D7B635CA80E63EA654660454",
+      "bytes": 551,
+      "witness": "POWERED_CONTACT_CHEAP PASS"
+    },
+    {
+      "name": "stage6-assembly-departure-cheap-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-departure-cheap-release.txt",
+      "sha256": "4B7A18FAC557F8019D476BF23A9AF413CB71CE1747AF274A374CFACB69A7153F",
+      "bytes": 233,
+      "witness": "DEPARTURE_CLEARANCE_HOLD frontier=3 tick=47916 debt=15625"
+    },
+    {
+      "name": "stage6-assembly-allocation-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-allocation-release.txt",
+      "sha256": "8CD743DEE6994768F171B2456B8EB1C0146EDF93CADFA2E63A182E73265784EE",
+      "bytes": 1436,
+      "witness": "ASSEMBLY_ALLOCATION {\"windows\":14,\"bytes\":0,\"positiveControl\":\"nonzero required\",\"policy\":\"checked existing helper; no tolerance, subtraction or retry\"}"
+    },
+    {
+      "name": "stage6-player-integrated-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-player-integrated-release.txt",
+      "sha256": "0D512C2AC0CB86A23910E8AA13C885C03E5E0A7A9BA4A2C114E0519D17EFEDB2",
+      "bytes": 9783,
+      "witness": "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94"
+    },
+    {
+      "name": "stage6-player-attitude-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-player-attitude-release.txt",
+      "sha256": "C4DF8F17F78099128EAD709028AD088C717975DA8D48AAA2E43C9836A1E63CFD",
+      "bytes": 185,
+      "witness": "PLAYER_ATTITUDE PASS checks=8264"
+    },
+    {
+      "name": "stage6-player-engine-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-player-engine-release.txt",
+      "sha256": "44C81E9228C61F6973458A34C4AD117B897F81373F8CC101FA8EC07588F7E82D",
+      "bytes": 813,
+      "witness": "PLAYER_ENGINE PASS checks=9898"
+    },
+    {
+      "name": "stage6-assembly-presentation-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-presentation-release.txt",
+      "sha256": "73B88F623AEEB923C650352896B695A32D22977B9BA7F35ECA2D143111D64CF8",
+      "bytes": 7011,
+      "witness": "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation"
+    },
+    {
+      "name": "stage6-florida-slab-camera-static-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-static-release.txt",
+      "sha256": "ACA16C3EA5893EE2A6853D0849598BAB3BCB7BBDC23ABCF0BF0D1B005A2F6506",
+      "bytes": 2132,
+      "witness": "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792"
+    },
+    {
+      "name": "stage6-florida-slab-camera-warp-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-warp-release.txt",
+      "sha256": "E9423AFFAEE75C63466E01E433C556111F3210B66794C469F133D54940CE119D",
+      "bytes": 12916,
+      "witness": "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true"
+    },
+    {
+      "name": "stage6-florida-slab-camera-moving-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-moving-release.txt",
+      "sha256": "DBE4E3FC0A5E437D580ADE144B351BC0EF6B8723FA42AF5A9125DF47392BB29B",
+      "bytes": 795,
+      "witness": "ACTIVE_VESSEL_MOVING {\"pass\":true,\"physicalIntervals\":128,\"comChanged\":true,\"maxFollowError\":0,\"translations\":[100,1000,100000],\"maximumRelativeEncodingError\":0,\"solarPaused\":true,\"held\":true,\"saveUnchanged\":true,\"largestRoot\":7000000000000}"
+    },
+    {
+      "name": "stage6-florida-slab-camera-costs-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-camera-costs-release.txt",
+      "sha256": "0A40B1072A2B06E92DCEF07396CF72FE3B08936F3763F7B49E9072DE50ACDC58",
+      "bytes": 4445,
+      "witness": "ACTIVE_VESSEL_STORAGE {\"targetSlots\":1,\"historySlots\":0,\"observationBytes\":128,\"retainedBefore\":257416656,\"retainedAfter\":257416080,\"refocusOperations\":10000,\"bindingUnchanged\":true}"
+    },
+    {
+      "name": "stage6-florida-slab-correctness-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-correctness-release.txt",
+      "sha256": "0B4B13C526A4F43058CB82BF769590192FCCD4445283682A552970F6DA952172",
+      "bytes": 5269,
+      "witness": "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+    },
+    {
+      "name": "stage6-florida-slab-solar-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-solar-release.txt",
+      "sha256": "3E8ACA77ABF96CD478C33C2D54FE581BE3B7B44429B031BBCCC80BB25B8FB967",
+      "bytes": 5903,
+      "witness": "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=843040485311220 intervals=1200 support=600/600 peak=9.750102006811368E-05 maxPositionError=7.04673395977428E-09"
+    },
+    {
+      "name": "stage6-florida-slab-allocation-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-florida-slab-allocation-release.txt",
+      "sha256": "23A238321A5524A656715431B8E37030872B836B5F111B0F819694448FA00DDE",
+      "bytes": 373,
+      "witness": "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+    },
+    {
+      "name": "stage6-assembly-florida-qualification-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-assembly-florida-qualification-release.txt",
+      "sha256": "CABC66EEC1CBC861B58301780CD0D421FB430191C5B869E576BF9A1902773E0B",
+      "bytes": 4702,
+      "witness": "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+    },
+    {
+      "name": "stage6-layout-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-layout-release.txt",
+      "sha256": "81A90072DF5875BCB33F4719742A04D31181B19D0B0DC485C3446B5DE81896ED",
+      "bytes": 330,
+      "witness": "Native identity: configuration=Release; loaded=E:\\NovaCore\\build\\player-flight-controls-gauntlet\\candidate\\bin\\NovaCore.Graphics.Tests\\release\\NovaCore.Native.dll; sha256=15F105092D3EF6BA421F0FBEA0920A8A5630BA40490155CBA892EAF0334570B3; source=E:\\NovaCore\\build\\player-flight-controls-gauntlet/native-release\\NovaCore.Native.dll"
+    },
+    {
+      "name": "stage6-launcher-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-launcher-release.txt",
+      "sha256": "FB281D17E89B43C69B53ABC67CEF70F9C3DB8AA059C5B05DF40676DCB507127B",
+      "bytes": 684,
+      "witness": "NovaCore launcher tests passed: 19"
+    },
+    {
+      "name": "stage6-Simulation-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-Simulation-release.txt",
+      "sha256": "04A6DA10F07260FD3B873C2074B5BD1A2A59CF48FFCD3A0C9F2849EB53708C9A",
+      "bytes": 67110,
+      "witness": "PASS Powered contact zero allocation"
+    },
+    {
+      "name": "stage6-ReferenceFrames-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-ReferenceFrames-release.txt",
+      "sha256": "3484345795FFFC125D0FA41DC8B1124ABFD2F4D7BCBD2F57A25EBC3F6B187CD7",
+      "bytes": 934,
+      "witness": "Benchmark: 10,000 root resolutions in 3.362 ms; managed allocations=0 bytes; final=4000000000009.999"
+    },
+    {
+      "name": "stage6-Precision-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-Precision-release.txt",
+      "sha256": "68FA6F497D414EF0EB85D687F4960DC2BEC379E452E18FF92FFAFFD0A9790745",
+      "bytes": 692,
+      "witness": "PASS"
+    },
+    {
+      "name": "stage6-Camera-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-Camera-release.txt",
+      "sha256": "81D31F66E22E95BE1248235F2946E49F644FB9E1A1A1AB9D33AAE137A9A752D2",
+      "bytes": 127,
+      "witness": "PASS camera controller: W delta=-0.099609375, S delta=0.099609375, wheel 1=1.189207115002721; update=194.66 ns, allocations=0"
+    },
+    {
+      "name": "stage6-BepuDependency-release",
+      "exit": 0,
+      "path": "build/player-flight-controls-gauntlet/stage6-BepuDependency-release.txt",
+      "sha256": "46B9F239058362B8BF65AB1EEC1459970D5561559439D3BF0B2FE9C8AB6A2A00",
+      "bytes": 2215,
+      "witness": "}"
+    }
+  ],
+  "builds": [
+    {
+      "configuration": "debug",
+      "path": "build/player-flight-controls-gauntlet/solution-debug.txt",
+      "sha256": "4129E690443DAB6A512B8C65BF6CDF92926F3961B9EEFFD18BAE390E9DFC4425",
+      "bytes": 82,
+      "witness": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:02.51"
+      ]
+    },
+    {
+      "configuration": "release",
+      "path": "build/player-flight-controls-gauntlet/solution-release.txt",
+      "sha256": "58214C989DB8F0513FB9B5F53AB2D8ADDFB305AE5552DAD50AD34ED6A4582A45",
+      "bytes": 82,
+      "witness": [
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:02.53"
+      ]
+    }
+  ]
+}
