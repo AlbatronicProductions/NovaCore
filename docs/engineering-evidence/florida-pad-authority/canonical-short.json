@@ -1,0 +1,102 @@
+{
+  "judgment": "APPLICATION_INTEGRATION_PASS",
+  "playerPass": false,
+  "padRoutes": [
+    "editor",
+    "flight",
+    "flight-return",
+    "game",
+    "game-return"
+  ],
+  "checks": 542,
+  "tank": "nc.tank.short-2",
+  "process": 35164,
+  "window": 4262280,
+  "parts": 12,
+  "source": "ea57aae45b20fa89a51d3a745dc4d5fce4b1d3756356f2a342ca5293491d3889",
+  "compiled": "3927321ada52f20d8123999aefaf2b7299838a4793583d5d6aeef9e2cb156376",
+  "retainedEpoch": 843709011151396,
+  "finalEpoch": 843709011245146,
+  "frames": 10528,
+  "warmWindows": [
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.509500026702881,
+        "p95": 10.632599830627441,
+        "p99": 10.869400024414062,
+        "max": 10.927299499511719
+      },
+      "cpuMs": {
+        "median": 0.0055,
+        "p95": 0.0214,
+        "p99": 0.0402,
+        "max": 0.0595
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.476700305938721,
+        "p95": 10.547499656677246,
+        "p99": 10.947099685668945,
+        "max": 11.03589916229248
+      },
+      "cpuMs": {
+        "median": 0.0055,
+        "p95": 0.0186,
+        "p99": 0.022,
+        "max": 0.022
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.505199909210205,
+        "p95": 10.744799613952637,
+        "p99": 11,
+        "max": 11.002799987792969
+      },
+      "cpuMs": {
+        "median": 0.006,
+        "p95": 0.0209,
+        "p99": 0.0377,
+        "max": 0.0379
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99"
+}

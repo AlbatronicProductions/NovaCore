@@ -1,0 +1,190 @@
+[
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\build",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\build"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\samples\\NovaCore.ReferenceFrameFixture\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\samples\\NovaCore.ReferenceFrameFixture\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\samples\\NovaCore.ReferenceFrameFixture\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\samples\\NovaCore.ReferenceFrameFixture\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\samples\\NovaCore.Triangle\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\samples\\NovaCore.Triangle\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\samples\\NovaCore.Triangle\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\samples\\NovaCore.Triangle\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Core\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Core\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Core\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Core\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.EphemerisFormat\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.EphemerisFormat\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.EphemerisFormat\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.EphemerisFormat\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Graphics\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Graphics\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Graphics\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Graphics\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Interop\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Interop\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Interop\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Interop\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Platform\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Platform\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Platform\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Platform\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Simulation\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Simulation\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\src\\NovaCore.Simulation\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\src\\NovaCore.Simulation\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.BepuDependency.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.BepuDependency.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.BepuDependency.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.BepuDependency.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Camera.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Camera.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Camera.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Camera.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.EphemerisBuilder.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.EphemerisBuilder.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.EphemerisBuilder.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.EphemerisBuilder.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Graphics.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Graphics.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Graphics.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Graphics.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Launcher.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Launcher.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Launcher.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Launcher.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.NaifEphemerisAdapter.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.NaifEphemerisAdapter.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.NaifEphemerisAdapter.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.NaifEphemerisAdapter.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Precision.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Precision.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Precision.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Precision.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.ReferenceFrames.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.ReferenceFrames.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.ReferenceFrames.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.ReferenceFrames.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Simulation.Tests\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Simulation.Tests\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tests\\NovaCore.Simulation.Tests\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tests\\NovaCore.Simulation.Tests\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.App\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.App\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.App\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.App\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.AssetTool\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.AssetTool\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.AssetTool\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.AssetTool\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.ConstructionEditor\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.ConstructionEditor\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.ConstructionEditor\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.ConstructionEditor\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.EphemerisBuilder\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.EphemerisBuilder\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.EphemerisBuilder\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.EphemerisBuilder\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.Launcher\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.Launcher\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.Launcher\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.Launcher\\obj"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.NaifEphemerisAdapter\\bin",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.NaifEphemerisAdapter\\bin"
+  },
+  {
+    "from": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.NaifEphemerisAdapter\\obj",
+    "to": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold\\tools\\NovaCore.NaifEphemerisAdapter\\obj"
+  }
+]

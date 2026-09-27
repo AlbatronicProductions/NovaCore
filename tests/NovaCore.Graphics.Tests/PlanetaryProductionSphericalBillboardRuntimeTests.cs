@@ -6,6 +6,20 @@ using System.Runtime.InteropServices;
 
 internal static class PlanetaryProductionSphericalBillboardRuntimeTests
 {
+    public static void RunTesCpuOnly()
+    {
+        var root=GraphicsTestHarness.RepositoryPath();
+        var levels=PlanetaryProductionSphericalBillboardTopologyLibrary.Load(Path.Combine(root,"assets","planetary-production-topology"));
+        ProveTes(levels[^1]);
+        foreach(double depth in new[]{0d,-0d,double.Epsilon,-double.Epsilon,1e-20,-1e-20,1e-7,-1e-7})
+        foreach(double distance in new[]{10d,Math.BitDecrement(50d),50d,Math.BitIncrement(50d),1e6})
+        {
+            var a=new Double3(distance,-1,depth);var b=new Double3(distance,1,depth);
+            var factor=PlanetaryProductionSphericalBillboardTes.SharedEdgeFactor(a,b,1440,Math.PI/3,50);
+            Require(double.IsFinite(factor)&&factor>=1&&factor<=64,"CPU TES finite through exact eye-plane neighborhood");
+            Require(distance<50||factor==1,"CPU zero-fade distance policy unchanged");
+        }
+    }
     public static void Run()
     {
         var root = PlanetarySphericalBillboardGpuProof.FindRepositoryRoot(AppContext.BaseDirectory);
@@ -891,8 +905,11 @@ internal static class PlanetaryProductionSphericalBillboardRuntimeTests
             "production_spherical_billboard.tesc"));
         var evaluation=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders",
             "production_spherical_billboard.tese"));
+        var factorOwner=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders",
+            "production_tessellation_factor.glsl"));
         Require(control.Contains("inner=(a+b+c)*.3333",StringComparison.Ordinal)&&
-                control.Contains("return clamp(pixels/3*fade,1,64)",StringComparison.Ordinal)&&
+                control.Contains("return terrainEdgeFactor(",StringComparison.Ordinal)&&
+                factorOwner.Contains("return clamp(pixels/3*fade,1.0f,64.0f)",StringComparison.Ordinal)&&
                 !control.Contains("exp2(ceil(log2(required)))",StringComparison.Ordinal)&&
                 !control.Contains("inner=max(a,max(b,c))",StringComparison.Ordinal)&&
                 evaluation.Contains("layout(triangles,fractional_odd_spacing,cw)",StringComparison.Ordinal),

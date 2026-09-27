@@ -12,10 +12,22 @@ using NovaCore.Simulation.Spacecraft.Assemblies;
 using NovaCore.Simulation.Time;
 
 /// <summary>Ordinary application adapter for a registered stock assembly. Reusable asset presentation consumes copied canonical state only.</summary>
-internal sealed class StockAssemblyDevelopmentScene : IDisposable
+internal sealed class StockAssemblyDevelopmentScene : IApplicationVesselScene
 {
     // Presentation lifetime only: never enters canonical state, replay or design identity.
     private static long nextFocusGeneration;
+    ReusablePartVisuals IApplicationVesselScene.Visuals=>Visuals;
+    int IApplicationVesselScene.RenderCapacity=>RenderCapacity;
+    FloridaContactPresentation? IApplicationVesselScene.FloridaView=>FloridaView;
+    PlayerFlightControlInput? IApplicationVesselScene.PlayerInput=>PlayerInput;
+    bool IApplicationVesselScene.UsesSolarCamera=>UsesSolarCamera;
+    bool IApplicationVesselScene.Failed=>Failed;
+    ResolvedRenderSnapshot IApplicationVesselScene.InitialSnapshot=>InitialSnapshot;
+    SceneObjectFocusObservation IApplicationVesselScene.PrepareFocusObservation()=>PrepareFocusObservation();
+    void IApplicationVesselScene.ApplyPlayerInput(in NativeInputState input)=>ApplyPlayerInput(input);
+    void IApplicationVesselScene.AdvanceLive(bool startRequested)=>AdvanceLive(startRequested);
+    void IApplicationVesselScene.BuildSubmission(in GpuCameraData camera,in UniversePosition root,RenderFrameSubmission submission)=>BuildSubmission(camera,root,submission);
+    unsafe void IApplicationVesselScene.WriteExhaustParameters(NativeRenderObject* objects,int count)=>WriteExhaustParameters(objects,count);
     private readonly ulong focusGeneration = checked((ulong)Interlocked.Increment(ref nextFocusGeneration));
     private bool disposed;
     private readonly AssemblyApplicationSession session;
@@ -41,7 +53,8 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
     private readonly double[] frameMilliseconds=new double[40000];
     private readonly double[] serviceMilliseconds=new double[40000];
     private readonly char[] title=new char[384];
-    private int titledFrontier=-1,titledAdmission=-1;
+    private int titledFrontier=-1;
+    private long titledAdmission=-1;
     private bool titledStarted,titledCompleted,titledFailed;
     private long sequence,timestamp,remainder;
     private int frameCount;
@@ -265,7 +278,7 @@ internal sealed class StockAssemblyDevelopmentScene : IDisposable
             }
         }
     }
-    private static DoubleQuaternion Rotation(Matrix3 m)
+    internal static DoubleQuaternion Rotation(Matrix3 m)
     {
         double x,y,z,w;var trace=m.A+m.E+m.I;
         if(trace>0){var s=Math.Sqrt(trace+1)*2;w=s/4;x=(m.H-m.F)/s;y=(m.C-m.G)/s;z=(m.D-m.B)/s;}
@@ -347,14 +360,12 @@ internal sealed class FloridaContactPresentation
     {RootPosition=Position(local.RootPosition.Value),RootOrientation=Rotation*local.RootOrientation};
     internal ResolvedRenderObject Slab()
     {
-        var slab=Site.Slab??throw new InvalidOperationException("Explicit slab authority required.");
-        var centre=new Double3(0,AssemblyContactProfile.SupportPlaneAtOrigin-slab.Dimensions.Y*.5,0);
-        return new(new(0xFFFF0001u),Position(centre),Rotation,slab.Dimensions,MeshHandle.FloridaSupportSlab);
+        return Solar.FloridaSupportSlab();
     }
     internal void PrepareCamera(CameraState camera)
     {
         if(SolarNavigation)
-        {if(!Solar.TryStartAtFloridaSupportSlab(camera,FloridaSlabSupport.AuthoredTop-AssemblyContactProfile.SupportPlaneAtOrigin))throw new InvalidDataException("Florida Solar camera unavailable.");return;}
+        {if(!Solar.TryStartAtFloridaSupportSlab(camera,FloridaSlabSupport.AuthoredTop-Site.SupportPlane))throw new InvalidDataException("Florida Solar camera unavailable.");return;}
         if(!Solar.Focus(camera,NativePresentationFocus.Earth))throw new InvalidDataException("Florida Earth presentation unavailable.");
         // View the copied spacecraft on the single authored support slab. Camera only.
         camera.Position=camera.Position with {Value=Position(new(12,7,16)).Value};
@@ -362,5 +373,18 @@ internal sealed class FloridaContactPresentation
             DoubleQuaternion.FromAxisAngle(Double3.UnitX,-Math.Atan2(7,20));
         camera.Mode=CameraMode.Free;
         Solar.EnforceFinalCameraInvariant(camera);camera.Projection=Solar.Projection;
+    }
+    internal SceneObjectFocusObservation CraftFocus(ConstructionRuntimeBinding binding,ConstructionRuntimeState state,ulong revision,SceneObjectFocusStatus status)
+    {
+        if(binding.Physical is not {} physical||!ReferenceEquals(physical.Site,Site)||state.Physical is not {} motion||
+            !ReferenceEquals(state.Fuel.Network,binding.Fuel)||!ReferenceEquals(state.Power.Network,binding.Power))
+            throw new InvalidDataException("Foreign craft presentation.");
+        RefreshDisplayFrame();
+        return new(binding.Spacecraft.Id.Value,checked((ulong)binding.Identity.Generation),Site.Authority.BodyId,Position(motion.Motion.PositionO),
+            checked((long)revision),state.Epoch.Ticks,Solar.PresentationTicks,status)
+        {
+            ReferenceFrame=new(Site.Authority.BodyId,Site.LocalToBodyFixed),
+            BoundingRadius=physical.Craft.FocusRadius+Math.Sqrt(physical.Craft.FocusCenter.LengthSquared)
+        };
     }
 }

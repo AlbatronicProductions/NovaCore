@@ -1,0 +1,80 @@
+{
+  "taskOutputDirectories": [
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\canonical-long",
+      "bytes": 254347,
+      "files": 10,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\canonical-short",
+      "bytes": 257942,
+      "files": 10,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\canonical-stabilization",
+      "bytes": 192543,
+      "files": 10,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-cache",
+      "bytes": 271791820,
+      "files": 2,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-generated-hold",
+      "bytes": 442648455,
+      "files": 2264,
+      "classification": "REGENERATABLE; retain through Project Control disposition. Isolated qualified package within clean-source is separately sealed."
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source",
+      "bytes": 1163495486,
+      "files": 3703,
+      "classification": "REGENERATABLE; retain through Project Control disposition. Isolated qualified package within clean-source is separately sealed."
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\independent-long",
+      "bytes": 252665,
+      "files": 10,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\independent-short",
+      "bytes": 258058,
+      "files": 10,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\independent-stabilization",
+      "bytes": 192940,
+      "files": 10,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\native",
+      "bytes": 189275,
+      "files": 10,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\package-negative",
+      "bytes": 12172011,
+      "files": 127,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions",
+      "bytes": 50697708,
+      "files": 125,
+      "classification": "REGENERATABLE qualification output; concise reports and causal witnesses retained in evidence"
+    }
+  ],
+  "totalDirectoryBytes": 1942403250,
+  "canonicalPlayerCandidate": "KEEP E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows",
+  "permanentTestsAndReports": "KEEP; no storage retirement was performed on prior work",
+  "rootOutputs": "Current Debug/Release build outputs are regeneratable; canonical Release is protected while awaiting disposition."
+}

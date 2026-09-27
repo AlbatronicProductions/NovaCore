@@ -1,0 +1,413 @@
+[
+  {
+    "kind": "managed-build",
+    "arguments": [
+      "build",
+      "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "-c",
+      "Debug",
+      "--no-restore",
+      "-v",
+      "quiet"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 1850.7162,
+    "output": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:01.67"
+    ]
+  },
+  {
+    "kind": "managed-build",
+    "arguments": [
+      "build",
+      "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-v",
+      "quiet"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 746.1709,
+    "output": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:00.57"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 244.4317,
+    "output": [
+      "Modular Part Standard baseline PASS: 33 checks; catalog 751a86d1443f036c56505a845a7a644e09bdf74ba60c6c4c05ae60fe4a371818; full Gate 1 also requires red-team probes"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-redteam"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 206.8768,
+    "output": [
+      "{\"unresolvedPortResourceAccepted\":false,\"passthroughResourceRevisionMissingFromDependencyDigest\":false,\"nullPlacementRefusal\":\"InvalidDataException\"}",
+      "Modular Part Standard red team PASS"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-closure"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 255.2744,
+    "output": [
+      "Modular Gate 1 bounded closure PASS: 58 checks; resource catalog 94d3ada39e190751cd02aa2a97a2cae0e3922982ee4269a710bdb9f09eceda17; socket catalog dde5d4c6d2b452f16da121a3ca24b727483b0c21b180c3f60c200329687e7738"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-admission-audit"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 198.3531,
+    "output": [
+      "{\"densityKgM3\":1000,\"capacityKg\":9.424777960769382E-09,\"geometricVolumeM3\":9.424777960769381E-15,\"requiredVolumeM3\":9.424777960769381E-12,\"expectedMassKg\":9.424777960769381E-12,\"capacityToPhysicalMassRatio\":1000,\"admitted\":false,\"reloaded\":false,\"digest\":null,\"sourceUnchanged\":true}",
+      "{\"densityKgM3\":1E+20,\"capacityKg\":1,\"geometricVolumeM3\":9.424777960769381E-15,\"requiredVolumeM3\":1E-20,\"expectedMassKg\":942477.7960769382,\"capacityToPhysicalMassRatio\":1.0610329539459686E-06,\"admitted\":false,\"reloaded\":false,\"digest\":null,\"sourceUnchanged\":true}",
+      "{\"field\":\"construction.asset.materialOrigin\",\"refusal\":\"JsonException\",\"structured\":true}",
+      "{\"field\":\"standard.socketGroups[0].axis.position\",\"refusal\":\"JsonException\",\"structured\":true}",
+      "Modular full admission audit PASS"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-numerics"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 246.7249,
+    "output": [
+      "Modular Gate 1 numerical admission PASS: 251 independent-rational/scale/boundary checks"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-json"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 195.188,
+    "output": [
+      "Modular Gate 1 JSON refusal PASS: 20 checks"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-aggregate"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 515.8011,
+    "output": [
+      "Modular Gate 1 dry aggregate admission PASS: 50 independent centre-first rational/boundary checks"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-size"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 511.6393,
+    "output": [
+      "Modular Gate 1 catalog bound PASS: 12 byte-boundary checks"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate1-predicates"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 165.7802,
+    "output": [
+      "Modular Gate 1 physical predicates PASS: 37 independent sign/overlap/boundary checks"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage1"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 251.4961,
+    "output": [
+      "Construction Stage 1 PASS: 24 checks; catalog c25d1615ade47d3e375d1bb13259c98fc0f2fea8f5cbe815fba16208dfc275ce"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage2"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 253.6662,
+    "output": [
+      "Construction Stage 2 PASS: 28 checks; design 6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage3"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 2384.5922,
+    "output": [
+      "Construction Stage 3 PASS: 2075 checks; exact oracle 400 cases; DLV graph only, no ignition"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage4"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 384.5789,
+    "output": [
+      "Construction Stage 4 PASS: 90 checks; power/data independent; no DLV electrical admission"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage5"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 268.7012,
+    "output": [
+      "Construction Stage 5 core PASS: 31 checks; isolated revision-bound editor; UI qualification separate"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage6"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 533.2976,
+    "output": [
+      "Construction Stage 6 PASS: 93 checks; shared design admission and once-only runtime registration; no physical-flight admission"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage7"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 285.2738,
+    "output": [
+      "Construction Stage 7 PASS: 62 checks; 150 dry + 36 resource regions; 38 actuators; mass 247283.61451443686; COM Double3 { X = 19.305845298919515, Y = 0.0005515133792867957, Z = 1.1493567613128163E-18, LengthSquared = 372.7156630099798, IsFinite = True }; static only"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--construction-stage8-reuse"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 283.6007,
+    "output": [
+      "Construction Stage 8 reuse PASS: 18 checks; capsule-only design 016a853a405a2de74e3f33e40dd756d927f37158f2e7f3c4c771f054477ce163; no launcher assumptions"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--srv01-integration"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 881.4393,
+    "output": [
+      "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+      "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--assembly-control"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 350.8133,
+    "output": [
+      "Live command authority PASS: 1557 checks"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--pilot-demand"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 369.2262,
+    "output": [
+      "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+      "PILOT_PERFORMANCE samples=2048 median_ms=0.0016 p95_ms=0.0016 p99_ms=0.0017 max_ms=0.0388 raw_counter_bytes=0 collections=0/0/0 normal_runtime=true",
+      "PILOT_STORAGE admission_bytes=56 capacity=256 payload_bytes=14336 full_journal_save_bytes=76578 admission_allocation_bytes=0",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_DEMAND PASS checks=2939"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--pilot-allocation"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 927.3636,
+    "output": [
+      "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+      "{\"stage\":4,\"samples\":1024,\"medianMs\":0.0947,\"p95Ms\":0.0984,\"p99Ms\":0.1097,\"maxMs\":0.1494,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+    ]
+  },
+  {
+    "kind": "qualification",
+    "arguments": [
+      "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "--modular-gate2"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 258.0581,
+    "output": [
+      "Modular Gate 2 CraftDocument PASS: 77 strict-version/roundtrip/migration checks"
+    ]
+  },
+  {
+    "kind": "managed-build-after-migration-correction",
+    "exitCode": 0,
+    "elapsedMs": 1809.5024,
+    "output": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:01.59"
+    ]
+  },
+  {
+    "kind": "qualification-after-migration-correction",
+    "arguments": [
+      "--modular-gate2"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 258.7411,
+    "output": [
+      "Modular Gate 2 CraftDocument PASS: 78 strict-version/roundtrip/migration checks"
+    ]
+  },
+  {
+    "kind": "final-gate2-managed-build",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "elapsedMs": 1403.5091,
+    "output": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:01.23"
+    ]
+  },
+  {
+    "kind": "final-gate2-managed-build",
+    "configuration": "Release",
+    "exitCode": 0,
+    "elapsedMs": 819.8066,
+    "output": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:00.64"
+    ]
+  },
+  {
+    "kind": "final-gate2-qualification",
+    "arguments": [
+      "--modular-gate2"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 277.6104,
+    "output": [
+      "Modular Gate 2 CraftDocument PASS: 83 strict-version/roundtrip/migration checks"
+    ]
+  },
+  {
+    "kind": "final-gate2-build",
+    "configuration": "Debug",
+    "exitCode": 0,
+    "elapsedMs": 1374.0551,
+    "output": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:01.20"
+    ]
+  },
+  {
+    "kind": "final-gate2-qualification",
+    "arguments": [
+      "--modular-gate2"
+    ],
+    "exitCode": 0,
+    "elapsedMs": 279.1737,
+    "output": [
+      "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+    ]
+  }
+]

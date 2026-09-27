@@ -1,0 +1,1226 @@
+{
+  "utc": "2026-09-26T22:17:48.270386+00:00",
+  "collection": "post-build, during qualification",
+  "attestation": "Root was the sole production writer. No runtime/test source or binary changed from final build start through this baseline capture. Earlier-started qualification rows inherit this observed unchanged baseline; these are not represented as launch-time hashes. Only evidence documents were edited.",
+  "sourceSha256": "4c4ef09957e306c567684f59db39625851e6d4fba685037c44fd91ffb8bd1182",
+  "testFilesSha256": "7c811c95be84f7fcffd0314ef8aa297ddad84c2a8eee1ab4226e1535173d5dd7",
+  "testFiles": {
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/NovaCore.App.Diagnostics.Tests.deps.json": {
+      "bytes": 1236,
+      "sha256": "00be5b2de17f94e3a5ef405c3c682d59e96c9a4a3a366aec978cf5531419f6be"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/NovaCore.App.Diagnostics.Tests.dll": {
+      "bytes": 16384,
+      "sha256": "1a38b673eb287eb4eb84fcc31d3823b7ba4a9f32c5dcd43e1e798fecc93e52db"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/NovaCore.App.Diagnostics.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "2d44edbffa33260776580260bd7c041fff0eb2f57e919f36868b1e9b7e0d80dd"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/NovaCore.App.Diagnostics.Tests.pdb": {
+      "bytes": 14180,
+      "sha256": "e58aa40e7a808b4662f7bff11dd113443dc39b369b708b140da2ec47798df45f"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/NovaCore.App.Diagnostics.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.BepuDependency.Tests.deps.json": {
+      "bytes": 2398,
+      "sha256": "a460b12c6f46753a38bb687304dee9a55d5156ade9651e5cf934580477f5cee0"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.BepuDependency.Tests.dll": {
+      "bytes": 12288,
+      "sha256": "da1fecc3557990f8c7a3238c2f5e50c828972dcd3d4b21620295f23035241d0b"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.BepuDependency.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "30bd0cad0940758e2c927bc3bf933cf4349eff3e081a60830b14b3e6412f1a9a"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.BepuDependency.Tests.pdb": {
+      "bytes": 12908,
+      "sha256": "922bff3b16d3f2273b6421b93583b06c9feb62532b75e315259afe613a508067"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.BepuDependency.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 79872,
+      "sha256": "4069a96b8c33664900c595a9c0fc7534115a581f77d9134fa7f746dee8fa052f"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 30636,
+      "sha256": "78d3af150f1ee2a20ac68996e9945687abc78d8d0e82103ffa87be56a1a60610"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5217792,
+      "sha256": "b9766c165c1695b553b081d59941bd1e14cb5e07d4e5cd02ba8b549be17d684b"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 416236,
+      "sha256": "78ab9a240e7fa5992be9fd09f90483a246903304eee964a91d6425b3fda30962"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.deps.json": {
+      "bytes": 2398,
+      "sha256": "a460b12c6f46753a38bb687304dee9a55d5156ade9651e5cf934580477f5cee0"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.dll": {
+      "bytes": 12288,
+      "sha256": "cb6c82095f50d95859fd7f702cd09bf087170ecc448e20102ee5c2bc3a8269a7"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "30bd0cad0940758e2c927bc3bf933cf4349eff3e081a60830b14b3e6412f1a9a"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.pdb": {
+      "bytes": 12692,
+      "sha256": "9761cb5188c7682e8d08d8fb77ef7740364094c7f5d71cb912de661b8f252c62"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 77312,
+      "sha256": "1d71f2f6272f051e7274b23bc7b70007a0443f9d6065a07b34e5d5bead03de0e"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 27836,
+      "sha256": "dbeca390efe90d5662b00aa57341727de13f60b7f0de41ad1416f0e1b933af0f"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5147136,
+      "sha256": "d7a0069f6f60832e327619920e0ccf89fe2ed9fb6ddce320d3bdbd211a0e9057"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 354240,
+      "sha256": "a9dcda1cd8da872e5e4a3cc0e0df0698627389f08d3fecd7e6d9de486dde31c9"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Camera.Tests.deps.json": {
+      "bytes": 1927,
+      "sha256": "e6d1590a5ec015cefb7d193d6712b9487c33a20b775cca8873719b3b95405ea5"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Camera.Tests.dll": {
+      "bytes": 12800,
+      "sha256": "25675e841e210bad6b008750b439e08d35727d51b4c80479aef3a099972fb29f"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Camera.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "ab26f4923b7b4843c51a783ac25427bb2fcf31ab94ef4d450b53fadfa39bcc3a"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Camera.Tests.pdb": {
+      "bytes": 13708,
+      "sha256": "e63d652d2a7de1f42fc5af14361c49e44aa4714e1d9875fe1501f70caa127798"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Camera.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Interop.dll": {
+      "bytes": 28672,
+      "sha256": "3d2d60d204f1c633d9d310a018cfe68cad839c941c133f97374f9b7db12120e8"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/NovaCore.Interop.pdb": {
+      "bytes": 15872,
+      "sha256": "994dd785133e41424ad933537138989a9a0244e6871326c8b9e6133504d9fd31"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Camera.Tests.deps.json": {
+      "bytes": 1927,
+      "sha256": "e6d1590a5ec015cefb7d193d6712b9487c33a20b775cca8873719b3b95405ea5"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Camera.Tests.dll": {
+      "bytes": 12288,
+      "sha256": "4e207f36f1e0cb38f89d3d51fdde8716801dfff78b1d5520e28e5047a8cde988"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Camera.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "ab26f4923b7b4843c51a783ac25427bb2fcf31ab94ef4d450b53fadfa39bcc3a"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Camera.Tests.pdb": {
+      "bytes": 13356,
+      "sha256": "f58f6843c303fdc2f3a7304dc41a5846e0683e65aed3ff99b33bd945e0f47777"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Camera.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Interop.dll": {
+      "bytes": 28160,
+      "sha256": "973020718c2d78202d86d0b73d6fc291c5011361913a05ec8f7390ee033fff85"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Interop.pdb": {
+      "bytes": 15276,
+      "sha256": "7fec74d6ae1d40f0d55431477ab5adfeb545a3fc67b823964ea3e2112e2e1939"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Camera.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.EphemerisBuilder.Tests.deps.json": {
+      "bytes": 2452,
+      "sha256": "a863337ba2599bc71a836c823ad903b953ddbe71fc8f0f301c9c2b5918ebe982"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.EphemerisBuilder.Tests.dll": {
+      "bytes": 17920,
+      "sha256": "75ea8c03af712f3550b5a1a27258be4b4b45ae95d3ac585fd93361017da6806b"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.EphemerisBuilder.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "97bf15fd245f4c51919a165b132e7585235fe08b8b72e1b521700f0d5878e9bf"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.EphemerisBuilder.Tests.pdb": {
+      "bytes": 13600,
+      "sha256": "5f064b9eb5968d2f440fcc4ee25e58f97300765d513e5de43f8681b6f66fa631"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.EphemerisBuilder.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 79872,
+      "sha256": "4069a96b8c33664900c595a9c0fc7534115a581f77d9134fa7f746dee8fa052f"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 30636,
+      "sha256": "78d3af150f1ee2a20ac68996e9945687abc78d8d0e82103ffa87be56a1a60610"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5217792,
+      "sha256": "b9766c165c1695b553b081d59941bd1e14cb5e07d4e5cd02ba8b549be17d684b"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 416236,
+      "sha256": "78ab9a240e7fa5992be9fd09f90483a246903304eee964a91d6425b3fda30962"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.EphemerisBuilder.Tests.deps.json": {
+      "bytes": 2452,
+      "sha256": "a863337ba2599bc71a836c823ad903b953ddbe71fc8f0f301c9c2b5918ebe982"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.EphemerisBuilder.Tests.dll": {
+      "bytes": 17920,
+      "sha256": "cc8d4a4c8c14e577edd41069bbe836445655fff130a86091536986f0792c323d"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.EphemerisBuilder.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "97bf15fd245f4c51919a165b132e7585235fe08b8b72e1b521700f0d5878e9bf"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.EphemerisBuilder.Tests.pdb": {
+      "bytes": 13260,
+      "sha256": "4588f1156e29a9b22d1883cdeb55a2693cde3362fa1356c4c8d1f275f4974343"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.EphemerisBuilder.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 77312,
+      "sha256": "1d71f2f6272f051e7274b23bc7b70007a0443f9d6065a07b34e5d5bead03de0e"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 27836,
+      "sha256": "dbeca390efe90d5662b00aa57341727de13f60b7f0de41ad1416f0e1b933af0f"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5147136,
+      "sha256": "d7a0069f6f60832e327619920e0ccf89fe2ed9fb6ddce320d3bdbd211a0e9057"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 354240,
+      "sha256": "a9dcda1cd8da872e5e4a3cc0e0df0698627389f08d3fecd7e6d9de486dde31c9"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.EphemerisBuilder.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 79872,
+      "sha256": "4069a96b8c33664900c595a9c0fc7534115a581f77d9134fa7f746dee8fa052f"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 30636,
+      "sha256": "78d3af150f1ee2a20ac68996e9945687abc78d8d0e82103ffa87be56a1a60610"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.dll": {
+      "bytes": 698368,
+      "sha256": "7e660a37d27e4dab1c8ba2fc42fb1e4f641467aecbfbcaebeab0f476059b24ac"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.pdb": {
+      "bytes": 189516,
+      "sha256": "5a52ae0a8d6ed0e1795f30f00887b82c30e7c4e47297a14ca461e8c1f8da010d"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.deps.json": {
+      "bytes": 3266,
+      "sha256": "76dd41ec6d9cdc091ef43072c7ba11b6d96f51776b8282f0ec8d2723e1710d52"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll": {
+      "bytes": 2041344,
+      "sha256": "9a91f846e2d2ff842e9c7544a051fcb91714e2ab8d7cf5ade2f4adaaee006f14"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "3ccf11d78573e66d65a73bcb0e82da1c5cf95f65b50f7fce24ded9e35236aad4"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.pdb": {
+      "bytes": 460216,
+      "sha256": "9fcc2e2fcff67eac0ccbf6445447d6e3166919b33169cc3a7888188708292188"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Interop.dll": {
+      "bytes": 28672,
+      "sha256": "3d2d60d204f1c633d9d310a018cfe68cad839c941c133f97374f9b7db12120e8"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Interop.pdb": {
+      "bytes": 15872,
+      "sha256": "994dd785133e41424ad933537138989a9a0244e6871326c8b9e6133504d9fd31"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Native.dll": {
+      "bytes": 2099200,
+      "sha256": "80e16960313a4d3b1c4033869c155b535549571c0819637468ad379f84697452"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5217792,
+      "sha256": "b9766c165c1695b553b081d59941bd1e14cb5e07d4e5cd02ba8b549be17d684b"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 416236,
+      "sha256": "78ab9a240e7fa5992be9fd09f90483a246903304eee964a91d6425b3fda30962"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/assets/visual/SRV01/NC_SRV_Capsule_A.glb": {
+      "bytes": 123968,
+      "sha256": "6b045a63186ed63fa1c6d48ef7e7ab89299f83b4f533897b8679b22068ceff6a"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/assets/visual/SRV01/NC_SRV_Main_A.glb": {
+      "bytes": 130064,
+      "sha256": "3b02f9e3788a2ba85ea8c0238e2f61f8c916d7757e2c535b8348cb8e6c1ad46f"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/assets/visual/SRV01/NC_SRV_Rcs_A.glb": {
+      "bytes": 143776,
+      "sha256": "6118cb37bd8b7678d0eacc032391b1143143e2360e351cdcbd67508a3124ca5b"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/assets/visual/SRV01/NC_SRV_Tank_A.glb": {
+      "bytes": 256312,
+      "sha256": "22cd027892f20596238d7a7580a4e73032071f6303a73cb211915bab4c4de378"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 77312,
+      "sha256": "1d71f2f6272f051e7274b23bc7b70007a0443f9d6065a07b34e5d5bead03de0e"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 27836,
+      "sha256": "dbeca390efe90d5662b00aa57341727de13f60b7f0de41ad1416f0e1b933af0f"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.dll": {
+      "bytes": 673280,
+      "sha256": "c9043963e8661aad3f9205f3016197038d91686d4ece37249010b9c456636a2c"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.pdb": {
+      "bytes": 151464,
+      "sha256": "ee12284992812de3488740b509b6d4e8a748acb44ef00221894acc9ded52e688"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.deps.json": {
+      "bytes": 3266,
+      "sha256": "76dd41ec6d9cdc091ef43072c7ba11b6d96f51776b8282f0ec8d2723e1710d52"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll": {
+      "bytes": 1974272,
+      "sha256": "0844fdc9e3669eea70a7120ea7159cf21bc125ea471cce71890749b10c976426"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "3ccf11d78573e66d65a73bcb0e82da1c5cf95f65b50f7fce24ded9e35236aad4"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.pdb": {
+      "bytes": 366352,
+      "sha256": "ea9f379f6bcc2d50ec5538935aba6c811b025f6501f39e644b7398ee026f1eb9"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Interop.dll": {
+      "bytes": 28160,
+      "sha256": "973020718c2d78202d86d0b73d6fc291c5011361913a05ec8f7390ee033fff85"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Interop.pdb": {
+      "bytes": 15276,
+      "sha256": "7fec74d6ae1d40f0d55431477ab5adfeb545a3fc67b823964ea3e2112e2e1939"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Native.dll": {
+      "bytes": 448512,
+      "sha256": "8e0b9842570a40bcb9921c7d9bff536502e30a113161f3539814bfd079a84e46"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5147136,
+      "sha256": "d7a0069f6f60832e327619920e0ccf89fe2ed9fb6ddce320d3bdbd211a0e9057"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 354240,
+      "sha256": "a9dcda1cd8da872e5e4a3cc0e0df0698627389f08d3fecd7e6d9de486dde31c9"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/assets/visual/SRV01/NC_SRV_Capsule_A.glb": {
+      "bytes": 123968,
+      "sha256": "6b045a63186ed63fa1c6d48ef7e7ab89299f83b4f533897b8679b22068ceff6a"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/assets/visual/SRV01/NC_SRV_Main_A.glb": {
+      "bytes": 130064,
+      "sha256": "3b02f9e3788a2ba85ea8c0238e2f61f8c916d7757e2c535b8348cb8e6c1ad46f"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/assets/visual/SRV01/NC_SRV_Rcs_A.glb": {
+      "bytes": 143776,
+      "sha256": "6118cb37bd8b7678d0eacc032391b1143143e2360e351cdcbd67508a3124ca5b"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/assets/visual/SRV01/NC_SRV_Tank_A.glb": {
+      "bytes": 256312,
+      "sha256": "22cd027892f20596238d7a7580a4e73032071f6303a73cb211915bab4c4de378"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.deps.json": {
+      "bytes": 1197,
+      "sha256": "1731818eac7dbb7cf1670fa06969666de1fc19ce8669317e3971725ad69bbd1d"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.dll": {
+      "bytes": 64512,
+      "sha256": "5a4783cd1e5391b790728b69ec6dfe2d2ae08521069128adcdeece877b8af6fc"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.exe": {
+      "bytes": 162304,
+      "sha256": "2dc46f038287c89d4d1539336d87556e8f708e4b3aab0ee86a47f295f6fdfb84"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.pdb": {
+      "bytes": 24152,
+      "sha256": "7701e7339b71745138bf25eb7d20b6b4a3181853e1dc72d82026e752bd4b1a43"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.runtimeconfig.json": {
+      "bytes": 447,
+      "sha256": "039a0defb81019310fa2e8a17ef8d2ad086b1a37656149aa598f1f75893f2a22"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.Tests.deps.json": {
+      "bytes": 1584,
+      "sha256": "77e8f8d2a268de74d046533eec102261c05a66f47393e908c00cd6a0d8b976a6"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.Tests.dll": {
+      "bytes": 30208,
+      "sha256": "86cfb9dd64c75a447777fcdc5a80cf0464d30ef8f88fd17b189e76dd4e1b7f87"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "72ec5baddd0f2f775ae7cbef9f2254d70d9de1ef376892c9d4a6491f5cfcd8f4"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.Tests.pdb": {
+      "bytes": 16868,
+      "sha256": "b0e76fe61e16778894c95b8fd39b81f5f2270933dee3ae3061d6107f67cda75d"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/NovaCore.Launcher.Tests.runtimeconfig.json": {
+      "bytes": 447,
+      "sha256": "039a0defb81019310fa2e8a17ef8d2ad086b1a37656149aa598f1f75893f2a22"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Debug/net10.0-windows/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.deps.json": {
+      "bytes": 1197,
+      "sha256": "1731818eac7dbb7cf1670fa06969666de1fc19ce8669317e3971725ad69bbd1d"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.dll": {
+      "bytes": 62464,
+      "sha256": "aa637b5dde356486c44109335d70dfd02c57009ba20b17df0cefa91f2c7d406f"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.exe": {
+      "bytes": 162304,
+      "sha256": "2dc46f038287c89d4d1539336d87556e8f708e4b3aab0ee86a47f295f6fdfb84"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.pdb": {
+      "bytes": 22540,
+      "sha256": "cb491f303423df10f2251077d61a024366751f65a5aba1721d784a9182901303"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.runtimeconfig.json": {
+      "bytes": 519,
+      "sha256": "96bc2946dff8790400d652ec7f8de7bb043e954980d59470c112788b68a1fbd3"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.deps.json": {
+      "bytes": 1584,
+      "sha256": "77e8f8d2a268de74d046533eec102261c05a66f47393e908c00cd6a0d8b976a6"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.dll": {
+      "bytes": 30208,
+      "sha256": "6add52921c71a9cf651393fa06c4100ac606b2beec681e7d828de1961a1731b4"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "72ec5baddd0f2f775ae7cbef9f2254d70d9de1ef376892c9d4a6491f5cfcd8f4"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.pdb": {
+      "bytes": 16028,
+      "sha256": "52b19492960573e80a861fe53590e8597f309d289b5d2f5b4376f2041e779be3"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.runtimeconfig.json": {
+      "bytes": 519,
+      "sha256": "96bc2946dff8790400d652ec7f8de7bb043e954980d59470c112788b68a1fbd3"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 79872,
+      "sha256": "4069a96b8c33664900c595a9c0fc7534115a581f77d9134fa7f746dee8fa052f"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 30636,
+      "sha256": "78d3af150f1ee2a20ac68996e9945687abc78d8d0e82103ffa87be56a1a60610"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.deps.json": {
+      "bytes": 2446,
+      "sha256": "7249a34b1e0d290366ac36789a2a4ed406c54be7313016355ca63c7278eb783b"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.dll": {
+      "bytes": 81920,
+      "sha256": "7146742de55f73da74055c34d07b4b81d4be9e138f4a5f868904a18bc2bfef48"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.exe": {
+      "bytes": 162816,
+      "sha256": "1e52d6cd5cbe162541fe56a361f759265d84ddcce8f1cdaef060ea27b6c85df9"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.pdb": {
+      "bytes": 27184,
+      "sha256": "327ed6646042624be1439c3d2160a243ea5c78b082c9d62acdcd3a0d48e6ae00"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.Tests.deps.json": {
+      "bytes": 2962,
+      "sha256": "f3b07e66b0d739f9c50ff1291c43c05b86a29b33b41a1dccd6e2cd0b0fc49d2a"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.Tests.dll": {
+      "bytes": 109568,
+      "sha256": "e450c32d8f699a09495796bd05cb50a9d54d465f40194829a5decee7e901372f"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "3d9cddd1ace827199a8a144cec87c53b4f0fbd1f4c084360553c41503d7a024d"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.Tests.pdb": {
+      "bytes": 36876,
+      "sha256": "8374dd840634e0f0c1ac6415268ba894bedf74d0e7f313e5cf7107244779f9d0"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.NaifEphemerisAdapter.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5217792,
+      "sha256": "b9766c165c1695b553b081d59941bd1e14cb5e07d4e5cd02ba8b549be17d684b"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 416236,
+      "sha256": "78ab9a240e7fa5992be9fd09f90483a246903304eee964a91d6425b3fda30962"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 77312,
+      "sha256": "1d71f2f6272f051e7274b23bc7b70007a0443f9d6065a07b34e5d5bead03de0e"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 27836,
+      "sha256": "dbeca390efe90d5662b00aa57341727de13f60b7f0de41ad1416f0e1b933af0f"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.deps.json": {
+      "bytes": 2446,
+      "sha256": "7249a34b1e0d290366ac36789a2a4ed406c54be7313016355ca63c7278eb783b"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.dll": {
+      "bytes": 80384,
+      "sha256": "f6d300b0e150db2a0e0a64e8f94115de0b644b2431526711ad9033f78400a162"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.exe": {
+      "bytes": 162816,
+      "sha256": "1e52d6cd5cbe162541fe56a361f759265d84ddcce8f1cdaef060ea27b6c85df9"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.pdb": {
+      "bytes": 25372,
+      "sha256": "fc0b9fbdc6b42241a942e926c3d419d22a20ad9b9186a74df54cc4109fd6c5f6"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.Tests.deps.json": {
+      "bytes": 2962,
+      "sha256": "f3b07e66b0d739f9c50ff1291c43c05b86a29b33b41a1dccd6e2cd0b0fc49d2a"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.Tests.dll": {
+      "bytes": 107008,
+      "sha256": "5c11cf5c80e8d9e6f25327339de35212e562ae080eb6798e858c5610aaedb457"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "3d9cddd1ace827199a8a144cec87c53b4f0fbd1f4c084360553c41503d7a024d"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.Tests.pdb": {
+      "bytes": 32716,
+      "sha256": "0394b5233b7a8dd2506e1cffc8dd410d6592aaa3bd103df4860062bae23aa5f9"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.NaifEphemerisAdapter.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5147136,
+      "sha256": "d7a0069f6f60832e327619920e0ccf89fe2ed9fb6ddce320d3bdbd211a0e9057"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 354240,
+      "sha256": "a9dcda1cd8da872e5e4a3cc0e0df0698627389f08d3fecd7e6d9de486dde31c9"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.NaifEphemerisAdapter.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Graphics.dll": {
+      "bytes": 698368,
+      "sha256": "7e660a37d27e4dab1c8ba2fc42fb1e4f641467aecbfbcaebeab0f476059b24ac"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Graphics.pdb": {
+      "bytes": 189516,
+      "sha256": "5a52ae0a8d6ed0e1795f30f00887b82c30e7c4e47297a14ca461e8c1f8da010d"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Interop.dll": {
+      "bytes": 28672,
+      "sha256": "3d2d60d204f1c633d9d310a018cfe68cad839c941c133f97374f9b7db12120e8"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Interop.pdb": {
+      "bytes": 15872,
+      "sha256": "994dd785133e41424ad933537138989a9a0244e6871326c8b9e6133504d9fd31"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Platform.dll": {
+      "bytes": 6656,
+      "sha256": "2197aa106e638aa7f81161a5480f05bf842050eb7df2c80cfd4df0f9b1b9269e"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Platform.pdb": {
+      "bytes": 12272,
+      "sha256": "b9471c5ab1cc223fba4af7441b57d19739ac6decadf317daf951c1bffedfcb87"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.deps.json": {
+      "bytes": 2749,
+      "sha256": "4710c8d0a51fe2f4f2a059906ff78d75c9bfd09cde5ad669f7fb18664d5873b8"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.dll": {
+      "bytes": 13824,
+      "sha256": "8465cc188ccf1ca4969fa4019e63e240bb9cc8485a4cb3c31938ee8ef2148de4"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "08b271204c68ddcc585877258a5cef6a7b3a72e9a664643392ec5f30d08e1572"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.pdb": {
+      "bytes": 13500,
+      "sha256": "5565359015dc3a16be7c0ffa9a39eab4b66d1610085a8ea1fed8bb5fa4339ad1"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/NovaCore.Precision.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Graphics.dll": {
+      "bytes": 673280,
+      "sha256": "c9043963e8661aad3f9205f3016197038d91686d4ece37249010b9c456636a2c"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Graphics.pdb": {
+      "bytes": 151464,
+      "sha256": "ee12284992812de3488740b509b6d4e8a748acb44ef00221894acc9ded52e688"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Interop.dll": {
+      "bytes": 28160,
+      "sha256": "973020718c2d78202d86d0b73d6fc291c5011361913a05ec8f7390ee033fff85"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Interop.pdb": {
+      "bytes": 15276,
+      "sha256": "7fec74d6ae1d40f0d55431477ab5adfeb545a3fc67b823964ea3e2112e2e1939"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Platform.dll": {
+      "bytes": 6656,
+      "sha256": "b574d3eb31136f40d4065875a68d42ac663614a348297d78c69cd316aa1c8d85"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Platform.pdb": {
+      "bytes": 12136,
+      "sha256": "2e4446a44a157e65619106903d7bcebcc4b8e3673b642e2207a85a3627e5d561"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.deps.json": {
+      "bytes": 2749,
+      "sha256": "4710c8d0a51fe2f4f2a059906ff78d75c9bfd09cde5ad669f7fb18664d5873b8"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.dll": {
+      "bytes": 13824,
+      "sha256": "71acf23ad904c125e9c1d6402ce1eae6a87b3485911fb089095eb44fbbbe3cab"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "08b271204c68ddcc585877258a5cef6a7b3a72e9a664643392ec5f30d08e1572"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.pdb": {
+      "bytes": 13228,
+      "sha256": "0e0be46fa010bd57e6bb0f31e8413392925cfdccff3c6f89e3993dc528918f8f"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Precision.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.deps.json": {
+      "bytes": 1589,
+      "sha256": "3e62b92dd5f26cd92e82dcd6ff5d8e419b932abbf91bc75d333e4ef2fd71b130"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.dll": {
+      "bytes": 43008,
+      "sha256": "54142124e1cc6481ba7b980d21310ba19784461b5a191cffbc0ab4044b908646"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "a8596d89e0d617572fa3950428adb54584eb80b9d575e5953fc5be0a117323e8"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.pdb": {
+      "bytes": 20524,
+      "sha256": "a85606bffdd6c46b8d04c355ef418831a858fa7aeabdf42112e69b697146dcf7"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/NovaCore.ReferenceFrames.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.deps.json": {
+      "bytes": 1589,
+      "sha256": "3e62b92dd5f26cd92e82dcd6ff5d8e419b932abbf91bc75d333e4ef2fd71b130"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.dll": {
+      "bytes": 42496,
+      "sha256": "c78afc7bb019070b28195d5745282f309679b4d786c6629ee6e4dd0f85391ecf"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "a8596d89e0d617572fa3950428adb54584eb80b9d575e5953fc5be0a117323e8"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.pdb": {
+      "bytes": 18436,
+      "sha256": "ac268a316661abff0b9895a3f33df9a6c5918939fac3701b81b5895736124ceb"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Core.dll": {
+      "bytes": 97792,
+      "sha256": "4a4a9bdbd3053425b04e84d4734b8f9ff986a03a61bbe8d89dc570ab54120e56"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Core.pdb": {
+      "bytes": 35952,
+      "sha256": "1ecb2387c4dced60d4c265e8325236280139577749e8988b35491c3df5965359"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 79872,
+      "sha256": "4069a96b8c33664900c595a9c0fc7534115a581f77d9134fa7f746dee8fa052f"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 30636,
+      "sha256": "78d3af150f1ee2a20ac68996e9945687abc78d8d0e82103ffa87be56a1a60610"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5217792,
+      "sha256": "b9766c165c1695b553b081d59941bd1e14cb5e07d4e5cd02ba8b549be17d684b"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 416236,
+      "sha256": "78ab9a240e7fa5992be9fd09f90483a246903304eee964a91d6425b3fda30962"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.deps.json": {
+      "bytes": 2386,
+      "sha256": "237988a9ab78e41a0bf5dd05032461bf4d1338f8b71abe696134f1d6bc360913"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll": {
+      "bytes": 1688064,
+      "sha256": "88d3e9ebfec805dad8afc9695aeb18dfeb120cce81ae252b0ecc0e0888e2c1bf"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "4652f20fd9a09976549a013f41b2b16398685a623ac386706dc50d86d1ba81c9"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.pdb": {
+      "bytes": 374736,
+      "sha256": "8f6163b7ac88d4083f029f1b652fe0e1db5c8871e6d045d207953bffd06a05ce"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.runtimeconfig.json": {
+      "bytes": 270,
+      "sha256": "256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/Data/Assembly-FourHorn-Reference-Endpoints.json": {
+      "bytes": 62704,
+      "sha256": "3a173370e2a011fa8ebb6014ed22804fbaf7183b6e6e0524941039904e288c96"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/Data/Assembly-Reference-Endpoints.json": {
+      "bytes": 27912,
+      "sha256": "2fc90b50e227462e87c35148d8c3fc862091f521f4b45ea54d0f07ba60160431"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Core.dll": {
+      "bytes": 94720,
+      "sha256": "a02b74c3678f9b0213c59e9281fea76b5e3d24d992bec2a7cf2c17e95d693c97"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Core.pdb": {
+      "bytes": 32692,
+      "sha256": "9a4d2fa17e44250debf529c1a77fe1d17113c49c89b2969c06e1dfd7ded988ce"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.dll": {
+      "bytes": 77312,
+      "sha256": "1d71f2f6272f051e7274b23bc7b70007a0443f9d6065a07b34e5d5bead03de0e"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.EphemerisFormat.pdb": {
+      "bytes": 27836,
+      "sha256": "dbeca390efe90d5662b00aa57341727de13f60b7f0de41ad1416f0e1b933af0f"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.dll": {
+      "bytes": 5147136,
+      "sha256": "d7a0069f6f60832e327619920e0ccf89fe2ed9fb6ddce320d3bdbd211a0e9057"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.pdb": {
+      "bytes": 354240,
+      "sha256": "a9dcda1cd8da872e5e4a3cc0e0df0698627389f08d3fecd7e6d9de486dde31c9"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.deps.json": {
+      "bytes": 2386,
+      "sha256": "237988a9ab78e41a0bf5dd05032461bf4d1338f8b71abe696134f1d6bc360913"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll": {
+      "bytes": 1638912,
+      "sha256": "c684c4e6680d6c206fecec66b6b4f149e54fe9237b86eb0d2f7f197f15e4fefb"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.exe": {
+      "bytes": 162816,
+      "sha256": "4652f20fd9a09976549a013f41b2b16398685a623ac386706dc50d86d1ba81c9"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.pdb": {
+      "bytes": 300560,
+      "sha256": "36e57a171ca239c47dc8af77b4c2c66b31efe12574d1dca2cffb7e068f0843c1"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.runtimeconfig.json": {
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/Data/Assembly-FourHorn-Reference-Endpoints.json": {
+      "bytes": 62704,
+      "sha256": "3a173370e2a011fa8ebb6014ed22804fbaf7183b6e6e0524941039904e288c96"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/Data/Assembly-Reference-Endpoints.json": {
+      "bytes": 27912,
+      "sha256": "2fc90b50e227462e87c35148d8c3fc862091f521f4b45ea54d0f07ba60160431"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    }
+  },
+  "packageSha256": "15ec023278f85a720f838c35ff638831c576e6becd5d83a63b2a69d15a707a00",
+  "buildLogHashes": {
+    "configure-Debug": "e2d365a64d19320574c3ee1d9928b9fd8fe7fa3529840ca0d1f7f1921e237b6d",
+    "native-Debug": "be51160f88eec547539493696885c66668d394789c366cbcd842bcd68732a10d",
+    "clean-Debug": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "managed-Debug": "e85b09582269c219a9f8b41af84734bc2907d5f182c0d3d8ae5837642cdfa7d6",
+    "configure-Release": "574ef6cad0643342d244689e316072ee5ded9ec8327714cbd8a4f98fe3fdfcb4",
+    "native-Release": "e97299460841f15f171e49e810037398ac3d12d9ba13e0e77f5318dcd3629132",
+    "clean-Release": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "managed-Release": "8840fe4a1ba4291f9651b48f3227cc15ec383d5980ec88d757e000eb5f93ca5a",
+    "package": "c8e6eebb4dcb6d78be9f85b19549e3b7e26d68332d315c66cad36ba7fc512c5c"
+  },
+  "finalComparison": "PASS"
+}

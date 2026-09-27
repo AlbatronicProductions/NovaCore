@@ -1,0 +1,957 @@
+--- a/samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs
++++ b/samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs
+@@ -14,7 +14,7 @@
+         if(scene.Failed)return;
+         var phase=scene.State.Physical!.Consumer==AssemblyPhysicalConsumer.SupportedContact?0:scene.Actuation.Main?1:2;
+         if(seen[phase]++<Warmup||counts[phase]==values[phase].Length)return;
+-        values[phase][counts[phase]++]=new(frame,cpu,allocated,g0,g1,g2,scene.Actuation.Jets!=0);
++        values[phase][counts[phase]++]=new(frame,cpu,allocated,g0,g1,g2,!scene.Actuation.Jets.IsEmpty);
+     }
+     internal void Report()
+     {
+--- a/samples/NovaCore.Triangle/ConstructionFlightScene.cs
++++ b/samples/NovaCore.Triangle/ConstructionFlightScene.cs
+@@ -152,7 +152,7 @@
+             var main=Session.Binding.Physical!.Control.Main;var g=main.Gimbal!;var q=Gimbal();
+             AddExhaust(submission,main.PartOrigin+main.PartRotation.Apply(g.Pivot+q.Rotate(g.NozzleOffset)),main.PartRotation.Apply(q.Rotate(-Double3.UnitX)),2.8,.35);
+         }
+-        for(var i=0;i<Craft.Allocation.JetActuators.Length;i++)if((Actuation.Jets&(1u<<i))!=0){var a=Craft.Actuators[Craft.Allocation.JetActuators[i]];AddExhaust(submission,a.Point,-a.Axis,.36,.095);}
++        for(var i=0;i<Craft.Allocation.JetActuators.Length;i++)if(Actuation.Jets.Contains(i)){var a=Craft.Actuators[Craft.Allocation.JetActuators[i]];AddExhaust(submission,a.Point,-a.Axis,.36,.095);}
+         submission.Complete();
+     }
+     private void AddExhaust(RenderFrameSubmission submission,Double3 point,Double3 axis,double length,double radius)
+@@ -169,7 +169,7 @@
+             objects[cursor].Padding0=time;objects[cursor].Padding1=BitConverter.SingleToUInt32Bits((float)exhaustSpeeds[actuator]);objects[cursor++].Padding2=nozzle;
+         }
+         if(Actuation.Main)Stamp(mainActuator,0);
+-        for(var i=0;i<Craft.Allocation.JetActuators.Length;i++)if((Actuation.Jets&(1u<<i))!=0)Stamp(Craft.Allocation.JetActuators[i],(uint)i+1);
++        for(var i=0;i<Craft.Allocation.JetActuators.Length;i++)if(Actuation.Jets.Contains(i))Stamp(Craft.Allocation.JetActuators[i],(uint)i+1);
+         if(cursor!=count)throw new InvalidOperationException("Craft exhaust count differs.");
+     }
+     private unsafe void UpdateTitle()
+--- a/src/NovaCore.Graphics/TerrainAssetDistribution.cs
++++ b/src/NovaCore.Graphics/TerrainAssetDistribution.cs
+@@ -141,7 +141,7 @@
+         if (!directory.Exists && directory.Parent is not null) directory = directory.Parent;
+         while (directory is not null)
+         {
+-            if (Directory.Exists(Path.Combine(directory.FullName, ".git")) &&
++            if ((Directory.Exists(Path.Combine(directory.FullName, ".git")) || File.Exists(Path.Combine(directory.FullName, ".git"))) &&
+                 Directory.Exists(Path.Combine(directory.FullName, "assets", "terrain", "manifests")))
+             {
+                 root = directory.FullName;
+--- a/src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionFuel.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionFuel.cs
+@@ -9,7 +9,17 @@
+ internal readonly record struct ConstructionStoreKey(string Part,string Store);
+ internal readonly record struct ConstructionConsumerKey(string Part,string Consumer);
+ internal sealed record ConstructionFuelStore(ConstructionStoreKey Key,string Resource,BigInteger Capacity,BigInteger Initial,bool Enabled,int Part);
+-internal sealed record ConstructionFuelTerm(string Resource,uint Weight,ImmutableArray<int> Stores,ImmutableArray<int> Levels,ImmutableArray<BigInteger> ShareFactors);
++internal sealed record ConstructionFuelTerm(string Resource,uint Weight,ImmutableArray<int> Stores,ImmutableArray<int> Levels,ImmutableArray<BigInteger> ShareFactors,BigInteger ShareNumerator=default)
++{
++    // The prepared lattice is divisible by every reachable supplier count.
++    // Modular terms retain one exact numerator rather than duplicating S+1
++    // large integers for every mixture term. Legacy tables keep their identity.
++    internal BigInteger ShareFactor(int suppliers)
++    {
++        Require(suppliers>0&&suppliers<=Stores.Length,"Invalid selected supplier count.");
++        return ShareFactors.IsDefault?ShareNumerator/suppliers:ShareFactors[suppliers];
++    }
++}
+ internal sealed record ConstructionFuelConsumer(ConstructionConsumerKey Key,BigInteger Rate,ConstructionFlowRule Rule,ImmutableArray<ConstructionFuelTerm> Terms);
+ internal readonly record struct ConstructionRatio(BigInteger Numerator,BigInteger Denominator)
+ {
+@@ -35,6 +45,14 @@
+     internal int QuantityBits {get;}
+     internal int ScratchBits {get;}
+     internal int ScratchSignedBits=>checked(ScratchBits+1);
++    internal int MaximumSnapshotBytes {get;}
++    internal static int SnapshotCapacity(int stores,int quantityBits,bool modular)
++    {
++        Require(stores>=0&&quantityBits>=0,"Invalid fuel snapshot dimensions.");
++        var bytes=modular?checked(256L+((long)stores+1)*(quantityBits/4L+5)):
++            checked(1024L+((long)stores+1)*(quantityBits/4L+2));
++        Require(bytes<=Array.MaxLength,"Fuel snapshot exceeds the CLR byte-array representation.");return (int)bytes;
++    }
+     internal int InitiallyPositive {get;}
+     internal ImmutableArray<ConstructionRatio> ZeroActivity {get;}
+     private ConstructionFuelNetwork(CompiledConstructionDesign design,string digest,ImmutableArray<ConstructionFuelStore> stores,
+@@ -54,6 +72,7 @@
+         // parser envelope larger than every solver expression.
+         if(ports is not null)ScratchBits=Math.Max(ScratchBits,checked(4*(QuantityBits/4+2)));
+         Require(ScratchBits<=MaximumArithmeticBits,"Fuel arithmetic admission width exceeded.");
++        MaximumSnapshotBytes=SnapshotCapacity(stores.Length,QuantityBits,ports is not null);
+     }
+     internal static BigInteger Decode(double value,bool kilograms)
+     {
+@@ -72,7 +91,7 @@
+         Require(ports is null||unavailableEdges.IsEmpty,"Craft port topology cannot be altered through legacy edge overrides.");
+         Unique(unavailableEdges,x=>x,"unavailable service edges");
+         foreach(var id in unavailableEdges)Require(design.ServiceEdges.Any(e=>e.Id==id),"Unknown unavailable edge.");
+-        Require(design.Parts.Sum(p=>p.Definition.Stores.Length)<=MaximumStores&&
++        Require(ports is not null||design.Parts.Sum(p=>p.Definition.Stores.Length)<=MaximumStores&&
+             design.Parts.Sum(p=>p.Definition.Construction!.Consumers.Length)<=MaximumConsumers&&
+             design.Parts.Sum(p=>p.Definition.Construction!.Consumers.Sum(c=>c.Mixture.Length))<=MaximumMixtureTerms,"Fuel network admission capacity exceeded.");
+         var stores=ImmutableArray.CreateBuilder<ConstructionFuelStore>();
+@@ -84,10 +103,16 @@
+             {var initial=configuration.Stores.Single(s=>s.Store==store.Id);stores.Add(new(new(part.Instance.Id,store.Id),store.ResourceIdentity,Decode(store.CapacityKg,true),Decode(initial.QuantityKg,true),initial.Enabled,p));}
+             foreach(var consumer in part.Definition.Construction!.Consumers)definitions.Add((p,consumer));
+         }
+-        Require(stores.Count<=MaximumStores&&definitions.Count<=MaximumConsumers,"Fuel network admission capacity exceeded.");
++        Require(ports is not null||stores.Count<=MaximumStores&&definitions.Count<=MaximumConsumers,"Fuel network admission capacity exceeded.");
+         var scale=BigInteger.One;
+-        foreach(var (_,c) in definitions)scale=Lcm(scale,c.Mixture.Aggregate(BigInteger.Zero,(v,t)=>v+t.Weight));
+-        var sharing=BigInteger.One;for(var n=1;n<=stores.Count;n++)sharing=Lcm(sharing,n);scale*=sharing;
++        foreach(var (_,c) in definitions){var sum=c.Mixture.Aggregate(BigInteger.Zero,(v,t)=>v+t.Weight);
++            if(ports is not null)Require(scale.GetBitLength()+sum.GetBitLength()<=MaximumArithmeticBits,"Physical mixture lattice admission width exceeded.");
++            scale=Lcm(scale,sum);}
++        var sharing=BigInteger.One;for(var n=1;n<=stores.Count;n++){
++            if(ports is not null)Require(sharing.GetBitLength()+new BigInteger(n).GetBitLength()<=MaximumArithmeticBits,"Physical sharing lattice admission width exceeded.");
++            sharing=Lcm(sharing,n);}
++        if(ports is not null)Require(scale.GetBitLength()+sharing.GetBitLength()<=MaximumArithmeticBits,"Physical sharing scale admission width exceeded.");
++        scale*=sharing;
+         var timeScale=BigInteger.One;
+         if(ports is not null){
+             var power=ConstructionServiceNetwork.Compile(design,ConstructionService.Electricity,ports:ports);
+@@ -137,10 +162,13 @@
+                 int Level(int i)=>ports is null?distance[stores[i].Part]:ports.StoreDistance(explicitDistance!.Value,stores[i].Part,stores[i].Key.Store);
+                 var eligible=Enumerable.Range(0,stores.Count).Where(i=>stores[i].Resource==term.Resource&&
+                     (ports is not null?Level(i)!=int.MaxValue:stores[i].Part==owner?c.FeedStores.Contains(stores[i].Key.Store):distance[stores[i].Part]>=0)).ToImmutableArray();
+-                var factors=ImmutableArray.CreateBuilder<BigInteger>(stores.Count+1);factors.Add(0);
+                 if(ports is not null)Require(scale.GetBitLength()+32<=MaximumArithmeticBits,"Physical mixture construction width exceeded.");
+-                for(var n=1;n<=stores.Count;n++)factors.Add(scale*term.Weight/(sum*n));
+-                terms.Add(new(term.Resource,term.Weight,eligible,eligible.Select(Level).ToImmutableArray(),factors.MoveToImmutable()));
++                if(ports is not null)terms.Add(new(term.Resource,term.Weight,eligible,eligible.Select(Level).ToImmutableArray(),default,scale*term.Weight/sum));
++                else{
++                    var factors=ImmutableArray.CreateBuilder<BigInteger>(stores.Count+1);factors.Add(0);
++                    for(var n=1;n<=stores.Count;n++)factors.Add(scale*term.Weight/(sum*n));
++                    terms.Add(new(term.Resource,term.Weight,eligible,eligible.Select(Level).ToImmutableArray(),factors.MoveToImmutable()));
++                }
+             }
+             compiled.Add(new(new(design.Parts[owner].Instance.Id,c.Id),Decode(c.TotalFlowKgS,false),c.FlowRule,terms.ToImmutable()));
+         }
+@@ -180,8 +208,9 @@
+     internal byte[] Save()=>AssemblyJson.Write(new ConstructionFuelSave(Network.Digest,Hex(Denominator),Events,Quantities.Select(Hex).ToImmutableArray()));
+     internal static ConstructionFuelState Load(ConstructionFuelNetwork network,ReadOnlySpan<byte> bytes)
+     {
+-        var maximum=checked(1024+(network.Stores.Length+1)*(network.QuantityBits/4+2));
+-        var data=AssemblyJson.Read<ConstructionFuelSave>(bytes,maximum);
++        // Generic snapshots derive punctuation/hex space from every store;
++        // retain the legacy static format's original admission envelope.
++        var data=AssemblyJson.Read<ConstructionFuelSave>(bytes,network.MaximumSnapshotBytes);
+         Require(data.Network==network.Digest&&!data.Quantities.IsDefault&&data.Quantities.Length==network.Stores.Length,"Wrong fuel network snapshot.");
+         BigInteger Parse(string s,int bits)
+         {
+@@ -241,7 +270,10 @@
+                     if(selected.Count==0)complete=false;
+                 }
+                 if(!complete)continue;active[j]=true;
+-                for(var k=0;k<consumer.Terms.Length;k++)foreach(var i in chosen[j][k])rates[i]+=consumer.Rate*(consumer.Terms[k].ShareFactors[chosen[j][k].Count]/timeDivisor);
++                for(var k=0;k<consumer.Terms.Length;k++){
++                    var rate=consumer.Rate*(consumer.Terms[k].ShareFactor(chosen[j][k].Count)/timeDivisor);
++                    foreach(var i in chosen[j][k])rates[i]+=rate;
++                }
+             }
+             var earliest=-1;
+             for(var i=0;i<n.Length;i++)if(rates[i]>0&&(earliest<0||n[i]*rates[earliest]<n[earliest]*rates[i]))earliest=i;
+--- a/src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPower.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPower.cs
+@@ -58,22 +58,31 @@
+     internal ConstructionPowerWidths Widths {get;}
+     internal int IntegerBits=>Widths.IntegerBits;
+     internal int ScratchBits=>Widths.ScratchMagnitudeBits;
+-    internal int MaximumSnapshotBytes=>Fuel.Ports is null?checked(16384+(Modules.Length+1)*Widths.HexDigits):
++    internal int MaximumSnapshotBytes {get;}
++    internal static int SnapshotCapacity(int modules,int hexDigits,long cursorBytes,bool modular)
++    {
++        Require(modules>=0&&hexDigits>0&&cursorBytes>=0,"Invalid power snapshot dimensions.");
+         // Canonical ASCII: hex strings include quotes/commas; each bool uses
+-        // <=6 bytes; each bus cursor <=511 uses <=4. Fixed names, identities,
++        // <=6 bytes; cursor digits derive from this network's battery count.
++        // Fixed names, identities,
+         // event count and punctuation fit the independently counted256 bytes.
+-        checked(256+(Modules.Length+1)*(Widths.HexDigits+3)+Modules.Length*6+Power.Count*4);
++        var bytes=modular?checked(256L+((long)modules+1)*(hexDigits+3L)+modules*6L+cursorBytes):
++            checked(16384L+((long)modules+1)*hexDigits);
++        Require(bytes<=Array.MaxLength,"Power snapshot exceeds the CLR byte-array representation.");return (int)bytes;
++    }
+     private ConstructionPowerNetwork(ConstructionFuelNetwork fuel,ConstructionServiceNetwork power,ConstructionServiceNetwork data,string digest,
+         ImmutableArray<ConstructionPowerModule> modules,ImmutableArray<ImmutableArray<int>> batteries)
+     {
+         Fuel=fuel;Power=power;Data=data;Digest=digest;Modules=modules;Batteries=batteries;
+         ZeroDelivery=Enumerable.Repeat(new ConstructionRatio(0,1),modules.Length).ToImmutableArray();
+         Widths=ConstructionPowerWidths.Derive(checked(1+fuel.InitiallyPositive*fuel.RateBits));
++        MaximumSnapshotBytes=SnapshotCapacity(modules.Length,Widths.HexDigits,
++            batteries.Sum(b=>(long)Math.Max(0,b.Length-1).ToString(CultureInfo.InvariantCulture).Length+1),fuel.Ports is not null);
+     }
+     internal static ConstructionPowerNetwork Compile(ConstructionFuelNetwork fuel,ImmutableArray<string> unavailable=default)
+     {
+         var design=fuel.Design;if(unavailable.IsDefault)unavailable=[];
+-        Require(design.Parts.Sum(p=>p.Definition.Construction!.Electrical.Length)<=512,"Power module capacity exceeded.");
++        Require(fuel.Ports is not null||design.Parts.Sum(p=>p.Definition.Construction!.Electrical.Length)<=512,"Power module capacity exceeded.");
+         var power=ConstructionServiceNetwork.Compile(design,ConstructionService.Electricity,unavailable,fuel.Ports);
+         var data=ConstructionServiceNetwork.Compile(design,ConstructionService.Data,unavailable,fuel.Ports);
+         var modules=ImmutableArray.CreateBuilder<ConstructionPowerModule>();
+--- a/src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.Physical.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.Physical.cs
+@@ -46,7 +46,32 @@
+     AssemblyControlRequest Request,StateRevision Revision,long HostSequence,int Contacts,double Clearance);
+ internal sealed record ConstructionPhysicalHistory(ConstructionControlCheckpoint Checkpoint,
+     System.Collections.Immutable.ImmutableArray<ConstructionPhysicalRecord> Records);
+-internal readonly record struct ConstructionActuationObservation(bool Main,uint Jets,bool GimbalPowered);
++// An immutable endpoint-availability view, not the preceding interval's integrated
++// output. Captured command/resources belong to this compiled craft and remain
++// valid after subsequent publication. No per-observation collection allocation.
++internal readonly struct ConstructionJetObservation
++{
++    private readonly ConstructionPhysicalServices? services;
++    private readonly CraftControlRow? row;
++    private readonly ConstructionFuelState? fuel;
++    private readonly ConstructionPowerState? power;
++    internal int Length=>services?.Craft.Allocation.JetActuators.Length??0;
++    internal int Count {get;}
++    internal bool IsEmpty=>Count==0;
++    internal bool Contains(int index)
++    {
++        if((uint)index>=(uint)Length)return false;
++        var a=services!.Craft.Actuators[services.Craft.Allocation.JetActuators[index]];
++        return row!.Consumers[a.Consumer]&&services.Available(a,fuel!,power!);
++    }
++    internal ConstructionJetObservation(ConstructionPhysicalServices services,CraftControlRow row,ConstructionFuelState fuel,ConstructionPowerState power)
++    {
++        AssemblyConstructionFacts.Require(ReferenceEquals(row.Craft,services.Craft)&&ReferenceEquals(fuel.Network,services.Craft.Fuel)&&ReferenceEquals(power.Network,services.Craft.Power)&&row.Consumers.Length==services.Craft.Fuel.Consumers.Length,"Foreign jet observation source.");
++        this.services=services;this.row=row;this.fuel=fuel;this.power=power;Count=0;
++        for(var i=0;i<Length;i++)if(Contains(i))Count++;
++    }
++}
++internal readonly record struct ConstructionActuationObservation(bool Main,ConstructionJetObservation Jets,bool GimbalPowered);
+ 
+ internal sealed partial class ConstructionRuntimeBinding
+ {
+--- a/src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraft.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraft.cs
+@@ -127,9 +127,9 @@
+         static string Hex(System.Numerics.BigInteger value)=>value.ToString("x",System.Globalization.CultureInfo.InvariantCulture);
+         Digest=AssemblyJson.Digest(new {Schema,Source=design.Digest,design.Data.DependencyDigest,Dependencies=dependencies,Profile=AdmissionProfile,
+             Render=render,Ports=ports.Ports,Routes=ports.Routes,Mass=new{mass.Dry,mass.Stores,mass.MaximumMass,mass.ComMinimum,mass.ComMaximum,mass.OriginInertiaMinimum,mass.OriginInertiaMaximum,Initial=initial},
+-            Collision=collision,Clearance=clearance,Support=support,Actuators=actuators,AllocationGeometry,Allocation=new{Allocation.JetActuators,Allocation.AxisMasks,Allocation.Complete,Allocation.ForceTolerance,Allocation.TorqueTolerance},Diagnostics,AdmissionDiagnostics,FocusCenter,FocusRadius,
++            Collision=collision,Clearance=clearance,Support=support,Actuators=actuators,AllocationGeometry,Allocation=new{Allocation.JetActuators,Allocation.AxisJets,Allocation.Complete,Allocation.ForceTolerance,Allocation.TorqueTolerance},Diagnostics,AdmissionDiagnostics,FocusCenter,FocusRadius,
+             Fuel=new{Scale=Hex(fuel.Scale),Stores=fuel.Stores.Select(s=>new{s.Key,s.Resource,Capacity=Hex(s.Capacity),Initial=Hex(s.Initial),s.Enabled,s.Part}).ToArray(),
+-                Consumers=fuel.Consumers.Select(c=>new{c.Key,Rate=Hex(c.Rate),c.Rule,Terms=c.Terms.Select(t=>new{t.Resource,t.Weight,t.Stores,t.Levels,Factors=t.ShareFactors.Select(Hex).ToArray()}).ToArray()}).ToArray()},
++                Consumers=fuel.Consumers.Select(c=>new{c.Key,Rate=Hex(c.Rate),c.Rule,Terms=c.Terms.Select(t=>new{t.Resource,t.Weight,t.Stores,t.Levels,ShareNumerator=Hex(t.ShareNumerator)}).ToArray()}).ToArray()},
+             Power=power.Modules.Select(m=>new{m.Key,m.Role,m.Part,m.Bus,Capacity=Hex(m.Capacity),Rate=Hex(m.Rate),m.Driver,Initial=Hex(m.Initial),m.Enabled}).ToArray()});
+     }
+ }
+@@ -168,7 +168,7 @@
+         }).ToImmutableArray();
+         if(design.ControlIndex<0)Problem("CONTROL_MISSING",null,"controlPart","Choose a command core for control.");
+         if(actuators.Count(a=>a.Model=="nc.actuator.main/1")!=1)Problem("MAIN_COUNT",null,"actuators","This launch profile requires one main engine.");
+-        if(actuators.Count(a=>a.Model=="nc.actuator.attitude/1") is <1 or >32)Problem("ATTITUDE_COUNT",null,"actuators","Use between one and 32 attitude jets for this bounded profile.");
++        if(!actuators.Any(a=>a.Model=="nc.actuator.attitude/1"))Problem("ATTITUDE_MISSING",null,"actuators","Provide authored attitude hardware with balanced axis authority.");
+         foreach(var actuator in actuators){
+             if(actuator.Model is not ("nc.actuator.main/1" or "nc.actuator.attitude/1"))Problem("ACTUATOR_MODEL",actuator.Key.Part,actuator.Key.Consumer,"This actuator model is not qualified for this launch profile.");
+             if(!actuator.DataReachable)Problem("DATA_PATH",actuator.Key.Part,actuator.Key.Consumer,"Connect this actuator to the selected command core's data service.");
+--- a/src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftAllocation.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftAllocation.cs
+@@ -8,7 +8,8 @@
+ internal sealed class CompiledCraftAllocation
+ {
+     internal ImmutableArray<int> JetActuators {get;}
+-    internal ImmutableArray<uint> AxisMasks {get;}
++    // Canonical jet indices, never bit positions in a machine-sized word.
++    internal ImmutableArray<ImmutableArray<int>> AxisJets {get;}
+     internal bool Complete {get;}
+     internal double ForceTolerance {get;}
+     internal double TorqueTolerance {get;}
+@@ -16,7 +17,7 @@
+     internal CompiledCraftAllocation(ImmutableArray<CraftActuator> actuators,CraftMassLaw mass)
+     {
+         JetActuators=actuators.Select((a,i)=>(a,i)).Where(x=>x.a.Model=="nc.actuator.attitude/1").Select(x=>x.i).ToImmutableArray();
+-        if(JetActuators.Length is <1 or >32){AxisMasks=[];return;}
++        if(JetActuators.IsEmpty){AxisJets=[];return;}
+         var jets=JetActuators.Select(i=>actuators[i]).ToArray();var columns=jets.Select(a=>new CraftControlColumn(a.Axis*a.Thrust,Double3.Cross(a.Point,a.Axis*a.Thrust))).ToArray();
+         // Authored axes are exact coefficients of this static wrench model.
+         // This residual band covers their rigid-frame transport, not a relaxation
+@@ -25,25 +26,48 @@
+         ForceTolerance=4e-12*jets.Sum(a=>a.Thrust);
+         TorqueTolerance=ForceTolerance*Math.Max(1,jets.Max(a=>Norm(a.Point))+Math.Max(Norm(mass.ComMinimum),Norm(mass.ComMaximum)));
+         AssemblyConstructionFacts.Require(double.IsFinite(ForceTolerance)&&double.IsFinite(TorqueTolerance)&&ForceTolerance>0&&TorqueTolerance>0&&columns.All(c=>c.Force.IsFinite&&c.MomentAtOrigin.IsFinite),"Craft allocation numerical range exceeded.");
+-        var masks=new uint[6];static double Axis(Double3 v,int axis)=>axis==0?v.X:axis==1?v.Y:v.Z;
++        var selections=new ImmutableArray<int>[6];static double Axis(Double3 v,int axis)=>axis==0?v.X:axis==1?v.Y:v.Z;
++        // Prove all pair additions before streaming can skip a selected pair.
++        // Extrema bound each component of every reachable two-column sum.
++        if(jets.Length>=2)for(var component=0;component<6;component++){
++            double hi=double.NegativeInfinity,hi2=hi,lo=double.PositiveInfinity,lo2=lo;
++            foreach(var c in columns){var v=Axis(component<3?c.Force:c.MomentAtOrigin,component%3);
++                if(v>=hi){hi2=hi;hi=v;}else hi2=Math.Max(hi2,v);
++                if(v<=lo){lo2=lo;lo=v;}else lo2=Math.Min(lo2,v);}
++            AssemblyConstructionFacts.Require(double.IsFinite(hi+hi2)&&double.IsFinite(lo+lo2),"Craft allocation pair range exceeded.");
++        }
+         for(var axis=0;axis<3;axis++)for(var sign=-1;sign<=1;sign+=2){
+-            var candidates=new List<(uint Mask,double Strength,int First,int Second)>();
+-            for(var i=0;i<jets.Length;i++)for(var j=i+1;j<jets.Length;j++){
+-                var force=columns[i].Force+columns[j].Force;var torque=columns[i].MomentAtOrigin+columns[j].MomentAtOrigin;
+-                AssemblyConstructionFacts.Require(force.IsFinite&&torque.IsFinite,"Craft allocation pair range exceeded.");
+-                if(Norm(force)>ForceTolerance||Axis(torque,axis)*sign<=TorqueTolerance||Enumerable.Range(0,3).Any(a=>a!=axis&&Math.Abs(Axis(torque,a))>TorqueTolerance))continue;
+-                candidates.Add(((1u<<i)|(1u<<j),Axis(torque,axis)*sign,i,j));
++            // Each row i streams partners in monotone signed-moment order.
++            // Only one head per row is resident. Cursors never retreat: <=J²
++            // pair examinations, O(J) scratch, O(J² log J) cold heap work.
++            // Equal rounded strengths break by first identity then partner
++            // rank (signed component, identity); no collection-order ties.
++            var partners=Enumerable.Range(0,jets.Length).OrderByDescending(j=>Axis(columns[j].MomentAtOrigin,axis)*sign).ThenBy(j=>j).ToArray();
++            var cursor=new int[jets.Length];var selected=new bool[jets.Length];
++            var heads=new PriorityQueue<(int First,int Second),(double NegativeStrength,int First,int Rank)>(jets.Length);
++            void Next(int i){
++                while(cursor[i]<partners.Length){var rank=cursor[i]++;var j=partners[rank];if(j<=i||selected[j])continue;
++                    var force=columns[i].Force+columns[j].Force;var torque=columns[i].MomentAtOrigin+columns[j].MomentAtOrigin;
++                    var strength=Axis(torque,axis)*sign;
++                    if(Norm(force)>ForceTolerance||strength<=TorqueTolerance||Math.Abs(Axis(torque,(axis+1)%3))>TorqueTolerance||Math.Abs(Axis(torque,(axis+2)%3))>TorqueTolerance)continue;
++                    heads.Enqueue((i,j),(-strength,i,rank));return;
++                }
+             }
+-            uint selected=0;foreach(var pair in candidates.OrderByDescending(c=>c.Strength).ThenBy(c=>c.First).ThenBy(c=>c.Second))if((selected&pair.Mask)==0)selected|=pair.Mask;
+-            masks[axis*2+(sign>0?1:0)]=selected;
++            for(var i=0;i<jets.Length;i++)Next(i);
++            while(heads.TryDequeue(out var pair,out _)){
++                if(selected[pair.First])continue;
++                if(selected[pair.Second]){Next(pair.First);continue;}
++                selected[pair.First]=true;selected[pair.Second]=true;
++            }
++            selections[axis*2+(sign>0?1:0)]=Enumerable.Range(0,jets.Length).Where(j=>selected[j]).ToImmutableArray();
+         }
+-        AxisMasks=masks.ToImmutableArray();Complete=masks.All(m=>m!=0);
++        AxisJets=selections.ToImmutableArray();Complete=selections.All(s=>!s.IsEmpty);
+         // Union, not arithmetic addition: shared jets are actuated only once.
+         // Prove every simultaneous request retains signs and zero unused axes
+         // throughout the conservative COM box, before exposing FUNCTION.
+         for(var roll=-1;roll<=1;roll++)for(var pitch=-1;pitch<=1;pitch++)for(var yaw=-1;yaw<=1;yaw++){
+-            int[] demand=[roll,pitch,yaw];uint mask=0;for(var axis=0;axis<3;axis++)if(demand[axis]!=0)mask|=masks[axis*2+(demand[axis]>0?1:0)];
+-            var force=Double3.Zero;var moment=Double3.Zero;for(var j=0;j<jets.Length;j++)if((mask&(1u<<j))!=0){force+=columns[j].Force;moment+=columns[j].MomentAtOrigin;}
++            int[] demand=[roll,pitch,yaw];var selected=new bool[jets.Length];for(var axis=0;axis<3;axis++)if(demand[axis]!=0)foreach(var j in selections[axis*2+(demand[axis]>0?1:0)])selected[j]=true;
++            var force=Double3.Zero;var moment=Double3.Zero;for(var j=0;j<jets.Length;j++)if(selected[j]){force+=columns[j].Force;moment+=columns[j].MomentAtOrigin;}
+             AssemblyConstructionFacts.Require(force.IsFinite&&moment.IsFinite,"Craft allocation union range exceeded.");
+             if(Norm(force)>ForceTolerance)Complete=false;
+             foreach(var x in new[]{mass.ComMinimum.X,mass.ComMaximum.X})foreach(var y in new[]{mass.ComMinimum.Y,mass.ComMaximum.Y})foreach(var z in new[]{mass.ComMinimum.Z,mass.ComMaximum.Z}){
+--- a/src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftControl.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftControl.cs
+@@ -4,7 +4,7 @@
+ 
+ namespace NovaCore.Simulation.Spacecraft.Assemblies;
+ 
+-internal sealed record CraftControlRow(ImmutableArray<bool> Consumers,uint Jets,double TargetY,double TargetZ);
++internal sealed record CraftControlRow(CompiledCraft Craft,ImmutableArray<bool> Consumers,double TargetY,double TargetZ);
+ /// <summary>Prepared actuator rows consumed by the existing control owner. It
+ /// cannot admit player commands or mutate resource/actuator state.</summary>
+ internal sealed class CompiledCraftControl
+@@ -36,11 +36,10 @@
+             Double3.Cross(Main.Point-pivot,Main.Axis).LengthSquared<=1e-24,"Physical main nozzle is not coaxial with its authored pivot.");
+         var limit=Math.Min(g.LimitY,g.LimitZ);
+         for(var engine=0;engine<2;engine++)for(sbyte pitch=-1;pitch<=1;pitch++)for(sbyte yaw=-1;yaw<=1;yaw++)for(sbyte roll=-1;roll<=1;roll++){
+-            var main=engine!=0;var demand=new AssemblyPilotDemand(pitch,yaw,roll);uint mask=0;
+-            void Add(int axis,int sign){if(sign!=0)mask|=craft.Allocation.AxisMasks[axis*2+(sign>0?1:0)];}
++            var main=engine!=0;var demand=new AssemblyPilotDemand(pitch,yaw,roll);
++            var enabled=new bool[craft.Fuel.Consumers.Length];enabled[Main.Consumer]=main;
++            void Add(int axis,int sign){if(sign!=0)foreach(var j in craft.Allocation.AxisJets[axis*2+(sign>0?1:0)])enabled[craft.Actuators[craft.Allocation.JetActuators[j]].Consumer]=true;}
+             Add(0,roll);if(!main){Add(1,pitch);Add(2,yaw);}
+-            var enabled=new bool[craft.Fuel.Consumers.Length];enabled[Main.Consumer]=main;
+-            for(var j=0;j<craft.Allocation.JetActuators.Length;j++)if((mask&(1u<<j))!=0)enabled[craft.Actuators[craft.Allocation.JetActuators[j]].Consumer]=true;
+             // Desired material-frame direction; inverse authored clocking maps
+             // that direction to the actual part-local two-axis mechanism.
+             var y=0d;var z=0d;
+@@ -58,7 +57,7 @@
+                 bool Signed(double value,int sign)=>sign==0?Math.Abs(value)<=craft.Allocation.TorqueTolerance:value*sign>craft.Allocation.TorqueTolerance;
+                 Require(torque.IsFinite&&Signed(torque.X,roll)&&Signed(torque.Y,pitch)&&Signed(torque.Z,yaw),"Prepared physical control lacks signed axis authority.");
+             }
+-            rows[Index(main,demand)]=new(active,mask,y,z);
++            rows[Index(main,demand)]=new(craft,active,y,z);
+         }
+     }
+ }
+--- a/src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs
++++ b/src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs
+@@ -34,8 +34,6 @@
+         var reasons=problems.GroupBy(d=>d.Code,StringComparer.Ordinal).Select(group=>group.Key switch {
+             "FUEL_PATH"=>"Propellant is unavailable to one or more engines or attitude jets. Fill and enable connected tanks; check fuel connections if the problem remains.",
+             "POWER_PATH"=>"Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.",
+-            "ATTITUDE_COUNT"=>$"This craft has {craft.Allocation.JetActuators.Length} attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+-            "ATTITUDE_AUTHORITY" when problems.Any(d=>d.Code=="ATTITUDE_COUNT")=>null,
+             _=>string.Join(" ",group.Select(d=>d.Message).Distinct(StringComparer.Ordinal))
+         }).Where(reason=>reason is not null);
+         return "Launch refused. "+string.Join("\n\n",reasons);
+--- a/src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs
++++ b/src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs
+@@ -181,9 +181,8 @@
+             var p=_construction!;var profile=authority.Binding.Physical;
+             if(profile is null||p.Control is null)return ConstructionServiceStatus.InvalidInput;
+             var row=profile.Control.Resolve(p.Control.Requested);var main=profile.Control.Main;var services=profile.Services;
+-            var fuel=p.Expected.Fuel;var power=p.Expected.Power;uint jets=0;
+-            for(var j=0;j<profile.Craft.Allocation.JetActuators.Length;j++)
+-            {var a=profile.Craft.Actuators[profile.Craft.Allocation.JetActuators[j]];if(row.Consumers[a.Consumer]&&services.Available(a,fuel,power))jets|=1u<<j;}
++            var fuel=p.Expected.Fuel;var power=p.Expected.Power;
++            var jets=new ConstructionJetObservation(services,row,fuel,power);
+             observation=new(row.Consumers[main.Consumer]&&services.Available(main,fuel,power),jets,services.Powered(main,power));return ConstructionServiceStatus.Ready;
+         }
+         finally{_clock.PublicationPhase.Exit();}
+--- a/tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs
++++ b/tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs
+@@ -49,7 +49,9 @@
+             Console.WriteLine($"LAUNCH_READINESS tanks={string.Join(',',tanks)} parts={craft.Render.Length} empty=REFUSED filled=ADMITTED partial=ADMITTED persistence=PASS");
+         }
+         Build(catalog,["nc.tank.long-2","nc.tank.long-2"],2);editor.FillForLaunch(editor.Revision);
+-        var excessive=Refuse(Compile(),"ATTITUDE_COUNT");Need(excessive.Contains("64 attitude jets",StringComparison.Ordinal)&&!excessive.Contains("balanced authority",StringComparison.Ordinal),"witness explains 64 jets instead of misleading service/support text");
++        var sixtyFour=Admit(Compile());Need(sixtyFour.Function&&sixtyFour.Allocation.JetActuators.Length==64,"64 jets are functional without count refusal");
++        var source=editor.Save(editor.Revision);try{_=new CompiledCraftContact(sixtyFour);throw new Exception("Oversized two-long article accepted");}
++        catch(InvalidDataException e){Need(e.Message.Contains("support",StringComparison.OrdinalIgnoreCase)&&editor.Save(editor.Revision).SequenceEqual(source),"actual support refusal remains observational");}
+         Build(catalog,["nc.tank.short-2"],1);editor.FillForLaunch(editor.Revision);
+         var prepared=editor.Save(editor.Revision);var data=editor.Current!.Design.Data;
+         foreach(var service in new[]{ConstructionService.Propellant,ConstructionService.Electricity,ConstructionService.Data}){
+--- a/tests/NovaCore.Graphics.Tests/ModularFloridaTests.Application.cs
++++ b/tests/NovaCore.Graphics.Tests/ModularFloridaTests.Application.cs
+@@ -61,7 +61,7 @@
+             }
+             scene.ApplyPlayerInput(new(){ControlInputActive=1,PilotKeys=NativePilotKeys.W|NativePilotKeys.A|NativePilotKeys.Q});
+             for(var i=0;i<8;i++)scene.Advance(new(15625));Present();
+-            Need(scene.Actuation.Jets!=0&&scene.State.Physical!.Gimbal!=default,"combined demand realizes generic jets/gimbal at every legal clock");
++            Need(!scene.Actuation.Jets.IsEmpty&&scene.State.Physical!.Gimbal!=default,"combined demand realizes generic jets/gimbal at every legal clock");
+             PoweredPresentation(scene);
+             scene.ApplyPlayerInput(new(){ControlInputActive=0,PilotKeys=NativePilotKeys.W});Need(scene.PlayerInput.Observation.Requested.Pilot==default,"focus loss releases input");
+             scene.ApplyPlayerInput(new(){ControlInputActive=1,EngineActions=NativeEngineActions.Off});var cutoff=scene.State;var fuel=cutoff.Fuel.Save();
+@@ -125,7 +125,7 @@
+             Need(GC.GetAllocatedBytesForCurrentThread()==allocated,"warmed powered mesh and native exhaust submission zero allocation");
+             Need(BitConverter.UInt32BitsToSingle(native[meshes.Length+1].Padding1)==3072f&&native[meshes.Length+1].Padding2==0,"main exhaust uses authored effective speed");
+             var cursor=meshes.Length+2;
+-            for(var i=0;i<scene.Craft.Allocation.JetActuators.Length;i++)if((scene.Actuation.Jets&(1u<<i))!=0)
++            for(var i=0;i<scene.Craft.Allocation.JetActuators.Length;i++)if(scene.Actuation.Jets.Contains(i))
+             {
+                 var actuator=scene.Craft.Actuators[scene.Craft.Allocation.JetActuators[i]];var consumer=scene.Craft.Design.Parts[actuator.Part].Definition.Construction!.Consumers.Single(c=>c.Id==actuator.Key.Consumer);
+                 Need(native[cursor].Padding2==(uint)i+1&&BitConverter.UInt32BitsToSingle(native[cursor].Padding1)==(float)(consumer.ThrustN/consumer.TotalFlowKgS),"independent 32-bit jet mask stamps matching actuator speed");cursor++;
+--- a/tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightBoundary.cs
++++ b/tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightBoundary.cs
+@@ -51,7 +51,7 @@
+             var status=s.Engine.ServiceConstructionDebt(s.Authority,out var published);
+             Console.WriteLine($"DEPLETION {mode} {status} {published}");
+             Need(status==ConstructionServiceStatus.Published&&published==1,"exact fractional depletion publication "+mode);
+-            var state=Observe(s);Need(s.Engine.ObserveConstructionActuation(s.Authority,out var actual)==ConstructionServiceStatus.Ready&&!actual.Main&&actual.Jets==0,"empty required resource/power ceases all actuation at endpoint");
++            var state=Observe(s);Need(s.Engine.ObserveConstructionActuation(s.Authority,out var actual)==ConstructionServiceStatus.Ready&&!actual.Main&&actual.Jets.IsEmpty,"empty required resource/power ceases all actuation at endpoint");
+             var expected=s.Binding.Physical!.Services.Advance(s.Binding.Initial.Fuel,s.Binding.Initial.Power,15625,s.Binding.Physical.Control.Resolve(new(true,new(1,1,1))).Consumers.AsSpan());
+             Need(expected.Fuel.Save().SequenceEqual(state.Fuel.Save())&&expected.Power.Save().SequenceEqual(state.Power.Save()),"native motion uses the same exact service proposal");
+         }
+--- a/tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightControls.cs
++++ b/tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightControls.cs
+@@ -69,13 +69,13 @@
+             {
+                 var key=axis==0?(sign>0?NativePilotKeys.Q:NativePilotKeys.E):axis==1?(sign>0?NativePilotKeys.W:NativePilotKeys.S):(sign>0?NativePilotKeys.A:NativePilotKeys.D);
+                 var before=Observe(s);input.Apply(Input(key));
+-                Need(s.Engine.ObserveConstructionActuation(s.Authority,out var realized)==ConstructionServiceStatus.Ready&&realized.Main==main&&(main&&axis!=0?realized.Jets==0:realized.Jets!=0),"physical gimbal/32-jet actuator selection");
++                Need(s.Engine.ObserveConstructionActuation(s.Authority,out var realized)==ConstructionServiceStatus.Ready&&realized.Main==main&&(main&&axis!=0?realized.Jets.IsEmpty:!realized.Jets.IsEmpty),"physical gimbal/32-jet actuator selection");
+                 var admissions=input.Observation.AdmissionCount;input.Apply(Input(key));Need(input.Observation.AdmissionCount==admissions,"held input does not repeat admission");
+                 Advance(8);var after=Observe(s);var change=after.Physical!.Motion.AngularVelocityBody-before.Physical!.Motion.AngularVelocityBody;
+                 var component=axis==0?change.X:axis==1?change.Y:change.Z;Need(sign*component>1e-5,"physical signed axis acceleration");
+                 input.Apply(Input());Advance(8);var released=Observe(s);
+                 Need(Norm(released.Physical!.Motion.AngularVelocityBody)>1e-5,"release preserves angular momentum");
+-                Need(s.Engine.ObserveConstructionActuation(s.Authority,out realized)==ConstructionServiceStatus.Ready&&realized.Jets==0,"release stops physical RCS");
++                Need(s.Engine.ObserveConstructionActuation(s.Authority,out realized)==ConstructionServiceStatus.Ready&&realized.Jets.IsEmpty,"release stops physical RCS");
+             }
+         }
+     }
+--- a/tests/NovaCore.Graphics.Tests/ModularStabilizationTests.cs
++++ b/tests/NovaCore.Graphics.Tests/ModularStabilizationTests.cs
+@@ -22,8 +22,8 @@
+             s.Redo(s.Revision);s.Undo(s.Revision);Need(s.Save(s.Revision).SequenceEqual(saved),"nested redo/undo exact");
+             using var loaded=new ConstructionEditorSession(catalog);loaded.Load(0,saved);Need(loaded.Save(loaded.Revision).SequenceEqual(saved),"mixed-depth deterministic persistence");
+             if(depth>=4){s.FillForLaunch(s.Revision);var before=s.Save(s.Revision);var craft=CraftCompiler.Compile(catalog,s.Current!.Design.Data,root);
+-                Need(!craft.Function&&craft.Diagnostics.Any(d=>d.Code=="ATTITUDE_COUNT"),"construction capacity is not flight authority");
+-                try{CraftLaunchAdmission.Prepare(catalog,before,root,CraftLaunchAdmission.SourceHash(before),s.Current.Design.Digest,craft.Digest,catalog.Digest);throw new Exception("Unsupported flight accepted");}catch(InvalidDataException){Need(s.Save(s.Revision).SequenceEqual(before),"launch refusal preserves document");}}
++                Need(craft.Function,"all authored attitude jets retain FUNCTION independently of contact admission");
++                try{CraftLaunchAdmission.Prepare(catalog,before,root,CraftLaunchAdmission.SourceHash(before),s.Current.Design.Digest,craft.Digest,catalog.Digest);_=new CompiledCraftContact(craft);throw new Exception("Unsupported flight accepted");}catch(InvalidDataException){Need(s.Save(s.Revision).SequenceEqual(before),"physical launch refusal preserves document");}}
+             Console.WriteLine($"STABILIZATION depth={depth} parts={data.Instances.Length} saveBytes={saved.Length} PASS");
+         }
+         foreach(var members in new[]{1,8}){
+@@ -42,12 +42,13 @@
+         var dense=StabilizationCraftFixture.Create(catalog,100,true);using var large=new ConstructionEditorSession(catalog);large.Load(0,AssemblyJson.Write(dense));
+         var entries=dense.Instances.Sum(p=>visuals[p.Definition.Id].Meshes.Length);
+         var maximumMeshes=visuals.Values.Max(v=>v.Meshes.Length);var placement=catalog.Data.Definitions.SelectMany(d=>d.Standard!.SocketGroups).SelectMany(g=>g.Placements).Max(p=>p.Count);
+-        var capacity=EditorRenderCapacity.Required(maximumMeshes,placement);
++        var maximumActuators=catalog.Data.Definitions.Max(d=>d.Construction!.Consumers.Length);
++        var capacity=EditorRenderCapacity.Required(maximumMeshes,placement,maximumActuators);
+         Need(dense.Instances.Length==901&&entries==4101&&entries>4096&&entries<capacity,"admitted dense witness crosses old renderer bound");
+         // Independent upper-bound accounting includes a refused eight-member
+         // draft beyond a full document, every marker and a free held mesh set.
+         Need(capacity>=1024*maximumMeshes+placement*maximumMeshes+1024+maximumMeshes,"all reachable drawing classes fit");
+-        Need(capacity>=1024*maximumMeshes+32+1+1,"unified physical profile plume/slab headroom");
++        Need(capacity>=1024*(maximumMeshes+maximumActuators)+1,"unified authored actuator plume/slab headroom");
+         using(var full=new ConstructionEditorSession(catalog)){
+             full.Load(0,AssemblyJson.Write(StabilizationCraftFixture.Create(catalog,113,true)));var parent="t112-0";
+             for(var i=0;i<6;i++){full.PreviewPlacement(full.Revision,new(catalog.Reference(D("nc.tank.short-2")),parent,"aft","fore",0,1,$"extra{i}"));full.AcceptPreview(full.Revision);parent=$"extra{i}-0";}
+--- a/tests/NovaCore.Graphics.Tests/ModularViewportTests.cs
++++ b/tests/NovaCore.Graphics.Tests/ModularViewportTests.cs
+@@ -32,6 +32,23 @@
+             Need(first.Assets.SelectMany(a=>a.Meshes).Select(m=>m.Handle).SequenceEqual(handles),"second lease cannot rewrite first handles");
+             Need(assets.SelectMany(a=>a.Meshes).All(m=>m.Handle==MeshHandle.Invalid),"input assets immutable across upload leases");
+         }
++        foreach(var duplicate in new[]{assets[0],assets[0] with {Sha256=new string('0',64)}}){
++            var refused=false;try{using var invalid=new ReusablePartVisuals(assets.Add(duplicate));}catch(InvalidDataException){refused=true;}
++            Need(refused,"upload lease still refuses duplicate identity including conflicting content");
++        }
++        var references=new Dictionary<string,PartVisualAsset>{{"first-definition",assets[0]},{"second-definition",assets[0]}};
++        using(var shared=EditorVisualAssets.Prepare(references.Values)){
++            using var baseline=new ReusablePartVisuals([assets[0]]);
++            Need(shared.UniqueMeshCount==baseline.UniqueMeshCount&&shared.BufferBytes==baseline.BufferBytes,"shared definition references upload one complete asset");
++            Need(ReferenceEquals(shared.Resolve(references["first-definition"].Identity),shared.Resolve(references["second-definition"].Identity)),"every definition resolves the same lease-owned asset");
++            var handles=shared.Assets.SelectMany(a=>a.Meshes).Select(m=>m.Handle).ToArray();
++            using var reversed=EditorVisualAssets.Prepare(references.Values.Reverse());
++            Need(shared.Assets.SelectMany(a=>a.Meshes).Select(m=>m.Handle).SequenceEqual(handles)&&assets.SelectMany(a=>a.Meshes).All(m=>m.Handle==MeshHandle.Invalid),"shared/reversed leases preserve original handles and immutable inputs");
++        }
++        var conflictRefused=false;try{using var conflict=EditorVisualAssets.Prepare([assets[0],assets[0] with {Sha256=new string('0',64)}]);}catch(InvalidDataException){conflictRefused=true;}
++        Need(conflictRefused,"shared-asset preparation cannot hide conflicting content identity");
++        using(var distinct=EditorVisualAssets.Prepare([assets[0],assets[0] with {Identity="independent-test-asset/1"}]))
++            Need(distinct.Assets.Length==2,"equal content does not merge distinct asset identities");
+         foreach(var asset in assets){
+             var composite=PartVisualPicking.NeutralComposite(asset);Need(composite.Meshes.Length==1&&composite.Meshes[0].VertexCount==asset.Meshes.Sum(m=>m.VertexCount)&&composite.Meshes[0].TriangleCount==asset.Meshes.Sum(m=>m.TriangleCount),"neutral composition preserves all geometry");
+             foreach(var origin in new[]{new Double3(10,1,.1),new Double3(-10,0,0),new Double3(0,10,.1),new Double3(0,0,10)}){
+--- a/tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj
++++ b/tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj
+@@ -22,6 +22,7 @@
+     <Compile Include="../../samples/NovaCore.Triangle/ConstructionFlightScene.cs" Link="ConstructionFlightScene.cs" />
+     <Compile Include="../../samples/NovaCore.Triangle/CraftFlightOptions.cs" Link="CraftFlightOptions.cs" />
+     <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorCamera.cs" Link="EditorCamera.cs" />
++    <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorVisualAssets.cs" Link="EditorVisualAssets.cs" />
+     <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorSocketTargets.cs" Link="EditorSocketTargets.cs" />
+     <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorRenderCapacity.cs" Link="EditorRenderCapacity.cs" />
+     <Compile Include="../../tools/NovaCore.ConstructionEditor/StabilizationCraftFixture.cs" Link="StabilizationCraftFixture.cs" />
+--- a/tests/NovaCore.Simulation.Tests/ModularCraftTests.Compiler.cs
++++ b/tests/NovaCore.Simulation.Tests/ModularCraftTests.Compiler.cs
+@@ -40,11 +40,11 @@
+             Check(craft.Actuators.All(a=>a.DataReachable&&a.RequiredLoads.Length==2),"every actuator resolves own and core power prerequisites");
+             var nonData=craft.Ports.Ports.Select((p,i)=>(p,i)).Where(x=>x.p.Definition.Service==ConstructionService.Electricity).Take(2).Select(x=>x.i).ToArray();
+             Check(!craft.Power.Data.Connected(nonData[0],nonData[1])&&!craft.Power.CanCommand(-1),"non-data/invalid indices cannot grant command connectivity");
+-            Check(craft.Allocation.Complete&&craft.Allocation.JetActuators.Length==32&&craft.Allocation.AxisMasks.Length==6&&craft.Allocation.AxisMasks.Any(m=>(m&0x80000000)!=0),"compiled 32-bit allocation includes the final jet and every axis sign");
++            Check(craft.Allocation.Complete&&craft.Allocation.JetActuators.Length==32&&craft.Allocation.AxisJets.Length==6&&craft.Allocation.AxisJets.Any(m=>m.Contains(31)),"compiled population-sized allocation includes the final jet and every axis sign");
+             var example=craft.Actuators.First(a=>a.Model=="nc.actuator.attitude/1");
+             var tinyA=example with {Point=new(0,1,0),Axis=Double3.UnitZ,Thrust=1e-200};
+             var tinyB=example with {Point=new(0,-1,0),Axis=-Double3.UnitZ,Thrust=1e-200*(1-1e-6)};
+-            Check(new CompiledCraftAllocation([tinyA,tinyB],craft.Mass).AxisMasks[1]==0,"underflowing squared residual cannot admit unbalanced pure couple");
++            Check(new CompiledCraftAllocation([tinyA,tinyB],craft.Mass).AxisJets[1].IsEmpty,"underflowing squared residual cannot admit unbalanced pure couple");
+             Reject(()=>new CompiledCraftAllocation([tinyA with {Point=new(0,1e153,0),Thrust=1e155},tinyB with {Point=new(0,-1e153,0),Thrust=1e155}],craft.Mass),"finite columns with overflowing pair moment refuse");
+             Check(craft.Collision.Length==69&&craft.Support.Length==4&&craft.Clearance.Length==2,"complete hardware profile independent of render; RCS plumes are not placement obstacles");
+             Check(craft.InitialMass.Mass==(longer?2164:1304)&&craft.Mass.Dry.Mass==(longer?564:504),"compiled exact dry and wet physical masses");
+--- a/tests/NovaCore.Simulation.Tests/Program.cs
++++ b/tests/NovaCore.Simulation.Tests/Program.cs
+@@ -15,6 +15,7 @@
+ using NovaCore.Core.ReferenceFrames;
+ using System.Diagnostics;
+ 
++if (args.Contains("--rcs-scalability",StringComparer.Ordinal)) { RcsScalabilityTests.Run(args.SkipWhile(a=>a!="--rcs-scalability").Skip(1).FirstOrDefault()); return; }
+ if (args.Contains("--modular-gate1",StringComparer.Ordinal)) { ModularCraftTests.PartStandardGate(); return; }
+ if (args.Contains("--modular-gate1-redteam",StringComparer.Ordinal)) { ModularCraftTests.PartStandardRedTeam(); return; }
+ if (args.Contains("--modular-gate1-closure",StringComparer.Ordinal)) { ModularCraftTests.PartStandardClosure(); return; }
+--- /dev/null
++++ b/tests/NovaCore.Simulation.Tests/RcsScalabilityFixture.cs
+@@ -0,0 +1,60 @@
++using System.Collections.Immutable;
++using NovaCore.Core;
++using NovaCore.Simulation.Spacecraft.Assemblies;
++
++// Qualification data only. The stock catalog and its support/load laws are never
++// modified. A distinct smaller finite store exercises generic >64-jet flight.
++internal static class RcsScalabilityFixture
++{
++    internal const string Assets="assets/vehicles/modular-starter";
++    internal const string HalfTank="nc.test.tank.short-half";
++    internal static AssemblyDefinitionCatalog Catalog(bool half=false)
++    {
++        var source=AssemblyDefinitionCatalog.Load(File.ReadAllBytes(Path.Combine(Assets,"catalog.json")));
++        if(!half)return source;
++        var original=source.Data.Definitions.Single(d=>d.Id=="nc.tank.short-2");
++        var laws=original.Standard!.StoreLaws.Select(l=>l with {LengthM=l.LengthM/2,Provenance="RcsScalabilityFixture: half-length concentric finite stores inside unchanged conservative shell."}).ToImmutableArray();
++        var stores=original.Stores.Select(s=>s with {CapacityKg=s.CapacityKg/2}).ToImmutableArray();
++        var geometry=original.Construction!.StoreGeometry.Select(g=>{
++            var law=laws.Single(l=>l.Store==g.Store);var r2=law.InnerRadiusM*law.InnerRadiusM+law.OuterRadiusM*law.OuterRadiusM;
++            return g with {UsableVolumeM3=g.UsableVolumeM3/2,InertiaPerKg=Matrix3.Diagonal(new(r2/2,r2/4+law.LengthM*law.LengthM/12,r2/4+law.LengthM*law.LengthM/12))};
++        }).ToImmutableArray();
++        var definition=original with {Id=HalfTank,Stores=stores,Standard=original.Standard with {StoreLaws=laws},Construction=original.Construction with {
++            Name="Qualification half-capacity short tank",StoreGeometry=geometry,
++            PhysicalSource=new(HalfTank+".physics",1,AssemblyJson.Digest(new {original.Construction.PhysicalSource,stores,laws,geometry}),"RcsScalabilityFixture.cs analytic definition; qualification only, not a production part.")}};
++        return AssemblyDefinitionCatalog.Compile(source.Data with {Definitions=source.Data.Definitions.Add(definition)});
++    }
++    internal static CompiledConstructionDesign Document(AssemblyDefinitionCatalog catalog,int tanks,int members=8,string tank="nc.tank.short-2")
++    {
++        if(tanks>16)return BulkDocument(catalog,tanks,tank);
++        using var s=new ConstructionEditorSession(catalog);
++        DefinitionReference D(string id)=>catalog.Reference(catalog.Data.Definitions.Single(d=>d.Id==id));
++        s.PreviewRoot(0,D("nc.core.command-2"),"core","rcs-qualification",new(Double3.Zero,Matrix3.Identity));s.AcceptPreview(s.Revision);
++        void Add(string id,string parent,string target,string child,string name,int count=1){s.PreviewPlacement(s.Revision,new(D(id),parent,target,child,0,count,name));s.AcceptPreview(s.Revision);}
++        for(var i=0;i<tanks;i++)Add(tank,i==0?"core":$"tank{i-1}-0","aft","fore",$"tank{i}");
++        Add("nc.mount.single-2to1",$"tank{tanks-1}-0","aft","fore","adapter");Add("nc.engine.main-1","adapter-0","engine","fore","engine");
++        for(var i=0;i<tanks;i++)Add("nc.rcs.block-r1",$"tank{i}-0","radial-1","mount",$"ring{i}",members);
++        s.FillForLaunch(s.Revision);return s.Current!.Design;
++    }
++    private static CompiledConstructionDesign BulkDocument(AssemblyDefinitionCatalog catalog,int tanks,string tank)
++    {
++        // Stress compilation directly, not hundreds of repeated editor rebuilds.
++        // Each physical pose still derives from authored connectors and the final
++        // graph passes the same fit/identity/compiler checks as an editor save.
++        var parts=ImmutableArray.CreateBuilder<PartInstanceData>();var edges=ImmutableArray.CreateBuilder<StructuralEdgeData>();
++        PartDefinitionData D(string id)=>catalog.Data.Definitions.Single(d=>d.Id==id);
++        parts.Add(new("core",0,catalog.Reference(D("nc.core.command-2")),new(Double3.Zero,Matrix3.Identity)));
++        int Add(string id,string definition,int parent,string target,string child){var p=parts[parent];var pd=catalog.Resolve(p.Definition);var d=D(definition);
++            var pose=CompiledConstructionDesign.Snap(p.Pose,pd.Attachments.Single(a=>a.Id==target),d.Attachments.Single(a=>a.Id==child));
++            var services=pd.Construction!.Interfaces.Single(a=>a.Interface==target).Services&d.Construction!.Interfaces.Single(a=>a.Interface==child).Services;
++            var index=parts.Count;parts.Add(new(id,index,catalog.Reference(d),pose));edges.Add(new(p.Id,target,id,child,new("joint-"+id,false,services,0)));return index;}
++        var hosts=new int[tanks];for(var i=0;i<tanks;i++)hosts[i]=Add("tank"+i,tank,i==0?0:hosts[i-1],"aft","fore");
++        var adapter=Add("adapter","nc.mount.single-2to1",hosts[^1],"aft","fore");Add("engine","nc.engine.main-1",adapter,"engine","fore");
++        for(var i=0;i<tanks;i++)Add("block"+i,"nc.rcs.block-r1",hosts[i],"radial-1","mount");
++        var instances=parts.ToImmutable();var config=instances.Select(p=>{var d=catalog.Resolve(p.Definition);return new ConstructionConfiguration(p.Id,
++            d.Stores.Select(s=>new ConstructionStoreInitial(s.Id,p.Id=="tank0"?s.CapacityKg:0,true)).ToImmutableArray(),
++            d.Construction!.Electrical.Select(e=>new ConstructionElectricalInitial(e.Id,e.CapacityJ,true)).ToImmutableArray());}).ToImmutableArray();
++        return CompiledConstructionDesign.Compile(catalog,new(CompiledConstructionDesign.CraftSchema,"rcs-bulk",1,catalog.DependencyDigest(instances),"core","core",instances,edges.ToImmutable(),[],config,[],[],new("Generic compilation stress only",1)));
++    }
++    internal static CompiledCraft Compile(AssemblyDefinitionCatalog catalog,CompiledConstructionDesign d)=>CraftCompiler.Compile(catalog,d.Data,Assets);
++}
+--- /dev/null
++++ b/tests/NovaCore.Simulation.Tests/RcsScalabilityTests.cs
+@@ -0,0 +1,150 @@
++using System.Collections.Immutable;
++using System.Diagnostics;
++using System.Numerics;
++using System.Text.Json;
++using NovaCore.Core;
++using NovaCore.Simulation.Spacecraft.Assemblies;
++
++internal static class RcsScalabilityTests
++{
++    private static int checks;
++    private static void Need(bool value,string why){checks++;if(!value)throw new InvalidDataException("RCS scalability: "+why);}
++    private static void Refuse(Action action,string why){try{action();}catch(InvalidDataException){checks++;return;}throw new Exception("Accepted "+why);}
++    private static double Component(Double3 v,int a)=>a==0?v.X:a==1?v.Y:v.Z;
++    private static double Norm(Double3 v){var s=Math.Max(Math.Abs(v.X),Math.Max(Math.Abs(v.Y),Math.Abs(v.Z)));return s==0?0:s*Math.Sqrt((v/s).LengthSquared);}
++    // Deliberately exhaustive independent oracle. Production must not retain
++    // this quadratic pair list. Also supports the former stock tie order.
++    private static ImmutableArray<int>[] Oracle(ImmutableArray<CraftActuator> jets,CompiledCraftAllocation allocation,bool old=false)
++    {
++        var result=new ImmutableArray<int>[6];
++        for(var axis=0;axis<3;axis++)for(var sign=-1;sign<=1;sign+=2){
++            var rank=Enumerable.Range(0,jets.Length).OrderByDescending(j=>Component(Double3.Cross(jets[j].Point,jets[j].Axis*jets[j].Thrust),axis)*sign).ThenBy(j=>j).Select((j,r)=>(j,r)).ToDictionary(x=>x.j,x=>x.r);
++            var candidates=new List<(double Strength,int I,int J)>();
++            for(var i=0;i<jets.Length;i++)for(var j=i+1;j<jets.Length;j++){
++                var f=jets[i].Axis*jets[i].Thrust+jets[j].Axis*jets[j].Thrust;
++                var m=Double3.Cross(jets[i].Point,jets[i].Axis*jets[i].Thrust)+Double3.Cross(jets[j].Point,jets[j].Axis*jets[j].Thrust);
++                if(Norm(f)>allocation.ForceTolerance||Component(m,axis)*sign<=allocation.TorqueTolerance||Enumerable.Range(0,3).Any(a=>a!=axis&&Math.Abs(Component(m,a))>allocation.TorqueTolerance))continue;
++                candidates.Add((Component(m,axis)*sign,i,j));
++            }
++            var selected=new HashSet<int>();foreach(var p in candidates.OrderByDescending(p=>p.Strength).ThenBy(p=>p.I).ThenBy(p=>old?p.J:rank[p.J]))
++                if(!selected.Contains(p.I)&&!selected.Contains(p.J)){selected.Add(p.I);selected.Add(p.J);}
++            result[axis*2+(sign>0?1:0)]=selected.Order().ToImmutableArray();
++        }
++        return result;
++    }
++    private static void CompareOracle(ImmutableArray<CraftActuator> jets,CraftMassLaw mass,bool old=false)
++    {
++        var a=new CompiledCraftAllocation(jets,mass);var expected=Oracle(jets,a,old);
++        for(var i=0;i<6;i++)Need(a.AxisJets[i].SequenceEqual(expected[i]),"complete streamed allocation equals exhaustive pair oracle");
++    }
++    internal static void Run(string? output=null)
++    {
++        checks=0;var catalog=RcsScalabilityFixture.Catalog();var half=RcsScalabilityFixture.Catalog(true);var before=catalog.Save();var rows=new List<object>();
++        foreach(var members in new[]{1,2,4,8}){
++            var d=RcsScalabilityFixture.Document(catalog,1,members);var c=RcsScalabilityFixture.Compile(catalog,d);
++            Need(c.Allocation.JetActuators.Length==members*4&&c.Actuators.Select(a=>a.Key).Distinct().Count()==members*4+1,"every symmetry member expands independently");
++            Need(CompiledConstructionDesign.LoadCraft(catalog,d.Save()).Save().SequenceEqual(d.Save()),"all symmetry save/reload identities");
++        }
++        foreach(var count in new[]{8,32,64,96,288}){
++            var library=count==96?half:catalog;var d=RcsScalabilityFixture.Document(library,Math.Max(1,count/32),count==8?2:8,count==96?RcsScalabilityFixture.HalfTank:"nc.tank.short-2");
++            var c=RcsScalabilityFixture.Compile(library,d);var fuel=c.Fuel.Initial();var power=c.Power.Initial();
++            Need(c.Allocation.JetActuators.Length==count&&c.Fuel.Consumers.Length==count+1,"no first-N truncation including former service ceiling");
++            Need(c.Actuators.Select(a=>a.Key).Distinct().Count()==count+1,"unique complete actuator identity");
++            var reload=RcsScalabilityFixture.Compile(library,CompiledConstructionDesign.LoadCraft(library,d.Save()));Need(reload.Digest==c.Digest,"recompile identity");
++            var reverse=d.Data with {Instances=d.Data.Instances.Reverse().ToImmutableArray(),Connections=d.Data.Connections.Reverse().ToImmutableArray(),Configuration=d.Data.Configuration.Reverse().ToImmutableArray()};
++            Need(CraftCompiler.Compile(library,reverse,RcsScalabilityFixture.Assets).Digest==c.Digest,"enumeration cannot replace authored order");
++            Need(ConstructionFuelState.Load(c.Fuel,fuel.Save()).Save().SequenceEqual(fuel.Save())&&ConstructionPowerState.Load(c.Power,power.Save()).Save().SequenceEqual(power.Save()),"exact service save/reload");
++            foreach(var term in c.Fuel.Consumers.SelectMany(x=>x.Terms))for(var n=1;n<=term.Stores.Length;n++){
++                Need(term.ShareFactors.IsDefault&&term.ShareNumerator%n==0&&term.ShareFactor(n)*n==term.ShareNumerator,"compact exact sharing lattice, no table or division residue");
++            }
++            var jets=c.Allocation.JetActuators.Select(i=>c.Actuators[i]).ToImmutableArray();CompareOracle(jets,c.Mass);if(count==32)CompareOracle(jets,c.Mass,true);
++            if(count==8){Need(!c.Function&&c.Diagnostics.Any(x=>x.Code=="ATTITUDE_AUTHORITY"),"eight stock jets retain real missing-axis refusal");
++                var request=Enumerable.Repeat(true,count+1).ToArray();var flow=ConstructionFuelSolver.Advance(fuel,15625,request);Need(flow.ActiveTicks.Length==count+1&&flow.ActiveTicks.All(t=>t.Numerator>0),"all eight jets retain service delivery");
++            }else{
++                Need(c.Function,"balanced complete craft FUNCTION");var control=new CompiledCraftControl(c);var services=new ConstructionPhysicalServices(c);
++                if(count<=96){var contact=new CompiledCraftContact(c);Need(contact.MaximumFootLoad<=15000,"unchanged support law accepts witness");}
++                for(var main=0;main<2;main++)for(sbyte pitch=-1;pitch<=1;pitch++)for(sbyte yaw=-1;yaw<=1;yaw++)for(sbyte roll=-1;roll<=1;roll++){
++                    var row=control.Resolve(new(main!=0,new(pitch,yaw,roll)));var g=new AssemblyGimbal(row.TargetY,row.TargetZ,row.TargetY,row.TargetZ);
++                    var w=AssemblyActuation.Resolve(c,row.Consumers.AsSpan(),g);var force=Double3.Zero;var moment=Double3.Zero;
++                    foreach(var a in c.Actuators)if(row.Consumers[a.Consumer]){var aw=a.Gimbal is null?new AssemblyWrench(a.Axis*a.Thrust,Double3.Cross(a.Point,a.Axis*a.Thrust)):AssemblyActuation.Main(a,g.ActualY,g.ActualZ);force+=aw.Force;moment+=aw.MomentAtOrigin;}
++                    Need(w==new AssemblyWrench(force,moment),"all54 rows independently accumulate every realized actuator exactly once");
++                    var view=new ConstructionJetObservation(services,row,fuel,power);Need(view.Count==jets.Count(a=>row.Consumers[a.Consumer])&&Enumerable.Range(0,count).Count(view.Contains)==view.Count,"complete availability view");
++                }
++                var command=control.Resolve(new(false,new(1,1,1)));var observation=new ConstructionJetObservation(services,command,fuel,power);
++                Need(observation.Contains(count-1)||Enumerable.Range(32,Math.Max(0,count-32)).Any(observation.Contains)||count==32,"high indices are physically available without aliasing");
++                Refuse(()=>new ConstructionJetObservation(services,new CompiledCraftControl(reload).Resolve(default),fuel,power),"foreign row from equal-size rebuild");
++                var evolution=services.Advance(fuel,power,15625,command.Consumers.AsSpan());Need(evolution.Phases.Any(p=>p.Active.Any(x=>x)),"real service output");
++                foreach(var resource in c.Fuel.Stores.Select(s=>s.Resource).Distinct()){
++                    BigInteger dn=0,dd=1;for(var s=0;s<c.Fuel.Stores.Length;s++)if(c.Fuel.Stores[s].Resource==resource){var a=fuel.InQ(s);var b=evolution.Fuel.InQ(s);dn=dn*a.Denominator*b.Denominator+(a.Numerator*b.Denominator-b.Numerator*a.Denominator)*dd;dd*=a.Denominator*b.Denominator;var gcd=BigInteger.GreatestCommonDivisor(dn,dd);dn/=gcd;dd/=gcd;}
++                    BigInteger rn=0,rd=1;for(var i=0;i<c.Fuel.Consumers.Length;i++)if(command.Consumers[i]){var consumer=c.Fuel.Consumers[i];var sum=consumer.Terms.Aggregate(BigInteger.Zero,(n,t)=>n+t.Weight);foreach(var term in consumer.Terms.Where(t=>t.Resource==resource)){rn=rn*sum+consumer.Rate*term.Weight*15625*rd;rd*=sum;var gcd=BigInteger.GreatestCommonDivisor(rn,rd);rn/=gcd;rd/=gcd;}}
++                    Need(dn*rd==rn*dd,"independent exact mixture and resource conservation");
++                }
++                var motion=new AssemblyMotion(default,default,DoubleQuaternion.Identity,default);var response=AssemblyDynamics.Evaluate(control,motion,evolution,default,command);Need(response.Motion.AngularVelocityBody.LengthSquared>0,"actual physical attitude response");
++                var empty=ConstructionFuelState.Create(c.Fuel,Enumerable.Repeat(BigInteger.Zero,c.Fuel.Stores.Length).ToImmutableArray(),1,c.Fuel.InitiallyPositive);
++                Need(new ConstructionJetObservation(services,command,empty,power).IsEmpty&&!observation.IsEmpty,"starvation and retained old observation distinct");
++                var battery=c.Power.Modules.FindIndex(m=>m.Role==ElectricalRole.Battery);var partial=ConstructionPowerState.Create(c.Power,power.Charge.SetItem(battery,ConstructionFuelNetwork.Decode(.001,true)),1,power.Active,power.Cursor,0);
++                var outage=services.Advance(fuel,partial,15625,command.Consumers.AsSpan());Need(outage.Phases.Any(p=>p.Active.Any(x=>x))&&outage.Phases.Any(p=>p.Active.All(x=>!x)),"exact partial power interval includes coast tail");
++                Need(new ConstructionJetObservation(services,command,outage.Fuel,outage.Power).IsEmpty,"unavailable power produces no endpoint output");
++                var release=control.Resolve(default);Need(new ConstructionJetObservation(services,release,fuel,power).IsEmpty&&!observation.IsEmpty,"release/rebuild cannot mutate captured view");
++                for(var warm=0;warm<1024;warm++){_=new ConstructionJetObservation(services,command,fuel,power);_=AssemblyActuation.Resolve(c,command.Consumers.AsSpan(),default);}
++                var start=GC.GetAllocatedBytesForCurrentThread();for(var repeat=0;repeat<1024;repeat++){_=new ConstructionJetObservation(services,command,fuel,power);_=AssemblyActuation.Resolve(c,command.Consumers.AsSpan(),default);}Need(GC.GetAllocatedBytesForCurrentThread()==start,"warmed complete observation and wrench exactly0B");
++            }
++            rows.Add(Measure(library,d,c,count));Console.WriteLine($"RCS jets={count} function={c.Function} consumers={c.Fuel.Consumers.Length} massMaximum={c.Mass.MaximumMass} PASS");
++        }
++        foreach(var (tanks,tank) in new[]{(2,"nc.tank.long-2"),(3,"nc.tank.short-2")}){var c=RcsScalabilityFixture.Compile(catalog,RcsScalabilityFixture.Document(catalog,tanks,tank:tank));Need(c.Function,"oversized stock actuator system remains functional");Refuse(()=>new CompiledCraftContact(c),"unchanged stock support overload");}
++        ServiceCapacity(catalog);
++        var baseline=RcsScalabilityFixture.Compile(catalog,RcsScalabilityFixture.Document(catalog,1));var example=baseline.Actuators.First(a=>a.Model=="nc.actuator.attitude/1");
++        foreach(var n in new[]{31,32,33,63,64,65,257}){
++            var jets=Enumerable.Range(0,n).Select(i=>example with {Point=new(0,(i%2==0?1:-1)*(1+(i%7)*Math.ScaleB(1d,-52)),0),Axis=i%2==0?Double3.UnitZ:-Double3.UnitZ,Thrust=1,Key=new("synthetic",i.ToString())}).ToImmutableArray();CompareOracle(jets,baseline.Mass);
++        }
++        Need(catalog.Save().SequenceEqual(before),"stock six-part catalog unchanged");
++        var report=new{judgment="PASS",checks,scope="CPU scalable compilation/services/physical wrench;8 stock jets correctly refuse missing-axis authority;96 uses explicitly distinct qualification half-capacity tank;288 compile/services only",rows};
++        if(output is not null){Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);File.WriteAllText(output,JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));File.WriteAllBytes(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(output))!,"qualification-catalog.json"),half.Save());}
++        Console.WriteLine($"RCS_SCALABILITY PASS checks={checks}");
++    }
++    private static void ServiceCapacity(AssemblyDefinitionCatalog catalog)
++    {
++        var limit=(Array.MaxLength-256)/10-1;
++        Need(ConstructionFuelNetwork.SnapshotCapacity(limit,20,true)<=Array.MaxLength,"derived fuel serialization boundary");
++        Refuse(()=>ConstructionFuelNetwork.SnapshotCapacity(limit+1,20,true),"first unrepresentable fuel snapshot");
++        limit=(Array.MaxLength-256-8)/14;
++        Need(ConstructionPowerNetwork.SnapshotCapacity(limit,5,0,true)<=Array.MaxLength,"derived power serialization boundary");
++        Refuse(()=>ConstructionPowerNetwork.SnapshotCapacity(limit+1,5,0,true),"first unrepresentable power snapshot");
++        // Cross all old static fuel counts together. No contact/flight claim.
++        var many=RcsScalabilityFixture.Compile(catalog,RcsScalabilityFixture.Document(catalog,129,1));
++        Need(many.Fuel.Stores.Length==258&&many.Fuel.Consumers.Length==517&&many.Fuel.Consumers.Sum(c=>c.Terms.Length)==1034,"generic fuel has no replacement256/1024 cap");
++        var saved=many.Fuel.Initial().Save();Need(ConstructionFuelState.Load(many.Fuel,saved).Save().SequenceEqual(saved),"more-than256 stores roundtrip under derived byte admission");
++        var core=catalog.Data.Definitions.Single(d=>d.Id=="nc.core.command-2");
++        var added=Enumerable.Range(0,1100).Select(i=>new ElectricalDefinition("test-battery-"+i,ElectricalRole.Battery,1,0,null)).ToImmutableArray();
++        var changed=core with {Construction=core.Construction! with {Electrical=core.Construction.Electrical.AddRange(added)},Standard=core.Standard! with {
++            Ports=core.Standard.Ports.AddRange(added.Select(m=>new PartServicePort(m.Id+".power",ConstructionService.Electricity,null,null,null,null,m.Id,false))),
++            Routes=core.Standard.Routes.AddRange(added.Select(m=>new PartInternalRoute(m.Id+".route",m.Id+".power","battery.power",true)))}};
++        var library=AssemblyDefinitionCatalog.Compile(catalog.Data with {Definitions=catalog.Data.Definitions.Select(d=>d.Id==core.Id?changed:d).ToImmutableArray()});
++        var craft=RcsScalabilityFixture.Compile(library,RcsScalabilityFixture.Document(library,1));var power=craft.Power.Initial();
++        var cursor=power.Cursor.SetItem(craft.Power.Modules.First(m=>m.Role==ElectricalRole.Battery).Bus,1100);
++        power=ConstructionPowerState.Create(craft.Power,power.Charge,1,power.Active,cursor,0);saved=power.Save();
++        Need(craft.Power.Modules.Length>512&&saved.Length<=craft.Power.MaximumSnapshotBytes&&ConstructionPowerState.Load(craft.Power,saved).Save().SequenceEqual(saved),"generic modules beyond512 and four-digit battery cursor roundtrip");
++        Refuse(()=>new ConstructionPhysicalServices(craft),"generic multi-battery topology still obeys separate physical profile");
++    }
++    private static object Distribution(List<double> values){values.Sort();double P(double p)=>values[(int)Math.Ceiling(p*values.Count)-1];return new{median=P(.5),p95=P(.95),p99=P(.99),maximum=values[^1]};}
++    private static object Measure(AssemblyDefinitionCatalog catalog,CompiledConstructionDesign source,CompiledCraft craft,int jets)
++    {
++        var cold=new List<double>();var bytes=new List<double>();for(var i=0;i<18;i++){var b=GC.GetAllocatedBytesForCurrentThread();var t=Stopwatch.GetTimestamp();var c=RcsScalabilityFixture.Compile(catalog,source);var ms=Stopwatch.GetElapsedTime(t).TotalMilliseconds;var allocated=GC.GetAllocatedBytesForCurrentThread()-b;Need(c.Digest==craft.Digest,"measured rebuild identity");if(i>=2){cold.Add(ms);bytes.Add(allocated);}}
++        var service=new List<double>();var serviceBytes=new List<double>();var observer=new List<double>();
++        if(craft.Function){var controls=new CompiledCraftControl(craft);var profile=new ConstructionPhysicalServices(craft);var row=controls.Resolve(new(false,new(1,1,1)));var fuel=craft.Fuel.Initial();var power=craft.Power.Initial();
++            for(var i=0;i<260;i++){var b=GC.GetAllocatedBytesForCurrentThread();var t=Stopwatch.GetTimestamp();_=profile.Advance(fuel,power,15625,row.Consumers.AsSpan());var ms=Stopwatch.GetElapsedTime(t).TotalMilliseconds;var allocation=GC.GetAllocatedBytesForCurrentThread()-b;if(i>=4){service.Add(ms);serviceBytes.Add(allocation);}}
++            for(var window=0;window<32;window++){var t=Stopwatch.GetTimestamp();for(var i=0;i<128;i++)_=new ConstructionJetObservation(profile,row,fuel,power);observer.Add(Stopwatch.GetElapsedTime(t).TotalMilliseconds/128);}}
++        else{var fuel=craft.Fuel.Initial();var request=craft.Actuators.Select(a=>a.Model=="nc.actuator.attitude/1").ToArray();
++            for(var i=0;i<260;i++){var b=GC.GetAllocatedBytesForCurrentThread();var t=Stopwatch.GetTimestamp();_=ConstructionFuelSolver.Advance(fuel,15625,request);_=AssemblyActuation.Resolve(craft,request,default);var ms=Stopwatch.GetElapsedTime(t).TotalMilliseconds;var allocation=GC.GetAllocatedBytesForCurrentThread()-b;if(i>=4){service.Add(ms);serviceBytes.Add(allocation);}}}
++        var retainedFactors=craft.Fuel.Consumers.SelectMany(c=>c.Terms).Sum(t=>(t.ShareNumerator.GetBitLength()+7)/8);
++        var retained=new List<double>();for(var repeat=0;repeat<3;repeat++)retained.Add(Retained(catalog,source));
++        return new{jets,coldMs=Distribution(cold),coldAllocatedBytes=Distribution(bytes),serviceMs=Distribution(service),serviceAllocatedBytes=Distribution(serviceBytes),observerMs=observer.Count==0?null:Distribution(observer),retainedHeapBytesPerGraph=retained,selectionPayloadBytes=craft.Allocation.AxisJets.Sum(a=>a.Length)*sizeof(int),exactSharingMagnitudeBytes=retainedFactors,preparedConsumerRowPayloadBytes=craft.Function?54L*craft.Fuel.Consumers.Length:0,scope="normal GC CPU timing;8 measures exact fuel plus wrench, others physical service; separate forced-GC retained graph deltas; no GPU timing; cold report-only"};
++    }
++    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
++    private static double Retained(AssemblyDefinitionCatalog catalog,CompiledConstructionDesign source)
++    {
++        GC.Collect();GC.WaitForPendingFinalizers();GC.Collect();var before=GC.GetTotalMemory(true);var retained=new object[3];
++        for(var i=0;i<retained.Length;i++){var craft=RcsScalabilityFixture.Compile(catalog,source);retained[i]=new object?[]{craft,craft.Function?new CompiledCraftControl(craft):null,craft.Function?new ConstructionPhysicalServices(craft):null,craft.Fuel.Initial(),craft.Power.Initial()};}
++        var delta=GC.GetTotalMemory(true)-before;GC.KeepAlive(retained);return delta/3d;
++    }
++}
+--- a/tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs
++++ b/tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs
+@@ -161,7 +161,7 @@
+         },370,42);
+         if(running)ActionButton(panel,"Back",CloseOverlay,370);
+         if(!running)DiagnosticStartup.Mark(DiagnosticStartup.UiReady);
+-        if(qualificationPath is not null&&!running){resolution.SelectedItem=NovaCoreResolutionPreset.Resolution1280x720;fullscreen.Checked=false;BeginInvoke(()=>ClickButton("Start NovaCore"));}
++        if(qualificationPath is not null&&!running){resolution.SelectedItem=RcsScalabilityQualification?NovaCoreResolutionPreset.Resolution3440x1440:NovaCoreResolutionPreset.Resolution1280x720;fullscreen.Checked=RcsScalabilityQualification;BeginInvoke(()=>ClickButton("Start NovaCore"));}
+     }
+     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern IntPtr SetFocus(IntPtr window);
+     private void FocusViewport(){if(running){var child=GetWindow(viewport.Handle,5);if(child!=IntPtr.Zero)SetFocus(child);}}
+--- a/tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs
++++ b/tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs
+@@ -7,6 +7,8 @@
+ internal sealed unsafe partial class DesktopEditorForm
+ {
+     private string? expectedPreview;
++    private bool RcsScalabilityQualification=>qualificationTankDefinition is "rcs64" or "rcs96";
++    private string InitialQualificationTank=>qualificationTankDefinition=="deep"||RcsScalabilityQualification?"nc.tank.short-2":qualificationTankDefinition;
+     private int padWarmPhase;
+     private long padWarmUntil;
+     private readonly HashSet<string> padObservedRoutes=new();
+@@ -47,9 +49,9 @@
+                     applicationHandle=Handle.ToInt64();childHandle=GetWindow(viewport.Handle,5).ToInt64();RequireQualification(childHandle!=0&&!editing&&solar is not null,"one native renderer begins in the Solar game");ClickButton("New vehicle");ChooseCard("nc.core.command-2");Hover(Double3.Zero);break;
+                 case 1: RequireQualification(session.Current is null&&session.Preview is not null,"card creates uncommitted root ghost");qualificationTarget=session.Preview!.Design.Parts[0].Instance.Pose.Position;Hover(new(.25,0,0));break;
+                 case 2: RequireQualification((session.Preview!.Design.Parts[0].Instance.Pose.Position-qualificationTarget).LengthSquared>.01,"held root follows pointer: "+session.Preview.Design.Parts[0].Instance.Pose.Position+" from "+qualificationTarget);WindowClick(Double3.Zero);break;
+-                case 3: RequireQualification(session.Current?.Design.Parts.Length==1&&mode.SelectedIndex==0,"root click commits");ChooseCard(qualificationTankDefinition=="deep"?"nc.tank.short-2":qualificationTankDefinition);SocketHover("core","aft");break;
++                case 3: RequireQualification(session.Current?.Design.Parts.Length==1&&mode.SelectedIndex==0,"root click commits");ChooseCard(InitialQualificationTank);SocketHover("core","aft");break;
+                 case 4: ExpectPreview(2);SocketClick("core","aft");break;
+-                case 5: ExpectCommit(2);qualificationTank=session.Current!.Design.Data.Instances.Single(p=>p.Definition.Id==(qualificationTankDefinition=="deep"?"nc.tank.short-2":qualificationTankDefinition)).Id;ChooseCard("nc.mount.single-2to1");camera.Pitch=-.4;SocketHover(qualificationTank,"aft");break;
++                case 5: ExpectCommit(2);qualificationTank=session.Current!.Design.Data.Instances.Single(p=>p.Definition.Id==InitialQualificationTank).Id;ChooseCard("nc.mount.single-2to1");camera.Pitch=-.4;SocketHover(qualificationTank,"aft");break;
+                 case 6: ExpectPreview(3);SocketClick(qualificationTank!,"aft");break;
+                 case 7: ExpectCommit(3);qualificationAdapter=session.Current!.Design.Data.Instances.Single(p=>p.Definition.Id=="nc.mount.single-2to1").Id;ChooseCard("nc.engine.main-1");camera.Pitch=-1.4;SocketHover(qualificationAdapter,"engine");break;
+                 case 8: ExpectPreview(4);SocketClick(qualificationAdapter!,"engine");break;
+@@ -60,9 +62,15 @@
+                 case 13: RequireQualification(session.Preview is null&&refusedGhost is not null&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"one invalid member refuses complete eight without source mutation");ClickButton("Bin");ClickButton("Undo");ChooseCard("nc.rcs.block-r1");SocketClick(qualificationTank!,"radial-1");break;
+                 case 14: RequireQualification(session.Current!.Design.Parts.Length==12,"eight restored");if(qualificationTankDefinition=="deep"){
+                     session.Load(session.Revision,AssemblyJson.Write(StabilizationCraftFixture.Create(session.Catalog,2,shortOnly:true)),true);
+-                    // Deep stack uses the already-qualified 32-jet flight profile: keep one eight-block group.
++                    // Retain the previous two-tank/one-ring preservation witness.
+                     session.Remove(session.Revision,"r1-0");qualificationTank="t0-0";qualificationAdapter="adapter-0";
+                     RequireQualification(session.Current!.Design.Parts.Length==13,"two-short-tank flight witness admitted structurally");
++                }
++                if(RcsScalabilityQualification){
++                    var large=qualificationTankDefinition=="rcs96";
++                    session.Load(session.Revision,AssemblyJson.Write(StabilizationCraftFixture.Create(session.Catalog,large?3:2,shortOnly:true,shortTankDefinition:large?"nc.test.tank.short-half":"nc.tank.short-2")),true);
++                    qualificationTank="t0-0";qualificationAdapter="adapter-0";
++                    RequireQualification(session.Current!.Design.Parts.Length==(large?30:21),"complete multi-ring construction witness");
+                 }
+                 var emptySource=session.Save(session.Revision);var emptyRevision=session.Revision;var emptyHistory=session.UndoCount;
+                 ClickButton("Launch vehicle");
+@@ -75,9 +83,9 @@
+                 case 16: var list=overlay!.Controls.OfType<ListBox>().Single();list.SelectedItem=list.Items.Cast<SavedEntry>().Single(x=>x.Text==applicationSave);ClickButton("Load selected");RequireQualification(session.Save(session.Revision).SequenceEqual(qualificationSaved!),"in-product reload exact craft");qualificationSaved=session.Save(session.Revision);launchedDigest=session.Current!.Design.Digest;launchedRevision=session.Revision;launchedDirty=session.Dirty;ClickButton("Launch vehicle");break;
+                 case 17: RequireQualification(flight is not null&&!editing&&flight.Craft.Design.Digest==launchedDigest,"same-application exact craft launch");retainedFlight=flight;ViewportMessage(0x201,1);ViewportMessage(0x202);break;
+                 case 18: if(padWarmPhase==3){padWarmPhase=4;padWarmUntil=System.Diagnostics.Stopwatch.GetTimestamp()+20*System.Diagnostics.Stopwatch.Frequency;}if(System.Diagnostics.Stopwatch.GetTimestamp()<padWarmUntil){applicationStep--;break;}if(!flight!.Measurements.PhaseComplete(0)){applicationStep--;break;}RequireQualification(status.Text.Contains("SUPPORTED",StringComparison.Ordinal),"supported feedback remains visible inside the product");poweredStart=flight.State.Epoch.Ticks;PostFlightKey('Z');break;
+-                case 19: RequireQualification(flight!.Actuation.Main&&!flight.Failed,"hosted Z ignition");if(!flight.Measurements.PhaseComplete(1)||flight.State.Epoch.Ticks-poweredStart<8_000_000){applicationStep--;break;}PostFlightKey('W',false);break;
+-                case 20: RequireQualification(flight!.PlayerInput.Observation.Requested!=default,"hosted physical attitude request");ViewportMessage(0x101,'W');PostFlightKey('X');break;
+-                case 21: RequireQualification(!flight!.Actuation.Main&&!flight.Failed,"hosted X cutoff");if(!flight.Measurements.PhaseComplete(2)){applicationStep--;break;}RequireQualification(status.Text.Contains("COAST",StringComparison.Ordinal)&&status.Text.Contains("main OFF",StringComparison.Ordinal),"coast and cutoff feedback remain visible without a title bar");ClickButton("Menu");ClickButton("New vehicle / retained design");retainedEpoch=flight.State.Epoch.Ticks;break;
++                case 19: RequireQualification(flight!.Actuation.Main&&!flight.Failed,"hosted Z ignition");if(!flight.Measurements.PhaseComplete(1)||flight.State.Epoch.Ticks-poweredStart<(RcsScalabilityQualification?16_000_000:8_000_000)){applicationStep--;break;}PostFlightKey('W',false);break;
++                case 20: RequireQualification(flight!.PlayerInput.Observation.Requested!=default,"hosted physical attitude request");ViewportMessage(0x101,'W');PostFlightKey('X');if(RcsScalabilityQualification)PostFlightKey('Q',false);break;
++                case 21: RequireQualification(!flight!.Actuation.Main&&!flight.Failed,"hosted X cutoff");if(RcsScalabilityQualification)RequireQualification(!flight.Actuation.Jets.IsEmpty&&Enumerable.Range(32,flight.Actuation.Jets.Length-32).Any(flight.Actuation.Jets.Contains),"high-index RCS realized through native flight");if(!flight.Measurements.PhaseComplete(2)){applicationStep--;break;}if(RcsScalabilityQualification)ViewportMessage(0x101,'Q');RequireQualification(status.Text.Contains("COAST",StringComparison.Ordinal)&&status.Text.Contains("main OFF",StringComparison.Ordinal),"coast and cutoff feedback remain visible without a title bar");ClickButton("Menu");ClickButton("New vehicle / retained design");retainedEpoch=flight.State.Epoch.Ticks;break;
+                 case 22: RequireQualification(editing&&ReferenceEquals(flight,retainedFlight)&&session.Current!.Design.Digest==launchedDigest&&session.Revision==launchedRevision&&session.Dirty==launchedDirty,"return retains owners, draft, history and dirty baseline");RequireQualification(flight!.State.Epoch.Ticks==retainedEpoch&&solar!.CurrentTime.Ticks==retainedEpoch,"editor preserves single physical/Solar epoch");ClickButton("Return to flight");break;
+                 case 23: RequireQualification(ReferenceEquals(flight,retainedFlight)&&flight!.State.Epoch.Ticks>=retainedEpoch&&!flight.Failed,"resume continues canonical flight");ClickButton("Menu");ClickButton("New vehicle / retained design");break;
+                 case 24: RunLaunchRefusalChecks();RunApplicationAdversarialChecks();qualificationName=craftName.Text;ClientSize=new(1100,740);break;
+--- a/tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs
++++ b/tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs
+@@ -10,15 +10,15 @@
+         var saved=session.Save(session.Revision);var owner=flight;var epoch=flight!.State.Epoch.Ticks;
+         foreach(var supportCase in new[]{false,true}){
+             var depth=supportCase?3:2;
+-            session.Load(session.Revision,NovaCore.Simulation.Spacecraft.Assemblies.AssemblyJson.Write(StabilizationCraftFixture.Create(session.Catalog,depth,shortOnly:true)),true);
++            session.Load(session.Revision,NovaCore.Simulation.Spacecraft.Assemblies.AssemblyJson.Write(StabilizationCraftFixture.Create(session.Catalog,depth,shortOnly:supportCase)),true);
+             if(supportCase)foreach(var host in new[]{1,2})session.Remove(session.Revision,$"r{host}-0");
+             ClickButton("Fill consumables");var before=EditorFingerprint();
+             ClickButton("Launch vehicle");
+-            var expected=supportCase?"Authored support load exceeded.":"64 attitude jets";
++            var expected="Authored support load exceeded.";
+             RequireQualification(overlay is not null&&overlay.Controls.OfType<TextBox>().Single().Text.Contains(expected,StringComparison.Ordinal),"native launch details explain "+expected);
+             RequireQualification(EditorFingerprint()==before&&ReferenceEquals(flight,owner)&&flight!.State.Epoch.Ticks==epoch,"invalid launch preserves draft, history, flight owner and epoch");
+             RequireQualification(owner!.Session.Engine.ObserveConstructionServices(owner.Session.Authority,out var retained)==NovaCore.Simulation.Spacecraft.Assemblies.ConstructionServiceStatus.Ready&&retained!.Epoch.Ticks==epoch,"refused replacement leaves retained flight authority usable");
+-            Console.WriteLine($"APPLICATION_REFUSAL_RECOVERY_PASS case={(supportCase?"support-load":"64-jets")} reason={diagnostic}");
++            Console.WriteLine($"APPLICATION_REFUSAL_RECOVERY_PASS case={(supportCase?"support-load":"64-jets-support-load")} reason={diagnostic}");
+             ClickButton("Back to construction");
+         }
+         session.Load(session.Revision,saved,true);RefreshInspector();
+--- a/tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs
++++ b/tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs
+@@ -33,8 +33,11 @@
+         var suffix=Guid.NewGuid().ToString("N")[..8];
+         TestInspect(qualificationTank!);fill.Value=37.5m;stores.Checked=false;ClickButton("Apply to selected group");
+         TestInspect("core");charge.Value=42.5m;electrical.Checked=false;ClickButton("Apply to selected group");
+-        var symmetryMember=session.Current!.Design.Data.Symmetry.Single().Members[3].Part;
+-        TestInspect(symmetryMember);electrical.Checked=false;ClickButton("Apply to selected group");
++        foreach(var group in session.Current!.Design.Data.Symmetry){
++            var symmetryMember=group.Members[Math.Min(3,group.Members.Length-1)].Part;
++            TestInspect(symmetryMember);electrical.Checked=false;ClickButton("Apply to selected group");
++            RequireQualification(group.Members.All(member=>session.Current!.Design.Data.Configuration.Single(c=>c.Part==member.Part).Electrical.All(e=>!e.Enabled)),"each symmetry group preserves its own disabled service configuration");
++        }
+         TestRename("Partial "+suffix);
+         var partial=session.Save(session.Revision);var identity=session.Current!.Design.Data.Id;
+         RequireQualification(session.Current.Design.Data.Configuration.Single(c=>c.Part==qualificationTank).Stores.All(s=>!s.Enabled),"disabled partial stores are authored state");
+@@ -69,7 +72,9 @@
+         TestInspect(qualificationAdapter!);var beforeClock=session.Save(session.Revision);var oldAngle=session.Current!.Design.Data.Connections.Single(c=>c.Child==qualificationAdapter).Construction!.ClockDegrees;
+         ClickButton("Rotate");RequireQualification(session.Current!.Design.Data.Connections.Single(c=>c.Child==qualificationAdapter).Construction!.ClockDegrees!=oldAngle,"Rotate advances the connected part's admitted clock");
+         ClickButton("Undo");RequireQualification(session.Save(session.Revision).SequenceEqual(beforeClock),"clock undo restores exact assembly");
+-        TestInspect(symmetryMember);var keyed=EditorFingerprint();ClickButton("Rotate");RequireQualification(EditorFingerprint()==keyed&&session.Preview is null,"fixed radial key refuses rotation without mutation");
++        foreach(var group in session.Current!.Design.Data.Symmetry){
++            TestInspect(group.Members[0].Part);var keyed=EditorFingerprint();ClickButton("Rotate");RequireQualification(EditorFingerprint()==keyed&&session.Preview is null,"each fixed radial key refuses rotation without mutation");
++        }
+         TestInspect(qualificationTank!);fill.Value=50;ClickButton("Apply to selected group");var updated=session.Save(session.Revision);
+         ClickButton("New vehicle");ClickButton("Save and continue");overlay!.Controls.OfType<TextBox>().Single().Text="Saved-before-new-"+suffix;ClickButton("Save new");
+         RequireQualification(session.Current is null&&File.ReadAllBytes(Path.Combine(SaveDirectory,"Saved-before-new-"+suffix+".craft.json")).SequenceEqual(updated),"Save and continue publishes before clearing draft");
+--- a/tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs
++++ b/tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs
+@@ -65,10 +65,11 @@
+             return PartVisualLoader.Load(Path.Combine(assetRoot,a.RelativePath),a.Id+"/"+a.Revision,a.Sha256);
+         },StringComparer.Ordinal);
+         picking=assets.ToDictionary(p=>p.Key,p=>PartVisualPicking.NeutralComposite(p.Value),StringComparer.Ordinal);
+-        visuals=new(assets.Values.ToImmutableArray());
++        visuals=EditorVisualAssets.Prepare(assets.Values);
+         foreach(var id in assets.Keys.ToArray())assets[id]=visuals.Resolve(assets[id].Identity);
+         renderCapacity=EditorRenderCapacity.Required(assets.Values.Max(a=>a.Meshes.Length),
+-            catalog.Data.Definitions.SelectMany(d=>d.Standard!.SocketGroups).SelectMany(g=>g.Placements).Select(p=>p.Count).DefaultIfEmpty(1).Max());
++            catalog.Data.Definitions.SelectMany(d=>d.Standard!.SocketGroups).SelectMany(g=>g.Placements).Select(p=>p.Count).DefaultIfEmpty(1).Max(),
++            catalog.Data.Definitions.Max(d=>d.Construction!.Consumers.Length));
+         renderEntries=new(renderCapacity);
+         foreach(var d in catalog.Data.Definitions.OrderByDescending(d=>d.Standard!.RootEligible).ThenBy(d=>d.Construction!.Name,StringComparer.Ordinal))catalogList.Items.Add(new CatalogItem(d));
+         catalogList.SelectedIndex=0;
+--- a/tools/NovaCore.ConstructionEditor/EditorRenderCapacity.cs
++++ b/tools/NovaCore.ConstructionEditor/EditorRenderCapacity.cs
+@@ -8,11 +8,13 @@
+     // document bound. It replaces the current drawing, not appends to it.
+     // Also reserve all socket markers and one free held-part drawing. These are
+     // conservative simultaneous bounds; no accepted part/depth policy changes.
+-    // The unified flight profile adds at most 32 jets, one main plume and one
+-    // slab to accepted meshes; the marker reservation also covers those 34.
+-    internal static int Required(int maximumMeshes,int maximumPlacementMembers)
++    // Flight reserves one plume per authored actuator and the single slab.
++    // Catalog-derived dimensions change with authored hardware, not a jet cap.
++    internal static int Required(int maximumMeshes,int maximumPlacementMembers,int maximumActuators)
+     {
+-        if(maximumMeshes<1||maximumPlacementMembers<1)throw new ArgumentOutOfRangeException();
+-        return checked((CompiledConstructionDesign.MaximumParts+maximumPlacementMembers+1)*maximumMeshes+EditorSocketTargets.DisplayCapacity);
++        if(maximumMeshes<1||maximumPlacementMembers<1||maximumActuators<0)throw new ArgumentOutOfRangeException();
++        var editor=checked((CompiledConstructionDesign.MaximumParts+maximumPlacementMembers+1)*maximumMeshes+EditorSocketTargets.DisplayCapacity);
++        var flight=checked(CompiledConstructionDesign.MaximumParts*(maximumMeshes+maximumActuators)+1);
++        return Math.Max(editor,flight);
+     }
+ }
+--- /dev/null
++++ b/tools/NovaCore.ConstructionEditor/EditorVisualAssets.cs
+@@ -0,0 +1,12 @@
++using System.Collections.Immutable;
++using NovaCore.Graphics;
++
++namespace NovaCore.ConstructionEditor;
++
++internal static class EditorVisualAssets
++{
++    // Definition references may share verified art. Upload each exact asset once;
++    // conflicting content under one identity still fails the upload lease.
++    internal static ReusablePartVisuals Prepare(IEnumerable<PartVisualAsset> references)=>
++        new(references.DistinctBy(a=>(a.Identity,a.Sha256)).ToImmutableArray());
++}
+--- a/tools/NovaCore.ConstructionEditor/StabilizationCraftFixture.cs
++++ b/tools/NovaCore.ConstructionEditor/StabilizationCraftFixture.cs
+@@ -8,13 +8,13 @@
+ // production graph, identity, compatibility and physical collision validators.
+ internal static class StabilizationCraftFixture
+ {
+-    internal static ConstructionDesignData Create(AssemblyDefinitionCatalog catalog,int depth,bool dense=false,bool shortOnly=false)
++    internal static ConstructionDesignData Create(AssemblyDefinitionCatalog catalog,int depth,bool dense=false,bool shortOnly=false,string shortTankDefinition="nc.tank.short-2")
+     {
+         PartDefinitionData D(string id)=>catalog.Data.Definitions.Single(d=>d.Id==id);
+         using var s=new ConstructionEditorSession(catalog);
+         s.PreviewRoot(0,catalog.Reference(D("nc.core.command-2")),"core","stabilization",new(Double3.Zero,Matrix3.Identity));s.AcceptPreview(s.Revision);
+         for(var i=0;i<depth;i++){
+-            s.PreviewPlacement(s.Revision,new(catalog.Reference(D(!dense&&!shortOnly&&i%2==1?"nc.tank.long-2":"nc.tank.short-2")),i==0?"core":$"t{i-1}-0","aft","fore",0,1,$"t{i}"));s.AcceptPreview(s.Revision);
++            s.PreviewPlacement(s.Revision,new(catalog.Reference(D(!dense&&!shortOnly&&i%2==1?"nc.tank.long-2":shortTankDefinition)),i==0?"core":$"t{i-1}-0","aft","fore",0,1,$"t{i}"));s.AcceptPreview(s.Revision);
+         }
+         var original=s.Current!.Design.Data;var all=original;
+         foreach(var i in dense?Enumerable.Range(0,depth):new[]{0,depth/2,depth-1}.Distinct()){
+--- a/tools/NovaCore.Launcher/RepositoryLocator.cs
++++ b/tools/NovaCore.Launcher/RepositoryLocator.cs
+@@ -11,7 +11,7 @@
+         var current = new DirectoryInfo(Path.GetFullPath(startDirectory));
+         while (current is not null)
+         {
+-            if (Directory.Exists(Path.Combine(current.FullName, ".git")) &&
++            if ((Directory.Exists(Path.Combine(current.FullName, ".git")) || File.Exists(Path.Combine(current.FullName, ".git"))) &&
+                 File.Exists(Path.Combine(current.FullName, SampleProjectRelativePath)))
+             {
+                 repositoryRoot = current.FullName;

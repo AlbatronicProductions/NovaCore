@@ -1,0 +1,253 @@
+{
+  "judgment": "PASS",
+  "root": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder",
+  "beforeActualBytes": 252349152,
+  "afterActualBytes": 252350456,
+  "reclaimedBytes": 0,
+  "newReportBytes": 1304,
+  "originalFiles": 22,
+  "allOriginalHashesUnchanged": true,
+  "report": {
+    "Status": "COMPLETE",
+    "Before": {
+      "TotalBytes": 252349152,
+      "CleanBytes": 83915867,
+      "AbnormalBytes": 252349152,
+      "PinnedBytes": 0,
+      "Sessions": 3,
+      "CleanSessions": 1,
+      "AbnormalSessions": 3,
+      "PinnedSessions": 0
+    },
+    "After": {
+      "TotalBytes": 252349152,
+      "CleanBytes": 83915867,
+      "AbnormalBytes": 252349152,
+      "PinnedBytes": 0,
+      "Sessions": 3,
+      "CleanSessions": 1,
+      "AbnormalSessions": 3,
+      "PinnedSessions": 0
+    },
+    "Decisions": [
+      {
+        "Session": "bf47741d-dda9-40b5-bbee-daba9f3bea88",
+        "Bytes": 84518977,
+        "Clean": false,
+        "Pinned": false,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Not positively COMPLETE or report contradicts durable recovery"
+      },
+      {
+        "Session": "c7de847a-1f9b-4ac3-89f6-1fe4a160517a",
+        "Bytes": 83915867,
+        "Clean": true,
+        "Pinned": false,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Missing ownership/finalization or unknown content; preserve"
+      },
+      {
+        "Session": "f967ea2a-be4b-4f55-b586-6bbfa2543a31",
+        "Bytes": 83914308,
+        "Clean": false,
+        "Pinned": false,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "PRESERVE: InvalidDataException: Recovery metadata contradicts validated durable authority"
+      }
+    ],
+    "Deleted": [],
+    "Failures": [],
+    "Warning": "Recorder storage: 3 abnormal/ambiguous sessions preserved (240.7 MiB measured). 0 pinned. 0 retention failures. Review evidence; forensic sessions are never automatically deleted.",
+    "OtherRetainedBytes": 0,
+    "AccountingComplete": true,
+    "UnmeasuredEntries": []
+  },
+  "beforeFiles": {
+    "admission.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\bank0.bin": {
+      "bytes": 41947136,
+      "sha256": "20d38ef69ead7c31514638a5843c5a36c69f5199674c864de29d98b6a02a9af1"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\bank1.bin": {
+      "bytes": 41947136,
+      "sha256": "ace73cb8cf9782dcf40a8ea73397755dd76049a8300014b84d2875d95ee6b5bb"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\head0.bin": {
+      "bytes": 4096,
+      "sha256": "357cec3bcb01baa7ae6923c896f4d17dccddd48b173589b97b1a097bea8ab717"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\head1.bin": {
+      "bytes": 4096,
+      "sha256": "3aa2b41cdf8c06c37dd29ca9fee5bff509aeb40e3c1b3f6f1a3e94fa589edeb5"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\performance.json": {
+      "bytes": 396,
+      "sha256": "ffd4df75df7106d441d5a51f7b9a22393cd2501edc063263a92586c6aa74b735"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\recovery.json": {
+      "bytes": 615083,
+      "sha256": "62445c772c9ec231ddf1b248cac961b019f7b0ef3bee3b7b7606e0a3bb304cd8"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\session.json": {
+      "bytes": 1034,
+      "sha256": "ead173fa4a5ac77519464153e7733b1728103089d1b1aab77aced5e75219b166"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\bank0.bin": {
+      "bytes": 41947136,
+      "sha256": "fb93c3e6db7da1635efaf5cca07fd1915c03cc94c1d0990b8c2e8d36db23da82"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\bank1.bin": {
+      "bytes": 41947136,
+      "sha256": "24c0d9f60a2fa81572f22907f38abb5fbf320e275df32653b6a9c98501ae7bb7"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\head0.bin": {
+      "bytes": 4096,
+      "sha256": "687f94a49a19fa74f404f51558b3c4320c6e3876a4db467019c6418c21fedef8"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\head1.bin": {
+      "bytes": 4096,
+      "sha256": "3909204ecabbfd525575947621b589898a066d4e8b1579394a0eb2ebfb75a754"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\performance.json": {
+      "bytes": 383,
+      "sha256": "d3d7abd9b252bfd5fdd60b1e2cc8ac36194f10f774136a644fa870765a482c48"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\recovery.json": {
+      "bytes": 11986,
+      "sha256": "47b2f6c18b795dea47611ab975ab5d82b71d6038d48cf49889d80a54ffcdb089"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\session.json": {
+      "bytes": 1034,
+      "sha256": "79058bcc6666dda613b63fa5dea873d09f766a5bfe0cc123a2c9a2f721a0c2d3"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\bank0.bin": {
+      "bytes": 41947136,
+      "sha256": "1ade0e56404b9aac6810201ec8de067a43a28517c4ecdb9a8b723718e343507a"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\bank1.bin": {
+      "bytes": 41947136,
+      "sha256": "a78e1f6b7c5e51c04ce688d007b9329d58001f14938e1a9d62713697c9a300ed"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\head0.bin": {
+      "bytes": 4096,
+      "sha256": "d9b5f137103ff970cf115e0c2a323445e4f26bd1e44baa5d321da506c2a36bc4"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\head1.bin": {
+      "bytes": 4096,
+      "sha256": "9dcadf94ea062ee8bbf6890c7a0fc921d796c1e3f17ab1587a8e7a8275e2c354"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\performance.json": {
+      "bytes": 388,
+      "sha256": "383ee37f5b3f78983c0c0829f7973a1d327127e51a2c018dbbba1440748f927d"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\recovery.json": {
+      "bytes": 10422,
+      "sha256": "12fd0c2c7e8141f2f5448915f715d972b23c6ab3ba08986fe2e7d8dc2930c181"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\session.json": {
+      "bytes": 1034,
+      "sha256": "c6cfd2d98bc80fd1e318408df4cc03fee4e4148af5d47e35acd7ceb4c56846af"
+    }
+  },
+  "afterFiles": {
+    "admission.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "retention-status.json": {
+      "bytes": 1304,
+      "sha256": "ec1b76225feb3071551792a73f31d97567ed50db651eaf71c0afec814385472b"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\bank0.bin": {
+      "bytes": 41947136,
+      "sha256": "20d38ef69ead7c31514638a5843c5a36c69f5199674c864de29d98b6a02a9af1"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\bank1.bin": {
+      "bytes": 41947136,
+      "sha256": "ace73cb8cf9782dcf40a8ea73397755dd76049a8300014b84d2875d95ee6b5bb"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\head0.bin": {
+      "bytes": 4096,
+      "sha256": "357cec3bcb01baa7ae6923c896f4d17dccddd48b173589b97b1a097bea8ab717"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\head1.bin": {
+      "bytes": 4096,
+      "sha256": "3aa2b41cdf8c06c37dd29ca9fee5bff509aeb40e3c1b3f6f1a3e94fa589edeb5"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\performance.json": {
+      "bytes": 396,
+      "sha256": "ffd4df75df7106d441d5a51f7b9a22393cd2501edc063263a92586c6aa74b735"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\recovery.json": {
+      "bytes": 615083,
+      "sha256": "62445c772c9ec231ddf1b248cac961b019f7b0ef3bee3b7b7606e0a3bb304cd8"
+    },
+    "bf47741ddda940b5bbeedaba9f3bea88\\session.json": {
+      "bytes": 1034,
+      "sha256": "ead173fa4a5ac77519464153e7733b1728103089d1b1aab77aced5e75219b166"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\bank0.bin": {
+      "bytes": 41947136,
+      "sha256": "fb93c3e6db7da1635efaf5cca07fd1915c03cc94c1d0990b8c2e8d36db23da82"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\bank1.bin": {
+      "bytes": 41947136,
+      "sha256": "24c0d9f60a2fa81572f22907f38abb5fbf320e275df32653b6a9c98501ae7bb7"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\head0.bin": {
+      "bytes": 4096,
+      "sha256": "687f94a49a19fa74f404f51558b3c4320c6e3876a4db467019c6418c21fedef8"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\head1.bin": {
+      "bytes": 4096,
+      "sha256": "3909204ecabbfd525575947621b589898a066d4e8b1579394a0eb2ebfb75a754"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\performance.json": {
+      "bytes": 383,
+      "sha256": "d3d7abd9b252bfd5fdd60b1e2cc8ac36194f10f774136a644fa870765a482c48"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\recovery.json": {
+      "bytes": 11986,
+      "sha256": "47b2f6c18b795dea47611ab975ab5d82b71d6038d48cf49889d80a54ffcdb089"
+    },
+    "c7de847a1f9b4ac389f61fe4a160517a\\session.json": {
+      "bytes": 1034,
+      "sha256": "79058bcc6666dda613b63fa5dea873d09f766a5bfe0cc123a2c9a2f721a0c2d3"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\bank0.bin": {
+      "bytes": 41947136,
+      "sha256": "1ade0e56404b9aac6810201ec8de067a43a28517c4ecdb9a8b723718e343507a"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\bank1.bin": {
+      "bytes": 41947136,
+      "sha256": "a78e1f6b7c5e51c04ce688d007b9329d58001f14938e1a9d62713697c9a300ed"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\head0.bin": {
+      "bytes": 4096,
+      "sha256": "d9b5f137103ff970cf115e0c2a323445e4f26bd1e44baa5d321da506c2a36bc4"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\head1.bin": {
+      "bytes": 4096,
+      "sha256": "9dcadf94ea062ee8bbf6890c7a0fc921d796c1e3f17ab1587a8e7a8275e2c354"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\performance.json": {
+      "bytes": 388,
+      "sha256": "383ee37f5b3f78983c0c0829f7973a1d327127e51a2c018dbbba1440748f927d"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\recovery.json": {
+      "bytes": 10422,
+      "sha256": "12fd0c2c7e8141f2f5448915f715d972b23c6ab3ba08986fe2e7d8dc2930c181"
+    },
+    "f967ea2abe4b4f55b5866bbfa2543a31\\session.json": {
+      "bytes": 1034,
+      "sha256": "c6cfd2d98bc80fd1e318408df4cc03fee4e4148af5d47e35acd7ceb4c56846af"
+    }
+  },
+  "accountingNote": "Snapshot excludes the status report published afterward. Clean disposition and abnormal ownership protection overlap."
+}

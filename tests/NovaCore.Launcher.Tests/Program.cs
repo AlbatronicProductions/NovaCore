@@ -8,6 +8,7 @@ var tests = new (string Name, Action Test)[]
     ("contact development scenarios", ContactDevelopmentScenarios),
     ("powered free-flight scenario", PoweredFreeFlightScenario),
     ("stock assembly scenario", StockAssemblyScenario),
+    ("player flight control scenario", PlayerFlightControlScenario),
     ("Earth fullscreen native preset", EarthFullscreenNativePreset),
     ("M12D spherical billboard GPU proof preset", M12DSphericalBillboardGpuProofPreset),
     ("new Earth renderer preset", NewEarthRendererPreset),
@@ -40,8 +41,8 @@ static void DefaultSelection()
 
 static void ScenarioCatalogMappings()
 {
-    Equal(12, ScenarioCatalog.All.Count);
-    Equal(12, ScenarioCatalog.All.Count(definition => definition.IsSupported));
+    Equal(13, ScenarioCatalog.All.Count);
+    Equal(13, ScenarioCatalog.All.Count(definition => definition.IsSupported));
     True(ScenarioCatalog.All.Select(definition => definition.Preset).Distinct().Count() == ScenarioCatalog.All.Count,
         "Scenario presets must be unique.");
 }
@@ -69,6 +70,17 @@ static void StockAssemblyScenario()
     True(LaunchCommandBuilder.BuildArguments(configuration).Contains("--scene=stock-assembly"),"Stock assembly application route");
     Equal(NovaCoreStartingBody.None,configuration.StartingBody);
     Equal(NovaCorePhysicalSurface.Generation3,configuration.PhysicalSurface);
+}
+
+static void PlayerFlightControlScenario()
+{
+    Equal(NovaCoreScenarioPreset.StockAssembly, System.Text.Json.JsonSerializer.Deserialize<NovaCoreScenarioPreset>("11"));
+    Equal("11", System.Text.Json.JsonSerializer.Serialize(NovaCoreScenarioPreset.StockAssembly));
+    Equal(12, (int)NovaCoreScenarioPreset.PlayerFlightControls);
+    var configuration=Create(NovaCoreScenarioPreset.PlayerFlightControls);
+    SequenceEqual(["--scene=sol","--player-flight-controls","--physical-surface=m12d-natural-candidate"],LaunchCommandBuilder.BuildArguments(configuration));
+    Equal(NovaCoreStartingBody.None,configuration.StartingBody);
+    True(configuration.AltitudeMetres is null&&configuration.SurfaceSite is null,"Independent free-flight proving route");
 }
 
 static void M12DSphericalBillboardGpuProofPreset()

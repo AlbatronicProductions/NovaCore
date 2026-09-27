@@ -20,6 +20,13 @@ internal static class SpacecraftMotionEvaluator
         SimulationInstant time,out AssemblyPublishedMotion motion)
     {
         motion=default;
+        if(state.Spacecraft.TryGetConstruction(subject,out var binding,out var construction))
+        {
+            if(binding!.Physical is not {} physical||construction?.Physical is not {} dynamic||construction.ReferenceMass is not {} mass||
+                time!=construction.Epoch||!physical.Site.Applicable)return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
+            motion=new(subject,physical.Site.EarthFrame,time,state.Revision,physical.Site.ToEarth(dynamic.Motion,time),mass);
+            return SpacecraftTranslationStatus.Success;
+        }
         if(!state.Spacecraft.TryGetAssembly(subject,out var launch,out var value))return SpacecraftTranslationStatus.SubjectNotFound;
         if(time!=value.Epoch)return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;
         if(launch!.Site is {} site)
@@ -35,7 +42,7 @@ internal static class SpacecraftMotionEvaluator
         SimulationInstant time, out SpacecraftMotion motion)
     {
         motion = default;
-        if(state.Spacecraft.TryGetAssembly(subject,out _,out _))return SpacecraftTranslationStatus.AssemblyMotionRequiresTypedView;
+        if(state.Spacecraft.TryGetAssembly(subject,out _,out _)||state.Spacecraft.TryGetConstruction(subject,out _,out _))return SpacecraftTranslationStatus.AssemblyMotionRequiresTypedView;
         if (state.Spacecraft.TryGetAppliedEndpoint(subject, out var endpoint))
         {
             if (time != endpoint.Epoch) return SpacecraftTranslationStatus.OutsideQualifiedEndpoint;

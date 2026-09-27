@@ -1,0 +1,263 @@
+{
+  "checkedUtc": "2026-09-22T06:59:49.343970+00:00",
+  "units": "Logical file bytes; not allocated clusters",
+  "evidenceExcludingThisInventory": {
+    "files": 16,
+    "bytes": 1052263
+  },
+  "build": {
+    "path": "E:\\NovaCore\\build\\modular-player-revision",
+    "files": 369,
+    "bytes": 435006894
+  },
+  "buildGroups": [
+    {
+      "path": "build/modular-player-revision/app-long-debug-final.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-debug-final.json",
+      "bytes": 2058,
+      "sha256": "07f486f49d8c092f25d8eb0207059c3f5f549fec342c509e59ff4b820c5f8559"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-debug-final.log",
+      "bytes": 216221,
+      "sha256": "2d3997e5179aa711bd5a752aa3ae6416bb4bf95432841abe06ed6c04f42a1881"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-debug-final.process.json",
+      "bytes": 472,
+      "sha256": "fd7041e1b2f82aeb7a180556a9d67c5baf5c857e3347a19b226510f842dd498a"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-debug.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-debug.json",
+      "bytes": 2091,
+      "sha256": "447768800c87d8e18fb1a49d4f6c0ac4e9df03e5a7fb887254835112f8c29973"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-debug.log",
+      "bytes": 236507,
+      "sha256": "0a5a6b58b035290a9c9d573a274242c4b60ccf5e118191b7c726db788c36652a"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-release-final.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-release-final.json",
+      "bytes": 2069,
+      "sha256": "949d0b0ea8b51908a56f3634ac061b05b3b1abd8bf027e4866932d8c422bb70d"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-release-final.log",
+      "bytes": 210167,
+      "sha256": "3f14ccb450032bb0cb6887573b0016415597dbcf671d17c194a86b086d2a21ca"
+    },
+    {
+      "path": "build/modular-player-revision/app-long-release-final.process.json",
+      "bytes": 474,
+      "sha256": "2d5171cbf52e2dc80aa30c9793ec3f82c166cae84d1de73c931a132a8aafd4ef"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-debug-final.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-debug-final.json",
+      "bytes": 2070,
+      "sha256": "de33548d905ea4bf79aaadfbcb9e01f4a32e88f40b9b45073bcf8edde16e53e4"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-debug-final.log",
+      "bytes": 220767,
+      "sha256": "b581e97312892a65896c0f8561a45f35198e00fe4d2336d9c87ed67b457089e6"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-debug-final.process.json",
+      "bytes": 473,
+      "sha256": "ca91b72b75994791e62a75e29b6a2631533fc2f4fc92244fd8846b8de6b78afe"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-debug.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-debug.json",
+      "bytes": 2100,
+      "sha256": "c755f8426c636dee95e71e9b22b028b92d0348f398ecc61dbfb4175754c270d2"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-debug.log",
+      "bytes": 238724,
+      "sha256": "f403f69f995d0eeb0863ccccf27a55fb98f65e177feccf74c8234531a7226a93"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-release-final.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-release-final.json",
+      "bytes": 2071,
+      "sha256": "2aa6f4a3c8a11fcdeb5e71c98461ba1f1ebc48a272e4d223d410ffcae1eaa506"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-release-final.log",
+      "bytes": 214298,
+      "sha256": "a460606911678ae877b00c6047f62535ffc6b663ba9f178656d3e3d3b42444e1"
+    },
+    {
+      "path": "build/modular-player-revision/app-short-release-final.process.json",
+      "bytes": 475,
+      "sha256": "aaeccc4def6ea7ff454fbf4bb30bd0a440491c014497c4bec24f25904466727e"
+    },
+    {
+      "path": "build/modular-player-revision/compile-fixes.py",
+      "bytes": 401,
+      "sha256": "3b9649a37340c096b0ad2818e6220c012d95a6197049a4086e066616647ffb2e"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\modular-player-revision\\craft-library",
+      "files": 54,
+      "bytes": 380498
+    },
+    {
+      "path": "build/modular-player-revision/graphics-viewport.log",
+      "bytes": 83,
+      "sha256": "4879f6ef378e4948b7f4d528b4bb8ea5deebd44d768113c8407d78605ab81251"
+    },
+    {
+      "path": "build/modular-player-revision/host-refactor.py",
+      "bytes": 962,
+      "sha256": "79da0eb01273e81ec5a18126a06271531d63bcd6df92adb23d794e97717e9e4c"
+    },
+    {
+      "path": "build/modular-player-revision/index",
+      "bytes": 464995,
+      "sha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e"
+    },
+    {
+      "path": "build/modular-player-revision/ksa-install-entry.json",
+      "bytes": 283106,
+      "sha256": "42ec128fe22d5376c4362dda3d56bcb8374b9130cd9cfd2e6e94c3f585d1a315"
+    },
+    {
+      "path": "build/modular-player-revision/ksa-install-final.json",
+      "bytes": 131,
+      "sha256": "f89200b109a9656017af549075cc736f8bd537394e4ae9f7fd4a4ee238a48c5e"
+    },
+    {
+      "path": "build/modular-player-revision/ksa-preservation.json",
+      "bytes": 423,
+      "sha256": "0708db6b0a508908d54dd2721191877cfd76ff2d1f0c927786ac7256a17feaee"
+    },
+    {
+      "path": "build/modular-player-revision/ksa-user-entry.json",
+      "bytes": 16025,
+      "sha256": "1333df19b064220dc76e52d02ab82fce44d4fd566f16ac2900cf1c2f4351acc6"
+    },
+    {
+      "path": "build/modular-player-revision/ksa-user-final.json",
+      "bytes": 254,
+      "sha256": "3c4e82bc5441221b5c4e50d3dfbaaf1d57bc3bf89c689295742974555a48926d"
+    },
+    {
+      "path": "build/modular-player-revision/ksa-user-recovery.zip",
+      "bytes": 391226354,
+      "sha256": "391846f5d10271bda411174707810b57b7e66e30c507106682b552cabd915c6e"
+    },
+    {
+      "path": "build/modular-player-revision/launcher-settings-before-live.json",
+      "bytes": 107,
+      "sha256": "0e45ef76b1b52d2d564b2da592149e3f8ae2b26e8a09e780fb6da099b9736da9"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\modular-player-revision\\native-debug",
+      "files": 102,
+      "bytes": 33084042
+    },
+    {
+      "path": "build/modular-player-revision/native-final-build.log",
+      "bytes": 270,
+      "sha256": "797def1cb67efe14f79a351e7bf7965aa8546b54786d44352c7749ce35cb0cb8"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\modular-player-revision\\native-release",
+      "files": 95,
+      "bytes": 5809766
+    },
+    {
+      "path": "build/modular-player-revision/presentation-refactor.py",
+      "bytes": 4485,
+      "sha256": "e3205ccca33c6c95ec44a1f77aecda6a724477d7fca09c8fd25091f5dc0325d2"
+    },
+    {
+      "path": "build/modular-player-revision/preserve-reference.py",
+      "bytes": 1665,
+      "sha256": "0403c561afd5c52de9409058bebd7b399c3caae3df112f0e24b17c3d64ea13f3"
+    },
+    {
+      "path": "build/modular-player-revision/refine-ui.py",
+      "bytes": 3590,
+      "sha256": "0df10a0b2d56fe5f698d5617b9f9dcd316c083ae078d3b69044f07715c9e787b"
+    },
+    {
+      "path": "E:\\NovaCore\\build\\modular-player-revision\\regressions",
+      "files": 67,
+      "bytes": 344553
+    },
+    {
+      "path": "E:\\NovaCore\\build\\modular-player-revision\\regressions-final",
+      "files": 11,
+      "bytes": 241309
+    },
+    {
+      "path": "build/modular-player-revision/repo-preservation.json",
+      "bytes": 225,
+      "sha256": "143b93e26bda794e98976955e8e69c902991eead030943684b74bf4d7ed173dd"
+    },
+    {
+      "path": "build/modular-player-revision/revision-entry.zip",
+      "bytes": 1792206,
+      "sha256": "bea863d4bea4ee3f39666166aa05f1708a716a4f56e02adc689b9fc2e2e12e26"
+    },
+    {
+      "path": "build/modular-player-revision/visual-review-craft.json",
+      "bytes": 407,
+      "sha256": "609fcbabaf5e2328cb75d3ad87ab32581a348e70caec75b51e34f0b63eab90b1"
+    }
+  ],
+  "external": [
+    {
+      "path": "C:\\Users\\Tyler\\Documents\\My Games\\Kitten Space Agency\\vehicles\\NovaCore_UX_Convergence_20260921\\meta.toml",
+      "bytes": 167,
+      "sha256": "bc91986d2608fcf8563e8c3fb820120909aeff2295018f9f429d046416b83c7d",
+      "role": "Own named KSA reference save; retain"
+    },
+    {
+      "path": "C:\\Users\\Tyler\\Documents\\My Games\\Kitten Space Agency\\vehicles\\NovaCore_UX_Convergence_20260921\\vehicle.xml",
+      "bytes": 38477,
+      "sha256": "46afb1962c00aeacc7fd744071eec80a7bb1bb26c7f8aec9a0aec37b6fa70c7d",
+      "role": "Own named KSA reference save; retain"
+    },
+    {
+      "source": "build\\modular-player-revision\\craft-library\\Application-nc.tank.short-2-ea08058b.craft.json",
+      "destination": "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\UX-Review-20260922.craft.json",
+      "sha256": "7936a61295828a13c10fb39c7d43adfe6e3b86d1b8c35d865c8a9feda7459d2a",
+      "purpose": "Agent-owned disposable visual review copy of exact qualifying short craft; not a product template",
+      "bytes": 10096
+    }
+  ],
+  "cleanupAuthorized": false,
+  "retention": "Retain all; entry/recovery and unique evidence protected. Native/managed outputs and historical logs are reproducible candidates, not deletion authorization. Historical one-off refactor scripts are non-idempotent and must not be replayed."
+}

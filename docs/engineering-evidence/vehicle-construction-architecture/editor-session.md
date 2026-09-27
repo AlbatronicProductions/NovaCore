@@ -1,0 +1,13 @@
+# Generic editor foundation
+
+ConstructionEditorSession owns an isolated draft and validated ghost on one thread. Current, Preview and compiled service facts are immutable. Existing AssemblyDefinitionCatalog, CompiledConstructionDesign, Snap and canonical serialization are shared with stock content. No editor object owns live spacecraft state.
+
+Every successful draft/ghost change advances an editor revision. Preview supersession, accept, cancel, clear and load invalidate earlier requests. Saved design revision and digest are separate: loading identical bytes preserves both. An edit compiles graph, fuel and power before replacing any draft reference; refusal preserves current/ghost/revision. New resource stores and batteries start empty, enabled; configuration is explicit.
+
+Root placement is a preview until accepted. Keyed interface frames fix mating orientation; the editor permits rigid rotation of the whole assembly, not arbitrary post-mating roll. Reconnection atomically reparents/transforms a whole subtree; no disconnected intermediate is installed. Editor removal/reconnection also works on ordinary non-detachable mounts. Root removal produces an empty editor, which cannot be saved as a vehicle.
+
+Removal prunes crossing service links and dangling actions, drops any affected symmetry group, and clears a removed control selection. Other metadata survives. Reconnection keeps metadata and is refused if an existing symmetry/action relationship would become invalid. Advanced metadata editing validates complete symmetry/actions/service-link arrays through the same compiler. Subparts are inspected through their owning definition and are not independent catalog entries. Variants are exact catalog revisions/definitions, not a second inheritance model.
+
+The local tool is an ASP.NET browser host with a bounded serialized queue on one dedicated owner thread. Every multi-field observation is taken there. Loopback host/IP checks, an ephemeral API token and same-origin POST checks constrain the transport. Uploads are bounded; saves download canonical bytes. It accepts catalog/asset/stock paths only at process startup; browser commands have no arbitrary filesystem authority. Asset hashing occurs once at startup, not on display frames.
+
+Presentation is explicitly a physical-frame/socket/dry-COM schematic. It provides actual design editing and inspection, not rendered-mesh acceptance. KSA convergence: catalog/ghost/snap/insert/remove/stock-save lifecycle ADAPT; isolated draft authority intentionally preserves NovaCore publication boundaries. See ksa-current-construction-map.md.

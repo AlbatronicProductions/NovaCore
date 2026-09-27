@@ -1,0 +1,106 @@
+[
+  {
+    "name": "native-Debug",
+    "sha256": "c88bbb0d3241eba7cb7b06d899205f165a7b4030d2c188a9aeeb43b93c2752aa",
+    "summary": [
+      "[8/14] Linking CXX executable NovaCorePreparedSubmissionTests.exe",
+      "[9/14] Building CXX object CMakeFiles\\NovaCoreRegionalPupilLifetimeTests.dir\\RegionalPupilLifetimeTests.cpp.obj",
+      "[10/14] Linking CXX executable NovaCoreRegionalPupilLifetimeTests.exe",
+      "[11/14] Building CXX object CMakeFiles\\NovaCoreFrozenCaptureMock.dir\\FrozenCaptureMock.cpp.obj",
+      "[12/14] Linking CXX executable NovaCoreFrozenCaptureMock.exe",
+      "[13/14] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[14/14] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  {
+    "name": "native-Release",
+    "sha256": "4c3415c1078d1e5140d206a50f7012c098f93d46284a2b4f31c4f18ee86a3591",
+    "summary": [
+      "[8/14] Linking CXX executable NovaCoreCausalRecorderMock.exe",
+      "[9/14] Building CXX object CMakeFiles\\NovaCoreRegionalPupilLifetimeTests.dir\\RegionalPupilLifetimeTests.cpp.obj",
+      "[10/14] Linking CXX executable NovaCoreRegionalPupilLifetimeTests.exe",
+      "[11/14] Building CXX object CMakeFiles\\NovaCoreFrozenCaptureMock.dir\\FrozenCaptureMock.cpp.obj",
+      "[12/14] Linking CXX executable NovaCoreFrozenCaptureMock.exe",
+      "[13/14] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[14/14] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  {
+    "name": "managed-Debug",
+    "sha256": "91e64a38a86d9e7ef24eae84aafbb155b25216035bdf0cf2cf1c81b4290fccbc",
+    "summary": [
+      "  NovaCore.App -> E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\NovaCore.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.30"
+    ]
+  },
+  {
+    "name": "managed-Release",
+    "sha256": "0b4bb7044a45cff8588d4a72d7f3961e6b8870ca7e3adf7603ae920c22ac4ff7",
+    "summary": [
+      "  NovaCore.App -> E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.12"
+    ]
+  },
+  {
+    "name": "clean-native-Debug",
+    "sha256": "2c8fbc3330c2eed74f6f01138a7b61eff3496ec71bf79f2fa3a391ff49182b02",
+    "summary": [
+      "[27/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\ProductionCubeSurface.cpp.obj",
+      "[28/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\LocalTerrainPack.cpp.obj",
+      "[29/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetaryHeightQuery.cpp.obj",
+      "[30/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetarySphericalBillboardGpuProof.cpp.obj",
+      "[31/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetaryMeshPreparation.cpp.obj",
+      "[32/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[33/33] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  {
+    "name": "clean-native-Release",
+    "sha256": "df357bdf34a591d396d1bf3eb37fccdc1f43cdfbed85879dfc21a9bf2d7a0e00",
+    "summary": [
+      "[27/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\ProductionCubeSurface.cpp.obj",
+      "[28/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\LocalTerrainPack.cpp.obj",
+      "[29/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetarySphericalBillboardGpuProof.cpp.obj",
+      "[30/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetaryHeightQuery.cpp.obj",
+      "[31/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetaryMeshPreparation.cpp.obj",
+      "[32/33] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[33/33] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  {
+    "name": "clean-managed-Debug",
+    "sha256": "a4b5ea4595aa40fe805864625d55ea84be6662169457c94d0698f1386d5c207b",
+    "summary": [
+      "  NovaCore.App -> E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\NovaCore.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.35"
+    ]
+  },
+  {
+    "name": "clean-managed-Release",
+    "sha256": "be119b4720b7565839d1dbe528efccfb2081ea47551961ee8c03f31b7922fb4a",
+    "summary": [
+      "  NovaCore.App -> E:\\NovaCore\\build\\stabilization-bank-gauntlet\\clean-source\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.18"
+    ]
+  }
+]

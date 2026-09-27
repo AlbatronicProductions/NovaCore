@@ -1,0 +1,1698 @@
+{
+  "schema": "novacore.modular-player-application/1",
+  "playerPass": false,
+  "routes": [
+    {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "playerPass": false,
+      "checks": 389,
+      "tank": "nc.tank.short-2",
+      "process": 64012,
+      "window": 56558326,
+      "parts": 12,
+      "source": "3d07a6ab962eacaa1fc76e05ca081ef565d184572916a28197efb65189d996c9",
+      "compiled": "45b837ef4175f410a786e24dfa1353c3af49ea3457723a48b0886dc33abda18c",
+      "retainedEpoch": 843330183424924,
+      "finalEpoch": 843330183659299,
+      "frames": 3784,
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.549000263214111,
+            "p95": 5.93149995803833,
+            "p99": 6.195699691772461,
+            "max": 6.196000099182129
+          },
+          "cpuMs": {
+            "median": 0.0337,
+            "p95": 0.0578,
+            "p99": 0.0845,
+            "max": 0.0872
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.584700107574463,
+            "p95": 5.893200397491455,
+            "p99": 6.016499996185303,
+            "max": 10.520999908447266
+          },
+          "cpuMs": {
+            "median": 0.0328,
+            "p95": 0.0613,
+            "p99": 0.072,
+            "max": 0.1055
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.575099945068359,
+            "p95": 5.890899658203125,
+            "p99": 6.052299976348877,
+            "max": 6.163099765777588
+          },
+          "cpuMs": {
+            "median": 0.0322,
+            "p95": 0.058,
+            "p99": 0.0649,
+            "max": 0.0712
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "637e1f9278cad5d7a4fc042d07d23663eb3e76e40fb8f3ba0430bed6a01458b8",
+      "configuration": "debug",
+      "tankSize": "short",
+      "flightWindows": [
+        {
+          "phase": "supported",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 4.848800133913755,
+            "p95": 8.479200303554535,
+            "p99": 11.815999634563923,
+            "max": 13.791799545288086,
+            "maximumConsecutiveP95": 5
+          },
+          "callbackMs": {
+            "median": 0.8804,
+            "p95": 3.2732,
+            "p99": 3.6103,
+            "max": 3.9889,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54288,
+            "p99": 54584,
+            "max": 58920,
+            "maximumConsecutiveP95": 2
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.297800060361624,
+            "p95": 7.388500031083822,
+            "p99": 7.74030014872551,
+            "max": 9.235300123691559,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.9284,
+            "p95": 2.257,
+            "p99": 2.5099,
+            "max": 3.822,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54288,
+            "p99": 54288,
+            "max": 54584,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.35790016874671,
+            "p95": 7.3043000884354115,
+            "p99": 7.896199822425842,
+            "max": 8.356800302863121,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 1.0194,
+            "p95": 2.2241,
+            "p99": 2.663,
+            "max": 2.7395,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54288,
+            "p99": 54400,
+            "max": 54584,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 4.966699983924627,
+            "p95": 7.904999889433384,
+            "p99": 8.260900154709816,
+            "max": 8.472800254821777,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 1.0105,
+            "p95": 2.9974,
+            "p99": 3.1602,
+            "max": 3.2354,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49120,
+            "p99": 49120,
+            "max": 49400,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.240499973297119,
+            "p95": 7.476800121366978,
+            "p99": 8.531499654054642,
+            "max": 8.896400220692158,
+            "maximumConsecutiveP95": 2
+          },
+          "callbackMs": {
+            "median": 1.0368,
+            "p95": 3.1698,
+            "p99": 3.5946,
+            "max": 3.9027,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49120,
+            "p99": 49232,
+            "max": 49400,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.1020001992583275,
+            "p95": 7.496099919080734,
+            "p99": 8.226499892771244,
+            "max": 8.43849964439869,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.9879,
+            "p95": 3.1078,
+            "p99": 3.5605,
+            "max": 4.2579,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49120,
+            "p99": 49120,
+            "max": 49400,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.034300033003092,
+            "p95": 7.4847000651061535,
+            "p99": 7.855799980461597,
+            "max": 8.249999955296516,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.99,
+            "p95": 2.9182,
+            "p99": 3.0496,
+            "max": 3.1669,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35296,
+            "p99": 35296,
+            "max": 35560,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.1346998661756516,
+            "p95": 8.170000277459621,
+            "p99": 12.22699973732233,
+            "max": 22.66490086913109,
+            "maximumConsecutiveP95": 12
+          },
+          "callbackMs": {
+            "median": 1.0628,
+            "p95": 3.0413,
+            "p99": 3.3755,
+            "max": 4.9585,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35296,
+            "p99": 35560,
+            "max": 68272,
+            "maximumConsecutiveP95": 4
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.012299865484238,
+            "p95": 7.6293000020086765,
+            "p99": 7.918599992990494,
+            "max": 8.190300315618515,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.95,
+            "p95": 3.103,
+            "p99": 3.3418,
+            "max": 3.4837,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35296,
+            "p99": 35296,
+            "max": 35560,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "processMeasurement": {
+        "process": 64012,
+        "exitCode": 0,
+        "configuration": "Debug",
+        "tank": "short",
+        "samples": 34,
+        "sampleIntervalSeconds": 1,
+        "peakPrivateBytesObserved": 4686286848,
+        "peakWorkingSetBytes": 4226023424,
+        "peakHandlesObserved": 1135,
+        "boundary": "Whole process including startup, editor, live flight and handler qualification; no idle baseline subtraction",
+        "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8"
+      },
+      "logBytes": 220767,
+      "logSha256": "b581e97312892a65896c0f8561a45f35198e00fe4d2336d9c87ed67b457089e6",
+      "validationErrors": [],
+      "validationWarningCount": 10,
+      "validationWarningKinds": [
+        "WARNING-Shader-OutputNotConsumed"
+      ],
+      "runtimeFileFingerprints": [
+        "Runtime managed: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\NovaCore.Triangle.dll; bytes=365056; sha256=f475883c6d3bf4b13b9ea29d748cb4693a760b59bc74286fedae91bcf31fbc99",
+        "Runtime native-resolved: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\NovaCore.Native.dll; bytes=1799168; sha256=637e1f9278cad5d7a4fc042d07d23663eb3e76e40fb8f3ba0430bed6a01458b8",
+        "Runtime production-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\planetary_production.frag.spv; bytes=152228; sha256=8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+        "Runtime production-tess-control: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\production_spherical_billboard.tesc.spv; bytes=12632; sha256=0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "Runtime production-tess-evaluation: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "Runtime distant-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+      ]
+    },
+    {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "playerPass": false,
+      "checks": 391,
+      "tank": "nc.tank.long-2",
+      "process": 63888,
+      "window": 211028920,
+      "parts": 12,
+      "source": "e05c152c06661f6f8d1224ad90f2d2f0c4336cea8370925ea8e890febbfd9d34",
+      "compiled": "345d2b72aa5e56855a864fa1583d1a48fd4b88c67f022afa11f576bc3747d614",
+      "retainedEpoch": 843330217912626,
+      "finalEpoch": 843330218193876,
+      "frames": 3800,
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.539000034332275,
+            "p95": 5.977999687194824,
+            "p99": 6.23799991607666,
+            "max": 6.28439998626709
+          },
+          "cpuMs": {
+            "median": 0.026,
+            "p95": 0.0492,
+            "p99": 0.0604,
+            "max": 0.0623
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.531200408935547,
+            "p95": 5.95359992980957,
+            "p99": 6.261199951171875,
+            "max": 11.131500244140625
+          },
+          "cpuMs": {
+            "median": 0.0266,
+            "p95": 0.0592,
+            "p99": 0.0616,
+            "max": 0.0623
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.56850004196167,
+            "p95": 5.9683003425598145,
+            "p99": 6.042699813842773,
+            "max": 6.0625
+          },
+          "cpuMs": {
+            "median": 0.0271,
+            "p95": 0.0522,
+            "p99": 0.0609,
+            "max": 0.0616
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "637e1f9278cad5d7a4fc042d07d23663eb3e76e40fb8f3ba0430bed6a01458b8",
+      "configuration": "debug",
+      "tankSize": "long",
+      "flightWindows": [
+        {
+          "phase": "supported",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.124200135469437,
+            "p95": 8.078300394117832,
+            "p99": 11.408500373363495,
+            "max": 13.877499848604202,
+            "maximumConsecutiveP95": 6
+          },
+          "callbackMs": {
+            "median": 0.8762,
+            "p95": 3.1271,
+            "p99": 3.5088,
+            "max": 4.5646,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54304,
+            "p99": 54600,
+            "max": 58936,
+            "maximumConsecutiveP95": 2
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.363100208342075,
+            "p95": 7.387899793684483,
+            "p99": 7.827100344002247,
+            "max": 8.13200045377016,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 1.0629,
+            "p95": 2.2138,
+            "p99": 2.3994,
+            "max": 3.5038,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54304,
+            "p99": 54304,
+            "max": 54600,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.44640002772212,
+            "p95": 7.398600224405527,
+            "p99": 7.904100231826305,
+            "max": 8.53050034493208,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.9193,
+            "p95": 2.3321,
+            "p99": 2.5791,
+            "max": 2.6829,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54304,
+            "p99": 54416,
+            "max": 54600,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 4.906400106847286,
+            "p95": 7.979599758982658,
+            "p99": 8.3557004109025,
+            "max": 8.479800075292587,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 1.1113,
+            "p95": 2.988,
+            "p99": 3.2455,
+            "max": 3.2947,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49136,
+            "p99": 49136,
+            "max": 49416,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 4.947499837726355,
+            "p95": 7.729500066488981,
+            "p99": 8.367300033569336,
+            "max": 8.520499803125858,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 1.0447,
+            "p95": 2.901,
+            "p99": 3.1717,
+            "max": 3.6325,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49136,
+            "p99": 49248,
+            "max": 49416,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.064399912953377,
+            "p95": 7.336399983614683,
+            "p99": 7.631800137460232,
+            "max": 7.712000049650669,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.9797,
+            "p95": 2.9197,
+            "p99": 3.0909,
+            "max": 3.1817,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49136,
+            "p99": 49136,
+            "max": 49416,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.0559998489916325,
+            "p95": 7.222199812531471,
+            "p99": 7.552799768745899,
+            "max": 7.687500212341547,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 1.007,
+            "p95": 2.9005,
+            "p99": 3.1097,
+            "max": 3.1416,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35312,
+            "p99": 35312,
+            "max": 35576,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.039900075644255,
+            "p95": 7.154699880629778,
+            "p99": 7.49529991298914,
+            "max": 7.616600021719933,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 1.0484,
+            "p95": 2.7943,
+            "p99": 3.1491,
+            "max": 3.2311,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35312,
+            "p99": 35424,
+            "max": 35576,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.0760000012815,
+            "p95": 7.261400111019611,
+            "p99": 7.641000207513571,
+            "max": 8.023199625313282,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.9609,
+            "p95": 2.8265,
+            "p99": 3.0996,
+            "max": 3.2706,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35312,
+            "p99": 35312,
+            "max": 35576,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "processMeasurement": {
+        "process": 63888,
+        "exitCode": 0,
+        "configuration": "Debug",
+        "tank": "long",
+        "samples": 35,
+        "sampleIntervalSeconds": 1,
+        "peakPrivateBytesObserved": 4503449600,
+        "peakWorkingSetBytes": 4192792576,
+        "peakHandlesObserved": 1128,
+        "boundary": "Whole process including startup, editor, live flight and handler qualification; no idle baseline subtraction",
+        "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8"
+      },
+      "logBytes": 216221,
+      "logSha256": "2d3997e5179aa711bd5a752aa3ae6416bb4bf95432841abe06ed6c04f42a1881",
+      "validationErrors": [],
+      "validationWarningCount": 10,
+      "validationWarningKinds": [
+        "WARNING-Shader-OutputNotConsumed"
+      ],
+      "runtimeFileFingerprints": [
+        "Runtime managed: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\NovaCore.Triangle.dll; bytes=365056; sha256=f475883c6d3bf4b13b9ea29d748cb4693a760b59bc74286fedae91bcf31fbc99",
+        "Runtime native-resolved: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\NovaCore.Native.dll; bytes=1799168; sha256=637e1f9278cad5d7a4fc042d07d23663eb3e76e40fb8f3ba0430bed6a01458b8",
+        "Runtime production-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\planetary_production.frag.spv; bytes=152228; sha256=8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+        "Runtime production-tess-control: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\production_spherical_billboard.tesc.spv; bytes=12632; sha256=0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "Runtime production-tess-evaluation: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "Runtime distant-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\shaders\\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+      ]
+    },
+    {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "playerPass": false,
+      "checks": 391,
+      "tank": "nc.tank.short-2",
+      "process": 63300,
+      "window": 53807990,
+      "parts": 12,
+      "source": "7936a61295828a13c10fb39c7d43adfe6e3b86d1b8c35d865c8a9feda7459d2a",
+      "compiled": "99458b6a074e73dceb3c8f33cee6089d0dc536e80241febfd4a525b688c8170f",
+      "retainedEpoch": 843330253167994,
+      "finalEpoch": 843330253261744,
+      "frames": 3800,
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.5590996742248535,
+            "p95": 5.878799915313721,
+            "p99": 5.95359992980957,
+            "max": 6.088200092315674
+          },
+          "cpuMs": {
+            "median": 0.0083,
+            "p95": 0.0337,
+            "p99": 0.0394,
+            "max": 0.0424
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.571099758148193,
+            "p95": 5.853300094604492,
+            "p99": 5.980799674987793,
+            "max": 10.430700302124023
+          },
+          "cpuMs": {
+            "median": 0.007,
+            "p95": 0.0342,
+            "p99": 0.0359,
+            "max": 0.0362
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.546000003814697,
+            "p95": 5.8429999351501465,
+            "p99": 5.935400009155273,
+            "max": 6.080599784851074
+          },
+          "cpuMs": {
+            "median": 0.006,
+            "p95": 0.0331,
+            "p99": 0.116,
+            "max": 0.1221
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "2d1eda6790670f7898cab2a64d9a0485a9e9fabd2ad3b596aed5137b40095f59",
+      "configuration": "release",
+      "tankSize": "short",
+      "flightWindows": [
+        {
+          "phase": "supported",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.3750998340547085,
+            "p95": 8.082999847829342,
+            "p99": 8.78129992634058,
+            "max": 13.559100218117237,
+            "maximumConsecutiveP95": 2
+          },
+          "callbackMs": {
+            "median": 0.4702,
+            "p95": 2.5147,
+            "p99": 2.883,
+            "max": 3.1494,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54288,
+            "p99": 54584,
+            "max": 54584,
+            "maximumConsecutiveP95": 2
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.523600149899721,
+            "p95": 6.746599916368723,
+            "p99": 8.079100400209427,
+            "max": 9.568000212311745,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1514,
+            "p95": 1.0741,
+            "p99": 2.149,
+            "max": 4.3442,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54288,
+            "p99": 54288,
+            "max": 54632,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.557499825954437,
+            "p95": 6.317900028079748,
+            "p99": 6.881999783217907,
+            "max": 7.462599780410528,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0678,
+            "p95": 0.4641,
+            "p99": 0.7507,
+            "max": 1.1383,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54288,
+            "p99": 54288,
+            "max": 54584,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.527399946004152,
+            "p95": 6.215800065547228,
+            "p99": 6.540399976074696,
+            "max": 7.6188999228179455,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0723,
+            "p95": 0.4598,
+            "p99": 0.5443,
+            "max": 1.2292,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49120,
+            "p99": 49120,
+            "max": 49360,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.537800025194883,
+            "p95": 6.2986998818814754,
+            "p99": 6.560899782925844,
+            "max": 7.783600129187107,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0947,
+            "p95": 0.4927,
+            "p99": 1.117,
+            "max": 1.4141,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49080,
+            "p99": 49192,
+            "max": 49360,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.535199772566557,
+            "p95": 6.293099839240313,
+            "p99": 6.420299876481295,
+            "max": 7.281200028955936,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1003,
+            "p95": 0.4994,
+            "p99": 0.559,
+            "max": 1.0674,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49080,
+            "p99": 49080,
+            "max": 49360,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.5207000114023685,
+            "p95": 6.23330008238554,
+            "p99": 6.541400216519833,
+            "max": 6.9785998202860355,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0717,
+            "p95": 0.4483,
+            "p99": 0.4609,
+            "max": 1.1692,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35256,
+            "p99": 35256,
+            "max": 35520,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.542899947613478,
+            "p95": 7.043099962174892,
+            "p99": 8.673500269651413,
+            "max": 21.57749980688095,
+            "maximumConsecutiveP95": 12
+          },
+          "callbackMs": {
+            "median": 0.1055,
+            "p95": 0.4581,
+            "p99": 0.5709,
+            "max": 1.3509,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35256,
+            "p99": 35520,
+            "max": 68192,
+            "maximumConsecutiveP95": 2
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.546300206333399,
+            "p95": 6.154099944978952,
+            "p99": 6.454499904066324,
+            "max": 6.698499899357557,
+            "maximumConsecutiveP95": 2
+          },
+          "callbackMs": {
+            "median": 0.0747,
+            "p95": 0.4115,
+            "p99": 0.4632,
+            "max": 1.1069,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35256,
+            "p99": 35256,
+            "max": 35520,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "processMeasurement": {
+        "process": 63300,
+        "exitCode": 0,
+        "configuration": "Release",
+        "tank": "short",
+        "samples": 30,
+        "sampleIntervalSeconds": 1,
+        "peakPrivateBytesObserved": 4542816256,
+        "peakWorkingSetBytes": 4126797824,
+        "peakHandlesObserved": 1129,
+        "boundary": "Whole process including startup, editor, live flight and handler qualification; no idle baseline subtraction",
+        "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8"
+      },
+      "logBytes": 214298,
+      "logSha256": "a460606911678ae877b00c6047f62535ffc6b663ba9f178656d3e3d3b42444e1",
+      "validationErrors": [],
+      "validationWarningCount": 0,
+      "validationWarningKinds": [],
+      "runtimeFileFingerprints": [
+        "Runtime managed: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Triangle.dll; bytes=350208; sha256=e3eb2712e3fdaa39ab4bbc0a8b9f3b91b8bfe329ead5edb9c4661972dea89cd0",
+        "Runtime native-resolved: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Native.dll; bytes=363008; sha256=2d1eda6790670f7898cab2a64d9a0485a9e9fabd2ad3b596aed5137b40095f59",
+        "Runtime production-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\planetary_production.frag.spv; bytes=152228; sha256=8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+        "Runtime production-tess-control: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tesc.spv; bytes=12632; sha256=0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "Runtime production-tess-evaluation: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "Runtime distant-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+      ]
+    },
+    {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "playerPass": false,
+      "checks": 391,
+      "tank": "nc.tank.long-2",
+      "process": 18444,
+      "window": 13502312,
+      "parts": 12,
+      "source": "94b34fc815c8b596b19b41a699baf69b465e9f2cbe98115de4861c37642264df",
+      "compiled": "00c5b494ed10dec290c89db789d93f2f687fc5a749f7adf2807d12c9c3fcf219",
+      "retainedEpoch": 843330283427462,
+      "finalEpoch": 843330283536837,
+      "frames": 3800,
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.555500030517578,
+            "p95": 5.872999668121338,
+            "p99": 5.928900241851807,
+            "max": 5.966899871826172
+          },
+          "cpuMs": {
+            "median": 0.0073,
+            "p95": 0.0282,
+            "p99": 0.0383,
+            "max": 0.0417
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.554800033569336,
+            "p95": 5.870299816131592,
+            "p99": 6.015699863433838,
+            "max": 10.97800064086914
+          },
+          "cpuMs": {
+            "median": 0.0069,
+            "p95": 0.0309,
+            "p99": 0.0389,
+            "max": 0.0391
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.557600021362305,
+            "p95": 5.843900203704834,
+            "p99": 6.02839994430542,
+            "max": 6.07990026473999
+          },
+          "cpuMs": {
+            "median": 0.0061,
+            "p95": 0.0328,
+            "p99": 0.0628,
+            "max": 0.0865
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "2d1eda6790670f7898cab2a64d9a0485a9e9fabd2ad3b596aed5137b40095f59",
+      "configuration": "release",
+      "tankSize": "long",
+      "flightWindows": [
+        {
+          "phase": "supported",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.054499953985214,
+            "p95": 8.184099569916725,
+            "p99": 9.394300170242786,
+            "max": 12.17969972640276,
+            "maximumConsecutiveP95": 2
+          },
+          "callbackMs": {
+            "median": 0.6516,
+            "p95": 2.8529,
+            "p99": 3.2021,
+            "max": 3.8564,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54304,
+            "p99": 54304,
+            "max": 54600,
+            "maximumConsecutiveP95": 2
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.576000083237886,
+            "p95": 6.7854998633265495,
+            "p99": 7.495900150388479,
+            "max": 9.607800282537937,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1475,
+            "p95": 1.3164,
+            "p99": 2.1242,
+            "max": 4.5245,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54304,
+            "p99": 54304,
+            "max": 54648,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.555599927902222,
+            "p95": 6.291999947279692,
+            "p99": 6.663300096988678,
+            "max": 7.032399997115135,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0671,
+            "p95": 0.4843,
+            "p99": 0.7396,
+            "max": 1.2732,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54304,
+            "p99": 54304,
+            "max": 54600,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.542300175875425,
+            "p95": 6.220899987965822,
+            "p99": 6.550599820911884,
+            "max": 7.271199952811003,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0693,
+            "p95": 0.4336,
+            "p99": 0.5501,
+            "max": 1.1209,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49136,
+            "p99": 49136,
+            "max": 49376,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.548399873077869,
+            "p95": 6.165199913084507,
+            "p99": 7.1483999490737915,
+            "max": 8.762200362980366,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0768,
+            "p95": 0.4879,
+            "p99": 1.2418,
+            "max": 3.1497,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49096,
+            "p99": 49208,
+            "max": 49376,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.518199875950813,
+            "p95": 6.197299808263779,
+            "p99": 6.511699873954058,
+            "max": 7.072899956256151,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1045,
+            "p95": 0.4846,
+            "p99": 0.528,
+            "max": 1.1463,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49096,
+            "p99": 49096,
+            "max": 49376,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.565200001001358,
+            "p95": 6.2061999924480915,
+            "p99": 6.549200043082237,
+            "max": 6.853700149804354,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1073,
+            "p95": 0.4532,
+            "p99": 0.4736,
+            "max": 1.0915,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35272,
+            "p99": 35272,
+            "max": 35536,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.546300206333399,
+            "p95": 6.26259995624423,
+            "p99": 6.4893001690506935,
+            "max": 7.060599979013205,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1121,
+            "p95": 0.4773,
+            "p99": 0.5157,
+            "max": 1.1672,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35272,
+            "p99": 35384,
+            "max": 35536,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.537299904972315,
+            "p95": 6.222900003194809,
+            "p99": 6.513999775052071,
+            "max": 8.120199665427208,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1067,
+            "p95": 0.4543,
+            "p99": 0.4881,
+            "max": 1.1261,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35272,
+            "p99": 35272,
+            "max": 35536,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "processMeasurement": {
+        "process": 18444,
+        "exitCode": 0,
+        "configuration": "Release",
+        "tank": "long",
+        "samples": 30,
+        "sampleIntervalSeconds": 1,
+        "peakPrivateBytesObserved": 3469475840,
+        "peakWorkingSetBytes": 3294072832,
+        "peakHandlesObserved": 1130,
+        "boundary": "Whole process including startup, editor, live flight and handler qualification; no idle baseline subtraction",
+        "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8"
+      },
+      "logBytes": 210167,
+      "logSha256": "3f14ccb450032bb0cb6887573b0016415597dbcf671d17c194a86b086d2a21ca",
+      "validationErrors": [],
+      "validationWarningCount": 0,
+      "validationWarningKinds": [],
+      "runtimeFileFingerprints": [
+        "Runtime managed: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Triangle.dll; bytes=350208; sha256=e3eb2712e3fdaa39ab4bbc0a8b9f3b91b8bfe329ead5edb9c4661972dea89cd0",
+        "Runtime native-resolved: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Native.dll; bytes=363008; sha256=2d1eda6790670f7898cab2a64d9a0485a9e9fabd2ad3b596aed5137b40095f59",
+        "Runtime production-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\planetary_production.frag.spv; bytes=152228; sha256=8c59838abb3d7ee6418695ea40f044ca1f04f5c3c9216296d5cc19bba6110d6b",
+        "Runtime production-tess-control: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tesc.spv; bytes=12632; sha256=0163498278f9523fd442434f05f056be28252d16c2f2ba44b8d91642b33e4439",
+        "Runtime production-tess-evaluation: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "Runtime distant-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+      ]
+    }
+  ]
+}

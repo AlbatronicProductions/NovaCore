@@ -7,6 +7,10 @@ namespace nc::facility {
 // Primitive order, dimensions, colors and the existing mesh winding are unchanged.
 struct Box { std::array<float,3> minimum, maximum, color; };
 inline constexpr uint32_t GeometryVersion=1, MaximumCasters=8;
+// Current pad raster and shadow share a centered unit box. Legacy mesh handles
+// below remain ABI-compatible, but are not part of the unified player route.
+inline constexpr uint32_t SupportSlabGeometry=7;
+inline constexpr Box SupportSlabUnit{{-.5f,-.5f,-.5f},{.5f,.5f,.5f},{.34f,.37f,.40f}};
 inline constexpr std::array<Box,4> LaunchPadBoxes{{
   {{-32,-24,0},{32,24,1.5f},{.34f,.37f,.40f}},
   {{-7,-7,1.5f},{7,7,8.5f},{.48f,.50f,.52f}},

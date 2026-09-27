@@ -1,0 +1,927 @@
+{
+  "schema": "novacore.modular-gate9-results/1",
+  "judgment": "PASS",
+  "scope": "Cold canonical Florida admission; continuous support and powered flight remain Gates 10-12",
+  "playerPass": false,
+  "qualification": [
+    {
+      "elapsedMs": 3488.1635,
+      "exitCode": 0,
+      "arguments": [
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Debug",
+        "--no-restore",
+        "-v:q",
+        "-p:NativeBuildDirectory=modular-craft-first-playable/native-debug"
+      ],
+      "output": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:03.30"
+      ],
+      "kind": "solution-build"
+    },
+    {
+      "elapsedMs": 1051.8192,
+      "exitCode": 0,
+      "arguments": [
+        "build",
+        "tools/NovaCore.ConstructionEditor",
+        "-c",
+        "Debug",
+        "--no-restore",
+        "-v:q",
+        "-p:NativeBuildDirectory=modular-craft-first-playable/native-debug"
+      ],
+      "output": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:00.87"
+      ],
+      "kind": "editor-build"
+    },
+    {
+      "elapsedMs": 331.8429,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate2"
+      ],
+      "output": [
+        "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 19786.2347,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate3"
+      ],
+      "output": [
+        "Gate 3 IO witness directory: E:\\NovaCore\\build\\modular-craft-first-playable\\gate3-tests\\77a4b735da304e94ae4827b25301f01e",
+        "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 309.074,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate4"
+      ],
+      "output": [
+        "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 996a19fc0550ea5af01ae7748eea493263c08e1c54a8ef8ba3fda1c90eeeab4a"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 1953.0565,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate5-operations"
+      ],
+      "output": [
+        "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 3290.0115,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate6"
+      ],
+      "output": [
+        "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\fb1a871835a04ad9bc1f764d359acf2d"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 1332.4979,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate7"
+      ],
+      "output": [
+        "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 4045.08,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate8"
+      ],
+      "output": [
+        "short timeBits=1080 rateBits=2161 quantityBits=6510 fuelScratch=8672 physicalScratch=8646",
+        "contact 1304kg: footLoadMax=7399.62384422313N tiltMargin=0.8609520377960432m nativeTravel=0.0002985001774504781m depth=0.000298531m recenterP=1.9984014443252818E-15m recenterV=1.9178279303923403E-14m/s",
+        "long timeBits=1080 rateBits=2161 quantityBits=6511 fuelScratch=8673 physicalScratch=8646",
+        "contact 2164kg: footLoadMax=12572.373112166708N tiltMargin=0.8347614606772324m nativeTravel=0.00021433879737742245m depth=0.00021489449m recenterP=0m recenterV=1.553677691793345E-14m/s",
+        "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 2281.3744,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-gate9"
+      ],
+      "output": [
+        "FLORIDA_PRESENTATION_READY site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=5.9161",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 earthP=1.7423449953896652E-09 earthV=1.9065862296939068E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=7996e0444e189deb6bd41d51187430905ba62fd1f6011c848022aef76a99dd43 earthP=3.5540055303074762E-09 earthV=2.2737367544323206E-13 nativeBytes=458752",
+        "FLORIDA_PRESENTATION_READY site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2581",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc earthP=2.7152485655831642E-09 earthV=2.0495186137532024E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=cbe00062626b83d031b8a6e9668f45c4ab685e1aeabaef8c05c1983b2e11beb7 earthP=2.5076627764545864E-09 earthV=1.8198773652309379E-13 nativeBytes=458752",
+        "MODULAR_GATE9 PASS checks=550"
+      ],
+      "kind": "Debug"
+    },
+    {
+      "elapsedMs": 2923.0254,
+      "exitCode": 0,
+      "arguments": [
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-v:q",
+        "-p:NativeBuildDirectory=modular-craft-first-playable/native-release"
+      ],
+      "output": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:02.74"
+      ],
+      "kind": "solution-build"
+    },
+    {
+      "elapsedMs": 1024.3279,
+      "exitCode": 0,
+      "arguments": [
+        "build",
+        "tools/NovaCore.ConstructionEditor",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-v:q",
+        "-p:NativeBuildDirectory=modular-craft-first-playable/native-release"
+      ],
+      "output": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:00.85"
+      ],
+      "kind": "editor-build"
+    },
+    {
+      "elapsedMs": 317.8199,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate2"
+      ],
+      "output": [
+        "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 3954.1132,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate3"
+      ],
+      "output": [
+        "Gate 3 IO witness directory: E:\\NovaCore\\build\\modular-craft-first-playable\\gate3-tests\\20d6e1c764734b79bc4cb444ab5dff4d",
+        "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 308.0938,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate4"
+      ],
+      "output": [
+        "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 996a19fc0550ea5af01ae7748eea493263c08e1c54a8ef8ba3fda1c90eeeab4a"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 1286.7938,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate5-operations"
+      ],
+      "output": [
+        "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 1909.2038,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate6"
+      ],
+      "output": [
+        "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\3b97ffe31cbd4ddb9e44c1efebb1ccf6"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 976.3192,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate7"
+      ],
+      "output": [
+        "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 3233.987,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate8"
+      ],
+      "output": [
+        "short timeBits=1080 rateBits=2161 quantityBits=6510 fuelScratch=8672 physicalScratch=8646",
+        "contact 1304kg: footLoadMax=7399.62384422313N tiltMargin=0.8609520377960432m nativeTravel=0.0002985001774504781m depth=0.000298531m recenterP=1.9984014443252818E-15m recenterV=1.9178279303923403E-14m/s",
+        "long timeBits=1080 rateBits=2161 quantityBits=6511 fuelScratch=8673 physicalScratch=8646",
+        "contact 2164kg: footLoadMax=12572.373112166708N tiltMargin=0.8347614606772324m nativeTravel=0.00021433879737742245m depth=0.00021489449m recenterP=0m recenterV=1.553677691793345E-14m/s",
+        "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 1514.742,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-gate9"
+      ],
+      "output": [
+        "FLORIDA_PRESENTATION_READY site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=6.4157",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 earthP=1.7423449953896652E-09 earthV=1.9065862296939068E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=7996e0444e189deb6bd41d51187430905ba62fd1f6011c848022aef76a99dd43 earthP=3.5540055303074762E-09 earthV=2.2737367544323206E-13 nativeBytes=458752",
+        "FLORIDA_PRESENTATION_READY site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2988",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc earthP=2.7152485655831642E-09 earthV=2.0495186137532024E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=cbe00062626b83d031b8a6e9668f45c4ab685e1aeabaef8c05c1983b2e11beb7 earthP=2.5076627764545864E-09 earthV=1.8198773652309379E-13 nativeBytes=458752",
+        "MODULAR_GATE9 PASS checks=550"
+      ],
+      "kind": "Release"
+    },
+    {
+      "elapsedMs": 1559.3899,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--florida-slab-correctness"
+      ],
+      "output": [
+        "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=9.017920290485749E-07 gravity=Double3 { X = -8.105698039195347E-06, Y = -9.79401894838773, Z = 0.014248775455661259, LengthSquared = 95.92301018904558, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=0",
+        "FLORIDA_SLAB_INITIAL PASS minHeight=-6.661338147750939E-16 allCornerEdgeMargin=23.24410285091158 supportCorners=4 comProjection=(-2.313043373857347E-16,0) supportRectangle=(-0.2599999999999997,0.26000000000000045,-0.26,0.26)",
+        "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e origin=Double3 { X = -5270997.711609826, Y = -1870990.5537414225, Z = 3050582.128838567, LengthSquared = 40590073852774.91, IsFinite = True } velocity=Double3 { X = 136.4347925649703, Y = -384.3672157626637, Z = 1.6237584470144013E-05, LengthSquared = 166352.6091753888, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+        "FLORIDA_SITE_STEP n=1 status=AwaitingDebt published=1 tick=16666 penetration=1.1632370733760666E-05 velocity=Double3 { X = 0.0017438485223584465, Y = -0.00032104925036909493, Z = 0.0007433827035915709, LengthSquared = 3.696698134093409E-06, IsFinite = True } omega=Double3 { X = 5.242117503967414E-17, Y = -0.00043728388845920563, Z = -0.0010257934918627143, LengthSquared = 1.2434694870539035E-06, IsFinite = True } private=(1, 1, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=2 status=AwaitingDebt published=1 tick=33333 penetration=4.519891408105714E-05 velocity=Double3 { X = 0.0017207357881572545, Y = -0.0014547801639188949, Z = 0.0019079812761573433, LengthSquared = 8.71770952814406E-06, IsFinite = True } omega=Double3 { X = 1.18863236293551E-08, Y = -0.0011251445392992695, Z = -0.0010094009340242808, LengthSquared = 2.284840480065341E-06, IsFinite = True } private=(1, 2, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=3 status=AwaitingDebt published=1 tick=50000 penetration=7.286953757756898E-05 velocity=Double3 { X = 0.0008943278019797764, Y = -0.001189414309218159, Z = 0.0021988948642452204, LengthSquared = 7.049667240370896E-06, IsFinite = True } omega=Double3 { X = 3.017509151684479E-08, Y = -0.001293489592621556, Z = -0.000526084390267918, LengthSquared = 1.9498801128143824E-06, IsFinite = True } private=(1, 3, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=4 status=AwaitingDebt published=1 tick=66666 penetration=9.07351598706807E-05 velocity=Double3 { X = -0.00011393446891208101, Y = -0.0008533683474987432, Z = 0.0015115899004409287, LengthSquared = 3.0261226268340304E-06, IsFinite = True } omega=Double3 { X = 4.114803453763964E-08, Y = -0.000889196408942106, Z = 6.702208271781035E-05, LengthSquared = 7.951622149405306E-07, IsFinite = True } private=(1, 4, 0, 0, False, False)",
+        "FLORIDA_SITE_STEP n=1200 status=Completed published=1 tick=20000000 penetration=7.898934219352505E-05 velocity=Double3 { X = 1.449634698116014E-06, Y = -3.8062909542743644E-06, Z = 4.530117568285254E-09, LengthSquared = 1.658931210853794E-11, IsFinite = True } omega=Double3 { X = -3.9278180563863434E-12, Y = -2.6833791645522324E-09, Z = -8.527654813249942E-07, LengthSquared = 7.272161666786176E-13, IsFinite = True } private=(1, 1200, 0, 0, False, False)",
+        "FLORIDA_SLAB_METRICS peak=9.750102006811368E-05 settledHeight=7.901107027863397E-05 drift=9.32385073805606E-08 speed=5.5077650646174094E-06 angular=2.1950650053798498E-06 orientationMatrixDrift=4.606867605723037E-06 minEdgeClearance=23.243980844171386 minContacts=4 geometricContactChildMask=4 settledGeometricFeatureChanges=0 support=600/600",
+        "FLORIDA_SITE_CHEAP PASS peakPenetration=9.750102006811368E-05 support=600/600 intervals=1200",
+        "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=7.861267317148919E-09 maxVelocity=5.796914039811765E-13 maxOrientationMatrix=1.887379141862766E-15 maxAngular=1.258635097526423E-19 departure=REFUSED_NOT_QUALIFIED",
+        "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+        "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 912.1744,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--florida-slab-allocation"
+      ],
+      "output": [
+        "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 1246.0217,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--florida-slab-camera-static"
+      ],
+      "output": [
+        "SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.6294",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+        "SRV01_COLD_PREPARATION ms=320.8709 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 4036.1399,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--florida-slab-camera-warp"
+      ],
+      "output": [
+        "SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.6953",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+        "SRV01_COLD_PREPARATION ms=352.2606 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+        "ACTIVE_VESSEL_COST {\"route\":\"camera-at-warp-1\",\"warm\":512,\"count\":2048,\"median\":0.0727,\"p95\":0.3617,\"p99\":0.4073,\"maximum\":1.1262,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":1.1262,\"index\":844},{\"ms\":0.5321,\"index\":799},{\"ms\":0.5111,\"index\":800},{\"ms\":0.4563,\"index\":537},{\"ms\":0.4478,\"index\":796},{\"ms\":0.4241,\"index\":784},{\"ms\":0.418,\"index\":824},{\"ms\":0.4146,\"index\":820}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"supported-warp-1\",\"warm\":512,\"count\":2048,\"median\":0.1352,\"p95\":0.15,\"p99\":0.1551,\"maximum\":0.3393,\"collections\":[0,0,0],\"allocated\":4751360,\"tails\":[{\"ms\":0.3393,\"index\":655},{\"ms\":0.2522,\"index\":656},{\"ms\":0.223,\"index\":859},{\"ms\":0.1974,\"index\":583},{\"ms\":0.1935,\"index\":118},{\"ms\":0.1809,\"index\":668},{\"ms\":0.1809,\"index\":760},{\"ms\":0.1792,\"index\":654}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_WARP {\"factor\":1,\"frames\":600,\"maximumOffset\":1.2825190372575068E-05,\"maximumHorizon\":1.609529295749793E-07,\"maximumDistance\":9.144515143333365E-06,\"terrainCorrections\":0,\"canonicalUnchanged\":true}",
+        "SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.1946",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+        "SRV01_COLD_PREPARATION ms=120.0466 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+        "ACTIVE_VESSEL_COST {\"route\":\"camera-at-warp-120\",\"warm\":512,\"count\":2048,\"median\":0.0299,\"p95\":0.0301,\"p99\":0.0326,\"maximum\":0.0547,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.0547,\"index\":1361},{\"ms\":0.0361,\"index\":1524},{\"ms\":0.0359,\"index\":1359},{\"ms\":0.0355,\"index\":1390},{\"ms\":0.0348,\"index\":1360},{\"ms\":0.0345,\"index\":1169},{\"ms\":0.0341,\"index\":1667},{\"ms\":0.0335,\"index\":1388}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"supported-warp-120\",\"warm\":512,\"count\":2048,\"median\":0.0564,\"p95\":0.0581,\"p99\":0.0595,\"maximum\":0.0836,\"collections\":[0,0,0],\"allocated\":4751360,\"tails\":[{\"ms\":0.0836,\"index\":1367},{\"ms\":0.0831,\"index\":471},{\"ms\":0.0785,\"index\":194},{\"ms\":0.0763,\"index\":1368},{\"ms\":0.0667,\"index\":1369},{\"ms\":0.0664,\"index\":472},{\"ms\":0.0617,\"index\":1518},{\"ms\":0.0616,\"index\":1385}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_WARP {\"factor\":120,\"frames\":600,\"maximumOffset\":1.2706837655196019E-05,\"maximumHorizon\":1.623512853162285E-07,\"maximumDistance\":9.373143875279766E-06,\"terrainCorrections\":0,\"canonicalUnchanged\":true}",
+        "SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2128",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+        "SRV01_COLD_PREPARATION ms=121.7581 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+        "ACTIVE_VESSEL_COST {\"route\":\"camera-at-warp-14400\",\"warm\":512,\"count\":2048,\"median\":0.0417,\"p95\":0.0609,\"p99\":0.1032,\"maximum\":0.1526,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.1526,\"index\":1649},{\"ms\":0.1518,\"index\":561},{\"ms\":0.1508,\"index\":436},{\"ms\":0.1483,\"index\":1297},{\"ms\":0.1382,\"index\":1899},{\"ms\":0.1347,\"index\":1777},{\"ms\":0.1316,\"index\":437},{\"ms\":0.1302,\"index\":673}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"supported-warp-14400\",\"warm\":512,\"count\":2048,\"median\":0.0821,\"p95\":0.0903,\"p99\":0.1234,\"maximum\":0.2145,\"collections\":[0,0,0],\"allocated\":4751360,\"tails\":[{\"ms\":0.2145,\"index\":377},{\"ms\":0.1889,\"index\":463},{\"ms\":0.1762,\"index\":306},{\"ms\":0.171,\"index\":545},{\"ms\":0.1637,\"index\":301},{\"ms\":0.1618,\"index\":128},{\"ms\":0.1609,\"index\":546},{\"ms\":0.155,\"index\":40}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_WARP {\"factor\":14400,\"frames\":600,\"maximumOffset\":1.4349719309970898E-05,\"maximumHorizon\":5.070600856821404E-07,\"maximumDistance\":1.3057511441871839E-05,\"terrainCorrections\":0,\"canonicalUnchanged\":true}",
+        "SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2021",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+        "SRV01_COLD_PREPARATION ms=128.742 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+        "ACTIVE_VESSEL_COST {\"route\":\"camera-at-warp-86400\",\"warm\":512,\"count\":2048,\"median\":0.0416,\"p95\":0.0561,\"p99\":0.1051,\"maximum\":0.1816,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.1816,\"index\":1038},{\"ms\":0.1689,\"index\":1167},{\"ms\":0.1608,\"index\":790},{\"ms\":0.159,\"index\":1809},{\"ms\":0.1446,\"index\":414},{\"ms\":0.1415,\"index\":542},{\"ms\":0.1388,\"index\":292},{\"ms\":0.1361,\"index\":1171}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"supported-warp-86400\",\"warm\":512,\"count\":2048,\"median\":0.0836,\"p95\":0.1194,\"p99\":0.1585,\"maximum\":0.2798,\"collections\":[0,0,0],\"allocated\":4751360,\"tails\":[{\"ms\":0.2798,\"index\":863},{\"ms\":0.2511,\"index\":1275},{\"ms\":0.2443,\"index\":701},{\"ms\":0.2123,\"index\":1881},{\"ms\":0.2104,\"index\":1998},{\"ms\":0.2093,\"index\":1578},{\"ms\":0.2082,\"index\":453},{\"ms\":0.207,\"index\":375}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_WARP {\"factor\":86400,\"frames\":600,\"maximumOffset\":1.428240232699955E-05,\"maximumHorizon\":5.076233532711742E-07,\"maximumDistance\":1.3057511441871839E-05,\"terrainCorrections\":0,\"canonicalUnchanged\":true}",
+        "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 889.1298,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--florida-slab-camera-moving"
+      ],
+      "output": [
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.",
+        "SRV01_COLD_PREPARATION ms=144.3089 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ACTIVE_VESSEL_MOVING {\"pass\":true,\"physicalIntervals\":128,\"comChanged\":true,\"maxFollowError\":0,\"translations\":[100,1000,100000],\"maximumRelativeEncodingError\":0,\"solarPaused\":true,\"held\":true,\"saveUnchanged\":true,\"largestRoot\":7000000000000}"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 2265.6701,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--florida-slab-camera-costs"
+      ],
+      "output": [
+        "SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab",
+        "FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.791",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+        "SRV01_COLD_PREPARATION ms=329.6205 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ACTIVE_VESSEL_COST {\"route\":\"florida-vessel-follow-orbit-zoom\",\"warm\":512,\"count\":2048,\"median\":0.0446,\"p95\":0.0471,\"p99\":0.0621,\"maximum\":0.075,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.075,\"index\":1881},{\"ms\":0.0741,\"index\":369},{\"ms\":0.0709,\"index\":1638},{\"ms\":0.0694,\"index\":667},{\"ms\":0.0694,\"index\":1633},{\"ms\":0.0689,\"index\":1022},{\"ms\":0.0686,\"index\":1636},{\"ms\":0.0685,\"index\":663}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"F-refocus\",\"warm\":512,\"count\":2048,\"median\":0.0144,\"p95\":0.0145,\"p99\":0.0164,\"maximum\":0.0237,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.0237,\"index\":381},{\"ms\":0.0194,\"index\":382},{\"ms\":0.0194,\"index\":441},{\"ms\":0.0194,\"index\":1939},{\"ms\":0.0189,\"index\":996},{\"ms\":0.0189,\"index\":1938},{\"ms\":0.0188,\"index\":1937},{\"ms\":0.0186,\"index\":2010}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"celestial-vessel-switch\",\"warm\":512,\"count\":2048,\"median\":0.0191,\"p95\":0.0192,\"p99\":0.0257,\"maximum\":0.0474,\"collections\":[0,0,0],\"allocated\":98304,\"tails\":[{\"ms\":0.0474,\"index\":992},{\"ms\":0.0339,\"index\":218},{\"ms\":0.0336,\"index\":503},{\"ms\":0.0332,\"index\":515},{\"ms\":0.0323,\"index\":1064},{\"ms\":0.0311,\"index\":504},{\"ms\":0.0288,\"index\":1063},{\"ms\":0.0274,\"index\":516}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"solar-celestial-display\",\"warm\":512,\"count\":2048,\"median\":0.009,\"p95\":0.0091,\"p99\":0.012,\"maximum\":0.0157,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.0157,\"index\":1095},{\"ms\":0.0148,\"index\":498},{\"ms\":0.0148,\"index\":1715},{\"ms\":0.0144,\"index\":279},{\"ms\":0.014,\"index\":462},{\"ms\":0.0137,\"index\":1547},{\"ms\":0.0134,\"index\":1555},{\"ms\":0.0132,\"index\":1556}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_STORAGE {\"targetSlots\":1,\"historySlots\":0,\"observationBytes\":136,\"retainedBefore\":258119872,\"retainedAfter\":258119248,\"refocusOperations\":10000,\"bindingUnchanged\":true}"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 1034.7154,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--player-engine"
+      ],
+      "output": [
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=33.55 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "PLAYER_INPUT_COST calls=20000 elapsed_ms=32.1712 bytes=0",
+        "PLAYER_ENGINE PASS checks=9898"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 882.4915,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--player-attitude"
+      ],
+      "output": [
+        "PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0034 p95_ms=0.0046 p99_ms=0.0193 max_ms=0.0721 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152",
+        "PLAYER_ATTITUDE PASS checks=8264"
+      ],
+      "kind": "preserved-graphics"
+    },
+    {
+      "elapsedMs": 1646.0584,
+      "exitCode": 0,
+      "arguments": [
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--player-integrated"
+      ],
+      "output": [
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=31.3759 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=11.6059 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=19.2491 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=10.9447 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=10.9891 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=10.5315 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=10.399 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=10.3839 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=10.3557 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=10.7849 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+        "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+        "SRV01_COLD_PREPARATION ms=11.5929 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"request-sign-resolution\",\"samples\":640,\"medianMs\":0,\"p95Ms\":0.0001,\"p99Ms\":0.0001,\"maxMs\":0.0003,\"repetitionMaxMs\":[0.0003,0.0003,0.0001,0.0001,0.0001],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+        "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"input-plus-canonical-admission\",\"samples\":640,\"medianMs\":0.0019,\"p95Ms\":0.0057,\"p99Ms\":0.0128,\"maxMs\":0.023,\"repetitionMaxMs\":[0.0172,0.023,0.0128,0.0149,0.0143],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+        "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"allocation-table-lookup\",\"samples\":640,\"medianMs\":0.0001,\"p95Ms\":0.0002,\"p99Ms\":0.0007,\"maxMs\":0.0015,\"repetitionMaxMs\":[0.0015,0.0014,0.0008,0.0008,0.0007],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+        "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"host-credit-physical-service-observation\",\"samples\":640,\"medianMs\":0.092,\"p95Ms\":0.0957,\"p99Ms\":0.1348,\"maxMs\":0.2112,\"repetitionMaxMs\":[0.1357,0.2112,0.1145,0.1155,0.1107],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+        "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"vessel-follow-and-render-submission\",\"samples\":640,\"medianMs\":0.1918,\"p95Ms\":0.2038,\"p99Ms\":0.2506,\"maxMs\":2.0312,\"repetitionMaxMs\":[0.2453,0.397,0.2018,2.0312,0.2112],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+        "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"combined-including-diagnostic-request-and-lookup\",\"samples\":640,\"medianMs\":0.2848,\"p95Ms\":0.3084,\"p99Ms\":0.3805,\"maxMs\":2.0891,\"repetitionMaxMs\":[0.3805,0.6102,0.3264,2.0891,0.3295],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+        "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94"
+      ],
+      "kind": "preserved-graphics"
+    }
+  ],
+  "preserved": [
+    {
+      "kind": "managed-build",
+      "arguments": [
+        "build",
+        "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+        "-c",
+        "Debug",
+        "--no-restore",
+        "-v",
+        "quiet"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 781.0562,
+      "output": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:00.61"
+      ]
+    },
+    {
+      "kind": "managed-build",
+      "arguments": [
+        "build",
+        "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-v",
+        "quiet"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 776.6895,
+      "output": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:00.60"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 265.7498,
+      "output": [
+        "Modular Part Standard baseline PASS: 33 checks; catalog 751a86d1443f036c56505a845a7a644e09bdf74ba60c6c4c05ae60fe4a371818; full Gate 1 also requires red-team probes"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-redteam"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 217.409,
+      "output": [
+        "{\"unresolvedPortResourceAccepted\":false,\"passthroughResourceRevisionMissingFromDependencyDigest\":false,\"nullPlacementRefusal\":\"InvalidDataException\"}",
+        "Modular Part Standard red team PASS"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-closure"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 256.1298,
+      "output": [
+        "Modular Gate 1 bounded closure PASS: 58 checks; resource catalog 94d3ada39e190751cd02aa2a97a2cae0e3922982ee4269a710bdb9f09eceda17; socket catalog dde5d4c6d2b452f16da121a3ca24b727483b0c21b180c3f60c200329687e7738"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-admission-audit"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 191.4162,
+      "output": [
+        "{\"densityKgM3\":1000,\"capacityKg\":9.424777960769382E-09,\"geometricVolumeM3\":9.424777960769381E-15,\"requiredVolumeM3\":9.424777960769381E-12,\"expectedMassKg\":9.424777960769381E-12,\"capacityToPhysicalMassRatio\":1000,\"admitted\":false,\"reloaded\":false,\"digest\":null,\"sourceUnchanged\":true}",
+        "{\"densityKgM3\":1E+20,\"capacityKg\":1,\"geometricVolumeM3\":9.424777960769381E-15,\"requiredVolumeM3\":1E-20,\"expectedMassKg\":942477.7960769382,\"capacityToPhysicalMassRatio\":1.0610329539459686E-06,\"admitted\":false,\"reloaded\":false,\"digest\":null,\"sourceUnchanged\":true}",
+        "{\"field\":\"construction.asset.materialOrigin\",\"refusal\":\"JsonException\",\"structured\":true}",
+        "{\"field\":\"standard.socketGroups[0].axis.position\",\"refusal\":\"JsonException\",\"structured\":true}",
+        "Modular full admission audit PASS"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-numerics"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 261.9017,
+      "output": [
+        "Modular Gate 1 numerical admission PASS: 251 independent-rational/scale/boundary checks"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-json"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 205.4546,
+      "output": [
+        "Modular Gate 1 JSON refusal PASS: 20 checks"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-aggregate"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 549.8853,
+      "output": [
+        "Modular Gate 1 dry aggregate admission PASS: 50 independent centre-first rational/boundary checks"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-size"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 506.4889,
+      "output": [
+        "Modular Gate 1 catalog bound PASS: 12 byte-boundary checks"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-predicates"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 164.8696,
+      "output": [
+        "Modular Gate 1 physical predicates PASS: 37 independent sign/overlap/boundary checks"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage1"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 279.1824,
+      "output": [
+        "Construction Stage 1 PASS: 24 checks; catalog c25d1615ade47d3e375d1bb13259c98fc0f2fea8f5cbe815fba16208dfc275ce"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage2"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 263.5572,
+      "output": [
+        "Construction Stage 2 PASS: 28 checks; design 6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage3"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 2351.9905,
+      "output": [
+        "Construction Stage 3 PASS: 2075 checks; exact oracle 400 cases; DLV graph only, no ignition"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage4"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 405.3304,
+      "output": [
+        "Construction Stage 4 PASS: 90 checks; power/data independent; no DLV electrical admission"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage5"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 273.7753,
+      "output": [
+        "Construction Stage 5 core PASS: 31 checks; isolated revision-bound editor; UI qualification separate"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage6"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 551.2422,
+      "output": [
+        "Construction Stage 6 PASS: 93 checks; shared design admission and once-only runtime registration; no physical-flight admission"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage7"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 281.8986,
+      "output": [
+        "Construction Stage 7 PASS: 62 checks; 150 dry + 36 resource regions; 38 actuators; mass 247283.61451443686; COM Double3 { X = 19.305845298919515, Y = 0.0005515133792867957, Z = 1.1493567613128163E-18, LengthSquared = 372.7156630099798, IsFinite = True }; static only"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--construction-stage8-reuse"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 280.4571,
+      "output": [
+        "Construction Stage 8 reuse PASS: 18 checks; capsule-only design 016a853a405a2de74e3f33e40dd756d927f37158f2e7f3c4c771f054477ce163; no launcher assumptions"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--srv01-integration"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 962.6976,
+      "output": [
+        "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+        "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--assembly-control"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 375.5691,
+      "output": [
+        "Live command authority PASS: 1557 checks"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--pilot-demand"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 392.8641,
+      "output": [
+        "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+        "PILOT_PERFORMANCE samples=2048 median_ms=0.0016 p95_ms=0.0032 p99_ms=0.0033 max_ms=0.0182 raw_counter_bytes=5784 collections=0/0/0 normal_runtime=true",
+        "PILOT_STORAGE admission_bytes=56 capacity=256 payload_bytes=14336 full_journal_save_bytes=76578 admission_allocation_bytes=0",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PILOT_DEMAND PASS checks=2939"
+      ]
+    },
+    {
+      "kind": "qualification",
+      "arguments": [
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--pilot-allocation"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 892.8113,
+      "output": [
+        "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+        "{\"stage\":4,\"samples\":1024,\"medianMs\":0.0888,\"p95Ms\":0.0908,\"p99Ms\":0.0936,\"maxMs\":0.1249,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+      ]
+    }
+  ],
+  "finalCold": [
+    {
+      "exitCode": 0,
+      "build": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:01.81"
+      ],
+      "configuration": "Debug",
+      "output": [
+        "FLORIDA_PRESENTATION_READY site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=6.1414",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 earthP=1.7423449953896652E-09 earthV=1.9065862296939068E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=7996e0444e189deb6bd41d51187430905ba62fd1f6011c848022aef76a99dd43 earthP=3.5540055303074762E-09 earthV=2.2737367544323206E-13 nativeBytes=458752",
+        "FLORIDA_PRESENTATION_READY site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2548",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc earthP=2.7152485655831642E-09 earthV=2.0495186137532024E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=cbe00062626b83d031b8a6e9668f45c4ab685e1aeabaef8c05c1983b2e11beb7 earthP=2.5076627764545864E-09 earthV=1.8198773652309379E-13 nativeBytes=458752",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.3016",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.272",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=3.0053",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2824",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2663",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2716",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.6081",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2219",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2304",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2726",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2469",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2635",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2533",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2538",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2421",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2329",
+        "MODULAR_GATE9 PASS checks=886"
+      ]
+    },
+    {
+      "exitCode": 0,
+      "build": [
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:01.75"
+      ],
+      "configuration": "Release",
+      "output": [
+        "FLORIDA_PRESENTATION_READY site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=5.9026",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 earthP=1.7423449953896652E-09 earthV=1.9065862296939068E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=1304 support=-3.3 craft=f2c6a60f48f10f037a14af2a32e7ad974a8ae0b889f1560d8aace60af8a87397 site=7996e0444e189deb6bd41d51187430905ba62fd1f6011c848022aef76a99dd43 earthP=3.5540055303074762E-09 earthV=2.2737367544323206E-13 nativeBytes=458752",
+        "FLORIDA_PRESENTATION_READY site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2526",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=b6d5d7d41bc88d614132cd75ae54ac142588de1dce3aa4ab9730d7db5bd43cbc earthP=2.7152485655831642E-09 earthV=2.0495186137532024E-13 nativeBytes=458752",
+        "MODULAR_FLORIDA_COLD mass=2164 support=-4.8 craft=e1de76303480959eb3d9b75f25ba625054124764964676ee64007b664d9881ca site=cbe00062626b83d031b8a6e9668f45c4ab685e1aeabaef8c05c1983b2e11beb7 earthP=2.5076627764545864E-09 earthV=1.8198773652309379E-13 nativeBytes=458752",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.265",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2527",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.3098",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2886",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2165",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2107",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2291",
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2094",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2269",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2207",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2022",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2403",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2103",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2524",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2166",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.1965",
+        "MODULAR_GATE9 PASS checks=886"
+      ]
+    }
+  ]
+}

@@ -31,6 +31,9 @@ public readonly record struct FloridaLaunchSite(
     /// <summary>Depth of the separate foundation below the unchanged slab origin. Its unit mesh spans Z=-1..0.</summary>
     public double FoundationDepthMetres { get; init; }
     public Double3 FoundationScale => new(PlatformEastWidthMetres, PlatformNorthLengthMetres, FoundationDepthMetres);
+    /// <summary>The one visible base/footing union, in East/Up/-North mesh coordinates.</summary>
+    public Double3 SupportSlabScale => new(PlatformEastWidthMetres, FoundationDepthMetres + PlatformThicknessMetres, PlatformNorthLengthMetres);
+    public double SupportSlabCenterUp => (PlatformThicknessMetres - FoundationDepthMetres) * .5d;
 
     internal FloridaSlabSupport CreateSupportSlab(IPhysicalSurfacePointQuery query)
     {

@@ -2,6 +2,33 @@ cmake_minimum_required(VERSION 3.24)
 project(NovaCoreNative LANGUAGES CXX)
 
 find_package(Vulkan REQUIRED)
+add_executable(NovaCoreMinimumRecorderMock EXCLUDE_FROM_ALL OrdinaryRecorderMock.cpp)
+add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/OrdinaryMockVulkan.h"
+  COMMAND python "${CMAKE_CURRENT_SOURCE_DIR}/../../tests/NovaCore.MinimumRecorder.Tests/native-fixture.py"
+    --header "${Vulkan_INCLUDE_DIRS}/vulkan/vulkan_core.h" --output "${CMAKE_CURRENT_BINARY_DIR}/OrdinaryMockVulkan.h"
+  DEPENDS OrdinaryNative.inl ../../tests/NovaCore.MinimumRecorder.Tests/native-fixture.py)
+target_sources(NovaCoreMinimumRecorderMock PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/OrdinaryMockVulkan.h")
+target_compile_features(NovaCoreMinimumRecorderMock PRIVATE cxx_std_20)
+target_compile_definitions(NovaCoreMinimumRecorderMock PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+target_include_directories(NovaCoreMinimumRecorderMock PRIVATE ${Vulkan_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(NovaCoreMinimumRecorderMock PRIVATE ole32)
+add_executable(NovaCoreFrozenCaptureMock EXCLUDE_FROM_ALL FrozenCaptureMock.cpp)
+target_compile_features(NovaCoreFrozenCaptureMock PRIVATE cxx_std_20)
+target_compile_definitions(NovaCoreFrozenCaptureMock PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+target_link_libraries(NovaCoreFrozenCaptureMock PRIVATE bcrypt)
+add_executable(NovaCoreRegionalPupilLifetimeTests EXCLUDE_FROM_ALL RegionalPupilLifetimeTests.cpp)
+target_compile_features(NovaCoreRegionalPupilLifetimeTests PRIVATE cxx_std_20)
+add_executable(NovaCoreTerrainTessellationTests EXCLUDE_FROM_ALL TerrainTessellationTests.cpp)
+target_compile_features(NovaCoreTerrainTessellationTests PRIVATE cxx_std_20)
+if(MSVC)
+  target_compile_options(NovaCoreTerrainTessellationTests PRIVATE /fp:strict)
+endif()
+add_executable(NovaCoreCausalRecorderMock EXCLUDE_FROM_ALL CausalRecorderMock.cpp)
+target_compile_features(NovaCoreCausalRecorderMock PRIVATE cxx_std_20)
+target_compile_definitions(NovaCoreCausalRecorderMock PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+add_executable(NovaCorePresentationResultTests EXCLUDE_FROM_ALL PresentationResultTests.cpp)
+target_compile_features(NovaCorePresentationResultTests PRIVATE cxx_std_20)
+target_include_directories(NovaCorePresentationResultTests PRIVATE ${Vulkan_INCLUDE_DIRS})
 find_program(GLSLC_EXECUTABLE glslc REQUIRED HINTS "$ENV{VULKAN_SDK}/Bin")
 
 set(SHADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaders")
@@ -119,7 +146,7 @@ add_custom_command(OUTPUT
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.vert" -o "${SPIRV_DIR}/production_spherical_billboard.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tesc" -o "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tese" -o "${SPIRV_DIR}/production_spherical_billboard.tese.spv"
-  DEPENDS "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/regional_physical.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/production_spherical_billboard_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_physical.glsl" "${SHADER_DIR}/production_spherical_billboard_reset.comp" "${SHADER_DIR}/production_spherical_billboard_cull.comp" "${SHADER_DIR}/production_spherical_billboard_compact.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_reset.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_compact.comp" "${SHADER_DIR}/production_nested_scale_mesh_cull.comp" "${SHADER_DIR}/production_nested_scale_mesh_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard.vert" "${SHADER_DIR}/production_spherical_billboard.tesc" "${SHADER_DIR}/production_spherical_billboard.tese" "${SHADER_DIR}/production_cube_surface.glsl")
+  DEPENDS "${SHADER_DIR}/production_tessellation_factor.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/regional_physical.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/production_spherical_billboard_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_physical.glsl" "${SHADER_DIR}/production_spherical_billboard_reset.comp" "${SHADER_DIR}/production_spherical_billboard_cull.comp" "${SHADER_DIR}/production_spherical_billboard_compact.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_reset.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_compact.comp" "${SHADER_DIR}/production_nested_scale_mesh_cull.comp" "${SHADER_DIR}/production_nested_scale_mesh_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard.vert" "${SHADER_DIR}/production_spherical_billboard.tesc" "${SHADER_DIR}/production_spherical_billboard.tese" "${SHADER_DIR}/production_cube_surface.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/distant_planet.vert" -o "${SPIRV_DIR}/distant_planet.vert.spv"
@@ -188,9 +215,16 @@ add_custom_target(NovaCoreSphericalBillboardProofShaders DEPENDS
   "${SPIRV_DIR}/spherical_billboard_proof.frag.spv")
 add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h PlanetaryHeightQuery.cpp PlanetaryHeightQuery.h PlanetaryMeshPreparation.cpp PlanetaryMeshPreparation.h PlanetarySphericalBillboardGpuProof.cpp PlanetarySphericalBillboardGpuProof.h ProductionCubeSurface.cpp ProductionCubeSurface.h LocalTerrainPack.cpp LocalTerrainPack.h)
 add_dependencies(NovaCore.Native NovaCoreShaders NovaCoreProductionShaders NovaCoreMeshPreparationShaders NovaCoreSphericalBillboardProofShaders)
+add_custom_command(OUTPUT "${SPIRV_DIR}/frozen_capture_pack.comp.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/frozen_capture_pack.comp" -o "${SPIRV_DIR}/frozen_capture_pack.comp.spv"
+  DEPENDS "${SHADER_DIR}/frozen_capture_pack.comp" "${SHADER_DIR}/frozen_capture_pack_shared.glsl")
+add_custom_target(NovaCoreFrozenPackingShader DEPENDS "${SPIRV_DIR}/frozen_capture_pack.comp.spv")
+add_dependencies(NovaCore.Native NovaCoreFrozenPackingShader)
 
 add_executable(NovaCoreRegionalPhysicalTests EXCLUDE_FROM_ALL RegionalPhysicalResidencyTests.cpp LocalTerrainPack.cpp)
 add_executable(NovaCoreMappedBufferMemoryTests EXCLUDE_FROM_ALL MappedBufferMemoryTests.cpp)
+add_executable(NovaCorePostContactTimingTests EXCLUDE_FROM_ALL PostContactTimingTests.cpp)
+target_compile_features(NovaCorePostContactTimingTests PRIVATE cxx_std_20)
 target_compile_features(NovaCoreMappedBufferMemoryTests PRIVATE cxx_std_20)
 target_include_directories(NovaCoreMappedBufferMemoryTests PRIVATE ${Vulkan_INCLUDE_DIRS})
 target_compile_features(NovaCoreRegionalPhysicalTests PRIVATE cxx_std_20)
@@ -202,11 +236,12 @@ target_link_libraries(NovaCore.Native PRIVATE Vulkan::Vulkan user32 bcrypt)
 add_custom_command(TARGET NovaCore.Native POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:NovaCore.Native>" "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/NovaCore.Native.dll")
 
-# Permanent analytical visibility parity test; not a runtime compute pass.
-add_custom_command(OUTPUT "${SPIRV_DIR}/facility_visibility_test.comp.spv"
-  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/facility_visibility_test.comp" -o "${SPIRV_DIR}/facility_visibility_test.comp.spv"
+# Permanent analytical visibility parity test; never copied into the player shader package.
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/test-shaders")
+add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/facility_visibility_test.comp" -o "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv"
   DEPENDS "${SHADER_DIR}/facility_visibility_test.comp" "${SHADER_DIR}/facility_light_occlusion.glsl")
-add_custom_target(NovaCoreFacilityVisibilityTestShader DEPENDS "${SPIRV_DIR}/facility_visibility_test.comp.spv")
+add_custom_target(NovaCoreFacilityVisibilityTestShader DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv")
 add_executable(NovaCoreFacilityVisibilityTests EXCLUDE_FROM_ALL FacilityLightOcclusionTests.cpp)
 add_dependencies(NovaCoreFacilityVisibilityTests NovaCoreFacilityVisibilityTestShader)
 target_compile_features(NovaCoreFacilityVisibilityTests PRIVATE cxx_std_20)

@@ -1,0 +1,25 @@
+{
+  "disposition": "PASS",
+  "scope": "canonical Release native package and bounded application smoke",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "ownerFiles": [
+    "samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+    "tools/NovaCore.App/NovaCore.App.csproj",
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj"
+  ],
+  "packageFiles": 127,
+  "nativeShaders": 66,
+  "shaderMissing": 0,
+  "shaderExtra": 0,
+  "shaderHashMismatches": 0,
+  "smokeChecks": 392,
+  "smokeExitCode": 0,
+  "visualSmokeExitCode": 0,
+  "manualPlayerAcceptance": false,
+  "banked": false,
+  "publishNativeContent": "PASS",
+  "standalonePublishParity": "NOT QUALIFIED: six diagnostic web files absent",
+  "canonicalExe": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+  "sourcePreservation": "3595 of 3598 original files byte-identical; only three intended csproj files changed",
+  "priorCandidatePreservation": "127 of 127 files byte-identical"
+}

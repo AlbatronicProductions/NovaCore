@@ -1,0 +1,14 @@
+{
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "sourceSha256": "e94f351e8e8de63768d6061215d6f769bd69714b8671e87d76b66685d805a554",
+  "sourceFiles": 963,
+  "packageSha256": "f53c55cd50ab80cfc41dc0c39f9fdceac409bbfd8bb1127883f75a3e550aaf3c",
+  "packageFiles": 134,
+  "settingsSha256": "0e45ef76b1b52d2d564b2da592149e3f8ae2b26e8a09e780fb6da099b9736da9",
+  "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "refsSha256": "6219d20916f1905a2824e4391ca590bdf011aee8c8ed2500f666925762ce1793",
+  "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8",
+  "nativeSha256": "2244a96be294c23032ab531d8865ec0d1be2c147a01afa4ce0c4f2a4152f7be6",
+  "gpuExposure": 0,
+  "banked": false
+}

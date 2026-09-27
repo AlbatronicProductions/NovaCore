@@ -1,0 +1,30 @@
+{
+  "gate": 1,
+  "judgment": "FAIL_STOP_ESCALATE",
+  "permittedCorrectionCycles": 1,
+  "usedCorrectionCycles": 1,
+  "corrected": {
+    "responsibility": "Legacy schema admission",
+    "before": "CompiledAssemblyDesign accepted PartStandardData under its closed legacy schema when the definition reference digest was recomputed.",
+    "change": "Require Standard is null alongside the existing Construction is null guard.",
+    "after": "Permanent refusal witness passes; 33 baseline checks and dependent legacy construction/SRV/control regressions pass."
+  },
+  "unresolved": [
+    {
+      "responsibility": "Typed resource identity and dependency closure",
+      "unresolvedPortResourceAccepted": true,
+      "passthroughResourceRevisionMissingFromDependencyDigest": true,
+      "cause": "PartStandard validates interface port resource syntax without catalog resolution; DependencyDigest includes only stores and consumer mixtures."
+    },
+    {
+      "responsibility": "Malformed authored socket placement refusal",
+      "nullPlacementRefusal": "NullReferenceException",
+      "requiredRefusal": "InvalidDataException with a controlled diagnostic",
+      "cause": "Placement entries are dereferenced before null validation."
+    }
+  ],
+  "executableWitness": "--modular-gate1-redteam",
+  "processResult": "nonzero, reproduced after correction",
+  "additionalProductionCorrections": 0,
+  "laterGatesRun": false
+}

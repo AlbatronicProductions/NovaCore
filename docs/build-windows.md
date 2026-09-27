@@ -1,11 +1,49 @@
 # Build on Windows 11
 
+The normal unified player entry for the current **unbanked, feature-frozen**
+generation is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+Run it without arguments for startup/configuration → game → construction → launch
+→ flight/control → return. `NovaCore.Launcher.exe` is the legacy scenario tool.
+This is a repository-layout development build, not a standalone installer.
+Resolve Git LFS before building (`git lfs pull` in a fresh clone). M15.5 HEAD alone
+does not include all current unbanked work; the
+[canonical source/package manifest](engineering-evidence/rcs-canonicalization/README.md)
+identifies the prospective source set reproduced before banking.
+The later frozen candidate identity and current performance/storage qualification
+are consolidated in the [final bank-candidate report](engineering-evidence/performance-150fps/bank-candidate.md).
+Its full working-file receipt preserves the later source/test/evidence additions;
+older prospective source exports are historical and insufficient on their own.
+Its strict final GPU payoff gate stopped before implementation; stable 150 FPS is
+still open. Do not interpret these build instructions as permission to consume a
+new native qualification exposure. The [final recorder-storage supplement](engineering-evidence/minimum-recorder-bounded-storage/README.md)
+supersedes prior storage policy and source/package identities only. Ordinary
+startup silently runs maintenance as needed, reserves a complete session within
+the 512 MiB total cap, starts MinimumRecorder, then launches the game. The 400 MiB
+preventive threshold leaves maintenance headroom. Unique protected evidence that
+cannot safely change representation may exceptionally force an explicit
+unrecorded launch; such a run cannot satisfy mandatory-recorder qualification.
+The recorder is temporary qualification infrastructure in this development package,
+not approved permanent public-player architecture. Do not package runtime journals,
+dumps/captures, bulk or unselected generated evidence. A public GitHub/player release
+requires Project Control's separate KEEP / DEV-ONLY / RETIRE decision for developer
+instrumentation source, even after an M16.0 engineering bank.
+Build and run from `E:\NovaCore`, the sole canonical production tree. No isolated
+RCS worktree, copied worktree executable or test catalog is needed for the normal
+player route. The 96-jet qualification catalog remains an explicit test input.
+
 Required tools:
 
 - .NET 10 SDK
 - Visual Studio 2026 with Desktop development with C++ and Windows 11 SDK
 - CMake 4.4 or later
 - LunarG Vulkan SDK, including validation layers and `glslc`
+- PowerShell 7 for scripts; Python 3 for package verification (not player runtime)
+- Vulkan-capable graphics driver, VC++ x64 runtime, .NET 10 Desktop and ASP.NET
+  runtimes (included with the installed SDK development environment)
+
+Qualified toolchain: .NET SDK 10.0.303, MSVC 14.51.36231 and Vulkan SDK 1.4.357.0.
+Use a Visual Studio x64 Developer PowerShell so MSVC, Windows SDK and Ninja are
+on PATH. No KSA installation, NAIF toolkit or Python package is a player dependency.
 
 Regenerating the production Earth terrain additionally requires the pinned
 NumPy/Pillow environment documented in `assets/earth/PROVENANCE.md`. Set
@@ -22,7 +60,7 @@ dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
 pwsh tools/earth_data/acquire_florida_m12.ps1
 dotnet run --project tools/NovaCore.AssetTool -- build earth-florida-m12
 
-cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja
+cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja -DCMAKE_BUILD_TYPE=Debug
 cmake --build build/native-ninja
 dotnet build NovaCore.sln -c Debug
 
@@ -37,8 +75,42 @@ dotnet run --project samples/NovaCore.Triangle -c Debug -- --scene=frames
 
 For Release, configure/build `build/native-ninja-release` with
 `-DCMAKE_BUILD_TYPE=Release`, then run `dotnet build NovaCore.sln -c Release`.
-Both solution configurations map all 20 projects. A Release build must report
+Both solution configurations map all 24 projects. A Release build must report
 actual project outputs; MSB4121 warnings do not constitute a successful build.
+
+The normal build/package/run sequence after terrain preparation is:
+
+```powershell
+cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/native-ninja
+dotnet build NovaCore.sln -c Debug
+cmake -S native/NovaCore.Native -B build/native-ninja-release -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build/native-ninja-release
+dotnet build NovaCore.sln -c Release
+python tools/verify-player-package.py --output build/player-package-verification.json
+& ./tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe
+```
+
+The current source-derived package contains 66 shaders, the native DLL, managed
+dependencies, starter/SRV assets and third-party notices. Native content flows
+through project references; do not hand-copy DLLs or shaders. The verifier checks
+the CMake target output closure and current source content, not an old candidate.
+
+To reproduce with existing terrain distribution bytes, use the hash-validating
+installer instead of regenerating terrain. Both inputs must match the checked-in
+manifests; `--cache` is an explicit disposable destination:
+
+```powershell
+dotnet run --project tools/NovaCore.AssetTool -c Release -- install earth-surface-v5 --source C:/distribution/earth-surface-v5.nccube --cache C:/NovaCoreCache
+dotnet run --project tools/NovaCore.AssetTool -c Release -- install earth-florida-m12 --source C:/distribution/earth-florida-m12.nccube --cache C:/NovaCoreCache
+$env:NOVACORE_ASSET_CACHE='C:/NovaCoreCache'
+dotnet run --project tools/NovaCore.AssetTool -c Release -- verify earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -c Release -- verify earth-florida-m12
+```
+
+Runtime also retains repository topology/elevation assets. Keep the repository
+root marker and those source assets. A portable copied EXE is not the product
+package. Full diagnostic-web publish parity is outside this qualification.
 
 The separate offline NAIF regression requires its own rebuildable shim:
 
@@ -66,6 +138,12 @@ regenerate, interruption recovery, and fresh-clone behavior.
 Logging uses repeated or comma-separated `--log=` values, for example `--log=input,precision` or `--log=vulkan --log=renderer`. Valid categories are `startup`, `vulkan`, `precision`, `input`, `renderer`, `validation`, `camera`, and `all`. `--verbose-input` remains a temporary compatibility alias for `--log=input`.
 
 ## Graphics validation contract
+
+For this stabilization campaign, Project Control permits automated integration,
+direct visual/runtime evidence and reproducibility to satisfy the acceptance bar
+without mandatory manual retest. Historical manual gates below retain their
+original scope; Engineering does not declare manual Player PASS.
+
 
 Run from the repository root. Build native and managed code in the same
 configuration first, including the Triangle sample for window tests. The Graphics
@@ -98,7 +176,7 @@ Debug tests resolve the Debug native DLL; Release tests resolve Release. Before
 running a case, the harness compares the deployed SHA-256 with the selected native
 build, loads that exact path, and checks the actual loaded module. No native PATH
 fallback is accepted. Test shader paths use the same configuration. Window tests
-also verify the sample DLL and all 49 deployed shader hashes against that build.
+also verify the sample DLL and all source-derived deployed shader hashes (currently 66) against that build.
 
 Full automated validation means all 90 managed cases, plus the three native cases
 below, pass in both configurations with their stated prerequisites. Category

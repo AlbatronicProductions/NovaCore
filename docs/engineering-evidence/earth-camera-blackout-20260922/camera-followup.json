@@ -1,0 +1,108 @@
+{
+  "schema": "novacore.earth-camera-blackout.camera-followup/1",
+  "recordedUtc": "2026-09-22T15:41:33.6859714Z",
+  "playerConfirmed": {
+    "exactAltitudeKnown": false,
+    "approximateRestartLocal": "2026-09-22 10:49 EDT",
+    "action": "zooming close to Earth and moving camera around",
+    "executedBinaryKnown": false,
+    "proximity": "ground and horizon visible",
+    "displayMode": "borderless fullscreen",
+    "resolution": "native; exact monitor and pixel dimensions unverified",
+    "approximateRunDuration": "a few minutes"
+  },
+  "savedSettings": {
+    "values": {
+      "Preset": 3,
+      "AltitudeMetres": null,
+      "WindowMode": 1,
+      "Resolution": 0,
+      "Diagnostics": 1
+    },
+    "incidentWindowProof": false,
+    "sha256": "0E45EF76B1B52D2D564B2DA592149E3F8AE2B26E8A09E780FB6DA099B9736DA9",
+    "lastWriteTime": "2026-09-22T10:46:54.4621359-04:00",
+    "path": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Launcher\\settings.json"
+  },
+  "tests": [
+    {
+      "configuration": "Debug",
+      "case": "Solar camera bounded-domain crash regression",
+      "exitCode": 0,
+      "milliseconds": 965,
+      "log": "build/earth-camera-blackout-20260922/camera-debug-1.log",
+      "gpuExecution": false,
+      "sha256": "43680F763BA2E82BF2C793B4BFA00967CDD162667DB4A3354A1CAB3C8530F82F"
+    },
+    {
+      "configuration": "Debug",
+      "case": "Camera SurfaceAnchor handoff monotonicity",
+      "exitCode": 0,
+      "milliseconds": 648,
+      "log": "build/earth-camera-blackout-20260922/camera-debug-2.log",
+      "gpuExecution": false,
+      "sha256": "8B4E155C5CAAB5704C820855B87BA79EDA6A9EF8CCB293657DA105F585CFD514"
+    },
+    {
+      "configuration": "Debug",
+      "case": "Planetary camera terrain exclusion",
+      "exitCode": 0,
+      "milliseconds": 4739,
+      "log": "build/earth-camera-blackout-20260922/camera-debug-3.log",
+      "gpuExecution": false,
+      "sha256": "8E795DEF51433418C81869E6ADB255A11AACA1A0E9DF0CF4E6F2358733EE3E2E"
+    },
+    {
+      "configuration": "Debug",
+      "case": "Camera drag isolation",
+      "exitCode": 0,
+      "milliseconds": 582,
+      "log": "build/earth-camera-blackout-20260922/camera-debug-4.log",
+      "gpuExecution": false,
+      "sha256": "7B9AF18C4DD0FD03AEE3FE19724413DEC876BC9F4DB8762EA18ECA8CB05C41B4"
+    },
+    {
+      "configuration": "Release",
+      "case": "Solar camera bounded-domain crash regression",
+      "exitCode": 0,
+      "milliseconds": 498,
+      "log": "build/earth-camera-blackout-20260922/camera-release-1.log",
+      "gpuExecution": false,
+      "sha256": "4FF09B1900E70A9ECF5FC94C80033A7E185EF26DA58E85557A563EC3B9F47FBB"
+    },
+    {
+      "configuration": "Release",
+      "case": "Camera SurfaceAnchor handoff monotonicity",
+      "exitCode": 0,
+      "milliseconds": 253,
+      "log": "build/earth-camera-blackout-20260922/camera-release-2.log",
+      "gpuExecution": false,
+      "sha256": "2D4368085000E81888446791F89AC41DACB98E47A2F5A46D2107E5B3A9CE82CD"
+    },
+    {
+      "configuration": "Release",
+      "case": "Planetary camera terrain exclusion",
+      "exitCode": 0,
+      "milliseconds": 1337,
+      "log": "build/earth-camera-blackout-20260922/camera-release-3.log",
+      "gpuExecution": false,
+      "sha256": "3F8CD2CAEF782480A33E7361294A3C9AEC8EDAA91606C583581A7B3178057D86"
+    },
+    {
+      "configuration": "Release",
+      "case": "Camera drag isolation",
+      "exitCode": 0,
+      "milliseconds": 201,
+      "log": "build/earth-camera-blackout-20260922/camera-release-4.log",
+      "gpuExecution": false,
+      "sha256": "C758CC29DA6642CEC9156B31E8562EC0C6F9F33089E25015E195515B598ADA64"
+    }
+  ],
+  "productionFilesChangedThisFollowup": [],
+  "originalManualBuildFilesChanged": [],
+  "headUnchanged": true,
+  "indexUnchanged": true,
+  "gpuExecution": false,
+  "crashCause": "unresolved",
+  "priorProtocolFullyImplemented": false
+}

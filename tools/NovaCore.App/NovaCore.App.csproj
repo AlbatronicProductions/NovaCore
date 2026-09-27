@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>NovaCore</AssemblyName>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj" />
+    <ProjectReference Include="../../src/NovaCore.Diagnostics/NovaCore.Diagnostics.csproj" />
+    <ProjectReference Include="../NovaCore.Recorder/NovaCore.Recorder.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <Target Name="PackageMinimumRecorder" AfterTargets="Build">
+    <ItemGroup>
+      <RecorderFiles Include="../NovaCore.Recorder/bin/$(Configuration)/net10.0-windows/NovaCore.Recorder.*" />
+    </ItemGroup>
+    <Error Condition="!Exists('../NovaCore.Recorder/bin/$(Configuration)/net10.0-windows/NovaCore.Recorder.exe')" Text="Mandatory minimum recorder executable missing." />
+    <Copy SourceFiles="@(RecorderFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

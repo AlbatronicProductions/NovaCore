@@ -1,0 +1,32 @@
+{
+  "schema": "novacore.modular-geometry-audit/1",
+  "method": "independent convex SAT; solid body/nozzle collision and retained main-engine clearance; no thermal/plume certification",
+  "toleranceM": 1e-09,
+  "satManufacturedChecks": 9,
+  "results": [
+    {
+      "craft": "short",
+      "collisionShapes": 69,
+      "clearanceShapes": 2,
+      "physicalPairs": 1987,
+      "clearancePairs": 132,
+      "violations": []
+    },
+    {
+      "craft": "long",
+      "collisionShapes": 69,
+      "clearanceShapes": 2,
+      "physicalPairs": 1987,
+      "clearancePairs": 132,
+      "violations": []
+    },
+    {
+      "craft": "three-short",
+      "collisionShapes": 151,
+      "clearanceShapes": 2,
+      "physicalPairs": 10806,
+      "clearancePairs": 296,
+      "violations": []
+    }
+  ]
+}

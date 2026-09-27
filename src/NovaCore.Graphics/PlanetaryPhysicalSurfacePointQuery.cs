@@ -9,7 +9,7 @@ namespace NovaCore.Graphics;
 /// No renderer or simulation startup is required. The current oracle datasets publish once and
 /// never mutate/unload; consequently an acquired authority cannot become partially resident.
 /// </summary>
-public sealed class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQuery, IPhysicalGradingProofSource
+public sealed partial class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQuery, IPhysicalGradingProofSource, IPhysicalSurfaceHeightBounds, IPhysicalSurfaceCollisionSource
 {
     // Existing physical normal parity ceiling. This is numerical qualification, not proof of
     // differentiability everywhere: unresolved creases and unstable stencils explicitly fail.
@@ -19,6 +19,20 @@ public sealed class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQu
     private const double Radius = PlanetaryPhysicalSurface.EarthReferenceRadiusMetres;
     private const PlanetaryPhysicalSurfaceGeneration Generation = PlanetaryPhysicalSurfaceGeneration.M12DNaturalTerrainCandidate;
     private static readonly PlanetaryTerrainDefinition Terrain = PlanetaryTerrainDefinition.EarthProductionCubeV5;
+    private static readonly (double Base,double Near) NaturalBounds=PlanetaryNaturalTerrainFamilies.PhysicalHeightBounds();
+
+    double IPhysicalSurfaceHeightBounds.HeightUpperBound(in Double3 direction,double angularRadius)
+    {
+        var geographic=Math.Max(0,EarthElevationDataset.CapElevationUpperBound(direction,angularRadius)+EarthLocalTerrainElevationDataset.ResidualUpperBound);
+        var region=FloridaFacilitySupport.Region;
+        // Sample rejects outside this cosine before evaluating any plane.
+        var cosine=1-(Math.Pow(region.InnerEastMetres+region.BlendMetres,2)+Math.Pow(region.InnerNorthMetres+region.BlendMetres,2))/(Radius*Radius);
+        var plane=(Radius+region.PlaneAltitudeMetres)/cosine-Radius;
+        var maximum=Math.Max(geographic+NaturalBounds.Base,plane)+NaturalBounds.Near;
+        // Enclose finite arithmetic in grading's cancellation R/cos-R and
+        // natural interpolation; independent of render LOD or point stencils.
+        return Math.BitIncrement(maximum+1024*Math.ScaleB(1d,-52)*(Radius+maximum));
+    }
 
     private PlanetaryPhysicalSurfacePointQuery(PhysicalSurfaceAuthorityIdentity authority) => Authority = authority;
     public PhysicalSurfaceAuthorityIdentity Authority { get; }
@@ -68,6 +82,11 @@ public sealed class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQu
 
     public PhysicalSurfacePointResult Query(ulong bodyId, in Double3 bodyFixedUnitDirection)
     {
+        try{return QueryQualified(bodyId,bodyFixedUnitDirection);}
+        catch(InvalidDataException){return Failure(PhysicalSurfaceQueryStatus.AuthorityUnavailable);}
+    }
+    private PhysicalSurfacePointResult QueryQualified(ulong bodyId,in Double3 bodyFixedUnitDirection)
+    {
         if (bodyId == 0 || !bodyFixedUnitDirection.IsFinite ||
             Math.Abs(bodyFixedUnitDirection.LengthSquared - 1d) > SurfaceAnchor.DirectionUnitLengthSquaredTolerance)
             return Failure(PhysicalSurfaceQueryStatus.InvalidInput);
@@ -113,7 +132,11 @@ public sealed class PlanetaryPhysicalSurfacePointQuery : IPhysicalSurfacePointQu
     }
 
     private PhysicalSurfacePointResult Failure(PhysicalSurfaceQueryStatus status) => new(status, Authority, default, default, default, default, default);
-    private static double Height(Double3 direction) => PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(Terrain, direction, Generation);
+    private static double Height(Double3 direction)
+    {
+        PhysicalCollisionAngles.ValidatePhysicalDirection(direction);
+        return PlanetaryPhysicalSurface.EvaluateFinalHeightNoGradient(Terrain,direction,Generation);
+    }
     private static Double3 Offset(Double3 direction, Double3 axis, double distance) => (direction + axis * (distance / Radius)).Normalized();
     private static double Angle(Double3 a, Double3 b) => Math.Atan2(Math.Sqrt(Double3.Cross(a, b).LengthSquared), Double3.Dot(a, b));
     private static Double3 Normal(Double3 direction, Double3 east, Double3 north, double x, double y, double height) =>

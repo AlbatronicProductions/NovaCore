@@ -1,0 +1,10 @@
+{
+  "judgment": "CONNECTOR_RECIPE_PASS",
+  "completeStockRecipe": "PASS_THREE_TANKS_24_RCS_ADAPTER_ENGINE",
+  "playerPass": false,
+  "checks": 76,
+  "frames": 160,
+  "parts": 30,
+  "source": "18f073876b477ef50e8ef8be9277108ea73d40d0bc52de9c72c89004fc496118",
+  "native": "79719b00774a7a3683d5c1820efda249ef3848adab1a4f00285b89ec1e50243a"
+}

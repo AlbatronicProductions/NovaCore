@@ -1,0 +1,11 @@
+{
+  "existingSaves": {
+    "Test 1.craft.json": "1cbd271b6c76a82b20eb0077637567145cb7688072047204880f0e33acbb9585",
+    "UX-Review-20260922.craft.json": "7936a61295828a13c10fb39c7d43adfe6e3b86d1b8c35d865c8a9feda7459d2a"
+  },
+  "settingsBeforeSha256": "0e45ef76b1b52d2d564b2da592149e3f8ae2b26e8a09e780fb6da099b9736da9",
+  "fixtureSource": "E:\\NovaCore\\build\\rcs-canonicalization\\Canonical-RCS64.craft.json",
+  "fixtureSha256": "306fd72076071f1aa73ab6583cd489fcca2cf9bf11a30e2f53a6d68ea074ec6c",
+  "fixturePlayerPath": "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\PC-RCS64-canonical-20260926.craft.json",
+  "method": "Exported using canonical Release permanent fixture; ordinary stock CraftDocument; no worktree data or binary used."
+}

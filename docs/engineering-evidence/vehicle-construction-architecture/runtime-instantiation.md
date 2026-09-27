@@ -1,0 +1,25 @@
+# Stage6 shared runtime convergence
+
+**PASS — PROMOTE.** One shared compiled design feeds stock files, saved player files, isolated editor documents and runtime binding. The cold ConstructionApplicationSession composes the existing SimulationClock, SimulationState, SpacecraftStateStore and SimulationTransactionEngine. It adds no second simulation loop or canonical state owner. A proving session contains one static constructed craft; this does not qualify simultaneous multi-craft flight.
+
+The immutable binding owns compiled topology, fuel/power/data facts, placed part/subpart/actuator identities and constituent full-load references. Registration claims its observational identity exactly once, atomically, after fallible frame/store preparation. Retirement never releases that claim. Restore recompiles the same saved design, issues a fresh identity and replays the bounded command journal through the existing transaction owner. Exact fuel/power endpoints, time and revision must match. Observational IDs are absent from deterministic saved bytes; they cannot recreate command capabilities.
+
+The owner prepares exact fuel, then energy from that same interval's actual engine activity, before any canonical mutation. Clock credit, target epoch, revision, history capacity, load commands, data reachability and physical qualifications are checked first. It rechecks source identity/revision, clock/time/debt/rate/remainder/pause, timeline and slot, then installs the joint successor with fixed writes in one existing publication phase. Wrong thread, nested publication, foreign/stale/retired authority, overflow, pending work and preparation refusal cannot partially publish fuel, power or time. Permanent fault coverage refuses between fuel preparation and energy publication.
+
+Static slots cannot enter legacy attitude, rigid-body, translation, contact/applied, continuation or command paths. DLV fuel demand is refused because the accepted definitions retain UnqualifiedHardware. This is a conservative whole-vehicle gate: any such marker blocks every requested fuel consumer, including consumers unrelated to that hardware. Electrical modules absent from content remain absent. Rate must be one and the clock unpaused at admission; later clock changes make source authority stale. Physical flight warp is not qualified.
+
+Spatial reference mass is computed only if every store is exactly full or empty. This applies equally to initial partial fills and later depletion. A full-load tensor is not a depletion law. Exact total resource quantity remains available separately. No force, torque, supported contact, trajectory or successor body is produced here.
+
+## Single Stage6 correction
+
+The initial review found two convergence/lifetime failures. A valid two-part graph with4096 service links and4096 actions using legal128-character escaped IDs compiled/saved6,938,644 bytes, exceeding the standalone loader's4,000,000-byte cap. It also restored inside a6,939,566-byte runtime document. Separately, a binding could register into two stores and remain active in the second after the first owner retired.
+
+Stage6 owns shared save/runtime convergence, so its unused one-correction allowance covered both findings. The constructor now validates canonical serialized bytes against the same MaximumDocumentBytes constant as Load, before exposing a compiled design or installing an editor proposal. Valid canonical bytes and digests are unchanged; oversized draft proposals are refused atomically. Runtime Restore passes through that same compiler. Registration now has a permanent Interlocked claim after preparation. No fuel/power arithmetic changed. This is not a second Stage4 arithmetic rescue.
+
+Permanent93-check qualification includes the historical size witness,4MB−1/4MB/4MB+1 ingress, immutable oversized refusal, runtime-restore bypass refusal,16 concurrent registrations with exactly one winner, failed frame preparation before claim, retired identity refusal, independent runtime inventories, replay continuation and legacy ingress exclusions. Both independent reviewers PASS; ksa_frames independently executed93 checks plus Stage2/5 regressions.
+
+## Editor handoff
+
+The loopback tool dispatches all operations to one owner thread. Instantiate prepares a fresh static session before retiring its predecessor; retire also works after the draft has been cleared. Draft edits never mutate instantiated state. Browser observations verified stock DLV identity1, unchanged while its draft rotated; player two-part identity2, unchanged while its draft cleared; capsule-only identity3. All retired independently, with no console errors.
+
+UI requests compare current draft revision and current runtime generation/absence. Null generation means expected absence, not a permanent operation nonce: a delayed request after absence→instance→absence can create a fresh instance. It cannot revive the retired identity/capability. Service commands use strict sequence admission independently of this UI selection contract.

@@ -1,0 +1,14 @@
+[
+  {
+    "configuration": "Debug",
+    "nativeDirectory": "native-ninja"
+  },
+  {
+    "configuration": "Release",
+    "nativeDirectory": "native-ninja-release"
+  },
+  {
+    "configuration": "Release override",
+    "nativeDirectory": "explicit-native-override"
+  }
+]

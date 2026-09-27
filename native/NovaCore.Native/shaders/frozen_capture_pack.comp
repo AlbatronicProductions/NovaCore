@@ -1,0 +1,30 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+layout(local_size_x=256) in;
+layout(set=0,binding=0,std430) readonly buffer Physical {uint words[];} physical;
+layout(set=0,binding=1,std430) readonly buffer Visibility {uint words[];} visibility;
+layout(set=0,binding=2,std430) readonly buffer Compacted {uint words[];} compacted;
+layout(set=0,binding=3,std430) readonly buffer Counters {uint words[];} counters;
+layout(set=0,binding=4,std430) readonly buffer Indirect {uint words[];} indirect;
+layout(set=0,binding=5,std430) writeonly buffer Packed {uint words[];} packed;
+layout(set=0,binding=6,std430) buffer Metadata {uint words[];} metadata;
+layout(push_constant) uniform Parameters {uint values[12];} p;
+uint PackPhysical(uint i){return physical.words[i];}
+uint PackVisibility(uint i){return visibility.words[i];}
+uint PackCompacted(uint i){return compacted.words[i];}
+uint PackCounter(uint i){return counters.words[i];}
+uint PackIndirect(uint i){return indirect.words[i];}
+void PackWrite(uint i,uint v){packed.words[i]=v;}
+void PackError(uint error){atomicOr(metadata.words[1],error);}
+void PackPaddingError(uint vertex,uint word,uint value){
+  PackError(2u);if(atomicCompSwap(metadata.words[12],0u,vertex+1u)==0u){metadata.words[13]=word;metadata.words[14]=value;}
+}
+void PackMetadata(uint count,bool valid){
+  metadata.words[0]=0x344b5046u;metadata.words[2]=p.values[0];metadata.words[3]=p.values[1];metadata.words[4]=count;
+  for(uint i=0u;i<4u;++i)metadata.words[5u+i]=p.values[7u+i];
+  metadata.words[9]=48u*p.values[0]+16u*min(p.values[0],4u)+4u*p.values[1]+(valid?count*4u:0u)+188u+64u;
+  metadata.words[10]=64u*p.values[0]+4u*p.values[1]+(valid?count*4u:0u)+188u;
+  metadata.words[11]=(p.values[0]-min(p.values[0],4u))*4u;
+}
+#include "frozen_capture_pack_shared.glsl"
+void main(){FrozenPackLane(gl_GlobalInvocationID.x,gl_NumWorkGroups.x*256u,p.values[0],p.values[1],p.values[2],p.values[3],p.values[4],p.values[5],p.values[6]);}

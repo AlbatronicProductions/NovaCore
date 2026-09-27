@@ -1,0 +1,48 @@
+{
+  "short": [
+    "FLORIDA_LIFECYCLE_PASS route=game slabs=1 legacyMeshes=0 caster=7",
+    "FLORIDA_LIFECYCLE_PASS route=editor slabs=0 legacyMeshes=0 caster=0",
+    "FLORIDA_LIFECYCLE_PASS route=game-return slabs=1 legacyMeshes=0 caster=7",
+    "APPLICATION_LAUNCH_REFUSED source=393aa4a4f30adb00d4b53fbe8dd9d888c374e9b0eceac8b2f120514ecac61a2b codes=POWER_PATH,FUEL_PATH reason=Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.",
+    "MODULAR_FLIGHT_READY source=0ae4a21055e8115170ba128131f3447460bcae40127daeeeea237f17309fba65 compiled=301635022d9e4508105ada5fa0c108f4899e0b7607337bc22d3cbbf417dec419 vehicle=ConstructionVehicleIdentity { Vessel = SpacecraftId { Value = 1 }, Generation = 1 } parts=12 epoch=843715522502864 mass=1304 physical=continuous-64Hz main=OFF controls=neutral",
+    "APPLICATION_LAUNCH process=21976 source=0ae4a21055e8115170ba128131f3447460bcae40127daeeeea237f17309fba65 compiled=301635022d9e4508105ada5fa0c108f4899e0b7607337bc22d3cbbf417dec419 epoch=843715522502864 sourceRevision=25 dirty=False",
+    "FLORIDA_LIFECYCLE_PASS route=flight slabs=1 legacyMeshes=0 caster=7",
+    "FLORIDA_LIFECYCLE_PASS route=flight-return slabs=1 legacyMeshes=0 caster=7",
+    "APPLICATION_LAUNCH_REFUSED source=d834b6e2600076ca69c8f714c480237fb794673cbfb83d4e432e8fe347c44410 codes=ATTITUDE_COUNT,ATTITUDE_AUTHORITY reason=Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+    "APPLICATION_REFUSAL_RECOVERY_PASS case=64-jets reason=Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+    "APPLICATION_LAUNCH_REFUSED source=aa99dc66972ce3c066e70ec2e4f31c6f1dc59a073626a7a3ab1002d1bdc1a09d codes= reason=Authored support load exceeded.",
+    "APPLICATION_REFUSAL_RECOVERY_PASS case=support-load reason=Authored support load exceeded.",
+    "APPLICATION_LAUNCH_REFUSED source=1a3f28264f44561b9fbf0125362839004ddc36e70107fb4e9aa0e0db063f0a9b codes=POWER_PATH,FUEL_PATH reason=Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems."
+  ],
+  "long": [
+    "FLORIDA_LIFECYCLE_PASS route=game slabs=1 legacyMeshes=0 caster=7",
+    "FLORIDA_LIFECYCLE_PASS route=editor slabs=0 legacyMeshes=0 caster=0",
+    "FLORIDA_LIFECYCLE_PASS route=game-return slabs=1 legacyMeshes=0 caster=7",
+    "APPLICATION_LAUNCH_REFUSED source=fcec0288b9beed9b88280a99711cfab92b027b81f6f456ebd669ecf8449f3231 codes=POWER_PATH,FUEL_PATH reason=Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.",
+    "MODULAR_FLIGHT_READY source=9f2c9425124fc260e5c9a817afe53aa71943d66f752c7b4337a7b89dc55374a9 compiled=3e0a55d75032b76a3da0132d2f3b2a7c94eac1478f64bfb5ca22001d0e1bca42 vehicle=ConstructionVehicleIdentity { Vessel = SpacecraftId { Value = 1 }, Generation = 1 } parts=12 epoch=843715589277205 mass=2164 physical=continuous-64Hz main=OFF controls=neutral",
+    "APPLICATION_LAUNCH process=27476 source=9f2c9425124fc260e5c9a817afe53aa71943d66f752c7b4337a7b89dc55374a9 compiled=3e0a55d75032b76a3da0132d2f3b2a7c94eac1478f64bfb5ca22001d0e1bca42 epoch=843715589277205 sourceRevision=25 dirty=False",
+    "FLORIDA_LIFECYCLE_PASS route=flight slabs=1 legacyMeshes=0 caster=7",
+    "FLORIDA_LIFECYCLE_PASS route=flight-return slabs=1 legacyMeshes=0 caster=7",
+    "APPLICATION_LAUNCH_REFUSED source=d834b6e2600076ca69c8f714c480237fb794673cbfb83d4e432e8fe347c44410 codes=ATTITUDE_COUNT,ATTITUDE_AUTHORITY reason=Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+    "APPLICATION_REFUSAL_RECOVERY_PASS case=64-jets reason=Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+    "APPLICATION_LAUNCH_REFUSED source=aa99dc66972ce3c066e70ec2e4f31c6f1dc59a073626a7a3ab1002d1bdc1a09d codes= reason=Authored support load exceeded.",
+    "APPLICATION_REFUSAL_RECOVERY_PASS case=support-load reason=Authored support load exceeded.",
+    "APPLICATION_LAUNCH_REFUSED source=26db6be5b69fdb82bb265df34894120d9b103c6dfb987f44a61c4983397111fc codes=POWER_PATH,FUEL_PATH reason=Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems."
+  ],
+  "two-short": [
+    "FLORIDA_LIFECYCLE_PASS route=game slabs=1 legacyMeshes=0 caster=7",
+    "FLORIDA_LIFECYCLE_PASS route=editor slabs=0 legacyMeshes=0 caster=0",
+    "FLORIDA_LIFECYCLE_PASS route=game-return slabs=1 legacyMeshes=0 caster=7",
+    "APPLICATION_LAUNCH_REFUSED source=aa78f3c8e104d18e13530de73b4485af741a05b0d77249a33aa8e28a3096f185 codes=POWER_PATH,FUEL_PATH reason=Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.",
+    "MODULAR_FLIGHT_READY source=b2fc2268331316b3b54e9a63387db79edc7238e2f8a70038671e078ba7c61a8d compiled=f23c07511c9100f365b9b7c01c42d9ac43f820cf6234aef65a222397d07839d2 vehicle=ConstructionVehicleIdentity { Vessel = SpacecraftId { Value = 1 }, Generation = 1 } parts=13 epoch=843715656564937 mass=2224 physical=continuous-64Hz main=OFF controls=neutral",
+    "APPLICATION_LAUNCH process=37092 source=b2fc2268331316b3b54e9a63387db79edc7238e2f8a70038671e078ba7c61a8d compiled=f23c07511c9100f365b9b7c01c42d9ac43f820cf6234aef65a222397d07839d2 epoch=843715656564937 sourceRevision=27 dirty=False",
+    "FLORIDA_LIFECYCLE_PASS route=flight slabs=1 legacyMeshes=0 caster=7",
+    "FLORIDA_LIFECYCLE_PASS route=flight-return slabs=1 legacyMeshes=0 caster=7",
+    "APPLICATION_LAUNCH_REFUSED source=d834b6e2600076ca69c8f714c480237fb794673cbfb83d4e432e8fe347c44410 codes=ATTITUDE_COUNT,ATTITUDE_AUTHORITY reason=Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+    "APPLICATION_REFUSAL_RECOVERY_PASS case=64-jets reason=Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+    "APPLICATION_LAUNCH_REFUSED source=aa99dc66972ce3c066e70ec2e4f31c6f1dc59a073626a7a3ab1002d1bdc1a09d codes= reason=Authored support load exceeded.",
+    "APPLICATION_REFUSAL_RECOVERY_PASS case=support-load reason=Authored support load exceeded.",
+    "APPLICATION_LAUNCH_REFUSED source=7cb7b50d2068ff21bf7e0078c048dca3100ead096adca147c5db89e11369b078 codes=POWER_PATH,FUEL_PATH reason=Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems."
+  ],
+  "construction": []
+}

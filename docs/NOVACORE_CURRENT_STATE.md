@@ -1,4 +1,60 @@
 # NovaCore current engineering state
+## Current unbanked generation — feature freeze
+
+Latest disposition: **campaign closed; FROZEN / UNBANKED for Project Control bank decision**.
+The [final canonical bank candidate](engineering-evidence/performance-150fps/bank-candidate.md)
+consolidates accepted scope, open limits and exact source/package/Git identities.
+The [150 FPS performance closure](engineering-evidence/performance-150fps/README.md)
+retains the underlying measurement and payoff evidence.
+Surface Recontact correctness and the one bounded native physical route PASS;
+the mandatory recorder remains native PASS. Stage A CPU/contact performance is
+accepted by Project Control. Storage warnings/safe maintenance pass Debug/Release
+and adversarial review. The final authorized GPU attempt stopped at its payoff
+gate before any production GPU change or new native verification. Production
+whole-frame 150 FPS remains REVISE / OPEN. The candidate is FROZEN / UNBANKED; blackout remains
+UNRESOLVED, Player acceptance and banking HOLD. The authorized native witness is
+consumed; no relaunch or new production responsibility without Project Control.
+Normal startup performs safe maintenance, reserves a complete recorder session,
+starts MinimumRecorder, then launches the game. Only exceptional protected-evidence
+exhaustion permits explicitly unrecorded play; mandatory-recorder qualification
+cannot pass without coverage. The total runtime cap remains 512 MiB.
+That requirement is temporary qualification infrastructure while blackout causality
+is unresolved, not accepted permanent public-player architecture. For the prospective
+M16.0 engineering bank, necessary recorder/diagnostic source and permanent tests may
+remain versioned for reproducibility. Heavy forensic/fault/harness/observer/analysis
+work is developer-only. Runtime data, raw journals, dumps/captures, bulk and unselected
+generated evidence remain local-only, never committed or public-packaged. Project
+Control must classify instrumentation source KEEP / DEV-ONLY / RETIRE before any
+public GitHub/player-release decision; engineering banking does not grant that decision.
+
+Preserved launch foundation: [scalable launch support](engineering-evidence/scalable-launch-support/README.md),
+preserving the [RCS canonicalization](engineering-evidence/rcs-canonicalization/README.md).
+`E:\NovaCore` is the sole production tree. The generic 32-jet limit and fixed-width
+selection masks are retired; complete immutable actuator identity, deterministic
+allocation and exact services are preserved. Current canonical qualification and
+Project Control disposition are recorded in that package. The previous isolated
+candidate is historical integration authority, not another production entry.
+The [launch refusal diagnosis and recovery](engineering-evidence/launch-admission-regression/README.md),
+the [Florida pad authority](engineering-evidence/florida-pad-authority/README.md)
+and existing physical/service admission remain intact. Fresh parts have empty
+consumables; explicitly fill before launch. Refusals now identify their cause.
+Affected candidate/package identities are superseded; banking remains unauthorized.
+
+The normal player entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+Startup/configuration, Solar game, generic construction, launch, bounded Florida
+flight/control and return share the unified application. `NovaCore.Launcher.exe`
+remains a legacy scenario/engineering entry, not the normal player workflow.
+
+The [final bank-candidate record](engineering-evidence/performance-150fps/bank-candidate.md)
+is the current disposition, preserving the earlier support/stabilization evidence.
+All milestone sections below describe their
+banked scope; their historical future-work statements do not override the newer
+unbanked generation. Feature expansion is frozen. M16.0 is assigned for preparation only; banking
+remains a separate manual Project Control action. Project Control alone decides PASS—BANK / REVISE / REJECT / ESCALATE.
+Automated integration, direct native runtime evidence and reproducibility may
+establish acceptance without mandatory manual retest; Engineering does not claim
+Player PASS. [Known limitations](KNOWN_LIMITATIONS.md) separate construction,
+flight, terrain and distribution qualification.
 
 This is the primary current-state and architecture-handoff document. Durable
 engineering rules live in [ENGINEERING_RULES.md](../ENGINEERING_RULES.md), and

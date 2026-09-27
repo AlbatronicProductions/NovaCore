@@ -1,0 +1,535 @@
+{
+  "bytes": 1650107682,
+  "items": [
+    {
+      "path": "build/florida-pad-authority/after-launch-two-tank.png",
+      "files": 1,
+      "bytes": 59724,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/after-launch.png",
+      "files": 1,
+      "bytes": 54575,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/before-construction.png",
+      "files": 1,
+      "bytes": 41989,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/cache-florida.log",
+      "files": 1,
+      "bytes": 411,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/cache-global.log",
+      "files": 1,
+      "bytes": 408,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/camera-warp.log",
+      "files": 1,
+      "bytes": 12913,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/canonical-long",
+      "files": 9,
+      "bytes": 595494,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/canonical-package.json",
+      "files": 1,
+      "bytes": 20854,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/canonical-short",
+      "files": 9,
+      "bytes": 601020,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/canonical-stabilization",
+      "files": 6,
+      "bytes": 74256,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/canonical-two-tank",
+      "files": 9,
+      "bytes": 597539,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/clean-cache",
+      "files": 2,
+      "bytes": 271791820,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/clean-configure.log",
+      "files": 1,
+      "bytes": 661,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/clean-generated-hold",
+      "files": 1186,
+      "bytes": 204044728,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/clean-managed-Release.log",
+      "files": 1,
+      "bytes": 3866,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/clean-native-Release.log",
+      "files": 1,
+      "bytes": 135,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/clean-source",
+      "files": 3729,
+      "bytes": 1164964103,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--florida-pad-authority.log",
+      "files": 1,
+      "bytes": 508,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--florida-slab-correctness.log",
+      "files": 1,
+      "bytes": 5269,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--florida-slab-solar.log",
+      "files": 1,
+      "bytes": 5904,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--modular-connectors.log",
+      "files": 1,
+      "bytes": 175,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--modular-gate10-dynamics.log",
+      "files": 1,
+      "bytes": 1102,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--modular-gate10-flight.log",
+      "files": 1,
+      "bytes": 2300,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--modular-gate11.log",
+      "files": 1,
+      "bytes": 45,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--modular-gate12-application.log",
+      "files": 1,
+      "bytes": 16146,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug--modular-gate9.log",
+      "files": 1,
+      "bytes": 7281,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Debug-facility-gpu.log",
+      "files": 1,
+      "bytes": 339,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/diff-check.log",
+      "files": 1,
+      "bytes": 6733,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/empty-implicit-layers",
+      "files": 0,
+      "bytes": 0,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/entry.json",
+      "files": 1,
+      "bytes": 577138,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/envelope-build.log",
+      "files": 1,
+      "bytes": 796,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/facility-final-Debug.log",
+      "files": 1,
+      "bytes": 339,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/facility-final-Release.log",
+      "files": 1,
+      "bytes": 339,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/facility-gpu-Release-controlled.log",
+      "files": 1,
+      "bytes": 339,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/facility-gpu-Release-isolated.log",
+      "files": 1,
+      "bytes": 8536,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/facility-gpu-Release.log",
+      "files": 1,
+      "bytes": 3979,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/flight-envelope-Debug.log",
+      "files": 1,
+      "bytes": 432,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/flight-envelope-Release.log",
+      "files": 1,
+      "bytes": 432,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/flight-envelope.log",
+      "files": 1,
+      "bytes": 432,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/independent-final",
+      "files": 9,
+      "bytes": 594932,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/independent-two-tank",
+      "files": 9,
+      "bytes": 594360,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/isolated-moves.json",
+      "files": 1,
+      "bytes": 11538,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/isolated-package.json",
+      "files": 1,
+      "bytes": 20906,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/isolated-package.log",
+      "files": 1,
+      "bytes": 498,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/managed-Debug.log",
+      "files": 1,
+      "bytes": 2877,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/managed-Release.log",
+      "files": 1,
+      "bytes": 2923,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/native-Debug.log",
+      "files": 1,
+      "bytes": 135,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/native-deep",
+      "files": 4,
+      "bytes": 366509,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-deep-final",
+      "files": 4,
+      "bytes": 361534,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-long",
+      "files": 3,
+      "bytes": 7105,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-long-final",
+      "files": 9,
+      "bytes": 592833,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-long-sealed",
+      "files": 9,
+      "bytes": 590776,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-ninja-final.log",
+      "files": 1,
+      "bytes": 216,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/native-ninja-release-final.log",
+      "files": 1,
+      "bytes": 224,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/native-Release.log",
+      "files": 1,
+      "bytes": 135,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/native-short",
+      "files": 9,
+      "bytes": 517263,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-short-final",
+      "files": 9,
+      "bytes": 600358,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-stabilization",
+      "files": 9,
+      "bytes": 192550,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-two-tank",
+      "files": 4,
+      "bytes": 560059,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/native-two-tank-final",
+      "files": 9,
+      "bytes": 593657,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/NovaCore.Camera.Tests.log",
+      "files": 1,
+      "bytes": 127,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/NovaCore.ReferenceFrames.Tests.log",
+      "files": 1,
+      "bytes": 934,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/package.log",
+      "files": 1,
+      "bytes": 446,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/pad-final-Debug.log",
+      "files": 1,
+      "bytes": 508,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/pad-final-Release.log",
+      "files": 1,
+      "bytes": 508,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/pad-Release.log",
+      "files": 1,
+      "bytes": 508,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/presentation-allocation.log",
+      "files": 1,
+      "bytes": 4877,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/regressions.json",
+      "files": 1,
+      "bytes": 22659,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--florida-pad-authority.log",
+      "files": 1,
+      "bytes": 508,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--florida-slab-correctness.log",
+      "files": 1,
+      "bytes": 5269,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--florida-slab-solar.log",
+      "files": 1,
+      "bytes": 5903,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--modular-connectors.log",
+      "files": 1,
+      "bytes": 175,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--modular-gate10-dynamics.log",
+      "files": 1,
+      "bytes": 1102,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--modular-gate10-flight.log",
+      "files": 1,
+      "bytes": 2300,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--modular-gate11.log",
+      "files": 1,
+      "bytes": 45,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--modular-gate12-application.log",
+      "files": 1,
+      "bytes": 16147,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release--modular-gate9.log",
+      "files": 1,
+      "bytes": 7280,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/Release-facility-gpu.log",
+      "files": 1,
+      "bytes": 339,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/reproduction-package.json",
+      "files": 1,
+      "bytes": 20942,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/reproduction-package.log",
+      "files": 1,
+      "bytes": 534,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/retired-test-shaders",
+      "files": 8,
+      "bytes": 91360,
+      "classification": "Regeneratable qualification/reproduction output; retained until Project Control disposition. Canonical player package is outside this tree."
+    },
+    {
+      "path": "build/florida-pad-authority/run-final-routes.py",
+      "files": 1,
+      "bytes": 1319,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/run-native.py",
+      "files": 1,
+      "bytes": 772,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/run-regressions.py",
+      "files": 1,
+      "bytes": 1380,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/run-sealed-routes.py",
+      "files": 1,
+      "bytes": 1064,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/source-export.json",
+      "files": 1,
+      "bytes": 802520,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/source-export.log",
+      "files": 1,
+      "bytes": 687,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    },
+    {
+      "path": "build/florida-pad-authority/test-shader-retirement.json",
+      "files": 1,
+      "bytes": 3021,
+      "classification": "Reproducible raw command output or compact entry evidence."
+    }
+  ],
+  "deletedUniqueArtifacts": 0,
+  "scope": "Only eight test-shader copies moved into retained task output; no earlier evidence retirement or cleanup."
+}

@@ -1,0 +1,16 @@
+{
+  "judgment": "PASS_FROZEN_UNBANKED",
+  "utc": "2026-09-26T22:33:10.684532+00:00",
+  "repository": "E:\\NovaCore",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "sourceSha256": "4c4ef09957e306c567684f59db39625851e6d4fba685037c44fd91ffb8bd1182",
+  "sourceFiles": 926,
+  "packageSha256": "15ec023278f85a720f838c35ff638831c576e6becd5d83a63b2a69d15a707a00",
+  "executable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+  "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8",
+  "simulationSha256": "d7a0069f6f60832e327619920e0ccf89fe2ed9fb6ddce320d3bdbd211a0e9057",
+  "nativeSha256": "8e0b9842570a40bcb9921c7d9bff536502e30a113161f3539814bfd079a84e46",
+  "banked": false,
+  "playerPass": false,
+  "milestone": null
+}

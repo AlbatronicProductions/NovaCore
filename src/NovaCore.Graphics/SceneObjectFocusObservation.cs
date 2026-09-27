@@ -28,7 +28,10 @@ public readonly record struct SceneObjectFocusObservation(
     long ObservationTicks, long DisplayTicks, SceneObjectFocusStatus Status)
 {
     public SceneObjectFocusReferenceFrame ReferenceFrame { get; init; } = SceneObjectFocusReferenceFrame.Root;
+    // Zero preserves legacy framing. A generic publisher supplies the compiled
+    // physical extent about its material origin, never a mesh-derived mass.
+    public double BoundingRadius {get;init;}
     public bool IsAvailable => CanonicalId != 0 && Generation != 0 &&
-        EnvironmentalBodyId != 0 && MaterialOrigin.Value.IsFinite && ReferenceFrame.IsValid &&
+        EnvironmentalBodyId != 0 && MaterialOrigin.Value.IsFinite && ReferenceFrame.IsValid && double.IsFinite(BoundingRadius)&&BoundingRadius>=0 &&
         Status is SceneObjectFocusStatus.Prepared or SceneObjectFocusStatus.Active or SceneObjectFocusStatus.Held;
 }

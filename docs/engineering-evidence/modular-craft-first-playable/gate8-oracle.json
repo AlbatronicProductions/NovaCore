@@ -1,0 +1,30 @@
+{
+  "judgment": "PASS",
+  "precision": 60,
+  "substeps": [
+    128,
+    256
+  ],
+  "rows": [
+    {
+      "craft": "short",
+      "selfConvergence": 1.0060247392835987e-20,
+      "positionVelocityQuaternionRateErrors": [
+        2.2059943217222544e-17,
+        2.7498099696940403e-15,
+        1.672708523196927e-17,
+        5.800545999731116e-17
+      ]
+    },
+    {
+      "craft": "long",
+      "selfConvergence": 8.874918605743333e-21,
+      "positionVelocityQuaternionRateErrors": [
+        3.6256455822871324e-17,
+        2.2569844391182924e-15,
+        1.2256258449014879e-16,
+        3.430991720760219e-17
+      ]
+    }
+  ]
+}

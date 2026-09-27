@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget><AllowUnsafeBlocks>true</AllowUnsafeBlocks><NativeBuildDirectory>native-ninja</NativeBuildDirectory></PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'"><NativeBuildDirectory>native-ninja-release</NativeBuildDirectory></PropertyGroup>
+  <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
+  <PropertyGroup>
+    <NativeBuildDirectory Condition="'$(NativeBuildDirectory)' == '' and '$(Configuration)' == 'Release'">native-ninja-release</NativeBuildDirectory>
+    <NativeBuildDirectory Condition="'$(NativeBuildDirectory)' == ''">native-ninja</NativeBuildDirectory>
+    <NativeRuntimeRoot>$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\</NativeRuntimeRoot>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="..\..\assets\visual\SRV01\*.glb" Link="assets\visual\SRV01\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
@@ -9,67 +13,18 @@
     <ProjectReference Include="..\..\src\NovaCore.Platform\NovaCore.Platform.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Simulation\NovaCore.Simulation.csproj" />
   </ItemGroup>
-  <Target Name="CopyNativeRuntime" AfterTargets="Build">
-    <ItemGroup>
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\triangle.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\triangle.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\exhaust.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\exhaust.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\exhaust_resolve.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\orbit.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\orbit.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\orbit_previous.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\body_forward.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\sas_target.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_select.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_terrain_generate.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_production_terrain.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_production.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\regional_physical_demand.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\regional_physical_incoming_demand.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_prepare.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_incoming_prepare.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_reset.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_cull.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_compact.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_incoming_reset.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_incoming_cull.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_nested_scale_mesh_cull.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_nested_scale_mesh_incoming_cull.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard_incoming_compact.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard.tesc.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\production_spherical_billboard.tese.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_natural_terrain_global_prepare.comp.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\distant_planet.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\distant_planet.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_ring.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_ring_far.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\planetary_ring_near.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_orbit.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_orbit.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_marker.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_marker.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_label.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_label.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_speed_hud.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\solar_speed_hud.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\fullscreen.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\space_background.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\tone_map.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\stellar_sun.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\stellar_sun.frag.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\stellar_glow.vert.spv" />
-      <RuntimeShader Include="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\shaders\stellar_glow.frag.spv" />
-      <ExpectedShader Include="@(RuntimeShader->'$(OutDir)shaders\%(Filename)%(Extension)')" />
-      <ExistingShader Include="$(OutDir)shaders\*.spv" />
-      <StaleShader Include="@(ExistingShader)" Exclude="@(ExpectedShader)" />
-    </ItemGroup>
-    <Delete Files="@(StaleShader)" />
-    <Copy SourceFiles="@(RuntimeShader)" DestinationFolder="$(OutDir)shaders" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\NovaCore.Native.dll" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  <!-- Native runtime content belongs to the renderer and flows through project references
+       to ConstructionEditor and NovaCore.App for both build and publish. Build native first. -->
+  <ItemGroup>
+    <RuntimeShader Include="$(NativeRuntimeRoot)shaders\*.spv" />
+    <Content Include="@(RuntimeShader)" Link="shaders\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="$(NativeRuntimeRoot)NovaCore.Native.dll" Link="NovaCore.Native.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="ValidateNativeRuntimeContent" BeforeTargets="PrepareForBuild;GetCopyToOutputDirectoryItems;ComputeFilesToPublish">
+    <Error Condition="!Exists('$(NativeRuntimeRoot)NovaCore.Native.dll')" Text="Native runtime is missing from $(NativeRuntimeRoot). Build the matching native configuration before building or publishing the application." />
+    <Error Condition="'@(RuntimeShader)' == ''" Text="Native SPIR-V shader package is empty in $(NativeRuntimeRoot)shaders. Build the matching native configuration before building or publishing the application." />
+  </Target>
+  <Target Name="CopyEarthElevation" AfterTargets="Build">
     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\assets\earth\runtime\earth_elevation_8192x4096.r16" DestinationFolder="$(OutDir)earth-data" SkipUnchangedFiles="true" />
   </Target>
 </Project>

@@ -1,0 +1,864 @@
+{
+  "judgment": "PASS",
+  "routes": [
+    {
+      "name": "Debug-PreparedSubmissionTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja\\NovaCorePreparedSubmissionTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "63b2fac69263287794d3d52655a78596931a33ce57c7bb63053f8bad90922787",
+      "summary": [
+        "EDITOR_SUBMISSION PASS active=4101 prepared=18585 larger=34080 deviceBoundary=exact canary=unchanged refusal=atomic",
+        "PREPARED_SUBMISSION PASS counts=37,38,39,37,54 bytes=4416 overflow=refused canary=unchanged recreate=retained"
+      ]
+    },
+    {
+      "name": "Debug-RegionalPupilLifetimeTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja\\NovaCoreRegionalPupilLifetimeTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "28a89f2f00dc1ee76f66580639ec1d8db3c69a234bc4a3ead1efe832e134daec",
+      "summary": [
+        "vertices=696410 pupilInterval=33 allResident=0 ioDelay=0 publications=60 finalPupil=90 demandSlices=1340 preparationSlices=660",
+        "vertices=696410 pupilInterval=100 allResident=0 ioDelay=0 publications=20 finalPupil=50 demandSlices=440 preparationSlices=220",
+        "vertices=712106 pupilInterval=1 allResident=0 ioDelay=0 publications=60 finalPupil=1978 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=3 allResident=0 ioDelay=0 publications=60 finalPupil=680 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=22 allResident=0 ioDelay=0 publications=60 finalPupil=119 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=33 allResident=0 ioDelay=0 publications=60 finalPupil=90 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=100 allResident=0 ioDelay=0 publications=20 finalPupil=50 demandSlices=440 preparationSlices=220",
+        "vertices=712106 pupilInterval=1 allResident=0 ioDelay=7 publications=49 finalPupil=1951 demandSlices=1100 preparationSlices=550",
+        "vertices=712106 pupilInterval=1 allResident=1 ioDelay=0 publications=181 finalPupil=2011 demandSlices=0 preparationSlices=2000",
+        "Regional pupil dependency handoff: PASS; CPU-only; no Vulkan entry point"
+      ]
+    },
+    {
+      "name": "Debug-TerrainTessellationTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja\\NovaCoreTerrainTessellationTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "ce9eabd124adc10a667c1c2186e46b10bc716565370686a2fd1a4ca839a74b57",
+      "summary": [
+        "{\"ordinaryUnchanged\":100000,\"singularNeighborhood\":2400,\"replayedEdges\":0,\"maxDifference\":0,\"gpuExposure\":false}"
+      ]
+    },
+    {
+      "name": "Debug-PresentationResultTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja\\NovaCorePresentationResultTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "f29f51b8a1e888d7a278e613ecc308b585544f06e6bbf7da05ca948cdd148718",
+      "summary": [
+        "PASS 18 presentation outcomes; no Vulkan device created"
+      ]
+    },
+    {
+      "name": "Debug-startup-guard",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja\\NovaCoreCausalRecorderMock.exe",
+        "--test-startup-guard"
+      ],
+      "exit": 0,
+      "sha256": "12dd475622648daf11ffac3be7194f8c47422cce2d156c936d69a9d3633eb78f",
+      "summary": [
+        "Native startup admission: 6/6 passed; Vulkan calls=0; denied cases simulated GPU calls=0"
+      ]
+    },
+    {
+      "name": "Debug-observer-build",
+      "command": [
+        "dotnet",
+        "build",
+        "tools/NovaCore.Causal.Observer/NovaCore.Causal.Observer.csproj",
+        "-c",
+        "Debug"
+      ],
+      "exit": 0,
+      "sha256": "f50e3f03d2f90794d32021eb54b8731890180b3e06a403208c53155af3bd7946",
+      "summary": [
+        "  Determining projects to restore...",
+        "  Restored E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\NovaCore.Causal.Observer.csproj (in 45 ms).",
+        "  NovaCore.Causal.Observer -> E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Debug\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:00.94"
+      ]
+    },
+    {
+      "name": "Debug--test-production-frame",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Debug\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "--test-production-frame",
+        "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions\\Debug--test-production-frame-output"
+      ],
+      "exit": 0,
+      "sha256": "047454573f8987c41a0b5e8f90a606f5e9134a636230f5f4b8a21a803ba6f4e1",
+      "summary": [
+        "PASS production frame checks=33; exact 60 FPS boundary; CPU-only"
+      ]
+    },
+    {
+      "name": "Debug--test-adaptive",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Debug\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "--test-adaptive",
+        "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions\\Debug--test-adaptive-output"
+      ],
+      "exit": 0,
+      "sha256": "2c912095fe96290912c897e2b35ed1afa480b9fd078ab748da7566d93fad8032",
+      "summary": [
+        "PASS adaptive policy/checkpoint checks=27; CPU-only"
+      ]
+    },
+    {
+      "name": "Debug--test-first-alarm",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Debug\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "--test-first-alarm",
+        "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions\\Debug--test-first-alarm-output"
+      ],
+      "exit": 0,
+      "sha256": "d94242ce452380dbd840d4a2a0451d9640c433911cca590ad46615a57b00f9ff",
+      "summary": [
+        "PASS first-alarm checks=76; CPU-only; first boundary immutable; stop integration separately exercised by mock-frozen-repeated-cost"
+      ]
+    },
+    {
+      "name": "Debug--modular-connectors",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+        "--modular-connectors"
+      ],
+      "exit": 0,
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05",
+      "summary": [
+        "Modular connector graph PASS: 1070 checks; depths 0..64, two root frames, all three tank hosts at 1/2/4/8 symmetry; physical nozzle collisions still refused; no Player PASS."
+      ]
+    },
+    {
+      "name": "Debug--modular-stabilization",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+        "--modular-stabilization"
+      ],
+      "exit": 0,
+      "sha256": "c7c75b6c5d2e95856b8ea983bc03130af76213986a09a7691f20456b908b8f4e",
+      "summary": [
+        "STABILIZATION depth=1 parts=12 saveBytes=9391 PASS",
+        "STABILIZATION depth=2 parts=21 saveBytes=16929 PASS",
+        "STABILIZATION depth=4 parts=31 saveBytes=25076 PASS",
+        "STABILIZATION depth=16 parts=43 saveBytes=32058 PASS",
+        "STABILIZATION depth=64 parts=91 saveBytes=59907 PASS",
+        "STABILIZATION depth=96 parts=123 saveBytes=78483 PASS",
+        "Modular stabilization PASS: 223 checks; denseParts=901 renderEntries=4101 preparedCapacity=18585; no Player PASS."
+      ]
+    },
+    {
+      "name": "Release-PreparedSubmissionTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja-release\\NovaCorePreparedSubmissionTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "63b2fac69263287794d3d52655a78596931a33ce57c7bb63053f8bad90922787",
+      "summary": [
+        "EDITOR_SUBMISSION PASS active=4101 prepared=18585 larger=34080 deviceBoundary=exact canary=unchanged refusal=atomic",
+        "PREPARED_SUBMISSION PASS counts=37,38,39,37,54 bytes=4416 overflow=refused canary=unchanged recreate=retained"
+      ]
+    },
+    {
+      "name": "Release-RegionalPupilLifetimeTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja-release\\NovaCoreRegionalPupilLifetimeTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "28a89f2f00dc1ee76f66580639ec1d8db3c69a234bc4a3ead1efe832e134daec",
+      "summary": [
+        "vertices=696410 pupilInterval=33 allResident=0 ioDelay=0 publications=60 finalPupil=90 demandSlices=1340 preparationSlices=660",
+        "vertices=696410 pupilInterval=100 allResident=0 ioDelay=0 publications=20 finalPupil=50 demandSlices=440 preparationSlices=220",
+        "vertices=712106 pupilInterval=1 allResident=0 ioDelay=0 publications=60 finalPupil=1978 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=3 allResident=0 ioDelay=0 publications=60 finalPupil=680 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=22 allResident=0 ioDelay=0 publications=60 finalPupil=119 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=33 allResident=0 ioDelay=0 publications=60 finalPupil=90 demandSlices=1340 preparationSlices=660",
+        "vertices=712106 pupilInterval=100 allResident=0 ioDelay=0 publications=20 finalPupil=50 demandSlices=440 preparationSlices=220",
+        "vertices=712106 pupilInterval=1 allResident=0 ioDelay=7 publications=49 finalPupil=1951 demandSlices=1100 preparationSlices=550",
+        "vertices=712106 pupilInterval=1 allResident=1 ioDelay=0 publications=181 finalPupil=2011 demandSlices=0 preparationSlices=2000",
+        "Regional pupil dependency handoff: PASS; CPU-only; no Vulkan entry point"
+      ]
+    },
+    {
+      "name": "Release-TerrainTessellationTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja-release\\NovaCoreTerrainTessellationTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "ce9eabd124adc10a667c1c2186e46b10bc716565370686a2fd1a4ca839a74b57",
+      "summary": [
+        "{\"ordinaryUnchanged\":100000,\"singularNeighborhood\":2400,\"replayedEdges\":0,\"maxDifference\":0,\"gpuExposure\":false}"
+      ]
+    },
+    {
+      "name": "Release-PresentationResultTests",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja-release\\NovaCorePresentationResultTests.exe"
+      ],
+      "exit": 0,
+      "sha256": "f29f51b8a1e888d7a278e613ecc308b585544f06e6bbf7da05ca948cdd148718",
+      "summary": [
+        "PASS 18 presentation outcomes; no Vulkan device created"
+      ]
+    },
+    {
+      "name": "Release-startup-guard",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja-release\\NovaCoreCausalRecorderMock.exe",
+        "--test-startup-guard"
+      ],
+      "exit": 0,
+      "sha256": "12dd475622648daf11ffac3be7194f8c47422cce2d156c936d69a9d3633eb78f",
+      "summary": [
+        "Native startup admission: 6/6 passed; Vulkan calls=0; denied cases simulated GPU calls=0"
+      ]
+    },
+    {
+      "name": "Release-observer-build",
+      "command": [
+        "dotnet",
+        "build",
+        "tools/NovaCore.Causal.Observer/NovaCore.Causal.Observer.csproj",
+        "-c",
+        "Release"
+      ],
+      "exit": 0,
+      "sha256": "7e8c90c14337742278c06595687bf3a20895dffe6f8181243d78bc7637b7246d",
+      "summary": [
+        "  Determining projects to restore...",
+        "  All projects are up-to-date for restore.",
+        "  NovaCore.Causal.Observer -> E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Release\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:01.11"
+      ]
+    },
+    {
+      "name": "Release--test-production-frame",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Release\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "--test-production-frame",
+        "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions\\Release--test-production-frame-output"
+      ],
+      "exit": 0,
+      "sha256": "047454573f8987c41a0b5e8f90a606f5e9134a636230f5f4b8a21a803ba6f4e1",
+      "summary": [
+        "PASS production frame checks=33; exact 60 FPS boundary; CPU-only"
+      ]
+    },
+    {
+      "name": "Release--test-adaptive",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Release\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "--test-adaptive",
+        "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions\\Release--test-adaptive-output"
+      ],
+      "exit": 0,
+      "sha256": "2c912095fe96290912c897e2b35ed1afa480b9fd078ab748da7566d93fad8032",
+      "summary": [
+        "PASS adaptive policy/checkpoint checks=27; CPU-only"
+      ]
+    },
+    {
+      "name": "Release--test-first-alarm",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tools\\NovaCore.Causal.Observer\\bin\\Release\\net10.0-windows\\NovaCore.Causal.Observer.dll",
+        "--test-first-alarm",
+        "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions\\Release--test-first-alarm-output"
+      ],
+      "exit": 0,
+      "sha256": "d94242ce452380dbd840d4a2a0451d9640c433911cca590ad46615a57b00f9ff",
+      "summary": [
+        "PASS first-alarm checks=76; CPU-only; first boundary immutable; stop integration separately exercised by mock-frozen-repeated-cost"
+      ]
+    },
+    {
+      "name": "Release--modular-connectors",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+        "--modular-connectors"
+      ],
+      "exit": 0,
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05",
+      "summary": [
+        "Modular connector graph PASS: 1070 checks; depths 0..64, two root frames, all three tank hosts at 1/2/4/8 symmetry; physical nozzle collisions still refused; no Player PASS."
+      ]
+    },
+    {
+      "name": "Release--modular-stabilization",
+      "command": [
+        "dotnet",
+        "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+        "--modular-stabilization"
+      ],
+      "exit": 0,
+      "sha256": "c7c75b6c5d2e95856b8ea983bc03130af76213986a09a7691f20456b908b8f4e",
+      "summary": [
+        "STABILIZATION depth=1 parts=12 saveBytes=9391 PASS",
+        "STABILIZATION depth=2 parts=21 saveBytes=16929 PASS",
+        "STABILIZATION depth=4 parts=31 saveBytes=25076 PASS",
+        "STABILIZATION depth=16 parts=43 saveBytes=32058 PASS",
+        "STABILIZATION depth=64 parts=91 saveBytes=59907 PASS",
+        "STABILIZATION depth=96 parts=123 saveBytes=78483 PASS",
+        "Modular stabilization PASS: 223 checks; denseParts=901 renderEntries=4101 preparedCapacity=18585; no Player PASS."
+      ]
+    },
+    {
+      "name": "modular-gate1",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1"
+      ],
+      "exit": 0,
+      "sha256": "86f5c3ea9303a0c63568c676a7b9688f143d58b4b85e71a123b7e58d7204a226",
+      "summary": [
+        "Modular Part Standard baseline PASS: 33 checks; catalog 751a86d1443f036c56505a845a7a644e09bdf74ba60c6c4c05ae60fe4a371818; full Gate 1 also requires red-team probes"
+      ]
+    },
+    {
+      "name": "modular-gate1-redteam",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-redteam"
+      ],
+      "exit": 0,
+      "sha256": "29b094cc6fd0048b71f93652bc72e3240fd5615649349410bcfebd781c142b26",
+      "summary": [
+        "{\"unresolvedPortResourceAccepted\":false,\"passthroughResourceRevisionMissingFromDependencyDigest\":false,\"nullPlacementRefusal\":\"InvalidDataException\"}",
+        "Modular Part Standard red team PASS"
+      ]
+    },
+    {
+      "name": "modular-gate1-closure",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-closure"
+      ],
+      "exit": 0,
+      "sha256": "0458f04e3175a43de3c917b53fb801248384d0d97993736398e92cd0fcf56933",
+      "summary": [
+        "Modular Gate 1 bounded closure PASS: 58 checks; resource catalog 94d3ada39e190751cd02aa2a97a2cae0e3922982ee4269a710bdb9f09eceda17; socket catalog dde5d4c6d2b452f16da121a3ca24b727483b0c21b180c3f60c200329687e7738"
+      ]
+    },
+    {
+      "name": "modular-gate1-admission-audit",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-admission-audit"
+      ],
+      "exit": 0,
+      "sha256": "8232e8004580a886ab0145b4397b7b7c3f33e0b06a305774c3438c24a4ee806f",
+      "summary": [
+        "{\"densityKgM3\":1000,\"capacityKg\":9.424777960769382E-09,\"geometricVolumeM3\":9.424777960769381E-15,\"requiredVolumeM3\":9.424777960769381E-12,\"expectedMassKg\":9.424777960769381E-12,\"capacityToPhysicalMassRatio\":1000,\"admitted\":false,\"reloaded\":false,\"digest\":null,\"sourceUnchanged\":true}",
+        "{\"densityKgM3\":1E+20,\"capacityKg\":1,\"geometricVolumeM3\":9.424777960769381E-15,\"requiredVolumeM3\":1E-20,\"expectedMassKg\":942477.7960769382,\"capacityToPhysicalMassRatio\":1.0610329539459686E-06,\"admitted\":false,\"reloaded\":false,\"digest\":null,\"sourceUnchanged\":true}",
+        "{\"field\":\"construction.asset.materialOrigin\",\"refusal\":\"JsonException\",\"structured\":true}",
+        "{\"field\":\"standard.socketGroups[0].axis.position\",\"refusal\":\"JsonException\",\"structured\":true}",
+        "Modular full admission audit PASS"
+      ]
+    },
+    {
+      "name": "modular-gate1-numerics",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-numerics"
+      ],
+      "exit": 0,
+      "sha256": "098411f07de594c6596c7b7d1a2cabdcedd29e14f0cb1394b116b49397f272df",
+      "summary": [
+        "Modular Gate 1 numerical admission PASS: 251 independent-rational/scale/boundary checks"
+      ]
+    },
+    {
+      "name": "modular-gate1-json",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-json"
+      ],
+      "exit": 0,
+      "sha256": "8cb18250017f31faf65f6bb81aa611b16ab8578d8dc89ef876a363e5254a05b7",
+      "summary": [
+        "Modular Gate 1 JSON refusal PASS: 20 checks"
+      ]
+    },
+    {
+      "name": "modular-gate1-aggregate",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-aggregate"
+      ],
+      "exit": 0,
+      "sha256": "6ca95841915b4c7477e0548bf0c9a04b0f1bfd7122ea85e86e0d9f0cb27a209e",
+      "summary": [
+        "Modular Gate 1 dry aggregate admission PASS: 50 independent centre-first rational/boundary checks"
+      ]
+    },
+    {
+      "name": "modular-gate1-size",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-size"
+      ],
+      "exit": 0,
+      "sha256": "679305152014893803ddec204156a6449920cb4242a263606b0187b65e5a6d2a",
+      "summary": [
+        "Modular Gate 1 catalog bound PASS: 12 byte-boundary checks"
+      ]
+    },
+    {
+      "name": "modular-gate1-predicates",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate1-predicates"
+      ],
+      "exit": 0,
+      "sha256": "cf95d02a28580e9498c79acc15df17031696255abc7631cfe42e6d116639164b",
+      "summary": [
+        "Modular Gate 1 physical predicates PASS: 37 independent sign/overlap/boundary checks"
+      ]
+    },
+    {
+      "name": "modular-gate2",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate2"
+      ],
+      "exit": 0,
+      "sha256": "c85ee7d744747849b7f4bd455d1b10c2efc06941a6cb5058d98585f1955dee82",
+      "summary": [
+        "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+      ]
+    },
+    {
+      "name": "modular-gate3",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate3"
+      ],
+      "exit": 0,
+      "sha256": "242dab243897cdf61b3f507aa22f7958c8ba6fb119a375af6e5ec1f0f093e85b",
+      "summary": [
+        "Gate 3 IO witness directory: E:\\NovaCore\\build\\modular-craft-first-playable\\gate3-tests\\ba6d6efb5325480fa8595f9221e9ad25",
+        "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+      ]
+    },
+    {
+      "name": "modular-gate4",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate4"
+      ],
+      "exit": 0,
+      "sha256": "4073187cca8c006f32d8acf5c62da04ad3e00beab8d6d816fd9066c422616a2a",
+      "summary": [
+        "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 774d360412a53b0a330ffece63321aa16261135aef55a23d0af08a9f25f16466"
+      ]
+    },
+    {
+      "name": "modular-gate5-operations",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate5-operations"
+      ],
+      "exit": 0,
+      "sha256": "3412642d62251d4a0e56b8b2fc7b16d176c80ad053b0df5ea3657b4e24fdf09d",
+      "summary": [
+        "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+      ]
+    },
+    {
+      "name": "modular-gate6",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate6"
+      ],
+      "exit": 0,
+      "sha256": "c590dd441d917e88290c25b62fcd78fec2b1ed9a53e6549ffb1a755b4bcad207",
+      "summary": [
+        "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\8d201a21a9fe404db2f59af0fa31792c"
+      ]
+    },
+    {
+      "name": "modular-gate7",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate7"
+      ],
+      "exit": 0,
+      "sha256": "e1d8b3efbd8f50277f3049e0425915c7cc16545caf2dbe10ec33f02bbd8b24b9",
+      "summary": [
+        "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+      ]
+    },
+    {
+      "name": "modular-gate8",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate8"
+      ],
+      "exit": 0,
+      "sha256": "7edd0b7fb0422cbe9523ec3fa8c23ceb24059ec99cebfc65ef618582255e33ec",
+      "summary": [
+        "short timeBits=1080 rateBits=2161 quantityBits=6510 fuelScratch=8672 physicalScratch=8646",
+        "contact 1304kg: footLoadMax=7399.62384422313N tiltMargin=0.8609520377960432m nativeTravel=0.0002985001774504781m depth=0.000298531m recenterP=1.9984014443252818E-15m recenterV=1.9178279303923403E-14m/s",
+        "long timeBits=1080 rateBits=2161 quantityBits=6511 fuelScratch=8673 physicalScratch=8646",
+        "contact 2164kg: footLoadMax=12572.373112166708N tiltMargin=0.8347614606772324m nativeTravel=0.00021433879737742245m depth=0.00021489449m recenterP=0m recenterV=1.553677691793345E-14m/s",
+        "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+      ]
+    },
+    {
+      "name": "modular-gate8-oracle",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--modular-gate8-oracle"
+      ],
+      "exit": 0,
+      "sha256": "b32373eb17228a03c3dc27fb45039df936db2ad92251436b1f054caa107663b4",
+      "summary": [
+        "      0.0015624999997834927,",
+        "      -0.0011708552674622094,",
+        "      0.0007827753494501734,",
+        "      0.9999977874747753,",
+        "      0.20000051565729665,",
+        "      -0.14973879622443176,",
+        "      0.10039038833931123",
+        "    ]",
+        "  }",
+        "]"
+      ]
+    },
+    {
+      "name": "srv01-integration",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+        "--srv01-integration"
+      ],
+      "exit": 0,
+      "sha256": "f672e14e501b8c2c67ce311a5406f280b6b7ee1ea386917ab5f0301e17d2f923",
+      "summary": [
+        "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+        "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+      ]
+    },
+    {
+      "name": "modular-greybox-assets",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-greybox-assets"
+      ],
+      "exit": 0,
+      "sha256": "3ef1fb80901dc0d130907c05c1ba1f48fa829999a9fa6fec439826754c339d4d",
+      "summary": [
+        "Modular greybox assets PASS: 6 assets, 29 meshes, 2124 triangles; strict production loader, no GPU/player acceptance claim"
+      ]
+    },
+    {
+      "name": "modular-viewport",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-viewport"
+      ],
+      "exit": 0,
+      "sha256": "4879f6ef378e4948b7f4d528b4bb8ea5deebd44d768113c8407d78605ab81251",
+      "summary": [
+        "Modular viewport CPU/ABI PASS: 74 checks; native window route separately required"
+      ]
+    },
+    {
+      "name": "modular-gate9",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-gate9"
+      ],
+      "exit": 0,
+      "sha256": "69924330b7a5120f1cf6cebdad78aa7c6a5f0838e4a91a2d643fe5cb25e9360b",
+      "summary": [
+        "FLORIDA_PRESENTATION_READY site=0baaa5c1cfe6b5a37b2f0c907ccfb39f0b223279f240766962a91db4fc4e60fc body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2761",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2627",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.461",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2494",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2623",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2381",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2623",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.23",
+        "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2459",
+        "MODULAR_GATE9 PASS checks=886"
+      ]
+    },
+    {
+      "name": "modular-gate10-dynamics",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-gate10-dynamics"
+      ],
+      "exit": 0,
+      "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586",
+      "summary": [
+        "MODULAR_ROTATING_DYNAMICS mass=1304 epoch=999000 position=3.6145035867253375E-09 velocity=3.00540469234687E-14 omega=2.423651445728339E-16 orientation=1.1604353567155542E-15",
+        "MODULAR_ROTATING_DYNAMICS mass=1304 epoch=-1000500 position=6.456591479416027E-09 velocity=3.5957955699586803E-13 omega=2.5172027167143304E-16 orientation=2.447531919918933E-15",
+        "MODULAR_ROTATING_DYNAMICS mass=1304 epoch=21999000 position=5.650641908641717E-09 velocity=3.457721479366324E-13 omega=2.118352371637509E-16 orientation=1.737995547973855E-15",
+        "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=999000 position=4.971902003526367E-09 velocity=1.9907880820997406E-13 omega=2.4394924734781536E-16 orientation=1.7921162839671297E-15",
+        "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=-1000500 position=6.506772997082267E-09 velocity=3.5956310280083856E-13 omega=2.2247786310271853E-16 orientation=1.6356961449923234E-15",
+        "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=21999000 position=5.509778655226916E-09 velocity=2.428416888236078E-13 omega=2.242025235105681E-16 orientation=1.4198814970921195E-15",
+        "MODULAR_GATE10_DYNAMICS PASS checks=23"
+      ]
+    },
+    {
+      "name": "modular-gate10-flight",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-gate10-flight"
+      ],
+      "exit": 0,
+      "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+      "summary": [
+        "CONTACT_ORACLE long=True p=0.00013034641760283666 v=0.006287147074434613 actual=Double3 { X = -6.010499934702423E-08, Y = 0.07501897960901074, Z = 0.00019489938671417886, LengthSquared = 0.005627885287351724, IsFinite = True } oracle=Double3 { X = -6.919587566393415E-08, Y = 0.068731894143439, Z = 0.0002227325339593758, LengthSquared = 0.004724122882331375, IsFinite = True }",
+        "CONTACT_IMPULSE long=True residualNs=6.790322769041022E-06 recoveryVelocity=0.006287147845941257 slices=16",
+        "flight long=True consumer=FreeFlight p=Double3 { X = -0.8110923259946647, Y = 972.349084873879, Z = 2.8503604176925923, LengthSquared = 945471.5252803417, IsFinite = True } v=Double3 { X = -0.12468053607646762, Y = 102.05270865775535, Z = 0.28505136195897945, LengthSquared = 10414.852143899725, IsFinite = True }",
+        "FLIGHT_ORACLE long=True position=2.5526564705494318E-08 velocity=8.079744757155179E-11 contactPosition=0.00013034641760283666 contactVelocity=0.006287147074434613 handoffTicks=1125000",
+        "DEPLETION fuel Published 1",
+        "DEPLETION power Published 1",
+        "DEPLETION tiny-fuel Published 1",
+        "FRESH_CONTACT_ORACLE long=False position=0.00010490079822280653 velocity=1.887376321631664E-08",
+        "FRESH_CONTACT_ORACLE long=True position=3.3703649670694695E-05 velocity=8.743172911942352E-09",
+        "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+      ]
+    },
+    {
+      "name": "modular-gate11",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-gate11"
+      ],
+      "exit": 0,
+      "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41",
+      "summary": [
+        "MODULAR_GATE11_LONG_FLIGHT_PASS checks=8064"
+      ]
+    },
+    {
+      "name": "modular-gate12-application",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-gate12-application"
+      ],
+      "exit": 0,
+      "sha256": "46df19195d30fb0ec0d4a7adb840567319f55a86cbe1369176c5452795a291a6",
+      "summary": [
+        "Z: ignite \u00c2\u00b7 X: cutoff \u00c2\u00b7 W/S pitch \u00c2\u00b7 A/D yaw \u00c2\u00b7 Q/E roll \u00c2\u00b7 mouse orbit \u00c2\u00b7 wheel zoom \u00c2\u00b7 F: craft \u00c2\u00b7 1\u00e2\u20ac\u201c0: celestial focus. Physical flight runs at 1x. In NovaCore, Menu returns to retained construction.",
+        "MODULAR_FLIGHT_END failed=False reason=none source=a687686bca2795ed2be7bdbfc47a1fdc29678fd9a5843bde03377efd7a7eda38 compiled=af5e9cc899d1134046e3e493e658385bd949effe4baea58716858da8d43e05f5 epoch=11170875 sequence=651 mass=1702.2763671875 position=Double3 { X = -0.1459902279494293, Y = 251.93144306031368, Z = 0.5761019741773881, LengthSquared = 63469.80520908339, IsFinite = True } velocity=Double3 { X = -0.04129204499670638, Y = 19.584109089258273, Z = 0.12276393780238562, LengthSquared = 383.5541048373733, IsFinite = True }",
+        "MODULAR_INTEGRATED_MEASURE {\"warmupPerPhase\":64,\"sampling\":\"first three 256-frame windows within each phase; normal GC; phase re-entry retains that phase\\u0027s sequence\",\"boundary\":\"callback input, bounded physical service, celestial publication, camera and render preparation; frame interval also includes native presentation/scheduling\",\"windows\":0}",
+        "FLORIDA_PRESENTATION_READY site=25010d791076bf1d16abcce0809115240b01ba05050f6af59c1b97ef6b355c47 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.1534",
+        "MODULAR_FLIGHT_READY source=79234b824be311679ef21bc7a52497c4d0d238abbb89332089d218e106995c2e compiled=46a89b65d297565d3b3e975f4760f8da21ac55108e01a46eba13908c81e3dc33 vehicle=ConstructionVehicleIdentity { Vessel = SpacecraftId { Value = 9 }, Generation = 9 } parts=12 epoch=0 mass=1304 physical=continuous-64Hz main=OFF controls=neutral",
+        "Z: ignite \u00c2\u00b7 X: cutoff \u00c2\u00b7 W/S pitch \u00c2\u00b7 A/D yaw \u00c2\u00b7 Q/E roll \u00c2\u00b7 mouse orbit \u00c2\u00b7 wheel zoom \u00c2\u00b7 F: craft \u00c2\u00b7 1\u00e2\u20ac\u201c0: celestial focus. Physical flight runs at 1x. In NovaCore, Menu returns to retained construction.",
+        "MODULAR_FLIGHT_REFUSED reason=adversarial publication refusal epoch=62500 sequence=4",
+        "MODULAR_FLIGHT_END failed=True reason=adversarial publication refusal source=79234b824be311679ef21bc7a52497c4d0d238abbb89332089d218e106995c2e compiled=46a89b65d297565d3b3e975f4760f8da21ac55108e01a46eba13908c81e3dc33 epoch=62500 sequence=4 mass=1304 position=Double3 { X = 8.996262068627914E-11, Y = -0.000297602847029399, Z = 3.344999583900643E-06, LengthSquared = 8.857864358222824E-08, IsFinite = True } velocity=Double3 { X = -8.449364144212976E-09, Y = 2.539682736067108E-07, Z = -3.701289995902984E-05, LengthSquared = 1.3700193346529045E-09, IsFinite = True }",
+        "MODULAR_INTEGRATED_MEASURE {\"warmupPerPhase\":64,\"sampling\":\"first three 256-frame windows within each phase; normal GC; phase re-entry retains that phase\\u0027s sequence\",\"boundary\":\"callback input, bounded physical service, celestial publication, camera and render preparation; frame interval also includes native presentation/scheduling\",\"windows\":0}",
+        "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+      ]
+    },
+    {
+      "name": "modular-editor-regressions",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+        "--modular-editor-regressions"
+      ],
+      "exit": 0,
+      "sha256": "442a8b03c36f5848a83cab3378ce1d4f7e347d31d295035c4ef6bec727d5feb1",
+      "summary": [
+        "SRV01_COLD_PREPARATION ms=108.7445 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+        "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "ACTIVE_VESSEL_COST {\"route\":\"florida-vessel-follow-orbit-zoom\",\"warm\":512,\"count\":2048,\"median\":0.0438,\"p95\":0.049,\"p99\":0.0596,\"maximum\":0.1096,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.1096,\"index\":822},{\"ms\":0.0907,\"index\":829},{\"ms\":0.0743,\"index\":823},{\"ms\":0.0698,\"index\":868},{\"ms\":0.0691,\"index\":1175},{\"ms\":0.0682,\"index\":824},{\"ms\":0.068,\"index\":826},{\"ms\":0.0679,\"index\":825}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"F-refocus\",\"warm\":512,\"count\":2048,\"median\":0.0141,\"p95\":0.0162,\"p99\":0.019,\"maximum\":0.026,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.026,\"index\":488},{\"ms\":0.0248,\"index\":1179},{\"ms\":0.0237,\"index\":1879},{\"ms\":0.0228,\"index\":1887},{\"ms\":0.0226,\"index\":875},{\"ms\":0.02,\"index\":169},{\"ms\":0.0198,\"index\":1817},{\"ms\":0.0197,\"index\":594}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"celestial-vessel-switch\",\"warm\":512,\"count\":2048,\"median\":0.0187,\"p95\":0.0214,\"p99\":0.0251,\"maximum\":0.038,\"collections\":[0,0,0],\"allocated\":98304,\"tails\":[{\"ms\":0.038,\"index\":394},{\"ms\":0.0287,\"index\":355},{\"ms\":0.0285,\"index\":949},{\"ms\":0.028,\"index\":2021},{\"ms\":0.0276,\"index\":1451},{\"ms\":0.0273,\"index\":1978},{\"ms\":0.0272,\"index\":159},{\"ms\":0.0268,\"index\":923}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_COST {\"route\":\"solar-celestial-display\",\"warm\":512,\"count\":2048,\"median\":0.0088,\"p95\":0.0089,\"p99\":0.0117,\"maximum\":0.0243,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.0243,\"index\":1248},{\"ms\":0.0203,\"index\":1055},{\"ms\":0.0195,\"index\":377},{\"ms\":0.0177,\"index\":379},{\"ms\":0.0144,\"index\":1056},{\"ms\":0.0134,\"index\":231},{\"ms\":0.013,\"index\":799},{\"ms\":0.013,\"index\":1443}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+        "ACTIVE_VESSEL_STORAGE {\"targetSlots\":1,\"historySlots\":0,\"observationBytes\":136,\"retainedBefore\":260268224,\"retainedAfter\":260267840,\"refocusOperations\":10000,\"bindingUnchanged\":true}"
+      ]
+    },
+    {
+      "name": "Simulation",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll"
+      ],
+      "exit": 0,
+      "sha256": "780812d0eb72ff060bf70f25b611ab353bd4537f673b42b266a84d480a09cac8",
+      "summary": [
+        "PASS Powered contact host partitions and moving frame",
+        "ORDINARY_ALLOCATION gate=powered-contact-dry-complete bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-interior-exhaustion-to-dry bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-no-work bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-backlog bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=powered-contact-input-projection bytes=0 entry=PASS exit=PASS",
+        "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+        "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+        "POWERED_CONTACT_ALLOCATION PASS five_exact_zero_windows positive_control=NONZERO",
+        "PASS Powered contact zero allocation"
+      ]
+    },
+    {
+      "name": "ReferenceFrames",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.dll"
+      ],
+      "exit": 0,
+      "sha256": "242bcb8641d61cb6fcb1b9cc984ea447d61385cfa1b5e7042444cac43a8f037d",
+      "summary": [
+        "Deterministic static-fixture hash: 0x17E48B3F5A63A4D0",
+        "PASS static universe fixture",
+        "PASS ORB",
+        "PASS CCI/CCF",
+        "PASS rotating velocity",
+        "SurfaceAnchor precision: angular=1.49011611938476562E-008 rad; body=1.51385336298908041E-005 m; root=0.00000000000000000E+000 m; offset=1.49670440805493854E-005 m; velocity=1.10391391388378380E-009 m/s; stationary=1.10392831694650650E-009 m/s; enuOrthogonal=4.44522890719056818E-018; enuUnit=2.22044604925031308E-016; hash=0x91886B025BE6DB8B",
+        "SurfaceAnchor performance: forward=4835239/s; inverse=4421023/s; terrainQueries=200000; allocations=0 bytes",
+        "PASS surface anchor authority",
+        "PASS validation",
+        "Benchmark: 10,000 root resolutions in 3.377 ms; managed allocations=0 bytes; final=4000000000009.999"
+      ]
+    },
+    {
+      "name": "Camera",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Camera.Tests/bin/Release/net10.0/NovaCore.Camera.Tests.dll"
+      ],
+      "exit": 0,
+      "sha256": "9d714d3c862fdfc589760a1b993064d047370f88638416c7b5187328bac1d95e",
+      "summary": [
+        "PASS camera controller: W delta=-0.099609375, S delta=0.099609375, wheel 1=1.189207115002721; update=145.94 ns, allocations=0"
+      ]
+    },
+    {
+      "name": "Launcher",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.dll"
+      ],
+      "exit": 0,
+      "sha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b",
+      "summary": [
+        "PASS structured launch environment",
+        "PASS launcher build configuration",
+        "PASS Earth orbital arguments",
+        "PASS invariant altitude formatting",
+        "PASS subdivision diagnostic mapping",
+        "PASS Florida launch mapping",
+        "PASS invalid configuration rejection",
+        "PASS diagnostics arguments",
+        "PASS existing production scenarios",
+        "NovaCore launcher tests passed: 19"
+      ]
+    },
+    {
+      "name": "Precision",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.dll"
+      ],
+      "exit": 0,
+      "sha256": "19bc0b81f56c24e8479fb31546a4c984333004fa77038d374264f87f26f04e9d",
+      "summary": [
+        "centimetre       0.02001953125  0              PASS",
+        "millimetre       0.0009765625   0              PASS",
+        "negative root    0.5            0              PASS",
+        "mixed signs      0.02978515625  0              PASS",
+        "near zero        1000           5.204170427930421E-18 PASS",
+        "movement symmetry: +X=-0.10009765625, -X=0.10009765625, +Y=-0.10009765625, -Y=0.10009765625",
+        "relative subtraction/pack: 5.87 ns/update; allocations=0 bytes",
+        "log options: parsing and verbose-input compatibility passed",
+        "",
+        "PASS"
+      ]
+    },
+    {
+      "name": "app-diagnostics-build",
+      "command": [
+        "dotnet",
+        "build",
+        "tests/NovaCore.App.Diagnostics.Tests/NovaCore.App.Diagnostics.Tests.csproj",
+        "-c",
+        "Release"
+      ],
+      "exit": 0,
+      "sha256": "138a9afd0ea74dab7e37bf8852200fe94ce82046daac3d4ecaeb522cb83a61e6",
+      "summary": [
+        "  Determining projects to restore...",
+        "  Restored E:\\NovaCore\\tests\\NovaCore.App.Diagnostics.Tests\\NovaCore.App.Diagnostics.Tests.csproj (in 46 ms).",
+        "  NovaCore.App.Diagnostics.Tests -> E:\\NovaCore\\tests\\NovaCore.App.Diagnostics.Tests\\bin\\Release\\net10.0\\NovaCore.App.Diagnostics.Tests.dll",
+        "",
+        "Build succeeded.",
+        "    0 Warning(s)",
+        "    0 Error(s)",
+        "",
+        "Time Elapsed 00:00:00.86"
+      ]
+    },
+    {
+      "name": "app-diagnostics",
+      "command": [
+        "dotnet",
+        "tests/NovaCore.App.Diagnostics.Tests/bin/Release/net10.0/NovaCore.App.Diagnostics.Tests.dll",
+        "E:\\NovaCore\\build\\stabilization-bank-gauntlet\\regressions\\diagnostic-output"
+      ],
+      "exit": 0,
+      "sha256": "ecd1f166f5bd29046f0aece24fca6e4fa08391897368bd6c61986742c66d6db4",
+      "summary": [
+        "PASS 113 diagnostic checks; no window or GPU created"
+      ]
+    }
+  ],
+  "harnessRefusal": "The initial SRV-01 flag was sent to the wrong test runner and refused as unknown; rerouted to its Simulation owner and passed. No production change. Prior successful results retained with log hashes."
+}

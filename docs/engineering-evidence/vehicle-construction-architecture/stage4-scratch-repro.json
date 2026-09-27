@@ -1,0 +1,16 @@
+{
+  "judgment": "REPRODUCED: declared temporary-width bound exceeded before refusal",
+  "source_sha256": "6bb12ca08e20b995aad1f54e868bab2a7351266f0a9f1e30fe5d1edadcc28608",
+  "initially_positive_stores": 4,
+  "events": 3,
+  "rate_bits": 1078,
+  "individual_denominator_limit_bits": 3235,
+  "energy_denominator_bits": 3233,
+  "fuel_denominator_bits": 3232,
+  "activity_denominator_bits": 3232,
+  "initial_joint_lcm_bits": 6464,
+  "third_factor_lcm_bits": 9695,
+  "declared_scratch_bits": 8626,
+  "canonical_mutation": false,
+  "scope": "exact reproduction of current expression ordering; no production correction or runtime publication"
+}

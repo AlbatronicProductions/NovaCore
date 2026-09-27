@@ -1,0 +1,75 @@
+{
+  "utc": "2026-09-25T21:43:29.811710+00:00",
+  "beforeBytes": 5064447356,
+  "afterBytes": 723774660,
+  "netTreeReclaimedBytes": 4340672696,
+  "deletedFiles": 1677,
+  "deletedLogicalBytes": 4340673486,
+  "remainingFiles": 6704,
+  "protectedFilesVerified": 10261,
+  "changedOrMissingProtectedFiles": [],
+  "unlistedFilesDeleted": [],
+  "headUnchanged": true,
+  "indexUnchanged": true,
+  "branchTagRemoteRefsUnchanged": true,
+  "worktreesUnchanged": true,
+  "currentManifestRetiredCounts": {
+    "builds": 0,
+    "qualificationArtifacts": 0
+  },
+  "currentManifestSha256": "42e6077abab339203af8cfef91ad269b0bd2bb0b1e99e6c1ffc8e42eee0b27aa",
+  "historicalManifestSha256": "d87202c10fd50a8ae46d69f87cb06b8c9930640a2fb19b787f1a5c2483aee7a5",
+  "offlineSmoke": [
+    {
+      "name": "candidate-authorities",
+      "exitCode": 0,
+      "log": "candidate-authorities.log"
+    },
+    {
+      "name": "production-frame-smoke",
+      "exitCode": 0,
+      "log": "production-frame-smoke.log"
+    },
+    {
+      "name": "ordinary-trigger-replay",
+      "exitCode": 0,
+      "log": "ordinary-trigger-replay.log"
+    },
+    {
+      "name": "tessellation-smoke",
+      "exitCode": 0,
+      "log": "tessellation-smoke.log"
+    },
+    {
+      "name": "pupil-handoff-smoke",
+      "exitCode": 0,
+      "log": "pupil-handoff-smoke.log"
+    },
+    {
+      "name": "native-journal",
+      "exitCode": 0,
+      "log": "native-journal.log"
+    },
+    {
+      "name": "capture-journal",
+      "exitCode": 0,
+      "log": "capture-journal.log"
+    },
+    {
+      "name": "final-frozen-capture-join",
+      "exitCode": 0,
+      "log": "final-frozen-capture-join.log"
+    }
+  ],
+  "candidateAuthorityFilesVerified": 723,
+  "retainedCurrentManifestIdentities": 681,
+  "engineeringQualification": "PASS for bounded native route",
+  "manualPlayerAcceptance": "ON HOLD",
+  "productionSourceChanges": false,
+  "commitTagPushBank": false,
+  "ksaWrites": 0,
+  "originalBlackoutCause": "UNPROVEN",
+  "units": "Bytes are logical file lengths; decimal GB=1e9, GiB=2^30",
+  "auditRoot": "E:\\NovaCore\\build\\final-blackout-retirement-20260925",
+  "netAcrossAuditAndReportApproximatelyGB": 4.326
+}

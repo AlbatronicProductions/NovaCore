@@ -90,6 +90,18 @@ struct NcFrameSubmission { NcCameraData camera; NcRenderObject* objects; uint32_
 struct NcAbiLayout { uint32_t encodedPositionSize, cameraDataSize, cameraPositionOffset, cameraViewProjectionOffset, renderTransformSize, renderObjectSize, renderObjectPositionOffset, renderObjectTransformOffset, renderObjectMeshOffset; uint32_t drawBatchSize, orbitLineVertexSize, frameSubmissionSize, frameObjectsOffset, frameBatchesOffset, frameOrbitVerticesOffset, frameOrbitVertexCountOffset; uint32_t inputStateSize, inputDeltaSecondsOffset, inputMoveLeftOffset, inputMoveRightOffset, inputMoveForwardOffset, inputMoveBackwardOffset, inputMoveDownOffset, inputMoveUpOffset, inputResetOffset, inputLookActiveOffset, inputMouseDeltaXOffset, inputMouseDeltaYOffset, inputMouseWheelDetentsOffset, inputPauseToggleOffset, inputRateDecreaseOffset, inputRateIncreaseOffset, inputSasModeKeyOffset, inputFastModifierOffset, inputSlowModifierOffset; uint32_t framePlanetaryGpuOffset, framePlanetaryModeOffset, framePlanetaryPresentationOffset, inputPresentationFocusOffset, frameSolarLightingOffset, inputViewportWidthOffset, inputViewportHeightOffset, inputCameraActionsOffset, inputEngineActionsOffset, inputControlActiveOffset, inputPilotKeysOffset; };
 // mouseWheelDetents is signed Win32 WHEEL_DELTA-normalized detents, consumed once per callback.
 struct NcInputState { float deltaSeconds; uint32_t moveLeft, moveRight, moveForward, moveBackward, moveDown, moveUp, reset, lookActive; float mouseDeltaX, mouseDeltaY; int32_t mouseWheelDetents; uint32_t pauseToggle, rateDecrease, rateIncrease, sasModeKey, fastModifier, slowModifier; NcPresentationFocus presentationFocus; uint32_t viewportWidthPixels, viewportHeightPixels, cameraActions, engineActions, controlInputActive, pilotKeys; };
+// Same-thread, synchronous child viewport lease. Parent is borrowed, never
+// destroyed by native. Input is client pixels; buttons: left=1,right=2,middle=4.
+// Press/release/wheel are consumed once per host callback; stop is host-owned.
+struct NcEditorViewport {
+  uint32_t size, version; uint64_t parentWindow;
+  uint32_t width, height; int32_t pointerX, pointerY;
+  uint32_t buttons, pressed, released, focused; float wheel; uint32_t stop;
+};
+typedef uint32_t (__cdecl *NcEditorMessageCallback)(uint64_t window,uint32_t message,uint64_t wParam,int64_t lParam,void* userData);
+static_assert(sizeof(NcEditorViewport)==56 && offsetof(NcEditorViewport,parentWindow)==8 && offsetof(NcEditorViewport,stop)==52,"editor viewport ABI");
+struct NcApplicationViewport { NcEditorViewport input; uint32_t mode,reserved; };
+static_assert(sizeof(NcApplicationViewport)==64 && offsetof(NcApplicationViewport,mode)==56 && offsetof(NcApplicationViewport,reserved)==60,"application viewport ABI");
 enum NcHostEventType : uint32_t { NC_DIAGNOSTIC = 1, NC_UPDATE_FRAME = 2 };
 enum NcLogCategory : uint32_t { NC_LOG_ALWAYS = 0, NC_LOG_NONE = 0, NC_LOG_STARTUP = 1 << 0, NC_LOG_VULKAN = 1 << 1, NC_LOG_PRECISION = 1 << 2, NC_LOG_INPUT = 1 << 3, NC_LOG_RENDERER = 1 << 4, NC_LOG_VALIDATION = 1 << 5, NC_LOG_CAMERA = 1 << 6 };
 struct NcHostEvent { NcHostEventType type; uint32_t logCategory; const char* utf8Message; NcInputState input; NcFrameSubmission* submission; };
@@ -249,6 +261,8 @@ enum NcResult : int32_t { NC_SUCCESS = 0, NC_FAILURE = 1, NC_INVALID_ARGUMENT = 
 NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission* submission, NcHostCallback callback, void* userData);
 NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets);
 NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity);
+NC_API NcResult __cdecl nc_run_editor_viewport(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity, NcEditorViewport* viewport, NcEditorMessageCallback preprocess);
+NC_API NcResult __cdecl nc_run_application_viewport(NcFrameSubmission* submission,NcHostCallback callback,void* userData,const NcRuntimeAssets* assets,const NcVisualMesh* meshes,uint32_t count,uint32_t capacity,NcApplicationViewport* viewport,NcEditorMessageCallback preprocess);
 NC_API NcResult __cdecl nc_run_renderer_with_assets_and_visual_meshes(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity);
 NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch* patches, uint32_t count);
 NC_API NcResult __cdecl nc_validate_terrain_asset(const char* pathUtf8, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount);

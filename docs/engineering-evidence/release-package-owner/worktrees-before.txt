@@ -1,0 +1,4 @@
+worktree E:/NovaCore
+HEAD 8c189b28ce2a68f97de734d1589acb500c41fd99
+branch refs/heads/main
+

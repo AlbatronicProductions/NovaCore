@@ -1,0 +1,60 @@
+{
+  "utc": "2026-09-25T21:21:01.697412+00:00",
+  "units": "logical bytes; decimal GB; net includes new compact evidence",
+  "beforeBytes": 26923562547,
+  "afterBytes": 8898033763,
+  "netReclaimedBytes": 18025528784,
+  "deletedFileBytes": 18042438685,
+  "deletedFileCount": 4625,
+  "unplannedMissingFiles": [],
+  "linksSkipped": [
+    "E:\\NovaCore-M1420-Correction-audit\\graphics-root\\assets",
+    "E:\\NovaCore-M1420-Correction-audit\\graphics-root\\build"
+  ],
+  "hygieneEvidenceBytes": 16893186,
+  "status": "COMPLETE; protected identities and offline smoke PASS; manual Player acceptance ON HOLD",
+  "directories": [
+    {
+      "path": "E:\\NovaCore",
+      "beforeBytes": 26882516452,
+      "afterBytes": 8856987668,
+      "netReductionBytes": 18025528784,
+      "files": 19510
+    },
+    {
+      "path": "E:\\NovaCore-Archives",
+      "beforeBytes": 35263506,
+      "afterBytes": 35263506,
+      "netReductionBytes": 0,
+      "files": 382
+    },
+    {
+      "path": "E:\\NovaCore-Assessments",
+      "beforeBytes": 1164289,
+      "afterBytes": 1164289,
+      "netReductionBytes": 0,
+      "files": 66
+    },
+    {
+      "path": "E:\\NovaCore-Diagnostics",
+      "beforeBytes": 367691,
+      "afterBytes": 367691,
+      "netReductionBytes": 0,
+      "files": 37
+    },
+    {
+      "path": "E:\\NovaCore-M1420-Correction-audit",
+      "beforeBytes": 355528,
+      "afterBytes": 355528,
+      "netReductionBytes": 0,
+      "files": 67
+    },
+    {
+      "path": "E:\\NovaCore-Research",
+      "beforeBytes": 3895081,
+      "afterBytes": 3895081,
+      "netReductionBytes": 0,
+      "files": 206
+    }
+  ]
+}

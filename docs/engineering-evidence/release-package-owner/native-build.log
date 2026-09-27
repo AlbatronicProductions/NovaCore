@@ -1,0 +1,33 @@
+[1/33] Generating shaders/body_forward.frag.spv, shaders/sas_target.frag.spv
+[2/33] Generating shaders/distant_planet.vert.spv, shaders/distant_planet.frag.spv
+[3/33] Generating shaders/orbit.vert.spv, shaders/orbit.frag.spv
+[4/33] Generating shaders/orbit_previous.frag.spv
+[5/33] Generating shaders/planetary.vert.spv, shaders/planetary.frag.spv
+[6/33] Generating shaders/fullscreen.vert.spv, shaders/space_background.frag.spv, shaders/tone_map.frag.spv, shaders/stellar_sun.vert.spv, shaders/stellar_sun.frag.spv, shaders/stellar_glow.vert.spv, shaders/stellar_glow.frag.spv
+[7/33] Generating shaders/planetary_height_query.comp.spv
+[8/33] Generating shaders/planetary_natural_terrain_families_query.comp.spv
+[9/33] Generating shaders/planetary_natural_terrain_field_query.comp.spv
+[10/33] Generating shaders/planetary_natural_terrain_global_prepare.comp.spv
+[11/33] Generating shaders/planetary_natural_terrain_prepare.comp.spv
+[12/33] Generating shaders/planetary_select.comp.spv, shaders/planetary_terrain_generate.comp.spv
+[13/33] Generating shaders/planetary_ring.vert.spv, shaders/planetary_ring_far.frag.spv, shaders/planetary_ring_near.frag.spv
+[14/33] Generating shaders/triangle.frag.spv
+[15/33] Generating shaders/triangle.vert.spv
+[16/33] Generating shaders/planetary_production.frag.spv, shaders/planetary_production_terrain.comp.spv
+[17/33] Generating shaders/solar_orbit.vert.spv, shaders/solar_orbit.frag.spv, shaders/solar_marker.vert.spv, shaders/solar_marker.frag.spv, shaders/solar_label.vert.spv, shaders/solar_label.frag.spv, shaders/solar_speed_hud.vert.spv, shaders/solar_speed_hud.frag.spv
+[18/33] Generating shaders/regional_physical_demand.comp.spv
+[19/33] Generating shaders/regional_physical_incoming_demand.comp.spv
+[20/33] Generating shaders/planetary_mesh_displace.comp.spv, shaders/planetary_mesh_normals.comp.spv
+[21/33] Generating shaders/production_spherical_billboard_reset.comp.spv, shaders/production_spherical_billboard_prepare.comp.spv, shaders/production_spherical_billboard_incoming_prepare.comp.spv, shaders/production_spherical_billboard_cull.comp.spv, shaders/production_spherical_billboard_compact.comp.spv, shaders/production_spherical_billboard_incoming_reset.comp.spv, shaders/production_spherical_billboard_incoming_cull.comp.spv, shaders/production_nested_scale_mesh_cull.comp.spv, shaders/production_nested_scale_mesh_incoming_cull.comp.spv, shaders/production_spherical_billboard_incoming_compact.comp.spv, shaders/production_spherical_billboard.vert.spv, shaders/production_spherical_billboard.tesc.spv, shaders/production_spherical_billboard.tese.spv
+[22/33] Generating shaders/spherical_billboard_proof_reset.comp.spv, shaders/spherical_billboard_proof_prepare.comp.spv, shaders/spherical_billboard_proof_normals.comp.spv, shaders/spherical_billboard_proof_cull.comp.spv, shaders/spherical_billboard_proof_compact.comp.spv, shaders/spherical_billboard_proof.vert.spv, shaders/spherical_billboard_proof.frag.spv
+[23/33] Generating shaders/frozen_capture_pack.comp.spv
+[24/33] Generating shaders/exhaust.frag.spv
+[25/33] Generating shaders/exhaust.vert.spv
+[26/33] Generating shaders/exhaust_resolve.frag.spv
+[27/33] Building CXX object CMakeFiles\NovaCore.Native.dir\PlanetaryHeightQuery.cpp.obj
+[28/33] Building CXX object CMakeFiles\NovaCore.Native.dir\PlanetaryMeshPreparation.cpp.obj
+[29/33] Building CXX object CMakeFiles\NovaCore.Native.dir\NovaCoreNative.cpp.obj
+[30/33] Building CXX object CMakeFiles\NovaCore.Native.dir\ProductionCubeSurface.cpp.obj
+[31/33] Building CXX object CMakeFiles\NovaCore.Native.dir\PlanetarySphericalBillboardGpuProof.cpp.obj
+[32/33] Building CXX object CMakeFiles\NovaCore.Native.dir\LocalTerrainPack.cpp.obj
+[33/33] Linking CXX shared library NovaCore.Native.dll

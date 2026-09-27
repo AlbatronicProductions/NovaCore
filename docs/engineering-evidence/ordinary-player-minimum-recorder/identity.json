@@ -1,0 +1,21 @@
+{
+  "judgment": "PASS_FROZEN_UNBANKED",
+  "utc": "2026-09-27T01:29:13.953381+00:00",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "sourceSha256": "80a84411b5d6f580c60226eb30f937b6659786547afb7944a61db6e44fff6c18",
+  "sourceFiles": 951,
+  "packageSha256": "3a75c475862d9c7d208c72ea3cbd47833b67d5c74634a869f6e93466c809703e",
+  "packageFiles": 134,
+  "executable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+  "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8",
+  "managedApplicationSha256": "d656c6e2453387f03c60123f19bcd8e436d7c10137ce9360a30096fe81c33b2d",
+  "nativeSha256": "8e12b51f3bb0aa2ffdb20e3c66932b0de540f73696805ea34ecfaceb778c6d37",
+  "minimumLibrarySha256": "a5e83a9159750472040f533913edcd78fe13e0868ce8f5b5ebc5a5b5788a9ade",
+  "persistenceOwnerSha256": "175a70ad95e995e4a0bb3ee3303482b5a43b81d0c8c42e067f247e8c0fcc3e47",
+  "qualification": "CPU/mock/fault only",
+  "gpuExposureAuthorized": false,
+  "blackoutCause": "UNRESOLVED",
+  "playerAcceptance": "HOLD",
+  "banked": false,
+  "milestone": null
+}

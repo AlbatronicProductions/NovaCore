@@ -1,0 +1,63 @@
+{
+  "judgment": "PASS",
+  "entryFileCount": 3853,
+  "changedEntryFiles": [
+    "NovaCore.sln",
+    "docs/NOVACORE_CURRENT_STATE.md",
+    "docs/engineering-evidence/README.md",
+    "native/NovaCore.Native/CMakeLists.txt",
+    "native/NovaCore.Native/NovaCoreNative.cpp",
+    "native/NovaCore.Native/RegionalPhysicalPreparation.inl",
+    "tools/NovaCore.App/NovaCore.App.csproj",
+    "tools/NovaCore.App/Program.cs",
+    "tools/verify-player-package.py"
+  ],
+  "newFiles": [
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/README.md",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/identity.json",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/package-files.json",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/performance.json",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/preservation.json",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/qualification.json",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/red-team.md",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/reproduce.ps1",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/seal.py",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/source-files.json",
+    "native/NovaCore.Native/OrdinaryNative.inl",
+    "native/NovaCore.Native/OrdinaryRecorder.h",
+    "native/NovaCore.Native/OrdinaryRecorderMock.cpp",
+    "src/NovaCore.Diagnostics/NovaCore.Diagnostics.csproj",
+    "src/NovaCore.Diagnostics/OrdinaryCheckpoint.cs",
+    "src/NovaCore.Diagnostics/OrdinaryJournal.cs",
+    "src/NovaCore.Diagnostics/OrdinaryObserver.cs",
+    "src/NovaCore.Diagnostics/OrdinaryProtocol.cs",
+    "src/NovaCore.Diagnostics/OrdinarySession.cs",
+    "src/NovaCore.Diagnostics/OrdinaryState.cs",
+    "src/NovaCore.Interop/MinimumRecorder.cs",
+    "tests/NovaCore.MinimumRecorder.Tests/NovaCore.MinimumRecorder.Tests.csproj",
+    "tests/NovaCore.MinimumRecorder.Tests/Program.cs",
+    "tests/NovaCore.MinimumRecorder.Tests/native-fixture.py",
+    "tools/NovaCore.Recorder/NovaCore.Recorder.csproj",
+    "tools/NovaCore.Recorder/Program.cs"
+  ],
+  "protectedEvidence": [
+    {
+      "root": "E:\\NovaCore\\build\\blackout-recurrence-20260926-193024",
+      "manifestSha256": "ab37a3a6bff1173f224871f4978caec19402648eea897e1f62376d74407ef04e",
+      "files": 228,
+      "unchanged": true
+    },
+    {
+      "root": "E:\\NovaCore\\build\\blackout-recurrence-20260926-livekernel",
+      "manifestSha256": "d76fc6728dbc410d8e5f829e80cf2f3072ff2fdabd00dfce3184a19cb0062bc6",
+      "files": 4,
+      "unchanged": true
+    }
+  ],
+  "headUnchanged": true,
+  "refsUnchanged": true,
+  "indexBytesUnchanged": true,
+  "unrelatedEntryFilesUnchanged": true,
+  "ksaWrites": 0,
+  "settingsChanges": 0
+}

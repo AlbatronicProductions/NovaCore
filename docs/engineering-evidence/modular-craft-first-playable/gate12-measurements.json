@@ -1,0 +1,641 @@
+{
+  "schema": "novacore.modular-gate12-measurements/1",
+  "capture": "Normal GC; 64 warmup frames per phase then three consecutive 256-frame windows. Phase re-entry retains phase sequence. Capture never limits simulation.",
+  "boundary": "Full managed host callback plus separate native frame interval. First4096 is the earlier bounded global window, not phase-resolved.",
+  "limits": [
+    "All final phase windows have rcsFrames=0; integrated active-RCS frame pacing is not measured.",
+    "Zero median callback allocation reflects callbacks without a canonical 64Hz step; physical service is not allocation-free.",
+    "Historical first long combined phase line was truncated at 4096 characters. It is excluded from complete phase evidence.",
+    "Frame outliers are retained; these samples are not whole-game performance certification."
+  ],
+  "runs": [
+    {
+      "route": "gate12-native-short",
+      "first4096": [
+        "MODULAR_FRAME samples=4096 median=5.5578 p95=5.746 p99=6.0402 max=132.0073 serviceMedian=0.0012 serviceP95=0.5168 serviceP99=1.8434 serviceMax=79.502"
+      ],
+      "phaseWindows": [],
+      "completePhaseEvidence": false
+    },
+    {
+      "route": "gate12-native-long",
+      "first4096": [
+        "MODULAR_FRAME samples=4096 median=5.5421 p95=6.0898 p99=6.373 max=133.1427 serviceMedian=0.0009 serviceP95=0.4693 serviceP99=2.4212 serviceMax=127.0683"
+      ],
+      "phaseWindows": [],
+      "completePhaseEvidence": false
+    },
+    {
+      "route": "gate12-native-long-final",
+      "first4096": [
+        "MODULAR_FRAME samples=4096 median=5.5452 p95=6.1411 p99=6.5528 max=130.3193 serviceMedian=0.0012 serviceP95=0.5681 serviceP99=2.5107 serviceMax=88.1783"
+      ],
+      "phaseWindows": [
+        {
+          "phase": "supported",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.545500200241804,
+            "p95": 8.695299737155437,
+            "p99": 14.709300361573696,
+            "max": 35.943999886512756,
+            "maximumConsecutiveP95": 3
+          },
+          "callbackMs": {
+            "median": 0.4364,
+            "p95": 3.3592,
+            "p99": 5.4783,
+            "max": 30.087,
+            "maximumConsecutiveP95": 3
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54296,
+            "p99": 54320,
+            "max": 107104,
+            "maximumConsecutiveP95": 4
+          },
+          "collections": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.5495998822152615,
+            "p95": 6.169300060719252,
+            "p99": 6.37059984728694,
+            "max": 6.416200194507837,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0712,
+            "p95": 0.4827,
+            "p99": 0.7051,
+            "max": 0.7655,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54296,
+            "p99": 54296,
+            "max": 54320,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.514299962669611,
+            "p95": 6.302699912339449,
+            "p99": 6.517000030726194,
+            "max": 6.751399952918291,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0739,
+            "p95": 0.517,
+            "p99": 0.8385,
+            "max": 0.8548,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54296,
+            "p99": 54320,
+            "max": 54408,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.598099902272224,
+            "p95": 6.373200099915266,
+            "p99": 6.69710012152791,
+            "max": 6.853300146758556,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0924,
+            "p95": 0.4814,
+            "p99": 0.5543,
+            "max": 0.5774,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49128,
+            "p99": 49128,
+            "max": 49152,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.562399979680777,
+            "p95": 6.428000051528215,
+            "p99": 6.53850007802248,
+            "max": 6.75360020250082,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0816,
+            "p95": 0.4916,
+            "p99": 0.5155,
+            "max": 0.5438,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49088,
+            "p99": 49112,
+            "max": 49200,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.563000217080116,
+            "p95": 6.407700013369322,
+            "p99": 6.634000223129988,
+            "max": 6.953999865800142,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1026,
+            "p95": 0.4855,
+            "p99": 0.5795,
+            "max": 0.8916,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49088,
+            "p99": 49088,
+            "max": 49112,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.544600076973438,
+            "p95": 6.076300051063299,
+            "p99": 6.287400145083666,
+            "max": 6.590900011360645,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0794,
+            "p95": 0.3618,
+            "p99": 0.3973,
+            "max": 0.4196,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35264,
+            "p99": 35264,
+            "max": 35376,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.535999778658152,
+            "p95": 6.078199949115515,
+            "p99": 6.371200084686279,
+            "max": 6.593000143766403,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0867,
+            "p95": 0.3711,
+            "p99": 0.5041,
+            "max": 0.6857,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35264,
+            "p99": 35264,
+            "max": 35264,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.558399949222803,
+            "p95": 6.060000043362379,
+            "p99": 6.259699817746878,
+            "max": 6.344799883663654,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0892,
+            "p95": 0.3582,
+            "p99": 0.425,
+            "max": 0.4735,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35264,
+            "p99": 35264,
+            "max": 35264,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "completePhaseEvidence": true
+    },
+    {
+      "route": "gate12-native-short-final",
+      "first4096": [
+        "MODULAR_FRAME samples=4096 median=5.5566 p95=6.0963 p99=6.4152 max=96.5623 serviceMedian=0.0014 serviceP95=0.5653 serviceP99=1.9303 serviceMax=86.5979"
+      ],
+      "phaseWindows": [
+        {
+          "phase": "supported",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.5669997818768024,
+            "p95": 8.00270028412342,
+            "p99": 9.265299886465073,
+            "max": 33.96660089492798,
+            "maximumConsecutiveP95": 2
+          },
+          "callbackMs": {
+            "median": 0.2195,
+            "p95": 2.5776,
+            "p99": 4.1375,
+            "max": 28.1184,
+            "maximumConsecutiveP95": 2
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54272,
+            "p99": 54344,
+            "max": 106224,
+            "maximumConsecutiveP95": 2
+          },
+          "collections": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.568699911236763,
+            "p95": 6.428900174796581,
+            "p99": 6.679899990558624,
+            "max": 6.8836999125778675,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0806,
+            "p95": 0.7123,
+            "p99": 0.7502,
+            "max": 0.778,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54272,
+            "p99": 54272,
+            "max": 54296,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "supported",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.563800223171711,
+            "p95": 6.263699848204851,
+            "p99": 6.536299828439951,
+            "max": 6.663499865680933,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0809,
+            "p95": 0.6701,
+            "p99": 0.7517,
+            "max": 0.8109,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 54272,
+            "p99": 54272,
+            "max": 54384,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.54580008611083,
+            "p95": 6.274799816310406,
+            "p99": 6.786299869418144,
+            "max": 7.0373001508414745,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1,
+            "p95": 0.3941,
+            "p99": 0.6002,
+            "max": 0.644,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49104,
+            "p99": 49104,
+            "max": 49216,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.524300038814545,
+            "p95": 6.249799858778715,
+            "p99": 6.414399947971106,
+            "max": 6.620700005441904,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0902,
+            "p95": 0.489,
+            "p99": 0.5146,
+            "max": 0.5237,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49064,
+            "p99": 49064,
+            "max": 49088,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "powered",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.527399946004152,
+            "p95": 6.20670011267066,
+            "p99": 6.66549988090992,
+            "max": 6.67749997228384,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.1014,
+            "p95": 0.4996,
+            "p99": 0.5514,
+            "max": 0.853,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 49064,
+            "p99": 49064,
+            "max": 49088,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 0,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.624299868941307,
+            "p95": 6.411000154912472,
+            "p99": 7.009100168943405,
+            "max": 7.57410004734993,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0864,
+            "p95": 0.3345,
+            "p99": 0.4597,
+            "max": 0.5129,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35240,
+            "p99": 35240,
+            "max": 35240,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 1,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.564799997955561,
+            "p95": 6.246400065720081,
+            "p99": 6.595099810510874,
+            "max": 7.1796998381614685,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0741,
+            "p95": 0.3873,
+            "p99": 0.4996,
+            "max": 0.7945,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35240,
+            "p99": 35240,
+            "max": 35240,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "phase": "coast",
+          "window": 2,
+          "samples": 256,
+          "complete": true,
+          "rcsFrames": 0,
+          "frameMs": {
+            "median": 5.552699789404869,
+            "p95": 6.241499911993742,
+            "p99": 6.482699885964394,
+            "max": 6.632199976593256,
+            "maximumConsecutiveP95": 1
+          },
+          "callbackMs": {
+            "median": 0.0702,
+            "p95": 0.4535,
+            "p99": 0.4783,
+            "max": 0.5039,
+            "maximumConsecutiveP95": 1
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 35240,
+            "p99": 35240,
+            "max": 35352,
+            "maximumConsecutiveP95": 1
+          },
+          "collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "completePhaseEvidence": true
+    }
+  ]
+}

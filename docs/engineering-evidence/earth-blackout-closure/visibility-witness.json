@@ -1,0 +1,240 @@
+{
+  "status": "REVISE",
+  "sourceJournalSha256": "0b5f2fc91bd8ec35225007b3d00787da0bf705893191136e3a19579a4276a429",
+  "frame": {
+    "frame": 16200,
+    "cameraState": {
+      "serial": 741896,
+      "frame": 16200,
+      "submitted": 16200,
+      "completed": 16200,
+      "viewport": [
+        3440,
+        1322
+      ],
+      "camera": [
+        2475961.9596511647,
+        5845362.651630774,
+        -540520.1753491238
+      ],
+      "altitude": 83.27394104003906,
+      "forward": [
+        -0.26269954442977905,
+        -0.11941663920879364,
+        -0.9574594497680664
+      ],
+      "level": 17,
+      "triangles": 1424208,
+      "visible": 810442,
+      "vertices": 712106,
+      "publication": 18,
+      "incomingPublication": 0,
+      "physicalBuffer": 827932255716081,
+      "vertexCapacity": 712106,
+      "triangleCapacity": 1424208,
+      "authoritative": true
+    },
+    "cull": {
+      "serial": 741897,
+      "level": 17,
+      "visible": 810442,
+      "total": 1424208,
+      "screenRejected": 373731,
+      "horizonRejected": 240035,
+      "invalid": 0,
+      "overflow": 0
+    },
+    "tessellation": {
+      "serial": 741899,
+      "indices": 2431326,
+      "outer": 1.0,
+      "inner": 0.9998999834060669
+    },
+    "gpuStatistics": {
+      "serial": 741901,
+      "queryFrame": 16200,
+      "clipping": 78221,
+      "fragments": 2859050,
+      "tcs": 810442,
+      "tes": 2431326
+    },
+    "checks": {
+      "inputAccounted": true,
+      "snapshotMatchesCull": true,
+      "compacted": true,
+      "queryMatches": true,
+      "factorOneWork": true,
+      "valid": true,
+      "submitted": true,
+      "presented": true
+    }
+  },
+  "legacyDifference": [
+    {
+      "frame": 16200,
+      "height": 1440,
+      "visibleDelta": 411877,
+      "horizonRejectedDelta": -2,
+      "screenRejectedDelta": -411875
+    },
+    {
+      "frame": 16200,
+      "height": 2160,
+      "visibleDelta": 411877,
+      "horizonRejectedDelta": -2,
+      "screenRejectedDelta": -411875
+    }
+  ],
+  "historicalLifecycle": {
+    "incomingPreparationSlices": [
+      [
+        1,
+        30,
+        0,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        65536,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        131072,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        196608,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        262144,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        327680,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        393216,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        458752,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        524288,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        589824,
+        65536,
+        712106,
+        0
+      ],
+      [
+        1,
+        30,
+        655360,
+        56746,
+        712106,
+        1
+      ]
+    ],
+    "currentPreparationSliceCount": 0,
+    "stagedPublications": [],
+    "completedDependencyChecks": 543,
+    "firstDemand": [
+      32,
+      0,
+      0
+    ],
+    "lastDemand": [
+      766,
+      0,
+      0
+    ],
+    "allDemandMasksEmptyAndResolved": true
+  },
+  "coverage": {
+    "lastSubmitted": 16201,
+    "lastCompleted": 16201,
+    "framesWithoutRetainedSubmit": [
+      13360
+    ],
+    "framesWithoutRetainedPresent": [
+      13360
+    ],
+    "completedWithoutJoinedCounters": [
+      16201
+    ]
+  },
+  "exactReplay": {
+    "available": false,
+    "missing": [
+      "published pupil basis and offsets",
+      "prepared/cull/raster pupil identity in rolling journal",
+      "exact mapped camera projection and body orientation",
+      "exact mapped culling constants",
+      "prepared physical vertices and normals",
+      "compacted triangle membership"
+    ],
+    "reason": "Publication ordinal and physical buffer handle do not encode pupil contents; reconstructed pupil is a different input."
+  },
+  "offlineCorrection": {
+    "before": {
+      "ticks": 2000,
+      "vertices": 712106,
+      "demandSlices": 2000,
+      "preparationSlices": 0,
+      "publications": 0,
+      "finalPupil": 30
+    },
+    "after": {
+      "ticks": 2000,
+      "vertices": 712106,
+      "demandSlices": 1340,
+      "preparationSlices": 660,
+      "publications": 60,
+      "finalPupil": 1978
+    },
+    "gpuExecution": false,
+    "qualification": "Shared production dependency function; synthetic CPU completion events"
+  },
+  "liveGpuExposureThisRevision": 0
+}

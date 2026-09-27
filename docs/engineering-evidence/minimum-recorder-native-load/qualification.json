@@ -1,0 +1,725 @@
+{
+  "judgment": "OFFLINE PASS / FROZEN / UNBANKED",
+  "nativeLaunches": 0,
+  "canonicalDeployment": false,
+  "productionChanges": {
+    "src/NovaCore.Diagnostics/OrdinaryObserver.cs": {
+      "before": {
+        "bytes": 5666,
+        "sha256": "bd0dbe638495007321d73d19313bbcf627e7ee7d33b8225d2ede88f8da56b01b"
+      },
+      "after": {
+        "bytes": 5817,
+        "sha256": "394d85b3754c3954acd0f4742bc4367fdcb710d2e6e13dddb2409e669e20e196"
+      }
+    },
+    "src/NovaCore.Diagnostics/OrdinaryJournal.cs": {
+      "before": {
+        "bytes": 11411,
+        "sha256": "646420827e3928a4590114378c58240a24e9027fea95dbee9b030117ee14e25f"
+      },
+      "after": {
+        "bytes": 12431,
+        "sha256": "f514da49d8f7a6196148e9fda2f8d619d1b5cbc5a5aabc7299f15027ea21047a"
+      }
+    }
+  },
+  "compiledSourceAggregate": "ab76cba1127811ee1847a50f705e93ef2aacaa7ff816071fc0c7a1dcba9e666d",
+  "compiledSourceFiles": 730,
+  "isolatedRecorderPackage": {
+    "BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "NovaCore.Diagnostics.dll": {
+      "bytes": 105984,
+      "sha256": "af2a5a269ac6f37a1047592ae267ac7841c45d0f2b05cb385e96018a49dfa1e2"
+    },
+    "NovaCore.Diagnostics.pdb": {
+      "bytes": 31156,
+      "sha256": "d2c53b43487ee27d784fb3cd3374288e94299447cf6611be5c7cf920f189e0f1"
+    },
+    "NovaCore.Recorder.deps.json": {
+      "bytes": 1578,
+      "sha256": "460a5a0b4a5d3cd77a30915749189048d9929edac1b9040b63b1171a949bedab"
+    },
+    "NovaCore.Recorder.dll": {
+      "bytes": 6144,
+      "sha256": "2f15e061508722a1039476084cb57991ef79d97dc49b3f72e72a095cbe38e275"
+    },
+    "NovaCore.Recorder.exe": {
+      "bytes": 162304,
+      "sha256": "bc7ba08961e6e88160cb3f54b9752c27ba2297382ff548200bc4354db300eb31"
+    },
+    "NovaCore.Recorder.pdb": {
+      "bytes": 12188,
+      "sha256": "c00f496d772bf63e4553928e41a809bd4650bcc0de4eca03410d1852af215b51"
+    },
+    "NovaCore.Recorder.runtimeconfig.json": {
+      "bytes": 399,
+      "sha256": "3e965cd7cfd553c2ff4e842d8d8019aaae2da0a21d92ff85a87573dd8d1b95c6"
+    },
+    "third-party/Bepu/ATTRIBUTION.txt": {
+      "bytes": 374,
+      "sha256": "ff40f4ae2a543ac6b2fffd693210e9753b53937ac6e18a4fc8b7b131e5e2edf3"
+    },
+    "third-party/Bepu/LICENSE.txt": {
+      "bytes": 10140,
+      "sha256": "4cd13f7a31e98f51c4fb960a115e9a9ab9c42284ca5d5c9b5ccbcf322de45bfd"
+    }
+  },
+  "forensics": {
+    "limits": "Current bank incarnations retain only a recent suffix; checkpoints preserve older unmatched witnesses, not a full historical trace. Peaks below are retained-suffix lower bounds for the whole run. Exact first overflow, historical queue trajectory and disk stall timing were not recorded.",
+    "files": {
+      "bank0.bin": {
+        "bytes": 41947136,
+        "sha256": "2c6ba6b0bfb554d60149a8c025e4c482ca95cfffa39e8928c149544100fe0611"
+      },
+      "bank1.bin": {
+        "bytes": 41947136,
+        "sha256": "7ce003cc272741fae58e09eec037bddac20690043b2a1d94898f899e627bee3f"
+      },
+      "head0.bin": {
+        "bytes": 4096,
+        "sha256": "2e8236b9e5d00998a041812309af92fa7ee716aac962ab13771bbab93b27ed80"
+      },
+      "head1.bin": {
+        "bytes": 4096,
+        "sha256": "05f3e11552e7251d0b02dabfce49cc00d57e2c589d21c47678e9e291c0bbd653"
+      },
+      "observer.json": {
+        "bytes": 108,
+        "sha256": "1a91a1babdbf0eccc707c2a57d042ba6c8229b36a85a2219749b9ede66d1610f"
+      },
+      "ownership.lock": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "performance.json": {
+        "bytes": 393,
+        "sha256": "d1a2856d2f910d9261abe88becaef0bcf838b4110e761efa4ea122e7295fd323"
+      },
+      "preserve.pin": {
+        "bytes": 66,
+        "sha256": "76a1f5eb915544bfd71dc0212d9e1c5d8a3df87a2130e0d6f7e0eeb2df61c6dc"
+      },
+      "recovery.json": {
+        "bytes": 181925,
+        "sha256": "565de5fbf6c74e196470ae1d4ccf392d85ea09019953c243a783afe202ac139b"
+      },
+      "session.json": {
+        "bytes": 1106,
+        "sha256": "5c1c6b3b7fe8bc3c28d89284ffeb121fd3518c91d2ab7395359d82f5695da7ad"
+      }
+    },
+    "banks": [
+      {
+        "name": "bank0.bin",
+        "incarnation": 49,
+        "checkpoint": 1217824,
+        "checkpointBytes": 944356
+      },
+      {
+        "name": "bank1.bin",
+        "incarnation": 48,
+        "checkpoint": 1198460,
+        "checkpointBytes": 915714
+      }
+    ],
+    "retainedRecords": 32516,
+    "sequenceRange": [
+      1198461,
+      1230976
+    ],
+    "timeRangeAfterOpenSeconds": [
+      649.799345,
+      669.5803757
+    ],
+    "peakSlidingWindowsMs": {
+      "0.01": {
+        "events": 20,
+        "eventsPerSecond": 2000000.0
+      },
+      "0.1": {
+        "events": 23,
+        "eventsPerSecond": 230000.0
+      },
+      "1": {
+        "events": 84,
+        "eventsPerSecond": 84000.0
+      },
+      "10": {
+        "events": 432,
+        "eventsPerSecond": 43200.0
+      },
+      "100": {
+        "events": 908,
+        "eventsPerSecond": 9080.0
+      },
+      "1000": {
+        "events": 2815,
+        "eventsPerSecond": 2815.0
+      }
+    },
+    "eventsPerFrameHistogram": {
+      "2": 1,
+      "19": 1647,
+      "48": 1,
+      "350": 1,
+      "821": 1
+    },
+    "eventClasses": {
+      "2": 3301,
+      "3": 3300,
+      "4": 3300,
+      "5": 3300,
+      "6": 6600,
+      "7": 3300,
+      "8": 3300,
+      "9": 1651,
+      "10": 3300,
+      "12": 1138,
+      "13": 18,
+      "16": 6,
+      "20": 2
+    },
+    "pages": 3283,
+    "maximumObservedPreCopyBacklog": 574,
+    "pageOccupancyHistogram": {
+      "1": 7,
+      "2": 288,
+      "3": 13,
+      "4": 912,
+      "5": 6,
+      "6": 127,
+      "7": 2,
+      "8": 176,
+      "9": 5,
+      "10": 2,
+      "11": 29,
+      "12": 9,
+      "13": 24,
+      "14": 17,
+      "15": 1666
+    },
+    "unmatched": {
+      "open": 273,
+      "pending": 38,
+      "faultWords": {
+        "1": 311
+      },
+      "openPhases": {
+        "2": 157,
+        "4": 57,
+        "7": 20,
+        "3": 10,
+        "6": 23,
+        "5": 4,
+        "10": 2
+      },
+      "timeRangeAfterOpenSeconds": [
+        227.0770557,
+        240.8995166
+      ],
+      "frameRange": [
+        36357,
+        38845
+      ]
+    },
+    "persistence": {
+      "wallMs": 669491.2964,
+      "cpuMs": 18171.875,
+      "allocatedBytes": 2205683464,
+      "managedRetainedBytes": 898696,
+      "peakWorkingSetBytes": 60420096,
+      "BytesWritten": 841970915,
+      "Flushes": 199176,
+      "Rotations": 48,
+      "commitCount": 99539,
+      "sampledCommits": 4096,
+      "p50ms": 1.5853,
+      "p95ms": 1.8777,
+      "p99ms": 5.07,
+      "maxMs": 12.4429,
+      "storageBoundBytes": 83902464
+    }
+  },
+  "loads": {
+    "baseline-precise-delay": {
+      "batch": 15,
+      "frames": 2700,
+      "fps": 180,
+      "eventsPerFrame": 19,
+      "delayMs": 5.07,
+      "elapsed": 15.0037496,
+      "attemptedRate": 3419.145304850995,
+      "highWater": 8192,
+      "capacity": 8192,
+      "dropped": 6894,
+      "faults": 1,
+      "Complete": false,
+      "recoveredFaults": 65,
+      "recoveredDropped": 6894,
+      "open": 1024,
+      "pending": 0,
+      "produced": 46841,
+      "durable": 46841,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 4.1,
+        "p95": 8.6,
+        "p99": 9.9,
+        "max": 248.8
+      },
+      "commits": 3125,
+      "commitMs": {
+        "median": 6.1856,
+        "p95": 6.326,
+        "p99": 6.4239,
+        "max": 22.515
+      },
+      "bytesWritten": 25626044,
+      "flushes": 6254,
+      "rotations": 1,
+      "allocatedWorker": 55361072,
+      "workerWallMs": 19478.5993,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\baseline-precise-delay\\6761cb54aec24fea88def04454e25648"
+    },
+    "corrected-precise-delay": {
+      "batch": 1020,
+      "frames": 2700,
+      "fps": 180,
+      "eventsPerFrame": 19,
+      "bursts": false,
+      "burstCount": 0,
+      "eventsPerBurst": 802,
+      "delayMs": 5.07,
+      "elapsed": 14.9985514,
+      "attemptedRate": 3420.3303126993983,
+      "highWater": 2433,
+      "capacity": 8192,
+      "dropped": 0,
+      "faults": 0,
+      "Complete": true,
+      "recoveredFaults": 0,
+      "recoveredDropped": 0,
+      "open": 0,
+      "pending": 0,
+      "produced": 53735,
+      "durable": 53735,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 5.6,
+        "p95": 9.2,
+        "p99": 21.4,
+        "max": 62.3
+      },
+      "commits": 965,
+      "commitMs": {
+        "median": 6.2723,
+        "p95": 6.4707,
+        "p99": 7.0291,
+        "max": 28.5478
+      },
+      "bytesWritten": 20000935,
+      "flushes": 1936,
+      "rotations": 1,
+      "allocatedWorker": 53804704,
+      "workerWallMs": 15098.6432,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\corrected-precise-delay\\ad08490f6a244204a6009a6122a99224"
+    },
+    "baseline-no-delay": {
+      "batch": 15,
+      "frames": 2700,
+      "fps": 180,
+      "eventsPerFrame": 19,
+      "delayMs": 0,
+      "elapsed": 14.9944483,
+      "attemptedRate": 3421.2662562583246,
+      "highWater": 2433,
+      "capacity": 8192,
+      "dropped": 0,
+      "faults": 0,
+      "Complete": true,
+      "recoveredFaults": 0,
+      "recoveredDropped": 0,
+      "open": 0,
+      "pending": 0,
+      "produced": 53735,
+      "durable": 53735,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 5.4,
+        "p95": 8.9,
+        "p99": 19.1,
+        "max": 60.6
+      },
+      "commits": 3865,
+      "commitMs": {
+        "median": 1.0589,
+        "p95": 1.2502,
+        "p99": 1.3647,
+        "max": 17.3972
+      },
+      "bytesWritten": 31682727,
+      "flushes": 7734,
+      "rotations": 1,
+      "allocatedWorker": 65769072,
+      "workerWallMs": 15272.7088,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\baseline-no-delay\\c4a7baee38e04e52b8b8484a3eae515a"
+    },
+    "corrected-no-delay": {
+      "batch": 1020,
+      "frames": 2700,
+      "fps": 180,
+      "eventsPerFrame": 19,
+      "bursts": false,
+      "burstCount": 0,
+      "eventsPerBurst": 802,
+      "delayMs": 0,
+      "elapsed": 14.9944609,
+      "attemptedRate": 3421.2633813330362,
+      "highWater": 2433,
+      "capacity": 8192,
+      "dropped": 0,
+      "faults": 0,
+      "Complete": true,
+      "recoveredFaults": 0,
+      "recoveredDropped": 0,
+      "open": 0,
+      "pending": 0,
+      "produced": 53735,
+      "durable": 53735,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 5.7,
+        "p95": 9.4,
+        "p99": 24.8,
+        "max": 50.9
+      },
+      "commits": 1256,
+      "commitMs": {
+        "median": 1.1811,
+        "p95": 1.3934,
+        "p99": 1.8023,
+        "max": 19.4791
+      },
+      "bytesWritten": 22093824,
+      "flushes": 2522,
+      "rotations": 2,
+      "allocatedWorker": 55971072,
+      "workerWallMs": 15093.6747,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\corrected-no-delay\\5ed57e1a03b6472691f501b8d03f767a"
+    },
+    "bursts-Debug": {
+      "batch": 1020,
+      "frames": 3600,
+      "fps": 180,
+      "eventsPerFrame": 19,
+      "bursts": true,
+      "burstCount": 10,
+      "eventsPerBurst": 802,
+      "delayMs": 12.4429,
+      "elapsed": 19.9951989,
+      "attemptedRate": 3821.9174703983567,
+      "highWater": 2433,
+      "capacity": 8192,
+      "dropped": 0,
+      "faults": 0,
+      "Complete": true,
+      "recoveredFaults": 0,
+      "recoveredDropped": 0,
+      "open": 0,
+      "pending": 0,
+      "produced": 78855,
+      "durable": 78855,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 20.4,
+        "p95": 41.1,
+        "p99": 50.4,
+        "max": 872.4
+      },
+      "commits": 1326,
+      "commitMs": {
+        "median": 13.6636,
+        "p95": 13.8369,
+        "p99": 14.9192,
+        "max": 32.8036
+      },
+      "bytesWritten": 28565504,
+      "flushes": 2660,
+      "rotations": 2,
+      "allocatedWorker": 78165408,
+      "workerWallMs": 20150.7918,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\bursts-Debug\\559c5b9bcd1948cbb4fdce53dc54f59d"
+    },
+    "bursts-Release": {
+      "batch": 1020,
+      "frames": 3600,
+      "fps": 180,
+      "eventsPerFrame": 19,
+      "bursts": true,
+      "burstCount": 10,
+      "eventsPerBurst": 802,
+      "delayMs": 12.4429,
+      "elapsed": 20.0036915,
+      "attemptedRate": 3820.2948690745407,
+      "highWater": 2433,
+      "capacity": 8192,
+      "dropped": 0,
+      "faults": 0,
+      "Complete": true,
+      "recoveredFaults": 0,
+      "recoveredDropped": 0,
+      "open": 0,
+      "pending": 0,
+      "produced": 78855,
+      "durable": 78855,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 4.3,
+        "p95": 9,
+        "p99": 20.4,
+        "max": 816.1
+      },
+      "commits": 1306,
+      "commitMs": {
+        "median": 13.6374,
+        "p95": 13.7864,
+        "p99": 14.0826,
+        "max": 43.2132
+      },
+      "bytesWritten": 28504578,
+      "flushes": 2622,
+      "rotations": 2,
+      "allocatedWorker": 78105496,
+      "workerWallMs": 20153.1186,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\bursts-Release\\7bb3cc90046c4705add20e4d9842c3ce"
+    },
+    "independent-overload": {
+      "batch": 1020,
+      "frames": 4000,
+      "fps": 100000,
+      "eventsPerFrame": 19,
+      "bursts": false,
+      "burstCount": 0,
+      "eventsPerBurst": 802,
+      "delayMs": 100,
+      "elapsed": 0.0399912,
+      "attemptedRate": 1900418.0919802357,
+      "highWater": 8192,
+      "capacity": 8192,
+      "dropped": 67808,
+      "faults": 1,
+      "Complete": false,
+      "recoveredFaults": 1,
+      "recoveredDropped": 67808,
+      "open": 1,
+      "pending": 0,
+      "produced": 10627,
+      "durable": 10627,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 1,
+        "p95": 10.6,
+        "p99": 10.8,
+        "max": 150.1
+      },
+      "commits": 13,
+      "commitMs": {
+        "median": 102.7637,
+        "p95": 116.7475,
+        "p99": 116.7475,
+        "max": 116.7475
+      },
+      "bytesWritten": 2973773,
+      "flushes": 28,
+      "rotations": 0,
+      "allocatedWorker": 9778576,
+      "workerWallMs": 1443.9751,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\independent-overload\\4673b1fb8c8b4f4b8e3386271e0528a7"
+    },
+    "legacy-reproduction": {
+      "batch": 15,
+      "frames": 5400,
+      "fps": 180,
+      "eventsPerFrame": 19,
+      "bursts": false,
+      "burstCount": 0,
+      "eventsPerBurst": 802,
+      "delayMs": 5.07,
+      "elapsed": 29.9979986,
+      "attemptedRate": 3420.228174822303,
+      "highWater": 8192,
+      "capacity": 8192,
+      "dropped": 21808,
+      "faults": 1,
+      "Complete": false,
+      "recoveredFaults": 65,
+      "recoveredDropped": 21808,
+      "open": 1024,
+      "pending": 0,
+      "produced": 83227,
+      "durable": 83227,
+      "allocatedProducerBytes": 0,
+      "producerUs": {
+        "median": 4,
+        "p95": 8.5,
+        "p99": 9.6,
+        "max": 175.9
+      },
+      "commits": 5551,
+      "commitMs": {
+        "median": 6.1737,
+        "p95": 6.309,
+        "p99": 6.4059,
+        "max": 26.4861
+      },
+      "bytesWritten": 45772812,
+      "flushes": 11108,
+      "rotations": 2,
+      "allocatedWorker": 99788544,
+      "workerWallMs": 34479.3763,
+      "session": "E:\\NovaCore\\build\\recorder-overflow\\legacy-reproduction\\da7bae32184e49a887ab0e3a2e6aab7d"
+    }
+  },
+  "suites": {
+    "Debug": {
+      "recorderChecks": 8524,
+      "batchCuts": {
+        "checks": 342,
+        "pages": 68,
+        "maximum": 1020,
+        "judgment": "PASS"
+      },
+      "retentionChecks": 198,
+      "nativeStubs": {
+        "judgment": "PASS",
+        "frames": 1800,
+        "p50us": 40.4,
+        "p95us": 67.5,
+        "p99us": 77.6,
+        "maxus": 105.8,
+        "producerCpuMs": 78.125,
+        "produced": 35303,
+        "durable": 35303
+      },
+      "memory": {
+        "managedRetainedBefore": 270912,
+        "managedRetainedAfter": 320384,
+        "delta": 49472,
+        "peakWorkingSetBytes": 57487360,
+        "mappingBytes": 2101248,
+        "maximumCopiedRecords": 1020,
+        "maximumBatchFileBytes": 278528,
+        "limits": "Process-level managed delta includes test timing/results; producer allocation is measured separately. Mapping and copied-record bounds are exact."
+      }
+    },
+    "Release": {
+      "recorderChecks": 8524,
+      "batchCuts": {
+        "checks": 342,
+        "pages": 68,
+        "maximum": 1020,
+        "judgment": "PASS"
+      },
+      "retentionChecks": 198,
+      "nativeStubs": {
+        "judgment": "PASS",
+        "frames": 1800,
+        "p50us": 28,
+        "p95us": 44.9,
+        "p99us": 54.3,
+        "maxus": 166.8,
+        "producerCpuMs": 46.875,
+        "produced": 35303,
+        "durable": 35303
+      },
+      "memory": {
+        "managedRetainedBefore": 271200,
+        "managedRetainedAfter": 319864,
+        "delta": 48664,
+        "peakWorkingSetBytes": 64253952,
+        "mappingBytes": 2101248,
+        "maximumCopiedRecords": 1020,
+        "maximumBatchFileBytes": 278528,
+        "limits": "Process-level managed delta includes test timing/results; producer allocation is measured separately. Mapping and copied-record bounds are exact."
+      }
+    }
+  },
+  "originalRecoveryNewReader": {
+    "DurableSequence": 1230976,
+    "CommittedTarget": 1230976,
+    "Complete": false,
+    "Corrupt": false,
+    "Faults": 65,
+    "Dropped": 3383,
+    "open": 273,
+    "pending": 38,
+    "Terminal": "TERMINAL SUFFIX UNCERTAIN after DurableSequence; return not retained does not prove a call never returned. Present return is not physical display completion."
+  },
+  "preservation": {
+    "judgment": "PASS",
+    "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+    "refsSha256": "e67334372a507cbb03a1dffc6147e3272b9fe6c415b181b10e104609581605e0",
+    "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+    "settingsSha256": "0e45ef76b1b52d2d564b2da592149e3f8ae2b26e8a09e780fb6da099b9736da9",
+    "entryFiles": 3956,
+    "missing": [],
+    "modifiedEntryFiles": [
+      "src/NovaCore.Diagnostics/OrdinaryJournal.cs",
+      "src/NovaCore.Diagnostics/OrdinaryObserver.cs",
+      "tests/NovaCore.MinimumRecorder.Tests/Program.cs"
+    ],
+    "canonicalPackageFiles": 134,
+    "canonicalPackageUnchanged": true,
+    "pinnedForensicFiles": 10,
+    "pinnedForensicBytewiseUnchanged": true,
+    "entryProvenanceNote": "Refs differed from the earlier surface campaign seal on entry to this ticket; HEAD/index/source/package/settings matched. This ticket preserves its entry refs; no Git history operation performed.",
+    "surfacePhysicsAndNativeRenderingUnchanged": true
+  },
+  "independentReview": "PASS: source/ACK/rotation review plus independently executed over-envelope overload; no native acceptance inferred",
+  "evidenceLogs": {
+    "baseline-build.log": "aea16041ea90eaeaf0582796ff616df0616bb193267d14f0cf02cd4783ea7b2f",
+    "baseline-delayed-complete.log": "a3ad8846e79c0558d9460dc802f3b81027d212d818a597f5152ad6f9daed0095",
+    "baseline-delayed.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "baseline-no-delay.log": "c3254e3824d9d977cfc56471bdb098725cce6b15a7dbde7c237c6d45277ca964",
+    "baseline-precise-delay.log": "2fc7ad9d7b1995a33670efd078dd8b5b84819fc294ed9925222238ca6cf5ae42",
+    "batch-cuts-Debug.log": "ce1495c7f5935bc33364cbb632ae825fbe582e78bf2345c4056e73bc28220c06",
+    "batch-cuts-Release.log": "ce1495c7f5935bc33364cbb632ae825fbe582e78bf2345c4056e73bc28220c06",
+    "build-final-Debug.log": "d3a907382e3a55ac18f578def522e848072d107f284f3ba5fcd94c08e54fb838",
+    "build-final-Release.log": "614b2a9c9d06ffe6c9889c263e11e7bf1717523982560007f28decd536839a10",
+    "build-NovaCore.MinimumRecorder.Tests-Debug.log": "4f09b335c8533421a20e1ac14c1256d0bb0db609691d7cded453e88d273cf236",
+    "build-NovaCore.MinimumRecorder.Tests-Release.log": "9ea63f0f7b9ca1e33e434395f50e17dd9b5096edc80a936730da927329c49d5e",
+    "build-NovaCore.Recorder-Debug.log": "fbdc5f3c0dc59e2ee84dc80b184ef39f49f3ba5658cd6afd7278594cdc54cb78",
+    "build-NovaCore.Recorder-Release.log": "dee7b88425a92a3e9d66393ef1b25053207b640ecd7ad38e2800df69f2beb93a",
+    "build-NovaCore.Retention.Tests-Debug.log": "064b7dd8642ac81c905e5f7dc40eac5621ee44db1c60072ec469f6a0da83123f",
+    "build-NovaCore.Retention.Tests-Release.log": "9509903c600d1f007e9f99b8b0c50a81793fc7672e8c34aa5c78c750ccff5118",
+    "build-Release.log": "0303fe5f29d2fd903dd526f1e6c10e5d6adea95c27ead242a3ca138e1e3ad9ae",
+    "build-tests-final-Debug.log": "299fdbd45f1c51418f5cfdbdf93cda7f7419aea5aa56c216ee987315393d4efd",
+    "build-tests-final-Release.log": "d36947364d6b04d720ab048f9207ceb9344a2f0259c3870a811676b444e00b93",
+    "build-tests-forensic-Release.log": "5ffa9cfbaa6e6e1c9672c586561d098ec60e2d90da91bbbc27439091148a1aaf",
+    "build-tests-measurement-Debug.log": "14536671a9931e69f41a8f95f6c3619c7a1185b5aeb07bbbfcc40750cd3aff45",
+    "build-tests-measurement-Release.log": "614b2a9c9d06ffe6c9889c263e11e7bf1717523982560007f28decd536839a10",
+    "bursts-Debug.log": "1ecc673cd7cf6bd80d59df71e1ce7a8168f0b929e7eb873ddaca82936cfb62fd",
+    "bursts-Release.log": "28d9ededcc3547e774e21d82bf84b4149170ad4df1747c4b9748c45a894235c9",
+    "corrected-no-delay.log": "1aeb31f89f1afbefc990f4469542386584ef71f93e3ad2cc0120c9be0b1d1b69",
+    "corrected-precise-delay.log": "620c933339b3fb4a862774ee32e80fbd90bd55bffe08c7a4208f0a85f872d12b",
+    "full-Debug.log": "27e20700dd8de879394a93eddad70c4dbcc8f7f0b406274a00d2073cd0974a24",
+    "full-Release.log": "27e20700dd8de879394a93eddad70c4dbcc8f7f0b406274a00d2073cd0974a24",
+    "legacy-reproduction.log": "12cf19f5122d9a9dd8291bc5f8f48f08bb60b0f4eb894278194794783a9c14f9",
+    "native-build.log": "f685d6e7486c477f0e9d46e0d5553ecac097495238be885fbe0fee96e8547e0e",
+    "native-mock-Debug.log": "b6b872e3e47e514b145ceb2c2d7798803fdb125511541b09d2fd7322e794fa23",
+    "native-mock-Release.log": "b700008938c5c9fff7f6dd46c0e9b4db0b2e157a56b69c3591b00234570859b4",
+    "retention-Debug.log": "9fa80c08c01fe01fa8af17780cccefe653117118340f25b2f4267b718ed6b02a",
+    "retention-Release.log": "fd6ceb8fe5f0b07e1174f81a17080b8f38da781a672efe57e1bd7e94eaad0cdd"
+  },
+  "newTemporaryBytes": 1023935412,
+  "retention": "Pinned original excluded from temporary cleanup. Generated native-free banks and isolated builds are regeneratable; keep compact reports and repro source permanently.",
+  "correctedHelperBytes": 1374235
+}

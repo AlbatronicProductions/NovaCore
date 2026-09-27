@@ -1,0 +1,349 @@
+{
+  "schema": "novacore.greybox-analytic-source/1",
+  "definition": "nc.mount.single-2to1",
+  "provenance": "Original NovaCore analytic greybox; author-modular-starter.py; SI; not flight certification",
+  "primitives": [
+    {
+      "id": "ring",
+      "massKg": 20.0,
+      "center": [
+        -0.3,
+        0.0,
+        0.0
+      ],
+      "kind": "annulus",
+      "dimensions": [
+        0.1,
+        0.25,
+        0.2
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "beam-y-1",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        0.0,
+        -0.95
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        2.0,
+        0.1
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "beam-z-2",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        -0.95,
+        0.0
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        0.1,
+        1.8
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "beam-y-3",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        0.0,
+        0.95
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        2.0,
+        0.1
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "beam-z-4",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        0.95,
+        0.0
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        0.1,
+        1.8
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "brace-0",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        0.5766267485762415,
+        0.23884661968738002
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        0.8082725902777743,
+        0.1
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9238795325112867,
+        -0.3826834323650898,
+        0.0,
+        0.3826834323650898,
+        0.9238795325112867
+      ]
+    },
+    {
+      "id": "brace-1",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        -0.23884661968738002,
+        0.5766267485762415
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        0.8082725902777743,
+        0.1
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.3826834323650898,
+        -0.9238795325112867,
+        0.0,
+        0.9238795325112867,
+        -0.3826834323650898
+      ]
+    },
+    {
+      "id": "brace-2",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        -0.5766267485762415,
+        -0.23884661968738002
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        0.8082725902777743,
+        0.1
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.9238795325112867,
+        0.3826834323650898,
+        0.0,
+        -0.3826834323650898,
+        -0.9238795325112867
+      ]
+    },
+    {
+      "id": "brace-3",
+      "massKg": 5.0,
+      "center": [
+        -0.2,
+        0.23884661968738002,
+        -0.5766267485762415
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.4,
+        0.8082725902777743,
+        0.1
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3826834323650898,
+        0.9238795325112867,
+        0.0,
+        -0.9238795325112867,
+        0.3826834323650898
+      ]
+    },
+    {
+      "id": "leg-0",
+      "massKg": 10.0,
+      "center": [
+        -1.1,
+        -0.95,
+        -0.95
+      ],
+      "kind": "box",
+      "dimensions": [
+        1.4,
+        0.08,
+        0.08
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "leg-1",
+      "massKg": 10.0,
+      "center": [
+        -1.1,
+        -0.95,
+        0.95
+      ],
+      "kind": "box",
+      "dimensions": [
+        1.4,
+        0.08,
+        0.08
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "leg-2",
+      "massKg": 10.0,
+      "center": [
+        -1.1,
+        0.95,
+        -0.95
+      ],
+      "kind": "box",
+      "dimensions": [
+        1.4,
+        0.08,
+        0.08
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "leg-3",
+      "massKg": 10.0,
+      "center": [
+        -1.1,
+        0.95,
+        0.95
+      ],
+      "kind": "box",
+      "dimensions": [
+        1.4,
+        0.08,
+        0.08
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "assumptions": [
+    "Effective dry distributions are fixed in the material frame; gimbal motion changes actuator direction and visual geometry only.",
+    "No plume heating/aerodynamics/stress certification; support load and geometric keep-out qualification only."
+  ]
+}

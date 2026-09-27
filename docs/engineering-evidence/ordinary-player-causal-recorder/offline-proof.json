@@ -1,0 +1,78 @@
+[
+  {
+    "configuration": "Debug",
+    "result": {
+      "judgment": "COUNTEREXAMPLE_PROVEN",
+      "cpuOnly": true,
+      "checks": 139,
+      "limitations": "Deterministic persistence model, not a machine-reset experiment or production recorder qualification. No performance claim.",
+      "durablePrefixSha256": "1bd4ce96bfa695d62a49fd6ad97373ebab995d0b0f50e8b27a748b71224ce649",
+      "durableRecords": 2,
+      "indistinguishableHistories": [
+        {
+          "terminal": "submit 41 entered, no return",
+          "volatileRecords": 4
+        },
+        {
+          "terminal": "submission 41 returned; completion 40 proven; present 41 entered, no return",
+          "volatileRecords": 6
+        },
+        {
+          "terminal": "submission/present/frame 41 returned; next Update proves completion 41",
+          "volatileRecords": 10
+        }
+      ],
+      "parserCanProve": "Durable session and completion 40; everything after durable sequence 2 may be absent.",
+      "parserCannotProve": "Whether terminal work was submit, present, completed, or not admitted.",
+      "survivingObserverCase": "Successfully flushed present-entry marker retained; conditional on persistence owner survival and flush success.",
+      "partialRecordCuts": 64,
+      "corruptByteCases": 64,
+      "nominalCadenceMs": 10,
+      "simulatedWriterStallMs": 10000,
+      "gpuExecution": false,
+      "applicationExecution": false
+    },
+    "assembly": {
+      "bytes": 23040,
+      "sha256": "04354516b102e0589c1c37e6accddfdf2f89d2da8749cabff0738026a032483e"
+    }
+  },
+  {
+    "configuration": "Release",
+    "result": {
+      "judgment": "COUNTEREXAMPLE_PROVEN",
+      "cpuOnly": true,
+      "checks": 139,
+      "limitations": "Deterministic persistence model, not a machine-reset experiment or production recorder qualification. No performance claim.",
+      "durablePrefixSha256": "1bd4ce96bfa695d62a49fd6ad97373ebab995d0b0f50e8b27a748b71224ce649",
+      "durableRecords": 2,
+      "indistinguishableHistories": [
+        {
+          "terminal": "submit 41 entered, no return",
+          "volatileRecords": 4
+        },
+        {
+          "terminal": "submission 41 returned; completion 40 proven; present 41 entered, no return",
+          "volatileRecords": 6
+        },
+        {
+          "terminal": "submission/present/frame 41 returned; next Update proves completion 41",
+          "volatileRecords": 10
+        }
+      ],
+      "parserCanProve": "Durable session and completion 40; everything after durable sequence 2 may be absent.",
+      "parserCannotProve": "Whether terminal work was submit, present, completed, or not admitted.",
+      "survivingObserverCase": "Successfully flushed present-entry marker retained; conditional on persistence owner survival and flush success.",
+      "partialRecordCuts": 64,
+      "corruptByteCases": 64,
+      "nominalCadenceMs": 10,
+      "simulatedWriterStallMs": 10000,
+      "gpuExecution": false,
+      "applicationExecution": false
+    },
+    "assembly": {
+      "bytes": 22528,
+      "sha256": "ffc1a7917a5ba99109ed5eb7e3d5e42cd352d8787b4302f43d94eb4f85a74771"
+    }
+  }
+]

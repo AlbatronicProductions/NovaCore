@@ -1,0 +1,95 @@
+{
+  "judgment": "APPLICATION_INTEGRATION_PASS",
+  "playerPass": false,
+  "checks": 392,
+  "tank": "nc.tank.short-2",
+  "process": 4844,
+  "window": 6030170,
+  "parts": 12,
+  "source": "deacb1eb5597a2e6d8d66d5c30ba3a6ac728a8af82ec799b9e936018b66e77c7",
+  "compiled": "7c81e40416a491b79f9d79f18b944437b692afa2ae72e545b7b72c1066cea5bb",
+  "retainedEpoch": 843658277617741,
+  "finalEpoch": 843658277711491,
+  "frames": 3808,
+  "warmWindows": [
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.419999599456787,
+        "p95": 10.964299201965332,
+        "p99": 11.243800163269043,
+        "max": 11.382599830627441
+      },
+      "cpuMs": {
+        "median": 0.0092,
+        "p95": 0.0471,
+        "p99": 0.094,
+        "max": 0.1041
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.417199611663818,
+        "p95": 10.980500221252441,
+        "p99": 11.111200332641602,
+        "max": 11.469099998474121
+      },
+      "cpuMs": {
+        "median": 0.0047,
+        "p95": 0.0501,
+        "p99": 0.0727,
+        "max": 0.0762
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.463099956512451,
+        "p95": 10.885600090026855,
+        "p99": 11.029399871826172,
+        "max": 11.47130012512207
+      },
+      "cpuMs": {
+        "median": 0.0047,
+        "p95": 0.052,
+        "p99": 0.0835,
+        "max": 0.2331
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native": "79719b00774a7a3683d5c1820efda249ef3848adab1a4f00285b89ec1e50243a"
+}

@@ -4,6 +4,7 @@ layout(location = 1) in vec3 normal;
 layout(location = 2) in vec3 cameraRelativePosition;
 layout(location = 3) flat in uint mesh;
 layout(location = 4) in vec3 material;
+layout(location = 5) flat in uint editorStyle;
 layout(push_constant) uniform StellarLighting { vec4 sourceCenterExposure; vec4 sourceColorAmbient; vec4 radianceGlowEnabled; } lighting;
 layout(location = 0) out vec4 outColor;
 vec3 Brdf(vec3 n,vec3 v,vec3 l,vec3 radiance){
@@ -16,6 +17,9 @@ vec3 Brdf(vec3 n,vec3 v,vec3 l,vec3 radiance){
   return ((1.0-f)*(1.0-material.x)*color/3.14159265359+distribution*visibility*f/max(4.0*nv*nl,.0001))*radiance*nl;
 }
 void main() {
+  // Coverage transparency exposes the craft behind held geometry without
+  // changing ordinary opaque/exhaust blending or physical representation.
+  if((editorStyle==1u||editorStyle==2u||editorStyle==6u)&&((int(gl_FragCoord.x)+int(gl_FragCoord.y))&1)==0)discard;
   if(mesh>=1024u){
     vec3 n=normalize(normal),v=normalize(-cameraRelativePosition);
     // Fixed presentation lighting in linear space; no simulation authority.
@@ -23,7 +27,7 @@ void main() {
     lit+=color*(.16*(1.0-material.x)+.07*material.x)+color*material.z;
     outColor=vec4(lit,1.0);return;
   }
-  if(mesh!=3u&&mesh!=4u){outColor=vec4(color,1.0);return;}
+  if(mesh!=3u&&mesh!=4u&&mesh!=7u){outColor=vec4(color,1.0);return;}
   vec3 lightDirection=normalize(lighting.sourceCenterExposure.xyz-cameraRelativePosition);
   float diffuse=max(dot(normalize(normal),lightDirection),0.0);
   float illumination=max(lighting.sourceColorAmbient.w,.035)+(1.0-max(lighting.sourceColorAmbient.w,.035))*diffuse;

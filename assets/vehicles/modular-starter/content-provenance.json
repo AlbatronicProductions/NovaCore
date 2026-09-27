@@ -1,0 +1,61 @@
+{
+  "schema": "novacore.original-greybox-provenance/1",
+  "generator": "tools/vehicle-construction/author-modular-starter.py",
+  "source": "Original NovaCore accepted planning inputs and analytic authoring",
+  "ksaInputs": 0,
+  "blenderFiles": 0,
+  "files": {
+    "adapter.glb": {
+      "bytes": 35028,
+      "sha256": "0595cf9c0444d995180e4b9b957bf98e7b344b442e7d0ae17f9640c6ab1fb9b8"
+    },
+    "adapter.physics.json": {
+      "bytes": 5605,
+      "sha256": "7c463f256a22af997fa1a2a8e030ef9d5c4d199aefa00dd2cd502147dee5d3ca"
+    },
+    "block.glb": {
+      "bytes": 51080,
+      "sha256": "c07ab6d1dcdaa61fb76814011044c8836b0924099c11ead3d55b36ecbeac4e63"
+    },
+    "block.physics.json": {
+      "bytes": 1052,
+      "sha256": "b4fe56075701c6470b9615305b869ed798707d66761ef001fa465d44268bb60d"
+    },
+    "catalog.json": {
+      "bytes": 194563,
+      "sha256": "2356329a680ac6091645419094e90539c4ee6ddeb2597a3e5888fd433d662852"
+    },
+    "core.glb": {
+      "bytes": 8244,
+      "sha256": "a9c4294ded61cbb5392bc8f790be5ccf3b3f71bd2e2e717b669c1c901997f413"
+    },
+    "core.physics.json": {
+      "bytes": 855,
+      "sha256": "32e9497ea72a92dfb57f59a61f1c9e89ecf40ca0beb5f6f823a975879534aae9"
+    },
+    "engine.glb": {
+      "bytes": 35676,
+      "sha256": "f8f1d7f76a821d3d6efd5fa21d3365162084524bd0905aab5695d325d1db692a"
+    },
+    "engine.physics.json": {
+      "bytes": 859,
+      "sha256": "dd9b10adad3251df9798638f9d689e61d76306343736a152102894cd9b831e26"
+    },
+    "long.glb": {
+      "bytes": 14060,
+      "sha256": "0e12914c1eb071e7f2eea248621d63056811737ba7d9e4db6485496b321bc635"
+    },
+    "long.physics.json": {
+      "bytes": 853,
+      "sha256": "93ef14e954c40447695a4e3fe1eec52a3a7c2bbfbd51b5236c23dfe69acc0e12"
+    },
+    "short.glb": {
+      "bytes": 14068,
+      "sha256": "5589855cb446838f34926ab6478a99a1780cc38682cc88c3d27b3fee7d853bd1"
+    },
+    "short.physics.json": {
+      "bytes": 855,
+      "sha256": "44f3f366e4274caff2601598526bf0a162f8bd9624b2d582934c00d5c9ef0623"
+    }
+  }
+}

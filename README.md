@@ -27,6 +27,51 @@ The goal is a cohesive space simulation where planetary exploration and spacecra
 flight belong to the same journey. Today's working systems are the foundations;
 the full player experience is still being assembled.
 
+## Current unbanked generation — feature freeze
+
+**Project Control accepted the frozen candidate for M16.0 bank preparation; it remains UNBANKED.**
+See the [exact manual bank inventory and cleanup disposition](docs/engineering-evidence/m16-bank-preparation/README.md).
+The [current recorder-storage candidate supplement](docs/engineering-evidence/minimum-recorder-bounded-storage/README.md)
+reseals the authorized final storage correction. The [campaign bank-candidate report](docs/engineering-evidence/performance-150fps/bank-candidate.md)
+consolidates accepted engineering/integration outcomes, exact identities and
+reproduction. Stable 150 FPS remains open; historical blackout cause is unresolved;
+Player/public PASS is unassigned. The milestone is assigned for preparation; no bank is declared.
+MinimumRecorder remains temporary qualification infrastructure while blackout
+causality is unresolved. It is not accepted as permanent public-player architecture;
+public release requires Project Control's explicit instrumentation classification.
+Internal startup normally maintains the bounded recorder window, reserves a full
+session, starts recording, then launches the game. Preventive maintenance is at
+400 MiB; the hard total runtime cap is 512 MiB. Unrecorded play is an exceptional
+preservation fallback and cannot satisfy recorder-required qualification.
+
+The unified development application is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+It owns startup/configuration → Solar game → construction → Florida launch →
+physical flight/control → return to the retained construction document.
+The stabilization/bank gauntlet is documented in
+[the current evidence package](docs/engineering-evidence/stabilization-bank-gauntlet/README.md).
+The [Florida pad authority revision](docs/engineering-evidence/florida-pad-authority/README.md)
+provides one current single-layer slab throughout the unified lifecycle.
+The [RCS canonicalization record](docs/engineering-evidence/rcs-canonicalization/README.md)
+integrates the qualified scalable actuator architecture into `E:\NovaCore`;
+canonical qualification and Project Control disposition are recorded there.
+The [scalable launch-support revision](docs/engineering-evidence/scalable-launch-support/README.md)
+replaces the generic four-foot envelope with actual authored contact/load ownership;
+its final evidence records the current candidate disposition.
+Project Control alone may manually bank M16.0 after reviewing the fail-closed inventory.
+
+Latest [performance and recorder qualification](docs/engineering-evidence/performance-150fps/README.md):
+Stage A CPU/contact closure is accepted; recorder storage warning and safe maintenance
+pass Debug/Release. Stable 150 FPS remains **OPEN**: the final bounded GPU payoff
+gate did not establish a sufficient safe correction, so no GPU change or extra
+native run was made. The canonical candidate is frozen/unbanked; blackout cause
+remains unresolved and Player acceptance remains on hold.
+
+Construction uses generic part instances, connectors, deterministic transactions,
+save/load and 1×/2×/4×/8× symmetry. Short/long craft are witnesses, not depth limits.
+The current document capacity is 1,024 parts / 4 MB. Flight admission remains a
+separate bounded physical profile; editable craft are not automatically flyable.
+See [known limitations](docs/KNOWN_LIMITATIONS.md) and [build/run instructions](docs/build-windows.md).
+
 ## Working today
 
 **Current banked milestone: [M15.5 — Player Flight Controls](https://github.com/AlbatronicProductions/NovaCore/tree/m15.5-player-flight-controls).**
@@ -39,8 +84,8 @@ exploration, planet focus, overview, zoom and camera navigation.
 
 M15.4 adds a unified active-vessel camera, and M15.5 qualifies Z/X engine and
 WASD/QE attitude controls through physical actuators in a bounded free-flight
-development route. Powered Florida departure and connected player launch gameplay
-remain future work. These banks do not qualify an Earth launch stack or orbit
+development route. Connected Florida player launch belongs to the later unbanked
+generation above. These banks do not qualify an Earth launch stack or orbit
 insertion, SAS/navball/autopilot, production lighting/shadows, or
 atmosphere/aerodynamics/reentry. See the
 [current engineering state](docs/NOVACORE_CURRENT_STATE.md).
@@ -62,8 +107,9 @@ atmosphere/aerodynamics/reentry. See the
   powered free flight.
 
 These capabilities are exercised in bounded development scenarios. The original
-powered-flight cube and SRV-01 control route remain separate from Florida support;
-connected player launch and complete terrain landing are still ahead.
+powered-flight cube and SRV-01 control route remain separate historical witnesses.
+The newer unified application connects construction to bounded Florida flight;
+complete terrain landing remains future work.
 
 ## Screenshots
 
@@ -80,22 +126,21 @@ continue to evolve. They do not depict finished spacecraft or atmosphere systems
 
 **Surface → Launch → Atmosphere → Orbit → Interplanetary flight → Return → Landing**
 
-That connected journey is the long-term goal. Work ahead includes connected launch
-controls, finished spacecraft models, facilities, liftoff and landing interactions, richer
-terrain, and atmosphere, cloud and water systems. Rotating-site powered departure
-and a connected player-controlled surface-to-flight journey remain future work.
+That complete journey is the long-term goal. The current unbanked generation
+connects construction to bounded rotating-Florida departure and physical controls.
+Orbital vehicles, atmospheric flight, reentry and controlled landing remain future
+work. Feature expansion is frozen pending Project Control disposition.
 
 The intended player experience is straightforward: download a packaged build,
-launch an executable, and enter the simulation. Today's source build and scenario
-launcher serve development while that experience takes shape. No release date is
-promised.
+launch an executable, and enter the simulation. The unified development application
+already owns the continuous player lifecycle; a standalone distribution remains
+future work. No release date is promised.
 
 ## Trying NovaCore today
 
 Current access is for developers and technically comfortable source builders on
-**Windows 11, x64**. The launcher opens focused development scenarios used to
-exercise, diagnose and validate individual systems; it is not the final gameplay
-flow.
+**Windows 11, x64**. Use the unified NovaCore.exe for the player lifecycle.
+The separate legacy launcher remains available for focused engineering scenarios.
 
 Start with the [Windows build guide](docs/build-windows.md) and
 [terrain setup guide](docs/terrain-assets.md). Earth and Solar System scenes
@@ -111,14 +156,15 @@ PowerShell 7. Terrain generation uses Python with **NumPy 2.3.5** and
 [requirements.txt](tools/earth_data/requirements.txt). If needed, set
 `NOVACORE_PYTHON` to that interpreter's path.
 
-From a Visual Studio x64 Developer PowerShell:
+The unbanked App sources are not yet in the remote M15.5 checkout. Use the exact
+prospective source set from the stabilization record until Project Control banks
+it; a fresh clone of current remote HEAD cannot reproduce this candidate. After
+banking, clone the approved revision and resolve Git LFS. From that source root
+in a Visual Studio x64 Developer PowerShell. In an actual clone, first run
+`git lfs install` and `git lfs pull`; skip those commands for the sealed export,
+which already contains resolved LFS bytes and has no Git remote:
 
 ```powershell
-git lfs install
-git clone https://github.com/AlbatronicProductions/NovaCore.git
-cd NovaCore
-git lfs pull
-
 cmake -S native/NovaCore.Native -B build/native-ninja-release -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build/native-ninja-release
 dotnet build NovaCore.sln -c Release
@@ -128,10 +174,10 @@ dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v5
 pwsh tools/earth_data/acquire_florida_m12.ps1
 dotnet run --project tools/NovaCore.AssetTool -- build earth-florida-m12
 dotnet run --project tools/NovaCore.AssetTool -- verify earth-florida-m12
-dotnet run --project tools/NovaCore.Launcher -c Release
+& ./tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe
 ```
 
-Prepare both packages before using the launcher's default Solar System preset.
+Prepare both terrain packages before starting the unified application.
 Packages are generated and verified locally; no prebuilt terrain download is
 currently configured, and runtime does not download missing assets. See the
 [terrain guide](docs/terrain-assets.md) for cache setup and recovery.

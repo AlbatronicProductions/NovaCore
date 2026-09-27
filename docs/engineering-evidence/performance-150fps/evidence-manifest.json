@@ -1,0 +1,206 @@
+{
+  "build/performance-150fps/entry.json": {
+    "bytes": 659191,
+    "sha256": "91fc6fff1581afc2f8eb9cc2a9793bd6a671297fc7aff4d592b3322e7643bc3c"
+  },
+  "build/performance-150fps/offline-final-driver.log": {
+    "bytes": 5038,
+    "sha256": "8a4f8ece163e01caad556605950bf1b7c977f821cc43bf8221176ea032e62e99"
+  },
+  "build/performance-150fps/offline-comparison.json": {
+    "bytes": 904,
+    "sha256": "b3cc5d5c574853d78e2ed5d4481f98e478d61bd1c39118151805d2020210f6ac"
+  },
+  "build/performance-150fps/stage-a-final-replay.json": {
+    "bytes": 1063977,
+    "sha256": "e4ebc1c3ed093bd83aa3fffa4a7ed2dbfcd0f0a97ef1766ad152bcf382f46d4b"
+  },
+  "build/performance-150fps/maintenance-debug-driver.log": {
+    "bytes": 160,
+    "sha256": "3f2f82fcee4bbb651c9278e4289e3a06dda972f189dca4807e9ce013adb6e1e9"
+  },
+  "build/performance-150fps/maintenance/retention-Debug.log": {
+    "bytes": 13969,
+    "sha256": "4deb4b421ae593a761972062dc9bdb9f125b2a2797e19abae9668af1d2ece4e6"
+  },
+  "build/performance-150fps/maintenance/recorder-Debug.log": {
+    "bytes": 30,
+    "sha256": "427397198fde58b812c8af3015af8c7f25eefa9bd73a302b193efafb3bf79cff"
+  },
+  "build/performance-150fps/maintenance/ui-Debug.txt": {
+    "bytes": 126,
+    "sha256": "7bd7228075ab8043231d596b66c95f6d80c6b6f93d3347835d37e9982c32d2db"
+  },
+  "build/performance-150fps/retention-final-Release.log": {
+    "bytes": 13969,
+    "sha256": "790fd386d3d34c167d2dfc9727223966e6347685241e081eb5408ef95dbfc69f"
+  },
+  "build/performance-150fps/recorder-final-Release.log": {
+    "bytes": 30,
+    "sha256": "427397198fde58b812c8af3015af8c7f25eefa9bd73a302b193efafb3bf79cff"
+  },
+  "build/performance-150fps/storage-ui-Release.txt": {
+    "bytes": 126,
+    "sha256": "7bd7228075ab8043231d596b66c95f6d80c6b6f93d3347835d37e9982c32d2db"
+  },
+  "build/performance-150fps/package-before-native.json": {
+    "bytes": 21908,
+    "sha256": "86057b5f9d5a4908dbc3dbc2aa863396cb4ce37564acf9498115f6b1875364d3"
+  },
+  "build/performance-150fps/stage-a/source-freeze.json": {
+    "bytes": 127278,
+    "sha256": "c007c664db6cc264899b85576772fe54df6126d8d83c1ff6d09bc2b7df9e97d2"
+  },
+  "build/performance-150fps/stage-a/post-native-seal.json": {
+    "bytes": 127382,
+    "sha256": "792fa305dad792922f65dfaecf5ebc499367322df1f44f4ae36a29752adcd72d"
+  },
+  "build/performance-150fps/stage-a/final-seal.json": {
+    "bytes": 129634,
+    "sha256": "e5229746a0bdff2e715b5e9c60d6a1ae051db79e533de8c9d13ac617034bc677"
+  },
+  "build/performance-150fps/stage-a/native-launch.json": {
+    "bytes": 307,
+    "sha256": "0f445c30973ef8aa071c9d1ed60205441857f4e2793f2ecc160b2bbdf291273d"
+  },
+  "build/performance-150fps/stage-a/offline-admission.json": {
+    "bytes": 592,
+    "sha256": "e0c0c898b4fbfec7b70f570ffaf60e81a2dbe08f88bb73ae4f8d4219d872568f"
+  },
+  "build/performance-150fps/stage-a/prelaunch-check.json": {
+    "bytes": 127382,
+    "sha256": "792fa305dad792922f65dfaecf5ebc499367322df1f44f4ae36a29752adcd72d"
+  },
+  "build/performance-150fps/stage-a/native.json": {
+    "bytes": 842303,
+    "sha256": "91d3fc4e3370324a72b5c1b459fc262e5f03e4cc88fdfbd53829fcdd30378e80"
+  },
+  "build/performance-150fps/stage-a/native.json.input.ncflight.json": {
+    "bytes": 13505,
+    "sha256": "8502d85afb64021f5666770525da605e1920848d3af54f6e629a84dd40ee7414"
+  },
+  "build/performance-150fps/stage-a/native-timing.csv": {
+    "bytes": 266145,
+    "sha256": "c6426523b3a8691a803109bb7e97372dd524d618ee2e84f6f662eac06418f874"
+  },
+  "build/performance-150fps/stage-a/driver.log": {
+    "bytes": 197425,
+    "sha256": "2ecce2b76ce2a8fff33765854e7a6448ece46c18c8f96a2c9e274ac83151e66e"
+  },
+  "build/performance-150fps/stage-a/driver-error.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "build/performance-150fps/stage-a/process.json": {
+    "bytes": 3957,
+    "sha256": "fd26224b0f788100a992ec114d750c2fd92b48c553f20ada81ab7ed1ea3652bc"
+  },
+  "build/performance-150fps/stage-a/os-after.json": {
+    "bytes": 75,
+    "sha256": "b842d2b187ae9e3a40da87c901ffd284b8f555aee92c735cdf6e761925571152"
+  },
+  "build/performance-150fps/stage-a/analysis.json": {
+    "bytes": 205615,
+    "sha256": "c20496fe16959af64879cb4f9845761616443aefd9713281fd76fd7d9a1314f3"
+  },
+  "build/performance-150fps/stage-a/journal-summary.json": {
+    "bytes": 3437,
+    "sha256": "e7d1bf9b7bda127f249b44bf5501ec23de06765258d35ee9f99a99726a103d99"
+  },
+  "build/performance-150fps/stage-a/runtime-retention.json": {
+    "bytes": 3126,
+    "sha256": "992f0fe8fd373d152955d7444c19531475b15a8d05ea94d381dfaa7fd12274a1"
+  },
+  "docs/engineering-evidence/performance-150fps/bank-candidate.json": {
+    "bytes": 10069,
+    "sha256": "f025aa07559f4d0d61f47a43a461b161021908b73b921cc8db35486456ecbf66"
+  },
+  "docs/engineering-evidence/performance-150fps/bank-candidate.md": {
+    "bytes": 17096,
+    "sha256": "5345d434b84c8bce145e58af2ae6be5831b2cefca79afe544b744b5de173ceb4"
+  },
+  "docs/engineering-evidence/performance-150fps/final-gpu-payoff.json": {
+    "bytes": 26069,
+    "sha256": "bfd038ad77a2cb0926f639b5021a20ecb395666b2d5c37ebe156456b079490b2"
+  },
+  "docs/engineering-evidence/performance-150fps/final-gpu-payoff.md": {
+    "bytes": 5701,
+    "sha256": "ef7d257f5429460cced5c4f41c2cd39c958e519c524dd949ed6f0270dcebfaa3"
+  },
+  "docs/engineering-evidence/performance-150fps/native-results.md": {
+    "bytes": 4905,
+    "sha256": "49467a4ee4ac60f8b9db6b1e7de4c6357e3be23951298da3aec9a78708a8e863"
+  },
+  "docs/engineering-evidence/performance-150fps/README.md": {
+    "bytes": 7403,
+    "sha256": "ae4f4d4a3003b251e769903f6a7b715dc103dea679cd522b51044bb95a3f3b63"
+  },
+  "docs/engineering-evidence/performance-150fps/reproduce.md": {
+    "bytes": 3442,
+    "sha256": "7cea5adeabaee5403208554a544a3309c555e5453d85073eb544bcc407560dda"
+  },
+  "docs/engineering-evidence/performance-150fps/results.json": {
+    "bytes": 80818,
+    "sha256": "b0a6f3858d41c0cd6b371f65b3d1c22dbb6a4ee511e89f63a919877caa532065"
+  },
+  "docs/engineering-evidence/performance-150fps/retention.md": {
+    "bytes": 8522,
+    "sha256": "b55d935fcf2bdfb0ce8c4d6400c8e93189b6398c8fa41b252e9d2425804b5a9d"
+  },
+  "docs/engineering-evidence/performance-150fps/seal-bank-candidate.py": {
+    "bytes": 9498,
+    "sha256": "3553a82a99730e7e15092db50d7c9d5fcde059697a84a364dadea91c503ca638"
+  },
+  "docs/engineering-evidence/performance-150fps/stage-a-proof.md": {
+    "bytes": 3728,
+    "sha256": "a09e2be960778eaa886feba86cfdf5809f6f24b993f7ff7e2c5ea52266195cdc"
+  },
+  "docs/engineering-evidence/performance-150fps/stage-b-review.md": {
+    "bytes": 4881,
+    "sha256": "efdcda2405508dfe15a4178318d1274b307d431b00efd5b4d95a9959d3bdecb6"
+  },
+  "tools/physics/qualify-performance-150.ps1": {
+    "bytes": 4524,
+    "sha256": "644e74cee30079fde8e8b2c3923a99991ff958d2e796e9a04a97f8235e434e96"
+  },
+  "tools/physics/seal-performance-150-evidence.py": {
+    "bytes": 5530,
+    "sha256": "3ab7333403176ee645d81a5dafa23eca793f21a24ac739d3dc20ff114da6e84a"
+  },
+  "tools/physics/seal-performance-150.py": {
+    "bytes": 2494,
+    "sha256": "afbc8770b9a70decd6300c244f3ee122855b48154a86ffbbe0a8132d5bfd560e"
+  },
+  "tools/physics/witness-performance-150.ps1": {
+    "bytes": 3459,
+    "sha256": "b829960982e625c14ca978bbdacab8602bfc7987b1a3af38de0da52592023bd7"
+  },
+  "tools/physics/analyze-final-gpu-payoff.py": {
+    "bytes": 4954,
+    "sha256": "dc2a8ce5f574013e7db13e1b344934d4f70318d442890ff04a93016f94f24826"
+  },
+  "tools/physics/qualify-recorder-maintenance.ps1": {
+    "bytes": 1870,
+    "sha256": "fa2ca23a1f54d95a64eb11fd1345b610cd81fa7a4367279e3bf2fc73653d85d5"
+  },
+  "README.md": {
+    "bytes": 16143,
+    "sha256": "7773984f91d6f76418b5733c538805e0a68ccffa7f5a8869a1e9c14ab64666a0"
+  },
+  "docs/NOVACORE_CURRENT_STATE.md": {
+    "bytes": 48578,
+    "sha256": "4241e9de4a5573e90d0d8f6623e2cb9d6da898426dfdbeb14efbc37a37a09794"
+  },
+  "docs/KNOWN_LIMITATIONS.md": {
+    "bytes": 5741,
+    "sha256": "d242c8f7fe2778f05aca831ce95c81428b80d8ed224de8d4e982e006b9a0fb9b"
+  },
+  "docs/CHANGELOG.md": {
+    "bytes": 3996,
+    "sha256": "87d9d4e5da09cc6ccb4d03926e7003cb1f95d1e47150f1c681d4707a1f82f62c"
+  },
+  "docs/build-windows.md": {
+    "bytes": 17359,
+    "sha256": "e2833bda62d8eb556a599df6ec207201113b9b1c18b92a08c3a7e2f8011df0cd"
+  }
+}

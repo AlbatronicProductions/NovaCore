@@ -1,0 +1,22 @@
+{
+  "package-negative-missing": {
+    "judgment": "FAIL",
+    "packageSha256": "5dc838c4665f943c800e627e391dab7898c1a47d31f83bf2c04d18e73be03ecf",
+    "errors": [
+      "Shader inventory differs from native target dependencies: ['triangle.vert.spv']",
+      "Missing or mismatched: shaders/triangle.vert.spv"
+    ]
+  },
+  "package-negative-content": {
+    "judgment": "FAIL",
+    "packageSha256": "85c08f65033a60aaf4d37f34fe451f7252ce8cacf163cdd532292e2c526b6830",
+    "errors": [
+      "Missing or mismatched: assets/vehicles/modular-starter/catalog.json"
+    ]
+  },
+  "package-negative-restored": {
+    "judgment": "PASS",
+    "packageSha256": "827bdffc9a6cf396b9b5046bf9c121059bccf5f9d3819e9454a1f2da9ffa4a12",
+    "errors": []
+  }
+}

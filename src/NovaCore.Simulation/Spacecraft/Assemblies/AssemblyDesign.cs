@@ -46,17 +46,20 @@ internal readonly record struct AssemblyPose(Double3 Position,Matrix3 Rotation)
     internal AssemblyPose Then(AssemblyPose local)=>new(Point(local.Position),Rotation*local.Rotation);
     internal bool Rigid=>Position.IsFinite&&Rotation.Rigid;
 }
-internal enum AssemblyRole { Command, Tank, MainEngine, RcsJet, RcsBlock }
+internal enum AssemblyRole { Command, Tank, MainEngine, RcsJet, RcsBlock, Component }
 internal sealed record AttachmentData(string Id,string Family,AssemblyPose Frame);
 internal sealed record StoreData(string Id,string Species,string ResourceIdentity,Double3 Datum,double CapacityKg);
 internal sealed record PropulsionData(string Id,string Model,string FuelIdentity,string OxidizerIdentity,double FullThrustN,double ExtentRateKgS,double ExhaustSpeed,Double3 Point,Double3 Axis);
 internal sealed record GimbalData(string Id,Double3 Pivot,Double3 NozzleOffset,double LimitY,double LimitZ,double SlewRate);
 internal sealed record PartDefinitionData(string Id,uint Revision,string VisualReference,AssemblyRole Role,double DryMassKg,Double3 LocalCom,Matrix3 LocalInertia,
     ImmutableArray<AttachmentData> Attachments,ImmutableArray<StoreData> Stores,PropulsionData? Propulsion,GimbalData? Gimbal,
-    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<PropulsionData>? JetActuators=null);
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] ImmutableArray<PropulsionData>? JetActuators=null,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] PartConstructionData? Construction=null,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] PartStandardData? Standard=null);
 internal sealed record DefinitionReference(string Id,uint Revision,string Digest);
 internal sealed record PartInstanceData(string Id,int Order,DefinitionReference Definition,AssemblyPose Pose);
-internal sealed record StructuralEdgeData(string Parent,string ParentEndpoint,string Child,string ChildEndpoint);
+internal sealed record StructuralEdgeData(string Parent,string ParentEndpoint,string Child,string ChildEndpoint,
+    [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] ConstructionConnection? Construction=null);
 internal sealed record FeedEdgeData(string Source,string Store,string Consumer,string Species,
     [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] string? Actuator=null);
 internal sealed record ControlPairData(string Name,string First,string Second,int Axis,int Sign,
@@ -86,30 +89,45 @@ internal static class AssemblyJson
     }
     private sealed class ExactIntegerConverter:JsonConverter<PropellantInteger>
     {
-        public override PropellantInteger Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o)=>AssemblyResources.ParseHex(r.GetString()??throw new JsonException("Missing exact units."));
+        public override PropellantInteger Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o)=>
+            r.TokenType==JsonTokenType.String?AssemblyResources.ParseHex(r.GetString()!):throw new JsonException("Exact units require a string.");
         public override void Write(Utf8JsonWriter w,PropellantInteger v,JsonSerializerOptions o)=>w.WriteStringValue(AssemblyResources.Hex(v));
     }
     private sealed class InstantConverter:JsonConverter<SimulationInstant>
     {
-        public override SimulationInstant Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o)=>new(r.GetInt64());
+        public override SimulationInstant Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o)=>
+            r.TokenType==JsonTokenType.Number&&r.TryGetInt64(out var ticks)?new(ticks):throw new JsonException("Instant requires a signed 64-bit integer.");
         public override void Write(Utf8JsonWriter w,SimulationInstant v,JsonSerializerOptions o)=>w.WriteNumberValue(v.Ticks);
     }
-    private static double Number(JsonElement e){var v=e.GetDouble();return v==0?0:v;}
+    private static double Component(JsonElement e,string name)
+    {
+        if(!e.TryGetProperty(name,out var field)||field.ValueKind!=JsonValueKind.Number||
+            !field.TryGetDouble(out var value)||!double.IsFinite(value))
+            throw new JsonException($"Finite numeric component '{name}' required.");
+        return value==0?0:value;
+    }
+    private static void Components(JsonElement e,int count)
+    {if(e.ValueKind!=JsonValueKind.Object||e.EnumerateObject().Count()!=count)throw new JsonException($"Exactly {count} named numeric components required.");}
     private sealed class CanonicalDoubleConverter:JsonConverter<double>
     {
-        public override double Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o){var v=r.GetDouble();return v==0?0:v;}
+        public override double Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o)
+        {
+            if(r.TokenType!=JsonTokenType.Number||!r.TryGetDouble(out var value)||!double.IsFinite(value))
+                throw new JsonException("Finite binary64 number required.");
+            return value==0?0:value;
+        }
         public override void Write(Utf8JsonWriter w,double v,JsonSerializerOptions o)=>w.WriteNumberValue(v==0?0:v);
     }
     private sealed class VectorConverter:JsonConverter<Double3>
     {
         public override Double3 Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o)
-        {using var d=JsonDocument.ParseValue(ref r);var e=d.RootElement;if(e.EnumerateObject().Count()!=3)throw new JsonException("Three vector fields required.");return new(Number(e.GetProperty("x")),Number(e.GetProperty("y")),Number(e.GetProperty("z")));}
+        {using var d=JsonDocument.ParseValue(ref r);var e=d.RootElement;Components(e,3);return new(Component(e,"x"),Component(e,"y"),Component(e,"z"));}
         public override void Write(Utf8JsonWriter w,Double3 v,JsonSerializerOptions o){w.WriteStartObject();w.WriteNumber("x",v.X==0?0:v.X);w.WriteNumber("y",v.Y==0?0:v.Y);w.WriteNumber("z",v.Z==0?0:v.Z);w.WriteEndObject();}
     }
     private sealed class QuaternionConverter:JsonConverter<DoubleQuaternion>
     {
         public override DoubleQuaternion Read(ref Utf8JsonReader r,Type t,JsonSerializerOptions o)
-        {using var d=JsonDocument.ParseValue(ref r);var e=d.RootElement;if(e.EnumerateObject().Count()!=4)throw new JsonException("Four quaternion fields required.");return new(Number(e.GetProperty("x")),Number(e.GetProperty("y")),Number(e.GetProperty("z")),Number(e.GetProperty("w")));}
+        {using var d=JsonDocument.ParseValue(ref r);var e=d.RootElement;Components(e,4);return new(Component(e,"x"),Component(e,"y"),Component(e,"z"),Component(e,"w"));}
         public override void Write(Utf8JsonWriter w,DoubleQuaternion v,JsonSerializerOptions o){w.WriteStartObject();w.WriteNumber("x",v.X==0?0:v.X);w.WriteNumber("y",v.Y==0?0:v.Y);w.WriteNumber("z",v.Z==0?0:v.Z);w.WriteNumber("w",v.W==0?0:v.W);w.WriteEndObject();}
     }
     internal static byte[] Write<T>(T value)=>JsonSerializer.SerializeToUtf8Bytes(value,Options);
@@ -182,7 +200,7 @@ internal sealed partial class CompiledAssemblyDesign
             JetActuators=def.JetActuators?.OrderBy(j=>j.Id,StringComparer.Ordinal).ToImmutableArray()}).ToImmutableArray();
         foreach(var def in defs)
         {
-            Require(Identifier(def.Id)&&def.Revision>0&&Identifier(def.VisualReference),"Invalid definition identity/reference.");
+            Require(Identifier(def.Id)&&def.Revision>0&&Identifier(def.VisualReference)&&def.Construction is null&&def.Standard is null,"Invalid definition identity/reference or unadmitted construction extension.");
             Require(double.IsFinite(def.DryMassKg)&&def.DryMassKg>0&&def.LocalCom.IsFinite&&def.LocalInertia.PhysicalInertia,"Invalid authored dry mass/COM/inertia.");
             Require(!def.Attachments.IsDefault&&def.Attachments.Length>0&&def.Attachments.Select(a=>a.Id).Distinct(StringComparer.Ordinal).Count()==def.Attachments.Length,"Invalid endpoint identity.");
             foreach(var e in def.Attachments)Require(Identifier(e.Id)&&Identifier(e.Family)&&e.Frame.Rigid,"Invalid rigid endpoint.");
@@ -221,8 +239,8 @@ internal sealed partial class CompiledAssemblyDesign
             Require(Identifier(inst.Id)&&inst.Pose.Rigid,"Invalid instance/pose.");
             var def=defs.SingleOrDefault(x=>x.Id==inst.Definition.Id);
             Require(def is not null&&def.Revision==inst.Definition.Revision&&AssemblyJson.Digest(def)==inst.Definition.Digest,"Unresolved or altered definition dependency.");
-            parts.Add(new(inst,def!,inst.Pose.Point(def!.LocalCom),inst.Pose.Rotation*def.LocalInertia*inst.Pose.Rotation.Transpose()));
-            if(def.Role==AssemblyRole.RcsBlock)
+            parts.Add(AssemblyConstructionFacts.Place(inst,def!));
+            if(def!.Role==AssemblyRole.RcsBlock)
                 foreach(var jet in def.JetActuators!.Value)Require(inst.Pose.Point(jet.Point).LengthSquared<=1.3*1.3,"Independent jet exceeds the admitted 1.3 m assembly endpoint radius.");
         }
         Require(parts.Count(p=>p.Definition.Role==(blocks?AssemblyRole.RcsBlock:AssemblyRole.RcsJet))==4&&parts.Count(p=>p.Definition.Role==AssemblyRole.MainEngine)==1&&parts.Count(p=>p.Definition.Role==AssemblyRole.Tank)==1&&parts.Count(p=>p.Definition.Role==AssemblyRole.Command)==1,"Incorrect capability/instance counts.");
@@ -231,6 +249,7 @@ internal sealed partial class CompiledAssemblyDesign
         var occupied=new HashSet<string>(StringComparer.Ordinal);var parents=new Dictionary<string,string>(StringComparer.Ordinal);
         foreach(var e in d.Attachments)
         {
+            Require(e.Construction is null,"Generic connection capabilities require separate construction admission.");
             var parent=parts.Single(p=>p.Instance.Id==e.Parent);var child=parts.Single(p=>p.Instance.Id==e.Child);
             Require((child.Definition.Role==AssemblyRole.Tank&&parent.Definition.Role==AssemblyRole.Command)||
                 (child.Definition.Role is AssemblyRole.MainEngine or AssemblyRole.RcsJet or AssemblyRole.RcsBlock&&parent.Definition.Role==AssemblyRole.Tank),"Unsupported structural role relationship.");
@@ -240,11 +259,8 @@ internal sealed partial class CompiledAssemblyDesign
             var a=parent.Instance.Pose.Then(pe.Frame);var b=child.Instance.Pose.Then(ce.Frame);
             Require(pe.Family==ce.Family&&(a.Position-b.Position).LengthSquared<=1e-20&&(a.Rotation*Matrix3.Mate-b.Rotation).Maximum<=1e-12,"Mating frame mismatch.");
         }
-        foreach(var part in parts)
-        {
-            var id=part.Instance.Id;var seen=new HashSet<string>(StringComparer.Ordinal);
-            while(id!=d.CommandRoot){Require(seen.Add(id)&&parents.ContainsKey(id),"Disconnected/cyclic structural graph.");id=parents[id];}
-        }
+        var parentIndices=parts.Select(p=>parents.TryGetValue(p.Instance.Id,out var parent)?Array.FindIndex(instances.ToArray(),i=>i.Id==parent):-1).ToArray();
+        CompiledConstructionDesign.ValidateRootedParents(parentIndices,Array.FindIndex(instances.ToArray(),i=>i.Id==d.CommandRoot));
         var tank=parts.Single(p=>p.Definition.Role==AssemblyRole.Tank);
         foreach(var store in tank.Definition.Stores)Require(tank.Instance.Pose.Point(store.Datum)==Double3.Zero,"This qualified point-store profile requires authored common assembly datum O; no recentering.");
         Require(!d.Feeds.IsDefault&&d.Feeds.Length==(blocks?34:10),"Exactly two explicit typed feeds per actuator required.");

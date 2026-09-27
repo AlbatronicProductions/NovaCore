@@ -6,6 +6,12 @@ architecture specifications. Start from [current state](../NOVACORE_CURRENT_STAT
 and the relevant operational guide. A report's dated PASS/FAIL/unbanked wording
 records its investigation stage. Follow subsequent accepted conclusions.
 
+Current unbanked feature freeze: [stabilization / bank gauntlet](stabilization-bank-gauntlet/README.md). Project Control disposition remains required; historical stop wording below is preserved.
+
+Current disposition: [post-contact performance correction](post-contact-performance/README.md). Correctness, one native physical lifecycle and unchanged recorder PASS; whole-frame 150 FPS performance REVISE. Candidate FROZEN / UNBANKED. Blackout UNRESOLVED; Player acceptance and banking HOLD. The one authorized native witness is consumed; no relaunch or further production work without Project Control.
+
+Preserved construction foundation: [qualified RCS canonicalization](rcs-canonicalization/README.md), preserving [launch refusal diagnosis and recovery](launch-admission-regression/README.md) and [Florida pad authority](florida-pad-authority/README.md). The copied [isolated RCS evidence](rcs-attitude-scalability/README.md) is historical provenance; current production and qualification belong to E:\NovaCore. No banking is authorized.
+
 | Family | Continuing value | Read the conclusion first |
 |---|---|---|
 | [M15.5 Player Flight Controls](player-flight-controls-gauntlet/README.md) | Canonical live command authority, physical Z/X and WASD/QE allocation, finite-resource replay and manual acceptance in bounded free flight. | BANKED at `3d4de806b9856da9a56f3b4e48ec0e68a927de45`; tag `m15.5-player-flight-controls`. Campaign pre-bank stop wording is historical; no Florida departure. |
@@ -75,3 +81,5 @@ by default. Promotion/cleanup authority remains with
 conservative refusal; real Florida Coast clearance; Force refusal; rotating-feature and
 no-false-clear controls; deterministic Debug/Release validation; zero-allocation reusable
 paths; bounded performance; beta authority deferred. | **Banked contract** |
+
+Latest bounded stabilization revision: [Florida pad authority](florida-pad-authority/README.md).

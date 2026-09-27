@@ -1,0 +1,1571 @@
+{
+  "judgment": "REVISE",
+  "physicalCorrectness": "PASS",
+  "nativeRoute": "PASS",
+  "wholeFrame150Fps": "REVISE",
+  "recorder": {
+    "inspection": {
+      "DurableSequence": 14922,
+      "CommittedTarget": 14922,
+      "Complete": true,
+      "Corrupt": false,
+      "Faults": 0,
+      "Dropped": 0,
+      "open": 0,
+      "pending": 0,
+      "Terminal": "COMPLETE recorder session through DurableSequence 14922; sealed final produced sequence fully persisted. Present return is not physical display completion."
+    },
+    "persistence": {
+      "wallMs": 10878.7863,
+      "cpuMs": 500,
+      "allocatedBytes": 24268312,
+      "managedRetainedBytes": 622696,
+      "peakWorkingSetBytes": 58998784,
+      "BytesWritten": 7618637,
+      "Flushes": 1082,
+      "Rotations": 0,
+      "commitCount": 540,
+      "sampledCommits": 540,
+      "p50ms": 1.7216,
+      "p95ms": 2.215,
+      "p99ms": 5.3976,
+      "maxMs": 42.825,
+      "longestCommitMs": 42.825,
+      "ringPeakLower": 1206,
+      "ringPeakUpper": 1206,
+      "volatileLagPeakLower": 1206,
+      "volatileLagPeakUpper": 1206,
+      "peakSemantics": "Observer publication brackets; exact peak lies within inclusive lower/upper bounds. Ring upper is additionally bounded by capacity.",
+      "storageBoundBytes": 83902464
+    },
+    "journal": {
+      "session": "11b82e56-6ff4-4eb2-b337-9c782fdd89c8",
+      "recordCount": 14922,
+      "sequenceRange": [
+        1,
+        14922
+      ],
+      "unusedBanks": [
+        "bank1.bin"
+      ],
+      "fullSpanChecksumsValid": true,
+      "complete": true,
+      "phaseEdgeCounts": {
+        "1/0": 1,
+        "2/1": 604,
+        "2/2": 604,
+        "3/1": 604,
+        "3/2": 604,
+        "4/1": 604,
+        "4/2": 604,
+        "5/1": 604,
+        "5/2": 604,
+        "6/1": 1334,
+        "6/2": 1334,
+        "7/1": 667,
+        "7/2": 667,
+        "8/1": 604,
+        "8/2": 604,
+        "9/0": 667,
+        "10/1": 604,
+        "10/2": 604,
+        "12/0": 933,
+        "12/1": 922,
+        "12/2": 922,
+        "13/0": 91,
+        "14/0": 2,
+        "16/1": 3,
+        "16/2": 3,
+        "17/1": 63,
+        "17/2": 63,
+        "20/1": 1,
+        "20/2": 1
+      },
+      "resourceInfoActionCounts": {
+        "1": 278,
+        "3": 133,
+        "4": 122,
+        "5": 122,
+        "2": 278
+      },
+      "successfulSubmits": 667,
+      "completedEvents": 667,
+      "submitCompletionIdentityEquality": true,
+      "successfulPresents": 604,
+      "presentReturnCadenceMs": {
+        "count": 603,
+        "median": 5.6366,
+        "p95": 21.6276,
+        "p99": 89.0979,
+        "maximum": 1052.9724,
+        "over6667": 264,
+        "longestOver6667": 262,
+        "headroomMedian": 1.0300666666666674,
+        "headroomP95": -14.960933333333333,
+        "headroomP99": -82.43123333333332
+      },
+      "resourceBirthRetirementIdentityEquality": true,
+      "presentMeaning": "CPU API return cadence, not physical monitor scanout",
+      "flightPresentReturnCadenceMs": {
+        "count": 261,
+        "median": 10.0105,
+        "p95": 74.4275,
+        "p99": 95.3838,
+        "maximum": 1052.9724,
+        "over6667": 261,
+        "longestOver6667": 261,
+        "headroomMedian": -3.3438333333333334,
+        "headroomP95": -67.76083333333332,
+        "headroomP99": -88.71713333333332
+      }
+    },
+    "retainedFiles": {
+      "bank0.bin": {
+        "bytes": 41947136,
+        "sha256": "a86c91136e05c75b503339fb44f5674f855a94055106001b44bef59f588e6ea6"
+      },
+      "bank1.bin": {
+        "bytes": 41947136,
+        "sha256": "3255a235394514c0a9cc99b137b25375bf1edfefb1965eafff93233b844297e9"
+      },
+      "finalized.json": {
+        "bytes": 589,
+        "sha256": "a001647151ca9eb81f81569c857d04c409542fe27f7ea0ac675ddb6fbc0108d9"
+      },
+      "head0.bin": {
+        "bytes": 4096,
+        "sha256": "c27db44d586f6f47096f5c08be77b6648334eaaacb55c4e2ec58f85f313dfb23"
+      },
+      "head1.bin": {
+        "bytes": 4096,
+        "sha256": "cbcb509120cc5dd62836ecd1ee9b471dfac58720d36a8ed0237fac40c4978162"
+      },
+      "observer.json": {
+        "bytes": 108,
+        "sha256": "b934f5ee070eca693a9cad70350ff9c774292d6bd842d3d511a7165ca1a3aa5d"
+      },
+      "ownership.lock": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "performance.json": {
+        "bytes": 679,
+        "sha256": "e8c2ed88c434a9460cd117c34c3478340476c09773ca1f22ce4350632a9b6e1e"
+      },
+      "preserve.pin": {
+        "bytes": 68,
+        "sha256": "7d0bb8a76671fa37bfbd1cd05e4fa31c47c72e6649d7ce5cff376fbfba9755fd"
+      },
+      "recovery.json": {
+        "bytes": 11365,
+        "sha256": "1b8399d96b5552331062aa2cae34765aa22a447fd23a871c9e0ef9d879297c49"
+      },
+      "session.json": {
+        "bytes": 1106,
+        "sha256": "a2c6d5596767252834426ad86674590674aa3b64006bf3507c6f48660779635e"
+      }
+    }
+  },
+  "independentReview": "PASS correctness and evidence; REVISE performance",
+  "blackout": "UNRESOLVED",
+  "banking": "HOLD",
+  "playerPass": false,
+  "sourceSha256": "e4cbffba5a1eb6ae7c3e1bd21ab7fbd330cacb3cee6078ce4002f76e86bf0322",
+  "packageSha256": "b941d4ed5eed518599d2f729a348b0cf28f351e20f7e221686221ed14e3a1f3f",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "settings": "unchanged; 3440x1440 borderless desktop, canonical viewport3440x1322",
+  "offline": [
+    {
+      "name": "build-Debug",
+      "exitCode": 0,
+      "seconds": 4.2493701,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\build-Debug.log"
+    },
+    {
+      "name": "simulation-Debug",
+      "exitCode": 0,
+      "seconds": 17.7023669,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\simulation-Debug.log"
+    },
+    {
+      "name": "response-Debug",
+      "exitCode": 0,
+      "seconds": 0.1591941,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\response-Debug.log"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-query-Debug",
+      "exitCode": 0,
+      "seconds": 11.062345,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Physical-surface-point-query-Debug.log"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-stale-snapshot-Debug",
+      "exitCode": 0,
+      "seconds": 0.6027259,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Physical-surface-point-stale-snapshot-Debug.log"
+    },
+    {
+      "name": "physical-reference-Earth-CPU-elevation-oracle-Debug",
+      "exitCode": 0,
+      "seconds": 0.5114355,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Earth-CPU-elevation-oracle-Debug.log"
+    },
+    {
+      "name": "physical-reference-Canonical-body-fixed-geographic-handedness-Debug",
+      "exitCode": 0,
+      "seconds": 0.0781539,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Canonical-body-fixed-geographic-handedness-Debug.log"
+    },
+    {
+      "name": "physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Debug",
+      "exitCode": 0,
+      "seconds": 1.2991096,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Debug.log"
+    },
+    {
+      "name": "physical-reference-Multiscale-physical-terrain-modifier-foundation-Debug",
+      "exitCode": 0,
+      "seconds": 0.4771267,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Multiscale-physical-terrain-modifier-foundation-Debug.log"
+    },
+    {
+      "name": "physical-reference-Single-canonical-physical-surface-authority-Debug",
+      "exitCode": 0,
+      "seconds": 0.0771535,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Single-canonical-physical-surface-authority-Debug.log"
+    },
+    {
+      "name": "physical-reference-Global-anchored-physical-frequency-continuity-Debug",
+      "exitCode": 0,
+      "seconds": 0.0772271,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Global-anchored-physical-frequency-continuity-Debug.log"
+    },
+    {
+      "name": "physical-reference-Local-terrain-format-and-GPU-compression-Debug",
+      "exitCode": 0,
+      "seconds": 0.228129,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Local-terrain-format-and-GPU-compression-Debug.log"
+    },
+    {
+      "name": "physical-reference-Local-terrain-payload-2-authoring-contract-Debug",
+      "exitCode": 0,
+      "seconds": 0.0933936,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Local-terrain-payload-2-authoring-contract-Debug.log"
+    },
+    {
+      "name": "physical-reference-M12-Florida-regional-physical-surface-Debug",
+      "exitCode": 0,
+      "seconds": 0.8363515,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-M12-Florida-regional-physical-surface-Debug.log"
+    },
+    {
+      "name": "swept-clearance-Debug",
+      "exitCode": 0,
+      "seconds": 24.0549382,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\swept-clearance-Debug.log"
+    },
+    {
+      "name": "surface-numerics-Debug",
+      "exitCode": 0,
+      "seconds": 0.1002104,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-numerics-Debug.log"
+    },
+    {
+      "name": "surface-recontact-Debug",
+      "exitCode": 0,
+      "seconds": 6.4593435,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-recontact-Debug.log"
+    },
+    {
+      "name": "surface-refinement-Debug",
+      "exitCode": 0,
+      "seconds": 12.9907149,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-refinement-Debug.log"
+    },
+    {
+      "name": "surface-cases-Debug",
+      "exitCode": 0,
+      "seconds": 227.6843762,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-cases-Debug.log"
+    },
+    {
+      "name": "surface-cycles-Debug",
+      "exitCode": 0,
+      "seconds": 19.4386169,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-cycles-Debug.log"
+    },
+    {
+      "name": "surface-persistence-Debug",
+      "exitCode": 0,
+      "seconds": 5.1444072,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-persistence-Debug.log"
+    },
+    {
+      "name": "surface-terrain-Debug",
+      "exitCode": 0,
+      "seconds": 12.7718272,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-terrain-Debug.log"
+    },
+    {
+      "name": "surface-seams-Debug",
+      "exitCode": 0,
+      "seconds": 66.2012343,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-seams-Debug.log"
+    },
+    {
+      "name": "surface-plane-Debug",
+      "exitCode": 0,
+      "seconds": 1.0675769,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-plane-Debug.log"
+    },
+    {
+      "name": "modular-connectors-Debug",
+      "exitCode": 0,
+      "seconds": 4.2800133,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-connectors-Debug.log"
+    },
+    {
+      "name": "modular-stabilization-Debug",
+      "exitCode": 0,
+      "seconds": 604.75083,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-stabilization-Debug.log"
+    },
+    {
+      "name": "modular-viewport-Debug",
+      "exitCode": 0,
+      "seconds": 0.0770966,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-viewport-Debug.log"
+    },
+    {
+      "name": "modular-editor-regressions-Debug",
+      "exitCode": 0,
+      "seconds": 67.9940984,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-editor-regressions-Debug.log"
+    },
+    {
+      "name": "modular-gate9-Debug",
+      "exitCode": 0,
+      "seconds": 7.0119724,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate9-Debug.log"
+    },
+    {
+      "name": "modular-gate10-dynamics-Debug",
+      "exitCode": 0,
+      "seconds": 3.3376722,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate10-dynamics-Debug.log"
+    },
+    {
+      "name": "modular-gate10-flight-Debug",
+      "exitCode": 0,
+      "seconds": 15.827601,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate10-flight-Debug.log"
+    },
+    {
+      "name": "modular-gate11-Debug",
+      "exitCode": 0,
+      "seconds": 8.1233258,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate11-Debug.log"
+    },
+    {
+      "name": "modular-gate12-application-Debug",
+      "exitCode": 0,
+      "seconds": 20.9632212,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate12-application-Debug.log"
+    },
+    {
+      "name": "florida-pad-authority-Debug",
+      "exitCode": 0,
+      "seconds": 3.1086307,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\florida-pad-authority-Debug.log"
+    },
+    {
+      "name": "scalable-support-flight-Debug",
+      "exitCode": 0,
+      "seconds": 398.3282379,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\scalable-support-flight-Debug.log"
+    },
+    {
+      "name": "build-Release",
+      "exitCode": 0,
+      "seconds": 3.1489745,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\build-Release.log"
+    },
+    {
+      "name": "simulation-Release",
+      "exitCode": 0,
+      "seconds": 8.9754464,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\simulation-Release.log"
+    },
+    {
+      "name": "response-Release",
+      "exitCode": 0,
+      "seconds": 0.1549681,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\response-Release.log"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-query-Release",
+      "exitCode": 0,
+      "seconds": 1.7990777,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Physical-surface-point-query-Release.log"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-stale-snapshot-Release",
+      "exitCode": 0,
+      "seconds": 0.2573155,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Physical-surface-point-stale-snapshot-Release.log"
+    },
+    {
+      "name": "physical-reference-Earth-CPU-elevation-oracle-Release",
+      "exitCode": 0,
+      "seconds": 0.1728124,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Earth-CPU-elevation-oracle-Release.log"
+    },
+    {
+      "name": "physical-reference-Canonical-body-fixed-geographic-handedness-Release",
+      "exitCode": 0,
+      "seconds": 0.0633059,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Canonical-body-fixed-geographic-handedness-Release.log"
+    },
+    {
+      "name": "physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Release",
+      "exitCode": 0,
+      "seconds": 0.4818535,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Release.log"
+    },
+    {
+      "name": "physical-reference-Multiscale-physical-terrain-modifier-foundation-Release",
+      "exitCode": 0,
+      "seconds": 0.2683437,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Multiscale-physical-terrain-modifier-foundation-Release.log"
+    },
+    {
+      "name": "physical-reference-Single-canonical-physical-surface-authority-Release",
+      "exitCode": 0,
+      "seconds": 0.0716359,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Single-canonical-physical-surface-authority-Release.log"
+    },
+    {
+      "name": "physical-reference-Global-anchored-physical-frequency-continuity-Release",
+      "exitCode": 0,
+      "seconds": 0.0701589,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Global-anchored-physical-frequency-continuity-Release.log"
+    },
+    {
+      "name": "physical-reference-Local-terrain-format-and-GPU-compression-Release",
+      "exitCode": 0,
+      "seconds": 0.1893814,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Local-terrain-format-and-GPU-compression-Release.log"
+    },
+    {
+      "name": "physical-reference-Local-terrain-payload-2-authoring-contract-Release",
+      "exitCode": 0,
+      "seconds": 0.0906948,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-Local-terrain-payload-2-authoring-contract-Release.log"
+    },
+    {
+      "name": "physical-reference-M12-Florida-regional-physical-surface-Release",
+      "exitCode": 0,
+      "seconds": 0.48777,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\physical-reference-M12-Florida-regional-physical-surface-Release.log"
+    },
+    {
+      "name": "swept-clearance-Release",
+      "exitCode": 0,
+      "seconds": 8.3963444,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\swept-clearance-Release.log"
+    },
+    {
+      "name": "surface-numerics-Release",
+      "exitCode": 0,
+      "seconds": 0.0937675,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-numerics-Release.log"
+    },
+    {
+      "name": "surface-recontact-Release",
+      "exitCode": 0,
+      "seconds": 3.6429708,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-recontact-Release.log"
+    },
+    {
+      "name": "surface-refinement-Release",
+      "exitCode": 0,
+      "seconds": 5.1621338,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-refinement-Release.log"
+    },
+    {
+      "name": "surface-cases-Release",
+      "exitCode": 0,
+      "seconds": 34.5740434,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-cases-Release.log"
+    },
+    {
+      "name": "surface-cycles-Release",
+      "exitCode": 0,
+      "seconds": 4.5756437,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-cycles-Release.log"
+    },
+    {
+      "name": "surface-persistence-Release",
+      "exitCode": 0,
+      "seconds": 3.1036392,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-persistence-Release.log"
+    },
+    {
+      "name": "surface-terrain-Release",
+      "exitCode": 0,
+      "seconds": 4.7341276,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-terrain-Release.log"
+    },
+    {
+      "name": "surface-seams-Release",
+      "exitCode": 0,
+      "seconds": 12.6131542,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-seams-Release.log"
+    },
+    {
+      "name": "surface-plane-Release",
+      "exitCode": 0,
+      "seconds": 1.036367,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-plane-Release.log"
+    },
+    {
+      "name": "modular-connectors-Release",
+      "exitCode": 0,
+      "seconds": 2.6565069,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-connectors-Release.log"
+    },
+    {
+      "name": "modular-stabilization-Release",
+      "exitCode": 0,
+      "seconds": 49.0918578,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-stabilization-Release.log"
+    },
+    {
+      "name": "modular-viewport-Release",
+      "exitCode": 0,
+      "seconds": 0.077526,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-viewport-Release.log"
+    },
+    {
+      "name": "modular-editor-regressions-Release",
+      "exitCode": 0,
+      "seconds": 27.6108478,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-editor-regressions-Release.log"
+    },
+    {
+      "name": "modular-gate9-Release",
+      "exitCode": 0,
+      "seconds": 4.5634192,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate9-Release.log"
+    },
+    {
+      "name": "modular-gate10-dynamics-Release",
+      "exitCode": 0,
+      "seconds": 1.68275,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate10-dynamics-Release.log"
+    },
+    {
+      "name": "modular-gate10-flight-Release",
+      "exitCode": 0,
+      "seconds": 4.6298271,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate10-flight-Release.log"
+    },
+    {
+      "name": "modular-gate11-Release",
+      "exitCode": 0,
+      "seconds": 3.4827324,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate11-Release.log"
+    },
+    {
+      "name": "modular-gate12-application-Release",
+      "exitCode": 0,
+      "seconds": 6.1577351,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\modular-gate12-application-Release.log"
+    },
+    {
+      "name": "florida-pad-authority-Release",
+      "exitCode": 0,
+      "seconds": 1.2881132,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\florida-pad-authority-Release.log"
+    },
+    {
+      "name": "scalable-support-flight-Release",
+      "exitCode": 0,
+      "seconds": 55.1378964,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\scalable-support-flight-Release.log"
+    },
+    {
+      "name": "surface-performance-Release",
+      "exitCode": 0,
+      "seconds": 15.0064273,
+      "log": "E:\\NovaCore\\build\\post-contact-performance\\qualification\\surface-performance-Release.log"
+    }
+  ],
+  "newBoundaryChecks": {
+    "Debug": 63370,
+    "Release": 63370
+  },
+  "recorderChecksEachConfiguration": 22708,
+  "retentionChecksEachConfiguration": 198,
+  "equalSpan537": {
+    "oldSlices": 46298,
+    "newSlices": 3631,
+    "oldWorldRecreates": 4,
+    "newWorldRecreates": 1,
+    "samePhysicalFirstIntervals": 217,
+    "sameMassControlContactEpochIntervals": 537,
+    "positionDifferenceAfterHandoffMetres": 0.006530212,
+    "velocityDifferenceAfterHandoffMetresPerSecond": 0.002273169
+  },
+  "native": {
+    "launches": 1,
+    "pid": 42556,
+    "exitCode": 0,
+    "processWallSeconds": 27.2784954,
+    "frames": 604,
+    "flightObservations": 261,
+    "gpuSamples": 602,
+    "coverage": {
+      "judgment": "ROUTE_COMPLETE_PENDING_RECOVERY_AND_PERFORMANCE_REVIEW",
+      "error": null,
+      "TerrainSeen": true,
+      "GroundedRcs": true,
+      "Powered": true,
+      "source": "79234b824be311679ef21bc7a52497c4d0d238abbb89332089d218e106995c2e",
+      "vessel": "ConstructionVehicleIdentity { Vessel = SpacecraftId { Value = 1 }, Generation = 1 }"
+    },
+    "first": {
+      "Epoch": 18000000000,
+      "Sequence": 0,
+      "Consumer": 0,
+      "Position": {
+        "X": 80,
+        "Y": -8.413828381113708,
+        "Z": 0,
+        "LengthSquared": 6470.792508026834,
+        "IsFinite": true
+      },
+      "Velocity": {
+        "X": 0.1,
+        "Y": -0.1,
+        "Z": 0,
+        "LengthSquared": 0.020000000000000004,
+        "IsFinite": true
+      },
+      "Angular": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "Mass": 1304,
+      "Main": false,
+      "Jets": 0,
+      "Contacts": 0,
+      "World": 1,
+      "Frontier": 0,
+      "TerrainGeneration": 1,
+      "Tiles": 4,
+      "Triangles": 7936,
+      "TerrainContacts": 0,
+      "Pair": "",
+      "Feature0": -1,
+      "Feature1": -1,
+      "Feature2": -1,
+      "Feature3": -1,
+      "Depth": 0,
+      "Impulse": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "RawCapture": false
+    },
+    "handoff": {
+      "Epoch": 18003515625,
+      "Sequence": 225,
+      "Consumer": 0,
+      "Position": {
+        "X": 80.2018006002383,
+        "Y": -4.875030356775412,
+        "Z": 0.010437407639008259,
+        "LengthSquared": 6456.094849439345,
+        "IsFinite": true
+      },
+      "Velocity": {
+        "X": 0.35794706469527005,
+        "Y": 9.939534400296635,
+        "Z": 0.022825867784872098,
+        "LengthSquared": 98.92299121604427,
+        "IsFinite": true
+      },
+      "Angular": {
+        "X": -1.302997774560301e-05,
+        "Y": 7.544884188838029e-07,
+        "Z": 1.1459389724373536e-05,
+        "LengthSquared": 3.016671856802172e-10,
+        "IsFinite": true
+      },
+      "Mass": 1296.80517578125,
+      "Main": true,
+      "Jets": 0,
+      "Contacts": 0,
+      "World": 0,
+      "Frontier": 0,
+      "TerrainGeneration": 0,
+      "Tiles": 0,
+      "Triangles": 0,
+      "TerrainContacts": 0,
+      "Pair": "",
+      "Feature0": -1,
+      "Feature1": -1,
+      "Feature2": -1,
+      "Feature3": -1,
+      "Depth": 0,
+      "Impulse": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "RawCapture": false
+    },
+    "last": {
+      "Epoch": 18004515625,
+      "Sequence": 289,
+      "Consumer": 0,
+      "Position": {
+        "X": 80.80947660478202,
+        "Y": 12.039926642567307,
+        "Z": 0.04921651342954218,
+        "LengthSquared": 6675.133764962409,
+        "IsFinite": true
+      },
+      "Velocity": {
+        "X": 0.8577083944256059,
+        "Y": 23.921074806244206,
+        "Z": 0.054757947898501066,
+        "LengthSquared": 572.9564820086574,
+        "IsFinite": true
+      },
+      "Angular": {
+        "X": -1.3030034167440775e-05,
+        "Y": 7.533441793248078e-07,
+        "Z": 1.1459334112083825e-05,
+        "LengthSquared": 3.0166565614956457e-10,
+        "IsFinite": true
+      },
+      "Mass": 1286.80517578125,
+      "Main": true,
+      "Jets": 0,
+      "Contacts": 0,
+      "World": 0,
+      "Frontier": 0,
+      "TerrainGeneration": 0,
+      "Tiles": 0,
+      "Triangles": 0,
+      "TerrainContacts": 0,
+      "Pair": "",
+      "Feature0": -1,
+      "Feature1": -1,
+      "Feature2": -1,
+      "Feature3": -1,
+      "Depth": 0,
+      "Impulse": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "LengthSquared": 0,
+        "IsFinite": true
+      },
+      "RawCapture": false
+    },
+    "postHandoffIntervals": 64,
+    "joinMaximumErrorMs": 0.00011249999988649506,
+    "wholeFrameCadenceMs": {
+      "count": 261,
+      "median": 10.0004,
+      "p95": 74.4274,
+      "p99": 95.3884,
+      "maximum": 1053.8202,
+      "over6667": 261,
+      "longestOver6667": 261,
+      "headroomMedian": -3.333733333333334,
+      "headroomP95": -67.76073333333333,
+      "headroomP99": -88.72173333333333
+    },
+    "frameUpdateDrawMs": {
+      "count": 261,
+      "median": 9.9972,
+      "p95": 74.423,
+      "p99": 95.3838,
+      "maximum": 1052.9761,
+      "over6667": 261,
+      "longestOver6667": 261,
+      "headroomMedian": -3.3305333333333325,
+      "headroomP95": -67.75633333333333,
+      "headroomP99": -88.71713333333332
+    },
+    "presentReturnCadenceMs": {
+      "count": 261,
+      "median": 10.0105,
+      "p95": 74.4275,
+      "p99": 95.3838,
+      "maximum": 1052.9724,
+      "over6667": 261,
+      "longestOver6667": 261,
+      "headroomMedian": -3.3438333333333334,
+      "headroomP95": -67.76083333333332,
+      "headroomP99": -88.71713333333332
+    },
+    "restingCadenceMs": {
+      "count": 91,
+      "median": 10.5298,
+      "p95": 65.4596,
+      "p99": 69.3283,
+      "maximum": 69.3283,
+      "over6667": 91,
+      "longestOver6667": 81,
+      "headroomMedian": -3.863133333333333,
+      "headroomP95": -58.79293333333333,
+      "headroomP99": -62.661633333333334
+    },
+    "postHandoffNoNativeSlicesCadenceMs": {
+      "count": 98,
+      "median": 7.6249,
+      "p95": 9.3968,
+      "p99": 12.049,
+      "maximum": 12.049,
+      "over6667": 98,
+      "longestOver6667": 98,
+      "headroomMedian": -0.9582333333333333,
+      "headroomP95": -2.7301333333333337,
+      "headroomP99": -5.3823333333333325
+    },
+    "cpu": {
+      "frameMs": {
+        "count": 261,
+        "median": 9.9972,
+        "p95": 74.423,
+        "p99": 95.3838,
+        "maximum": 1052.9761,
+        "over6667": 261,
+        "longestOver6667": 261,
+        "headroomMedian": -3.3305333333333325,
+        "headroomP95": -67.75633333333333,
+        "headroomP99": -88.71713333333332
+      },
+      "followingCadenceMs": {
+        "count": 261,
+        "median": 10.0004,
+        "p95": 74.4274,
+        "p99": 95.3884,
+        "maximum": 1053.8202,
+        "over6667": 261,
+        "longestOver6667": 261,
+        "headroomMedian": -3.333733333333334,
+        "headroomP95": -67.76073333333333,
+        "headroomP99": -88.72173333333333
+      },
+      "updateMs": {
+        "count": 261,
+        "median": 9.7022,
+        "p95": 73.9861,
+        "p99": 94.9143,
+        "maximum": 1052.526,
+        "over6667": 258,
+        "longestOver6667": 237,
+        "headroomMedian": -3.0355333333333325,
+        "headroomP95": -67.31943333333332,
+        "headroomP99": -88.24763333333333
+      },
+      "fenceMs": {
+        "count": 261,
+        "median": 7.5388,
+        "p95": 10.0074,
+        "p99": 11.4509,
+        "maximum": 11.5729,
+        "over6667": 231,
+        "longestOver6667": 155,
+        "headroomMedian": -0.8721333333333332,
+        "headroomP95": -3.3407333333333336,
+        "headroomP99": -4.784233333333334
+      },
+      "inspectionMs": {
+        "count": 261,
+        "median": 0.0393,
+        "p95": 0.0671,
+        "p99": 0.1092,
+        "maximum": 0.2051,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.627366666666667,
+        "headroomP95": 6.599566666666667,
+        "headroomP99": 6.5574666666666666
+      },
+      "callbackMs": {
+        "count": 261,
+        "median": 1.4147,
+        "p95": 64.384,
+        "p99": 82.4846,
+        "maximum": 1032.8154,
+        "over6667": 37,
+        "longestOver6667": 33,
+        "headroomMedian": 5.251966666666667,
+        "headroomP95": -57.717333333333336,
+        "headroomP99": -75.81793333333333
+      },
+      "uploadMs": {
+        "count": 261,
+        "median": 0.0321,
+        "p95": 0.1026,
+        "p99": 0.1411,
+        "maximum": 18.4631,
+        "over6667": 2,
+        "longestOver6667": 1,
+        "headroomMedian": 6.634566666666667,
+        "headroomP95": 6.564066666666667,
+        "headroomP99": 6.525566666666667
+      },
+      "recordMs": {
+        "count": 261,
+        "median": 0.0488,
+        "p95": 0.0888,
+        "p99": 0.1011,
+        "maximum": 0.1057,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.617866666666667,
+        "headroomP95": 6.577866666666667,
+        "headroomP99": 6.565566666666667
+      },
+      "submitMs": {
+        "count": 261,
+        "median": 0.0196,
+        "p95": 0.0361,
+        "p99": 0.062,
+        "maximum": 1.4486,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.647066666666667,
+        "headroomP95": 6.630566666666667,
+        "headroomP99": 6.604666666666667
+      },
+      "presentMs": {
+        "count": 261,
+        "median": 0.1827,
+        "p95": 0.2473,
+        "p99": 0.2882,
+        "maximum": 0.4004,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.483966666666667,
+        "headroomP95": 6.419366666666667,
+        "headroomP99": 6.378466666666667
+      }
+    },
+    "gpu": {
+      "gpuTotal": {
+        "count": 261,
+        "median": 7.588240000000001,
+        "p95": 9.74473,
+        "p99": 11.50228,
+        "maximum": 11.6271,
+        "over6667": 240,
+        "longestOver6667": 234,
+        "headroomMedian": -0.9215733333333338,
+        "headroomP95": -3.0780633333333336,
+        "headroomP99": -4.835613333333334
+      },
+      "gpuUnused": {
+        "count": 261,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.666666666666667,
+        "headroomP95": 6.666666666666667,
+        "headroomP99": 6.666666666666667
+      },
+      "gpuDetailed": {
+        "count": 261,
+        "median": 5.09504,
+        "p95": 8.0722,
+        "p99": 8.095920000000001,
+        "maximum": 8.14488,
+        "over6667": 63,
+        "longestOver6667": 63,
+        "headroomMedian": 1.571626666666667,
+        "headroomP95": -1.4055333333333335,
+        "headroomP99": -1.4292533333333344
+      },
+      "gpuBackground": {
+        "count": 261,
+        "median": 0.6199600000000001,
+        "p95": 0.73721,
+        "p99": 0.7733300000000001,
+        "maximum": 0.7821,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.046706666666667,
+        "headroomP95": 5.929456666666667,
+        "headroomP99": 5.8933366666666664
+      },
+      "gpuPreSurface": {
+        "count": 261,
+        "median": 8e-05,
+        "p95": 0.00024000000000000003,
+        "p99": 0.00024000000000000003,
+        "maximum": 0.00028000000000000003,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.666586666666667,
+        "headroomP95": 6.666426666666667,
+        "headroomP99": 6.666426666666667
+      },
+      "gpuScene": {
+        "count": 261,
+        "median": 7.36136,
+        "p95": 9.66201,
+        "p99": 11.4494,
+        "maximum": 11.57426,
+        "over6667": 220,
+        "longestOver6667": 219,
+        "headroomMedian": -0.6946933333333334,
+        "headroomP95": -2.9953433333333335,
+        "headroomP99": -4.782733333333334
+      },
+      "gpuToneMap": {
+        "count": 261,
+        "median": 0.19289,
+        "p95": 0.35362000000000005,
+        "p99": 0.37383000000000005,
+        "maximum": 0.4146,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.473776666666667,
+        "headroomP95": 6.313046666666667,
+        "headroomP99": 6.292836666666667
+      },
+      "gpuCull": {
+        "count": 261,
+        "median": 0.7264,
+        "p95": 2.1500000000000004,
+        "p99": 4.640370000000001,
+        "maximum": 4.7062800000000005,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 5.940266666666667,
+        "headroomP95": 4.516666666666667,
+        "headroomP99": 2.026296666666666
+      },
+      "gpuMaterials": {
+        "count": 261,
+        "median": 6.1199200000000005,
+        "p95": 8.08604,
+        "p99": 8.22706,
+        "maximum": 8.310130000000001,
+        "over6667": 63,
+        "longestOver6667": 63,
+        "headroomMedian": 0.5467466666666665,
+        "headroomP95": -1.4193733333333336,
+        "headroomP99": -1.5603933333333329
+      },
+      "gpuCandidate": {
+        "count": 261,
+        "median": 5.09276,
+        "p95": 8.072040000000001,
+        "p99": 8.09576,
+        "maximum": 8.144720000000001,
+        "over6667": 63,
+        "longestOver6667": 63,
+        "headroomMedian": 1.5739066666666668,
+        "headroomP95": -1.4053733333333343,
+        "headroomP99": -1.4290933333333333
+      },
+      "gpuGlobal": {
+        "count": 261,
+        "median": 0.00012000000000000002,
+        "p95": 6.11964,
+        "p99": 6.14268,
+        "maximum": 6.163640000000001,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.666546666666667,
+        "headroomP95": 0.5470266666666666,
+        "headroomP99": 0.5239866666666666
+      }
+    },
+    "physicalServiceMs": {
+      "count": 260,
+      "median": 0.6875,
+      "p95": 64.0727,
+      "p99": 78.4158,
+      "maximum": 298.1853,
+      "over6667": 36,
+      "longestOver6667": 32,
+      "headroomMedian": 5.979166666666667,
+      "headroomP95": -57.40603333333333,
+      "headroomP99": -71.74913333333333
+    },
+    "work": {
+      "sums": {
+        "Intervals": 289,
+        "Slices": 3759,
+        "Creates": 1,
+        "Disposes": 2,
+        "Tiles": 4,
+        "Meshes": 1,
+        "ResourcesMs": 21.5834,
+        "ClearanceMs": 29.182099999999984,
+        "FreeFlightMs": 8.938100000000002,
+        "WorldMs": 289.6148,
+        "SlicePreparationMs": 10.3532,
+        "TerrainMs": 1609.2317999999996,
+        "SolverMs": 225.98880000000008,
+        "PublicationMs": 0.1877
+      },
+      "distributions": {
+        "ResourcesMs": {
+          "count": 260,
+          "median": 0.0472,
+          "p95": 0.2724,
+          "p99": 0.7389,
+          "maximum": 2.8676,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.619466666666667,
+          "headroomP95": 6.394266666666667,
+          "headroomP99": 5.927766666666667
+        },
+        "ClearanceMs": {
+          "count": 260,
+          "median": 0.0,
+          "p95": 0.8482,
+          "p99": 0.8816,
+          "maximum": 3.0721,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": 5.818466666666667,
+          "headroomP99": 5.785066666666667
+        },
+        "FreeFlightMs": {
+          "count": 260,
+          "median": 0.0,
+          "p95": 0.1249,
+          "p99": 0.4643,
+          "maximum": 2.2256,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": 6.541766666666667,
+          "headroomP99": 6.202366666666667
+        },
+        "WorldMs": {
+          "count": 260,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 289.6148,
+          "over6667": 1,
+          "longestOver6667": 1,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": 6.666666666666667,
+          "headroomP99": 6.666666666666667
+        },
+        "SlicePreparationMs": {
+          "count": 260,
+          "median": 0.0,
+          "p95": 0.2854,
+          "p99": 0.3659,
+          "maximum": 1.7315,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": 6.381266666666667,
+          "headroomP99": 6.300766666666667
+        },
+        "TerrainMs": {
+          "count": 260,
+          "median": 0.0,
+          "p95": 53.7846,
+          "p99": 69.1788,
+          "maximum": 69.6308,
+          "over6667": 33,
+          "longestOver6667": 31,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": -47.11793333333333,
+          "headroomP99": -62.51213333333333
+        },
+        "SolverMs": {
+          "count": 260,
+          "median": 0.0,
+          "p95": 7.2307,
+          "p99": 9.5228,
+          "maximum": 18.4487,
+          "over6667": 17,
+          "longestOver6667": 17,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": -0.5640333333333327,
+          "headroomP99": -2.856133333333333
+        },
+        "PublicationMs": {
+          "count": 260,
+          "median": 0.0002,
+          "p95": 0.0014,
+          "p99": 0.0028,
+          "maximum": 0.0546,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.6664666666666665,
+          "headroomP95": 6.665266666666667,
+          "headroomP99": 6.663866666666667
+        }
+      },
+      "debt": {
+        "admitted": 4521840,
+        "retired": 4515625,
+        "firstBefore": 0,
+        "lastAfter": 6215,
+        "maximumBefore": 312043,
+        "maximumBeforeService": 374543,
+        "maximumAfter": 312043,
+        "reconciliationErrors": 0,
+        "crossRowContinuityErrors": 0,
+        "maximumIntervalsPerCallback": 4
+      }
+    },
+    "restingWork": {
+      "sums": {
+        "Intervals": 101,
+        "Slices": 1616,
+        "Creates": 0,
+        "Disposes": 0,
+        "Tiles": 0,
+        "Meshes": 0,
+        "ResourcesMs": 6.2402999999999995,
+        "ClearanceMs": 0,
+        "FreeFlightMs": 0,
+        "WorldMs": 0,
+        "SlicePreparationMs": 2.6500999999999992,
+        "TerrainMs": 498.87639999999993,
+        "SolverMs": 59.67399999999997,
+        "PublicationMs": 0.033000000000000015
+      },
+      "distributions": {
+        "ResourcesMs": {
+          "count": 91,
+          "median": 0.0388,
+          "p95": 0.2278,
+          "p99": 1.3813,
+          "maximum": 1.3813,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.627866666666667,
+          "headroomP95": 6.438866666666667,
+          "headroomP99": 5.2853666666666665
+        },
+        "ClearanceMs": {
+          "count": 91,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": 6.666666666666667,
+          "headroomP99": 6.666666666666667
+        },
+        "FreeFlightMs": {
+          "count": 91,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": 6.666666666666667,
+          "headroomP99": 6.666666666666667
+        },
+        "WorldMs": {
+          "count": 91,
+          "median": 0.0,
+          "p95": 0.0,
+          "p99": 0.0,
+          "maximum": 0.0,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.666666666666667,
+          "headroomP95": 6.666666666666667,
+          "headroomP99": 6.666666666666667
+        },
+        "SlicePreparationMs": {
+          "count": 91,
+          "median": 0.0149,
+          "p95": 0.1857,
+          "p99": 0.2216,
+          "maximum": 0.2216,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.651766666666667,
+          "headroomP95": 6.480966666666667,
+          "headroomP99": 6.445066666666667
+        },
+        "TerrainMs": {
+          "count": 91,
+          "median": 1.9774,
+          "p95": 53.2447,
+          "p99": 53.4511,
+          "maximum": 53.4511,
+          "over6667": 11,
+          "longestOver6667": 11,
+          "headroomMedian": 4.689266666666667,
+          "headroomP95": -46.57803333333334,
+          "headroomP99": -46.78443333333333
+        },
+        "SolverMs": {
+          "count": 91,
+          "median": 0.4206,
+          "p95": 3.1148,
+          "p99": 3.9068,
+          "maximum": 3.9068,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.246066666666667,
+          "headroomP95": 3.551866666666667,
+          "headroomP99": 2.759866666666667
+        },
+        "PublicationMs": {
+          "count": 91,
+          "median": 0.0002,
+          "p95": 0.0017,
+          "p99": 0.0024,
+          "maximum": 0.0024,
+          "over6667": 0,
+          "longestOver6667": 0,
+          "headroomMedian": 6.6664666666666665,
+          "headroomP95": 6.664966666666667,
+          "headroomP99": 6.664266666666667
+        }
+      },
+      "debt": {
+        "admitted": 1429516,
+        "retired": 1578125,
+        "firstBefore": 275846,
+        "lastAfter": 1364,
+        "maximumBefore": 312043,
+        "maximumBeforeService": 374543,
+        "maximumAfter": 312043,
+        "reconciliationErrors": 0,
+        "crossRowContinuityErrors": 0,
+        "maximumIntervalsPerCallback": 4
+      }
+    },
+    "pureFreeFlightServiceMs": {
+      "count": 98,
+      "median": 0.2174,
+      "p95": 0.6875,
+      "p99": 3.0671,
+      "maximum": 3.0671,
+      "over6667": 0,
+      "longestOver6667": 0,
+      "headroomMedian": 6.449266666666667,
+      "headroomP95": 5.979166666666667,
+      "headroomP99": 3.599566666666667
+    },
+    "activeNoCreation": {
+      "callbacks": 125,
+      "terrainMs": 1603.3964999999996,
+      "serviceMs": 1910.1214000000004
+    },
+    "diagnostics": {
+      "recorderProducerUs": {
+        "median": 18.6,
+        "p95": 25.6,
+        "p99": 31.3,
+        "max": 42.7
+      },
+      "previousRecorderProducerUs": {
+        "median": 20.3,
+        "p95": 26.1,
+        "p99": 39.2,
+        "max": 93.4
+      },
+      "timedRecorderAllocations": 0,
+      "timedRecorderBytes": 0,
+      "recorderHeader": {
+        "Size": 64,
+        "Version": 1,
+        "Count": 261,
+        "Frequency": 10000000,
+        "RetainedBytes": 4479176,
+        "OwnedCalls": 1,
+        "OwnedBytes": 2377928,
+        "Overflow": 0
+      },
+      "observerMs": {
+        "count": 261,
+        "median": 0.0017,
+        "p95": 0.0135,
+        "p99": 0.0974,
+        "maximum": 1.1009,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.664966666666667,
+        "headroomP95": 6.653166666666667,
+        "headroomP99": 6.569266666666667
+      },
+      "instrumentationMs": {
+        "count": 260,
+        "median": 0.0004000000000000001,
+        "p95": 0.0020999999999986585,
+        "p99": 0.0030999999999998806,
+        "maximum": 0.1454999999999984,
+        "over6667": 0,
+        "longestOver6667": 0,
+        "headroomMedian": 6.666266666666667,
+        "headroomP95": 6.664566666666668,
+        "headroomP99": 6.663566666666667
+      },
+      "instrumentationAllocatedBytes": 64480,
+      "observerAllocatedBytes": 21992,
+      "nativeTimingArrayBytes": 3538944
+    },
+    "serviceAllocatedBytes": {
+      "count": 260,
+      "median": 59248.0,
+      "p95": 236992.0,
+      "p99": 405792.0,
+      "maximum": 5546480.0
+    },
+    "processMaxima": {
+      "cpuMs": 9140.625,
+      "workingSet": 3380080640,
+      "peakWorkingSet": 3399782400,
+      "privateBytes": 3658862592
+    }
+  },
+  "preservation": {
+    "headUnchanged": true,
+    "userRefsUnchanged": true,
+    "protectedCount": 80,
+    "protectedFailures": [],
+    "ksaSha256": "ce43d022e7dac9beb2352b6106164bc1f521dda1ae9d0b898b8dba0c59a69723",
+    "frozenComparison": {
+      "head": true,
+      "sourceSha256": true,
+      "packageSha256": true,
+      "ksaSha256": true
+    }
+  },
+  "changedEntryPaths": [
+    "docs/CODEX_HANDOFF.md",
+    "docs/NOVACORE_CURRENT_STATE.md",
+    "docs/engineering-evidence/README.md",
+    "native/NovaCore.Native/CMakeLists.txt",
+    "native/NovaCore.Native/NovaCoreNative.cpp",
+    "samples/NovaCore.Triangle/ConstructionFlightScene.cs",
+    "samples/NovaCore.Triangle/SurfaceRetryObservation.cs",
+    "src/NovaCore.Core/Surface/IPhysicalSurfaceCollisionSource.cs",
+    "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.Collision.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftClearance.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainColliders.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainGeometry.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Craft.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs",
+    "tests/NovaCore.Graphics.Tests/Program.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.SurfaceQualification.cs"
+  ],
+  "rawEvidence": {
+    "baseline.json": {
+      "bytes": 1071272,
+      "sha256": "912144f30cce204c34bcfc7091209004aed0f38db1c6203b61d24a2919e15053"
+    },
+    "equal-span-replay-Release.json": {
+      "bytes": 1063423,
+      "sha256": "faa7b8ad51ff254368dd9150eee596280acec0d45f04852c4004bd9684756cb4"
+    },
+    "journal-inspection.json": {
+      "bytes": 296,
+      "sha256": "457a4faaea2d798a73f29b805582b9937c5de8b392f169d292dd0b052be6ab0e"
+    },
+    "native-launch.json": {
+      "bytes": 264,
+      "sha256": "f9c08021585a97249dbd097cf9701e40f7293c09fe1dcd88f94d67464c61b33c"
+    },
+    "native-timing.csv": {
+      "bytes": 221064,
+      "sha256": "2a4229d44493d577d42ebfc43297ce44df04f597ccc54f6da5bfbe05a78acd8c"
+    },
+    "native.json": {
+      "bytes": 578369,
+      "sha256": "d6a1de4ec708c1b590a1a7599e8eff8c64df762ffcba365d6b2bbe965a7c0ed8"
+    },
+    "native.json.input.ncflight.json": {
+      "bytes": 13505,
+      "sha256": "8502d85afb64021f5666770525da605e1920848d3af54f6e629a84dd40ee7414"
+    },
+    "os-after.json": {
+      "bytes": 224,
+      "sha256": "4c29b154afa84b1635667a05e4317c9a44dc98ecd00a2ad12d86e39c4429884d"
+    },
+    "player-segment-0.log": {
+      "bytes": 132211,
+      "sha256": "9a68e311dafdbefef48ec3e705d7e806019a52861ce962b2a3a058b75337dede"
+    },
+    "process.json": {
+      "bytes": 9112,
+      "sha256": "2126911c6c38b635215a640586d2de01747a2819155b1af506a86b082839e459"
+    },
+    "source-freeze.json": {
+      "bytes": 126619,
+      "sha256": "369e27e86e4e2388f24d7d9dc791120075199355bca5e77b4501e7225f771d10"
+    }
+  },
+  "remainingCpuOwner": "CraftTerrainColliders.Ensure -> CraftTerrainFootprint.Compute repeated per native slice; four-interval synchronous debt magnifies cost. Reuse proof must preserve complete current query coverage.",
+  "additionalWholeFrameLimit": "Existing GPU workload independently exceeds150FPS; a contact-only fix cannot establish whole-framePASS.",
+  "outliers": [
+    {
+      "class": "ONE-TIME PRODUCTION TRANSITION",
+      "frame": 343,
+      "milliseconds": 1052.9761,
+      "reason": "Normal saved-flight restoration/admission, invoked once by qualification. Work=null; not a zero-cost physical service sample."
+    },
+    {
+      "class": "ONE-TIME PRODUCTION TRANSITION",
+      "frame": 503,
+      "milliseconds": 307.8994,
+      "reason": "One observed refinement import: world289.6148ms,4tiles,1mesh. This mechanism may repeat in other episodes."
+    },
+    {
+      "class": "UNRESOLVED",
+      "reason": "Repeated active-contact CPU timing warmup-versus-steady-state attribution is unproven. Production work is identified; no repeated tail is excluded."
+    },
+    {
+      "class": "PRODUCTION STEADY-STATE",
+      "reason": "Recurring GPU work and fence exposure continue in held-ground and post-handoff phases; no external driver fault demonstrated."
+    },
+    {
+      "class": "DIAGNOSTIC / QUALIFICATION ONLY",
+      "reason": "Measured bounded read observers and timing array; included in whole-frame observations, no subtraction."
+    }
+  ],
+  "limits": [
+    "No external OS/driver exclusion was made. System warning/error query returned no events.",
+    "Window enumeration observed storage notice and SurfaceContact title; normal process exit. No screenshot/physical dual-display or scanout certification.",
+    "First native service observation is unmeasured. Physical groups use post-service endpoints, so handoff callback contains prior contact work.",
+    "No contact material, resource, rendering quality, recorder architecture, or64Hz cadence change.",
+    "No additional native exposure or production change authorized by this report."
+  ],
+  "recorderJudgment": "PASS"
+}

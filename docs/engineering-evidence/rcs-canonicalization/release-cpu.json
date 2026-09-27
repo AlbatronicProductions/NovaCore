@@ -1,0 +1,212 @@
+{
+  "judgment": "PASS",
+  "checks": 1685,
+  "scope": "CPU scalable compilation/services/physical wrench;8 stock jets correctly refuse missing-axis authority;96 uses explicitly distinct qualification half-capacity tank;288 compile/services only",
+  "rows": [
+    {
+      "jets": 8,
+      "coldMs": {
+        "median": 8.4499,
+        "p95": 12.6535,
+        "p99": 12.6535,
+        "maximum": 12.6535
+      },
+      "coldAllocatedBytes": {
+        "median": 1714608,
+        "p95": 1714832,
+        "p99": 1714832,
+        "maximum": 1714832
+      },
+      "serviceMs": {
+        "median": 0.0252,
+        "p95": 0.0256,
+        "p99": 0.0312,
+        "maximum": 0.5273
+      },
+      "serviceAllocatedBytes": {
+        "median": 20920,
+        "p95": 20920,
+        "p99": 20920,
+        "maximum": 20920
+      },
+      "observerMs": null,
+      "retainedHeapBytesPerGraph": [
+        60496,
+        60496,
+        60496
+      ],
+      "selectionPayloadBytes": 16,
+      "exactSharingMagnitudeBytes": 2448,
+      "preparedConsumerRowPayloadBytes": 0,
+      "scope": "normal GC CPU timing;8 measures exact fuel plus wrench, others physical service; separate forced-GC retained graph deltas; no GPU timing; cold report-only"
+    },
+    {
+      "jets": 32,
+      "coldMs": {
+        "median": 19.8133,
+        "p95": 25.7747,
+        "p99": 25.7747,
+        "maximum": 25.7747
+      },
+      "coldAllocatedBytes": {
+        "median": 2759936,
+        "p95": 2760160,
+        "p99": 2760160,
+        "maximum": 2760160
+      },
+      "serviceMs": {
+        "median": 0.0661,
+        "p95": 0.0689,
+        "p99": 0.0744,
+        "maximum": 0.6653
+      },
+      "serviceAllocatedBytes": {
+        "median": 55904,
+        "p95": 55904,
+        "p99": 55904,
+        "maximum": 55904
+      },
+      "observerMs": {
+        "median": 0.002740625,
+        "p95": 0.002846875,
+        "p99": 0.00287109375,
+        "maximum": 0.00287109375
+      },
+      "retainedHeapBytesPerGraph": [
+        144408,
+        144408,
+        144416
+      ],
+      "selectionPayloadBytes": 160,
+      "exactSharingMagnitudeBytes": 8976,
+      "preparedConsumerRowPayloadBytes": 1782,
+      "scope": "normal GC CPU timing;8 measures exact fuel plus wrench, others physical service; separate forced-GC retained graph deltas; no GPU timing; cold report-only"
+    },
+    {
+      "jets": 64,
+      "coldMs": {
+        "median": 28.624,
+        "p95": 30.7286,
+        "p99": 30.7286,
+        "maximum": 30.7286
+      },
+      "coldAllocatedBytes": {
+        "median": 4584080,
+        "p95": 4591896,
+        "p99": 4591896,
+        "maximum": 4591896
+      },
+      "serviceMs": {
+        "median": 0.1779,
+        "p95": 0.2146,
+        "p99": 0.3279,
+        "maximum": 9.087
+      },
+      "serviceAllocatedBytes": {
+        "median": 115056,
+        "p95": 115056,
+        "p99": 115056,
+        "maximum": 115056
+      },
+      "observerMs": {
+        "median": 0.00596953125,
+        "p95": 0.00670703125,
+        "p99": 0.0069078125,
+        "maximum": 0.0069078125
+      },
+      "retainedHeapBytesPerGraph": [
+        261712,
+        261712,
+        261712
+      ],
+      "selectionPayloadBytes": 384,
+      "exactSharingMagnitudeBytes": 17680,
+      "preparedConsumerRowPayloadBytes": 3510,
+      "scope": "normal GC CPU timing;8 measures exact fuel plus wrench, others physical service; separate forced-GC retained graph deltas; no GPU timing; cold report-only"
+    },
+    {
+      "jets": 96,
+      "coldMs": {
+        "median": 30.5891,
+        "p95": 44.022,
+        "p99": 44.022,
+        "maximum": 44.022
+      },
+      "coldAllocatedBytes": {
+        "median": 6735112,
+        "p95": 6741520,
+        "p99": 6741520,
+        "maximum": 6741520
+      },
+      "serviceMs": {
+        "median": 0.2312,
+        "p95": 0.299,
+        "p99": 0.5759,
+        "maximum": 9.3422
+      },
+      "serviceAllocatedBytes": {
+        "median": 166720,
+        "p95": 166720,
+        "p99": 166720,
+        "maximum": 166720
+      },
+      "observerMs": {
+        "median": 0.00726484375,
+        "p95": 0.01030078125,
+        "p99": 0.0462,
+        "maximum": 0.0462
+      },
+      "retainedHeapBytesPerGraph": [
+        378960,
+        378960,
+        378960
+      ],
+      "selectionPayloadBytes": 544,
+      "exactSharingMagnitudeBytes": 26384,
+      "preparedConsumerRowPayloadBytes": 5238,
+      "scope": "normal GC CPU timing;8 measures exact fuel plus wrench, others physical service; separate forced-GC retained graph deltas; no GPU timing; cold report-only"
+    },
+    {
+      "jets": 288,
+      "coldMs": {
+        "median": 56.3037,
+        "p95": 75.233,
+        "p99": 75.233,
+        "maximum": 75.233
+      },
+      "coldAllocatedBytes": {
+        "median": 24884784,
+        "p95": 24928544,
+        "p99": 24928544,
+        "maximum": 24928544
+      },
+      "serviceMs": {
+        "median": 0.4413,
+        "p95": 0.5848,
+        "p99": 0.7828,
+        "maximum": 17.3914
+      },
+      "serviceAllocatedBytes": {
+        "median": 506696,
+        "p95": 506696,
+        "p99": 506696,
+        "maximum": 506696
+      },
+      "observerMs": {
+        "median": 0.00263359375,
+        "p95": 0.00286015625,
+        "p99": 0.00350859375,
+        "maximum": 0.00350859375
+      },
+      "retainedHeapBytesPerGraph": [
+        1087216,
+        1087216,
+        1087216
+      ],
+      "selectionPayloadBytes": 1696,
+      "exactSharingMagnitudeBytes": 80342,
+      "preparedConsumerRowPayloadBytes": 15606,
+      "scope": "normal GC CPU timing;8 measures exact fuel plus wrench, others physical service; separate forced-GC retained graph deltas; no GPU timing; cold report-only"
+    }
+  ]
+}

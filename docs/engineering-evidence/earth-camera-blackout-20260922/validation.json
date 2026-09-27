@@ -1,0 +1,133 @@
+{
+  "schema": "novacore.earth-camera-blackout/1",
+  "recordedUtc": "2026-09-22T15:33:38.3888218Z",
+  "incidentCause": "unresolved",
+  "crashPreventionProven": false,
+  "manualPlayerPass": false,
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "implementation": [
+    {
+      "path": "native/NovaCore.Native/CMakeLists.txt",
+      "sha256": "7A0284495A833E200E045712EBF653516D0F08AED649427212FEB80ACB7D0B0B",
+      "bytes": 27454
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "3911AF958606375C9E3861B900FECC1C7AF3FBAF42E9BF09CBA6195DD3C2E8BA",
+      "bytes": 312836
+    },
+    {
+      "path": "native/NovaCore.Native/PresentationResult.h",
+      "sha256": "C0329C30FE8BA494DA807A1C6EEBFA24A6A71C55574A0A8FE7DEB1926AF4D77B",
+      "bytes": 569
+    },
+    {
+      "path": "native/NovaCore.Native/PresentationResultTests.cpp",
+      "sha256": "AD6E1BCC09B150D04328BFBE56262F9E30E98F358E60283C4C0ECB5EA8A55F82",
+      "bytes": 1091
+    },
+    {
+      "path": "tools/NovaCore.App/Program.cs",
+      "sha256": "CD9B42CEE9DED4EA0EF33FD00E309C509C7B533BF41F8930F0E2EDB22E7B49DC",
+      "bytes": 1744
+    },
+    {
+      "path": "tools/NovaCore.App/SessionLog.cs",
+      "sha256": "E24E71C09FE732D5EB13B987E1B6D8B8AE654A12A6CAB40BBE24F104ADE619CF",
+      "bytes": 5671
+    },
+    {
+      "path": "tests/NovaCore.App.Diagnostics.Tests/NovaCore.App.Diagnostics.Tests.csproj",
+      "sha256": "04944DBA55F170BDE0B3B79997605756EAD431C84E93982792A4309C1CD50CE7",
+      "bytes": 214
+    },
+    {
+      "path": "tests/NovaCore.App.Diagnostics.Tests/Program.cs",
+      "sha256": "A4CFC1CC3969F817FD51F8C931C6774A8AC29D0304B40DE8C5B331471669E856",
+      "bytes": 3841
+    }
+  ],
+  "builds": [
+    {
+      "configuration": "debug",
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\managed\\bin\\NovaCore.App\\debug",
+      "files": 126,
+      "identitySha256": "70D276542974278B676EE99411A52E6378919259DF59D83B1FF0370E129E22FA",
+      "nativeMatches": true,
+      "nativePresentationTests": 18,
+      "diagnosticChecks": 113,
+      "gpuExecution": false
+    },
+    {
+      "configuration": "release",
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\managed\\bin\\NovaCore.App\\release",
+      "files": 126,
+      "identitySha256": "13C4B96C7811549BD0DCC3485770D96D81BDCE64F3AAB225F70DCAF5B6442BDF",
+      "nativeMatches": true,
+      "nativePresentationTests": 18,
+      "diagnosticChecks": 113,
+      "gpuExecution": false
+    }
+  ],
+  "logs": [
+    {
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\app-debug-build.log",
+      "sha256": "89BBF96B567C8C16CF517F2AA64942B07BD2FFACB9FF8C8EDF6DED8DC0CBCD6F",
+      "bytes": 1497
+    },
+    {
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\app-release-build.log",
+      "sha256": "172B46AD4862EA265C56504EB6118C7C8EE1B10F06B44EC3A4E8E8CA1AA45D07",
+      "bytes": 1517
+    },
+    {
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\log-tests-debug.txt",
+      "sha256": "ECD1F166F5BD29046F0AECE24FCA6E4FA08391897368BD6C61986742C66D6DB4",
+      "bytes": 54
+    },
+    {
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\log-tests-release.txt",
+      "sha256": "ECD1F166F5BD29046F0AECE24FCA6E4FA08391897368BD6C61986742C66D6DB4",
+      "bytes": 54
+    },
+    {
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\native-debug-build.log",
+      "sha256": "8277300B4BEF176362058A8056891296EA08446F1D6A04F674E9E26C6116485F",
+      "bytes": 4612
+    },
+    {
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\native-release-build.log",
+      "sha256": "93C1D57031EB007E1F272566F41A54D8EE447BBC5CAA6BFB5FCD066F8AE4C827",
+      "bytes": 4614
+    },
+    {
+      "path": "E:\\NovaCore\\build\\earth-camera-blackout-20260922\\windows-evidence.json",
+      "sha256": "200E01AB7490D121C8FE8D890E0E50FB3509712EE9C757D2248D4393DCFB1695",
+      "bytes": 65664
+    }
+  ],
+  "preservation": {
+    "checkedAt": "2026-09-22T11:30:52.9353043-04:00",
+    "entryFiles": 3501,
+    "entryChanges": [
+      {
+        "path": "native/NovaCore.Native/CMakeLists.txt",
+        "kind": "changed"
+      },
+      {
+        "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+        "kind": "changed"
+      },
+      {
+        "path": "tools/NovaCore.App/Program.cs",
+        "kind": "changed"
+      }
+    ],
+    "oldManualBuildFiles": 126,
+    "oldManualBuildChanges": [],
+    "headUnchanged": true,
+    "indexUnchanged": true,
+    "refsUnchanged": true,
+    "worktreesUnchanged": true
+  }
+}

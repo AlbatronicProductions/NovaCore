@@ -1,0 +1,91 @@
+{
+  "scope": "Stage 2 topology; service network solver not included",
+  "Digest": "6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564",
+  "DesignBytes": 8153,
+  "Results": [
+    {
+      "Name": "graph-compile-window-0",
+      "Samples": 128,
+      "MedianUs": 2135.2,
+      "P95Us": 3978.8,
+      "P99Us": 4676.2,
+      "MaxUs": 4708.2,
+      "AllocatedBytes": 68599808,
+      "BytesPerOperation": 535936,
+      "Gen0": 4,
+      "Gen1": 1,
+      "Gen2": 0,
+      "LongestP95Run": 4
+    },
+    {
+      "Name": "graph-compile-window-1",
+      "Samples": 128,
+      "MedianUs": 2996.8,
+      "P95Us": 3299.4,
+      "P99Us": 3390.6,
+      "MaxUs": 3482.3,
+      "AllocatedBytes": 68599808,
+      "BytesPerOperation": 535936,
+      "Gen0": 4,
+      "Gen1": 0,
+      "Gen2": 0,
+      "LongestP95Run": 4
+    },
+    {
+      "Name": "graph-compile-window-2",
+      "Samples": 128,
+      "MedianUs": 1746.8,
+      "P95Us": 1928.6,
+      "P99Us": 2058.1,
+      "MaxUs": 2071.5,
+      "AllocatedBytes": 68572160,
+      "BytesPerOperation": 535720,
+      "Gen0": 4,
+      "Gen1": 0,
+      "Gen2": 0,
+      "LongestP95Run": 4
+    },
+    {
+      "Name": "design-serialize",
+      "Samples": 128,
+      "MedianUs": 13.5,
+      "P95Us": 14.6,
+      "P99Us": 21.3,
+      "MaxUs": 21.5,
+      "AllocatedBytes": 1342464,
+      "BytesPerOperation": 10488,
+      "Gen0": 0,
+      "Gen1": 0,
+      "Gen2": 0,
+      "LongestP95Run": 3
+    },
+    {
+      "Name": "design-load",
+      "Samples": 128,
+      "MedianUs": 1227.7,
+      "P95Us": 1349.9,
+      "P99Us": 1413.6,
+      "MaxUs": 1486.8,
+      "AllocatedBytes": 79073280,
+      "BytesPerOperation": 617760,
+      "Gen0": 4,
+      "Gen1": 0,
+      "Gen2": 0,
+      "LongestP95Run": 1
+    },
+    {
+      "Name": "logical-partition-membership",
+      "Samples": 128,
+      "MedianUs": 1,
+      "P95Us": 1.1,
+      "P99Us": 1.3,
+      "MaxUs": 1.7,
+      "AllocatedBytes": 43008,
+      "BytesPerOperation": 336,
+      "Gen0": 0,
+      "Gen1": 0,
+      "Gen2": 0,
+      "LongestP95Run": 1
+    }
+  ]
+}

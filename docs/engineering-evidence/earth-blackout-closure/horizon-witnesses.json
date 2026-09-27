@@ -1,0 +1,612 @@
+{
+  "sourceRun": "E:\\NovaCore\\build\\earth-blackout-closure\\horizon-final-release",
+  "gpuExecution": false,
+  "witnesses": [
+    {
+      "cameraAndGeneration": {
+        "ctx": {
+          "Name": "pinned/L14/alt10.001/pitch-1E-07/azimuth0",
+          "Camera": {
+            "X": 2494046.389623493,
+            "Y": 5845295.425018311,
+            "Z": -449593.7759661507,
+            "LengthSquared": 40589880562721.47,
+            "IsFinite": true
+          },
+          "Forward": {
+            "X": -3.9146744512663645e-08,
+            "Y": -0.07668907195329666,
+            "Z": -0.9970550537109375,
+            "LengthSquared": 0.9999999938875799,
+            "IsFinite": true
+          },
+          "Orientation": {
+            "X": 0.597659077900499,
+            "Y": -0.3232013151718068,
+            "Z": -0.5738115363573315,
+            "W": 0.45725797665823015,
+            "IsFinite": true,
+            "LengthSquared": 1
+          },
+          "BodyRotation": {
+            "X": 0.54225785,
+            "Y": -0.45382422,
+            "Z": -0.45382422,
+            "W": 0.54225785
+          },
+          "Matrix": {
+            "C0R0": 0.09611369,
+            "C0R1": -0.23977022,
+            "C0R2": 0,
+            "C0R3": 0.9814601,
+            "C1R0": -0.66057956,
+            "C1R1": 0.6459027,
+            "C1R2": 0,
+            "C1R3": 0.17565547,
+            "C2R0": -0.28299546,
+            "C2R1": -1.5891254,
+            "C2R2": 0,
+            "C2R3": -0.07668907,
+            "C3R0": 0,
+            "C3R1": 0,
+            "C3R2": 0.20002005,
+            "C3R3": 0
+          },
+          "Planes": [
+            {
+              "X": 1.0775738,
+              "Y": -0.48492408,
+              "Z": -0.35968453,
+              "W": 0
+            },
+            {
+              "X": 0.8853464,
+              "Y": 0.83623505,
+              "Z": 0.2063064,
+              "W": 0
+            },
+            {
+              "X": 0.74168986,
+              "Y": 0.8215582,
+              "Z": -1.6658145,
+              "W": 0
+            },
+            {
+              "X": 1.2212303,
+              "Y": -0.4702472,
+              "Z": 1.5124363,
+              "W": 0
+            },
+            {
+              "X": 0,
+              "Y": 0,
+              "Z": 0,
+              "W": 0.20002005
+            },
+            {
+              "X": 0.9814601,
+              "Y": 0.17565547,
+              "Z": -0.07668907,
+              "W": -0.20002005
+            }
+          ],
+          "HalfAngle": 0.9813108,
+          "Height": 1440,
+          "TanY": 0.57735026,
+          "Altitude": 10.001002311706543
+        },
+        "level": 14,
+        "TopologyHash": 9915199639463303857,
+        "pupil": {
+          "PivotDirection": {
+            "X": 0.3914674351965733,
+            "Y": 0.9174820554762033,
+            "Z": -0.07056858408511331,
+            "LengthSquared": 1,
+            "IsFinite": true
+          },
+          "Tangent": {
+            "East": {
+              "X": 0,
+              "Y": 0.07668898120047421,
+              "Z": 0.9970550637564775,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "North": {
+              "X": 0.9201919621364972,
+              "Y": -0.3903145885585041,
+              "Z": 0.030021238778387863,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "Up": {
+              "X": 0.3914674351965733,
+              "Y": 0.9174820554762033,
+              "Z": -0.07056858408511331,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "IsValid": true
+          },
+          "LatticeFrame": {
+            "East": {
+              "X": 0,
+              "Y": 0.07668898120047421,
+              "Z": 0.9970550637564775,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "North": {
+              "X": 0.9201919621364972,
+              "Y": -0.3903145885585041,
+              "Z": 0.030021238778387863,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "Up": {
+              "X": 0.3914674351965733,
+              "Y": 0.9174820554762033,
+              "Z": -0.07056858408511331,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "IsValid": true
+          },
+          "SnapEastCells": 0,
+          "SnapNorthCells": 0,
+          "LatticeEastOffset": 0,
+          "LatticeNorthOffset": 0,
+          "Generation": 1,
+          "Rebased": false,
+          "IsValid": true
+        },
+        "triangles": 1195184,
+        "bad": 0,
+        "rejected": 0,
+        "legacyDraw": 1,
+        "old": 0,
+        "nearPlane": 397,
+        "max": 64,
+        "selectionRole": "settled or retained generation during adjacent transition; not all camera/LOD pairs selected initially"
+      },
+      "triangleWitness": {
+        "Name": "pinned/L14/alt10.001/pitch-1E-07/azimuth0",
+        "level": 14,
+        "TopologyHash": 9915199639463303857,
+        "triangle": 1105326,
+        "indices": [
+          553145,
+          552890,
+          552891
+        ],
+        "physical": [
+          {
+            "X": 2494012.6560336635,
+            "Y": 5845297.654646019,
+            "Z": -449610.19762800867,
+            "LengthSquared": 40589753129677.44,
+            "IsFinite": true
+          },
+          {
+            "X": 2493997.746754935,
+            "Y": 5845303.97855073,
+            "Z": -449610.68403425335,
+            "LengthSquared": 40589753129677.44,
+            "IsFinite": true
+          },
+          {
+            "X": 2493997.7467629993,
+            "Y": 5845305.221108528,
+            "Z": -449594.5294372548,
+            "LengthSquared": 40589753129677.44,
+            "IsFinite": true
+          }
+        ],
+        "rootRelative": [
+          {
+            "X": 10.221817,
+            "Y": 36.099037,
+            "Z": 2.2296276
+          },
+          {
+            "X": 8.07399,
+            "Y": 50.86081,
+            "Z": 8.553534
+          },
+          {
+            "X": -7.8279343,
+            "Y": 48.01478,
+            "Z": 9.796091
+          }
+        ],
+        "clip": [
+          {
+            "X": -23.494804,
+            "Y": 17.32242,
+            "Z": 0.20002005,
+            "W": 16.20231
+          },
+          {
+            "X": -35.242203,
+            "Y": 17.322598,
+            "Z": 0.20002005,
+            "W": 16.202316
+          },
+          {
+            "X": -35.242203,
+            "Y": 17.322565,
+            "Z": 0.20002005,
+            "W": 0
+          }
+        ],
+        "edges": [
+          {
+            "WA": 16.20231,
+            "WB": 16.202316,
+            "MidW": 16.202312,
+            "Distance": 44.75776,
+            "Length": 16.20231,
+            "Pixels": 1147.9032,
+            "Alignment": 0.90500194,
+            "Compensation": 1058.1796,
+            "Fade": 0.10484481,
+            "Raw": 40.11723,
+            "Factor": 40.11723,
+            "Corrected": 40.11723
+          },
+          {
+            "WA": 16.202316,
+            "WB": 0,
+            "MidW": 8.101158,
+            "Distance": 50.28208,
+            "Length": 16.202314,
+            "Pixels": "Infinity",
+            "Alignment": 0.1611144,
+            "Compensation": 0,
+            "Fade": 0,
+            "Raw": "NaN",
+            "Factor": "NaN",
+            "Corrected": 1
+          },
+          {
+            "WA": 0,
+            "WB": 16.20231,
+            "MidW": 8.101155,
+            "Distance": 42.50142,
+            "Length": 22.913527,
+            "Pixels": "Infinity",
+            "Alignment": 0.5391249,
+            "Compensation": 0,
+            "Fade": 0.1499716,
+            "Raw": "Infinity",
+            "Factor": 64,
+            "Corrected": 64
+          }
+        ],
+        "finite": true,
+        "legacyFinite": false,
+        "cpuReferenceFinite": true,
+        "cpuReferenceFactors": [
+          40.11725059793325,
+          1,
+          64
+        ],
+        "pathological": true,
+        "cpuCulling": "none-per-triangle; selected generation admitted",
+        "preparationIncluded": true,
+        "gpuComputeSubmissionIncluded": true,
+        "gpuCullDisposition": "indirect-draw-included",
+        "margin": 0,
+        "indirectDrawIncluded": true,
+        "canonicalNormalsChecked": true,
+        "preCorrectionClassification": "3-production-reachable-invalid-in-source-model",
+        "postCorrectionClassification": "2-valid-after-production-transformation",
+        "limitation": "source-level CPU execution, not a captured GPU physical buffer or GPU execution"
+      }
+    },
+    {
+      "cameraAndGeneration": {
+        "ctx": {
+          "Name": "equator-Z/L13/alt10.001/pitch0/azimuth0",
+          "Camera": {
+            "X": -1.4388933777809143e-06,
+            "Y": 0,
+            "Z": 6371018.800999135,
+            "LengthSquared": 40589880562684.45,
+            "IsFinite": true
+          },
+          "Forward": {
+            "X": 0,
+            "Y": 1,
+            "Z": 0,
+            "LengthSquared": 1,
+            "IsFinite": true
+          },
+          "Orientation": {
+            "X": 0.7668683914573213,
+            "Y": -0.6418043862296834,
+            "Z": 0,
+            "W": 0,
+            "IsFinite": true,
+            "LengthSquared": 1
+          },
+          "BodyRotation": {
+            "X": 0.54225785,
+            "Y": -0.45382422,
+            "Z": -0.45382422,
+            "W": 0.54225785
+          },
+          "Matrix": {
+            "C0R0": 0.12773418,
+            "C0R1": 1.7049598,
+            "C0R2": 0,
+            "C0R3": 0,
+            "C1R0": -0.7137041,
+            "C1R1": 0.30514276,
+            "C1R2": 0,
+            "C1R3": 0,
+            "C2R0": 0,
+            "C2R1": 0,
+            "C2R2": 0,
+            "C2R3": 1,
+            "C3R0": 0,
+            "C3R1": 0,
+            "C3R2": 0.20001999,
+            "C3R3": 0
+          },
+          "Planes": [
+            {
+              "X": 0.12773418,
+              "Y": -0.7137041,
+              "Z": 1,
+              "W": 0
+            },
+            {
+              "X": -0.12773418,
+              "Y": 0.7137041,
+              "Z": 1,
+              "W": 0
+            },
+            {
+              "X": 1.7049598,
+              "Y": 0.30514276,
+              "Z": 1,
+              "W": 0
+            },
+            {
+              "X": -1.7049598,
+              "Y": -0.30514276,
+              "Z": 1,
+              "W": 0
+            },
+            {
+              "X": 0,
+              "Y": 0,
+              "Z": 0,
+              "W": 0.20001999
+            },
+            {
+              "X": 0,
+              "Y": 0,
+              "Z": 1,
+              "W": -0.20001999
+            }
+          ],
+          "HalfAngle": 0.9813108,
+          "Height": 1440,
+          "TanY": 0.57735026,
+          "Altitude": 10.000999450683594
+        },
+        "level": 13,
+        "TopologyHash": 8282564765596214112,
+        "pupil": {
+          "PivotDirection": {
+            "X": 0,
+            "Y": 0,
+            "Z": 1,
+            "LengthSquared": 1,
+            "IsFinite": true
+          },
+          "Tangent": {
+            "East": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "North": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "Up": {
+              "X": 0,
+              "Y": 0,
+              "Z": 1,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "IsValid": true
+          },
+          "LatticeFrame": {
+            "East": {
+              "X": 1,
+              "Y": 0,
+              "Z": 0,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "North": {
+              "X": 0,
+              "Y": 1,
+              "Z": 0,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "Up": {
+              "X": 0,
+              "Y": 0,
+              "Z": 1,
+              "LengthSquared": 1,
+              "IsFinite": true
+            },
+            "IsValid": true
+          },
+          "SnapEastCells": 0,
+          "SnapNorthCells": 0,
+          "LatticeEastOffset": 0,
+          "LatticeNorthOffset": 0,
+          "Generation": 1,
+          "Rebased": false,
+          "IsValid": true
+        },
+        "triangles": 1096368,
+        "bad": 0,
+        "rejected": 0,
+        "legacyDraw": 4,
+        "old": 0,
+        "nearPlane": 1096,
+        "max": 64,
+        "selectionRole": "settled or retained generation during adjacent transition; not all camera/LOD pairs selected initially"
+      },
+      "triangleWitness": {
+        "Name": "equator-Z/L13/alt10.001/pitch0/azimuth0",
+        "level": 13,
+        "TopologyHash": 8282564765596214112,
+        "triangle": 1007535,
+        "indices": [
+          503993,
+          504248,
+          504247
+        ],
+        "physical": [
+          {
+            "X": 0,
+            "Y": -32.404626464424595,
+            "Z": 6371008.799917591,
+            "LengthSquared": 40589753129677.445,
+            "IsFinite": true
+          },
+          {
+            "X": 0,
+            "Y": 0,
+            "Z": 6371008.8,
+            "LengthSquared": 40589753129677.44,
+            "IsFinite": true
+          },
+          {
+            "X": -32.404626464424595,
+            "Y": 0,
+            "Z": 6371008.799917591,
+            "LengthSquared": 40589753129677.445,
+            "IsFinite": true
+          }
+        ],
+        "rootRelative": [
+          {
+            "X": 9.844656,
+            "Y": 1.7619324,
+            "Z": -32.404625
+          },
+          {
+            "X": 9.844575,
+            "Y": 1.7619176,
+            "Z": 0
+          },
+          {
+            "X": 4.1357956,
+            "Y": 33.65972,
+            "Z": 0
+          }
+        ],
+        "clip": [
+          {
+            "X": 7.1525574e-07,
+            "Y": 17.322384,
+            "Z": 0.20001999,
+            "W": -32.404625
+          },
+          {
+            "X": 9.536743e-07,
+            "Y": 17.322239,
+            "Z": 0.20001999,
+            "W": 0
+          },
+          {
+            "X": -23.494799,
+            "Y": 17.322384,
+            "Z": 0.20001999,
+            "W": 0
+          }
+        ],
+        "edges": [
+          {
+            "WA": -32.404625,
+            "WB": 0,
+            "MidW": 16.202312,
+            "Distance": 19.040373,
+            "Length": 32.404625,
+            "Pixels": "Infinity",
+            "Alignment": 0.8509464,
+            "Compensation": 2116.3594,
+            "Fade": 0.61919254,
+            "Raw": "Infinity",
+            "Factor": 64,
+            "Corrected": 64
+          },
+          {
+            "WA": 0,
+            "WB": 0,
+            "MidW": 0,
+            "Distance": 19.040373,
+            "Length": 32.40463,
+            "Pixels": "NaN",
+            "Alignment": 0.85094655,
+            "Compensation": "Infinity",
+            "Fade": 0.61919254,
+            "Raw": "NaN",
+            "Factor": "NaN",
+            "Corrected": 64
+          },
+          {
+            "WA": 0,
+            "WB": -32.404625,
+            "MidW": 16.202312,
+            "Distance": 25.001032,
+            "Length": 45.82706,
+            "Pixels": "Infinity",
+            "Alignment": 1.1920929e-07,
+            "Compensation": 0,
+            "Fade": 0.49997938,
+            "Raw": "Infinity",
+            "Factor": 64,
+            "Corrected": 64
+          }
+        ],
+        "finite": true,
+        "legacyFinite": false,
+        "cpuReferenceFinite": true,
+        "cpuReferenceFactors": [
+          64,
+          64,
+          64
+        ],
+        "pathological": true,
+        "cpuCulling": "none-per-triangle; selected generation admitted",
+        "preparationIncluded": true,
+        "gpuComputeSubmissionIncluded": true,
+        "gpuCullDisposition": "indirect-draw-included",
+        "margin": 0,
+        "indirectDrawIncluded": true,
+        "canonicalNormalsChecked": true,
+        "preCorrectionClassification": "3-production-reachable-invalid-in-source-model",
+        "postCorrectionClassification": "2-valid-after-production-transformation",
+        "limitation": "source-level CPU execution, not a captured GPU physical buffer or GPU execution"
+      }
+    }
+  ]
+}

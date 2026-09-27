@@ -1,0 +1,671 @@
+{
+  "scope": "Prepared service and free-flight numerical proposals only; fresh equivalent source each sample, normal GC; canonical publication/contact/render not yet included; no zero-allocation claim",
+  "rows": [
+    {
+      "craft": "short",
+      "mode": "powered-combined",
+      "window": 0,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3691,
+        "p95": 0.4183,
+        "p99": 0.4879,
+        "maximum": 0.4879
+      },
+      "serviceMilliseconds": {
+        "median": 0.0489,
+        "p95": 0.0687,
+        "p99": 0.0935,
+        "maximum": 0.0935
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3193,
+        "p95": 0.3486,
+        "p99": 0.431,
+        "maximum": 0.431
+      },
+      "allocatedBytes": {
+        "median": 42048,
+        "p95": 42048,
+        "p99": 42048,
+        "maximum": 42048
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 2883584,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "short",
+      "mode": "powered-combined",
+      "window": 1,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3642,
+        "p95": 0.4088,
+        "p99": 5.6296,
+        "maximum": 5.6296
+      },
+      "serviceMilliseconds": {
+        "median": 0.0422,
+        "p95": 0.0699,
+        "p99": 5.3042,
+        "maximum": 5.3042
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3177,
+        "p95": 0.3482,
+        "p99": 0.3878,
+        "maximum": 0.3878
+      },
+      "allocatedBytes": {
+        "median": 42048,
+        "p95": 42048,
+        "p99": 42048,
+        "maximum": 42048
+      },
+      "gc": [
+        1,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": -10951720,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "short",
+      "mode": "powered-combined",
+      "window": 2,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3574,
+        "p95": 0.3986,
+        "p99": 0.4416,
+        "maximum": 0.4416
+      },
+      "serviceMilliseconds": {
+        "median": 0.0416,
+        "p95": 0.0484,
+        "p99": 0.0649,
+        "maximum": 0.0649
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3154,
+        "p95": 0.3573,
+        "p99": 0.3998,
+        "maximum": 0.3998
+      },
+      "allocatedBytes": {
+        "median": 42048,
+        "p95": 42048,
+        "p99": 42048,
+        "maximum": 42048
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 2877616,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "short",
+      "mode": "rcs-coast",
+      "window": 0,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.4358,
+        "p95": 0.5185,
+        "p99": 0.5387,
+        "maximum": 0.5387
+      },
+      "serviceMilliseconds": {
+        "median": 0.0588,
+        "p95": 0.0827,
+        "p99": 0.1525,
+        "maximum": 0.1525
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3753,
+        "p95": 0.4079,
+        "p99": 0.449,
+        "maximum": 0.449
+      },
+      "allocatedBytes": {
+        "median": 56304,
+        "p95": 56304,
+        "p99": 56304,
+        "maximum": 56304
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3856792,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "short",
+      "mode": "rcs-coast",
+      "window": 1,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.4354,
+        "p95": 0.488,
+        "p99": 0.5967,
+        "maximum": 0.5967
+      },
+      "serviceMilliseconds": {
+        "median": 0.0591,
+        "p95": 0.0815,
+        "p99": 0.1064,
+        "maximum": 0.1064
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3747,
+        "p95": 0.4279,
+        "p99": 0.4903,
+        "maximum": 0.4903
+      },
+      "allocatedBytes": {
+        "median": 56304,
+        "p95": 56304,
+        "p99": 56304,
+        "maximum": 56304
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3857056,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "short",
+      "mode": "rcs-coast",
+      "window": 2,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.4365,
+        "p95": 0.4868,
+        "p99": 0.5908,
+        "maximum": 0.5908
+      },
+      "serviceMilliseconds": {
+        "median": 0.0605,
+        "p95": 0.0691,
+        "p99": 0.1164,
+        "maximum": 0.1164
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3749,
+        "p95": 0.4141,
+        "p99": 0.5303,
+        "maximum": 0.5303
+      },
+      "allocatedBytes": {
+        "median": 56304,
+        "p95": 56304,
+        "p99": 56304,
+        "maximum": 56304
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3856952,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "short",
+      "mode": "power-boundary",
+      "window": 0,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3462,
+        "p95": 0.4388,
+        "p99": 3.3907,
+        "maximum": 3.3907
+      },
+      "serviceMilliseconds": {
+        "median": 0.0455,
+        "p95": 0.0836,
+        "p99": 3.0625,
+        "maximum": 3.0625
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.2989,
+        "p95": 0.3681,
+        "p99": 0.465,
+        "maximum": 0.465
+      },
+      "allocatedBytes": {
+        "median": 52760,
+        "p95": 52760,
+        "p99": 52760,
+        "maximum": 52760
+      },
+      "gc": [
+        1,
+        1,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": -13204872,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "short",
+      "mode": "power-boundary",
+      "window": 1,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.345,
+        "p95": 0.3999,
+        "p99": 0.4569,
+        "maximum": 0.4569
+      },
+      "serviceMilliseconds": {
+        "median": 0.0448,
+        "p95": 0.0724,
+        "p99": 0.0876,
+        "maximum": 0.0876
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.2988,
+        "p95": 0.3415,
+        "p99": 0.3703,
+        "maximum": 0.3703
+      },
+      "allocatedBytes": {
+        "median": 52760,
+        "p95": 52760,
+        "p99": 52760,
+        "maximum": 52760
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3617912,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "short",
+      "mode": "power-boundary",
+      "window": 2,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3438,
+        "p95": 0.3745,
+        "p99": 0.3925,
+        "maximum": 0.3925
+      },
+      "serviceMilliseconds": {
+        "median": 0.0444,
+        "p95": 0.0519,
+        "p99": 0.0703,
+        "maximum": 0.0703
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.2984,
+        "p95": 0.3195,
+        "p99": 0.348,
+        "maximum": 0.348
+      },
+      "allocatedBytes": {
+        "median": 52760,
+        "p95": 52760,
+        "p99": 52760,
+        "maximum": 52760
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3610104,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "long",
+      "mode": "powered-combined",
+      "window": 0,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3615,
+        "p95": 0.419,
+        "p99": 3.3642,
+        "maximum": 3.3642
+      },
+      "serviceMilliseconds": {
+        "median": 0.0444,
+        "p95": 0.0774,
+        "p99": 2.5844,
+        "maximum": 2.5844
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3157,
+        "p95": 0.3558,
+        "p99": 0.7798,
+        "maximum": 0.7798
+      },
+      "allocatedBytes": {
+        "median": 42048,
+        "p95": 42048,
+        "p99": 42048,
+        "maximum": 42048
+      },
+      "gc": [
+        1,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": -13689680,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "long",
+      "mode": "powered-combined",
+      "window": 1,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3608,
+        "p95": 0.3989,
+        "p99": 0.4503,
+        "maximum": 0.4503
+      },
+      "serviceMilliseconds": {
+        "median": 0.0454,
+        "p95": 0.051,
+        "p99": 0.0809,
+        "maximum": 0.0809
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3149,
+        "p95": 0.3471,
+        "p99": 0.402,
+        "maximum": 0.402
+      },
+      "allocatedBytes": {
+        "median": 42048,
+        "p95": 42048,
+        "p99": 42048,
+        "maximum": 42048
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 2886016,
+      "maximumConsecutiveAtOrAboveWindowP95": 3
+    },
+    {
+      "craft": "long",
+      "mode": "powered-combined",
+      "window": 2,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3595,
+        "p95": 0.4029,
+        "p99": 0.5337,
+        "maximum": 0.5337
+      },
+      "serviceMilliseconds": {
+        "median": 0.0451,
+        "p95": 0.0699,
+        "p99": 0.11,
+        "maximum": 0.11
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3139,
+        "p95": 0.351,
+        "p99": 0.4237,
+        "maximum": 0.4237
+      },
+      "allocatedBytes": {
+        "median": 42048,
+        "p95": 42048,
+        "p99": 42048,
+        "maximum": 42048
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 2886624,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "long",
+      "mode": "rcs-coast",
+      "window": 0,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.4397,
+        "p95": 0.5085,
+        "p99": 0.5881,
+        "maximum": 0.5881
+      },
+      "serviceMilliseconds": {
+        "median": 0.0635,
+        "p95": 0.0813,
+        "p99": 0.1241,
+        "maximum": 0.1241
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3749,
+        "p95": 0.4282,
+        "p99": 0.5245,
+        "maximum": 0.5245
+      },
+      "allocatedBytes": {
+        "median": 56304,
+        "p95": 56304,
+        "p99": 56304,
+        "maximum": 56304
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3848832,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "long",
+      "mode": "rcs-coast",
+      "window": 1,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.4398,
+        "p95": 0.5163,
+        "p99": 0.5338,
+        "maximum": 0.5338
+      },
+      "serviceMilliseconds": {
+        "median": 0.0633,
+        "p95": 0.0821,
+        "p99": 0.0954,
+        "maximum": 0.0954
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3753,
+        "p95": 0.4517,
+        "p99": 0.4564,
+        "maximum": 0.4564
+      },
+      "allocatedBytes": {
+        "median": 56304,
+        "p95": 56304,
+        "p99": 56304,
+        "maximum": 56304
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3856688,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "long",
+      "mode": "rcs-coast",
+      "window": 2,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.4377,
+        "p95": 0.5304,
+        "p99": 0.6303,
+        "maximum": 0.6303
+      },
+      "serviceMilliseconds": {
+        "median": 0.0624,
+        "p95": 0.0953,
+        "p99": 0.2512,
+        "maximum": 0.2512
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3736,
+        "p95": 0.4368,
+        "p99": 0.5147,
+        "maximum": 0.5147
+      },
+      "allocatedBytes": {
+        "median": 56304,
+        "p95": 56304,
+        "p99": 56304,
+        "maximum": 56304
+      },
+      "gc": [
+        1,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": -12893920,
+      "maximumConsecutiveAtOrAboveWindowP95": 1
+    },
+    {
+      "craft": "long",
+      "mode": "power-boundary",
+      "window": 0,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3458,
+        "p95": 0.4325,
+        "p99": 0.4812,
+        "maximum": 0.4812
+      },
+      "serviceMilliseconds": {
+        "median": 0.046,
+        "p95": 0.0635,
+        "p99": 0.0719,
+        "maximum": 0.0719
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.2993,
+        "p95": 0.3866,
+        "p99": 0.4227,
+        "maximum": 0.4227
+      },
+      "allocatedBytes": {
+        "median": 52520,
+        "p95": 52520,
+        "p99": 52520,
+        "maximum": 52520
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3593224,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "long",
+      "mode": "power-boundary",
+      "window": 1,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3465,
+        "p95": 0.4289,
+        "p99": 0.46,
+        "maximum": 0.46
+      },
+      "serviceMilliseconds": {
+        "median": 0.046,
+        "p95": 0.0714,
+        "p99": 0.0971,
+        "maximum": 0.0971
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.3003,
+        "p95": 0.382,
+        "p99": 0.4122,
+        "maximum": 0.4122
+      },
+      "allocatedBytes": {
+        "median": 52520,
+        "p95": 52520,
+        "p99": 52520,
+        "maximum": 52520
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3601920,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    },
+    {
+      "craft": "long",
+      "mode": "power-boundary",
+      "window": 2,
+      "samples": 64,
+      "milliseconds": {
+        "median": 0.3454,
+        "p95": 0.4263,
+        "p99": 0.4638,
+        "maximum": 0.4638
+      },
+      "serviceMilliseconds": {
+        "median": 0.0456,
+        "p95": 0.068,
+        "p99": 0.1106,
+        "maximum": 0.1106
+      },
+      "dynamicsMilliseconds": {
+        "median": 0.2992,
+        "p95": 0.3743,
+        "p99": 0.4175,
+        "maximum": 0.4175
+      },
+      "allocatedBytes": {
+        "median": 52520,
+        "p95": 52520,
+        "p99": 52520,
+        "maximum": 52520
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "retainedDeltaWithoutForcedGc": 3593848,
+      "maximumConsecutiveAtOrAboveWindowP95": 2
+    }
+  ]
+}

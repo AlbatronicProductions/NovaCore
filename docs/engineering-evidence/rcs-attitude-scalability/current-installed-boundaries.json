@@ -1,0 +1,414 @@
+{
+  "sha256": "ce43d022e7dac9beb2352b6106164bc1f521dda1ae9d0b898b8dba0c59a69723",
+  "version": "2026.9.22.5482+40faabcc2a54baeb11b7b9f21beade6f7e6b524e",
+  "tool": "E:\\NovaCore\\build\\construction-connector-revision\\reference-tools\\ilspycmd.exe",
+  "bytes": 5057112,
+  "normalization": "stdout lines joined LF with final LF, UTF-8; source text held only in memory",
+  "installedPath": "E:\\Kitten Space Agency\\KSA.dll",
+  "contentPath": "E:\\Kitten Space Agency\\Content\\Core\\CorePropulsionBGameData.xml",
+  "observedUtc": "2026-09-26T18:27:26.7312134Z",
+  "types": [
+    {
+      "type": "KSA.ThrusterController",
+      "lineCount": 307,
+      "normalizedSourceSha256": "8b8d91c5a9184efe2c712d9e68ebf4db97470a36ddc538c8d38b8764af2f652f",
+      "anchors": [
+        {
+          "line": 36,
+          "symbol": "CreateComponents"
+        },
+        {
+          "line": 84,
+          "symbol": "RecomputeDynamicData"
+        },
+        {
+          "line": 293,
+          "symbol": "GetSaveData"
+        },
+        {
+          "line": 302,
+          "symbol": "ApplySaveData"
+        }
+      ]
+    },
+    {
+      "type": "KSA.RocketThrusterControllerTemplate",
+      "lineCount": 37,
+      "normalizedSourceSha256": "f775674b248bf6d5d9b557d634cbc3cb2c1c5d8986aeaa9b2dde1c4bbc02772b",
+      "anchors": [
+        {
+          "line": 17,
+          "symbol": "Create("
+        }
+      ]
+    },
+    {
+      "type": "KSA.Rocket",
+      "lineCount": 278,
+      "normalizedSourceSha256": "9f681f542b4d643f0ce01eded01ab98a915fb4f9d66d2b0c1f7f641f19c5bec6",
+      "anchors": [
+        {
+          "line": 74,
+          "symbol": "UpdateRockets"
+        },
+        {
+          "line": 104,
+          "symbol": "UpdateThrusterCache"
+        },
+        {
+          "line": 189,
+          "symbol": "UpdateThrusterCache"
+        }
+      ]
+    },
+    {
+      "type": "KSA.ModuleBase",
+      "lineCount": 64,
+      "normalizedSourceSha256": "691d10aa64abcdb16251ac1a34a79add3c2069f5252a79144384f56042c0aae8",
+      "anchors": [
+        {
+          "line": 22,
+          "symbol": "InstanceId"
+        },
+        {
+          "line": 27,
+          "symbol": "InstanceId"
+        },
+        {
+          "line": 37,
+          "symbol": "InstanceId"
+        },
+        {
+          "line": 43,
+          "symbol": "InstanceId"
+        },
+        {
+          "line": 35,
+          "symbol": "ModuleBase("
+        },
+        {
+          "line": 41,
+          "symbol": "ModuleBase("
+        },
+        {
+          "line": 16,
+          "symbol": "SaveDataBase"
+        },
+        {
+          "line": 47,
+          "symbol": "SaveDataBase"
+        },
+        {
+          "line": 52,
+          "symbol": "SaveDataBase"
+        }
+      ]
+    },
+    {
+      "type": "KSA.Module`1",
+      "lineCount": 458,
+      "normalizedSourceSha256": "be14073e0245a96d7ccffd57e431bd34c373b2750b886146feac43baa898acca",
+      "anchors": [
+        {
+          "line": 255,
+          "symbol": "public int Add"
+        },
+        {
+          "line": 260,
+          "symbol": "public int Add"
+        },
+        {
+          "line": 298,
+          "symbol": "public bool Remove"
+        },
+        {
+          "line": 303,
+          "symbol": "public bool Remove"
+        },
+        {
+          "line": 121,
+          "symbol": "MoveModule"
+        },
+        {
+          "line": 284,
+          "symbol": "MoveModule"
+        },
+        {
+          "line": 314,
+          "symbol": "MoveModule"
+        },
+        {
+          "line": 331,
+          "symbol": "MoveModule"
+        }
+      ]
+    },
+    {
+      "type": "KSA.ModuleStateful`4",
+      "lineCount": 861,
+      "normalizedSourceSha256": "00ce50557be65f161e7889d6aed5d8ddc6b42853d79c5bfc21d535750a913aca",
+      "anchors": [
+        {
+          "line": 302,
+          "symbol": "public void Add("
+        },
+        {
+          "line": 319,
+          "symbol": "public void AddNew"
+        },
+        {
+          "line": 343,
+          "symbol": "public void AddNew"
+        },
+        {
+          "line": 660,
+          "symbol": "StateUpdater("
+        },
+        {
+          "line": 847,
+          "symbol": "StateUpdater("
+        },
+        {
+          "line": 776,
+          "symbol": "public void Prepare"
+        },
+        {
+          "line": 794,
+          "symbol": "public void Dispose"
+        },
+        {
+          "line": 148,
+          "symbol": "public bool MoveNext"
+        },
+        {
+          "line": 202,
+          "symbol": "public bool MoveNext"
+        },
+        {
+          "line": 245,
+          "symbol": "public bool MoveNext"
+        },
+        {
+          "line": 629,
+          "symbol": "public bool MoveNext"
+        }
+      ]
+    },
+    {
+      "type": "KSA.FlightComputer",
+      "lineCount": 1895,
+      "normalizedSourceSha256": "b1a1d939be9ad78058f757a3628eef5812c8069c0e279a501e4aa1b42d928511",
+      "anchors": [
+        {
+          "line": 21,
+          "symbol": "VehicleConfigInfo"
+        },
+        {
+          "line": 129,
+          "symbol": "VehicleConfigInfo"
+        },
+        {
+          "line": 136,
+          "symbol": "VehicleConfigInfo"
+        },
+        {
+          "line": 257,
+          "symbol": "VehicleConfigInfo"
+        },
+        {
+          "line": 226,
+          "symbol": "ReadUpdatedVehicleConfiguration"
+        },
+        {
+          "line": 255,
+          "symbol": "ReadUpdatedVehicleConfiguration"
+        },
+        {
+          "line": 588,
+          "symbol": "SelectJetsToFire"
+        },
+        {
+          "line": 1210,
+          "symbol": "SelectJetsToFire"
+        }
+      ]
+    },
+    {
+      "type": "KSA.VehicleUpdateData",
+      "lineCount": 105,
+      "normalizedSourceSha256": "88c83fd4d5905a1ec7d91c9b25220cc76a5897b1f3da88fb6fda9dadeb560cb0",
+      "anchors": [
+        {
+          "line": 68,
+          "symbol": "VehicleUpdateData("
+        },
+        {
+          "line": 84,
+          "symbol": "public void Prepare"
+        }
+      ]
+    },
+    {
+      "type": "KSA.VehicleUpdateState",
+      "lineCount": 679,
+      "normalizedSourceSha256": "f3b69d2228989839cd0c1b3eee01065b43d84baa3118dbef18e64aef08d4412a",
+      "anchors": [
+        {
+          "line": 326,
+          "symbol": "PrepareFromWorker"
+        },
+        {
+          "line": 407,
+          "symbol": "UpdateActiveNozzles"
+        },
+        {
+          "line": 286,
+          "symbol": "Dispose"
+        },
+        {
+          "line": 331,
+          "symbol": "Dispose"
+        },
+        {
+          "line": 476,
+          "symbol": "Dispose"
+        },
+        {
+          "line": 659,
+          "symbol": "Dispose"
+        },
+        {
+          "line": 672,
+          "symbol": "Dispose"
+        },
+        {
+          "line": 673,
+          "symbol": "Dispose"
+        },
+        {
+          "line": 674,
+          "symbol": "Dispose"
+        },
+        {
+          "line": 676,
+          "symbol": "Dispose"
+        }
+      ]
+    },
+    {
+      "type": "KSA.Combustor",
+      "lineCount": 250,
+      "normalizedSourceSha256": "64c70c8bb0407808f3e9caf2b14bcad84eb5e6e637d05c876e327c4464aaa9e0",
+      "anchors": [
+        {
+          "line": 78,
+          "symbol": "ComputePropellantAvailable"
+        },
+        {
+          "line": 83,
+          "symbol": "ConsumePropellant"
+        },
+        {
+          "line": 200,
+          "symbol": "RecreateManager"
+        }
+      ]
+    },
+    {
+      "type": "KSA.RocketCore",
+      "lineCount": 230,
+      "normalizedSourceSha256": "e67256f7d62d90bb3d89eb88b02e51c0539a5374439d8912463aa581be225a51",
+      "anchors": [
+        {
+          "line": 176,
+          "symbol": "UpdateState("
+        }
+      ]
+    },
+    {
+      "type": "KSA.Part",
+      "lineCount": 3480,
+      "normalizedSourceSha256": "5f04afb85d34f37059cc4f4a9c845cf559c60904ce809fa415870dcc3f9d7fad",
+      "anchors": [
+        {
+          "line": 2152,
+          "symbol": "GetReferenceWithChildren"
+        },
+        {
+          "line": 2154,
+          "symbol": "GetReferenceWithChildren"
+        },
+        {
+          "line": 2157,
+          "symbol": "GetReferenceWithChildren"
+        },
+        {
+          "line": 2209,
+          "symbol": "GetReferenceWithChildren"
+        },
+        {
+          "line": 2284,
+          "symbol": "RestoreSymmetryLinks"
+        },
+        {
+          "line": 2399,
+          "symbol": "RegenerateWholePartInstanceTree"
+        }
+      ]
+    },
+    {
+      "type": "KSA.PartTree",
+      "lineCount": 1647,
+      "normalizedSourceSha256": "018773f518e2de116b2b2ac366afbad6bf1389d53c270f4d4813b121af65cdd2",
+      "anchors": [
+        {
+          "line": 1545,
+          "symbol": "TransferPart("
+        },
+        {
+          "line": 1557,
+          "symbol": "TransferPart("
+        },
+        {
+          "line": 1562,
+          "symbol": "TransferPart("
+        },
+        {
+          "line": 788,
+          "symbol": "RebuildResourceGraphs"
+        },
+        {
+          "line": 812,
+          "symbol": "RecreateResourceManagers"
+        },
+        {
+          "line": 837,
+          "symbol": "RecreateResourceManagers"
+        },
+        {
+          "line": 541,
+          "symbol": "RecomputeRocketControls"
+        },
+        {
+          "line": 993,
+          "symbol": "RecomputeRocketControls"
+        }
+      ]
+    },
+    {
+      "type": "KSA.ConnectorCapability",
+      "lineCount": 14,
+      "normalizedSourceSha256": "a11658c026c0df6518159f40da0bb0d48c096fe7f1bc4ee2713279808dbc2d3c",
+      "anchors": [
+        {
+          "line": 6,
+          "symbol": "enum ConnectorCapability"
+        }
+      ]
+    }
+  ],
+  "toolVersion": "11.0.0.9375",
+  "contentSha256": "412c75a2c15397c9526288b9a61c9349ae4d51dba0a1d11ed6a78ed5b79f33af",
+  "ksaWrites": 0,
+  "sourceTextRetained": false
+}

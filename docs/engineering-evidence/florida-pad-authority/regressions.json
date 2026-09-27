@@ -1,0 +1,342 @@
+[
+  {
+    "name": "Debug-facility-gpu",
+    "command": [
+      "E:\\NovaCore\\build\\native-ninja\\NovaCoreFacilityVisibilityTests.exe",
+      "E:\\NovaCore\\build\\native-ninja\\shaders\\facility_visibility_test.comp.spv"
+    ],
+    "exit": 0,
+    "sha256": "817c69d869bfa34ef7dabaf522b0125222771c787dc0b4c756d339de2ad3e554",
+    "tail": [
+      "FP32 boundary interval: case=6 rotation=1 camera=0 toleranceMetres=0.00199127",
+      "FP32 boundary interval: case=6 rotation=1 camera=600 toleranceMetres=0.00199127",
+      "Facility visibility PASS: 126 GPU/CPU cases; parallel/grazing/boundary/single-slab/no-legacy-casters/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates"
+    ]
+  },
+  {
+    "name": "Debug--florida-pad-authority",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--florida-pad-authority"
+    ],
+    "exit": 0,
+    "sha256": "99e9d6a2f2531b166609169818e85f8e32ab19c66f94953457e44dff1bfd5e25",
+    "tail": [
+      "FLORIDA_PAD_AUTHORITY PASS mesh=7 singleSlab=true physicalCorners=24 maxRootErrorMetres=1.5728399755926745E-05 caster=1 legacyCasterRefused=true",
+      "Florida seating proof: H=15.134892258793116; root=21.970461536198854; minimumContactLocalZ=-6.5855692772856855; depth=6.835569277405739; bottomCenterHeight=15.134892258793116; denseMaximumBottomGap=1.862645149230957E-09; denseMinimumDeckClearance=8.335569275543094; regional=15.001533002687239; generation=4; owner=NCSM1; geography/time/LOD/pupil/return=stable"
+    ]
+  },
+  {
+    "name": "Debug--florida-slab-correctness",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--florida-slab-correctness"
+    ],
+    "exit": 0,
+    "sha256": "0b4b13c526a4f43058cb82bf769590192fccd4445283682a552970f6da952172",
+    "tail": [
+      "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+    ]
+  },
+  {
+    "name": "Debug--florida-slab-solar",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--florida-slab-solar"
+    ],
+    "exit": 0,
+    "sha256": "4706b5efa46e9cc8f398d801b91c73df2ae196055f5c608cd0624cfa4c30d3b7",
+    "tail": [
+      "FLORIDA_PRESENTATION_READY site=067b12d9b4a935f0d0b9317f7f2c546c8e78d2d4bf042efba06fa0532a8d3803 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=843708057978457 east=0 support=authored-base-footing-union coldMs=0.2769",
+      "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+      "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+      "SRV01_COLD_PREPARATION ms=142.7404 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=843708057978457 intervals=1200 support=600/600 peak=9.750102195815735E-05 maxPositionError=6.124817970192947E-09"
+    ]
+  },
+  {
+    "name": "Debug--modular-connectors",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-connectors"
+    ],
+    "exit": 0,
+    "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05",
+    "tail": [
+      "Modular connector graph PASS: 1070 checks; depths 0..64, two root frames, all three tank hosts at 1/2/4/8 symmetry; physical nozzle collisions still refused; no Player PASS."
+    ]
+  },
+  {
+    "name": "Debug--modular-gate9",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate9"
+    ],
+    "exit": 0,
+    "sha256": "e1f3e35394b33fb3b90c324b0e479e777db4e64561cd4eda7fde9249c30923f5",
+    "tail": [
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2748",
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.284",
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2699",
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2742",
+      "MODULAR_GATE9 PASS checks=886"
+    ]
+  },
+  {
+    "name": "Debug--modular-gate10-dynamics",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate10-dynamics"
+    ],
+    "exit": 0,
+    "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586",
+    "tail": [
+      "MODULAR_ROTATING_DYNAMICS mass=1304 epoch=21999000 position=5.650641908641717E-09 velocity=3.457721479366324E-13 omega=2.118352371637509E-16 orientation=1.737995547973855E-15",
+      "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=999000 position=4.971902003526367E-09 velocity=1.9907880820997406E-13 omega=2.4394924734781536E-16 orientation=1.7921162839671297E-15",
+      "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=-1000500 position=6.506772997082267E-09 velocity=3.5956310280083856E-13 omega=2.2247786310271853E-16 orientation=1.6356961449923234E-15",
+      "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=21999000 position=5.509778655226916E-09 velocity=2.428416888236078E-13 omega=2.242025235105681E-16 orientation=1.4198814970921195E-15",
+      "MODULAR_GATE10_DYNAMICS PASS checks=23"
+    ]
+  },
+  {
+    "name": "Debug--modular-gate10-flight",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate10-flight"
+    ],
+    "exit": 0,
+    "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+    "tail": [
+      "DEPLETION power Published 1",
+      "DEPLETION tiny-fuel Published 1",
+      "FRESH_CONTACT_ORACLE long=False position=0.00010490079822280653 velocity=1.887376321631664E-08",
+      "FRESH_CONTACT_ORACLE long=True position=3.3703649670694695E-05 velocity=8.743172911942352E-09",
+      "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+    ]
+  },
+  {
+    "name": "Debug--modular-gate11",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate11"
+    ],
+    "exit": 0,
+    "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41",
+    "tail": [
+      "MODULAR_GATE11_LONG_FLIGHT_PASS checks=8064"
+    ]
+  },
+  {
+    "name": "Debug--modular-gate12-application",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate12-application"
+    ],
+    "exit": 0,
+    "sha256": "27885ebc3e6aa38005c6765bcaaaccc7fb290b044164690c9d80e136b0972ab6",
+    "tail": [
+      "Z: ignite \u00c2\u00b7 X: cutoff \u00c2\u00b7 W/S pitch \u00c2\u00b7 A/D yaw \u00c2\u00b7 Q/E roll \u00c2\u00b7 mouse orbit \u00c2\u00b7 wheel zoom \u00c2\u00b7 F: craft \u00c2\u00b7 1\u00e2\u20ac\u201c0: celestial focus. Physical flight runs at 1x. In NovaCore, Menu returns to retained construction.",
+      "MODULAR_FLIGHT_REFUSED reason=adversarial publication refusal epoch=62500 sequence=4",
+      "MODULAR_FLIGHT_END failed=True reason=adversarial publication refusal source=79234b824be311679ef21bc7a52497c4d0d238abbb89332089d218e106995c2e compiled=46a89b65d297565d3b3e975f4760f8da21ac55108e01a46eba13908c81e3dc33 epoch=62500 sequence=4 mass=1304 position=Double3 { X = 8.996262068627914E-11, Y = -0.000297602847029399, Z = 3.344999583900643E-06, LengthSquared = 8.857864358222824E-08, IsFinite = True } velocity=Double3 { X = -8.449364144212976E-09, Y = 2.539682736067108E-07, Z = -3.701289995902984E-05, LengthSquared = 1.3700193346529045E-09, IsFinite = True }",
+      "MODULAR_INTEGRATED_MEASURE {\"warmupPerPhase\":64,\"sampling\":\"first three 256-frame windows within each phase; normal GC; phase re-entry retains that phase\\u0027s sequence\",\"boundary\":\"callback input, bounded physical service, celestial publication, camera and render preparation; frame interval also includes native presentation/scheduling\",\"windows\":0}",
+      "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+    ]
+  },
+  {
+    "name": "Release-facility-gpu",
+    "command": [
+      "E:\\NovaCore\\build\\native-ninja-release\\NovaCoreFacilityVisibilityTests.exe",
+      "E:\\NovaCore\\build\\native-ninja-release\\shaders\\facility_visibility_test.comp.spv"
+    ],
+    "exit": 0,
+    "sha256": "817c69d869bfa34ef7dabaf522b0125222771c787dc0b4c756d339de2ad3e554",
+    "tail": [
+      "FP32 boundary interval: case=6 rotation=1 camera=0 toleranceMetres=0.00199127",
+      "FP32 boundary interval: case=6 rotation=1 camera=600 toleranceMetres=0.00199127",
+      "Facility visibility PASS: 126 GPU/CPU cases; parallel/grazing/boundary/single-slab/no-legacy-casters/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates"
+    ]
+  },
+  {
+    "name": "Release--florida-pad-authority",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--florida-pad-authority"
+    ],
+    "exit": 0,
+    "sha256": "99e9d6a2f2531b166609169818e85f8e32ab19c66f94953457e44dff1bfd5e25",
+    "tail": [
+      "FLORIDA_PAD_AUTHORITY PASS mesh=7 singleSlab=true physicalCorners=24 maxRootErrorMetres=1.5728399755926745E-05 caster=1 legacyCasterRefused=true",
+      "Florida seating proof: H=15.134892258793116; root=21.970461536198854; minimumContactLocalZ=-6.5855692772856855; depth=6.835569277405739; bottomCenterHeight=15.134892258793116; denseMaximumBottomGap=1.862645149230957E-09; denseMinimumDeckClearance=8.335569275543094; regional=15.001533002687239; generation=4; owner=NCSM1; geography/time/LOD/pupil/return=stable"
+    ]
+  },
+  {
+    "name": "Release--florida-slab-correctness",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--florida-slab-correctness"
+    ],
+    "exit": 0,
+    "sha256": "0b4b13c526a4f43058cb82bf769590192fccd4445283682a552970f6da952172",
+    "tail": [
+      "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+      "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+    ]
+  },
+  {
+    "name": "Release--florida-slab-solar",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--florida-slab-solar"
+    ],
+    "exit": 0,
+    "sha256": "9cd351a2e817baa5910c462384a6492a0fd58dc3668468c81ac3f071425a4856",
+    "tail": [
+      "FLORIDA_PRESENTATION_READY site=1dffd500d0b9da91b287d0bd1aa1bfd0c971b9bef175787de3859c8209f15eda body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=843708106162799 east=0 support=authored-base-footing-union coldMs=0.2307",
+      "STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096",
+      "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+      "SRV01_COLD_PREPARATION ms=134.659 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "FLORIDA_SOLAR_CURRENT_EPOCH PASS start=843708106162799 intervals=1200 support=600/600 peak=9.750102195815735E-05 maxPositionError=6.731987136789114E-09"
+    ]
+  },
+  {
+    "name": "Release--modular-connectors",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-connectors"
+    ],
+    "exit": 0,
+    "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05",
+    "tail": [
+      "Modular connector graph PASS: 1070 checks; depths 0..64, two root frames, all three tank hosts at 1/2/4/8 symmetry; physical nozzle collisions still refused; no Player PASS."
+    ]
+  },
+  {
+    "name": "Release--modular-gate9",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate9"
+    ],
+    "exit": 0,
+    "sha256": "336af6cf66abb649f6f2a89822920c319ad79246bf2a30312edf4f7d7fb822e4",
+    "tail": [
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2657",
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2633",
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.3844",
+      "FLORIDA_PRESENTATION_READY site=23fc18c73b3ddf526bcfe376858b7976d31d0fe2818e2bf00fa7614782e5c672 body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=-123456789 east=0 support=authored-base-footing-union coldMs=0.2724",
+      "MODULAR_GATE9 PASS checks=886"
+    ]
+  },
+  {
+    "name": "Release--modular-gate10-dynamics",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate10-dynamics"
+    ],
+    "exit": 0,
+    "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586",
+    "tail": [
+      "MODULAR_ROTATING_DYNAMICS mass=1304 epoch=21999000 position=5.650641908641717E-09 velocity=3.457721479366324E-13 omega=2.118352371637509E-16 orientation=1.737995547973855E-15",
+      "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=999000 position=4.971902003526367E-09 velocity=1.9907880820997406E-13 omega=2.4394924734781536E-16 orientation=1.7921162839671297E-15",
+      "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=-1000500 position=6.506772997082267E-09 velocity=3.5956310280083856E-13 omega=2.2247786310271853E-16 orientation=1.6356961449923234E-15",
+      "MODULAR_ROTATING_DYNAMICS mass=2164 epoch=21999000 position=5.509778655226916E-09 velocity=2.428416888236078E-13 omega=2.242025235105681E-16 orientation=1.4198814970921195E-15",
+      "MODULAR_GATE10_DYNAMICS PASS checks=23"
+    ]
+  },
+  {
+    "name": "Release--modular-gate10-flight",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate10-flight"
+    ],
+    "exit": 0,
+    "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+    "tail": [
+      "DEPLETION power Published 1",
+      "DEPLETION tiny-fuel Published 1",
+      "FRESH_CONTACT_ORACLE long=False position=0.00010490079822280653 velocity=1.887376321631664E-08",
+      "FRESH_CONTACT_ORACLE long=True position=3.3703649670694695E-05 velocity=8.743172911942352E-09",
+      "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+    ]
+  },
+  {
+    "name": "Release--modular-gate11",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate11"
+    ],
+    "exit": 0,
+    "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41",
+    "tail": [
+      "MODULAR_GATE11_LONG_FLIGHT_PASS checks=8064"
+    ]
+  },
+  {
+    "name": "Release--modular-gate12-application",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--modular-gate12-application"
+    ],
+    "exit": 0,
+    "sha256": "f2b329b59c2fb807e396b3a18ada2d83b585e86db4608bedf5d9e03d1f14292a",
+    "tail": [
+      "Z: ignite \u00c2\u00b7 X: cutoff \u00c2\u00b7 W/S pitch \u00c2\u00b7 A/D yaw \u00c2\u00b7 Q/E roll \u00c2\u00b7 mouse orbit \u00c2\u00b7 wheel zoom \u00c2\u00b7 F: craft \u00c2\u00b7 1\u00e2\u20ac\u201c0: celestial focus. Physical flight runs at 1x. In NovaCore, Menu returns to retained construction.",
+      "MODULAR_FLIGHT_REFUSED reason=adversarial publication refusal epoch=62500 sequence=4",
+      "MODULAR_FLIGHT_END failed=True reason=adversarial publication refusal source=79234b824be311679ef21bc7a52497c4d0d238abbb89332089d218e106995c2e compiled=46a89b65d297565d3b3e975f4760f8da21ac55108e01a46eba13908c81e3dc33 epoch=62500 sequence=4 mass=1304 position=Double3 { X = 8.996262068627914E-11, Y = -0.000297602847029399, Z = 3.344999583900643E-06, LengthSquared = 8.857864358222824E-08, IsFinite = True } velocity=Double3 { X = -8.449364144212976E-09, Y = 2.539682736067108E-07, Z = -3.701289995902984E-05, LengthSquared = 1.3700193346529045E-09, IsFinite = True }",
+      "MODULAR_INTEGRATED_MEASURE {\"warmupPerPhase\":64,\"sampling\":\"first three 256-frame windows within each phase; normal GC; phase re-entry retains that phase\\u0027s sequence\",\"boundary\":\"callback input, bounded physical service, celestial publication, camera and render preparation; frame interval also includes native presentation/scheduling\",\"windows\":0}",
+      "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+    ]
+  },
+  {
+    "name": "NovaCore.ReferenceFrames.Tests",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.ReferenceFrames.Tests\\bin\\Release\\net10.0\\NovaCore.ReferenceFrames.Tests.dll"
+    ],
+    "exit": 0,
+    "sha256": "c67c1c496d18c8157e26eb7ed836710e1354579e2c9ab0f74ee8976e5394d91c",
+    "tail": [
+      "SurfaceAnchor precision: angular=1.49011611938476562E-008 rad; body=1.51385336298908041E-005 m; root=0.00000000000000000E+000 m; offset=1.49670440805493854E-005 m; velocity=1.10391391388378380E-009 m/s; stationary=1.10392831694650650E-009 m/s; enuOrthogonal=4.44522890719056818E-018; enuUnit=2.22044604925031308E-016; hash=0x91886B025BE6DB8B",
+      "SurfaceAnchor performance: forward=4798925/s; inverse=4399549/s; terrainQueries=200000; allocations=0 bytes",
+      "PASS surface anchor authority",
+      "PASS validation",
+      "Benchmark: 10,000 root resolutions in 3.093 ms; managed allocations=0 bytes; final=4000000000009.999"
+    ]
+  },
+  {
+    "name": "NovaCore.Camera.Tests",
+    "command": [
+      "dotnet",
+      "E:\\NovaCore\\tests\\NovaCore.Camera.Tests\\bin\\Release\\net10.0\\NovaCore.Camera.Tests.dll"
+    ],
+    "exit": 0,
+    "sha256": "86a40d8b0da6fe67e895a8c1cdb9a8f8e1441d522ba4d0b64ac561ceefcb218a",
+    "tail": [
+      "PASS camera controller: W delta=-0.099609375, S delta=0.099609375, wheel 1=1.189207115002721; update=138.62 ns, allocations=0"
+    ]
+  }
+]

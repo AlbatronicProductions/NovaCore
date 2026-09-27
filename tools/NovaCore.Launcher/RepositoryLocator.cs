@@ -11,7 +11,7 @@ public static class RepositoryLocator
         var current = new DirectoryInfo(Path.GetFullPath(startDirectory));
         while (current is not null)
         {
-            if (Directory.Exists(Path.Combine(current.FullName, ".git")) &&
+            if ((Directory.Exists(Path.Combine(current.FullName, ".git")) || File.Exists(Path.Combine(current.FullName, ".git"))) &&
                 File.Exists(Path.Combine(current.FullName, SampleProjectRelativePath)))
             {
                 repositoryRoot = current.FullName;

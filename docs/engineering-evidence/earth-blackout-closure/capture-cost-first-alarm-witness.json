@@ -1,0 +1,259 @@
+{
+  "judgment": "PASS capture-cost ownership and first-alarm preservation OFFLINE ONLY",
+  "gpuExecution": false,
+  "applicationLaunches": 0,
+  "sourceIdentity": [
+    {
+      "path": "native/NovaCore.Native/FrozenCapture.h",
+      "sha256": "CE0F5CECFF8DDE703E2C3B6D46C342AFA7758F1968933E3AE008BEF7327FC6EF"
+    },
+    {
+      "path": "native/NovaCore.Native/FrozenCaptureMock.cpp",
+      "sha256": "E9F8DCCC37B87968EBEC51CC6270F38B7C09E3FE85DD603F4CBE2D56AA18580D"
+    },
+    {
+      "path": "native/NovaCore.Native/FrozenCaptureNative.inl",
+      "sha256": "9B9080FE8ED0811CC9DA8AA653C0F3072ACAD4A753BF3AF1DB9AF0E37D2F2DDB"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/AlarmJournal.cs",
+      "sha256": "BF89F55E4B60E161F3CE2508A5C5A9BCDAD5DECB7CBA9E263522DD9BA0EACFC6"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/CaptureCostWatch.cs",
+      "sha256": "03B24684661529C0CA665E76662B130518A3CAEFE945A4347024A85B8E2A6A21"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/CausalJournal.cs",
+      "sha256": "84D8EF77AD4FA361E22C218BCA8CBDE2B8940DFB77F31F15DF1FF634FE971BA2"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/FirstAlarmRegression.cs",
+      "sha256": "9CC862A104E167DEB30F754DD6FBD29D5E47FE679138A43DB86DE8D38C822963"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/FrozenRegression.cs",
+      "sha256": "681AA0883076D30F9F9A011A1EACB6499411F52A7D75B8B237A6FDC953803003"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/FrozenSnapshot.cs",
+      "sha256": "EFC55BF2797E6E038FF4CD4530500036D1DC473257F0DCF34EDC57CC45FD69D7"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/Program.cs",
+      "sha256": "EE1980E1C7B1FA2D61B26EF5AB4ED494C78354160913116004B8FA00DAD614D1"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/FrozenOwnershipProbe.cpp",
+      "sha256": "031B9173BB9F67D8B0004FF87F972AF51BBB0364B0C437A5D44A68BD8310A3DC"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/RecordingCallProbe.cpp",
+      "sha256": "950772A2ABD7B777195B99AAEC195E000CF2B30D9EEFD6EE0ADF95695F03C9C1"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/build_frozen_ownership_probe.py",
+      "sha256": "BFEC9F71138FEC6F65BCE0419CCBAE0A25FB8218A0ED082137CE0011761DD7FC"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/capture_transfer_accounting.py",
+      "sha256": "162D33D4A471585A82F2F5908DA7667252046D8EE50E68F897649C937D456EC3"
+    }
+  ],
+  "byteAccounting": [
+    {
+      "stage": "closer",
+      "examples": [
+        {
+          "frame": 3588,
+          "submission": 3651,
+          "generation": 4,
+          "pupil": 4,
+          "vertices": 54106,
+          "triangles": 108208,
+          "visible": 4633,
+          "oldGpuBytes": 6492796,
+          "newColdGpuBytes": 5194300,
+          "newWarmGpuBytes": 3895804,
+          "newHostCompactedBytes": 55596,
+          "fileBytes": 6497556
+        },
+        {
+          "frame": 3408,
+          "submission": 3471,
+          "generation": 4,
+          "pupil": 4,
+          "vertices": 54106,
+          "triangles": 108208,
+          "visible": 4633,
+          "oldGpuBytes": 6492796,
+          "newColdGpuBytes": 5194300,
+          "newWarmGpuBytes": 3895804,
+          "newHostCompactedBytes": 55596,
+          "fileBytes": 6497556
+        }
+      ],
+      "captureFence": {
+        "samples": 13,
+        "median": 3.5972,
+        "p95": 3.8347,
+        "p99": 3.8347,
+        "maximum": 3.8347
+      },
+      "gpuTransferBarrier": {
+        "samples": 13,
+        "median": 0.24108,
+        "p95": 0.24268,
+        "p99": 0.24268,
+        "maximum": 0.24268
+      }
+    },
+    {
+      "stage": "ground",
+      "examples": [
+        {
+          "frame": 11494,
+          "submission": 11557,
+          "generation": 15,
+          "pupil": 77,
+          "vertices": 597594,
+          "triangles": 1195184,
+          "visible": 15679,
+          "oldGpuBytes": 71711356,
+          "newColdGpuBytes": 57369148,
+          "newWarmGpuBytes": 43026940,
+          "newHostCompactedBytes": 188148,
+          "fileBytes": 71716116
+        },
+        {
+          "frame": 11314,
+          "submission": 11377,
+          "generation": 15,
+          "pupil": 76,
+          "vertices": 597594,
+          "triangles": 1195184,
+          "visible": 15747,
+          "oldGpuBytes": 71711356,
+          "newColdGpuBytes": 57369148,
+          "newWarmGpuBytes": 43026940,
+          "newHostCompactedBytes": 188964,
+          "fileBytes": 71716116
+        }
+      ],
+      "captureFence": {
+        "samples": 13,
+        "median": 6.0994,
+        "p95": 6.3794,
+        "p99": 6.3794,
+        "maximum": 6.3794
+      },
+      "gpuTransferBarrier": {
+        "samples": 13,
+        "median": 2.60084,
+        "p95": 2.6062,
+        "p99": 2.6062,
+        "maximum": 2.6062
+      }
+    }
+  ],
+  "transport": {
+    "oldFormula": "64V+28T+188",
+    "coldFormula": "64V+16T+188",
+    "warmFormula": "64V+4T+188",
+    "hostFormula": "12*visible",
+    "copyCalls": [
+      6,
+      5,
+      4
+    ],
+    "barriers": 2,
+    "slotBytes": 92274688,
+    "slots": 2,
+    "cadenceMs": 1000,
+    "extraSubmissions": 0,
+    "extraFences": 0,
+    "extraWaits": 0,
+    "renderThreadAllocations": 0,
+    "newRenderThreadLocks": 0,
+    "qualityChange": false,
+    "shaderChange": false,
+    "hardwareCostQualified": false
+  },
+  "firstAlarm": {
+    "primaryJournalRecords": 131072,
+    "producerRecords": 16384,
+    "shutdownTailRecords": 16384,
+    "maximumPinnedCaptures": 3,
+    "costThresholdMilliseconds": 6,
+    "repeatingCount": 3,
+    "windowSamples": 4,
+    "separateCaptureAndNoncapture": true,
+    "rendererDeadlinesChanged": false,
+    "automaticMockRuns": [
+      {
+        "configuration": "debug",
+        "frame": 127,
+        "submitted": 127,
+        "completedAtTrigger": 126,
+        "sealSerial": 2164,
+        "triggerQpc": 356359732206,
+        "stopQpc": 356359737586,
+        "millisecondsToStop": 0.538,
+        "finalSubmitted": 127,
+        "finalCompleted": 127,
+        "automaticStop": true,
+        "pinnedCaptureJoinPassed": true,
+        "tailDropped": 0
+      },
+      {
+        "configuration": "release",
+        "frame": 127,
+        "submitted": 127,
+        "completedAtTrigger": 126,
+        "sealSerial": 2164,
+        "triggerQpc": 356723668444,
+        "stopQpc": 356723673369,
+        "millisecondsToStop": 0.4925,
+        "finalSubmitted": 127,
+        "finalCompleted": 127,
+        "automaticStop": true,
+        "pinnedCaptureJoinPassed": true,
+        "tailDropped": 0
+      }
+    ],
+    "delayedSupervisorChecksPerConfiguration": 28,
+    "historicalCloserAlarm": null,
+    "retainedGroundAlarm": {
+      "Frame": 10594,
+      "Submission": 10657,
+      "Capture": 59,
+      "Generation": 15,
+      "Pupil": 70,
+      "Milliseconds": 6.2433
+    },
+    "historicalFirstAlarmRecovered": false
+  },
+  "qualification": {
+    "configurations": [
+      "Debug",
+      "Release"
+    ],
+    "recordingChecksPerConfiguration": 11929,
+    "oneShotTraceRecords": 149,
+    "outerInterruptionClassifications": 50,
+    "scalarInterruptionClassifications": 23,
+    "recoveryCommandsPassed": 44,
+    "observerLossCasesPassed": 2,
+    "newAndLegacyFrozenSchema": true,
+    "shaderBinariesUnchanged": 130
+  },
+  "unknowns": [
+    "New mapped-host-prefix hardware cost and timing tails",
+    "Ground/horizon/orbit GPU route qualification",
+    "Historical 411877-triangle discrepancy",
+    "September 22 dual-monitor blackout cause"
+  ],
+  "manualPlayerAcceptance": "ON HOLD",
+  "liveExposureAuthorized": false,
+  "bankingPerformed": false
+}

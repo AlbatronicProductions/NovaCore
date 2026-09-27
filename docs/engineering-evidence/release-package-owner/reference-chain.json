@@ -1,0 +1,20 @@
+[
+  {
+    "path": "samples/NovaCore.Triangle/bin/Release/net10.0",
+    "shaders": 66,
+    "mismatch": 0,
+    "nativeMatches": true
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/bin/Release/net10.0-windows",
+    "shaders": 66,
+    "mismatch": 0,
+    "nativeMatches": true
+  },
+  {
+    "path": "tools/NovaCore.App/bin/Release/net10.0-windows",
+    "shaders": 66,
+    "mismatch": 0,
+    "nativeMatches": true
+  }
+]

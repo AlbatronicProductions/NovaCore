@@ -1,4 +1,6 @@
 #version 460
+#extension GL_GOOGLE_include_directive : require
+#include "production_tessellation_factor.glsl"
 struct EncodedPosition{vec4 high;vec4 low;};struct GpuCameraData{EncodedPosition position;mat4 viewProjection;};layout(set=0,binding=0,std430)readonly buffer Frame{GpuCameraData camera;}frameData;layout(set=0,binding=2,std430)readonly buffer Input{vec4 a;vec4 b;vec4 c;uvec4 controls;vec4 d;vec4 textureDemand;}inputData;
 layout(vertices=3) out;
 // The user output payload is 13 scalars per control point. Body-wide constants
@@ -20,20 +22,10 @@ float edgeFactor(uint a,uint b){
   if(forceTesOne())return 1;
   vec3 p0=ip[a],p1=ip[b],mid=(p0+p1)*.5,edge=p1-p0;
   float midDistance=length(mid),edgeLength=length(edge);
-  float pixels=screenDistance(gl_in[a].gl_Position,gl_in[b].gl_Position);
-  float alignment=abs(dot(mid/midDistance,edge/edgeLength));
-  float skew=(alignment-.8)/.2;
-  if(skew>0){
-    // KSA constructs a camera-space comparison edge with equal X/Y components.
-    // For a standard perspective matrix this is the exact equivalent expressed
-    // from NovaCore's combined VP plus its authoritative vertical FOV.
-    float midW=abs((gl_in[a].gl_Position.w+gl_in[b].gl_Position.w)*.5);
-    float verticalTan=inputData.textureDemand.y;
-    float compensation=.5*1.41421356237*screenSize().y*(.6*edgeLength)/(midW*verticalTan);
-    pixels=mix(pixels,compensation,skew);
-  }
-  float fade=1-clamp(midDistance/50,0,1);
-  return clamp(pixels/3*fade,1,64);
+  float alignment=midDistance>0&&edgeLength>0?abs(dot(mid/midDistance,edge/edgeLength)):0.0;
+  vec4 ca=gl_in[a].gl_Position,cb=gl_in[b].gl_Position;vec2 size=screenSize();
+  return terrainEdgeFactor(ca.x,ca.y,ca.w,cb.x,cb.y,cb.w,
+    midDistance,edgeLength,alignment,size.x,size.y,inputData.textureDemand.y);
 }
 void main(){
   uint i=gl_InvocationID;

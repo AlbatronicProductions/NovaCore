@@ -1,0 +1,538 @@
+[
+  {
+    "name": "short",
+    "command": [
+      "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+      "--qualify-editor",
+      "E:\\NovaCore\\build\\launch-admission-regression\\native-final\\short\\result.json",
+      "--qualification-tank",
+      "nc.tank.short-2"
+    ],
+    "exit": 0,
+    "seconds": 66.73400000001129,
+    "logSha256": "01d2d44732f1c17ea371965e3fca827b59e07f0780d444f483054e8f7df6dfd4",
+    "tail": [
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"supported\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":4.900299943983555,\"p95\":7.912700064480305,\"p99\":8.772900328040123,\"max\":9.990200400352478,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0653,\"p95\":0.4487,\"p99\":0.6953,\"max\":1.1772,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":54288,\"p99\":54288,\"max\":54584,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":0,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":4.9991002306342125,\"p95\":7.474299985915422,\"p99\":8.503199554979801,\"max\":9.286999702453613,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0702,\"p95\":0.3336,\"p99\":0.5271,\"max\":1.0502,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":49120,\"p99\":49120,\"max\":49400,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":1,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.615599919110537,\"p95\":6.728800013661385,\"p99\":7.511899806559086,\"max\":8.694999851286411,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0761,\"p95\":0.3972,\"p99\":0.5459,\"max\":2.0197,\"maximumConsecutiveP95\":3},\"allocatedBytes\":{\"median\":0,\"p95\":49080,\"p99\":49080,\"max\":49360,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.502399988472462,\"p95\":6.487099919468164,\"p99\":8.963500149548054,\"max\":9.437600150704384,\"maximumConsecutiveP95\":2},\"callbackMs\":{\"median\":0.0721,\"p95\":0.3537,\"p99\":0.4873,\"max\":1.1826,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":49080,\"p99\":49080,\"max\":49360,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":0,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.169699899852276,\"p95\":6.180999800562859,\"p99\":6.833000108599663,\"max\":8.892600424587727,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.062,\"p95\":0.2968,\"p99\":0.4305,\"max\":0.9801,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":35256,\"p99\":35256,\"max\":35520,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":1,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.266000051051378,\"p95\":7.211099844425917,\"p99\":11.351100169122219,\"max\":19.628500565886497,\"maximumConsecutiveP95\":12},\"callbackMs\":{\"median\":0.064,\"p95\":0.3102,\"p99\":0.4742,\"max\":1.2979,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":35256,\"p99\":35520,\"max\":68192,\"maximumConsecutiveP95\":2},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.12650003656745,\"p95\":6.279100198298693,\"p99\":6.49290019646287,\"max\":6.939500104635954,\"maximumConsecutiveP95\":2},\"callbackMs\":{\"median\":0.0626,\"p95\":0.3048,\"p99\":0.4599,\"max\":1.1851,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":35256,\"p99\":35256,\"max\":35520,\"maximumConsecutiveP95\":1},\"collections\":[1,1,0]}",
+      "Session ended; exitCode=0"
+    ],
+    "result": {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "playerPass": false,
+      "padRoutes": [
+        "editor",
+        "flight",
+        "flight-return",
+        "game",
+        "game-return"
+      ],
+      "checks": 557,
+      "tank": "nc.tank.short-2",
+      "process": 21976,
+      "window": 40307226,
+      "parts": 12,
+      "source": "0ae4a21055e8115170ba128131f3447460bcae40127daeeeea237f17309fba65",
+      "compiled": "301635022d9e4508105ada5fa0c108f4899e0b7607337bc22d3cbbf417dec419",
+      "retainedEpoch": 843715555252864,
+      "finalEpoch": 843715555362239,
+      "frames": 10856,
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.32480001449585,
+            "p95": 7.564499855041504,
+            "p99": 7.940299987792969,
+            "max": 8.507500648498535
+          },
+          "cpuMs": {
+            "median": 0.0062,
+            "p95": 0.0242,
+            "p99": 0.0479,
+            "max": 0.0689
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.263700008392334,
+            "p95": 7.979800224304199,
+            "p99": 8.423999786376953,
+            "max": 10.40369987487793
+          },
+          "cpuMs": {
+            "median": 0.0059,
+            "p95": 0.0255,
+            "p99": 0.0508,
+            "max": 0.0708
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.229599952697754,
+            "p95": 7.5416998863220215,
+            "p99": 8.630899429321289,
+            "max": 8.649700164794922
+          },
+          "cpuMs": {
+            "median": 0.0058,
+            "p95": 0.0381,
+            "p99": 0.0431,
+            "max": 0.0471
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99"
+    }
+  },
+  {
+    "name": "long",
+    "command": [
+      "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+      "--qualify-editor",
+      "E:\\NovaCore\\build\\launch-admission-regression\\native-final\\long\\result.json",
+      "--qualification-tank",
+      "nc.tank.long-2"
+    ],
+    "exit": 0,
+    "seconds": 67.28099999998813,
+    "logSha256": "dce0d7d67030ec883fe7e6d7442a1e40f4c13c789a37e73f55161e18f9609152",
+    "tail": [
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"supported\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":4.824500065296888,\"p95\":7.524900138378143,\"p99\":8.368199691176414,\"max\":11.200900189578533,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0641,\"p95\":0.4444,\"p99\":0.7547,\"max\":1.0626,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":54304,\"p99\":54304,\"max\":54600,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":0,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":4.992799833416939,\"p95\":7.723600137978792,\"p99\":8.493900299072266,\"max\":9.854700416326523,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0632,\"p95\":0.3467,\"p99\":0.5906,\"max\":1.324,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":49136,\"p99\":49136,\"max\":49416,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":1,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.279500037431717,\"p95\":6.237700115889311,\"p99\":7.244499865919352,\"max\":8.311700075864792,\"maximumConsecutiveP95\":2},\"callbackMs\":{\"median\":0.0642,\"p95\":0.2901,\"p99\":0.3777,\"max\":1.0271,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":49096,\"p99\":49096,\"max\":49376,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.562699865549803,\"p95\":6.579199805855751,\"p99\":7.067299913614988,\"max\":9.46350023150444,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0716,\"p95\":0.3469,\"p99\":0.4889,\"max\":1.0362,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":49096,\"p99\":49096,\"max\":49376,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":0,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.465600173920393,\"p95\":6.57479977235198,\"p99\":9.1474000364542,\"max\":9.325800463557243,\"maximumConsecutiveP95\":2},\"callbackMs\":{\"median\":0.0698,\"p95\":0.2978,\"p99\":0.4559,\"max\":1.136,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":35272,\"p99\":35272,\"max\":35536,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":1,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.508800037205219,\"p95\":6.4199999906122684,\"p99\":6.673700176179409,\"max\":7.612899877130985,\"maximumConsecutiveP95\":2},\"callbackMs\":{\"median\":0.0678,\"p95\":0.3274,\"p99\":0.4565,\"max\":1.31,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":35272,\"p99\":35272,\"max\":35536,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.4883998818695545,\"p95\":6.4976997673511505,\"p99\":7.424000184983015,\"max\":8.042699657380581,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0636,\"p95\":0.3359,\"p99\":0.457,\"max\":1.4923,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":35272,\"p99\":35272,\"max\":35536,\"maximumConsecutiveP95\":1},\"collections\":[1,1,0]}",
+      "Session ended; exitCode=0"
+    ],
+    "result": {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "playerPass": false,
+      "padRoutes": [
+        "editor",
+        "flight",
+        "flight-return",
+        "game",
+        "game-return"
+      ],
+      "checks": 557,
+      "tank": "nc.tank.long-2",
+      "process": 27476,
+      "window": 17697040,
+      "parts": 12,
+      "source": "9f2c9425124fc260e5c9a817afe53aa71943d66f752c7b4337a7b89dc55374a9",
+      "compiled": "3e0a55d75032b76a3da0132d2f3b2a7c94eac1478f64bfb5ca22001d0e1bca42",
+      "retainedEpoch": 843715622214705,
+      "finalEpoch": 843715622324080,
+      "frames": 10872,
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.291800022125244,
+            "p95": 7.670499801635742,
+            "p99": 8.181500434875488,
+            "max": 8.461099624633789
+          },
+          "cpuMs": {
+            "median": 0.0062,
+            "p95": 0.0275,
+            "p99": 0.0503,
+            "max": 0.055
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.27810001373291,
+            "p95": 7.590100288391113,
+            "p99": 8.613800048828125,
+            "max": 9.971699714660645
+          },
+          "cpuMs": {
+            "median": 0.0058,
+            "p95": 0.0281,
+            "p99": 0.0455,
+            "max": 0.0499
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.314699649810791,
+            "p95": 7.595099925994873,
+            "p99": 7.971700191497803,
+            "max": 8.191600799560547
+          },
+          "cpuMs": {
+            "median": 0.0059,
+            "p95": 0.0235,
+            "p99": 0.0375,
+            "max": 0.0392
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99"
+    }
+  },
+  {
+    "name": "two-short",
+    "command": [
+      "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+      "--qualify-editor",
+      "E:\\NovaCore\\build\\launch-admission-regression\\native-final\\two-short\\result.json",
+      "--qualification-tank",
+      "deep"
+    ],
+    "exit": 0,
+    "seconds": 67.23500000000058,
+    "logSha256": "9083645f226c4ccea15e1d439836127a0e84649d31c15bba3fcecdfed33f6564",
+    "tail": [
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"supported\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":4.803999792784452,\"p95\":7.668700069189072,\"p99\":9.250300005078316,\"max\":10.581900365650654,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0747,\"p95\":0.5153,\"p99\":0.7681,\"max\":1.1517,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":58424,\"p99\":58424,\"max\":58712,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":0,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":4.8675998114049435,\"p95\":8.111599832773209,\"p99\":9.283400140702724,\"max\":10.626000352203846,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0634,\"p95\":0.3566,\"p99\":1.1068,\"max\":3.021,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":57168,\"p99\":57168,\"max\":57440,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":1,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.201499909162521,\"p95\":7.1610999293625355,\"p99\":8.603000082075596,\"max\":8.976100012660027,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0602,\"p95\":0.3011,\"p99\":0.5108,\"max\":1.4592,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":57128,\"p99\":57128,\"max\":57400,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"powered\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.573600064963102,\"p95\":6.740800105035305,\"p99\":8.023999631404877,\"max\":9.133200161159039,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.0705,\"p95\":0.3601,\"p99\":0.5092,\"max\":1.2431,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":57128,\"p99\":57128,\"max\":57400,\"maximumConsecutiveP95\":1},\"collections\":[1,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":0,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.439599975943565,\"p95\":6.750199943780899,\"p99\":8.384199813008308,\"max\":9.014899842441082,\"maximumConsecutiveP95\":2},\"callbackMs\":{\"median\":0.0707,\"p95\":0.3275,\"p99\":1.0405,\"max\":1.3043,\"maximumConsecutiveP95\":2},\"allocatedBytes\":{\"median\":0,\"p95\":38880,\"p99\":38880,\"max\":39136,\"maximumConsecutiveP95\":1},\"collections\":[1,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":1,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.515499971807003,\"p95\":6.581599824130535,\"p99\":8.473699912428856,\"max\":9.40600037574768,\"maximumConsecutiveP95\":1},\"callbackMs\":{\"median\":0.07,\"p95\":0.3071,\"p99\":0.4573,\"max\":1.0428,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":38880,\"p99\":38880,\"max\":39136,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "MODULAR_INTEGRATED_WINDOW {\"phase\":\"coast\",\"window\":2,\"samples\":256,\"complete\":true,\"rcsFrames\":0,\"frameMs\":{\"median\":5.411299876868725,\"p95\":6.612699944525957,\"p99\":7.904100231826305,\"max\":10.07159985601902,\"maximumConsecutiveP95\":2},\"callbackMs\":{\"median\":0.0709,\"p95\":0.283,\"p99\":0.43,\"max\":1.0588,\"maximumConsecutiveP95\":1},\"allocatedBytes\":{\"median\":0,\"p95\":38880,\"p99\":38880,\"max\":39136,\"maximumConsecutiveP95\":1},\"collections\":[0,0,0]}",
+      "Session ended; exitCode=0"
+    ],
+    "result": {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "playerPass": false,
+      "padRoutes": [
+        "editor",
+        "flight",
+        "flight-return",
+        "game",
+        "game-return"
+      ],
+      "checks": 561,
+      "tank": "deep",
+      "process": 37092,
+      "window": 13440556,
+      "parts": 13,
+      "source": "b2fc2268331316b3b54e9a63387db79edc7238e2f8a70038671e078ba7c61a8d",
+      "compiled": "f23c07511c9100f365b9b7c01c42d9ac43f820cf6234aef65a222397d07839d2",
+      "retainedEpoch": 843715689486812,
+      "finalEpoch": 843715689580562,
+      "frames": 10920,
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.591899871826172,
+            "p95": 7.990599632263184,
+            "p99": 8.274099349975586,
+            "max": 8.327500343322754
+          },
+          "cpuMs": {
+            "median": 0.0059,
+            "p95": 0.022,
+            "p99": 0.025,
+            "max": 0.0398
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.575300216674805,
+            "p95": 7.9918999671936035,
+            "p99": 8.445500373840332,
+            "max": 10.815799713134766
+          },
+          "cpuMs": {
+            "median": 0.006,
+            "p95": 0.0273,
+            "p99": 0.0459,
+            "max": 0.0569
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.545100212097168,
+            "p95": 8.0246000289917,
+            "p99": 8.521899223327637,
+            "max": 8.706900596618652
+          },
+          "cpuMs": {
+            "median": 0.0057,
+            "p95": 0.0208,
+            "p99": 0.0581,
+            "max": 0.0599
+          },
+          "allocatedBytes": {
+            "median": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99"
+    }
+  },
+  {
+    "name": "construction",
+    "command": [
+      "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+      "--qualify-editor",
+      "E:\\NovaCore\\build\\launch-admission-regression\\native-final\\construction\\result.json",
+      "--qualification-tank",
+      "stabilization"
+    ],
+    "exit": 0,
+    "seconds": 31.281000000002678,
+    "logSha256": "15e98301b352f470a7f561b065cc170e6362bdb3ba43de79dcc233088d75002b",
+    "tail": [
+      "APPLICATION_QUALIFY step=379 frame=3040 parts=901",
+      "[native] Average frame time: 9.163 ms (3040 frames)",
+      "[native] Frame pacing: p50=4.935 ms; p95=20.763 ms; p99=24.985 ms; max=8649.021 ms; samples=3040",
+      "[native] Fence wait pacing: average=3.398 ms; p95=7.043 ms; max=9.863 ms; samples=3040",
+      "[native] CPU timings: update=8.395 ms; fence=3.398; inspection=0.031; hostCallback=4.947; validationUpload=0.020; record=0.084; submit=0.019; present=0.188",
+      "[native] GPU timing averages: total=0.053 ms; anchoredCompute=0.000; anchoredDraw=0.000; background=0.012; preSurface=0.000; toneMap=0.016",
+      "[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; readyCapacity=8; uploadBudget=8; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false",
+      "Session ended; exitCode=0"
+    ],
+    "result": {
+      "judgment": "STABILIZATION_NATIVE_PASS",
+      "playerPass": false,
+      "checks": 1026,
+      "frames": 3040,
+      "profiles": [
+        {
+          "profile": 0,
+          "depth": 1,
+          "parts": 12,
+          "radialHosts": 1,
+          "source": "f18f6f43ea6fe945b254cafe730aa86dffe494ad2e9f3cd4d43574eb757ed694"
+        },
+        {
+          "profile": 1,
+          "depth": 2,
+          "parts": 21,
+          "radialHosts": 2,
+          "source": "908fff6d9c9938669af0fdce8a4c063546e2ed6028388e777b5908fe35503bcd"
+        },
+        {
+          "profile": 2,
+          "depth": 1,
+          "parts": 12,
+          "radialHosts": 1,
+          "source": "eb928ac8cd09415f10fe03f8fecbd5de38cdcae19cc66d8ef4d2fb417cd6561f"
+        },
+        {
+          "profile": 3,
+          "depth": 4,
+          "parts": 31,
+          "radialHosts": 3,
+          "source": "68642cb55ed08de93c9e783c202ffab52ed43ed1c4bf82d62e75bf4ebdd85571"
+        },
+        {
+          "profile": 4,
+          "depth": 16,
+          "parts": 43,
+          "radialHosts": 3,
+          "source": "83ff97a85aefc0937e9ede2bd926df0d30bf840d8684be086c5085e166d67990"
+        },
+        {
+          "profile": 5,
+          "depth": 64,
+          "parts": 91,
+          "radialHosts": 3,
+          "source": "c989b14f15ec9121b6b4fef5345d10f16599e599ab2c8fb5b7083133c50e4555"
+        }
+      ],
+      "dense": {
+        "parts": 901,
+        "renderEntries": 4101,
+        "renderCapacity": 18585,
+        "heldFrames": 424,
+        "seconds": 2.3403668,
+        "warmWindows": [
+          {
+            "samples": 120,
+            "frameMs": {
+              "median": 5.22320032119751,
+              "p95": 7.789600372314453,
+              "p99": 10.043100357055664,
+              "max": 10.70359992980957
+            },
+            "cpuMs": {
+              "median": 0.0871,
+              "p95": 0.1424,
+              "p99": 0.1978,
+              "max": 0.3061
+            },
+            "allocatedBytes": {
+              "median": 0,
+              "p95": 0,
+              "p99": 0,
+              "max": 0
+            },
+            "gc": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "samples": 120,
+            "frameMs": {
+              "median": 5.351500034332275,
+              "p95": 8.35890007019043,
+              "p99": 9.655600547790527,
+              "max": 10.685600280761719
+            },
+            "cpuMs": {
+              "median": 0.0869,
+              "p95": 0.1222,
+              "p99": 0.1709,
+              "max": 0.2053
+            },
+            "allocatedBytes": {
+              "median": 0,
+              "p95": 0,
+              "p99": 0,
+              "max": 0
+            },
+            "gc": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "samples": 120,
+            "frameMs": {
+              "median": 5.322500228881836,
+              "p95": 8.457300186157227,
+              "p99": 8.99370002746582,
+              "max": 10.277800559997559
+            },
+            "cpuMs": {
+              "median": 0.0867,
+              "p95": 0.1231,
+              "p99": 0.2084,
+              "max": 0.2937
+            },
+            "allocatedBytes": {
+              "median": 0,
+              "p95": 0,
+              "p99": 0,
+              "max": 0
+            },
+            "gc": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99"
+    }
+  }
+]

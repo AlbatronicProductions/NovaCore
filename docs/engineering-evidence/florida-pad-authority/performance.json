@@ -1,0 +1,105 @@
+{
+  "scope": "Three 120-frame held editor windows per canonical route; flight windows and native timings remain separately labeled in runtime logs. No universal cold-edit or zero-allocation whole-engine claim.",
+  "heldWindows": 12,
+  "frameMedianMsRange": [
+    5.465100288391113,
+    5.558799743652344
+  ],
+  "frameP95MsRange": [
+    9.04699993133545,
+    10.900899887084961
+  ],
+  "editorRenderAllocatedBytesMax": 0,
+  "editorRenderGC": [
+    0,
+    0,
+    0
+  ],
+  "dense": {
+    "parts": 901,
+    "renderEntries": 4101,
+    "renderCapacity": 18585,
+    "heldFrames": 424,
+    "seconds": 2.3345699,
+    "warmWindows": [
+      {
+        "samples": 120,
+        "frameMs": {
+          "median": 5.5077996253967285,
+          "p95": 9.04699993133545,
+          "p99": 10.191100120544434,
+          "max": 10.35509967803955
+        },
+        "cpuMs": {
+          "median": 0.0862,
+          "p95": 0.1672,
+          "p99": 0.193,
+          "max": 0.3808
+        },
+        "allocatedBytes": {
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "samples": 120,
+        "frameMs": {
+          "median": 5.49269962310791,
+          "p95": 9.679099082946777,
+          "p99": 10.402300834655762,
+          "max": 10.485899925231934
+        },
+        "cpuMs": {
+          "median": 0.0956,
+          "p95": 0.1679,
+          "p99": 0.1901,
+          "max": 0.1906
+        },
+        "allocatedBytes": {
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "samples": 120,
+        "frameMs": {
+          "median": 5.542300224304199,
+          "p95": 9.542400360107422,
+          "p99": 10.347900390625,
+          "max": 10.419400215148926
+        },
+        "cpuMs": {
+          "median": 0.092,
+          "p95": 0.1711,
+          "p99": 0.1957,
+          "max": 0.1974
+        },
+        "allocatedBytes": {
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}

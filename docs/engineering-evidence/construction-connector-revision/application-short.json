@@ -1,0 +1,95 @@
+{
+  "judgment": "APPLICATION_INTEGRATION_PASS",
+  "playerPass": false,
+  "checks": 393,
+  "tank": "nc.tank.short-2",
+  "process": 3748,
+  "window": 10485888,
+  "parts": 12,
+  "source": "71e6474a46c5be4267d2490b6c4210cc1e9f5cc439982a2cc347bab6acc03a74",
+  "compiled": "3902f71be5d38021e9c5f1d2f72f6b2f7541f2bc9f10631ac4dbcc0ecf47b261",
+  "retainedEpoch": 843668743166282,
+  "finalEpoch": 843668743275657,
+  "frames": 3816,
+  "warmWindows": [
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.636300086975098,
+        "p95": 7.855099678039551,
+        "p99": 8.541899681091309,
+        "max": 12.065299987792969
+      },
+      "cpuMs": {
+        "median": 0.0101,
+        "p95": 0.0527,
+        "p99": 0.2027,
+        "max": 0.2306
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.521100044250488,
+        "p95": 7.932400226593018,
+        "p99": 8.358599662780762,
+        "max": 8.59000015258789
+      },
+      "cpuMs": {
+        "median": 0.0052,
+        "p95": 0.025,
+        "p99": 0.0472,
+        "max": 0.0853
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.744600296020508,
+        "p95": 7.895000457763672,
+        "p99": 8.12969970703125,
+        "max": 8.26550006866455
+      },
+      "cpuMs": {
+        "median": 0.0048,
+        "p95": 0.0378,
+        "p99": 0.057,
+        "max": 0.0883
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native": "79719b00774a7a3683d5c1820efda249ef3848adab1a4f00285b89ec1e50243a"
+}

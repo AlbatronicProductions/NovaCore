@@ -1,0 +1,39 @@
+{
+  "judgment": "PRESERVATION_PASS",
+  "utc": "2026-09-27T00:18:48.020823+00:00",
+  "entryFileCount": 3845,
+  "entryChanges": [],
+  "addedReportFiles": [
+    "docs/engineering-evidence/ordinary-player-causal-recorder/README.md",
+    "docs/engineering-evidence/ordinary-player-causal-recorder/integration-map.md",
+    "docs/engineering-evidence/ordinary-player-causal-recorder/proof/BoundaryDurabilityProof.csproj",
+    "docs/engineering-evidence/ordinary-player-causal-recorder/proof/NuGet.Config",
+    "docs/engineering-evidence/ordinary-player-causal-recorder/proof/Program.cs",
+    "docs/engineering-evidence/ordinary-player-causal-recorder/reproduce.md"
+  ],
+  "unexpectedNewFiles": [],
+  "sealedEvidence": [
+    {
+      "root": "E:\\NovaCore\\build\\blackout-recurrence-20260926-193024",
+      "changes": [],
+      "inventoryUnchanged": true
+    },
+    {
+      "root": "E:\\NovaCore\\build\\blackout-recurrence-20260926-livekernel",
+      "changes": [],
+      "inventoryUnchanged": true
+    }
+  ],
+  "packageFileCount": 127,
+  "packageChanges": [],
+  "packageExtras": [],
+  "gitChanges": [],
+  "proofSourceMatches": true,
+  "qualificationScope": "Standalone CPU persistence-model proof only; not an implemented recorder",
+  "productionCodeChanges": 0,
+  "novaCoreBuilds": 0,
+  "novaCoreLaunches": 0,
+  "gpuExposure": false,
+  "recorderJudgment": "ESCALATE_CONTRACT_DECISION",
+  "candidateFrozen": false
+}

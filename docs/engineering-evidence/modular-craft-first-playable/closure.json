@@ -1,0 +1,111 @@
+{
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "headPreserved": true,
+  "refsPreserved": true,
+  "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "indexPreserved": true,
+  "worktreesPreserved": true,
+  "preexistingFileCount": 3322,
+  "unchangedPreexistingFiles": 3319,
+  "changed": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs",
+      "entrySha256": "624d1a2c891ac082955cae1f3c4b500d09b30075effaaa6f1748d0c9223a1a4d",
+      "sha256": "b77118d57a8f13c7aab730bd7325a9a0f11fbd78e50f79ad975f413389386ca5"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "entrySha256": "6e87ec5b75b859a6e4705a0cf8e2f5b4696ee42e9723dc79739bb577e31ac809",
+      "sha256": "c5bf5f8368157347671a6366c0e410106ea2ec1e168f77a7e0e84889f3986ebe"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "entrySha256": "f17aa31c41c9de8dc7864a2ab886353eed88b5cfd08428df5e1a7d0e27f262c6",
+      "sha256": "a8ebd5ef541d35f75d048f8eafd6b963bdc2de007517dc2c7680f980d73e2f5f"
+    }
+  ],
+  "missing": [],
+  "unexpectedChanged": [],
+  "added": [
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/accepted-plan.md",
+      "bytes": 41462,
+      "sha256": "fba2cc3a2476063f808b593188a857c72663ca7c162be55cbeed6a8e10a4812b"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/entry.json",
+      "bytes": 754231,
+      "sha256": "84770b16e8d876e3bd62653f8e70d584bb7098e29d5804b9bcdcaca80daed46c"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/gate1-regression.json",
+      "bytes": 4323,
+      "sha256": "5796762cb28143612708c0360721fb1cc99614069cabdc23236601d8fd422b4a"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/independent-review.md",
+      "bytes": 6632,
+      "sha256": "18c6363055c6a3e6eadc3febe3ebf1af719db8c04159cbd5f3a37f0beeb2c0a9"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/README.md",
+      "bytes": 2728,
+      "sha256": "566d666d229b9df6c4c0087e60ee1e910fbfa85b571a9882dc66a8d0a23306bb"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/redteam.json",
+      "bytes": 1415,
+      "sha256": "d9f656623f0356f31aa3cdc2aef18e20a720ba583f9f2d75c066dbb48b2439ad"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/report.md",
+      "bytes": 9009,
+      "sha256": "97fb7c71ebea31139c5742448c699ca7d54013c7cda92e394cff963ca41d9041"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/reproduce.md",
+      "bytes": 1816,
+      "sha256": "44bb78ed2cde16057cc59588fd53c89dda864cda61d934c329fcac4870ed688b"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandard.cs",
+      "bytes": 14690,
+      "sha256": "49ccd3d8ee8643dcca46f6d3d35d71563bfda6e752c09ead1d040d940bd73c6e"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.cs",
+      "bytes": 10970,
+      "sha256": "6bf1ebe51800f6cbad72669d5e0d1fbdd73204db98bc7cab13fcf4d16ab607dd"
+    }
+  ],
+  "evidenceBytesExcludingClosure": 821616.0,
+  "diagnosticBytes": 1259701.0,
+  "recoveryArchiveBytes": 791648,
+  "cleanup": "NONE; recovery retained until Project Control authorizes exact cleanup",
+  "ksaWrites": 0,
+  "gate1": "FAIL_STOP_ESCALATE",
+  "corrections": 1,
+  "compiledArtifacts": [
+    {
+      "path": "src/NovaCore.Simulation/bin/Debug/net10.0/NovaCore.Simulation.dll",
+      "bytes": 4880384,
+      "sha256": "f6b48e6f40d1835e9d22926a60f41e632e62c8f166964c0dbe6ab395b963ce86"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "bytes": 1396224,
+      "sha256": "57b43663893df46a20d636c5adc1270628e29450f617bd1de4fc1a7b3dadca80"
+    },
+    {
+      "path": "src/NovaCore.Simulation/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "bytes": 4825600,
+      "sha256": "d775c1f49230827da83ea0ed3a32cddc976946ff67c72333c91ddc8b82949206"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "bytes": 1356800,
+      "sha256": "f58835bc72653c4ed5b1562506690056ed3e709967a45b7fa35559dd82b88cfa"
+    }
+  ],
+  "whitespaceCheck": "git diff --check PASS; new authored text has no trailing whitespace"
+}

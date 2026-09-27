@@ -1,0 +1,97 @@
+{
+  "engineering": "PASS",
+  "integration": "PASS",
+  "playerPass": false,
+  "banked": false,
+  "milestoneAssigned": false,
+  "freeze": "Final source and canonical package sealed; later production edits invalidate affected qualification.",
+  "sourceSha256": "1f803f8be54ee9669e3d6305893dc2527cab1046cd77060512eeef5ef36f4464",
+  "qualifiedProductionSha256": "688c53c99272a27cb65714709b66ef52cad355b688bfb13a77e1345652dcdd60",
+  "packageSha256": "43a1ca2191e5100953325991cd543cc9b920a617e3e8be7aafd5603dd968528c",
+  "canonicalNativeSha256": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99",
+  "canonicalRoutes": {
+    "canonical-short": {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "checks": 542,
+      "frames": 10528,
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99",
+      "parts": 12,
+      "padRoutes": [
+        "editor",
+        "flight",
+        "flight-return",
+        "game",
+        "game-return"
+      ]
+    },
+    "canonical-long": {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "checks": 542,
+      "frames": 10536,
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99",
+      "parts": 12,
+      "padRoutes": [
+        "editor",
+        "flight",
+        "flight-return",
+        "game",
+        "game-return"
+      ]
+    },
+    "canonical-two-tank": {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "checks": 546,
+      "frames": 10544,
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99",
+      "parts": 13,
+      "padRoutes": [
+        "editor",
+        "flight",
+        "flight-return",
+        "game",
+        "game-return"
+      ]
+    },
+    "canonical-stabilization": {
+      "judgment": "STABILIZATION_NATIVE_PASS",
+      "checks": 1026,
+      "frames": 3040,
+      "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99",
+      "parts": null,
+      "padRoutes": null
+    },
+    "independent-final": {
+      "judgment": "APPLICATION_INTEGRATION_PASS",
+      "checks": 545,
+      "frames": 10536,
+      "native": "c66639a2d812fb6c25f7633a0f6689cc0ec1dd6d13250706cbfbd67115b195a6",
+      "parts": 13,
+      "padRoutes": [
+        "editor",
+        "flight",
+        "flight-return",
+        "game",
+        "game-return"
+      ]
+    }
+  },
+  "regressionCommands": 22,
+  "gpuCpuComparisonsPerConfiguration": 126,
+  "managedBuilds": "Debug and Release, zero warnings/errors",
+  "nativeBuilds": "Debug and Release PASS",
+  "freshSourceRelease": "PASS with 47 generated directories absent and verified explicit terrain cache",
+  "constructionDepths": [
+    1,
+    2,
+    4,
+    16,
+    64
+  ],
+  "denseConstruction": {
+    "parts": 901,
+    "renderEntries": 4101,
+    "capacity": 18585
+  },
+  "flightWitness": "Short, long and two-short-tank/13-part craft. Larger full-capacity stacks retain existing support-load refusals.",
+  "groundImpact": "Unchanged explicit outside-qualified-continuation boundary; landing/recontact/impact/destruction remain post-bank gaps."
+}

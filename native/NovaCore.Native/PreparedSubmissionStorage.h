@@ -7,6 +7,9 @@ namespace nc {
 inline uint64_t SubmissionBytes(uint32_t capacity) {
     return sizeof(NcCameraData) + uint64_t(sizeof(NcRenderObject)) * capacity;
 }
+inline bool PreparedCapacityFits(uint32_t capacity,uint32_t active,uint32_t storageRange) {
+    return capacity && active<=capacity && SubmissionBytes(capacity)<=storageRange;
+}
 // Preparation owns capacity; each frame supplies only its active length.
 // Check before either copy so refusal cannot partially overwrite a frame.
 inline void CopyPreparedSubmission(void* destination, uint64_t bytes,

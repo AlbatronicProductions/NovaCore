@@ -1,0 +1,21 @@
+{
+  "judgment": "PASS",
+  "originalSaves": {
+    "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\PC-RCS64-canonical-20260926.craft.json": "306fd72076071f1aa73ab6583cd489fcca2cf9bf11a30e2f53a6d68ea074ec6c",
+    "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\rcs-qualification.craft.json": "5dcba55826f47c49759d81e3611b15a7cbc443d608c9cf015e4bb4bf8ba1aa26",
+    "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\Test 1.craft.json": "1cbd271b6c76a82b20eb0077637567145cb7688072047204880f0e33acbb9585",
+    "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\UX-Review-20260922.craft.json": "7936a61295828a13c10fb39c7d43adfe6e3b86d1b8c35d865c8a9feda7459d2a"
+  },
+  "newQualificationSaves": {
+    "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\Scalable-support-final-4008kg.craft.json": "970df30eaf0e1f36bd8c53875504d03b90edd73248fd54f6bea32fa51b5c036c",
+    "C:\\Users\\Tyler\\Documents\\NovaCore\\Craft\\Scalable-support-stock-4008kg.craft.json": "9fd63c72dad51fcd83b723a5added60d93c9145acd48b333f9987c567ac6b774"
+  },
+  "settingsUnchanged": true,
+  "settings": {
+    "Preset": 3,
+    "AltitudeMetres": null,
+    "WindowMode": 1,
+    "Resolution": 0,
+    "Diagnostics": 1
+  }
+}

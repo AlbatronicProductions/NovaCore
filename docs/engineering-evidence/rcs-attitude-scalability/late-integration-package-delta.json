@@ -1,0 +1,20 @@
+{
+  "earlierPackageSha256": "e660f22f0a1bce3e60db10e17667f0896e884daba231be0216bee998a1636ae3",
+  "qualifiedPackageSha256": "4eeadff671b13768c49ece9f0ac45bd651af7c70e3f0f85b788f371c56ace533",
+  "changedFiles": [
+    "NovaCore.ConstructionEditor.dll",
+    "NovaCore.ConstructionEditor.pdb",
+    "NovaCore.ConstructionEditor.staticwebassets.endpoints.json",
+    "NovaCore.dll",
+    "NovaCore.pdb"
+  ],
+  "unchangedResponsibilities": [
+    "Simulation assembly",
+    "Graphics assembly",
+    "Triangle assembly",
+    "native runtime",
+    "all shaders",
+    "production content"
+  ],
+  "reason": "Final multi-group harness and shared-visual cold adapter affect editor/application only; full native routes rerun. Permanent viewport tests separately rerun."
+}

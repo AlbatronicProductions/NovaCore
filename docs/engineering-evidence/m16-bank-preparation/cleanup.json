@@ -1,0 +1,93 @@
+{
+  "judgment": "REVISE - deletion command rejected by automatic approval review: blocked by policy",
+  "accountingScope": "Four exact reviewed cleanup targets; report files are outside this scope",
+  "beforeBytes": 1190276823,
+  "afterBytes": 1190276823,
+  "reclaimedBytes": 0,
+  "retiredPaths": [],
+  "safeToRetireButBlocked": [
+    {
+      "path": "build/stabilization-bank-gauntlet/clean-cache",
+      "classification": "SAFE TO RETIRE",
+      "bytes": 271791820,
+      "reason": "Verified duplicate authoritative terrain cache",
+      "afterBytes": 271791820,
+      "retired": false
+    },
+    {
+      "path": "build/florida-pad-authority/clean-cache",
+      "classification": "SAFE TO RETIRE",
+      "bytes": 271791820,
+      "reason": "Verified duplicate authoritative terrain cache",
+      "afterBytes": 271791820,
+      "retired": false
+    },
+    {
+      "path": "build/stabilization-bank-gauntlet/clean-generated-hold",
+      "classification": "SAFE TO RETIRE",
+      "bytes": 442648455,
+      "reason": "Isolated historical reproduction generated bin/obj/native output; superseded canonical 134-file package retained; historical reproduction package manifests, logs and source export retained. Rebuild via retained reproduction recipe. No production/test input owner.",
+      "afterBytes": 442648455,
+      "retired": false
+    },
+    {
+      "path": "build/florida-pad-authority/clean-generated-hold",
+      "classification": "SAFE TO RETIRE",
+      "bytes": 204044728,
+      "reason": "Isolated historical reproduction generated bin/obj/native output; superseded canonical 134-file package retained; historical reproduction package manifests, logs and source export retained. Rebuild via retained reproduction recipe. No production/test input owner.",
+      "afterBytes": 204044728,
+      "retired": false
+    }
+  ],
+  "preserved": [
+    "tools/NovaCore.App/bin/Release/net10.0-windows",
+    ".git",
+    "assets",
+    "tests",
+    "build/native-ninja-release",
+    "build/recorder-bounded-storage",
+    "docs/engineering-evidence/minimum-recorder-bounded-storage",
+    ".novacore/cache/terrain/v1",
+    "build/stabilization-bank-gauntlet/clean-source",
+    "build/florida-pad-authority/clean-source"
+  ],
+  "deferAmbiguous": [
+    "build/earth-blackout-closure",
+    "build/earth-camera-blackout-20260922",
+    "build/blackout-recurrence-20260926-193024",
+    "build/ordinary-player-recorder",
+    "build/recorder-overflow"
+  ],
+  "externalUntouched": [
+    "C:/Users/Tyler/AppData/Local/NovaCore/MinimumRecorder",
+    "C:/Users/Tyler/.codex/worktrees/rcs-scalability/NovaCore",
+    "E:/Kitten Space Agency"
+  ],
+  "perFileTargetInventory": "build/m16-bank-preparation/cleanup-before.json",
+  "repositoryEntryBytes": 12085877098,
+  "repositoryEntryBytesByDirectory": {
+    ".gitattributes": 787,
+    ".gitignore": 438,
+    "Directory.Build.props": 284,
+    "Directory.Build.targets": 166,
+    "ENGINEERING_RULES.md": 16117,
+    "LICENSE": 13292,
+    "LICENSING.md": 2139,
+    "NOTICE.md": 1666,
+    "NovaCore.sln": 32874,
+    "README.md": 16634,
+    ".codex": 7357,
+    ".git": 1704940900,
+    ".github": 2475,
+    ".novacore": 446536853,
+    "assets": 990281599,
+    "build": 8051531522,
+    "docs": 156495544,
+    "external": 291735530,
+    "native": 1081220,
+    "samples": 164059499,
+    "src": 55132442,
+    "tests": 131088388,
+    "tools": 92899372
+  }
+}

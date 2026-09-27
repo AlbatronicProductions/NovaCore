@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {extents,sockets,socketMarkerLimit} from '../wwwroot/geometry.mjs';
+const pose={position:{x:10,y:20,z:30},rotation:{a:0,b:-1,c:0,d:1,e:0,f:0,g:0,h:0,i:1}};
+const part={pose,com:{x:10,y:20,z:30}};
+const definition={attachments:Array.from({length:256},(_,i)=>({id:`a${i}`,family:'proof',frame:{position:{x:i,y:i*2,z:-i}}}))};
+assert.equal(extents([],()=>definition,['x','y']),null);
+assert.deepEqual([...sockets(part,definition)][1].position,{x:8,y:21,z:29});
+const document={parts:Array(1024).fill(part)};
+const bounds=extents([document,document],()=>definition,['x','y']);
+assert.deepEqual(bounds,{count:528384,minX:-500,maxX:10,minY:20,maxY:275});
+assert.equal(socketMarkerLimit,2048);
+const maximum={attachments:Array.from({length:4096},(_,i)=>({id:`m${i}`,family:'proof',frame:{position:{x:i,y:0,z:0}}}))};
+assert.equal(extents([document],()=>maximum,['x','z']).count,4196352);
+assert.equal(extents([document,document],()=>maximum,['x','z']).count,8392704);
+console.log('Editor geometry PASS: empty, rigid transform, 528384-point repeated preview and 8392704-point combined admitted maximum; no argument spreading.');

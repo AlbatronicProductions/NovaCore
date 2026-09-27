@@ -1,0 +1,73 @@
+{
+  "judgment": "PASS",
+  "method": "Exact prospective unbanked file export with resolved LFS bytes and a fresh empty Git root marker. No commits or main index writes. Not a checkout of banked HEAD.",
+  "productionInputSha256": "f781b0a9e305f34c210f8e05acf8fd81068cea1098947629166d1dba9cd8144f",
+  "freshConfigurations": [
+    "Debug",
+    "Release"
+  ],
+  "matchedPackageContentAndShaders": true,
+  "pathOrBuildIdentityDifferences": [
+    "NovaCore.ConstructionEditor.dll",
+    "NovaCore.ConstructionEditor.exe",
+    "NovaCore.ConstructionEditor.pdb",
+    "NovaCore.ConstructionEditor.staticwebassets.endpoints.json",
+    "NovaCore.ConstructionEditor.staticwebassets.runtime.json",
+    "NovaCore.Core.dll",
+    "NovaCore.Core.pdb",
+    "NovaCore.dll",
+    "NovaCore.EphemerisFormat.dll",
+    "NovaCore.EphemerisFormat.pdb",
+    "NovaCore.exe",
+    "NovaCore.Graphics.dll",
+    "NovaCore.Graphics.pdb",
+    "NovaCore.Interop.dll",
+    "NovaCore.Interop.pdb",
+    "NovaCore.Launcher.dll",
+    "NovaCore.Launcher.exe",
+    "NovaCore.Launcher.pdb",
+    "NovaCore.Native.dll",
+    "NovaCore.pdb",
+    "NovaCore.Platform.dll",
+    "NovaCore.Platform.pdb",
+    "NovaCore.Simulation.dll",
+    "NovaCore.Simulation.pdb",
+    "NovaCore.Triangle.dll",
+    "NovaCore.Triangle.exe",
+    "NovaCore.Triangle.pdb"
+  ],
+  "binaryIdentityClaim": "Independent builds of identical production input, each runtime-qualified; not a claim of cross-directory byte-identical compiler output. Native PE/PDB identity and generated web metadata can differ.",
+  "isolatedGeneratedDirectories": 47,
+  "isolatedOutputRoutes": [
+    "independent-stabilization",
+    "independent-short",
+    "independent-long"
+  ],
+  "runtimeAuthorities": "Runtime logs locate managed/native/shaders inside the isolated complete player-package; elevation/topology inside fresh source; both terrain payloads inside clean-cache. No KSA, temporary capture, old binaries or sibling output required.",
+  "postBuildDocumentationSynchronization": [
+    {
+      "path": "README.md",
+      "buildTimeSha256": "c77aa27891b2f339049af564a66fc02879ba4e11827dfd537c58c08c954d7a88",
+      "finalSha256": "631452de51501278ebf09301224e773263703b5b68f2ba9e1696f451c696901b",
+      "classification": "documentation only: normal App route, unbanked source prerequisite and clone-only Git LFS commands"
+    },
+    {
+      "path": "docs/build-windows.md",
+      "buildTimeSha256": "aafa4c173bc816179852cfea5eb8fd326f8e0fbc3e94e056e537167bb5b9e020",
+      "finalSha256": "e2fb78a7c9c46d12b5dbb0cdcc753bf66bc3f71dad8a222c43fec2689ce3fe08",
+      "classification": "documentation/regression orchestration only; no compilation input change"
+    },
+    {
+      "path": "docs/engineering-evidence/stabilization-bank-gauntlet/qualify-offline.py",
+      "buildTimeSha256": "96e6132b6415d49cd33487fc7d6b5ac28e54d6de8c4e793777309b8214c448c0",
+      "finalSha256": "482eb25e58579ea627823cd1e4a92c90d1e7501c0ad01646c7dec10a21400783",
+      "classification": "documentation/regression orchestration only; no compilation input change"
+    },
+    {
+      "path": "docs/engineering-evidence/stabilization-bank-gauntlet/reproduce.md",
+      "buildTimeSha256": "7857a407f705c083c753a53c8445f7947ba033bfe5aea74612f222556cb53fde",
+      "finalSha256": "6663034fd0f0f0c3323a6fc4ab9f245d7bc1cb664699d3d0758b2a8f42b60bdb",
+      "classification": "documentation/regression orchestration only; no compilation input change"
+    }
+  ]
+}

@@ -1,0 +1,491 @@
+{
+  "note": "Cold preparation sample N=12: P95/P99 are observed maximum, not a fitted tail. Lifecycle timings cover actual 64Hz transactions, including existing resource/control allocation; pool bytes are retained native capacity before release. CPU qualification ran alongside native application routes; no idle-machine claim.",
+  "runs": [
+    {
+      "configuration": "Debug--scalable-support",
+      "kind": "constant-gravity-admission",
+      "values": {
+        "qualification": "SUPPORT_GEOMETRY_LOAD",
+        "checks": 249,
+        "rows": [
+          {
+            "tanks": [
+              "short"
+            ],
+            "mass": 1304,
+            "MaximumObservedLoad": 3265.435546875,
+            "MaximumDisplacement": 3.29038557538297e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 4.547473508864641e-13,
+            "Digest": "dc4bb9110648d46627ca51d90a8d07c5aa944845e2e54bcdf29278a588d241d6",
+            "admission": {
+              "median": 81.3176,
+              "p95": 109.6054,
+              "p99": 109.6054,
+              "worst": 109.6054,
+              "allocatedMedian": 120320
+            }
+          },
+          {
+            "tanks": [
+              "long"
+            ],
+            "mass": 2164,
+            "MaximumObservedLoad": 5403.315979003906,
+            "MaximumDisplacement": 2.3131580746849068e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 1.2862197421537486e-12,
+            "Digest": "80471844f91a56a58ef67b5eeb09503d68d9950df3a61e5017bec0005d0620d8",
+            "admission": {
+              "median": 95.0509,
+              "p95": 120.9538,
+              "p99": 120.9538,
+              "worst": 120.9538,
+              "allocatedMedian": 120320
+            }
+          },
+          {
+            "tanks": [
+              "short",
+              "short"
+            ],
+            "mass": 2288,
+            "MaximumObservedLoad": 5713.666442871094,
+            "MaximumDisplacement": 1.9802037058980204e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 2.5724394843074972e-12,
+            "Digest": "62b9c15608fbfa7da12f78a76b6799742dfe9cea6d78b393a39c21659e4615da",
+            "admission": {
+              "median": 103.8659,
+              "p95": 115.7568,
+              "p99": 115.7568,
+              "worst": 115.7568,
+              "allocatedMedian": 155192
+            }
+          },
+          {
+            "tanks": [
+              "long",
+              "long"
+            ],
+            "mass": 4008,
+            "MaximumObservedLoad": 10315.075439453125,
+            "MaximumDisplacement": 1.111359779315535e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 4.067383956680332e-12,
+            "Digest": "9c1b71491f0f4213013a7e1085984be5c2abad4f280f5bbfffd2e5167aa61cfd",
+            "admission": {
+              "median": 109.0808,
+              "p95": 116.7858,
+              "p99": 116.7858,
+              "worst": 116.7858,
+              "allocatedMedian": 155184
+            }
+          },
+          {
+            "tanks": [
+              "long",
+              "long",
+              "short"
+            ],
+            "mass": 4992,
+            "MaximumObservedLoad": 12904.582763671875,
+            "MaximumDisplacement": 8.854608495312277e-06,
+            "ForceResidual": 0,
+            "MomentResidual": 2.5724394843074972e-12,
+            "Digest": "16588fb3dbd620b425118d80363823e23d86873fcf7131418c45910180d38326",
+            "admission": {
+              "median": 112.7034,
+              "p95": 131.2783,
+              "p99": 131.2783,
+              "worst": 131.2783,
+              "allocatedMedian": 191688
+            }
+          }
+        ]
+      }
+    },
+    {
+      "configuration": "Debug--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "short"
+        ],
+        "mass": 1304,
+        "jets": 32,
+        "peak": 3279.7716064453125,
+        "identity": "a889cf171eece70692658b87f5e0019c9e3755cab6c1caffde08037bace6d9f2",
+        "MaximumDisplacement": 3.243227911298163e-05,
+        "departureMass": 1303.375,
+        "departureTime": 5062500,
+        "admissionMs": 254.8918,
+        "admissionBytes": 431536,
+        "retainedPoolBytes": 507904,
+        "supported": {
+          "median": 2.1608,
+          "p95": 3.2185,
+          "p99": 3.4265,
+          "worst": 3.5124,
+          "allocatedMedian": 51952
+        },
+        "releaseMs": 2.4133
+      }
+    },
+    {
+      "configuration": "Debug--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "long"
+        ],
+        "mass": 2164,
+        "jets": 32,
+        "peak": 5411.576965332031,
+        "identity": "38cc501a1f67f300ac45a96bb15c077bbc0ae4d013afa4b4548e7d8895668944",
+        "MaximumDisplacement": 2.3614493329660036e-05,
+        "departureMass": 2162.75,
+        "departureTime": 5125000,
+        "admissionMs": 112.0244,
+        "admissionBytes": 430480,
+        "retainedPoolBytes": 507904,
+        "supported": {
+          "median": 1.1263,
+          "p95": 1.1696,
+          "p99": 1.2082,
+          "worst": 2.1935,
+          "allocatedMedian": 51976
+        },
+        "releaseMs": 1.1915
+      }
+    },
+    {
+      "configuration": "Debug--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "short",
+          "short"
+        ],
+        "mass": 2288,
+        "jets": 64,
+        "peak": 5727.090759277344,
+        "identity": "d00eacabf4e1a6fbc47baa3fd08a0d8a26fc4506c24be10372d4e82272aada81",
+        "MaximumDisplacement": 1.9803022951236926e-05,
+        "departureMass": 2286.4375,
+        "departureTime": 5156250,
+        "admissionMs": 136.4085,
+        "admissionBytes": 539432,
+        "retainedPoolBytes": 573440,
+        "supported": {
+          "median": 1.1178,
+          "p95": 1.3157,
+          "p99": 1.4964,
+          "worst": 1.7011,
+          "allocatedMedian": 65960
+        },
+        "releaseMs": 1.3569
+      }
+    },
+    {
+      "configuration": "Debug--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "long",
+          "long"
+        ],
+        "mass": 4008,
+        "jets": 64,
+        "peak": 10105.149780273438,
+        "identity": "dd6f50dc5b926fce8dd54446a8ea3775b8310bbcb79a9f21f8d8ce9b2c847c3c",
+        "MaximumDisplacement": 1.1558372534636874e-05,
+        "departureMass": 3111.75,
+        "departureTime": 94625000,
+        "admissionMs": 126.4668,
+        "admissionBytes": 540560,
+        "retainedPoolBytes": 573440,
+        "supported": {
+          "median": 1.7798,
+          "p95": 2.1448,
+          "p99": 2.3665,
+          "worst": 6.5494,
+          "allocatedMedian": 89776
+        },
+        "releaseMs": 1.3286
+      }
+    },
+    {
+      "configuration": "Debug--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "short",
+          "short",
+          "long"
+        ],
+        "mass": 4132,
+        "jets": 96,
+        "peak": 10499.555541992188,
+        "identity": "04523ff3432b6eb6cd880b4c8065bf2789925209aa5b2383efeaa340b80c3cc5",
+        "MaximumDisplacement": 1.109163713408634e-05,
+        "departureMass": 3110.90625,
+        "departureTime": 107109375,
+        "admissionMs": 152.5291,
+        "admissionBytes": 651128,
+        "retainedPoolBytes": 655360,
+        "supported": {
+          "median": 2.1326,
+          "p95": 2.5646,
+          "p99": 2.8228,
+          "worst": 3.6269,
+          "allocatedMedian": 113616
+        },
+        "releaseMs": 1.9264
+      }
+    },
+    {
+      "configuration": "Release--scalable-support",
+      "kind": "constant-gravity-admission",
+      "values": {
+        "qualification": "SUPPORT_GEOMETRY_LOAD",
+        "checks": 249,
+        "rows": [
+          {
+            "tanks": [
+              "short"
+            ],
+            "mass": 1304,
+            "MaximumObservedLoad": 3265.435546875,
+            "MaximumDisplacement": 3.29038557538297e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 4.547473508864641e-13,
+            "Digest": "dc4bb9110648d46627ca51d90a8d07c5aa944845e2e54bcdf29278a588d241d6",
+            "admission": {
+              "median": 56.8568,
+              "p95": 87.7005,
+              "p99": 87.7005,
+              "worst": 87.7005,
+              "allocatedMedian": 120320
+            }
+          },
+          {
+            "tanks": [
+              "long"
+            ],
+            "mass": 2164,
+            "MaximumObservedLoad": 5403.315979003906,
+            "MaximumDisplacement": 2.3131580746849068e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 1.2862197421537486e-12,
+            "Digest": "80471844f91a56a58ef67b5eeb09503d68d9950df3a61e5017bec0005d0620d8",
+            "admission": {
+              "median": 40.676,
+              "p95": 41.7288,
+              "p99": 41.7288,
+              "worst": 41.7288,
+              "allocatedMedian": 120320
+            }
+          },
+          {
+            "tanks": [
+              "short",
+              "short"
+            ],
+            "mass": 2288,
+            "MaximumObservedLoad": 5713.666442871094,
+            "MaximumDisplacement": 1.9802037058980204e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 2.5724394843074972e-12,
+            "Digest": "62b9c15608fbfa7da12f78a76b6799742dfe9cea6d78b393a39c21659e4615da",
+            "admission": {
+              "median": 53.3523,
+              "p95": 58.8759,
+              "p99": 58.8759,
+              "worst": 58.8759,
+              "allocatedMedian": 155192
+            }
+          },
+          {
+            "tanks": [
+              "long",
+              "long"
+            ],
+            "mass": 4008,
+            "MaximumObservedLoad": 10315.075439453125,
+            "MaximumDisplacement": 1.111359779315535e-05,
+            "ForceResidual": 0,
+            "MomentResidual": 4.067383956680332e-12,
+            "Digest": "9c1b71491f0f4213013a7e1085984be5c2abad4f280f5bbfffd2e5167aa61cfd",
+            "admission": {
+              "median": 55.4436,
+              "p95": 61.6368,
+              "p99": 61.6368,
+              "worst": 61.6368,
+              "allocatedMedian": 155184
+            }
+          },
+          {
+            "tanks": [
+              "long",
+              "long",
+              "short"
+            ],
+            "mass": 4992,
+            "MaximumObservedLoad": 12904.582763671875,
+            "MaximumDisplacement": 8.854608495312277e-06,
+            "ForceResidual": 0,
+            "MomentResidual": 2.5724394843074972e-12,
+            "Digest": "16588fb3dbd620b425118d80363823e23d86873fcf7131418c45910180d38326",
+            "admission": {
+              "median": 64.0021,
+              "p95": 69.3908,
+              "p99": 69.3908,
+              "worst": 69.3908,
+              "allocatedMedian": 191592
+            }
+          }
+        ]
+      }
+    },
+    {
+      "configuration": "Release--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "short"
+        ],
+        "mass": 1304,
+        "jets": 32,
+        "peak": 3279.7716064453125,
+        "identity": "a889cf171eece70692658b87f5e0019c9e3755cab6c1caffde08037bace6d9f2",
+        "MaximumDisplacement": 3.243227911298163e-05,
+        "departureMass": 1303.375,
+        "departureTime": 5062500,
+        "admissionMs": 237.1156,
+        "admissionBytes": 431584,
+        "retainedPoolBytes": 507904,
+        "supported": {
+          "median": 1.8342,
+          "p95": 2.1236,
+          "p99": 2.3273,
+          "worst": 2.5418,
+          "allocatedMedian": 51952
+        },
+        "releaseMs": 1.3874
+      }
+    },
+    {
+      "configuration": "Release--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "long"
+        ],
+        "mass": 2164,
+        "jets": 32,
+        "peak": 5411.576965332031,
+        "identity": "38cc501a1f67f300ac45a96bb15c077bbc0ae4d013afa4b4548e7d8895668944",
+        "MaximumDisplacement": 2.3614493329660036e-05,
+        "departureMass": 2162.75,
+        "departureTime": 5125000,
+        "admissionMs": 67.3834,
+        "admissionBytes": 430480,
+        "retainedPoolBytes": 507904,
+        "supported": {
+          "median": 0.6564,
+          "p95": 0.7605,
+          "p99": 0.8663,
+          "worst": 0.9069,
+          "allocatedMedian": 51976
+        },
+        "releaseMs": 0.7303
+      }
+    },
+    {
+      "configuration": "Release--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "short",
+          "short"
+        ],
+        "mass": 2288,
+        "jets": 64,
+        "peak": 5727.090759277344,
+        "identity": "d00eacabf4e1a6fbc47baa3fd08a0d8a26fc4506c24be10372d4e82272aada81",
+        "MaximumDisplacement": 1.9803022951236926e-05,
+        "departureMass": 2286.4375,
+        "departureTime": 5156250,
+        "admissionMs": 62.4753,
+        "admissionBytes": 539432,
+        "retainedPoolBytes": 573440,
+        "supported": {
+          "median": 0.5223,
+          "p95": 0.6789,
+          "p99": 0.809,
+          "worst": 3.9517,
+          "allocatedMedian": 65960
+        },
+        "releaseMs": 0.9221
+      }
+    },
+    {
+      "configuration": "Release--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "long",
+          "long"
+        ],
+        "mass": 4008,
+        "jets": 64,
+        "peak": 10105.149780273438,
+        "identity": "dd6f50dc5b926fce8dd54446a8ea3775b8310bbcb79a9f21f8d8ce9b2c847c3c",
+        "MaximumDisplacement": 1.1558372534636874e-05,
+        "departureMass": 3111.75,
+        "departureTime": 94625000,
+        "admissionMs": 46.8324,
+        "admissionBytes": 540520,
+        "retainedPoolBytes": 573440,
+        "supported": {
+          "median": 0.7758,
+          "p95": 0.8915,
+          "p99": 1.0817,
+          "worst": 4.7701,
+          "allocatedMedian": 89776
+        },
+        "releaseMs": 0.5361
+      }
+    },
+    {
+      "configuration": "Release--scalable-support-flight",
+      "kind": "actual-site-lifecycle",
+      "values": {
+        "tanks": [
+          "short",
+          "short",
+          "long"
+        ],
+        "mass": 4132,
+        "jets": 96,
+        "peak": 10499.555541992188,
+        "identity": "04523ff3432b6eb6cd880b4c8065bf2789925209aa5b2383efeaa340b80c3cc5",
+        "MaximumDisplacement": 1.109163713408634e-05,
+        "departureMass": 3110.90625,
+        "departureTime": 107109375,
+        "admissionMs": 65.0869,
+        "admissionBytes": 651088,
+        "retainedPoolBytes": 655360,
+        "supported": {
+          "median": 0.9399,
+          "p95": 1.065,
+          "p99": 1.2547,
+          "worst": 2.8954,
+          "allocatedMedian": 113616
+        },
+        "releaseMs": 0.761
+      }
+    }
+  ]
+}

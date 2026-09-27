@@ -12,8 +12,9 @@ internal sealed partial class SimulationTransactionEngine
         internal readonly AssemblyControlAdmission[] Journal = new AssemblyControlAdmission[capacity];
         internal readonly AssemblyPilotAllocation? Allocation=allocation;
         internal int Count;
+        internal long BaseSequence;
         internal AssemblyControlRequest Requested;
-        internal int ArbitrationFrontier = -1;
+        internal long ArbitrationFrontier = -1;
         internal bool OffAtFrontier;
         internal bool Retired;
     }
@@ -65,6 +66,8 @@ internal sealed partial class SimulationTransactionEngine
         if (entered != AssemblyFlightStatus.Ready) return new(ControlStatus(entered));
         try
         {
+            if(_construction?.Control is {} constructionControl&&ReferenceEquals(constructionControl.Authority,control))
+                return AdmitConstructionControlInOwnedPhase(control,identity,sequence,request);
             var p = _assemblyFlight;
             if (p?.Control is not { } c || !ReferenceEquals(c.Authority, control))
                 return new(AssemblyControlStatus.InvalidAuthority);
@@ -109,6 +112,11 @@ internal sealed partial class SimulationTransactionEngine
         if (entered != AssemblyFlightStatus.Ready) return ControlStatus(entered);
         try
         {
+            if(_construction is {} construction&&construction.Control is {} cc&&ReferenceEquals(cc.Authority,control))
+            {
+                observation=new(cc.Authority.Identity,cc.Requested,cc.BaseSequence+cc.Count,cc.Journal.Length,construction.Expected.Sequence,cc.Retired);
+                return cc.Retired?AssemblyControlStatus.Retired:ConstructionControlStatus(CheckConstruction(construction.Authority));
+            }
             var p = _assemblyFlight;
             if (p?.Control is not { } c || !ReferenceEquals(c.Authority, control))
                 return AssemblyControlStatus.InvalidAuthority;
@@ -120,14 +128,16 @@ internal sealed partial class SimulationTransactionEngine
         finally { _clock.PublicationPhase.Exit(); }
     }
 
-    internal bool TryGetAssemblyControlAdmission(AssemblyControlAuthority control, int index,
+    internal bool TryGetAssemblyControlAdmission(AssemblyControlAuthority control, long index,
         out AssemblyControlAdmission admission)
     {
         admission = default;
         _clock.PublicationPhase.VerifyRead();
+        if(_construction?.Control is {} cc&&ReferenceEquals(cc.Authority,control))
+        {var offset=index-cc.BaseSequence;if(offset<0||offset>=cc.Count)return false;admission=cc.Journal[(int)offset];return true;}
         if (_assemblyFlight?.Control is not { } c || !ReferenceEquals(c.Authority, control) ||
-            (uint)index >= (uint)c.Count) return false;
-        admission = c.Journal[index];
+            index<0||index>=c.Count) return false;
+        admission = c.Journal[(int)index];
         return true;
     }
 
@@ -137,6 +147,10 @@ internal sealed partial class SimulationTransactionEngine
         if (entered != AssemblyFlightStatus.Ready) return ControlStatus(entered);
         try
         {
+            if(_construction is {} construction&&construction.Control is {} cc&&ReferenceEquals(cc.Authority,control))
+            {
+                cc.Retired=true;construction.Retired=true;construction.ContactWorld?.Dispose();return AssemblyControlStatus.Retired;
+            }
             var p = _assemblyFlight;
             if (p?.Control is not { } c || !ReferenceEquals(c.Authority, control))
                 return AssemblyControlStatus.InvalidAuthority;

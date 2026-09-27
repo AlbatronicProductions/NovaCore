@@ -1,0 +1,15 @@
+# Independent red team
+
+**Historical stage-review ledger through the first Stage4 stop.** Project Control subsequently authorized the focused arithmetic correction. Current Stage4/5/6 requalification and the completed40-item review are in [final-red-team.md](final-red-team.md). The current engineering judgment is PASS; manual acceptance remains PENDING.
+
+Stage0 construction/lifecycle, services and accepted-asset reviews found a coherent path. Arithmetic review supplied a bounded rational exact-consumption proof and20,000 in-memory independent-oracle matches; permanent production tests remain required in Stage3.
+
+Stage1 first review: REVISE. One bounded correction cycle covers cache-hit contract bypass, nested canonical ordering, invalid aggregate hidden by tolerance, ambiguous required node names, trailing-root normalization, and pre-allocation content bounds. External dependencies also refused. Tests exercise those findings. Actual export binding additionally resolves sidecar-local names and excludes capsule leg reservations, preserving their physical ownership. No production asset edits.
+
+Current Stage1 test command with actual accepted GLBs: PASS25 checks. Closed SRV assembly regression: PASS41634 checks and24 independent trajectories. Independent correction re-review: PASS. Asset/physical reviewer independently expands the current content to150 dry regions,36 stores,38 actuators and247283.61451443695kg, COM agreement1.70e-8m and tensor relative agreement2.93e-9. RCS content now uses the physical115N/247.599254s vacuum pair rather than mixing vacuum thrust with210s mission-budget Isp.
+
+Stage2 initial review: REVISE for independently rounded mirrored entries of rotated tensors and complete-catalog pinning. One bounded correction preserves legacy SRV arithmetic, constructs exactly symmetric generic derived tensors, and pins the used exact part/resource closure. Independent re-review PASS; permanent tests PASS28; SRV PASS41634/24 trajectories.
+
+Stage3 initial independent source review and execution found no arithmetic/topology mutation defect; PASS2073 at that candidate. One bounded correction resolves confounded direction/inlet tests and settles the allocation-free indexed zero-duration contract. Final independent re-review/execution PASS2075/400 independent fraction-oracle cases; warmed idle0B/op.
+
+Stage4 initial review required engine-generator→solar-generator→load phase ordering. One bounded correction added that behavior and a distinguishing test, explicit two-denominator scratch accounting, and joint-bound refusal tests.48 functional checks pass. Independent correction review then found a remaining transient-width failure: the initial energy/fuel LCM is unchecked before the first activity LCM.9695bits can be formed against an8626bit declared bound. The proposal is refused without source mutation, but the proof is invalid. Final review: REVISE REQUIRED — STOP FOR PROJECT CONTROL. See stage4-stop.md. No second correction performed. Stages5–8 not qualified; the40-item final campaign red team was not reached.

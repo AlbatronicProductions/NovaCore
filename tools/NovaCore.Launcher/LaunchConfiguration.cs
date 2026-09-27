@@ -13,7 +13,8 @@ public enum NovaCoreScenarioPreset
     ContactCentered,
     ContactTilted,
     PoweredFreeFlight,
-    StockAssembly
+    StockAssembly,
+    PlayerFlightControls
 }
 
 public enum NovaCoreScene

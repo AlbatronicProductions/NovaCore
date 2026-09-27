@@ -1,0 +1,95 @@
+{
+  "judgment": "APPLICATION_INTEGRATION_PASS",
+  "playerPass": false,
+  "checks": 391,
+  "tank": "nc.tank.short-2",
+  "process": 32356,
+  "window": 1644282,
+  "parts": 12,
+  "source": "c593f191d1e679f8b22f418fd11b8c4e623422352fbf854ca7ce688e932583b6",
+  "compiled": "900716b2f9c89c7124c5617210d9a6a1c3e00a30ef21bd03543914d73a0bc2fc",
+  "retainedEpoch": 843671116446907,
+  "finalEpoch": 843671116571907,
+  "frames": 3800,
+  "warmWindows": [
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.555600166320801,
+        "p95": 5.894000053405762,
+        "p99": 6.039000034332275,
+        "max": 6.1529998779296875
+      },
+      "cpuMs": {
+        "median": 0.0131,
+        "p95": 0.0365,
+        "p99": 0.0879,
+        "max": 0.0881
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.563899993896484,
+        "p95": 5.890100002288818,
+        "p99": 6.159900188446045,
+        "max": 10.414600372314453
+      },
+      "cpuMs": {
+        "median": 0.0046,
+        "p95": 0.0257,
+        "p99": 0.0574,
+        "max": 0.0751
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.564799785614014,
+        "p95": 5.805200099945068,
+        "p99": 5.843500137329102,
+        "max": 5.865099906921387
+      },
+      "cpuMs": {
+        "median": 0.0045,
+        "p95": 0.0295,
+        "p99": 0.0624,
+        "max": 0.0761
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native": "377cd8b5acf93b39a794c1482610e6610bb2b3a85a784437cf2814d62d0afe64"
+}

@@ -22,20 +22,66 @@ internal sealed class AssemblyFloridaSite
     internal string Digest { get; }
     internal double EastMetres { get; }
     internal FloridaSlabSupport? Slab { get; }
+    internal double SupportPlane {get;}
+    internal double AngularSpeedBound {get;}
+    internal double AngularAccelerationBound {get;}
     internal bool Applicable => terrain.Authority == Authority && terrain.GradingRegion == FloridaFacilitySupport.Region;
+    internal IPhysicalSurfaceCollisionSource CollisionSource=>Applicable&&terrain is IPhysicalSurfaceCollisionSource source?source:
+        throw new InvalidDataException("Current physical terrain does not provide collision geometry bounds.");
+    internal bool GradedTerrainBallClear(Double3 localCenter,double reach)
+    {
+        if(!Applicable||!localCenter.IsFinite||!double.IsFinite(reach)||reach<=0)return false;
+        var region=FloridaFacilitySupport.Region;var center=OriginBodyFixed+LocalToBodyFixed.Rotate(localCenter);
+        var up=Double3.Dot(center,region.Up)-reach;
+        return up>region.RadiusMetres+region.PlaneAltitudeMetres&&
+            region.RadiusMetres*(Math.Abs(Double3.Dot(center,region.East))+reach)/up<region.InnerEastMetres&&
+            region.RadiusMetres*(Math.Abs(Double3.Dot(center,region.North))+reach)/up<region.InnerNorthMetres;
+    }
+    internal bool RadialBallClear(Double3 center,double reach,out double lower)
+    {
+        lower=double.NegativeInfinity;var radius=Math.Sqrt(center.LengthSquared);
+        if(!Applicable||terrain is not IPhysicalSurfaceHeightBounds bounds||!double.IsFinite(radius+reach)||reach<=0||reach>=radius)return false;
+        // Three products/two sums/sqrt: downward relative enclosure of norm;
+        // the separate cap padding covers normalization/transcendental roundoff.
+        var safeRadius=Math.BitDecrement(radius*(1-16*Math.ScaleB(1d,-52)));
+        if(reach>=safeRadius)return false;
+        var cap=Math.BitIncrement(Math.Asin(reach/safeRadius)+64*Math.ScaleB(1d,-52));
+        var height=bounds.HeightUpperBound(center/radius,cap);
+        // The slab is the only admitted static solid outside terrain. Its top
+        // plus finite horizontal corners are enclosed by this radial maximum.
+        if(Slab is {} slab){var half=slab.Dimensions*.5;var top=Math.Sqrt(slab.TopBodyFixed.LengthSquared);height=Math.Max(height,top+Math.Sqrt(half.X*half.X+half.Z*half.Z)-Authority.ReferenceRadiusMetres);}
+        lower=Math.BitDecrement(Math.BitDecrement(safeRadius-reach)-Math.BitIncrement(Authority.ReferenceRadiusMetres+height));
+        return double.IsFinite(lower)&&lower>0;
+    }
 
     private AssemblyFloridaSite(IPhysicalGradingProofSource terrain, SimulationInstant start,
-        ReferenceFrameId earthFrame, double east, EarthContactOrientation model, double mu, FloridaSlabSupport? slab = null)
+        ReferenceFrameId earthFrame, double east, EarthContactOrientation model, double mu, FloridaSlabSupport? slab = null,
+        double supportPlane=AssemblyContactProfile.SupportPlaneAtOrigin,SimulationInstant? end=null)
     {
         this.terrain=terrain;this.model=model;Authority=terrain.Authority;Start=start;
-        End=new(checked(start.Ticks+20_000_000));EarthFrame=earthFrame;EastMetres=east;Mu=mu;
+        var radians=Math.PI/180;var century=model.SecondsPerDay*model.DaysPerCentury;
+        var a=Math.Abs(model.RaT*radians/century);var b=Math.Abs(model.DecT*radians/century);var c=Math.Abs(model.Wd*radians/model.SecondsPerDay);
+        AngularSpeedBound=Math.BitIncrement((a+b+c)*(1+32*Math.ScaleB(1d,-52)));
+        AngularAccelerationBound=Math.BitIncrement((a*b+(a+b)*c)*(1+32*Math.ScaleB(1d,-52)));
+        End=end??new(checked(start.Ticks+20_000_000));EarthFrame=earthFrame;EastMetres=east;Mu=mu;
         var region=terrain.GradingRegion;
         OriginBodyFixed=region.Up*(region.RadiusMetres+region.PlaneAltitudeMetres-AssemblyContactProfile.SupportPlaneAtOrigin)+region.East*east;
         LocalToBodyFixed=Basis(region.East,region.Up,-region.North);
-        Slab=slab;
-        if(slab is not null)OriginBodyFixed=slab.TopBodyFixed-region.Up*AssemblyContactProfile.SupportPlaneAtOrigin;
+        Slab=slab;SupportPlane=supportPlane;
+        if(slab is not null)OriginBodyFixed=slab.TopBodyFixed-region.Up*supportPlane;
         Digest=slab is null ? AssemblyJson.Digest(new {Identity,Authority,Start,End,EarthFrame,EastMetres,OriginBodyFixed,LocalToBodyFixed,model,Mu}) :
             AssemblyJson.Digest(new {Identity=FloridaSlabSupport.Identity,Authority,Start,End,EarthFrame,OriginBodyFixed,LocalToBodyFixed,model,Mu,slab.RootRadius,slab.FoundationDepth,slab.Dimensions});
+    }
+
+    internal static AssemblyFloridaSite CreateCraftSlab(IPhysicalSurfacePointQuery query,SimulationInstant start,
+        ReferenceFrameId earthFrame,FloridaSlabSupport slab,CompiledCraftContact contact)
+    {
+        ArgumentNullException.ThrowIfNull(contact);
+        var ground=CreateSlab(query,start,earthFrame,slab);
+        var end=new SimulationInstant(SolAnalyticalDefinition.Instance.EphemerisMetadata.SupportedEndDomainTicks);
+        if(end<=start||(Int128)end.Ticks-start.Ticks>long.MaxValue||!double.IsFinite(contact.SupportPlane))
+            throw new InvalidDataException("Craft site coverage exceeds the exact-time domain.");
+        return new(ground.terrain,start,earthFrame,0,ground.model,ground.Mu,slab,contact.SupportPlane,end);
     }
 
     internal static AssemblyFloridaSite CreateSlab(IPhysicalSurfacePointQuery query, SimulationInstant start,
@@ -79,12 +125,14 @@ internal sealed class AssemblyFloridaSite
         graph.TryGetNode(craft.CarrierFrame,out var site) && site.ParentId==EarthFrame && site.Kind==ReferenceFrameKind.Ccf &&
         graph.TryGetNode(craft.BodyFrame,out var body) && body.ParentId==site.Id && craft.BodyFrame!=EarthFrame;
 
-    internal AssemblySiteFrame At(SimulationInstant time)
+    internal AssemblySiteFrame At(SimulationInstant time)=>At(time,0);
+    internal AssemblySiteFrame At(SimulationInstant time,double offsetSeconds)
     {
-        if(time<Start||time>End||!Applicable)throw new InvalidDataException("Stale site or epoch.");
+        if(time<Start||time>End||!Applicable||!double.IsFinite(offsetSeconds)||offsetSeconds<0||offsetSeconds>1||
+            offsetSeconds*1_000_000>(double)((Int128)End.Ticks-time.Ticks))throw new InvalidDataException("Stale site or epoch.");
         // Current linear IAU owner, analytically differentiated. The banked finite-stencil
         // angular-velocity observation is deliberately not relabelled an exact derivative.
-        var seconds=time.SecondsSinceEpoch;var century=model.SecondsPerDay*model.DaysPerCentury;
+        var seconds=time.SecondsSinceEpoch+offsetSeconds;var century=model.SecondsPerDay*model.DaysPerCentury;
         var rad=Math.PI/180;var ra=(model.Ra0+model.RaT*seconds/century+90)*rad;
         var tilt=(90-model.Dec0-model.DecT*seconds/century)*rad;
         var a=model.RaT*rad/century;var b=-model.DecT*rad/century;var c=model.Wd*rad/model.SecondsPerDay;
@@ -94,7 +142,9 @@ internal sealed class AssemblyFloridaSite
         var omega=Double3.UnitZ*a+axis1*b+axis2*c;
         var alpha=Double3.Cross(Double3.UnitZ*a,axis1)*b+Double3.Cross(Double3.UnitZ*a+axis1*b,axis2)*c;
         var whole=time.Ticks/1_000_000;if(time.Ticks%1_000_000<0)whole--;
-        if(!CelestialBodyOrientationEvaluator.TryEvaluateEarthLocal(new(whole*1_000_000),(time.Ticks-whole*1_000_000)/1e6,out var earthQ,out _))
+        var fraction=(time.Ticks-whole*1_000_000)/1e6+offsetSeconds;
+        if(fraction>1){whole++;fraction-=1;}
+        if(!CelestialBodyOrientationEvaluator.TryEvaluateEarthLocal(new(whole*1_000_000),fraction,out var earthQ,out _))
             throw new InvalidDataException("Earth orientation refused.");
         var q=(earthQ*LocalToBodyFixed).Normalized();var p=earthQ.Rotate(OriginBodyFixed);
         return new(time,p,Double3.Cross(omega,p),q,q.Conjugate().Rotate(omega),q.Conjugate().Rotate(alpha));

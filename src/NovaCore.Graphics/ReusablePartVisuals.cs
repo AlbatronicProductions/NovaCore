@@ -20,6 +20,8 @@ public sealed class PartVisualMesh
     {Name=name;Gimballed=gimballed;Vertices=vertices;Indices=indices;}
     public int VertexCount=>Vertices.Length;
     public int TriangleCount=>Indices.Length/3;
+    public ReadOnlySpan<NativeVisualVertex> VertexData=>Vertices;
+    public ReadOnlySpan<uint> IndexData=>Indices;
 }
 public sealed record PartVisualAsset(string Identity,string Sha256,ImmutableArray<PartVisualMesh> Meshes,ImmutableArray<VisualSocket> Sockets,Double3 GimbalPivot);
 
@@ -146,14 +148,24 @@ public sealed unsafe class ReusablePartVisuals : IDisposable
     private bool disposed;
     public int UniqueMeshCount=>uploads.Length;
     public long BufferBytes {get;}
-    public ReusablePartVisuals(string directory)
+    private static ImmutableArray<PartVisualAsset> StockAssets(string directory)
     {
         var entries=new[]{("NC_SRV_Capsule_A","6b045a63186ed63fa1c6d48ef7e7ab89299f83b4f533897b8679b22068ceff6a"),
             ("NC_SRV_Tank_A","22cd027892f20596238d7a7580a4e73032071f6303a73cb211915bab4c4de378"),
             ("NC_SRV_Main_A","3b02f9e3788a2ba85ea8c0238e2f61f8c916d7757e2c535b8348cb8e6c1ad46f"),
             ("NC_SRV_Rcs_A","6118cb37bd8b7678d0eacc032391b1143143e2360e351cdcbd67508a3124ca5b")};
-        Assets=entries.Select(e=>PartVisualLoader.Load(Path.Combine(directory,e.Item1+".glb"),e.Item1+"/1",e.Item2)).ToImmutableArray();
+        return entries.Select(e=>PartVisualLoader.Load(Path.Combine(directory,e.Item1+".glb"),e.Item1+"/1",e.Item2)).ToImmutableArray();
+    }
+    public ReusablePartVisuals(string directory):this(StockAssets(directory)) { }
+    public ReusablePartVisuals(ImmutableArray<PartVisualAsset> assets)
+    {
+        if(assets.IsDefaultOrEmpty||assets.Any(a=>a is null)||assets.Select(a=>a.Identity).Distinct(StringComparer.Ordinal).Count()!=assets.Length)
+            throw new InvalidDataException("Distinct prepared visual assets required.");
+        // Handles belong to this upload lease. Sharing immutable prepared vertex
+        // arrays is safe; rebinding another lease cannot rewrite existing handles.
+        Assets=assets.Select(a=>a with {Meshes=a.Meshes.Select(m=>new PartVisualMesh(m.Name,m.Gimballed,m.Vertices,m.Indices)).ToImmutableArray()}).ToImmutableArray();
         var meshes=Assets.SelectMany(a=>a.Meshes).Append(Exhaust()).ToArray();uploads=new NativeVisualMesh[meshes.Length];pins=new GCHandle[meshes.Length*2];
+        if(meshes.Length>64)throw new InvalidDataException("Prepared visual mesh capacity exceeded.");
         try
         {
             for(var i=0;i<meshes.Length;i++)
@@ -181,5 +193,9 @@ public sealed unsafe class ReusablePartVisuals : IDisposable
     {ObjectDisposedException.ThrowIf(disposed,this);fixed(NativeVisualMesh* p=uploads)return NativeRuntime.RunRendererWithVisualMeshes(submission,callback,userData,p,(uint)uploads.Length,preparedObjectCapacity);}
     public NativeResult Run(NativeFrameSubmission* submission,NativeRuntime.HostCallback callback,IntPtr userData,uint preparedObjectCapacity,NativeRuntimeAssets* assets)
     {ObjectDisposedException.ThrowIf(disposed,this);fixed(NativeVisualMesh* p=uploads)return NativeRuntime.RunRendererWithAssetsAndVisualMeshes(submission,callback,userData,assets,p,(uint)uploads.Length,preparedObjectCapacity);}
+    public NativeResult RunEditor(NativeFrameSubmission* submission,NativeRuntime.HostCallback callback,IntPtr userData,uint preparedObjectCapacity,NativeEditorViewport* viewport,NativeRuntime.EditorMessageCallback preprocess)
+    {ObjectDisposedException.ThrowIf(disposed,this);fixed(NativeVisualMesh* p=uploads)return NativeRuntime.RunEditorViewport(submission,callback,userData,p,(uint)uploads.Length,preparedObjectCapacity,viewport,preprocess);}
+    public NativeResult RunApplication(NativeFrameSubmission* submission,NativeRuntime.HostCallback callback,IntPtr userData,uint capacity,NativeRuntimeAssets* assets,NativeApplicationViewport* viewport,NativeRuntime.EditorMessageCallback preprocess)
+    {ObjectDisposedException.ThrowIf(disposed,this);fixed(NativeVisualMesh* p=uploads)return NativeRuntime.RunApplicationViewport(submission,callback,userData,assets,p,(uint)uploads.Length,capacity,viewport,preprocess);}
     public void Dispose(){if(disposed)return;disposed=true;foreach(var p in pins)if(p.IsAllocated)p.Free();}
 }

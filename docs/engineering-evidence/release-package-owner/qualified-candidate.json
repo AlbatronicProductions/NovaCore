@@ -1,0 +1,637 @@
+[
+  {
+    "path": "assets\\vehicles\\modular-starter\\adapter.glb",
+    "bytes": 35028,
+    "sha256": "0595CF9C0444D995180E4B9B957BF98E7B344B442E7D0AE17F9640C6AB1FB9B8"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\adapter.physics.json",
+    "bytes": 5605,
+    "sha256": "7C463F256A22AF997FA1A2A8E030EF9D5C4D199AEFA00DD2CD502147DEE5D3CA"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\block.glb",
+    "bytes": 51080,
+    "sha256": "C07AB6D1DCDAA61FB76814011044C8836B0924099C11EAD3D55B36ECBEAC4E63"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\block.physics.json",
+    "bytes": 850,
+    "sha256": "D602FC1E563D9FC40C030425B113B36EA54BA5195D66A5E9C3CA3AA1CED0B409"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\catalog.json",
+    "bytes": 204935,
+    "sha256": "378A8A7ABD773266E910CB84F77E33FAA9B24D59FFBD0245834A36F61A3F2957"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\content-provenance.json",
+    "bytes": 2016,
+    "sha256": "F6E5EDD893B9AD79324EDCC9A9CE5AFEB0DE6058DB7034819565DEA515FEDD16"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\core.glb",
+    "bytes": 8244,
+    "sha256": "A9C4294DED61CBB5392BC8F790BE5CCF3B3F71BD2E2E717B669C1C901997F413"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\core.physics.json",
+    "bytes": 855,
+    "sha256": "32E9497EA72A92DFB57F59A61F1C9E89ECF40CA0BEB5F6F823A975879534AAE9"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\engine.glb",
+    "bytes": 35676,
+    "sha256": "F8F1D7F76A821D3D6EFD5FA21D3365162084524BD0905AAB5695D325D1DB692A"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\engine.physics.json",
+    "bytes": 859,
+    "sha256": "DD9B10ADAD3251DF9798638F9D689E61D76306343736A152102894CD9B831E26"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\long.glb",
+    "bytes": 14060,
+    "sha256": "0E12914C1EB071E7F2EEA248621D63056811737BA7D9E4DB6485496B321BC635"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\long.physics.json",
+    "bytes": 853,
+    "sha256": "93EF14E954C40447695A4E3FE1EEC52A3A7C2BBFBD51B5236C23DFE69ACC0E12"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\short.glb",
+    "bytes": 14068,
+    "sha256": "5589855CB446838F34926AB6478A99A1780CC38682CC88C3D27B3FEE7D853BD1"
+  },
+  {
+    "path": "assets\\vehicles\\modular-starter\\short.physics.json",
+    "bytes": 855,
+    "sha256": "44F3F366E4274CAFF2601598526BF0A162F8BD9624B2D582934C00D5C9EF0623"
+  },
+  {
+    "path": "assets\\visual\\SRV01\\NC_SRV_Capsule_A.glb",
+    "bytes": 123968,
+    "sha256": "6B045A63186ED63FA1C6D48EF7E7AB89299F83B4F533897B8679B22068CEFF6A"
+  },
+  {
+    "path": "assets\\visual\\SRV01\\NC_SRV_Main_A.glb",
+    "bytes": 130064,
+    "sha256": "3B02F9E3788A2BA85EA8C0238E2F61F8C916D7757E2C535B8348CB8E6C1AD46F"
+  },
+  {
+    "path": "assets\\visual\\SRV01\\NC_SRV_Rcs_A.glb",
+    "bytes": 143776,
+    "sha256": "6118CB37BD8B7678D0EACC032391B1143143E2360E351CDCBD67508A3124CA5B"
+  },
+  {
+    "path": "assets\\visual\\SRV01\\NC_SRV_Tank_A.glb",
+    "bytes": 256312,
+    "sha256": "22CD027892F20596238D7A7580A4E73032071F6303A73CB211915BAB4C4DE378"
+  },
+  {
+    "path": "BepuPhysics.dll",
+    "bytes": 880640,
+    "sha256": "77185E513BD530DEB322E41DD4ACDA9AD8E32E626CFA19492FB7481F25ED1FA7"
+  },
+  {
+    "path": "BepuUtilities.dll",
+    "bytes": 163328,
+    "sha256": "E0A1528DED4EF8EFCB8002B99704CB8614B7DB840D2CB39B5E45EDA52D63BC68"
+  },
+  {
+    "path": "NovaCore.ConstructionEditor.deps.json",
+    "bytes": 4507,
+    "sha256": "E886822B27791DE3AF545A6804494BDB1CCD3130D85403C662A5473544036CBE"
+  },
+  {
+    "path": "NovaCore.ConstructionEditor.dll",
+    "bytes": 169984,
+    "sha256": "683E2A4D73B86B8D9322C43EE6C37B22CD99DC1EC796B8A379961510A9849D42"
+  },
+  {
+    "path": "NovaCore.ConstructionEditor.exe",
+    "bytes": 162816,
+    "sha256": "77ED769DEF8D0AA8AE6D7C0E0B6C8A8BC8ED0BAD14D5D9B587F7B823D4402575"
+  },
+  {
+    "path": "NovaCore.ConstructionEditor.pdb",
+    "bytes": 55160,
+    "sha256": "46008EC5DA7DD2CC84AF9F9A441BE5DB3CBF461FF7D0206CF219F6DF768EE7B8"
+  },
+  {
+    "path": "NovaCore.ConstructionEditor.runtimeconfig.json",
+    "bytes": 573,
+    "sha256": "19EC30FEDB0198D8523F71A86C54B75BA602E763E2B916E2757E753177EDB25C"
+  },
+  {
+    "path": "NovaCore.ConstructionEditor.staticwebassets.endpoints.json",
+    "bytes": 15499,
+    "sha256": "6B94F3F882572E06C678A1586FB0AE43984E74A0E023DC9434EC9BE1C3028992"
+  },
+  {
+    "path": "NovaCore.ConstructionEditor.staticwebassets.runtime.json",
+    "bytes": 1253,
+    "sha256": "44498931520D448FA97EF8A203EC815032812FDDECFDFD0915F788B3EF959981"
+  },
+  {
+    "path": "NovaCore.Core.dll",
+    "bytes": 98304,
+    "sha256": "CE157E95DB2FF5CFAE5E958C751BD3BD6EC9E3E11FE225C025C3F158BD41B1BF"
+  },
+  {
+    "path": "NovaCore.Core.pdb",
+    "bytes": 36020,
+    "sha256": "96182EDB6CE1FFEDD41AC860BAF454C0AEBA21E7EB38F171CB75330755B18E33"
+  },
+  {
+    "path": "NovaCore.deps.json",
+    "bytes": 4897,
+    "sha256": "B25326CF697CB5120A368C791397A035B2758D446B13C058B962369DC800A76E"
+  },
+  {
+    "path": "NovaCore.dll",
+    "bytes": 12800,
+    "sha256": "04A7CF0F23BCA1C7E0DABB3D8634EA9E74E119396D3BE66EE57B2B08D76710BB"
+  },
+  {
+    "path": "NovaCore.EphemerisFormat.dll",
+    "bytes": 79872,
+    "sha256": "6AF5AA6FD5B4EECFEB921C323CC901A443BFE46B6FB675168DA8C3B734BED696"
+  },
+  {
+    "path": "NovaCore.EphemerisFormat.pdb",
+    "bytes": 30704,
+    "sha256": "21552897D6802B65B06F32627E8EA67564E4250A09203A9A606A073CA9E9D092"
+  },
+  {
+    "path": "NovaCore.exe",
+    "bytes": 162304,
+    "sha256": "4A14FF8B27D9BD4D42867B4179679F02AFB9D6647B2AA07F05E74D8B59F581C8"
+  },
+  {
+    "path": "NovaCore.Graphics.dll",
+    "bytes": 698368,
+    "sha256": "C6258383D563A7D2C581CBB9C3842162554B1A3262E4A63ACD38D0AEFBBF96B3"
+  },
+  {
+    "path": "NovaCore.Graphics.pdb",
+    "bytes": 189528,
+    "sha256": "F2F30E2C18253129C0CD31C40446983DC6084E33AEA1CCAB131614FDFCA8CB2E"
+  },
+  {
+    "path": "NovaCore.Interop.dll",
+    "bytes": 28672,
+    "sha256": "8FF58928AA65C98DF3AB14952307899048DA551F206CAE334BDA265DB1B41134"
+  },
+  {
+    "path": "NovaCore.Interop.pdb",
+    "bytes": 15948,
+    "sha256": "EF57B17E28025C3BC9F268CD403930CC727FA9FCB6426AF8086666BA36CEE733"
+  },
+  {
+    "path": "NovaCore.Launcher.deps.json",
+    "bytes": 1197,
+    "sha256": "1731818EAC7DBB7CF1670FA06969666DE1FC19CE8669317E3971725AD69BBD1D"
+  },
+  {
+    "path": "NovaCore.Launcher.dll",
+    "bytes": 64512,
+    "sha256": "64B6CC493FCE923938C9F372C488FC868689DB980E3C2D4268170E5B1871DAF6"
+  },
+  {
+    "path": "NovaCore.Launcher.exe",
+    "bytes": 162304,
+    "sha256": "2DC46F038287C89D4D1539336D87556E8F708E4B3AAB0EE86A47F295F6FDFB84"
+  },
+  {
+    "path": "NovaCore.Launcher.pdb",
+    "bytes": 24212,
+    "sha256": "E8560B5B4695EA9ACC645C19C139F915E6565BCFD4AEA35CBEEFDD274E61A041"
+  },
+  {
+    "path": "NovaCore.Launcher.runtimeconfig.json",
+    "bytes": 447,
+    "sha256": "039A0DEFB81019310FA2E8A17EF8D2AD086B1A37656149AA598F1F75893F2A22"
+  },
+  {
+    "path": "NovaCore.Native.dll",
+    "bytes": 2098688,
+    "sha256": "C0974ADB18C6DCA3DE6FC8E0C11C11CD201DFD5A43A17F8CC0DDE17786D7CF68"
+  },
+  {
+    "path": "NovaCore.pdb",
+    "bytes": 25284,
+    "sha256": "9D242E7943CE06EA247EAE0F868825CE33A44FA2A1D08A232FC8E3B150C15520"
+  },
+  {
+    "path": "NovaCore.Platform.dll",
+    "bytes": 6656,
+    "sha256": "46B0AE596403F9D2D7162F15C9BED3013B11CA17F5D03DBC6D087E5B915148D7"
+  },
+  {
+    "path": "NovaCore.Platform.pdb",
+    "bytes": 12344,
+    "sha256": "6CDDFFEE22988AEAF687ECCC96BA781BCD730B752640BF0C42F4E1A4E3A16F9E"
+  },
+  {
+    "path": "NovaCore.runtimeconfig.json",
+    "bytes": 540,
+    "sha256": "B99749BDFEDFD4FBFDEEA38AC626815FB621531DE416EB557FA510E16FC4FD2D"
+  },
+  {
+    "path": "NovaCore.Simulation.dll",
+    "bytes": 5185024,
+    "sha256": "B99976FAE0AACB1CE43918D81265D7FB7A0032A0BC3A8BBAACE63AC69F3EB3E2"
+  },
+  {
+    "path": "NovaCore.Simulation.pdb",
+    "bytes": 406156,
+    "sha256": "5EF76D48C4CD9F81E8D653444D978B994CA3AB0B1418A97CD16537ABA4E38ACE"
+  },
+  {
+    "path": "NovaCore.Triangle.deps.json",
+    "bytes": 3617,
+    "sha256": "D284776C0505517A09E1BA848A176E17F255899309E78F9CEEF3774BEF0866E1"
+  },
+  {
+    "path": "NovaCore.Triangle.dll",
+    "bytes": 367104,
+    "sha256": "A438E03AED15FCEDA232480DEFE093A0E1B6C6969486DA5F9AD0A6DF49687161"
+  },
+  {
+    "path": "NovaCore.Triangle.exe",
+    "bytes": 162304,
+    "sha256": "E79F7C66157FD12EA252DEFF82738DC6B431D2BC36895B72A4F9F579B9E2CCD6"
+  },
+  {
+    "path": "NovaCore.Triangle.pdb",
+    "bytes": 101000,
+    "sha256": "C86CE5C102FDC82D2003195AB93F6EAC941380B1CA0E635F4245DFC333FA5CCC"
+  },
+  {
+    "path": "NovaCore.Triangle.runtimeconfig.json",
+    "bytes": 270,
+    "sha256": "256DDA2706E1151BB95987B6B5BE610BF68D64E058285B19E7E958222FC90414"
+  },
+  {
+    "path": "shaders\\body_forward.frag.spv",
+    "bytes": 440,
+    "sha256": "FA706803F042FB5A9F7A3C9965A3E2DE3E8838E075D67876B78DF9BDC132CE0E"
+  },
+  {
+    "path": "shaders\\distant_planet.frag.spv",
+    "bytes": 35760,
+    "sha256": "04137AFB1C632DFB7074480377D9F93136AB3127D382BAEEF07D52B09409EBA8"
+  },
+  {
+    "path": "shaders\\distant_planet.vert.spv",
+    "bytes": 8428,
+    "sha256": "CF28FE0A7C0797BD7D72076437BA78C4E0D97BB1A0AE3C065BAF3BFC5DB62CB8"
+  },
+  {
+    "path": "shaders\\exhaust_resolve.frag.spv",
+    "bytes": 3584,
+    "sha256": "DB6DDD09497866AA665393503F9F1603211481C307F013F1B9C0EF9A6020C31C"
+  },
+  {
+    "path": "shaders\\exhaust.frag.spv",
+    "bytes": 20292,
+    "sha256": "AE6B7B86CA55B33DDD01908AD89EC4FECE0C7CD29F225FC8516068794696EF80"
+  },
+  {
+    "path": "shaders\\exhaust.vert.spv",
+    "bytes": 4900,
+    "sha256": "492860487930E2013BEB4B247B026EEAF2F6E28956DA0553408FBAA1005DBE19"
+  },
+  {
+    "path": "shaders\\frozen_capture_pack.comp.spv",
+    "bytes": 12972,
+    "sha256": "C767A7AB4BB8061AA7C00F9CE37A5779922DEAB9022E3AB7FC0C80516AB69C07"
+  },
+  {
+    "path": "shaders\\fullscreen.vert.spv",
+    "bytes": 1308,
+    "sha256": "A18F9B5E0B4A4E7A077B1017BAD7B1C5C40313B3F70113F1E0771CD202433130"
+  },
+  {
+    "path": "shaders\\orbit_previous.frag.spv",
+    "bytes": 456,
+    "sha256": "C4935060E07E01742D59D8A5834241E2963DCC80ED8E35BAEAC5B08288761E61"
+  },
+  {
+    "path": "shaders\\orbit.frag.spv",
+    "bytes": 456,
+    "sha256": "B06F50708727144E8D0F08D35CD2E64D8B1CEF501ED20B10FEA4A34196026267"
+  },
+  {
+    "path": "shaders\\orbit.vert.spv",
+    "bytes": 1756,
+    "sha256": "B4B9DD635F32156654E30D843C29EB864FEB09751D7B3027CF99A5D741B6A45B"
+  },
+  {
+    "path": "shaders\\planetary_height_query.comp.spv",
+    "bytes": 156160,
+    "sha256": "99ED73CD152D802ED582430DDF33AD52767F69937E1E4867DAD4716ABC4F56F8"
+  },
+  {
+    "path": "shaders\\planetary_mesh_displace.comp.spv",
+    "bytes": 133704,
+    "sha256": "587446A3D54EB3272BABA135CAE0136FB5DC30D254CE27A2F7CA7C5409EFB2F2"
+  },
+  {
+    "path": "shaders\\planetary_mesh_normals.comp.spv",
+    "bytes": 6264,
+    "sha256": "90B7B85919712BE884E944B2AFFFE639FC24DB83F5E73C0599118D8807150066"
+  },
+  {
+    "path": "shaders\\planetary_natural_terrain_families_query.comp.spv",
+    "bytes": 50884,
+    "sha256": "5FABC5591F492948D69FF236785F8478D4B9196000A0A7AF8B731267FC5016C5"
+  },
+  {
+    "path": "shaders\\planetary_natural_terrain_field_query.comp.spv",
+    "bytes": 27172,
+    "sha256": "AA136512BEBC9C818B4CCD6A1AE106F3BD21021786C9C8F9A37C0C2C844ABD5D"
+  },
+  {
+    "path": "shaders\\planetary_natural_terrain_global_prepare.comp.spv",
+    "bytes": 49540,
+    "sha256": "5A5450321873F5FF8BED7DD9E4F06C342625724D629DA2232521FBACE01C7A85"
+  },
+  {
+    "path": "shaders\\planetary_natural_terrain_prepare.comp.spv",
+    "bytes": 55480,
+    "sha256": "ACEB31079451BE0BC1B10D495D7CD23A1C45BE601755724C6DE2A29CA21335C7"
+  },
+  {
+    "path": "shaders\\planetary_production_terrain.comp.spv",
+    "bytes": 368,
+    "sha256": "405E6E6DAAB609CA383297BA8BE706BFA96859C65DC2D9F42476A32CDDD85DF7"
+  },
+  {
+    "path": "shaders\\planetary_production.frag.spv",
+    "bytes": 152228,
+    "sha256": "8C59838ABB3D7EE6418695EA40F044CA1F04F5C3C9216296D5CC19BBA6110D6B"
+  },
+  {
+    "path": "shaders\\planetary_ring_far.frag.spv",
+    "bytes": 2692,
+    "sha256": "343DB81BCCC310B21C600AB6EE6722438151694683BB0CF7BA01D54A9B68ADE6"
+  },
+  {
+    "path": "shaders\\planetary_ring_near.frag.spv",
+    "bytes": 2692,
+    "sha256": "48B8EF4E56B6BE9380CFBACA7DAA790035E704541B6B8A550B3CC7BED540244C"
+  },
+  {
+    "path": "shaders\\planetary_ring.vert.spv",
+    "bytes": 7728,
+    "sha256": "CCCEDE52D3C64DB872360912DB9EB29E60CB892C648ED53CE1C178F8623D0CFB"
+  },
+  {
+    "path": "shaders\\planetary_select.comp.spv",
+    "bytes": 91064,
+    "sha256": "8189BBD2A85FE23033F12C558D8B221B62B8969C17BA9FFCF07B7C8501FE8ADF"
+  },
+  {
+    "path": "shaders\\planetary_terrain_generate.comp.spv",
+    "bytes": 10292,
+    "sha256": "1FC8C24EA6B4A55E83997FADF80B4901F692B8BC2DE84A5CF6AC043E4DA531D1"
+  },
+  {
+    "path": "shaders\\planetary.frag.spv",
+    "bytes": 18548,
+    "sha256": "417F17B236834F0AC94FA3BBFDAE52AD164599FF14051E9B396809BEEA75CDA1"
+  },
+  {
+    "path": "shaders\\planetary.vert.spv",
+    "bytes": 135600,
+    "sha256": "DDB84030E2621DF8F05489E339989D66DE60D73435F490B4EC0AF4251D7A0338"
+  },
+  {
+    "path": "shaders\\production_nested_scale_mesh_cull.comp.spv",
+    "bytes": 30484,
+    "sha256": "497D88225A914B9601AD6C0F44733E834794A952854E71B26BE426EAD8780D94"
+  },
+  {
+    "path": "shaders\\production_nested_scale_mesh_incoming_cull.comp.spv",
+    "bytes": 30484,
+    "sha256": "23BD1B04D0291E6271138041433EEE07E57503482E8E5CF845E4B72C75967336"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_compact.comp.spv",
+    "bytes": 3460,
+    "sha256": "2AABD7633B333F86DF8A6EAE6B76ED2D13A7129443DCD9201531DE047B12F4D9"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_cull.comp.spv",
+    "bytes": 14624,
+    "sha256": "2827B58DCD7029695E0B33272018E54D19D6113B8D7AB9AC591C343B3D994398"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_incoming_compact.comp.spv",
+    "bytes": 2940,
+    "sha256": "6B0238138222112DDF1F945F5E6A31867D5DD11F57169481ECE9C05337F43E4E"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_incoming_cull.comp.spv",
+    "bytes": 14624,
+    "sha256": "8C677F08AE051CF525108A436066983D41961CE70757CA29A86DF165D2663CFB"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_incoming_prepare.comp.spv",
+    "bytes": 91824,
+    "sha256": "3B330D24DC873C2676DBB877208EFAE4D91347B66EF029706B8A3F0D3116F91C"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_incoming_reset.comp.spv",
+    "bytes": 1736,
+    "sha256": "5D750F929DCAB4F9F3138B4CDFA869AB26E3051D4B28485C02EE483F89E14D6E"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_prepare.comp.spv",
+    "bytes": 94876,
+    "sha256": "D178E6BA6B73045DC214E75000489C09A7F0982F9CFF7663489BA0818D30AE8B"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard_reset.comp.spv",
+    "bytes": 1736,
+    "sha256": "CF583D16E14C8A8EC63B393D8752541648D932CF0165231CC48F6076E28FC027"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard.tesc.spv",
+    "bytes": 15444,
+    "sha256": "5C8BD5D3915E0FE8EF9E597CF17C2EF0E2101656D732392A6B5F9B7FE80D301C"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard.tese.spv",
+    "bytes": 22836,
+    "sha256": "D0BC5D7A450F336D45C26C499B0B3A79ECC0258E1FFB9DEE0B5BCFB8AA21D31E"
+  },
+  {
+    "path": "shaders\\production_spherical_billboard.vert.spv",
+    "bytes": 8028,
+    "sha256": "1BAA9043DB7A8B71DCF5931F4CB415FA84CE6341B07D850EA9BEB8BAA02D2B6A"
+  },
+  {
+    "path": "shaders\\regional_physical_demand.comp.spv",
+    "bytes": 22344,
+    "sha256": "7D80DBD70BE13CC55F00EF836CD8DA9D3783064411320697777F6B5C848D8F67"
+  },
+  {
+    "path": "shaders\\regional_physical_incoming_demand.comp.spv",
+    "bytes": 22360,
+    "sha256": "A56B62B5432206B8AB5EDED734B13A0DDF9F0C726A4B444F8D24139BDCC17A60"
+  },
+  {
+    "path": "shaders\\sas_target.frag.spv",
+    "bytes": 440,
+    "sha256": "4E99FDA06F571590F950E91D93025CAFA83E4A454E68E3583CE59D869F0A3EF2"
+  },
+  {
+    "path": "shaders\\solar_label.frag.spv",
+    "bytes": 47588,
+    "sha256": "673C5DC0CC1E199D497C7C927F282A02DA444FA258860B6CB94B6FD1ED12C90A"
+  },
+  {
+    "path": "shaders\\solar_label.vert.spv",
+    "bytes": 11388,
+    "sha256": "A13A7A8ACB3AE2DA2CAC129A203CAFFD86B5A7F434701D99B59284FDD01F1844"
+  },
+  {
+    "path": "shaders\\solar_marker.frag.spv",
+    "bytes": 448,
+    "sha256": "D428743C08F96F4E508EAB131CFB54981C2628EECC7ACD3D2DF220B19103275B"
+  },
+  {
+    "path": "shaders\\solar_marker.vert.spv",
+    "bytes": 7776,
+    "sha256": "50D948741D3CA6B59577A82D3346AB3CAC51EDCB9AB80047247AC61C345B6DB6"
+  },
+  {
+    "path": "shaders\\solar_orbit.frag.spv",
+    "bytes": 1412,
+    "sha256": "23B511270C196C2186F7935699CA7FDEDF3C92C629DA67C10E8AE7615286181F"
+  },
+  {
+    "path": "shaders\\solar_orbit.vert.spv",
+    "bytes": 4008,
+    "sha256": "D71520615E2533A06208C3CEC752D2689F524A30FB6A11BD2CA4AE00E2CC027F"
+  },
+  {
+    "path": "shaders\\solar_speed_hud.frag.spv",
+    "bytes": 49400,
+    "sha256": "E073B0AB31C69A3516D695146ADE0DBD618D3DEDE5A10699F390F10DA52C3586"
+  },
+  {
+    "path": "shaders\\solar_speed_hud.vert.spv",
+    "bytes": 11036,
+    "sha256": "A777A4DFECE073339EFCD97C7292D970F8C26D21F221EBD62CE244970F0A5FB4"
+  },
+  {
+    "path": "shaders\\space_background.frag.spv",
+    "bytes": 12108,
+    "sha256": "0C98EE3DF0BA8AD8F313CC352A02032528E6B0E36B2DFA8CC2BE1A6755B71CFC"
+  },
+  {
+    "path": "shaders\\spherical_billboard_proof_compact.comp.spv",
+    "bytes": 4424,
+    "sha256": "4565EB6DAB20C8D08C93D042BF4CF69E362AB3C0B9CC92B8DF8793C1A268A5AC"
+  },
+  {
+    "path": "shaders\\spherical_billboard_proof_cull.comp.spv",
+    "bytes": 7408,
+    "sha256": "4D61C6F06BD8C5F5C80EBE83A1CB835266A8B85DF70FEFD17DA6C6DB0EF2ED76"
+  },
+  {
+    "path": "shaders\\spherical_billboard_proof_normals.comp.spv",
+    "bytes": 5368,
+    "sha256": "6241B4D06FFE62704A88997AFD189CEE8F38778E0D4100C1CD7CFC5E9D13E63E"
+  },
+  {
+    "path": "shaders\\spherical_billboard_proof_prepare.comp.spv",
+    "bytes": 4128,
+    "sha256": "C8491A619F5F723976FB97734033DCC81883062A7A3F43AE14B653C43216D632"
+  },
+  {
+    "path": "shaders\\spherical_billboard_proof_reset.comp.spv",
+    "bytes": 1372,
+    "sha256": "6B8289C27561C96B77B293915FCCF6619642186B0AB19CA0F43C7E4D1F6141CB"
+  },
+  {
+    "path": "shaders\\spherical_billboard_proof.frag.spv",
+    "bytes": 716,
+    "sha256": "31B75EB3C71E58C55E863E42A0AE703421AFCB47A5BAD1F8A10F213ECB7AE269"
+  },
+  {
+    "path": "shaders\\spherical_billboard_proof.vert.spv",
+    "bytes": 3056,
+    "sha256": "BB46F890042A949A2E664B3BDDE8F5B5CDB7AB6761B7BD54C6D4B67C828198ED"
+  },
+  {
+    "path": "shaders\\stellar_glow.frag.spv",
+    "bytes": 1736,
+    "sha256": "E83A5E7458EC4BE4B835384C88EC3EA958AE13569EE9AC823A4E2B2DB17FACEE"
+  },
+  {
+    "path": "shaders\\stellar_glow.vert.spv",
+    "bytes": 6592,
+    "sha256": "43463716AD81D7C913273D498B6F46A00CFD8A877E2C000D31FA66D5742CF1F8"
+  },
+  {
+    "path": "shaders\\stellar_sun.frag.spv",
+    "bytes": 3208,
+    "sha256": "5C448C0DA4CADEB08BF2C85C74448D3B690FD3D6BCCAB1FC2C49DA7A0BF54769"
+  },
+  {
+    "path": "shaders\\stellar_sun.vert.spv",
+    "bytes": 5168,
+    "sha256": "3E124D5BABCB1D219499AA2DE1482F90FC7C9008E92B054F7CA0D268336346B6"
+  },
+  {
+    "path": "shaders\\tone_map.frag.spv",
+    "bytes": 2700,
+    "sha256": "D617345E95589ECB087ED40C20F4D04A427251A2B5249D8181CC63C421EE3979"
+  },
+  {
+    "path": "shaders\\triangle.frag.spv",
+    "bytes": 7604,
+    "sha256": "AA879DF24ABD407E589CA2BEE69E879EFC4A4D396BD60A908180312C5B7D5B33"
+  },
+  {
+    "path": "shaders\\triangle.vert.spv",
+    "bytes": 7104,
+    "sha256": "DFD7EB24E0E684DB56A518A9F99660A36E56960E6E9068F0861001D62B9BC34A"
+  },
+  {
+    "path": "third-party\\Bepu\\ATTRIBUTION.txt",
+    "bytes": 374,
+    "sha256": "FF40F4AE2A543AC6B2FFFD693210E9753B53937AC6E18A4FC8B7B131E5E2EDF3"
+  },
+  {
+    "path": "third-party\\Bepu\\LICENSE.txt",
+    "bytes": 10140,
+    "sha256": "4CD13F7A31E98F51C4FB960A115E9A9AB9C42284CA5D5C9B5CCBCF322DE45BFD"
+  },
+  {
+    "path": "wwwroot\\editor.css",
+    "bytes": 2651,
+    "sha256": "A14CFAB90A3849271A4DE2ED6A151F688086507535E88685D959C74EED05575A"
+  },
+  {
+    "path": "wwwroot\\editor.js",
+    "bytes": 10109,
+    "sha256": "C4405609DED2D58D66140D35CF5887D44F947C672A67DD0B212CB90F1A8A054C"
+  },
+  {
+    "path": "wwwroot\\geometry.mjs",
+    "bytes": 899,
+    "sha256": "BD1299CF831171EDEF4F2D7DF598992AED98FB498413CC25A62190DB00148625"
+  },
+  {
+    "path": "wwwroot\\index.html",
+    "bytes": 4129,
+    "sha256": "955A408BF91C2D895BA4509A0D535B84726DB281CDF636E4729DC64591F9DB39"
+  }
+]

@@ -5,7 +5,7 @@ namespace NovaCore.Simulation.Spacecraft.Assemblies;
 internal readonly record struct AssemblyWrench(Double3 Force,Double3 MomentAtOrigin);
 internal readonly record struct AssemblyGimbal(double ActualY,double ActualZ,double TargetY,double TargetZ);
 
-internal static class AssemblyActuation
+internal static partial class AssemblyActuation
 {
     internal static AssemblyWrench Jet(CompiledPart p)
     {

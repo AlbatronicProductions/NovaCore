@@ -64,6 +64,9 @@ internal sealed class SimulationState
     internal bool TryPrepareAssemblySlot(AssemblyLaunch launch,in AssemblyRuntimeState expected,out int index)=>_spacecraft.TryPrepareAssemblySlot(launch,expected,out index);
     internal void InstallAssembly(int index,in AssemblyRuntimeState successor,StateRevision revision)
     { _spacecraft.InstallAssembly(index,successor);_revision=revision; }
+    internal bool TryPrepareConstructionSlot(ConstructionRuntimeBinding binding,ConstructionRuntimeState expected,out int index)=>_spacecraft.TryPrepareConstructionSlot(binding,expected,out index);
+    internal void InstallConstruction(int index,ConstructionRuntimeState successor,StateRevision revision)
+    {_spacecraft.InstallConstruction(index,successor);_revision=revision;}
     internal bool TryPrepareAppliedSlot(SpacecraftId subject, in SpacecraftPhysicalSource source, out int index) =>
         _spacecraft.TryPrepareAppliedSlot(subject, source, out index);
     internal void InstallAppliedEndpoint(int index, in SpacecraftAppliedEndpoint endpoint, StateRevision revision)

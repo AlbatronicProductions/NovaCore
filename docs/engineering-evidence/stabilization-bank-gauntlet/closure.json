@@ -1,0 +1,52 @@
+{
+  "judgment": "ENGINEERING_PASS_AND_INTEGRATION_PASS",
+  "bankDisposition": "STOP_FOR_PROJECT_CONTROL",
+  "recommendedDisposition": "Ready for Project Control banking consideration; no self-bank",
+  "featureFreeze": true,
+  "manualPlayerPassDeclared": false,
+  "manualRetestRequiredByCurrentInstruction": false,
+  "milestone": "NOT_ASSIGNED",
+  "sourceSha256": "e72e6cea6bafec91bfea8dc2fd47ba074cc34cea28eb53372a057dc11347a12a",
+  "qualifiedProductionSha256": "f781b0a9e305f34c210f8e05acf8fd81068cea1098947629166d1dba9cd8144f",
+  "canonicalPackageSha256": "827bdffc9a6cf396b9b5046bf9c121059bccf5f9d3819e9454a1f2da9ffa4a12",
+  "canonicalExecutable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+  "canonicalNativeSha256": "377cd8b5acf93b39a794c1482610e6610bb2b3a85a784437cf2814d62d0afe64",
+  "canonicalFileCount": 127,
+  "canonicalShaders": 66,
+  "builds": "Main and fresh prospective export: native/managed Debug and Release PASS; managed 0 warnings/errors",
+  "permanentConnectorChecksPerConfiguration": 1070,
+  "permanentStabilizationChecksPerConfiguration": 223,
+  "selectedVerificationRoutes": 55,
+  "nativeChecks": {
+    "canonical-stabilization": 1026,
+    "canonical-short": 391,
+    "canonical-long": 391,
+    "independent-stabilization": 1026,
+    "independent-short": 391,
+    "independent-long": 391
+  },
+  "corrections": [
+    "Move-mode socket availability uses existing selected membership",
+    "Render reservation derived from document, catalog, preview and marker bounds; native uses actual device storage range"
+  ],
+  "cleanReproduction": "Identical production inputs; independent complete package passed all three routes with 47 sibling/native generated directories moved aside and independently installed verified terrain cache",
+  "gitIgnoreVerification": [
+    "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe",
+    "build/stabilization-bank-gauntlet/clean-source/NovaCore.sln",
+    ".novacore/cache/terrain/v1/x.nccube",
+    "docs/engineering-evidence/stabilization-bank-gauntlet/__pycache__/x.pyc",
+    ".ksa-reference/KSA.dll",
+    ".ksa-extraction/Vehicle.cs"
+  ],
+  "withheldUnbankedFiles": 113,
+  "referenceClassification": "KSA ADAPT retained; no new KSA product-policy question; zero KSA writes",
+  "qualificationLimits": [
+    "Generic construction within explicit 1024 parts / 4 MB, not unlimited construction",
+    "Flight remains separately admitted one-main / 1-32-attitude-jet profile; deeper construction is not deeper flight qualification",
+    "Physical flight 1x; no atmosphere/staging/orbital/return physics expansion",
+    "Repository-layout development build, not standalone publish",
+    "Historical blackout bounded route retained; historical incident cause remains unproven",
+    "Dense cold qualification fixture preparation included an 8.66-second frame; held 901-part renderer measured separately; no universal cold-edit latency claim"
+  ],
+  "noCommitTagPushBank": true
+}

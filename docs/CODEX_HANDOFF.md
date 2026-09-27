@@ -1,4 +1,37 @@
 # NovaCore engineering handoff
+## Current unbanked generation — feature freeze
+
+Latest bounded revision: [post-contact performance correction](engineering-evidence/post-contact-performance/README.md).
+Correctness, native physical lifecycle and recorder PASS; whole-frame 150 FPS
+performance REVISE. FROZEN / UNBANKED; blackout UNRESOLVED; banking/Player acceptance
+HOLD. The one native witness is consumed. STOP FOR PROJECT CONTROL; no relaunch.
+
+Preserved construction foundation: [qualified RCS canonicalization](engineering-evidence/rcs-canonicalization/README.md).
+`E:\NovaCore` is the sole production tree; the former RCS worktree is read-only
+provenance awaiting separately authorized retirement after acceptance/banking.
+The qualified 31-file source delta is integrated; current canonical qualification
+and frozen disposition are recorded in that evidence package.
+The [launch refusal diagnosis and recovery](engineering-evidence/launch-admission-regression/README.md),
+the [Florida pad authority](engineering-evidence/florida-pad-authority/README.md)
+and existing physical/service admission remain intact. Fresh parts have empty
+consumables; explicitly fill before launch. Refusals now identify their cause.
+Affected candidate/package identities are superseded; banking remains unauthorized.
+
+The normal player entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+Startup/configuration, Solar game, generic construction, launch, bounded Florida
+flight/control and return share the unified application. `NovaCore.Launcher.exe`
+remains a legacy scenario/engineering entry, not the normal player workflow.
+
+The [post-contact record](engineering-evidence/post-contact-performance/README.md)
+is the current disposition, preserving the earlier RCS/stabilization evidence.
+All milestone sections below describe their
+banked scope; their historical future-work statements do not override the newer
+unbanked generation. Feature expansion is frozen. M16.0 is assigned for preparation only; banking
+remains a separate manual Project Control action. Project Control alone decides PASS—BANK / REVISE / REJECT / ESCALATE.
+Automated integration, direct native runtime evidence and reproducibility may
+establish acceptance without mandatory manual retest; Engineering does not claim
+Player PASS. [Known limitations](KNOWN_LIMITATIONS.md) separate construction,
+flight, terrain and distribution qualification.
 
 This document is the concise workflow handoff. The authoritative current
 architecture and milestone state is

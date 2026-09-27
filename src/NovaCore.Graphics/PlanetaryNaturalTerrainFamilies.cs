@@ -79,7 +79,7 @@ public readonly record struct PlanetaryNaturalTerrainCellDescriptorSample(
 /// Canonical M12D-P2B composition. It consumes the frozen P2A primitive and is
 /// routed only by the explicit M12D candidate generation; generation 3 is unchanged.
 /// </summary>
-public static class PlanetaryNaturalTerrainFamilies
+public static partial class PlanetaryNaturalTerrainFamilies
 {
     public const ulong ProofGeneration = 2;
     public const uint CompositionVersion = 1;
@@ -215,6 +215,20 @@ public static class PlanetaryNaturalTerrainFamilies
         var blendWeightGradient = 1.875d * 6d * outerWeightGradient;
         maximumGradient += 2d * maximumHeight * blendWeightGradient;
         return new(maximumMacro, maximumMeso, maximumNear, maximumHeight, maximumGradient);
+    }
+
+    internal static (double Base,double Near) PhysicalHeightBounds()
+    {
+        var baseHeight=0d;var near=0d;
+        foreach(var family in Enum.GetValues<PlanetaryNaturalTerrainFamily>())
+        {
+            var c=Configuration(family);
+            // EvaluateFamily shapes only meso. Warp changes coordinates, not
+            // the field value range. Biome composition is a convex blend.
+            baseHeight=Math.Max(baseHeight,PlanetaryNaturalTerrainField.ValueBound(c.MacroAmplitude)+ScaleValueBound(c.MesoAmplitude,c.ShapeLinear,c.ShapeRidge));
+            near=Math.Max(near,PlanetaryNaturalTerrainField.ValueBound(c.NearAmplitude));
+        }
+        return(Math.BitIncrement(baseHeight*(1+128*Math.ScaleB(1d,-52))),Math.BitIncrement(near*(1+128*Math.ScaleB(1d,-52))));
     }
 
     /// <summary>Stable manifest of the proof generation's ordered family/octave configuration.</summary>

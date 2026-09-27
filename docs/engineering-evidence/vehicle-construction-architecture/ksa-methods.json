@@ -1,0 +1,70 @@
+{
+  "dll_sha256": "a03e98153c6f353af6f280cd3bdc1c71c718008e2049f508dc6fbe54457a0aa8",
+  "methods": [
+    {
+      "method": "PartTree.Serialize",
+      "token": "06001A8F",
+      "il_sha256": "0AD4D5C8B22C234FCFDB29A985264B297CB2B458C67EFEA33BDF64C4DD439FDF"
+    },
+    {
+      "method": "PartTree.Deserialize(PartInstance)",
+      "token": "06001A8D",
+      "il_sha256": "4A23DF5926EE6FF019DAFD8AB1D4519A1AB00352E419D6A0004C2F1D84F59B04"
+    },
+    {
+      "method": "PartTree.RecomputeAllDerivedData",
+      "token": "06001A98",
+      "il_sha256": "21B4F2FCAE5982A01302C562E0D9B7E5C042F721F3E4CFC63BBDD5239018975C"
+    },
+    {
+      "method": "VehicleEditingSpace..ctor(Vehicle)",
+      "token": "060030AC",
+      "il_sha256": "C2CFD48058189D30E68DF2B351BE4164EC72010547E77CC4F78F2D021472FCB8"
+    },
+    {
+      "method": "VehicleTemplate.OnDataLoad",
+      "token": "0600310A",
+      "il_sha256": "3C0C4E407250EC1844C4685A8077413572A7D81CCA0B3F10A2DF3152498B39BD"
+    },
+    {
+      "method": "ElectricalCircuits.Rebuild",
+      "token": "06000829",
+      "il_sha256": "1C0882111AD46B1A9F7C643B8FB37D2E161FCBE6B51F76E3DF50C3F7A2869954"
+    },
+    {
+      "method": "ResourceManager.CanFlowAcross",
+      "token": "060024F7",
+      "il_sha256": "7093ED02502BE6821D329B3C79C999775CFAAA655C2B43F807FE6540B37FAD32"
+    },
+    {
+      "method": "ResourceManager.SeedRootEntries",
+      "token": "060024F6",
+      "il_sha256": "D0BB86E86C7D0C66F5CB04823CD4F10E2ADCBC012883E5D6E7C69A3A245DBF19"
+    },
+    {
+      "method": "SequencePerformanceList.RunDrainSimulation",
+      "token": "0600261A",
+      "il_sha256": "FEA69B9123864267B5D8F74FD48961D862E275DD49EA57AB4C842F9D5B179D2D"
+    },
+    {
+      "method": "VehicleProperties.ConsumePropellantFromActiveNozzles",
+      "token": "06001B46",
+      "il_sha256": "CD4DE8A508C052A5EB7252CF144ABBCDAE0D911520269E0423374FE705FBD337"
+    },
+    {
+      "method": "PowerManager.Consume",
+      "token": "06001C8D",
+      "il_sha256": "F7805DD94459A1EA694AB18D143D238BEE5F8D212581A77E021EE7D23961C0B3"
+    },
+    {
+      "method": "VehicleUpdateState.UpdateModules",
+      "token": "06001C58",
+      "il_sha256": "9F54FF7043F443C89687A217D39A6BA8A82C6CDEEADCC9FF1E6F2863EECD1B34"
+    },
+    {
+      "method": "Vehicle.get_IsControllable",
+      "token": "06002F02",
+      "il_sha256": "C94015C082745F88F636D012C39E13011C4E6084D4043D51A7CEDB872867174F"
+    }
+  ]
+}

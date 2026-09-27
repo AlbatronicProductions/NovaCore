@@ -20,6 +20,8 @@ internal readonly struct SpacecraftStateView
     public int Count { get { Verify(); return _store.Count; } }
     internal bool TryGetAssembly(SpacecraftId id,out AssemblyLaunch? launch,out AssemblyRuntimeState state)
     { if(Current)return _store.TryGetAssembly(id,out launch,out state);launch=null;state=default;return false; }
+    internal bool TryGetConstruction(SpacecraftId id,out ConstructionRuntimeBinding? binding,out ConstructionRuntimeState? state)
+    {if(Current)return _store.TryGetConstruction(id,out binding,out state);binding=null;state=null;return false;}
     internal bool TryGetAppliedEndpoint(SpacecraftId id, out SpacecraftAppliedEndpoint endpoint)
     { if (Current) return _store.TryGetAppliedEndpoint(id, out endpoint); endpoint = default; return false; }
     internal bool TryGetTranslation(SpacecraftId id, out SpacecraftTranslationState translation, out SpacecraftPhysicalProperties properties)

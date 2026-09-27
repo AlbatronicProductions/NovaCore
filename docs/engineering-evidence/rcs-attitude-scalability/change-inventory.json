@@ -1,0 +1,157 @@
+[
+  {
+    "path": "samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs",
+    "before": "4709323840d382affbac16542b837a6ad7ab97a258e71ee49cfeb6a64e176bfb",
+    "after": "713725f8ec55ec04bc6554b9b5611da66037fe9a206c33bc8f276ad93d9c891d"
+  },
+  {
+    "path": "samples/NovaCore.Triangle/ConstructionFlightScene.cs",
+    "before": "db5863c89c2c701b301088d00373f512cb3fc354debe75e5b214b16c061259a0",
+    "after": "ce9aea0596d314d54fb2d655b902ea99018ccf848a46f8544910ce84fa4df9a5"
+  },
+  {
+    "path": "src/NovaCore.Graphics/TerrainAssetDistribution.cs",
+    "before": "f866fbfc428697aceecad626dda6eb017630485cf066d208993e5b663b5321a7",
+    "after": "ad152de34705e62731bec11a297f8b8883c585a82f1b52d64ea76b9fe245015a"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionFuel.cs",
+    "before": "e0aa8a1f5e49f5d9c34b3c751567b327d66668b7efdf0708a231f5f60e8903c2",
+    "after": "88d1c7d95f354ccfdaefe6c2a29e09ea542e4188b1847379dc69b318744976c9"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPower.cs",
+    "before": "ffb597abfcc735acad155fe92cbbda8243af1735637d0cb986834e3d5fd86890",
+    "after": "c03c9bac4b04efbb0edabe4e387c3f3e69fe18ad1ab90cbbfcd8405406d7ab60"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.Physical.cs",
+    "before": "364b22a6414e46733d341f874cf60afcc1bdf978ab8146ef05cd802cdfa8ca8c",
+    "after": "9c1b5cc015fb46d9818d1ce41797203bd4b967c06d5f564870959658ebf56a59"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraft.cs",
+    "before": "8b822761de9e7e4c80d7f7ee453cc5cc83b0ceef40594c54e38cb7f88ef8e37b",
+    "after": "e585057de654d11234065c0f952382020e1bc1ae3c88956f49803b67c63b8fe6"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftAllocation.cs",
+    "before": "b869c45ce0ab8e072406b2b60f32b509d22a350bf9e7e7bc91f674695ac84b0e",
+    "after": "8c2178ba3d602a28aebc64e9ee25fdec0f4f180745eb6c3fd09b323ffad89f27"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftControl.cs",
+    "before": "f95c5b47f066482f3001e6ffeb8adaf3adcbd7fa16df32e0932a8d838044f966",
+    "after": "fb3de8a49bebab5c3cd9fd936fadbf88076fe30f7348d9aec2427bfdd98c7104"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs",
+    "before": "d773a59b28f20e938b099efd8175ada3eddf0f151c75704a5bbda4cb55e5f13e",
+    "after": "5cfa9748d3d5d2290cb68b4148f5b3becbd2db34ec75d1fb5f703398f2d0c889"
+  },
+  {
+    "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs",
+    "before": "1430298b190bb6e116874dbbf91a717cea4bb6e0ca5a11e74340541c170c1542",
+    "after": "880a0f828ff373cd9a105bb2235d629aa57c702ec264f64b14a869ca89952c4e"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs",
+    "before": "9d7d49bf006d0f1eeb0e30158cf76d22c31405269ce1c478e2a458924733509b",
+    "after": "7a66ea86ed8fef37152b5bf288dcea1d1fd31bbb79bbbc98dac7b3d6a1dea2c7"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Application.cs",
+    "before": "934774ec63cf7a42904097308ec7fe28bce65a29a0ac97c52fe72bb64d2f7b48",
+    "after": "583d1daeff057cc7a113ca4eae85f200c291eb52bd62d6b9494b25fae2cb2a42"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightBoundary.cs",
+    "before": "482fb7f9375a70ce9f632ddae43d981789bf4af1fb927b9dcb1f506b3f37781d",
+    "after": "94ac491887d6c745228b13834436c7245badb0d0e7fd02fdc0d6c9eaf052eb58"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightControls.cs",
+    "before": "11693dc6a5fb5a6280e39355bcdba9078171549a8597924faa11be7b5fb7fb6d",
+    "after": "f931c741bafd8590b0c30f27144149f47d6f836a5445f3ef7c59447eda928e07"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/ModularStabilizationTests.cs",
+    "before": "909bed9ddb3741a9d85d9f9df08212efda91fcbdeabdb8e003ef7e207709dd4f",
+    "after": "19c05d77db85d5b7c779147c479da0e3fd88cc5e7ce7f7d72c5c4e4f2f8cda63"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/ModularViewportTests.cs",
+    "before": "113ef2ac40ae5b3e1dade4d6225ef84599ed9f29468d30ade5dda9a5f6fff30f",
+    "after": "aafe8c6aa923b72972c646b123f1a785ccfea10811954d55fbe3a6fe6b1c42a7"
+  },
+  {
+    "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "before": "a191200dfeea8c6afc4c942b10ab2b8a4675d055b97dc73812c01301e2cb3eab",
+    "after": "33042554ca23c2ae2f5df48cffd4f3a2320335353d8c4392165adaefdc37d8e6"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.Compiler.cs",
+    "before": "388bb89d68c4f687ca7383d7022b3a7e8f1675f142939baddc30a53189802d9b",
+    "after": "fa14f69e78332e0f151c2b3c2ae170bae2cacd55a2dfbcc770bc19254832e432"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+    "before": "c53b7536abf9bab990479bfb8e60048c29d238248693f1ccfe79db938c450536",
+    "after": "392e6d9bd0d4006e56e0e704fdc861d33066ad094882c934e13d62e6250aa467"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/RcsScalabilityFixture.cs",
+    "before": null,
+    "after": "2e675f5db7644d2374f5ef0fa191ae0dfe88aeb283e7eedc16768f6bfa425114"
+  },
+  {
+    "path": "tests/NovaCore.Simulation.Tests/RcsScalabilityTests.cs",
+    "before": null,
+    "after": "7d53266f9edb28e9673f7e10ebcc2f5965fa6ffcd6b4a6dfacb8696d30bc2090"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs",
+    "before": "f5990b4b96ea4e18df57fa33062b28e74068245ea5bd30d8f30d680a04bd747d",
+    "after": "8981afab6af5d58567ad0b9688c93ba9ba9ce41e91dde4d341fa34c4ae14def8"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs",
+    "before": "d09459a072bda8877b42b1feec9831e99a8c310d397abfbe3bc3666b5d45fa9b",
+    "after": "9aad5d224e23ab03354547b7871233bb0a3ceb4bc4a469acd990144840e67c44"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs",
+    "before": "a6e0ff6c166ebe621af7769456be029ad31fed06f728e912ded890c758dd7d74",
+    "after": "9d9e3a6155c3cb55e0894dd3d7f8347267c1c39630944040dc1867e311a003f4"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs",
+    "before": "44516fc52b509590678e1de018fa9d67e4ef42d358f9a225ad20864d38a98e99",
+    "after": "6d9c473b2a8f22a89186a77f96983c0383b45201e8e83bfbf695fcb92ef29b4a"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs",
+    "before": "c835494151f6371e420516b872fd42aec8f7827c7df4e58b57cc2c1b73ce1c03",
+    "after": "25fd1006e380be1474f8283a30f1f960e57723899c75e4a5939b3c37eaf40243"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/EditorRenderCapacity.cs",
+    "before": "ee73599107275442019a0a22779944dd4b0e07eaadca55e32adbe58eabb5ee9f",
+    "after": "d31fd379c195ee04aa746b2b28ce5ca4ec27914698ab0f3a3b9ffa6f9974e799"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/EditorVisualAssets.cs",
+    "before": null,
+    "after": "eac73e3e3c7c1969a8562c9130dacc293d63239ed25c07518b92d32d8d73313f"
+  },
+  {
+    "path": "tools/NovaCore.ConstructionEditor/StabilizationCraftFixture.cs",
+    "before": "d276143b4d644f849850657a9522cee06fe719a3827e2750b8b8ddb3c078cd3e",
+    "after": "001d983b882fd83f48e42f0fe2ad323787284de5618399e4bb8d02c602717f71"
+  },
+  {
+    "path": "tools/NovaCore.Launcher/RepositoryLocator.cs",
+    "before": "be9e4e6b7dcfcc0dfe48e19d841a21279aa5b7a6a4b5fe2c8ac22255ea431eba",
+    "after": "a54d67b083b6d682efffe378f27913691028a38bbdbca4c498552a37c27fb59a"
+  }
+]

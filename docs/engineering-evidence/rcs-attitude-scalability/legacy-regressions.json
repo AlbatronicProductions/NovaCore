@@ -1,0 +1,248 @@
+[
+  {
+    "name": "Debug--construction-stage3",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--construction-stage3"
+    ],
+    "exit": 0,
+    "seconds": 2.3429999999934807,
+    "sha256": "ba966d1bec17f9b4e73eb92399005e131599a93c6c749e5bd9a9877dc3a2b73d",
+    "tail": [
+      "Construction Stage 3 PASS: 2075 checks; exact oracle 400 cases; DLV graph only, no ignition"
+    ]
+  },
+  {
+    "name": "Debug--construction-stage4",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--construction-stage4"
+    ],
+    "exit": 0,
+    "seconds": 0.40600000000267755,
+    "sha256": "6667c7cd462d1dba3a55bd7db9f0591987b88f3799ccf8ccf07455223c9eca9c",
+    "tail": [
+      "Construction Stage 4 PASS: 90 checks; power/data independent; no DLV electrical admission"
+    ]
+  },
+  {
+    "name": "Debug--construction-stage6",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--construction-stage6"
+    ],
+    "exit": 0,
+    "seconds": 0.5469999999913853,
+    "sha256": "858934df6686eb8f0cf8ef875a096f9d05de1f6d8c5c130e33e4e4e6fe25e25d",
+    "tail": [
+      "Construction Stage 6 PASS: 93 checks; shared design admission and once-only runtime registration; no physical-flight admission"
+    ]
+  },
+  {
+    "name": "Debug--srv01-integration",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--srv01-integration"
+    ],
+    "exit": 0,
+    "seconds": 1.264999999999418,
+    "sha256": "f672e14e501b8c2c67ce311a5406f280b6b7ee1ea386917ab5f0301e17d2f923",
+    "tail": [
+      "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+      "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+    ]
+  },
+  {
+    "name": "Debug--pilot-allocation",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Debug\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--pilot-allocation"
+    ],
+    "exit": 0,
+    "seconds": 1.0630000000091968,
+    "sha256": "d22f66710ef6b00ffe9039ac7f969ca616045b1c7acfc2301b9216cc0a1a12f7",
+    "tail": [
+      "{\"stage\":4,\"samples\":1024,\"medianMs\":0.1107,\"p95Ms\":0.1129,\"p99Ms\":0.1159,\"maxMs\":0.1404,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+    ]
+  },
+  {
+    "name": "Debug--player-integrated",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--player-integrated"
+    ],
+    "exit": 0,
+    "seconds": 2.6410000000032596,
+    "sha256": "6be437c1478d954bebbe198d83b72631a0e1baf9a3dabf703002230d4e3b1af6",
+    "tail": [
+      "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"host-credit-physical-service-observation\",\"samples\":640,\"medianMs\":0.108,\"p95Ms\":0.1294,\"p99Ms\":0.1951,\"maxMs\":0.2659,\"repetitionMaxMs\":[0.2464,0.2532,0.2659,0.1321,0.1409],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+      "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"vessel-follow-and-render-submission\",\"samples\":640,\"medianMs\":0.2576,\"p95Ms\":0.293,\"p99Ms\":0.361,\"maxMs\":1.4614,\"repetitionMaxMs\":[0.3786,0.4129,1.4614,0.3216,0.3026],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+      "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"combined-including-diagnostic-request-and-lookup\",\"samples\":640,\"medianMs\":0.3688,\"p95Ms\":0.4224,\"p99Ms\":0.5008,\"maxMs\":1.7297,\"repetitionMaxMs\":[0.5071,0.5373,1.7297,0.4343,0.4225],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+      "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94"
+    ]
+  },
+  {
+    "name": "Debug--player-attitude",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--player-attitude"
+    ],
+    "exit": 0,
+    "seconds": 1.0470000000059372,
+    "sha256": "5b8dfbdee779eeb6ae11e81e2beda013bb53def1a8733962fb892489b62120d1",
+    "tail": [
+      "PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0049 p95_ms=0.005 p99_ms=0.0081 max_ms=0.0791 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152",
+      "PLAYER_ATTITUDE PASS checks=8264"
+    ]
+  },
+  {
+    "name": "Debug--player-engine",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--player-engine"
+    ],
+    "exit": 0,
+    "seconds": 1.812999999994645,
+    "sha256": "4efc8eb1227866356ae5a4553fc1e934407bf39a974da5d65cea95f9b42d2122",
+    "tail": [
+      "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+      "SRV01_COLD_PREPARATION ms=31.5359 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "PLAYER_INPUT_COST calls=20000 elapsed_ms=44.1786 bytes=0",
+      "PLAYER_ENGINE PASS checks=9898"
+    ]
+  },
+  {
+    "name": "Release--construction-stage3",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--construction-stage3"
+    ],
+    "exit": 0,
+    "seconds": 2.375,
+    "sha256": "ba966d1bec17f9b4e73eb92399005e131599a93c6c749e5bd9a9877dc3a2b73d",
+    "tail": [
+      "Construction Stage 3 PASS: 2075 checks; exact oracle 400 cases; DLV graph only, no ignition"
+    ]
+  },
+  {
+    "name": "Release--construction-stage4",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--construction-stage4"
+    ],
+    "exit": 0,
+    "seconds": 0.4220000000059372,
+    "sha256": "6667c7cd462d1dba3a55bd7db9f0591987b88f3799ccf8ccf07455223c9eca9c",
+    "tail": [
+      "Construction Stage 4 PASS: 90 checks; power/data independent; no DLV electrical admission"
+    ]
+  },
+  {
+    "name": "Release--construction-stage6",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--construction-stage6"
+    ],
+    "exit": 0,
+    "seconds": 0.5779999999940628,
+    "sha256": "858934df6686eb8f0cf8ef875a096f9d05de1f6d8c5c130e33e4e4e6fe25e25d",
+    "tail": [
+      "Construction Stage 6 PASS: 93 checks; shared design admission and once-only runtime registration; no physical-flight admission"
+    ]
+  },
+  {
+    "name": "Release--srv01-integration",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--srv01-integration"
+    ],
+    "exit": 0,
+    "seconds": 0.9060000000026776,
+    "sha256": "f672e14e501b8c2c67ce311a5406f280b6b7ee1ea386917ab5f0301e17d2f923",
+    "tail": [
+      "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+      "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+    ]
+  },
+  {
+    "name": "Release--pilot-allocation",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Simulation.Tests\\bin\\Release\\net10.0\\NovaCore.Simulation.Tests.dll",
+      "--pilot-allocation"
+    ],
+    "exit": 0,
+    "seconds": 0.9370000000053551,
+    "sha256": "914db9049352579a430c2f713458a2b3779c28dd6568a600958cc92f60c69296",
+    "tail": [
+      "{\"stage\":4,\"samples\":1024,\"medianMs\":0.0893,\"p95Ms\":0.1054,\"p99Ms\":0.1612,\"maxMs\":0.2887,\"rawCounterBytes\":0,\"collections\":[0,0,0],\"isolatedBytes\":0,\"tableRows\":54,\"tablePayloadBytes\":17280}",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+    ]
+  },
+  {
+    "name": "Release--player-integrated",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--player-integrated"
+    ],
+    "exit": 0,
+    "seconds": 1.7189999999973224,
+    "sha256": "ceb656d46a4783918138c3031bfe6d93e8d8075946fe0c5a060d1db9c6843cd7",
+    "tail": [
+      "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"host-credit-physical-service-observation\",\"samples\":640,\"medianMs\":0.0915,\"p95Ms\":0.11,\"p99Ms\":0.1348,\"maxMs\":0.2448,\"repetitionMaxMs\":[0.2398,0.2065,0.1288,0.2448,0.136],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+      "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"vessel-follow-and-render-submission\",\"samples\":640,\"medianMs\":0.1951,\"p95Ms\":0.2435,\"p99Ms\":0.3189,\"maxMs\":0.4348,\"repetitionMaxMs\":[0.4204,0.4348,0.3134,0.2948,0.4001],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+      "{\"measurement\":\"PLAYER_INTEGRATED_COST\",\"phase\":\"combined-including-diagnostic-request-and-lookup\",\"samples\":640,\"medianMs\":0.2865,\"p95Ms\":0.3454,\"p99Ms\":0.4316,\"maxMs\":0.5291,\"repetitionMaxMs\":[0.4784,0.5291,0.412,0.4371,0.5071],\"normalBytes\":0,\"isolatedBytes\":0,\"collections\":[0,0,0],\"positiveBytes\":152}",
+      "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94"
+    ]
+  },
+  {
+    "name": "Release--player-attitude",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--player-attitude"
+    ],
+    "exit": 0,
+    "seconds": 0.9379999999946449,
+    "sha256": "01775e40cacc448d838b498c8923ffd95c90704d33cb41b4dbcba58d7253167a",
+    "tail": [
+      "PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0041 p95_ms=0.0043 p99_ms=0.0074 max_ms=0.0426 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152",
+      "PLAYER_ATTITUDE PASS checks=8264"
+    ]
+  },
+  {
+    "name": "Release--player-engine",
+    "command": [
+      "dotnet",
+      "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Release\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "--player-engine"
+    ],
+    "exit": 0,
+    "seconds": 1.0160000000032596,
+    "sha256": "7dd4030a0da6c45e7d219af98e56db1af68405fe2b370baf94be83f01e37deea",
+    "tail": [
+      "SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.",
+      "SRV01_COLD_PREPARATION ms=32.3749 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "PLAYER_INPUT_COST calls=20000 elapsed_ms=33.7975 bytes=0",
+      "PLAYER_ENGINE PASS checks=9898"
+    ]
+  }
+]

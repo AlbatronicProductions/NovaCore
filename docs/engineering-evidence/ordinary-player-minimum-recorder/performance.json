@@ -1,0 +1,214 @@
+{
+  "scope": "Complete minimum recorder with exact native wrappers and CPU Vulkan fakes, independent real persistence process. No GPU workload or frame performance claimed.",
+  "native": {
+    "native-debug-sealed": {
+      "producer": {
+        "judgment": "PASS",
+        "frames": 1800,
+        "p50us": 21.1,
+        "p95us": 39.1,
+        "p99us": 48.8,
+        "maxus": 82.3,
+        "producerCpuMs": 0,
+        "produced": 35303,
+        "durable": 35303
+      },
+      "observer": {
+        "wallMs": 28191.449,
+        "cpuMs": 421.875,
+        "allocatedBytes": 64382376,
+        "managedRetainedBytes": 504496,
+        "peakWorkingSetBytes": 50331648,
+        "BytesWritten": 25216142,
+        "Flushes": 6108,
+        "Rotations": 1,
+        "commitCount": 3052,
+        "sampledCommits": 3052,
+        "p50ms": 1.1149,
+        "p95ms": 1.369,
+        "p99ms": 1.5297,
+        "maxMs": 25.1781,
+        "storageBoundBytes": 83902464
+      },
+      "writeMiBPerSecond": 0.8530241558088386,
+      "observerCpuCorePercent": 1.4964644066362107,
+      "nativeProducerAllocations": 0
+    },
+    "native-release-sealed-1": {
+      "producer": {
+        "judgment": "PASS",
+        "frames": 1800,
+        "p50us": 10.6,
+        "p95us": 20.1,
+        "p99us": 28.8,
+        "maxus": 80,
+        "producerCpuMs": 62.5,
+        "produced": 35303,
+        "durable": 35303
+      },
+      "observer": {
+        "wallMs": 28150.6913,
+        "cpuMs": 984.375,
+        "allocatedBytes": 64058160,
+        "managedRetainedBytes": 474016,
+        "peakWorkingSetBytes": 55672832,
+        "BytesWritten": 24911420,
+        "Flushes": 6038,
+        "Rotations": 1,
+        "commitCount": 3017,
+        "sampledCommits": 3017,
+        "p50ms": 1.1018,
+        "p95ms": 1.3424,
+        "p99ms": 1.4755,
+        "maxMs": 18.0344,
+        "storageBoundBytes": 83902464
+      },
+      "writeMiBPerSecond": 0.8439359867233167,
+      "observerCpuCorePercent": 3.4968057782652036,
+      "nativeProducerAllocations": 0
+    },
+    "native-release-sealed-2": {
+      "producer": {
+        "judgment": "PASS",
+        "frames": 1800,
+        "p50us": 10.4,
+        "p95us": 19,
+        "p99us": 26.5,
+        "maxus": 191.3,
+        "producerCpuMs": 31.25,
+        "produced": 35303,
+        "durable": 35303
+      },
+      "observer": {
+        "wallMs": 28143.9247,
+        "cpuMs": 875,
+        "allocatedBytes": 64040816,
+        "managedRetainedBytes": 470984,
+        "peakWorkingSetBytes": 55590912,
+        "BytesWritten": 24879756,
+        "Flushes": 6026,
+        "Rotations": 1,
+        "commitCount": 3011,
+        "sampledCommits": 3011,
+        "p50ms": 1.1008,
+        "p95ms": 1.3411,
+        "p99ms": 1.5228,
+        "maxMs": 18.8657,
+        "storageBoundBytes": 83902464
+      },
+      "writeMiBPerSecond": 0.8430659386909992,
+      "observerCpuCorePercent": 3.10901911985289,
+      "nativeProducerAllocations": 0
+    }
+  },
+  "managed": {
+    "debug": [
+      {
+        "caseName": "blocked-consumer",
+        "milliseconds": 24.6128,
+        "attempts": 108192,
+        "allocatedTestHarness": 1172488
+      },
+      {
+        "caseName": "managed-producer-independent-persistence",
+        "events": 24000,
+        "p50us": 2.7,
+        "p95us": 5.6,
+        "p99us": 7.7,
+        "maxus": 23.8,
+        "producerAllocatedBytes": 328,
+        "cpuMs": 93.75,
+        "wallMs": 18758.5384,
+        "produced": 24001,
+        "durable": 23983,
+        "faults": 0,
+        "dropped": 0
+      },
+      {
+        "wallMs": 18798.5576,
+        "cpuMs": 203.125,
+        "allocatedBytes": 31182664,
+        "managedRetainedBytes": 333712,
+        "peakWorkingSetBytes": 50302976,
+        "BytesWritten": 16040013,
+        "Flushes": 3916,
+        "Rotations": 0,
+        "commitCount": 1957,
+        "sampledCommits": 1957,
+        "p50ms": 1.7097,
+        "p95ms": 2.0062,
+        "p99ms": 2.2335,
+        "maxMs": 219.4652,
+        "storageBoundBytes": 83902464
+      },
+      {
+        "caseName": "rotation-cost",
+        "p50ms": 1.8217,
+        "p95ms": 4.4821,
+        "p99ms": 22.1226,
+        "maxMs": 22.1226,
+        "Rotations": 15,
+        "BytesWritten": 660447,
+        "Flushes": 160
+      }
+    ],
+    "release": [
+      {
+        "caseName": "blocked-consumer",
+        "milliseconds": 18.2124,
+        "attempts": 108192,
+        "allocatedTestHarness": 1172536
+      },
+      {
+        "caseName": "managed-producer-independent-persistence",
+        "events": 24000,
+        "p50us": 0.7,
+        "p95us": 1.1,
+        "p99us": 1.7,
+        "maxus": 23,
+        "producerAllocatedBytes": 328,
+        "cpuMs": 93.75,
+        "wallMs": 18773.6532,
+        "produced": 24001,
+        "durable": 23983,
+        "faults": 0,
+        "dropped": 0
+      },
+      {
+        "wallMs": 18802.0463,
+        "cpuMs": 250,
+        "allocatedBytes": 31319048,
+        "managedRetainedBytes": 303104,
+        "peakWorkingSetBytes": 55517184,
+        "BytesWritten": 16162893,
+        "Flushes": 3946,
+        "Rotations": 0,
+        "commitCount": 1972,
+        "sampledCommits": 1972,
+        "p50ms": 1.6496,
+        "p95ms": 1.9932,
+        "p99ms": 2.2274,
+        "maxMs": 200.513,
+        "storageBoundBytes": 83902464
+      },
+      {
+        "caseName": "rotation-cost",
+        "p50ms": 1.7447,
+        "p95ms": 3.6387,
+        "p99ms": 22.1534,
+        "maxMs": 22.1534,
+        "Rotations": 15,
+        "BytesWritten": 660447,
+        "Flushes": 160
+      }
+    ]
+  },
+  "notes": [
+    "Native frame envelope includes all production context lookups and a fully seeded ordinary resource footprint; periodic pupil swaps and journal rotation.",
+    "Native producer allocations are asserted zero in timed actual wrapper calls.",
+    "Process CPU counters have 15.625 ms granularity; a reported zero is not literal zero CPU cost. QPC producer wall-time quantiles remain measured.",
+    "Observer allocations are collected over the whole session including checkpoint/summary; retained memory and working set are separate.",
+    "Flush latency belongs to independent process, never renderer wait.",
+    "Binary files remain 83902464 bytes per session; write traffic is additional repeated I/O, not journal growth."
+  ]
+}

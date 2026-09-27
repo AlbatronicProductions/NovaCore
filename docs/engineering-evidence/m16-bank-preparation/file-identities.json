@@ -1,0 +1,3469 @@
+{
+  "git": {
+    "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+    "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+    "refsSha256": "d58fc52b774fb93f2fb408e966837672ebcdc6f3a859f9043cb723caf99db497",
+    "origin": "https://github.com/AlbatronicProductions/NovaCore.git"
+  },
+  "files": {
+    ".gitignore": {
+      "bytes": 623,
+      "sha256": "084f385b7252bd02d57a3f23e68b450ccf3548f05023307d66e254cad695219e"
+    },
+    "ENGINEERING_RULES.md": {
+      "bytes": 16117,
+      "sha256": "40e4f26925e7e85bf725b3a9d581bab6ba9385a4b58a4a5449cc8df7b4e6af1c"
+    },
+    "NovaCore.sln": {
+      "bytes": 32874,
+      "sha256": "8c0bac84293b5543c590f0809733ef970a40738b9f6871b2dc6b47fef93d77d7"
+    },
+    "README.md": {
+      "bytes": 16548,
+      "sha256": "1d1a783a0abd505c2825b3454f668c7bf913cb835fa0e610427af93037e9abc0"
+    },
+    "assets/vehicles/development/content-provenance.json": {
+      "bytes": 8970,
+      "sha256": "ff5abc9ac60377b93786c71adae2e6aa4e6846f690ff6c56332abfe39fdc3e7e"
+    },
+    "assets/vehicles/development/development-catalog.json": {
+      "bytes": 178980,
+      "sha256": "956d615377cadd5604b63bd07838a101fce839e37f3044f68526c8d735c5c204"
+    },
+    "assets/vehicles/development/development-design.authoring.json": {
+      "bytes": 13757,
+      "sha256": "98cfafe74a8abbb4398ce1e9528f15de57fa94f003dca6b69bcc7dfdbac0a62a"
+    },
+    "assets/vehicles/development/development-design.json": {
+      "bytes": 8153,
+      "sha256": "6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564"
+    },
+    "assets/vehicles/modular-starter/adapter.glb": {
+      "bytes": 35028,
+      "sha256": "0595cf9c0444d995180e4b9b957bf98e7b344b442e7d0ae17f9640c6ab1fb9b8"
+    },
+    "assets/vehicles/modular-starter/adapter.physics.json": {
+      "bytes": 5605,
+      "sha256": "7c463f256a22af997fa1a2a8e030ef9d5c4d199aefa00dd2cd502147dee5d3ca"
+    },
+    "assets/vehicles/modular-starter/block.glb": {
+      "bytes": 51080,
+      "sha256": "c07ab6d1dcdaa61fb76814011044c8836b0924099c11ead3d55b36ecbeac4e63"
+    },
+    "assets/vehicles/modular-starter/block.physics.json": {
+      "bytes": 1052,
+      "sha256": "b4fe56075701c6470b9615305b869ed798707d66761ef001fa465d44268bb60d"
+    },
+    "assets/vehicles/modular-starter/catalog.json": {
+      "bytes": 194563,
+      "sha256": "2356329a680ac6091645419094e90539c4ee6ddeb2597a3e5888fd433d662852"
+    },
+    "assets/vehicles/modular-starter/content-provenance.json": {
+      "bytes": 2017,
+      "sha256": "c8303e4ae295b1e4ca1b5d0648188a0fc5e9aa37d9abc2bb31138b5c1e6da136"
+    },
+    "assets/vehicles/modular-starter/core.glb": {
+      "bytes": 8244,
+      "sha256": "a9c4294ded61cbb5392bc8f790be5ccf3b3f71bd2e2e717b669c1c901997f413"
+    },
+    "assets/vehicles/modular-starter/core.physics.json": {
+      "bytes": 855,
+      "sha256": "32e9497ea72a92dfb57f59a61f1c9e89ecf40ca0beb5f6f823a975879534aae9"
+    },
+    "assets/vehicles/modular-starter/engine.glb": {
+      "bytes": 35676,
+      "sha256": "f8f1d7f76a821d3d6efd5fa21d3365162084524bd0905aab5695d325d1db692a"
+    },
+    "assets/vehicles/modular-starter/engine.physics.json": {
+      "bytes": 859,
+      "sha256": "dd9b10adad3251df9798638f9d689e61d76306343736a152102894cd9b831e26"
+    },
+    "assets/vehicles/modular-starter/long.glb": {
+      "bytes": 14060,
+      "sha256": "0e12914c1eb071e7f2eea248621d63056811737ba7d9e4db6485496b321bc635"
+    },
+    "assets/vehicles/modular-starter/long.physics.json": {
+      "bytes": 853,
+      "sha256": "93ef14e954c40447695a4e3fe1eec52a3a7c2bbfbd51b5236c23dfe69acc0e12"
+    },
+    "assets/vehicles/modular-starter/short.glb": {
+      "bytes": 14068,
+      "sha256": "5589855cb446838f34926ab6478a99a1780cc38682cc88c3d27b3fee7d853bd1"
+    },
+    "assets/vehicles/modular-starter/short.physics.json": {
+      "bytes": 855,
+      "sha256": "44f3f366e4274caff2601598526bf0a162f8bd9624b2d582934c00d5c9ef0623"
+    },
+    "docs/CHANGELOG.md": {
+      "bytes": 5351,
+      "sha256": "df87ab8ab35f217e5ebacc732569e1d2825affef5816d869c011b706e3247a2f"
+    },
+    "docs/CODEX_HANDOFF.md": {
+      "bytes": 23504,
+      "sha256": "e298ba97dab04c301fc11cf98a817702578279f3efd80d2a65b9a0d05587ffad"
+    },
+    "docs/KNOWN_LIMITATIONS.md": {
+      "bytes": 6047,
+      "sha256": "0a68985d6418f9344012550aa01c317febb735ecbdcb0fdcfd5e2b850d9d1479"
+    },
+    "docs/NOVACORE_CURRENT_STATE.md": {
+      "bytes": 48063,
+      "sha256": "2208e3ac8749d561cf9feed17e0afe55641a951309bbf2791df197da5f834ac9"
+    },
+    "docs/architecture.md": {
+      "bytes": 39345,
+      "sha256": "cb18af575f461b435ecf82b050168bca36ed85e9c83d12208138c4556c09c327"
+    },
+    "docs/build-windows.md": {
+      "bytes": 17810,
+      "sha256": "c41bcd5eaf23a1f5ad7f88bd04ff4ba1e1183c38e7b1027bd6dac34fedeac81a"
+    },
+    "docs/engineering-evidence/README.md": {
+      "bytes": 14466,
+      "sha256": "6051056c1bba76975b0be12a77c6c303e346c6930a8170e78fc24e942a826c80"
+    },
+    "docs/engineering-evidence/blackout-recurrence-20260926/README.md": {
+      "bytes": 11431,
+      "sha256": "152592bf7af5633c46df0c7a28894bbe83e13d763645bf9276ccfc04cfb017eb"
+    },
+    "docs/engineering-evidence/blackout-recurrence-20260926/causal-matrix.md": {
+      "bytes": 7103,
+      "sha256": "f151d98be9db537998c1713aca18e92ad398fb29b8bc9389fb98fed163bbd262"
+    },
+    "docs/engineering-evidence/blackout-recurrence-20260926/differential.md": {
+      "bytes": 5935,
+      "sha256": "631395edc881cca358bfe4f9be11e680d0ffa76d04a476270fafeeed2d472afc"
+    },
+    "docs/engineering-evidence/blackout-recurrence-20260926/reproduce.md": {
+      "bytes": 3338,
+      "sha256": "4b1334b89dcc3ad90bee35ac899c3139c23d7ebcd2510ee82afed35343375b79"
+    },
+    "docs/engineering-evidence/blackout-recurrence-20260926/verification.json": {
+      "bytes": 2582,
+      "sha256": "dbd65e05352dd09fad71ced486f65f9cbd1f3c27203f1e50b9d46b582bd2a8aa"
+    },
+    "docs/engineering-evidence/blackout-recurrence-20260926/verification.md": {
+      "bytes": 4130,
+      "sha256": "f2a23a90155693a723a458de3391aedd085eaa215b02dffe4084018c1500d70d"
+    },
+    "docs/engineering-evidence/construction-connector-revision/README.md": {
+      "bytes": 6170,
+      "sha256": "889851cfeb37bb50c14ad152bd570d26116d30de0c1749a5ba739f7009efc92b"
+    },
+    "docs/engineering-evidence/construction-connector-revision/application-long.json": {
+      "bytes": 2067,
+      "sha256": "1b9d00349e4c83b84fe860ca18516b966b1acbc8255d9bc0fe0926bce90da148"
+    },
+    "docs/engineering-evidence/construction-connector-revision/application-short.json": {
+      "bytes": 2067,
+      "sha256": "4611eca22ff4f97e2bfab3fd1756d74680f5a0d2d1b20569a76ba9a61cf2af7c"
+    },
+    "docs/engineering-evidence/construction-connector-revision/candidate-identity.json": {
+      "bytes": 25559,
+      "sha256": "3623eb7004fcf7f7fad0be44655f68df21ac9c1df7235b6ae8a8d58bf7cbec87"
+    },
+    "docs/engineering-evidence/construction-connector-revision/geometry.json": {
+      "bytes": 822,
+      "sha256": "df5ca8565fefe7a51ec89d0001515c0af6366573acba340bb351186fb71927aa"
+    },
+    "docs/engineering-evidence/construction-connector-revision/ksa-and-cause.md": {
+      "bytes": 5775,
+      "sha256": "a7a711718ef76b422cfdfa380658c55668fd4cfaaab9a595e0ed0deb1431cb29"
+    },
+    "docs/engineering-evidence/construction-connector-revision/native-connectors.json": {
+      "bytes": 348,
+      "sha256": "bf5fddae19fb7bb0ba683df3169825fd144a6ca8180d45ee02d647db8468f1fa"
+    },
+    "docs/engineering-evidence/construction-connector-revision/preservation.json": {
+      "bytes": 3179,
+      "sha256": "9c451682f5de1a44cd92b8f99376ee0f101f24f5c9d77e57c8e16ca1dca3cfc6"
+    },
+    "docs/engineering-evidence/construction-connector-revision/reproduce.md": {
+      "bytes": 3248,
+      "sha256": "0c9bbf9bbfdd67bc606bce48c6f167f6fd64267115e4e521b4707bb92d83818e"
+    },
+    "docs/engineering-evidence/construction-connector-revision/review.md": {
+      "bytes": 2881,
+      "sha256": "b6cf95485333114994dc0a632c753d2da2ef1472d6c81d1747f13d2361d246de"
+    },
+    "docs/engineering-evidence/construction-connector-revision/validation.json": {
+      "bytes": 11160,
+      "sha256": "35f6a879abf75afec1b8763a513e65a4316f593fd68cbeee8984b93dc378bb45"
+    },
+    "docs/engineering-evidence/development-launch-stack-preblender/calculate.py": {
+      "bytes": 35545,
+      "sha256": "685d2ba8600056215bba39c0628c32effd32944003d6a335bb8efdabebc64d3f"
+    },
+    "docs/engineering-evidence/development-launch-stack-preblender/internal_feed_geometry.py": {
+      "bytes": 14020,
+      "sha256": "ebb97bf4c60fd9ad6fd4b01c290648c15c78c117fc61bcfb3dbbed00d9d3ab54"
+    },
+    "docs/engineering-evidence/development-launch-stack-preblender/stage1-propellant.json": {
+      "bytes": 15838,
+      "sha256": "d7d1b088259a50c202ab5d86bf2771c2659d9aef15ca4d1553656971d0f066d0"
+    },
+    "docs/engineering-evidence/development-launch-stack-preblender/stage2-engine-layout.json": {
+      "bytes": 27302,
+      "sha256": "a069d281473ae35c1c230aafd8515f3a0f5b3ce8b9be9f2e1f57d65d89acf511"
+    },
+    "docs/engineering-evidence/development-launch-stack-preblender/stage2-mass-regions.json": {
+      "bytes": 102461,
+      "sha256": "8f8227e7b38e47ec4e0f82f98a00065e67df2e7fec6c7a57026af5dff2d5e83c"
+    },
+    "docs/engineering-evidence/development-launch-stack-preblender/stage2-tank-layout.json": {
+      "bytes": 87194,
+      "sha256": "79e8648c401b64fc8a2023540cbf8f75299c8585cd093ac1afd053670f29a642"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/README.md": {
+      "bytes": 24808,
+      "sha256": "2f833f68eb5850e0d2fffe1046e17af826f91477be464d068362a7203ede5660"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/authority-scalar-boundary.md": {
+      "bytes": 17201,
+      "sha256": "11dabcf84812ba24213208a08f68dc105ca0eb28753040df836a70e285850d6a"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/authority-scalar-witness.json": {
+      "bytes": 6495,
+      "sha256": "27eda6f48d2d6460bea9e6ee95dc49a59a2caa0537818539abb7a83f5cf50051"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/autonomous-capture-requalification.md": {
+      "bytes": 12280,
+      "sha256": "fd224ac38dd320d17fb6bf6fa772a974a335a54d36567787a4e8eabd9ae60b9b"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/capture-cost-first-alarm-witness.json": {
+      "bytes": 7906,
+      "sha256": "baf33796909aa05e06e5e1bacce1424c9d44cfa8086f2696aa971f921129def1"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/capture-cost-first-alarm.md": {
+      "bytes": 15508,
+      "sha256": "54b24a3dbc30914bd89f2531ffba517f629708be0ac21d71ee74f655ea8aedee"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/closer-earth-live-qualification.md": {
+      "bytes": 17132,
+      "sha256": "07bf361447e82054d331844ef68e7b68ee714f55f744b13c7dfa57fc7933527c"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/corrected-path-live-qualification.md": {
+      "bytes": 13708,
+      "sha256": "071c36575f83221b818250e4371a9f3a040afc71735b971b81ebad705e599d98"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/frame-capture-ranges.md": {
+      "bytes": 8534,
+      "sha256": "4eaaa44c04f172bbc38304fa1294dbb4603389325f5b55754b756a8330383e27"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/frame168-stall-classification.md": {
+      "bytes": 18281,
+      "sha256": "d51340f3947908c4b188c0c96591a6887d868d0d2f1081ec2c64da45bede6a8c"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/frozen-evidence-contract.md": {
+      "bytes": 15735,
+      "sha256": "caa5b73a13ac70832338d39a289f2d4ee727ee35154457dfc4f40f463e933507"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/ground-horizon-sequence.md": {
+      "bytes": 18098,
+      "sha256": "513cac7ec011eddb7c9e87d19ea5de15f10bb9e2a9ea7335904b59ed2e4eba33"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/horizon-submission-boundary.md": {
+      "bytes": 11398,
+      "sha256": "ab0e734172f34c25cf5238cf5f9e8aed1db153c0cff5b4e1b59f09df987e6beb"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/horizon-witnesses.json": {
+      "bytes": 17064,
+      "sha256": "8fece77ea5ba6da5a731962f0da3ef8d323dd06e456f73e041bc337a1089b9b6"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/limited-readback-qualification.md": {
+      "bytes": 9368,
+      "sha256": "535d0a552e259ceb48419b0564ffd5d9a261d9210726b277952c97cc4ca109f8"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/marked-live-retry.md": {
+      "bytes": 6787,
+      "sha256": "97471d40aea1cd469131a791b67facf362df937ce4a0a96145afa800b93e2cae"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/native-adaptive-evidence.md": {
+      "bytes": 8947,
+      "sha256": "68af9699eef79604a0d0c22de1ae1f751984ca24086a1be7d8f5a458ce7054cc"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/native-ordinary-frame-contract.md": {
+      "bytes": 8435,
+      "sha256": "a80a2e6554b1bade112be5f50181f667c1b64756e0ccc229f040305607f5ea1f"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/native-route-closure.md": {
+      "bytes": 10518,
+      "sha256": "c433a6c150d126ca7ee4239ac2022ed1646556a01b02989a0f60db49e1cd2003"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/prepared-live-retry.md": {
+      "bytes": 11619,
+      "sha256": "e7e0f42a54c82ea711d7427b11f4781f6c012633f290042f20706b537d1e1798"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/recording-call-instrumentation.md": {
+      "bytes": 14885,
+      "sha256": "5b6d9223ee5a94a86af17d53adf7302bab748afeff043975e01e5080ebe48335"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/startup-lifecycle-qualification.md": {
+      "bytes": 15315,
+      "sha256": "da8e41c3fbaf9e57a493cfd51c7e54998f2651747fd598bcf29697a9877a719d"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/topology-lifetime-capture.md": {
+      "bytes": 16646,
+      "sha256": "b66f66514d6fb18517e1a7b1b1f15f007a127404a27c843059447f996055e377"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/visibility-reconciliation.md": {
+      "bytes": 12945,
+      "sha256": "2bfe8a2ddb1a0e12d5c02e918402bb5f545ad4e0d4a0ba5be52db42ccf77bd45"
+    },
+    "docs/engineering-evidence/earth-blackout-closure/visibility-witness.json": {
+      "bytes": 4927,
+      "sha256": "c13b4030d767ae92821795d23fae485ffaa07da6b1e65edb1ef0a9eda7ba0981"
+    },
+    "docs/engineering-evidence/earth-camera-blackout-20260922/README.md": {
+      "bytes": 13983,
+      "sha256": "846654c9414085f5f2ec15a7be42e804db37e9b3dab474aeabeb044cc763edf6"
+    },
+    "docs/engineering-evidence/earth-camera-blackout-20260922/camera-followup.json": {
+      "bytes": 3982,
+      "sha256": "5471e096b58d35f20002e5fac63fcbbc1301dd0b69b0ba6f75b11cad8f90444a"
+    },
+    "docs/engineering-evidence/earth-camera-blackout-20260922/validation.json": {
+      "bytes": 4718,
+      "sha256": "656fcd6e00af9150f3f6ffb467c17bb9f21ceb2776a1c85cb77b16341777f245"
+    },
+    "docs/engineering-evidence/final-blackout-build-retirement/README.md": {
+      "bytes": 9931,
+      "sha256": "95a5196c81dece886c0a83044eb85e6ea5a8d65cefc2f302500e69de83a42637"
+    },
+    "docs/engineering-evidence/final-blackout-build-retirement/result.json": {
+      "bytes": 2233,
+      "sha256": "618c0b5aaedf422c1eb8832f1dbfe267ff4caba3d21434af7b8d77e011d5d489"
+    },
+    "docs/engineering-evidence/florida-pad-authority/README.md": {
+      "bytes": 3567,
+      "sha256": "13cc1efe74148dd97a154018b00c20e72892d37491b286273a8cc57869220245"
+    },
+    "docs/engineering-evidence/florida-pad-authority/after-launch.png": {
+      "bytes": 59724,
+      "sha256": "db4baddf54baa6664293a8e7f0acaacf86e76bf9c6f52dc360cc8f47778e959c"
+    },
+    "docs/engineering-evidence/florida-pad-authority/bank-intent.json": {
+      "bytes": 50337,
+      "sha256": "38e6401b775dbd020fc59cc79a2fbf0621bd91137139509c015205bcd7c77d02"
+    },
+    "docs/engineering-evidence/florida-pad-authority/before-construction.png": {
+      "bytes": 41989,
+      "sha256": "2c5ff10c69de0bee66bbf77aedd8f438a163a9423a2f6ede982b199bfd27b797"
+    },
+    "docs/engineering-evidence/florida-pad-authority/builds-and-additional-checks.json": {
+      "bytes": 9806,
+      "sha256": "6d86ab4dd8b76c8e0b1a8e7850c826508dd3ca96b722d679f324af0323caad03"
+    },
+    "docs/engineering-evidence/florida-pad-authority/canonical-long.json": {
+      "bytes": 2184,
+      "sha256": "15e258d1cc7242d473546cee946ac2dfc27e53af2274ebde66e7245de027aa1c"
+    },
+    "docs/engineering-evidence/florida-pad-authority/canonical-package.json": {
+      "bytes": 20854,
+      "sha256": "8cd4719c3eadcbe2ed6bd407180c79af6f885c36659189bc44c75f1830d35149"
+    },
+    "docs/engineering-evidence/florida-pad-authority/canonical-short.json": {
+      "bytes": 2169,
+      "sha256": "bdae26934d5ea10a220d6f3a07c02da4d1e51ac5d387f31c59ab5ad709c0a720"
+    },
+    "docs/engineering-evidence/florida-pad-authority/canonical-stabilization.json": {
+      "bytes": 3179,
+      "sha256": "0aab4ec1052e679de5981e0f2c6356dfbdbdac40df982fd2a9976b3342949cf8"
+    },
+    "docs/engineering-evidence/florida-pad-authority/canonical-two-tank.json": {
+      "bytes": 2175,
+      "sha256": "071798b078ee6cb0f87ec44132d15eef062e531d2d69a8561df7173292a347ca"
+    },
+    "docs/engineering-evidence/florida-pad-authority/evidence-seal.json": {
+      "bytes": 3429,
+      "sha256": "81f15754f542832a75d38deededb8b39a9f0aa75c1a6d7cb1dc02a3bc0ce17ad"
+    },
+    "docs/engineering-evidence/florida-pad-authority/final-report.md": {
+      "bytes": 3950,
+      "sha256": "5ece45d19a09b331b292395b020294998dc089c6b44571a4e201e8e6a5f9f8f4"
+    },
+    "docs/engineering-evidence/florida-pad-authority/independent-final.json": {
+      "bytes": 2173,
+      "sha256": "245e7ceb60d0d3317f48402e31fe2b102349bc3aa2479dffc069cae6b3d4e426"
+    },
+    "docs/engineering-evidence/florida-pad-authority/independent-review.md": {
+      "bytes": 1042,
+      "sha256": "6f463776ff1f979d5a03fe276e846e0f15987300e0200058ade467e15d22b081"
+    },
+    "docs/engineering-evidence/florida-pad-authority/isolated-package.json": {
+      "bytes": 20906,
+      "sha256": "cf25a87602bf48a7adbfe563394656ca1877a99728ff77fa1c7aa178d23c1983"
+    },
+    "docs/engineering-evidence/florida-pad-authority/performance.json": {
+      "bytes": 2347,
+      "sha256": "6183d07b46ad1bc6927e38d7ae713e6853dbb6b71119078fb856a4c456c91770"
+    },
+    "docs/engineering-evidence/florida-pad-authority/preservation.json": {
+      "bytes": 1457,
+      "sha256": "149bbe330382dc61b372c384d0fcb1ae3ceaf48929c0c3450511b32a61a8ee79"
+    },
+    "docs/engineering-evidence/florida-pad-authority/qualification-attempts.json": {
+      "bytes": 4304,
+      "sha256": "e31b6d5775364dbf9a435ffe411b274184246bc19e0012674a68b4703a473604"
+    },
+    "docs/engineering-evidence/florida-pad-authority/qualification.json": {
+      "bytes": 3147,
+      "sha256": "878122a47a62baab26d99f83e35211cc67fa113cf7604eaf2a276da3a5979f41"
+    },
+    "docs/engineering-evidence/florida-pad-authority/regressions.json": {
+      "bytes": 22659,
+      "sha256": "370723a5ff2a6ca368761b67d787c823c083a762d0791b3b6cd204fde0481099"
+    },
+    "docs/engineering-evidence/florida-pad-authority/reproduce.md": {
+      "bytes": 2483,
+      "sha256": "2dc052f0a00390f1cb17c8ecf0aabae30a930e02dee5cab170f9e21af8131c30"
+    },
+    "docs/engineering-evidence/florida-pad-authority/reproduction.json": {
+      "bytes": 15076,
+      "sha256": "2a6f35b5f637412670f4395006214b653856779b54cad7b70b05cdd87f5b2489"
+    },
+    "docs/engineering-evidence/florida-pad-authority/source-seal.json": {
+      "bytes": 246390,
+      "sha256": "e2273038a5a7ec8bc8c144a6cda76b189547a61523841843422a71d11d81c1f2"
+    },
+    "docs/engineering-evidence/florida-pad-authority/storage.json": {
+      "bytes": 20520,
+      "sha256": "525465a7cabb7b4b81a9a23cb98be949943e69a406e57efcb6689fd7c94b7cb5"
+    },
+    "docs/engineering-evidence/launch-admission-regression/README.md": {
+      "bytes": 9993,
+      "sha256": "98c4e23b43f396801aba362459515909fe226bd9f17dd49b3aab5a368ed89691"
+    },
+    "docs/engineering-evidence/launch-admission-regression/artifact-seal.json": {
+      "bytes": 1126,
+      "sha256": "40ecc2315f589f8809c5ad7f5f4345729651053a1e49084cbf7d8c86ce440676"
+    },
+    "docs/engineering-evidence/launch-admission-regression/baseline-probe.json": {
+      "bytes": 2546,
+      "sha256": "e866bf9e9bd4d4aa8fc98cb68ffeb2c809ad2ed16a79945b3f6ac45ac1565d4e"
+    },
+    "docs/engineering-evidence/launch-admission-regression/builds.json": {
+      "bytes": 2817,
+      "sha256": "32520b046a5f2b82fe1f389db425a767142184987d7f76d2d94c6dda1edec885"
+    },
+    "docs/engineering-evidence/launch-admission-regression/canonical-package.json": {
+      "bytes": 20854,
+      "sha256": "5dc976e29b1fc730df1fcb699c0830685298ef904015034c4f5dde4169eb77d4"
+    },
+    "docs/engineering-evidence/launch-admission-regression/change.patch": {
+      "bytes": 22526,
+      "sha256": "41aa1d8021f46969a9ad2a9569ce4eab13e35b4f14330c5ac7243e2603abc706"
+    },
+    "docs/engineering-evidence/launch-admission-regression/corrected-probe.json": {
+      "bytes": 4112,
+      "sha256": "cb426526d9bdca5f3b9734b6d9e84517b552269dc0f7d9dd592dbca64a04a67b"
+    },
+    "docs/engineering-evidence/launch-admission-regression/direct-ui.json": {
+      "bytes": 2129,
+      "sha256": "3e7c5277b0e1c646c2684539152324fd14b1780976f99046a8274b277f3253f8"
+    },
+    "docs/engineering-evidence/launch-admission-regression/identity.json": {
+      "bytes": 4309,
+      "sha256": "8215dd3836f785c009f37d1eb3829c0d87871840a459b428f9a99ac51c48f4c3"
+    },
+    "docs/engineering-evidence/launch-admission-regression/native-witnesses.json": {
+      "bytes": 6910,
+      "sha256": "6bc0bee3e982ceab9570e21cb82e51e6172de667a070371de20aa751525d59b5"
+    },
+    "docs/engineering-evidence/launch-admission-regression/native.json": {
+      "bytes": 25276,
+      "sha256": "5515df69555cfe42ff541da5c72ec84781da297f390c804d71478cc17f992b15"
+    },
+    "docs/engineering-evidence/launch-admission-regression/qualify.py": {
+      "bytes": 2681,
+      "sha256": "8b7f0c877fec3302bdb74a502082bdf2773518b4d48c36574d37d9156432e129"
+    },
+    "docs/engineering-evidence/launch-admission-regression/regressions.json": {
+      "bytes": 41788,
+      "sha256": "d5b0c001f16eaa23169740dfa88a909c39f4e174af0d4fee89c888f48a61c85e"
+    },
+    "docs/engineering-evidence/m16-bank-preparation/README.md": {
+      "bytes": 8945,
+      "sha256": "5de07e40d1b1dadab92a786ab69ae49292786d16f4c72b70d0c8e57e5bf04f1a"
+    },
+    "docs/engineering-evidence/m16-bank-preparation/bank-inventory.json": {
+      "bytes": 77796,
+      "sha256": "af9bfc038a4691726e9f637e5e369f6a6d791ef2b69e92de2f19841da158898a"
+    },
+    "docs/engineering-evidence/m16-bank-preparation/cleanup.json": {
+      "bytes": 3468,
+      "sha256": "382963f0f5d4b7ab4dc7341dd009b4c483bd10080441f55910188967e9f51813"
+    },
+    "docs/engineering-evidence/m16-bank-preparation/excluded-paths.txt": {
+      "bytes": 7899,
+      "sha256": "a35784f5e38dab74632fb2e2e761c7a4e7ebda01816a50159629d6bca8bb7f48"
+    },
+    "docs/engineering-evidence/m16-bank-preparation/stage-paths.txt": {
+      "bytes": 58338,
+      "sha256": "417acf89d8f1ecbffd487b9b58164bea6c45327fd6e21d00fa9900ccf66ea118"
+    },
+    "docs/engineering-evidence/m16-bank-preparation/verification.json": {
+      "bytes": 2263,
+      "sha256": "e7032aa0808dfa1ef716c98d6fbac543fb727ff068dec53248c0529cdd7dddbb"
+    },
+    "docs/engineering-evidence/m16-bank-preparation/verify.py": {
+      "bytes": 4418,
+      "sha256": "35324087148b7e47de483e69e9c68f5be01d868ca318847a494be81f09d0af33"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/README.md": {
+      "bytes": 8303,
+      "sha256": "7b98d94905483f90ffe62b768497c001df2a930dec557f661c4e2fab38de77eb"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/candidate-identity.json": {
+      "bytes": 158361,
+      "sha256": "c9b1215d7c6ee23a17b3b223bb4c979b067be2c0d1672e7083f2038d89e7d2ec"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/contract.md": {
+      "bytes": 5500,
+      "sha256": "c09aab01232604e7c7cc9d7f9ff0e08afc2f376faabc3cbcfc2e13fee19a65c8"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/evidence-manifest.json": {
+      "bytes": 5488,
+      "sha256": "bbbd03d8fe4e1699bc7dfa00125a13fea9caaab12215e47441cdd6bc5691f902"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/preservation.json": {
+      "bytes": 25005,
+      "sha256": "874b26ac7f3c189d3fa01fc31d32d7d74b18a244d6690217431b181a51317bf3"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/reproduce.md": {
+      "bytes": 2358,
+      "sha256": "edc626d2850de300a122f3ff706c3a56ad135fbdfa45bd3bf824f4172b4fbc01"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/results.json": {
+      "bytes": 30126,
+      "sha256": "c8209413144451d154c6aebbd54a7285d380fff8d3fc34e700dfd50de359abc6"
+    },
+    "docs/engineering-evidence/minimum-recorder-bounded-storage/review.md": {
+      "bytes": 1665,
+      "sha256": "fe253df5e53dda788015024da9bb15a68d40080394d83dd78d44d73999db4380"
+    },
+    "docs/engineering-evidence/minimum-recorder-native-load/README.md": {
+      "bytes": 9255,
+      "sha256": "97556fe0a785c76b354d655f30489d97b03beff86ff924f21995fd6163b094c3"
+    },
+    "docs/engineering-evidence/minimum-recorder-native-load/qualification.json": {
+      "bytes": 23404,
+      "sha256": "6420905a338307a0f2b658c91aa51c0ac0f3ec9814e91c7bdd1828e1c7031ecb"
+    },
+    "docs/engineering-evidence/minimum-recorder-native-load/reproduce.md": {
+      "bytes": 3501,
+      "sha256": "f45b2e6ad2620fb56052e49b31227ce2a853773874641f38563566148f1713ad"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/README.md": {
+      "bytes": 4954,
+      "sha256": "273a3b64798a72ffc60b13a91b487cb529fcf83031f0f1b0a4fd3278f6e02116"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/identity.json": {
+      "bytes": 761,
+      "sha256": "72305b4aefbe006f756c891799a6bfb1ae628be80ccbfe771ab9771bba6f0dab"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/package-files.json": {
+      "bytes": 20376,
+      "sha256": "fd60a6003c93bda246612fbd0e41348f9f15350dd1e0c5a3cec8d46fee14eb52"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/preservation.json": {
+      "bytes": 1073,
+      "sha256": "552d3eb5d3869fd3195228a7f5ae65bebb3a52029cc34cab5d778f29714672f5"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/qualification.json": {
+      "bytes": 1914,
+      "sha256": "d466014fa342977c86ea5ca7210cb5b8f41d11c693a1ecc730cd8d801bad8425"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/red-team.md": {
+      "bytes": 2422,
+      "sha256": "f8a0cb430a3458817d175f11305c2cdfddc290a135323ed3a1a43a94b4556b64"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/reproduce.ps1": {
+      "bytes": 1530,
+      "sha256": "a918b134d3fcf6c2d1954bde5d7ff63e65d91ec6e69c8f0332faab562c3ef083"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/runtime-before-after.json": {
+      "bytes": 9918,
+      "sha256": "fff35721d6e7a0f7700d528cc287e1365281fe53dce7f810e7b77b008f8d5280"
+    },
+    "docs/engineering-evidence/minimum-recorder-retention/source-files.json": {
+      "bytes": 169791,
+      "sha256": "1cf75b2511c5aeb4c0ea14a5870b61e5ae3f3cc2632ba2a41856f083f524f276"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/README.md": {
+      "bytes": 6616,
+      "sha256": "3540e51c3f4cf647754d39b99f2f419d2fd082b08f813ac67a27790759ad544e"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/accepted-plan.md": {
+      "bytes": 41462,
+      "sha256": "fba2cc3a2476063f808b593188a857c72663ca7c162be55cbeed6a8e10a4812b"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/campaign-closure.json": {
+      "bytes": 68422,
+      "sha256": "51bdb0b0b9b4f396726ac4bf8efce26446e9574637d5d07f53ef471e1f96761f"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/campaign-report.md": {
+      "bytes": 15463,
+      "sha256": "1c0a76dec0adadc7e4a9e6617f8645ecfe76eba251996093cd80bf3b3138ce66"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/campaign-reproduce.md": {
+      "bytes": 4467,
+      "sha256": "ccc0a5cab843291f7be454e3975c7cd4bc6e8a78570b2103f23f4ea0f2fc9798"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/closure.json": {
+      "bytes": 4552,
+      "sha256": "5364dd5749927eaaba53bdee3c2adecbbed51e35f10f365edb5798c9ed796356"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/entry.json": {
+      "bytes": 754231,
+      "sha256": "84770b16e8d876e3bd62653f8e70d584bb7098e29d5804b9bcdcaca80daed46c"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-autonomous-report.md": {
+      "bytes": 4945,
+      "sha256": "17eb9f55f889ededc6fa789676d079b8fa1ce1da4421733df611461d02c3ce69"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-autonomous-results.json": {
+      "bytes": 10901,
+      "sha256": "f319b380d28f597c03313fdc0907d2bfcbc3c29d38e07ed426b2743e3e27f7be"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-autonomous-seal.json": {
+      "bytes": 4652,
+      "sha256": "2c3087b845a8bc6eb570dbe3052988c7e6d6e1be554e8b290eccd74b7086eddf"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-exception-report.md": {
+      "bytes": 10412,
+      "sha256": "4bea05e6c17300d2450447cad30ee52f9992a8756196332fc20d9849cec1fc52"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-exception-results.json": {
+      "bytes": 8816,
+      "sha256": "0d6b0f184c9b1e818b8d03a23af241da58b44e8f7babeea8162a9154bc6ea6e9"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-exception-seal.json": {
+      "bytes": 7046,
+      "sha256": "6c5cdb96b7e6d3c7433527091e397b13a0336a7c17f312ee451657c7a8f2a420"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-physical-consistency.md": {
+      "bytes": 8021,
+      "sha256": "27fec88228b462b40f6b257b9ab7ab295970e33d0e95672f86438ca365aec98f"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate1-regression.json": {
+      "bytes": 4323,
+      "sha256": "5796762cb28143612708c0360721fb1cc99614069cabdc23236601d8fd422b4a"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate10-derivation.md": {
+      "bytes": 8958,
+      "sha256": "47e21eaeba8771304c16b50a19df5ea8284c096316302044087f0be20c2c21c5"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate10-flight.md": {
+      "bytes": 5289,
+      "sha256": "60c341b427bf576f641ade2ea84829598be15da5635274f3b51b0eae2f2dd676"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate10-measurements.json": {
+      "bytes": 10601,
+      "sha256": "f5f79ee91fed9ef2e4dc618eeec572faaa1e13aef0610d9761e76587c9d6f05f"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate10-results.json": {
+      "bytes": 40154,
+      "sha256": "1daf6012c8037a20a7412cb2ab5cb3b5c4619bff38f8c092edf17b2f1e0999e8"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate10-seal.json": {
+      "bytes": 33682,
+      "sha256": "fcb696e9ad74c80b710f9b36f7e0d342979900e224d949350d0f2b30d22282f0"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate11-flight.md": {
+      "bytes": 2170,
+      "sha256": "d5974df8e58708c318a71e06378434e9674ee995544a72728128244abc098c26"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate11-seal.json": {
+      "bytes": 33682,
+      "sha256": "d82209b9fde0e49a21f88e7535f9dc154e4120f120e37129f2f4bffe4049b7ea"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate12-integration.md": {
+      "bytes": 12479,
+      "sha256": "9cbc20c4f692bcf1af69a9f4cd6b2078193e78b97a8924e922cbd4d894b274ce"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate12-measurements.json": {
+      "bytes": 17874,
+      "sha256": "070f8bfb7c3bbea5ac9d677d2f4f82705bc07da867b528472767a78f3919b261"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate12-results.json": {
+      "bytes": 50513,
+      "sha256": "544821507f9596b58ac70d03f391f6c54285e92378c9a87f86be98fbd8637063"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate12-seal.json": {
+      "bytes": 36257,
+      "sha256": "4ffb6f1413204996e9093559b2db9c89db25c3ec867f5ce1fe2ad4b4a7743b0c"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate2-document-contract.md": {
+      "bytes": 5391,
+      "sha256": "d4705e3cd61041ee7a067505f6e02e863ff81fe9845481a4a4acf296d3351533"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate2-results.json": {
+      "bytes": 13209,
+      "sha256": "8e639cbf7fcd724601ccf8d30a0d3ebe0fe1c18e66d97aea92755fa5adfbb658"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate2-seal.json": {
+      "bytes": 3982,
+      "sha256": "862c49ec222fb7c1e4f330ad218fcad83723e269ac9f7b8e1b99bea3c447524f"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate3-results.json": {
+      "bytes": 13088,
+      "sha256": "e6c02c5442401d8d0db9031497262d04b6a6e1113b2a2b531697a95f51e20c83"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate3-seal.json": {
+      "bytes": 5032,
+      "sha256": "6de56e9bdbd69aa173038c7ad5922547ca3863f83a62260fed6638f8896f3e1f"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate3-transactions.md": {
+      "bytes": 6021,
+      "sha256": "110eee3c9f919601e5a25b82831d5794f37b7f3fd9541d31a4fb70d05323a7f6"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate4-greyboxes.md": {
+      "bytes": 7633,
+      "sha256": "07b1f1084e5df884ab64aa6b4ad7b2575e428001ec2e2b7bcd72189da74e4361"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate4-results.json": {
+      "bytes": 15559,
+      "sha256": "37599ba6780769206454b72a22f5fd9576d0fe52c1aec655079205fa1a6f6254"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate4-seal.json": {
+      "bytes": 11798,
+      "sha256": "40941f73379191111c693dac1f49f895c50ac9db032d4038fecfdf7a1af19048"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate5-editor.md": {
+      "bytes": 6074,
+      "sha256": "963c3401d7219a63cd9c207fafea446d32597e12f9b5dd1a2e11347cc4e16c46"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate5-results.json": {
+      "bytes": 23289,
+      "sha256": "115079f84f1899b2997ae6d384f02e7585246b92145a5ffde7846a2d2b7ca182"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate5-seal.json": {
+      "bytes": 17121,
+      "sha256": "5366967c9bc76426f9a2ba4362b5dac1669578ecf250b41027f5329b4545371f"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate6-persistence.md": {
+      "bytes": 2966,
+      "sha256": "0e6015a27492fbf4d5d800ff737cf748a0e3d942d753438e9c925158f923331b"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate6-results.json": {
+      "bytes": 13272,
+      "sha256": "bb06aae56248d04a17bff02434243e232cbcc6ecf64913f10dd0213623e02fde"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate6-seal.json": {
+      "bytes": 17500,
+      "sha256": "165efd40663d629b571ba3c736289860007b556ca7c23898c79e5da50e136240"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate7-compiler.md": {
+      "bytes": 4599,
+      "sha256": "71303741486f989953e8a80ca0e32faed426a03b725c9bc5f81e4bd102d090b4"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate7-results.json": {
+      "bytes": 8114,
+      "sha256": "3f993aad90560bf1f6f3531a8998486c367ef12a59d7b1b890552c6bde4f4a7c"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate7-seal.json": {
+      "bytes": 18234,
+      "sha256": "2791271045d59f14ed58d25f2573ac4c96790584f49727b559f796d4e475e49b"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate8-derivation.md": {
+      "bytes": 8425,
+      "sha256": "48706b9a180befe52cf361580709efffb04e937bb9ca95260c9fdd0325607074"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate8-measurements.json": {
+      "bytes": 15173,
+      "sha256": "78513516e7337b8951737aee5254c0c630951cfae77b206577e8db280eba23a1"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate8-oracle.json": {
+      "bytes": 661,
+      "sha256": "da3a833c77706e9877e4e84f42ceba23f148bd9c76cb1474bd6e502c906fecc0"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate8-physical.md": {
+      "bytes": 5559,
+      "sha256": "f6ed22328d4fb25fce9ef8ace0d41a2197616064114492760350f4470afd1a2f"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate8-results.json": {
+      "bytes": 21143,
+      "sha256": "e543559dd4a44138830b960edd32583340c25e3a0d017cbecac2dbf08d0a2a9b"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate8-seal.json": {
+      "bytes": 21225,
+      "sha256": "b1adc56e7d847fcdcf0307cc845e305a49510b78d1814bcb60d6f11d440feada"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate9-admission.md": {
+      "bytes": 6134,
+      "sha256": "cbc8b12986756d80a48b284fa33f9694360124d0747e53cf97c9187f44d394c4"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate9-measurements.json": {
+      "bytes": 2972,
+      "sha256": "db3a698f310b8daf7fe1f3f7056d6fbf2399fae7d2d1b63df269c80476eb77e7"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate9-results.json": {
+      "bytes": 82457,
+      "sha256": "6292d8179828a09161a771f790f58199dd1d96419579e6a0b0200ecd345ecfa1"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/gate9-seal.json": {
+      "bytes": 27729,
+      "sha256": "d838310527fe4937e7d2dfe08299ee4907c37d3577b9bef5180effc66fbf7132"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/independent-review.md": {
+      "bytes": 6632,
+      "sha256": "18c6363055c6a3e6eadc3febe3ebf1af719db8c04159cbd5f3a37f0beeb2c0a9"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/manual-player-route.md": {
+      "bytes": 2982,
+      "sha256": "1919861aad12e59096395d79591ed063031fe88303bf928dbc898b9081db660c"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/project-control-short-pass.md": {
+      "bytes": 1595,
+      "sha256": "0dae8452f083abd5ff4b3b21e2c03d764967c08c94c021402ac0b20373d3a81b"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/redteam.json": {
+      "bytes": 1415,
+      "sha256": "d9f656623f0356f31aa3cdc2aef18e20a720ba583f9f2d75c066dbb48b2439ad"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/report.md": {
+      "bytes": 9009,
+      "sha256": "97fb7c71ebea31139c5742448c699ca7d54013c7cda92e394cff963ca41d9041"
+    },
+    "docs/engineering-evidence/modular-craft-first-playable/reproduce.md": {
+      "bytes": 1816,
+      "sha256": "44bb78ed2cde16057cc59588fd53c89dda864cda61d934c329fcac4870ed688b"
+    },
+    "docs/engineering-evidence/modular-player-revision/README.md": {
+      "bytes": 4066,
+      "sha256": "f3b22bfa03627d28d589120e55fa86251c1797fecc5f9b7b84a99366242913e6"
+    },
+    "docs/engineering-evidence/modular-player-revision/application-results.json": {
+      "bytes": 50763,
+      "sha256": "baad6315270ddc0bf673122233c877bad49900d66a2251da9678f6669f4971c4"
+    },
+    "docs/engineering-evidence/modular-player-revision/convergence-map.md": {
+      "bytes": 6388,
+      "sha256": "2b35dd55681a3f8259e4ffeedfd646638847f7623347bca2d3ceffda8d851b4f"
+    },
+    "docs/engineering-evidence/modular-player-revision/entry.json": {
+      "bytes": 798423,
+      "sha256": "16ad9d4faf29cdb0b25a5b83ff6a5c9c6caa07424addeb883d964583803a6ca4"
+    },
+    "docs/engineering-evidence/modular-player-revision/inventory.json": {
+      "bytes": 10134,
+      "sha256": "544881663389045d4b2f7527ff5f9928972352a3ef71ff063008212e0405a5ca"
+    },
+    "docs/engineering-evidence/modular-player-revision/ksa-history-refresh.md": {
+      "bytes": 2617,
+      "sha256": "14048aea6585d5139de7b28d036ca3857bf3c34b236e47f00e0a499d87f0f88d"
+    },
+    "docs/engineering-evidence/modular-player-revision/ksa-live-application.md": {
+      "bytes": 8663,
+      "sha256": "4cca5c8d123bbc6747d6024f2908282ad9495dbc1c4df77180c6d6d4b55d8fdb"
+    },
+    "docs/engineering-evidence/modular-player-revision/ownership-map.md": {
+      "bytes": 5162,
+      "sha256": "31804fb7c81db60ec47d522e60eff54f062a604d158f02e45493c1199725984c"
+    },
+    "docs/engineering-evidence/modular-player-revision/performance.md": {
+      "bytes": 3697,
+      "sha256": "145d0f35910a3117ace926669d3462c44a711891d4c8304d779cad027526720c"
+    },
+    "docs/engineering-evidence/modular-player-revision/preservation.json": {
+      "bytes": 4011,
+      "sha256": "95a738ba8bf027ccdcbe2299a70cea9445b13ba4c6cd09e4a8a5d8fe803a7f7c"
+    },
+    "docs/engineering-evidence/modular-player-revision/qualify.ps1": {
+      "bytes": 2391,
+      "sha256": "01fa7b567506edbf9ac00d7c923aaff4a8bd96e46b468fc8813bb667b7a92da3"
+    },
+    "docs/engineering-evidence/modular-player-revision/red-team.md": {
+      "bytes": 4589,
+      "sha256": "634726805477fe6941ad97fe57e96253255b5eca8834a9c1f55a4e05addd295d"
+    },
+    "docs/engineering-evidence/modular-player-revision/regression-results.json": {
+      "bytes": 82705,
+      "sha256": "45fd4690bf8eb427693cfa84ca3343485999b0d709a5f4c76a0578a7ee111968"
+    },
+    "docs/engineering-evidence/modular-player-revision/reproduce.md": {
+      "bytes": 5997,
+      "sha256": "5a9190ce607b979e9d17edfbb9596811c7c483ed0ee04d953a8c195dbd160856"
+    },
+    "docs/engineering-evidence/modular-player-revision/seal.py": {
+      "bytes": 12081,
+      "sha256": "96201529d6dd33b3426cf19fbb171707a03329b2a4789edd15f18e99aa7dd7c6"
+    },
+    "docs/engineering-evidence/modular-player-revision/source-identity.json": {
+      "bytes": 57761,
+      "sha256": "aa31d43c08d4279f87994a4d609da2f2f9c2ed79081c9012affc4dcb4e3011a4"
+    },
+    "docs/engineering-evidence/modular-player-revision/verify.py": {
+      "bytes": 2949,
+      "sha256": "8bf5a4c9af148ba66c7d01436d6c63039d17c7ec4ee071723598b808f0739c5d"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/README.md": {
+      "bytes": 10504,
+      "sha256": "38f83ef1037c355ec7e8b4b38ca39ff2a5ba44171a25244c035cc2271e8865f5"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/integration-map.md": {
+      "bytes": 3878,
+      "sha256": "19cef918db8e1e699c82c53301e24dbe09de35417fc8ef7f6e9ece20364c9a17"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/offline-proof.json": {
+      "bytes": 3201,
+      "sha256": "28d7bebeaafde8dfc9aa081770eeea315b9791fb711c040be10e8cab8e399b3f"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/preservation.json": {
+      "bytes": 1447,
+      "sha256": "a5d5c40003a2ed757a1d88e486212d1201006fc5d356ca41b78ffc55d64a2df9"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/proof/BoundaryDurabilityProof.csproj": {
+      "bytes": 377,
+      "sha256": "24b757175c99e6cd480c3a7089368ec8e8d7d3586cc02d797351b7373f6f7073"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/proof/NuGet.Config": {
+      "bytes": 74,
+      "sha256": "9508cae5f76364f56e80eb97cb16493977243cf38e5cca6284e3d74f83b20a2c"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/proof/Program.cs": {
+      "bytes": 8515,
+      "sha256": "781601ba09926dfd54f3cb31c613d819901ef289867284e50a4ba7f34123e7f5"
+    },
+    "docs/engineering-evidence/ordinary-player-causal-recorder/reproduce.md": {
+      "bytes": 2382,
+      "sha256": "a034131c5e7852719724079ea4c32872b6cac248df3707e9a8c4ed998740b200"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/README.md": {
+      "bytes": 8292,
+      "sha256": "d8fc615b88f168a991ccf9f1c399f517f6f24281ce52582f93b263d54597ebd3"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-live-qualification.md": {
+      "bytes": 7150,
+      "sha256": "c142dffb3ddf8abd8fca57fa0dabc37bbd3944d4b8e8a040a99ab0ee3cab82de"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/README.md": {
+      "bytes": 8476,
+      "sha256": "c41a3e2d00fb167d8cd4975a17fe887edf0792103452dbb2827c850954b96329"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/analyze.py": {
+      "bytes": 12007,
+      "sha256": "b0a0ccc86f9c5bf2a1cd7d0a0e644160a15e1437b8cfec1e6357adc51651feeb"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/evidence-hashes.json": {
+      "bytes": 3683,
+      "sha256": "2387493c34c518e2efe2e7b9f82f354e9c0502e3572b627621a1e2680c693ddf"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/freeze.py": {
+      "bytes": 4176,
+      "sha256": "abf2395864e348267c06e82e400fba691afb70617229957fb2508895d7a883c2"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/identity.json": {
+      "bytes": 720,
+      "sha256": "85b00b2ec5a008b75fff27dbea529940a25e72acabd6a9d438077f124f2a40f9"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/independent-review.md": {
+      "bytes": 2152,
+      "sha256": "77b3b692b48216af034d94f0d4849f7bd906146bee5c3d1fc324b2d8d48bac64"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/package-files.json": {
+      "bytes": 20375,
+      "sha256": "73a277cc4927d661bc17e0c3e7e9937c330b9827672894e83b924e7916567eb3"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/preservation.json": {
+      "bytes": 1514,
+      "sha256": "c47807180fb9bd2a07793d386081543fd9cc42ff61e8f085812a72d7df9223a1"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/qualification-plan.md": {
+      "bytes": 2850,
+      "sha256": "e0f885bd11cbe15129da33d648a5dd8c011a0cb4dfcce237a91a8a4549096e9c"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/qualification.json": {
+      "bytes": 18706,
+      "sha256": "1f0e790449c0fe40039ee36dfb812ad08b38287a6ef4079a89344d8dd7890422"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/reconcile.cs": {
+      "bytes": 1315,
+      "sha256": "ac1f10ffcdb1f05ec7ff681976f551e3b1758c1ac0035a04e021d0355a154858"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/reproduce.ps1": {
+      "bytes": 1647,
+      "sha256": "8245cfdc4ef68d4841af446a8e121304b4c54f1e2c22b513d3f8bcbf87e44888"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/benign-revision/source-files.json": {
+      "bytes": 168468,
+      "sha256": "6cdbd58067949ac5e623044aa6c68e4a46316211a3b27a2290a0ca712eda8528"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/identity.json": {
+      "bytes": 1120,
+      "sha256": "71856aec0e7d7b8cc9cd7a864531752a3f429d64fa6dc9775340f41d9565674f"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/package-files.json": {
+      "bytes": 20375,
+      "sha256": "319dd0966fc9b65f6b872af6360b2cb3c6682c54c6087ee6a7c56c261926e7e0"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/performance.json": {
+      "bytes": 6445,
+      "sha256": "12b50b127542fce6e911b034eb19c22c39186fa35eda29e3bb863011a4f74676"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/preservation.json": {
+      "bytes": 2856,
+      "sha256": "0a2584e0f8760c4c50657bd593eea2ea53a60b4226a35efee49a2c6d57c34b7a"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/qualification.json": {
+      "bytes": 11818,
+      "sha256": "f2657c67e5616ac581074b6f7f75ff8ea1b16c47729caaa46d4387db0dc660c0"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/red-team.md": {
+      "bytes": 2966,
+      "sha256": "4e4f88785fcd27be26a2010ba73a72278d8643c7c52b5019f1cfd1e2e4a8c437"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/reproduce.ps1": {
+      "bytes": 2098,
+      "sha256": "ebab3a2af2f98d419927cba70e993e527e694adbf9998c821c77701e2a969f57"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/seal.py": {
+      "bytes": 7946,
+      "sha256": "8cacdf3ece543d2540a9b10d1c1e8024685132f12e1cca8f037a19f454fff9d3"
+    },
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/source-files.json": {
+      "bytes": 167774,
+      "sha256": "94645ba5173d680ebab17c495fccbfdf30ca8c8d8536335b102bf745e6f6196b"
+    },
+    "docs/engineering-evidence/performance-150fps/README.md": {
+      "bytes": 7722,
+      "sha256": "9281540cd48bd0e385867ef46d96e22492d626ff9d073164ffa3c96e97d70494"
+    },
+    "docs/engineering-evidence/performance-150fps/bank-candidate.json": {
+      "bytes": 10069,
+      "sha256": "f025aa07559f4d0d61f47a43a461b161021908b73b921cc8db35486456ecbf66"
+    },
+    "docs/engineering-evidence/performance-150fps/bank-candidate.md": {
+      "bytes": 17657,
+      "sha256": "38e5f4759e0c3c1b5eecad4561a4761a788aea83094b0c1fdb37ce1760214949"
+    },
+    "docs/engineering-evidence/performance-150fps/evidence-manifest.json": {
+      "bytes": 8479,
+      "sha256": "34cbcc7f4ebdd44d1c5d824d9bee9901b0062a7d2a27a9c713508a4ac777cba5"
+    },
+    "docs/engineering-evidence/performance-150fps/final-gpu-payoff.json": {
+      "bytes": 26069,
+      "sha256": "bfd038ad77a2cb0926f639b5021a20ecb395666b2d5c37ebe156456b079490b2"
+    },
+    "docs/engineering-evidence/performance-150fps/final-gpu-payoff.md": {
+      "bytes": 5701,
+      "sha256": "ef7d257f5429460cced5c4f41c2cd39c958e519c524dd949ed6f0270dcebfaa3"
+    },
+    "docs/engineering-evidence/performance-150fps/native-results.md": {
+      "bytes": 4905,
+      "sha256": "49467a4ee4ac60f8b9db6b1e7de4c6357e3be23951298da3aec9a78708a8e863"
+    },
+    "docs/engineering-evidence/performance-150fps/reproduce.md": {
+      "bytes": 3442,
+      "sha256": "7cea5adeabaee5403208554a544a3309c555e5453d85073eb544bcc407560dda"
+    },
+    "docs/engineering-evidence/performance-150fps/results.json": {
+      "bytes": 80818,
+      "sha256": "b0a6f3858d41c0cd6b371f65b3d1c22dbb6a4ee511e89f63a919877caa532065"
+    },
+    "docs/engineering-evidence/performance-150fps/retention.md": {
+      "bytes": 8805,
+      "sha256": "a811783ea0d7a7bd104b6d11ee46968975dd0bc61c105129c9443c054dabc3a6"
+    },
+    "docs/engineering-evidence/performance-150fps/seal-bank-candidate.py": {
+      "bytes": 9498,
+      "sha256": "3553a82a99730e7e15092db50d7c9d5fcde059697a84a364dadea91c503ca638"
+    },
+    "docs/engineering-evidence/performance-150fps/stage-a-proof.md": {
+      "bytes": 3728,
+      "sha256": "a09e2be960778eaa886feba86cfdf5809f6f24b993f7ff7e2c5ea52266195cdc"
+    },
+    "docs/engineering-evidence/performance-150fps/stage-b-review.md": {
+      "bytes": 4881,
+      "sha256": "efdcda2405508dfe15a4178318d1274b307d431b00efd5b4d95a9959d3bdecb6"
+    },
+    "docs/engineering-evidence/post-blackout-storage-hygiene/README.md": {
+      "bytes": 9820,
+      "sha256": "a83e5be32136c417db0ebdb511cf16d37259edcbd53633fab9b25166ecfdb30c"
+    },
+    "docs/engineering-evidence/post-blackout-storage-hygiene/result.json": {
+      "bytes": 1671,
+      "sha256": "da18de12ab4b60e39d38aebe7be538ec873a563064efb1d1c1797aa057623d57"
+    },
+    "docs/engineering-evidence/post-contact-performance/README.md": {
+      "bytes": 10586,
+      "sha256": "3e1410e721cffad8760b9e153e58e9bce88e98b2119b656ab125e99911f14da8"
+    },
+    "docs/engineering-evidence/post-contact-performance/ksa.md": {
+      "bytes": 4941,
+      "sha256": "3dfe82084c864ad7afafed665bf3d5d4ea4957822c57945d8e86ae061626f9b1"
+    },
+    "docs/engineering-evidence/post-contact-performance/proof.md": {
+      "bytes": 6021,
+      "sha256": "51a4bf7b5d53dad675a1610b5280144b5725de88dece0c6f586514a781e1dbdc"
+    },
+    "docs/engineering-evidence/post-contact-performance/qualification.json": {
+      "bytes": 52353,
+      "sha256": "02ee6837af792f6001cdccf4aa50921b4f5d88b15f864f4ce430a8e5de8f3201"
+    },
+    "docs/engineering-evidence/post-contact-performance/reproduce.md": {
+      "bytes": 4954,
+      "sha256": "1ee349f68866f7fcdc1ef3f47cfd3e6fa3cbdcf28b5e4de9757d518b92a96c4f"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/README.md": {
+      "bytes": 6620,
+      "sha256": "09c1ef35126350fb5e3351db81c3283728f9765541aabcacf1d1b7d6eb48518c"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/builds.json": {
+      "bytes": 449,
+      "sha256": "5db8e847417fb6128d64f4e49d18c24f94734aed8f4bf27dc80fad33b324d95f"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/candidate-package.json": {
+      "bytes": 20954,
+      "sha256": "f4b663c20b7b61014e1dc486f996bf46c95a72112fda8d38753a7a2fece6e981"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/change-inventory.json": {
+      "bytes": 7728,
+      "sha256": "718dc694d9fbc234694a01b3240b889c40325c401ee00281aaf1d1095ea57336"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/change.patch": {
+      "bytes": 96209,
+      "sha256": "1aebfbbbd431ddcc19d1574cda5f2d4edc19a451d05567745f9f02247a6d9ff5"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/current-installed-boundaries.json": {
+      "bytes": 10158,
+      "sha256": "229757911442106bfe53aec4b8e9d11f5f6799feefd27d54b0e573184c6380e9"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/debug-cpu.json": {
+      "bytes": 5915,
+      "sha256": "4d3218fb1a0db6d1a0d18b544f14851d45fd93a77ebfd92ead001f3f229d8982"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/frozen-entry.json": {
+      "bytes": 785543,
+      "sha256": "24425538501003117a73617d78806f8bb3401538296ad2afeccb07067c20a94f"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/frozen-preservation.json": {
+      "bytes": 280,
+      "sha256": "cf3fc00835890bdc462a2e85702e4b2807d3d5e8f1616cb4aac7e6ac86625543"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/harness-witness.json": {
+      "bytes": 1159,
+      "sha256": "d4595383d75771e057df3ced53182b70e3c6e6a7ce346712f6d7afb00a17ca83"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/identity.json": {
+      "bytes": 849,
+      "sha256": "c05bb33d674a0092aa86f5693ae0a75dd9f587d415d615bca5b65bfbb23d7dec"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/inspect-identities.ps1": {
+      "bytes": 2728,
+      "sha256": "e38b8a1d4fef9dfc800eb7d1e32fdb5c014ea8e1ffadb2f8d0fd212cb7c29734"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/known-limits.md": {
+      "bytes": 2103,
+      "sha256": "85ff10f78b9abbad97b96a672f8a38c3ad35c4612494c8acb9d9ef95a263749d"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/ksa-boundaries-review.md": {
+      "bytes": 7848,
+      "sha256": "7cf68653f04bb8498526c7cd2e2402e6e03d8bcd80a37b4ffafaac3a6c2e3f09"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/late-integration-package-delta.json": {
+      "bytes": 773,
+      "sha256": "ede94bb0dd8860bc5b31835d7d809030e2eb80a5ce58cdc69f64df06fdd44a8d"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/legacy-regressions.json": {
+      "bytes": 12903,
+      "sha256": "c033a90dd1f1443a91eb34e3113333718007e6ae5047ed90c597c56c68a36d33"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/mechanism.md": {
+      "bytes": 5624,
+      "sha256": "c088303ac67fe8fe99fdf2af5d7f06ed8f7fa4cb5203751b3495425d3c6b47e1"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/native-gpu-samples.json": {
+      "bytes": 115473,
+      "sha256": "97cf3e847c5c66e8bd1ab5f78b0d34b982fa1e5a783b2b0961dbc4864d6c62a2"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/native-results.json": {
+      "bytes": 41978,
+      "sha256": "65e6840e2da0c3124c6cf388da2c9f97f89d72096e20614814c4810f1711437e"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/performance.md": {
+      "bytes": 5709,
+      "sha256": "e10e1ec0d3e029f9a3cd1f90832e5946c412feec296bfda5b6a3746fcfd5b54f"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/qualify-native.py": {
+      "bytes": 2604,
+      "sha256": "b0dda0e454f27b44b8f26923d495c034de43ce0e841d88a23ee713b99c238f8d"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/red-team.md": {
+      "bytes": 3096,
+      "sha256": "199ed8c55b3f8a4159716cbcc73d3108d2cab7d3ba3bc78827cc261cf2c74cda"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/regressions.json": {
+      "bytes": 38350,
+      "sha256": "94451904311c603c61bb207ae47fc2369d0117b0814d3ae394eb4c9b09aa296f"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/release-cpu.json": {
+      "bytes": 5905,
+      "sha256": "cc7aa77bf63a644c1660cdce332ee2b50631642378ac549b07b3646128cacb65"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/reproduce.md": {
+      "bytes": 5007,
+      "sha256": "bcc57bb745ca1d2fd90af6d9f14ce704767ff3d29a0f73e5933d635bb51b6916"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/retention-inventory.json": {
+      "bytes": 633,
+      "sha256": "61d0d4150b6fb9fbe5fdfd2b5926cd5e08da787bea589c7e5a280a0f2a2f2c7d"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/seal-evidence.py": {
+      "bytes": 7413,
+      "sha256": "4192616b44e4e30170dafac256e3bc9629b5aa39a540cb8e5fdc139c07373896"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/shared-visual-witness.json": {
+      "bytes": 512,
+      "sha256": "933116c5732498aac21d0e3df5a2d0e86e6726572ebbb0effa21dcfcbf8894ed"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/short-ignition-attempt.json": {
+      "bytes": 1343,
+      "sha256": "858c05059adde55f310005910abb1933970ad4079fa8e84432887cf75f266978"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/source-manifest.json": {
+      "bytes": 169636,
+      "sha256": "b9e695eda17d8af51d04bfea0ef26fea2ed49cc7af17bd869f68e085a08a459d"
+    },
+    "docs/engineering-evidence/rcs-attitude-scalability/supplemental-regressions.json": {
+      "bytes": 50920,
+      "sha256": "788b16bf724c6bdd0bf7b27b7dfde00dbb5c9287518bf448dbef7837400c738a"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/README.md": {
+      "bytes": 6046,
+      "sha256": "00235363e88adae37a3f5cc37f4645d87a5a7a00dcbb4210498f38967e99890a"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/build-canonical.ps1": {
+      "bytes": 1845,
+      "sha256": "c22b84fdd0eb1bcb32e50f485a289fe3abde00a7d3417f165f92e7c46a276c1f"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/builds.json": {
+      "bytes": 3182,
+      "sha256": "6a974da63320c2e9e1637b00679913816ea768bd6a5913d0ae32078660130bda"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/candidate-package.json": {
+      "bytes": 20854,
+      "sha256": "acd4ea1ed10b82225d38623b1c756404e204cd2cb1a80c11dbae16d81965776d"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/cpu-results.json": {
+      "bytes": 65026,
+      "sha256": "9ee74a5e8eaf39e90bd2c4eecab44376625ac20c31076f695f58fe7917941ed8"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/debug-cpu.json": {
+      "bytes": 5908,
+      "sha256": "a6bbafe7dbbdd68573beb737da3909662d07dd49240240dc804899b0fe91920f"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/direct-ui/01-filled.png": {
+      "bytes": 158346,
+      "sha256": "4f4cada57a1caed3885f811b7a734c4a243febe222dcbf3a16e6b52b718467a6"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/direct-ui/02-supported.png": {
+      "bytes": 127318,
+      "sha256": "bf655623bf9974e55e46d9241196d9d69235040622499653f64c223a0ecbfb4c"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/direct-ui/03-coast-before-rcs.png": {
+      "bytes": 126969,
+      "sha256": "c6926321ff148c9be599d838b6167dffb24f4244f3f3be963b524101951f4c76"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/direct-ui/process.json": {
+      "bytes": 2498,
+      "sha256": "ee09559e3208b398c769ed3a3610848969514d6ef7680bd4e29e9ef8f6f7211c"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/direct-ui/result.json": {
+      "bytes": 1000,
+      "sha256": "d43e437c6e5f4753cb3fea21dadbb579853ec3a6715fd80cc93a699f567841fa"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/direct-ui/session-witness.txt": {
+      "bytes": 2190,
+      "sha256": "f5f5c0aa451c847a33c58cf426e9399e8e066b9e61f7b183ab7412bb32c86dc8"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/entry.json": {
+      "bytes": 792852,
+      "sha256": "1ad8b0fbd78fe05a2d180bdcc51ed5ff6714ac352e45d6b239d305c3c711feed"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/export-ui-fixture.ps1": {
+      "bytes": 1848,
+      "sha256": "5b9b24f25c7d9de5c30ccbaf12921a2c490ebac651979fef5a58adcf6abb8642"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/integrate.py": {
+      "bytes": 2895,
+      "sha256": "e4c3d9206b22a65c65ac6c4cd2be8086943d9f7b941f18117a64ec16bedabbc5"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/integration.json": {
+      "bytes": 3249,
+      "sha256": "4a8fe2cc23a6c47086a40f659615919f26262de27c07f25f2844fbc6e9f7b4e4"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/preservation-checkpoint.json": {
+      "bytes": 2656,
+      "sha256": "7895aeee61cd8e03825daafb99bb7c7a20c3ea8ded35a1f66f54192535691580"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/qualify-cpu.py": {
+      "bytes": 2010,
+      "sha256": "4dc41ed1a6e105e0b692f6e85fc27f66453f937a47a4ba7c1583a230da1d9b2f"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/red-team.md": {
+      "bytes": 3175,
+      "sha256": "c133b2aadc0f64f6879b3274ea0abaeb699fce5921dcb4adc52f6b8bc7ce30b6"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/release-cpu.json": {
+      "bytes": 5890,
+      "sha256": "7fa298962a7167908ccaecc274989ef5e5190b7a5e2ca39b26702bb70b0253da"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/seal-canonical.py": {
+      "bytes": 7321,
+      "sha256": "37eee23f1517a72be6769b63c21cc02cb23d20c142764a062ff8ff6db540ff44"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/source-manifest.json": {
+      "bytes": 169636,
+      "sha256": "b9e695eda17d8af51d04bfea0ef26fea2ed49cc7af17bd869f68e085a08a459d"
+    },
+    "docs/engineering-evidence/rcs-canonicalization/ui-entry.json": {
+      "bytes": 749,
+      "sha256": "0392017f8db56469da6236a7225fdc196a78dd7c83318b41bd086e78434000a7"
+    },
+    "docs/engineering-evidence/release-package-owner/README.md": {
+      "bytes": 10294,
+      "sha256": "2d77c575394d2210e8ab7c6b5f6d67b9955c29a10c251db9accc60dc53d74dbc"
+    },
+    "docs/engineering-evidence/release-package-owner/app-build.log": {
+      "bytes": 1221,
+      "sha256": "bce5d0f2d547e682bcadb6243e38b06375043e8f5f9f3b817e8455508a0151b5"
+    },
+    "docs/engineering-evidence/release-package-owner/app-publish.log": {
+      "bytes": 1125,
+      "sha256": "1cf502ff5410adb5630ea669269de7900f9d10557cf6af3f8831c635a2e23dbc"
+    },
+    "docs/engineering-evidence/release-package-owner/application-smoke.json": {
+      "bytes": 2076,
+      "sha256": "04928fbfb227c6e5ae767f78ecd4689365a5ee17ee6a832221aa5f7ecbcede21"
+    },
+    "docs/engineering-evidence/release-package-owner/canonical-manifest.json": {
+      "bytes": 21156,
+      "sha256": "d9159f5cec839a8c31a0a28a422d17441e68ab420a016fbc47582eb1247b39d2"
+    },
+    "docs/engineering-evidence/release-package-owner/canonical-summary.json": {
+      "bytes": 1637,
+      "sha256": "5d6c312236f675bc6834498014a5505ca4a484b9c8a75efb484fdc0bddf8ee3f"
+    },
+    "docs/engineering-evidence/release-package-owner/configuration-selection.json": {
+      "bytes": 281,
+      "sha256": "f3c6d611f30720c5dab35f59a8827081b3425c8e4b85bcda8a5e0016c2b7694f"
+    },
+    "docs/engineering-evidence/release-package-owner/construction-models.jpg": {
+      "bytes": 135295,
+      "sha256": "3836adda0d2af0b1a35fc5cdc9cf52dcb61d2b0ea7d0d959daa32794ef400e5d"
+    },
+    "docs/engineering-evidence/release-package-owner/craft-library/Application-nc.tank.short-2-77650110.craft.json": {
+      "bytes": 10096,
+      "sha256": "deacb1eb5597a2e6d8d66d5c30ba3a6ac728a8af82ec799b9e936018b66e77c7"
+    },
+    "docs/engineering-evidence/release-package-owner/craft-library/Copy-6d6a5080.craft.json": {
+      "bytes": 10108,
+      "sha256": "af2890bb6202a7510dcff8b1bf18bf7790a556854f60ef299a24a0cd19a356d1"
+    },
+    "docs/engineering-evidence/release-package-owner/craft-library/Malformed-6d6a5080.craft.json": {
+      "bytes": 24,
+      "sha256": "806ee80324428c6e3664e84b035600a89f095a0a64a65a8373c9d9496943631d"
+    },
+    "docs/engineering-evidence/release-package-owner/craft-library/Partial-6d6a5080.craft.json": {
+      "bytes": 10108,
+      "sha256": "8c9155391a3b10f00ff99bf647b39d7c6e8fc1ba0274a9286336674512b402df"
+    },
+    "docs/engineering-evidence/release-package-owner/craft-library/Saved-before-new-6d6a5080.craft.json": {
+      "bytes": 10096,
+      "sha256": "8b596d4a4de5d4015e50f629b0c38c13f2f6bb998b68852f7253212e3f824cc6"
+    },
+    "docs/engineering-evidence/release-package-owner/craft-library/Second-6d6a5080.craft.json": {
+      "bytes": 821,
+      "sha256": "dc822bc80c30c52f1afab0e42ce2d5ec27e244bd76c0b80fda5aa63001b4e7b1"
+    },
+    "docs/engineering-evidence/release-package-owner/diff-check.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/engineering-evidence/release-package-owner/empty-shaders.log": {
+      "bytes": 1407,
+      "sha256": "b90ef36c81fc38c2f2be2d673c094cb7e1833acba86121a8c6bcc570b1b26332"
+    },
+    "docs/engineering-evidence/release-package-owner/final-package-verification.log": {
+      "bytes": 1637,
+      "sha256": "5d6c312236f675bc6834498014a5505ca4a484b9c8a75efb484fdc0bddf8ee3f"
+    },
+    "docs/engineering-evidence/release-package-owner/head-before.txt": {
+      "bytes": 42,
+      "sha256": "afc03f67c6d4ccf62cd237aa9a48f2ca4e7f360a287263ef9582b7370e837a78"
+    },
+    "docs/engineering-evidence/release-package-owner/missing-native.log": {
+      "bytes": 1375,
+      "sha256": "3ae67459b23b25731fb69f98ca9f300fee5ce3a063e90022e99a624699095fcf"
+    },
+    "docs/engineering-evidence/release-package-owner/native-before.json": {
+      "bytes": 16280,
+      "sha256": "db66311202cf510a73cc7cf222c9a44a6021d2553230a2ac7156f9ac8c9fb244"
+    },
+    "docs/engineering-evidence/release-package-owner/native-build.log": {
+      "bytes": 3793,
+      "sha256": "2da0e3e9214e82b66f5e8ba85b8b315c91bcab8e2fa2dbfe73705b1ae67b4819"
+    },
+    "docs/engineering-evidence/release-package-owner/native-configure.log": {
+      "bytes": 620,
+      "sha256": "61e388062a04e0d346873299a53aa9dfa384e0a88fc07e15aaf898e89ef34f95"
+    },
+    "docs/engineering-evidence/release-package-owner/negative-gates.json": {
+      "bytes": 774,
+      "sha256": "ff624b9f0312c78f48223d15ed065fd8f835884e3789a9d94fce3947bcf2e4b3"
+    },
+    "docs/engineering-evidence/release-package-owner/owner-correction.patch": {
+      "bytes": 13941,
+      "sha256": "6aa7666ca23a5fbb7b39300a87675b184021f5559b713019ef5a6315fa13ed65"
+    },
+    "docs/engineering-evidence/release-package-owner/owner-files-final.json": {
+      "bytes": 533,
+      "sha256": "48967917ce1564dc26e8decd34dc2b50680861fc86df861ea209c0da386273fa"
+    },
+    "docs/engineering-evidence/release-package-owner/package-before.json": {
+      "bytes": 21156,
+      "sha256": "7f0bd721246741bd1386563face05a2521346e32769ea1995e3a1b1ecadaad4e"
+    },
+    "docs/engineering-evidence/release-package-owner/powered-flight.jpg": {
+      "bytes": 51194,
+      "sha256": "b5d2a205ca2d3473d93f1f21690e0e1de3f52c174c528651a649ddef37f95c46"
+    },
+    "docs/engineering-evidence/release-package-owner/preserve-and-clean.ps1": {
+      "bytes": 4485,
+      "sha256": "34d18cec87507abc0c76f1304df1ec6cf847c9372c983a8727af91ec83760c0a"
+    },
+    "docs/engineering-evidence/release-package-owner/preserved-output-paths.json": {
+      "bytes": 3843,
+      "sha256": "6cec81aca5d8dc92fced5028e7925b9785e6202036ca373214214340fdafb9ee"
+    },
+    "docs/engineering-evidence/release-package-owner/publish-manifest.json": {
+      "bytes": 20184,
+      "sha256": "f9834762a27cf627f249ee2ecbbda9bfb823a1ce4c635c161302a923571c3322"
+    },
+    "docs/engineering-evidence/release-package-owner/publish-native-manifest.json": {
+      "bytes": 20184,
+      "sha256": "f9834762a27cf627f249ee2ecbbda9bfb823a1ce4c635c161302a923571c3322"
+    },
+    "docs/engineering-evidence/release-package-owner/publish-native-summary.json": {
+      "bytes": 1858,
+      "sha256": "810c7743058c53460ce7e29647b93bd21ef3be24a751a51fb676ecc06e7b161d"
+    },
+    "docs/engineering-evidence/release-package-owner/publish-native-verification.log": {
+      "bytes": 1858,
+      "sha256": "810c7743058c53460ce7e29647b93bd21ef3be24a751a51fb676ecc06e7b161d"
+    },
+    "docs/engineering-evidence/release-package-owner/publish-summary.json": {
+      "bytes": 1816,
+      "sha256": "97bb60772848c9b21dea1486e655bdc2a4e25fc9ee2053bb4c34d529a24aec6b"
+    },
+    "docs/engineering-evidence/release-package-owner/qualified-candidate-preservation.json": {
+      "bytes": 39,
+      "sha256": "7fdcdcdb98d78dea277741d1a26fc8029b84cd8058cfecd0402e57b753508cd3"
+    },
+    "docs/engineering-evidence/release-package-owner/qualified-candidate.json": {
+      "bytes": 21158,
+      "sha256": "15cb44535fc81ecce4607243a52e635797f445030dc73d2bca5c6304633f9e61"
+    },
+    "docs/engineering-evidence/release-package-owner/reference-chain.json": {
+      "bytes": 442,
+      "sha256": "4a5f34f0e821b03b57e125f0eff8b3a9d4be75a0194b013613ac55f85a884786"
+    },
+    "docs/engineering-evidence/release-package-owner/result.json": {
+      "bytes": 1021,
+      "sha256": "50da861ce4b7d1c974f615548871606d8b316427b0a3e931ef54300ad8f0e981"
+    },
+    "docs/engineering-evidence/release-package-owner/session-exits.json": {
+      "bytes": 1332,
+      "sha256": "eb0214966f40a4193ec8babce78f573d3e624e18636d1bef42eae879a0889990"
+    },
+    "docs/engineering-evidence/release-package-owner/smoke-process.json": {
+      "bytes": 189,
+      "sha256": "516f3ec4de7a472284f03abe10d89403ca40ea320c35c848cc2edd407d56c60a"
+    },
+    "docs/engineering-evidence/release-package-owner/smoke-stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/engineering-evidence/release-package-owner/smoke-stdout.log": {
+      "bytes": 212854,
+      "sha256": "507565f8f1ce0a073854020ed509ba62e7f931024657d5b3143198d9c56e251d"
+    },
+    "docs/engineering-evidence/release-package-owner/source-before.json": {
+      "bytes": 673149,
+      "sha256": "47487cad7d7915a7f95f0dcc474e028b0033391b09361c4d2424175e8946fa71"
+    },
+    "docs/engineering-evidence/release-package-owner/source-preservation.json": {
+      "bytes": 295,
+      "sha256": "1b769a976abd6867d29cf15fab2e3281b67d4f79a0b8468655fd3c59d8ba6dba"
+    },
+    "docs/engineering-evidence/release-package-owner/status-after.txt": {
+      "bytes": 11000,
+      "sha256": "311ea1e4f3b115a9b9895c45bc570c0d730c5dd63c055555cde6ee3fdea3e70f"
+    },
+    "docs/engineering-evidence/release-package-owner/status-before.txt": {
+      "bytes": 11120,
+      "sha256": "9e83d52113e0d1a35e19cf3827ce0329d1fe384bfbd453be4453b7ba29d05809"
+    },
+    "docs/engineering-evidence/release-package-owner/verify-package.ps1": {
+      "bytes": 3685,
+      "sha256": "20b826472762c4af57d8a35ce19aaa98e0e20b7e91ed10cc95597badc874896b"
+    },
+    "docs/engineering-evidence/release-package-owner/worktrees-before.txt": {
+      "bytes": 95,
+      "sha256": "41fa1e3c868c1e86b65184e342b6eba8fdf4c1bbef3c5131bdc57de925f1fd9e"
+    },
+    "docs/engineering-evidence/scalable-launch-support/README.md": {
+      "bytes": 10223,
+      "sha256": "0cbd70e476e016cf7298c344d89e8cf48c30b81d453914c08026cab958274c60"
+    },
+    "docs/engineering-evidence/scalable-launch-support/build-canonical.ps1": {
+      "bytes": 2099,
+      "sha256": "c3447dad2c65b3193b65339ab182827cfe44645db055f966a92cf4d49d19e507"
+    },
+    "docs/engineering-evidence/scalable-launch-support/builds.json": {
+      "bytes": 3193,
+      "sha256": "de215ad032a1b6fdbec48e5ba19521139e9c45b8e0c758c12607e97d2824cd3f"
+    },
+    "docs/engineering-evidence/scalable-launch-support/candidate-package.json": {
+      "bytes": 20854,
+      "sha256": "c4a6f954cf6e4ea8f0a8580521f45dad2d166681b88b97a84cea5cee2c2fdf03"
+    },
+    "docs/engineering-evidence/scalable-launch-support/capture-candidate.py": {
+      "bytes": 2899,
+      "sha256": "300a155d3ffe4ebd37227d8d0d0e661a440e17c4084635aa6c0182d7b7199da9"
+    },
+    "docs/engineering-evidence/scalable-launch-support/causal-owner.md": {
+      "bytes": 3439,
+      "sha256": "120b39aa02cf750606fc82005c48ac61d7c8465d43cc3760aaf5eb32cb49c5d6"
+    },
+    "docs/engineering-evidence/scalable-launch-support/change-allowlist.json": {
+      "bytes": 2167,
+      "sha256": "60950991260e593b763138e662df7b0c96d3d6a92a3697eca987ca77246cc502"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui.json": {
+      "bytes": 4347,
+      "sha256": "5e37ceed375f28e85f37d44651146b1059143309b3e55ac22cb42cbdda85823c"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/README.md": {
+      "bytes": 1241,
+      "sha256": "14d37c1983a070a3f0240499adb52a0968b777509132e2e68e099d2eeae73295"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/bounded-release.png": {
+      "bytes": 129893,
+      "sha256": "e16f14be0904d2607c17f9a8ce98f696c92339bcf5f51411c2ae008ca91fff8b"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-bounded-paused-flight.png": {
+      "bytes": 132554,
+      "sha256": "95776b715a0b805d1a140b4a00994c695dab39ef98f0cbc78f22abafaf0f6e26"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-bounded-return.png": {
+      "bytes": 158048,
+      "sha256": "5d7626fbd7e40a7458885408b49eb7addce189a7cfc90a058288fbb110ac2d37"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-cutoff.png": {
+      "bytes": 126485,
+      "sha256": "cb9fe39f6b73e7df58c42dcc74935c5c1201f834fc77742138ab88b1a7436f8e"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-filled.png": {
+      "bytes": 160908,
+      "sha256": "077e9ca22c80eb88a5b6faecb6f51a19acab6d0e10950c0041c324aa67127b88"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-ignition.png": {
+      "bytes": 126614,
+      "sha256": "9b8eb1c448b12dfd79a2811f9aa4a27def61d42372a6602bd809f248d9561f51"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-powered-release.png": {
+      "bytes": 131173,
+      "sha256": "818c0ff930c7002f2d63d8b657b8c961e31b4090b0bf05ec8a20504b19972f2a"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-returned-editor.png": {
+      "bytes": 157885,
+      "sha256": "7eff2e326814c3df64cf3563e2fc431a35746c3bac6239d6891286a3e4156920"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/final-supported.png": {
+      "bytes": 126697,
+      "sha256": "e4eeb83338b686e6aa1e59940b047185ab8741f089145bc94b0fe88b81d0bc24"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/powered-release.png": {
+      "bytes": 134293,
+      "sha256": "81f99a19ae11f9ddb37f02d308458a4a350fe8eb1b527f9ea00ab67f6f57132e"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/returned-editor.png": {
+      "bytes": 157870,
+      "sha256": "a286904d1722475336cc041d404117c380951ea39eb22d0d0acba10177206cfe"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/runtime-witness.log": {
+      "bytes": 1901,
+      "sha256": "c689984094c3a944bc8d55aceb00685df761fe7bbd5af542443af32ccc15f918"
+    },
+    "docs/engineering-evidence/scalable-launch-support/direct-ui/supported.png": {
+      "bytes": 129446,
+      "sha256": "c9292f10cb733103d449661917d676b1163f899bcc26a2b45e710a4dbecdbb7e"
+    },
+    "docs/engineering-evidence/scalable-launch-support/entry-summary.json": {
+      "bytes": 7821,
+      "sha256": "8bc65414981e0c220e948a64c942c3423c114e22eb638374476180096f5e41a8"
+    },
+    "docs/engineering-evidence/scalable-launch-support/identity.json": {
+      "bytes": 810,
+      "sha256": "668fd53a9227e036c5f6b00063573cc4bb7753cc4d2c54c24fa75b6389ad2b85"
+    },
+    "docs/engineering-evidence/scalable-launch-support/initial-contact-precision.json": {
+      "bytes": 2045,
+      "sha256": "49b8a5961aec2095849be905ae81ad19f1445b65f97c54f300f0ba68b559f72f"
+    },
+    "docs/engineering-evidence/scalable-launch-support/native-routes.json": {
+      "bytes": 41924,
+      "sha256": "aaae3ec0a4cf1a57caca096a388a95d12b27fd8dddb3b3f1fa8aef4555094bf2"
+    },
+    "docs/engineering-evidence/scalable-launch-support/performance.json": {
+      "bytes": 15482,
+      "sha256": "7f016ac61450a9e7842082359a64ecf408bd47cdeef0cc57a9ff4ec2a0bdc2a0"
+    },
+    "docs/engineering-evidence/scalable-launch-support/performance.md": {
+      "bytes": 2763,
+      "sha256": "88f8465ed170a2d1558d7f42849370bd4768962cd1dd4411f75816b200f8eea7"
+    },
+    "docs/engineering-evidence/scalable-launch-support/player-state-preservation.json": {
+      "bytes": 1186,
+      "sha256": "ea0adedbc62915960a0fb74ac6cca5e37b337261f419560dc7e907698207befc"
+    },
+    "docs/engineering-evidence/scalable-launch-support/preservation.json": {
+      "bytes": 6655,
+      "sha256": "e00a290d7b6e3900567131e512d262fee44e5fa1762ea24fe6318faabff64ad9"
+    },
+    "docs/engineering-evidence/scalable-launch-support/qualification-continuity.json": {
+      "bytes": 63941,
+      "sha256": "a44bb0e3f418b749c42540dd1380c70abf8f1cd16d0a28acf3a67616ef5dd331"
+    },
+    "docs/engineering-evidence/scalable-launch-support/qualify-cpu.py": {
+      "bytes": 2748,
+      "sha256": "77ed3232bfdfedddc7215f3b3edb3b92ebafd286927f3ce5bfd95f086809239b"
+    },
+    "docs/engineering-evidence/scalable-launch-support/red-team.md": {
+      "bytes": 4100,
+      "sha256": "11f1558bce1906aa99ec3ffbd2614409c7b032b04962cd135c3024d8e5796aae"
+    },
+    "docs/engineering-evidence/scalable-launch-support/regressions.json": {
+      "bytes": 86855,
+      "sha256": "f07a19a539325e6834e5e5e1c7ae58df59dfdbf2948baa8e79c759cc5c0536ac"
+    },
+    "docs/engineering-evidence/scalable-launch-support/reproduce.md": {
+      "bytes": 3386,
+      "sha256": "ea6abfe2c9289d9d3afbfcfea8fb08df9f99597a6b062ccb6529891e0f840eaa"
+    },
+    "docs/engineering-evidence/scalable-launch-support/retention.md": {
+      "bytes": 1800,
+      "sha256": "9c3dbc0d3704994d8cf0bebb2af19e567a552b62ef85c435609a774f9fded86c"
+    },
+    "docs/engineering-evidence/scalable-launch-support/seal-evidence.py": {
+      "bytes": 7220,
+      "sha256": "bfb20faa3577286c4cb8b4a76c1c9b044871426fdbc0d9aff801d1d5c2f024b4"
+    },
+    "docs/engineering-evidence/scalable-launch-support/source-manifest.json": {
+      "bytes": 171194,
+      "sha256": "3f392ec4cb7c854fd6cbceaf29407ed1d2fea47e618aa5879223e0fe557149ae"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/README.md": {
+      "bytes": 4049,
+      "sha256": "678e15c34c7223399f18f1e360cd00a45b031e00aef44493cd672c7cc8b19b4d"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/bank-intent.json": {
+      "bytes": 48156,
+      "sha256": "4022d46843f2b245943b6357cc6aade12b21966f6870ac09d21624033fce7860"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/builds.json": {
+      "bytes": 4864,
+      "sha256": "d43c5ce64103208ffa4a9f1117aeb0c18d17424dc734758c6660fdaf5ea3ffda"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/canonical-deep-construction.png": {
+      "bytes": 92500,
+      "sha256": "9d0f5e266813cc2b4e0fa182f20f812f08d824d3217aafef9ae11cd0aadd3976"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/canonical-long.json": {
+      "bytes": 2069,
+      "sha256": "4ecc6dd7367b47b466b5143d450ddb6f86e1aed3c08e12c2fb471bd146a430f7"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/canonical-package.json": {
+      "bytes": 20854,
+      "sha256": "fd3d758f9545e4f01b162cea32486fd64b6139934938245509a872994c4199e0"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/canonical-powered-flight.png": {
+      "bytes": 55269,
+      "sha256": "740ccc5f909db8d89141298c12fa83615ccfb1e9e3e4397a39563d7fa7348e0d"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/canonical-short.json": {
+      "bytes": 2073,
+      "sha256": "cc55c8963899f5e70eff65172daa1368299b1db9c6e3a1c105c38690a2f1e75f"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/canonical-stabilization.json": {
+      "bytes": 3174,
+      "sha256": "c2b08664d9653e8894af4b95482f54ca39ce35bf3b7d6b6a4b5c10f9575c6756"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/closure.json": {
+      "bytes": 3026,
+      "sha256": "fe5401987181b51bbc16bec69a10308a9836d34a36bd00b48caff6ee2207f1af"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/evidence-seal.json": {
+      "bytes": 4714,
+      "sha256": "73b0abdd069650a4a60ea35c1d7db803c8e6a90cfba7aee141797b1f5651100b"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/final-report.md": {
+      "bytes": 7725,
+      "sha256": "5a5928cb29ccbfae09a100e2c57514c8f90d5a350050bc5f89326e049400ad73"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/frozen-source.json": {
+      "bytes": 246484,
+      "sha256": "cbe96c749a97da61d7c205c9810debae72a9d884426d6ce919a846c370365400"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/independent-long.json": {
+      "bytes": 2069,
+      "sha256": "8ea89f8acdcac53231e1f22e7028183064dd68c6af12be75ca98cecfce63a9a6"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/independent-review.md": {
+      "bytes": 3352,
+      "sha256": "69a3403efaeec82becd06bd09f26ab98ef9844c31710c9a112b859669fc1c578"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/independent-short.json": {
+      "bytes": 2069,
+      "sha256": "a47bb10845c22d9499555ff31ee6ae28c847a41f74ea47a6ccc71c18800400a2"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/independent-stabilization.json": {
+      "bytes": 3180,
+      "sha256": "29a15caac6dd22dd190be83247e68273409bd9a203003bebfd971554aeb295b7"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/isolated-output-moves.json": {
+      "bytes": 11541,
+      "sha256": "ddb1f8f9344457a06ec5efac281e09b9ce0a916bb681302930f9b8efe65ac7e8"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/isolated-package.json": {
+      "bytes": 20918,
+      "sha256": "2fad15a46e8826112ad5c261cb6d3fa09e3585b874632dc45ed9b9d8c441ebd1"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/package-negative-controls.json": {
+      "bytes": 759,
+      "sha256": "e7c3a2cfd85f26799c9f6cd001b3284ab6b37a00ece36189ebf36967ec30cbe2"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/prepare-reproduction.py": {
+      "bytes": 3105,
+      "sha256": "93291d0e6e117ef9dadaa71b8fd89eea0686a6896ea447795922ab439379c6df"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/preservation.json": {
+      "bytes": 1642,
+      "sha256": "587bdea951be50dcbd7296a55d8045e2eadafa947a0f9cfa00035b59a4800e15"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/qualify-offline.py": {
+      "bytes": 3529,
+      "sha256": "482eb25e58579ea627823cd1e4a92c90d1e7501c0ad01646c7dec10a21400783"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/regressions.json": {
+      "bytes": 47107,
+      "sha256": "8b1d1fa4111425ac8c73f323ca54d840f99257fa2a08af91352379ca0b35dbe6"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/reproduce.md": {
+      "bytes": 3302,
+      "sha256": "6663034fd0f0f0c3323a6fc4ab9f245d7bc1cb664699d3d0758b2a8f42b60bdb"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/reproduction-package.json": {
+      "bytes": 20954,
+      "sha256": "7398c6186288de91cc002b1705b38451a2db18b9776e30aea8387bb27164558f"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/reproduction.json": {
+      "bytes": 3513,
+      "sha256": "dccbc6f25d49d7183af177619afbc852a4f28ae55655fc8a645d089d0a6f1a48"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/runtime-witnesses.json": {
+      "bytes": 39301,
+      "sha256": "e52cc6e8cbd6a6a0d8c06ea15c03302e5996a31c84460815e219e7e33cf45f7e"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/source-export.json": {
+      "bytes": 798199,
+      "sha256": "79435d90030b0f2719983694ed905d79d66d995560ffc0299d5aefa3024a3b77"
+    },
+    "docs/engineering-evidence/stabilization-bank-gauntlet/storage-inventory.json": {
+      "bytes": 3668,
+      "sha256": "63146a9c5144d1dd91d6e2768100aba1c8f6e4bb38713c5283804d341598f8e1"
+    },
+    "docs/engineering-evidence/surface-recontact/README.md": {
+      "bytes": 3804,
+      "sha256": "42cabfc1d96f048bc6f761d276e5e51fc22a095f9cbd6cfcca9d09ce0cd0fd39"
+    },
+    "docs/engineering-evidence/surface-recontact/architecture.md": {
+      "bytes": 4695,
+      "sha256": "1f0bda74e3136973df07f12f3a256f5e16e846c860719907265918ce5eed585b"
+    },
+    "docs/engineering-evidence/surface-recontact/capped-recovery.md": {
+      "bytes": 3032,
+      "sha256": "9bff869dc9c0a2f6ec1a9dee16ec26d347c036d829cfd2a510604fa79b7c70ca"
+    },
+    "docs/engineering-evidence/surface-recontact/ksa.md": {
+      "bytes": 4868,
+      "sha256": "e50d449b8ce05b681452b625782e178df51de7d53c59a5eb60bf7f0dc429d860"
+    },
+    "docs/engineering-evidence/surface-recontact/native-recorder-stop.md": {
+      "bytes": 4312,
+      "sha256": "bbbcc3d989d8e3990ab1f3a9af26f358bd123082ad257741e76b600a610368a2"
+    },
+    "docs/engineering-evidence/surface-recontact/native-retry/README.md": {
+      "bytes": 9873,
+      "sha256": "6c238481e714de9071381078d53f560b2d18b2019258d754cc7d9c3d92249ab4"
+    },
+    "docs/engineering-evidence/surface-recontact/native-retry/qualification.json": {
+      "bytes": 37964,
+      "sha256": "647ec9a6c13f6235f6826da8b268677a6e8afd764a0770938cfbd7157bb21083"
+    },
+    "docs/engineering-evidence/surface-recontact/native-retry/reproduce.md": {
+      "bytes": 4358,
+      "sha256": "dcfc79979d7db36ea399254630c95e0b9e447dd929a10e183e8110eece79ff19"
+    },
+    "docs/engineering-evidence/surface-recontact/performance.md": {
+      "bytes": 3600,
+      "sha256": "ed777e0874159cc957b00e05d0b8c724d74082f109dd27aa594d57ca6597de25"
+    },
+    "docs/engineering-evidence/surface-recontact/qualification.json": {
+      "bytes": 41071,
+      "sha256": "c24cf22bc2877585aebb4903dcfa74294c5c7831ea6f36b7b0bed731357b47c8"
+    },
+    "docs/engineering-evidence/surface-recontact/qualification.md": {
+      "bytes": 4613,
+      "sha256": "fe0899ec3e40a175ef53d9bd6b5c3bf93acfd03ae634657c97e9b10c75bad026"
+    },
+    "docs/engineering-evidence/surface-recontact/reproduce.md": {
+      "bytes": 2999,
+      "sha256": "1e9854fda921150f52910bd96eb7065ed28a26c46c857fba96a40fdc2c6d5e44"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/README.md": {
+      "bytes": 2886,
+      "sha256": "6340bd635881c1e2825c08f38d27c7fa2261dbf351ed34c24fc87c6641562fde"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/asset-identity.md": {
+      "bytes": 1492,
+      "sha256": "0226ebd2ad3a3d7561e6ff3115ba85ae178e3abe67c4f941c21115334d9dac81"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/cleanup.md": {
+      "bytes": 2154,
+      "sha256": "72ed70a2f129c21bda2df56188c0b74b1cfc0091eef7e2e78ae3050adec177cf"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/command-data.md": {
+      "bytes": 985,
+      "sha256": "741a28641afd04845ef96335e84252125c8cfed9ed8db8b0368009d71bd9dd49"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/connection-graph.md": {
+      "bytes": 2431,
+      "sha256": "e98abbed9da18b38574c70245d9fb1c0845fb7f71727739816296f715e187ad6"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/convergence-matrix.md": {
+      "bytes": 3275,
+      "sha256": "5d86fae0cac62f85b72ed649177a759476606ebeab31f603b1e874a80319721d"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/dlv-physical-reconciliation.md": {
+      "bytes": 2946,
+      "sha256": "fac0f8371ab587a8d869556848cd8e66f15b46075577629f11bccd0955c6955a"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/editor-session.md": {
+      "bytes": 2608,
+      "sha256": "6fbce928912d2698a1fd2974c74111ed087ae26522ddf0bcc9f2d7332825c922"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/electricity.md": {
+      "bytes": 3536,
+      "sha256": "7e8b3cd7e125c7bfb6550f06791b2a544b7fc6c1f4876a187bc3343153d87662"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/entry-seal.json": {
+      "bytes": 501021,
+      "sha256": "5a25ea896f6dc0f388dd036ac9dae2838e5dabe4d82c03a859615641e493c61e"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/final-red-team.md": {
+      "bytes": 3742,
+      "sha256": "ef67b980a8668fba20b6003c38302ed76e93801aa2029e10657a8b64503d9edc"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/fuel-arithmetic-contract.md": {
+      "bytes": 2278,
+      "sha256": "c97118d7a104349d4b1839ddd69d8ba54ce646a278d38b3061488f555be7d1b8"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/fuel-flow.md": {
+      "bytes": 3919,
+      "sha256": "e9fb0eb1ad998cf185a58ea3937cbddd78b7beb0181449d568b5aa3e8cd740a4"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/identity-stage4-stop.json": {
+      "bytes": 13681,
+      "sha256": "9bd71b8ac9952c752e845b2399a1b90c1fbecd41ef0d8aff4261029683f1b5d4"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/identity.json": {
+      "bytes": 23366,
+      "sha256": "6ab4bbc83961362de9ee2d1dd623cb7fc371d95736387435ae26288a174c5b1c"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/inspect-closeout.py": {
+      "bytes": 4279,
+      "sha256": "f695a6867a288a2c751ae7453582ddadab6018f79562306c6816411b0954325b"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/ksa-current-construction-map.md": {
+      "bytes": 6305,
+      "sha256": "57e3b132c17eee159efa55bf102e4efa06f9205ed3f85b23eb10950e7de56466"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/ksa-live-history.md": {
+      "bytes": 5686,
+      "sha256": "0ee2f8a75a958e4a1e0626d17ac25958366bac4e0c2ae0d4e8aee566988bd706"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/ksa-methods.json": {
+      "bytes": 2406,
+      "sha256": "7ee377dee9a50bd3f5b332d84e3040af26cda5cdc5f09b99d65ad157dad78dbe"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/manual-route.md": {
+      "bytes": 2985,
+      "sha256": "d025d8ef091c3e3febf970e0965bf5cc1283812b942777a48611e5575c1a0af7"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/novacore-current-owner-map.md": {
+      "bytes": 3593,
+      "sha256": "fca1676825229c983894d5f9bb86025629cfe1217a236d50bb2373cb8736f3aa"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/part-definition-contract.md": {
+      "bytes": 1581,
+      "sha256": "2c50fa9de3591f674972868c2cee8ca2eb22c489b285d43507875236e590d300"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage1.json": {
+      "bytes": 2281,
+      "sha256": "4a4db707ecbf6d15bbc33cb2ba30852974b7d753a287d7acca08bd496bf0751e"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage2.json": {
+      "bytes": 2133,
+      "sha256": "d087b1644aa3c1b61e5dafb250380ad4a97a2d4a12e26f111f22ae06523a5316"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage3.json": {
+      "bytes": 2824,
+      "sha256": "35f5779d8f90cbb1684ad8414f63c16ffb82034d145902666249a8b07f7bd31c"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage4.json": {
+      "bytes": 2486,
+      "sha256": "5333b9e0b3c09f54df73742fb53543e3ac39192ad14d7dfa0d1d6497938737f9"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage5.json": {
+      "bytes": 2418,
+      "sha256": "6f617fe8785dcb51f0596420e29da2d48ffe4df71c701b547f05000fd6ba4247"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage6.json": {
+      "bytes": 3478,
+      "sha256": "6d62321b00079a16f5a8005d49a7aa4e6c49497067981756af3b2d8b52f7bc4f"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-stage1.json": {
+      "bytes": 1671,
+      "sha256": "9b1dea287bbc46df3516fdd4bd683a1080148b77066ca85d90084151251d2096"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-stage2.json": {
+      "bytes": 2040,
+      "sha256": "aad40ae4c3caa7d9891c36c265e123c54f11999d63627db00a00b4ca29529e7e"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-stage3.json": {
+      "bytes": 2697,
+      "sha256": "df994d4e5d51aaf92a13a613d996fab08a38664b5793dd3e0438b94a7d0f2d53"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance-stage4.json": {
+      "bytes": 2562,
+      "sha256": "41c47d64f6a82de50880174d20bcc6a44a98d08018634df3fef7e6f6a6970972"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/performance.md": {
+      "bytes": 4027,
+      "sha256": "1bcc51eb7a92846c1683d872414b0049b9076f344f5e4beaf50e5cee3183b33a"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/red-team.md": {
+      "bytes": 3075,
+      "sha256": "35c6f23a741db6022af57df402c54729cb7019d7a7395ab450dce7a80bda96b5"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/regression.json": {
+      "bytes": 2988,
+      "sha256": "86d2a7d29e7ce25bf9a1d20fe09523d83ea78407405191f9851f54a81343a0bb"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/repo-truth.md": {
+      "bytes": 2056,
+      "sha256": "f6e09c18f1182da5509dfb0fa81125dd5c69e4353d6d9111b737445358ec9800"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/reproduce.md": {
+      "bytes": 4128,
+      "sha256": "a958a2e1bd8b6fcc492c6dfb0389076ce4f1cf8865bc5bb14cb19b6b0e687096"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/resource-types.md": {
+      "bytes": 1154,
+      "sha256": "d94b45330f20c13f4726aadbdddca0f6a0fcac79ac856319a0321e7bec911516"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/runtime-instantiation.md": {
+      "bytes": 5030,
+      "sha256": "c68d2ab8b4272db134b38336370d0e44b927ae7447fcb79bac029fef5df43e96"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/runtime-integration-plan.md": {
+      "bytes": 2347,
+      "sha256": "d97998f341b4247f34d8431c1ad530d75b539f97980afb7d509bd02d0d65f9b2"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage4-corrected-performance.json": {
+      "bytes": 2496,
+      "sha256": "5f652d893051ad9dcf14eb1c91b2f5dff5550cd72aebb2e3bb12aee7bc9d22ed"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage4-requalification.md": {
+      "bytes": 2422,
+      "sha256": "6999aa30fffd3bd4702ad2587f71d5a778954caaf7103c9195f66b85c9e66ff8"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage4-scratch-repro.json": {
+      "bytes": 638,
+      "sha256": "2bfb79022c42d0b542dd9042048b89c605e5e970ff70128e783041ddb251392d"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage4-scratch-repro.py": {
+      "bytes": 2457,
+      "sha256": "2287db15bb399fb37935a55062b9a0961f017c193cec798ad4cffa0488e220a2"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage4-stop.md": {
+      "bytes": 2704,
+      "sha256": "9e7a40986fc7ec2b9eb18ed4851fb95a0e546e3d479dfba3cc379b8baef42ab3"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage4-width-derivation.md": {
+      "bytes": 8925,
+      "sha256": "77a74c275b4db6e11b49763a4871897977e6670452e836d41d1bbf140b4a9994"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage4-width-reconstruct.py": {
+      "bytes": 2738,
+      "sha256": "5089f034c23c560c3a979b201e3a24c70b45eb99717390096a9b7859a328c6dd"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage5-browser-proof.md": {
+      "bytes": 3059,
+      "sha256": "74ff4e9f6752dc6dcd7fcb0c5b4835c603bbd0d7419ee69624c7e04f86472b6e"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/stage5-performance.json": {
+      "bytes": 2420,
+      "sha256": "c5216ff408dc3eb639d8ebb44ec54850bf7f0975e194289c67e41164f5758a4f"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/subpart-contract.md": {
+      "bytes": 1137,
+      "sha256": "719f6fd8f961007577a35bf239f8a409da025c53a8d11ff1a13f5d020aba207b"
+    },
+    "docs/engineering-evidence/vehicle-construction-architecture/vehicle-design.md": {
+      "bytes": 1473,
+      "sha256": "8fc690e0b95288f401d702ad3f365072f69d27d857f2f1c0c6ebae927c62b1c7"
+    },
+    "native/NovaCore.Native/AuthoredFacilityGeometry.h": {
+      "bytes": 976,
+      "sha256": "555b8e2e6cec4c738b781bc60a88bf53447aaa06bde8ff5b50a3923105b87471"
+    },
+    "native/NovaCore.Native/CMakeLists.txt": {
+      "bytes": 30527,
+      "sha256": "f6d07214243de7c3fb404ed1c530593d7de7961dc32e95b6bf67a61e219fcca0"
+    },
+    "native/NovaCore.Native/CausalNative.inl": {
+      "bytes": 15079,
+      "sha256": "91ac4eeafb2b45e594b90875726ba13ae0b6d8e0851b53f277b8a8619427486c"
+    },
+    "native/NovaCore.Native/CausalRecorder.h": {
+      "bytes": 6437,
+      "sha256": "9efa5e152f074ec00a282154e96b8ee4c7faf1e8425fab5b50c32650fd408ada"
+    },
+    "native/NovaCore.Native/CausalRecorderMock.cpp": {
+      "bytes": 5471,
+      "sha256": "a755085078cdbfcdf247d429a2a743b6e36a75037ab7c0a3ba7d08539b017905"
+    },
+    "native/NovaCore.Native/FacilityLightOcclusion.h": {
+      "bytes": 4661,
+      "sha256": "dd4cf0c019c901b33c77aadeb7984232a0c56b83db3d11e9ec00b24deabe6d3e"
+    },
+    "native/NovaCore.Native/FacilityLightOcclusionTests.cpp": {
+      "bytes": 5563,
+      "sha256": "bde2356efee6cfc5d5962644cd9016877350406af62fde0e9bfbcca8155f735f"
+    },
+    "native/NovaCore.Native/FrozenCapture.h": {
+      "bytes": 17376,
+      "sha256": "a15ff486227dca5b9b3b914e9e4320cb1e1fac1d29e382d3ab6bb5255aeac363"
+    },
+    "native/NovaCore.Native/FrozenCaptureMock.cpp": {
+      "bytes": 8618,
+      "sha256": "9b35c0a7027faf5d57149639f91d101d8b066eb7e1a378f1419c45c18aa67092"
+    },
+    "native/NovaCore.Native/FrozenCaptureNative.inl": {
+      "bytes": 23060,
+      "sha256": "629b8312563861b64ad48229ecd50be4c8d01faae98968e45fd4495d1678471e"
+    },
+    "native/NovaCore.Native/FrozenControlNative.inl": {
+      "bytes": 1156,
+      "sha256": "c4c5f86e59827a00366c70131277198f1959d919ae53784d26cd87328198c55a"
+    },
+    "native/NovaCore.Native/FrozenPacking.h": {
+      "bytes": 1860,
+      "sha256": "f36b4412e737fc14c49a40dcf9189f1429c02b182b75e33e139ffc6a0f26fe6c"
+    },
+    "native/NovaCore.Native/FrozenPackingNative.inl": {
+      "bytes": 4885,
+      "sha256": "13bba499f43349ac2b5ccdf38222684975e8ec7df01fb2f1fdd476565fb8b0a4"
+    },
+    "native/NovaCore.Native/FrozenTopologyNative.inl": {
+      "bytes": 6753,
+      "sha256": "8bbac2f67e88e1b4dd1ed741670dca3ffcc81691632d6a2d14593da69ea8643b"
+    },
+    "native/NovaCore.Native/NovaCoreNative.cpp": {
+      "bytes": 323696,
+      "sha256": "d81c42828769979dc9c7973f5e25a7d4703a89a0bdb3ee5099720d86fcd9b666"
+    },
+    "native/NovaCore.Native/NovaCoreNative.h": {
+      "bytes": 20756,
+      "sha256": "8d513cde0181582dc2381fa4a43616f43d76cd87300f050360cd7c11278e3e56"
+    },
+    "native/NovaCore.Native/OrdinaryMeasurement.h": {
+      "bytes": 2177,
+      "sha256": "ea20bc79955c1cec4bfd1c23268dac0b92cc43167dc3db512fa4d7e8dfba2b29"
+    },
+    "native/NovaCore.Native/OrdinaryNative.inl": {
+      "bytes": 16075,
+      "sha256": "57bc75944a7b30d5d305a3c93c4289d83e7b3da5da29f28edd0e16a634e27ec2"
+    },
+    "native/NovaCore.Native/OrdinaryRecorder.h": {
+      "bytes": 9354,
+      "sha256": "713b16687712e10bc9280e55e53edbad5b292901e8b645d18c0dadf1d5fa7ae9"
+    },
+    "native/NovaCore.Native/OrdinaryRecorderMock.cpp": {
+      "bytes": 10701,
+      "sha256": "0fbd4e769c8de4d8858ae8b6ac5304d4dac8612715b8c8d48bd71ed180194d16"
+    },
+    "native/NovaCore.Native/PostContactTiming.h": {
+      "bytes": 2252,
+      "sha256": "f2181ef28ff174173117a9c336e7606c93a6b747ddc71d637edc9229286561b8"
+    },
+    "native/NovaCore.Native/PostContactTimingTests.cpp": {
+      "bytes": 2215,
+      "sha256": "8a606768e00439e8ade3bad633c75be4706af638643fda54ede2ba541a954132"
+    },
+    "native/NovaCore.Native/PreparedSubmissionStorage.h": {
+      "bytes": 1200,
+      "sha256": "92c8a7917535234c9225746374ef0587e92dd44c389afd45be40c4adeafcbc57"
+    },
+    "native/NovaCore.Native/PreparedSubmissionStorageTests.cpp": {
+      "bytes": 3002,
+      "sha256": "85bf9917d3f58c9740e594ab007240fde45e00c92284dda301bc106c615b68f6"
+    },
+    "native/NovaCore.Native/PresentationResult.h": {
+      "bytes": 569,
+      "sha256": "c0329c30fe8ba494da807a1c6eebfa24a6a71c55574a0a8fe7deb1926af4d77b"
+    },
+    "native/NovaCore.Native/PresentationResultTests.cpp": {
+      "bytes": 1091,
+      "sha256": "ad6e1bcc09b150d04328bfbe56262f9e30e98f358e60283c4c0ecb5ea8a55f82"
+    },
+    "native/NovaCore.Native/RecordingCallTrace.h": {
+      "bytes": 4220,
+      "sha256": "78d6942e6431532d3437517e31a6536e2787204a58dece9ae26ef97697059da6"
+    },
+    "native/NovaCore.Native/RegionalPhysicalPreparation.inl": {
+      "bytes": 6721,
+      "sha256": "14b2a0fe7a0b2513e16554ba8ee065889d1eaee14b9f75e302e2e0cafcb41342"
+    },
+    "native/NovaCore.Native/RegionalPhysicalResidency.inl": {
+      "bytes": 12691,
+      "sha256": "f6c92b31e6ac7ddc091786e794fa2f4f77535ff8931abd90808a4dc4dc84ea84"
+    },
+    "native/NovaCore.Native/RegionalPupilLifetime.h": {
+      "bytes": 1602,
+      "sha256": "614a5100e4dbdf5ace6e402eaadce11a68be1d10297df43b7b627ce7efd354d6"
+    },
+    "native/NovaCore.Native/RegionalPupilLifetimeTests.cpp": {
+      "bytes": 4778,
+      "sha256": "401d8c1ed2691ed170f0f7bbdda7ed40248b0b156eab7d22a568820047977ed5"
+    },
+    "native/NovaCore.Native/StartupLifecycle.h": {
+      "bytes": 2734,
+      "sha256": "0d3329525c7b04853c8eb739bf3d5bb8065f0df26175809238e2d6f55827f2f0"
+    },
+    "native/NovaCore.Native/TerrainTessellationTests.cpp": {
+      "bytes": 3423,
+      "sha256": "228d9962755c415b4044d3a14dcf2e70a8873c00e903d1e9781fafc47009cc13"
+    },
+    "native/NovaCore.Native/shaders/frozen_capture_pack.comp": {
+      "bytes": 1957,
+      "sha256": "2cfe1ee0a379d02bf996abe4874bcbaa6c43e0ef3b2df2f53e374b2ddbd5f710"
+    },
+    "native/NovaCore.Native/shaders/frozen_capture_pack_shared.glsl": {
+      "bytes": 1422,
+      "sha256": "81e260ea5ab0c8025993fa2a137c2fb4c80b57902171d57e2f4c92228c076308"
+    },
+    "native/NovaCore.Native/shaders/production_spherical_billboard.tesc": {
+      "bytes": 3854,
+      "sha256": "cc3412546b6815ca264b539ae97d38caa7146cb39ba04220edfc0e23be85c9aa"
+    },
+    "native/NovaCore.Native/shaders/production_tessellation_factor.glsl": {
+      "bytes": 1544,
+      "sha256": "93202e80ec0db1fd5f20db6fd970a195ab055174f659e844db2173d8e2a6aac7"
+    },
+    "native/NovaCore.Native/shaders/triangle.frag": {
+      "bytes": 2082,
+      "sha256": "58b1d7a3df8df982683f97d85419f4a9d338cfd68cf30397791d5c62aaccac13"
+    },
+    "native/NovaCore.Native/shaders/triangle.vert": {
+      "bytes": 2366,
+      "sha256": "c4dbad2628fb6b20381738907833f611eb6b30a1bd8e80206008a62021d1e95a"
+    },
+    "samples/NovaCore.Triangle/ApplicationAssemblyInfo.cs": {
+      "bytes": 101,
+      "sha256": "ea6d898d44ac0957fe3709ecb6f9f100b11acad2e9033c750a4282bc50e484cd"
+    },
+    "samples/NovaCore.Triangle/BlackoutCameraQualification.cs": {
+      "bytes": 2798,
+      "sha256": "a95f0b5c98f57c2f5365d10b6c570be71fdcc62c1637306af09f3e4e28aec4ff"
+    },
+    "samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs": {
+      "bytes": 2879,
+      "sha256": "713725f8ec55ec04bc6554b9b5611da66037fe9a206c33bc8f276ad93d9c891d"
+    },
+    "samples/NovaCore.Triangle/ConstructionFlightScene.cs": {
+      "bytes": 20814,
+      "sha256": "93372d379c4a7b4e71a2a7d3617cf5f5118e55f82daaa72f0e10b0e772082ebc"
+    },
+    "samples/NovaCore.Triangle/CraftFlightOptions.cs": {
+      "bytes": 1898,
+      "sha256": "5ed5d990de6c5d24493c34ccc6ede70d108d24dbb02bee9f89c7cefbac081045"
+    },
+    "samples/NovaCore.Triangle/IApplicationPresentation.cs": {
+      "bytes": 878,
+      "sha256": "5bb7e1e3fcde06a3b30e305f5c52357528495379aae989640a3137671b3289e1"
+    },
+    "samples/NovaCore.Triangle/IApplicationVesselScene.cs": {
+      "bytes": 910,
+      "sha256": "f9324700c409cd78f7b41247e81fd619142a8e03f00446dee351eb50da6ed93d"
+    },
+    "samples/NovaCore.Triangle/NovaCore.Triangle.csproj": {
+      "bytes": 2713,
+      "sha256": "a6ebca3e4edadb646739a4c844dd52a008a9f4170192c1d6a93f686b6731075e"
+    },
+    "samples/NovaCore.Triangle/PlayerFlightControlInput.cs": {
+      "bytes": 4837,
+      "sha256": "7ca9a261be12fa327d9b5e72a3e969361f4cef93826934372c2f5e724cc3ddbc"
+    },
+    "samples/NovaCore.Triangle/Program.cs": {
+      "bytes": 68486,
+      "sha256": "df31e06dec97cd33a903b148b9c65da6ae570f1338ce4d06f795477ddcf924d2"
+    },
+    "samples/NovaCore.Triangle/SampleOptions.cs": {
+      "bytes": 6927,
+      "sha256": "acfd7a43c8cfe069ba513f571d4f466118be9d688f7cd2664c0652b21a4287d9"
+    },
+    "samples/NovaCore.Triangle/SolarSystemScene.cs": {
+      "bytes": 126389,
+      "sha256": "ffbac7df5eae2fb93d5b1d64b1054a60caadc5fec41d74525bafdd9929cd4bdd"
+    },
+    "samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs": {
+      "bytes": 32508,
+      "sha256": "72b3a3c5154100b2bdd3de9483bcc6169788dcffd02f0d9439c2e5e35fe5c08e"
+    },
+    "samples/NovaCore.Triangle/SurfaceRetryObservation.cs": {
+      "bytes": 4991,
+      "sha256": "8c5ccc254378cf67f70d3adf5d75bc40e46e0bc4bbbaab5aab91410562d1f4e0"
+    },
+    "src/NovaCore.Core/Surface/IPhysicalSurfaceCollisionSource.cs": {
+      "bytes": 2591,
+      "sha256": "5cd28aa22b54519144ce739d4cf9eff948e59ee7ef1f92bd4c888c58f5af0789"
+    },
+    "src/NovaCore.Core/Surface/IPhysicalSurfaceHeightBounds.cs": {
+      "bytes": 429,
+      "sha256": "ccd757d1d7237ed2626ad3ab86e6ee025ddbf48e3f6e8860e5132a35f7764994"
+    },
+    "src/NovaCore.Diagnostics/AssemblyInfo.cs": {
+      "bytes": 97,
+      "sha256": "ff45ccf9bd94c3b5cead569ea490bb94d72a9996c6746ed82c51acf50a8013dd"
+    },
+    "src/NovaCore.Diagnostics/BenignRecorderRoute.cs": {
+      "bytes": 2156,
+      "sha256": "a443e778fd571e33ff548a36b026eb4862cc44b99a33273c50db5a7effab06f3"
+    },
+    "src/NovaCore.Diagnostics/NovaCore.Diagnostics.csproj": {
+      "bytes": 172,
+      "sha256": "9fe64c1ce533dcb8a5f84e9290f8c91ff8ef48ae6ed764f214a5d52164e0c6fb"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryCheckpoint.cs": {
+      "bytes": 4713,
+      "sha256": "aaca6560dadef5a680f6d0f116bd3d967ecc4e6c640b03201c07c209bcd11f0c"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryJournal.cs": {
+      "bytes": 12640,
+      "sha256": "4b32ea208accb858c320d2ff625230dd85ba97600619ea9cb7dac39829fc61f6"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryObserver.cs": {
+      "bytes": 6829,
+      "sha256": "72023a47ef0a4fbf3a4ae2d90e4e52054387835d50ff15ca48e9db1fa1beacdc"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryOwnership.cs": {
+      "bytes": 2300,
+      "sha256": "a0af079ebcbe7cc62d0b41f5dd5ea709e46a45cac47daeafd10dd436f73575f5"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryProgressBounds.cs": {
+      "bytes": 866,
+      "sha256": "0f7c715c5560dd2dbaae87d07e4a7dfc16be50c4b201fc038d620f006e5bebcd"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryProtocol.cs": {
+      "bytes": 8600,
+      "sha256": "e189884710b3b58e2b009bb142df23d2148a66eb1a8a4224151aaff1e63d3814"
+    },
+    "src/NovaCore.Diagnostics/OrdinarySession.cs": {
+      "bytes": 3242,
+      "sha256": "76dc80fa279e7b1b62bcb570f93c78c45027260ed5aee5686b883624098f5951"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryState.cs": {
+      "bytes": 5450,
+      "sha256": "4dadb5b14a9c8ee8aa39d9a4b2e96616c1de2ed9f6abda7a5cd37e8a052cfa73"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryStorage.cs": {
+      "bytes": 3060,
+      "sha256": "974e8d1dca13cab8b53b5b3be0a442c50ffc8b97ee2ce2ab111037d9553c2f19"
+    },
+    "src/NovaCore.Diagnostics/OrdinaryTermination.cs": {
+      "bytes": 4828,
+      "sha256": "4adbc91eed508401c1e1f11f18fbce7587583a53e1b2eb3afccbfc642dd62fb4"
+    },
+    "src/NovaCore.Diagnostics/RuntimeRetention.Abnormal.cs": {
+      "bytes": 13018,
+      "sha256": "3875c4dc1bd5222bc0f5631b9c27881ac398c7bd4d10080077b5b74140f9451f"
+    },
+    "src/NovaCore.Diagnostics/RuntimeRetention.Host.cs": {
+      "bytes": 3342,
+      "sha256": "071cd44baf12c36e75696e7e5cc6913691056bccb1c993c00567783271715f87"
+    },
+    "src/NovaCore.Diagnostics/RuntimeRetention.Index.cs": {
+      "bytes": 14725,
+      "sha256": "8a18aa5af731a361ed5a8b61d0615b84d5e6c0966c6975b69068311d24436ecc"
+    },
+    "src/NovaCore.Diagnostics/RuntimeRetention.Maintenance.cs": {
+      "bytes": 12693,
+      "sha256": "e441e0818cea4196a8ca9a5c81967a77e60efd787cf370e6fc3a437accd7fb75"
+    },
+    "src/NovaCore.Diagnostics/RuntimeRetention.Rolling.cs": {
+      "bytes": 21536,
+      "sha256": "48d8f3ea0abb7a691cbeaa1027583e17566833562973dd696d3c6309d517e0f7"
+    },
+    "src/NovaCore.Diagnostics/RuntimeRetention.Windows.cs": {
+      "bytes": 6165,
+      "sha256": "6d96da3289a9a31b998efaa7823f0b3487025d9033241983db1d5ca786bcf1a0"
+    },
+    "src/NovaCore.Diagnostics/RuntimeRetention.cs": {
+      "bytes": 17520,
+      "sha256": "2eea44cd905a2b41b2d2b481afd91447ac7b22d5728c80ebe4def477ff886c15"
+    },
+    "src/NovaCore.Graphics/EarthElevationDataset.cs": {
+      "bytes": 8023,
+      "sha256": "5df29327a1ac8879ad3cbc07e6f8021dfbbfc3754901df35b00c19c035321dfa"
+    },
+    "src/NovaCore.Graphics/FloridaLaunchSite.cs": {
+      "bytes": 9713,
+      "sha256": "b6236aa2b5c29f9e8521080856002e1fa59b5282fe561af19d464007e8c23803"
+    },
+    "src/NovaCore.Graphics/PartVisualPicking.cs": {
+      "bytes": 2530,
+      "sha256": "4026c75343404a55e71035d905a0be75116a344dd61b23bec4322254fd07a19d"
+    },
+    "src/NovaCore.Graphics/PhysicalCollisionAddressBounds.cs": {
+      "bytes": 9030,
+      "sha256": "22c99b900e297482511fb28d761bd1b790826f42e95b67d9a41896d7d2f387c3"
+    },
+    "src/NovaCore.Graphics/PhysicalCollisionAngles.cs": {
+      "bytes": 5690,
+      "sha256": "a4311828d22d0343aaa6548c39efdca13bca166d76c5e59953b12bbde675364a"
+    },
+    "src/NovaCore.Graphics/PhysicalCollisionBounds.cs": {
+      "bytes": 7222,
+      "sha256": "34f4d013b7a643c7cd6869e266135b73c592abcb9e7432b145826f4d306ddf53"
+    },
+    "src/NovaCore.Graphics/PhysicalCollisionNumericalBudget.cs": {
+      "bytes": 16823,
+      "sha256": "a4be513d06c3cc830307e82674a0596555c829870bae9501cb8acc88306cb1e5"
+    },
+    "src/NovaCore.Graphics/PlanetaryLocalTerrain.cs": {
+      "bytes": 37127,
+      "sha256": "34512b40c0f31b7120f2a9712d96451196502855047f83aa3332016b2d0e7787"
+    },
+    "src/NovaCore.Graphics/PlanetaryNaturalTerrainFamilies.Collision.cs": {
+      "bytes": 4306,
+      "sha256": "dc5c4083b1bd8ac9aee99e0b10f731dfc87f19ed54aa970a9dc0a5ae43fb9492"
+    },
+    "src/NovaCore.Graphics/PlanetaryNaturalTerrainFamilies.cs": {
+      "bytes": 23349,
+      "sha256": "f0cf2f67404cd73674e82332e329f6bc4436bddf499ae03ba1bf6b88b14a836d"
+    },
+    "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.Collision.cs": {
+      "bytes": 16661,
+      "sha256": "016b040a327390b57ecd5f07a4f112ee086827fae405ece95ccb1b86293e0cf0"
+    },
+    "src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs": {
+      "bytes": 10934,
+      "sha256": "c52122f09742f9cab05b9647a7e80c37ec5fa299387e57024ad8824cbff40409"
+    },
+    "src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardRuntime.cs": {
+      "bytes": 29408,
+      "sha256": "75696959421fafdd23e2a717f5e758d825cc841bf82bae2681dc96d3a96c38b7"
+    },
+    "src/NovaCore.Graphics/ReusablePartVisuals.cs": {
+      "bytes": 17003,
+      "sha256": "46b2084d09e5218b0a9cb9348c4a6192b78f9203c0784244995b5883e196698c"
+    },
+    "src/NovaCore.Graphics/SceneObjectFocusObservation.cs": {
+      "bytes": 2078,
+      "sha256": "15393e7aa5d79a0dc86b80da33775934f99185ca13ddc6e2f2cfaa032dcb4731"
+    },
+    "src/NovaCore.Graphics/TerrainAssetDistribution.cs": {
+      "bytes": 21771,
+      "sha256": "ad152de34705e62731bec11a297f8b8883c585a82f1b52d64ea76b9fe245015a"
+    },
+    "src/NovaCore.Interop/DiagnosticStartup.cs": {
+      "bytes": 2333,
+      "sha256": "66b7ac28401b3685d2d5e17c787bc69948e3b57e4dae8d88c12a1b02dce2caff"
+    },
+    "src/NovaCore.Interop/MinimumRecorder.cs": {
+      "bytes": 2860,
+      "sha256": "cf996442154d5b09a95702d025ad666f7854fc4d529fabe8a1e1e933de7e1164"
+    },
+    "src/NovaCore.Interop/NativeRuntime.cs": {
+      "bytes": 26566,
+      "sha256": "488b6ffa77e1e160919dace33617696f9c9185c00e58fe4f7b333f2027a929de"
+    },
+    "src/NovaCore.Simulation/Properties/AssemblyInfo.cs": {
+      "bytes": 472,
+      "sha256": "5bd9e95f2ab1701957d04a89732b9b378c5f5d277bdb5a675c2ddbe235fcb712"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs": {
+      "bytes": 24843,
+      "sha256": "66a6c236b40c86c850a230a44b1c80df14bcef382759e8aae043942b4c53132b"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.Placement.cs": {
+      "bytes": 9901,
+      "sha256": "c488638c55729443ee6d2bb057d96c923f5803e75622b8946d64c24e2d34f6c7"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.Transactions.cs": {
+      "bytes": 8826,
+      "sha256": "7bf4c703058b41369892544a6fef76fa507ec9658142d05e0761a3e908fbc452"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.cs": {
+      "bytes": 11545,
+      "sha256": "870e7756e77ff057edb3d4ae4d59afb97d4b05491eed107a9cc3852929c39e96"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionFuel.cs": {
+      "bytes": 23757,
+      "sha256": "88d1c7d95f354ccfdaefe6c2a29e09ea542e4188b1847379dc69b318744976c9"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionGraph.Craft.cs": {
+      "bytes": 4064,
+      "sha256": "4838f2c77769c9ef1dc80dc13dbc680d984fbe0e81eccd53eeae3cebca8711be"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionGraph.cs": {
+      "bytes": 18145,
+      "sha256": "2b7b74a63cf1f74ce5bd61ef030b6abd16061aef685907ff77b2104c8ef33ad2"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionNumerics.cs": {
+      "bytes": 2714,
+      "sha256": "71453a10e123f6d224e2808f77b37d2cab26524c733f9080681825502c92cb00"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPhysical.cs": {
+      "bytes": 8746,
+      "sha256": "f83d66efcdf29e6d4db10385ceec7dbe394d52535c6b29c06370a31a7c91236d"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPower.cs": {
+      "bytes": 17111,
+      "sha256": "c03c9bac4b04efbb0edabe4e387c3f3e69fe18ad1ab90cbbfcd8405406d7ab60"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.Physical.cs": {
+      "bytes": 7817,
+      "sha256": "6fdc88fe264ce4b0ed15d8938f4e467d92abf0bd1f16309a3e652b0cdc1daa11"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.cs": {
+      "bytes": 11074,
+      "sha256": "32888a00ccc85b1802e1989168e46086e7087def13dd5825dd3a800f25109a53"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyControl.cs": {
+      "bytes": 2588,
+      "sha256": "df80a6a5fba863464431f362863d2101df784f8b605d53a2a9b3c30e844a605e"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs": {
+      "bytes": 26412,
+      "sha256": "951fd5e35908a27fc00809292839695bf6ecb0cafc3214b68d6d0cdc00119adf"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.Craft.cs": {
+      "bytes": 9863,
+      "sha256": "1e938f42d297770f95eabd714fd657bbaf70d9dd2e436f4ede836d0bafb5d1ec"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs": {
+      "bytes": 5189,
+      "sha256": "c5094db117caaf89798a059a0696cd37ffd457ca2d5f6ae92f7da9aaf8bdbaff"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFlight.cs": {
+      "bytes": 17338,
+      "sha256": "d2df85c44be969a1e67938785ba7b3875768d65789a295fc0079c133b34989f2"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs": {
+      "bytes": 13871,
+      "sha256": "c97d08a1e9350385800763aad11a785ba6c94514987d92009074920a8a7c7720"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyProfileAdmission.cs": {
+      "bytes": 4757,
+      "sha256": "a7da39a9a1e1b6819bf0f6a4f340c6e83ba24b930b47bd3ffe81db6cb5ce133f"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraft.cs": {
+      "bytes": 17143,
+      "sha256": "e585057de654d11234065c0f952382020e1bc1ae3c88956f49803b67c63b8fe6"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftAllocation.cs": {
+      "bytes": 6223,
+      "sha256": "8c2178ba3d602a28aebc64e9ee25fdec0f4f180745eb6c3fd09b323ffad89f27"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftContact.cs": {
+      "bytes": 3982,
+      "sha256": "d10d47d8c55138d8869adab4b9fceb5be9a6217a1fac153b74c7f927ec6740b7"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftControl.cs": {
+      "bytes": 7793,
+      "sha256": "fb3de8a49bebab5c3cd9fd936fadbf88076fe30f7348d9aec2427bfdd98c7104"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftPorts.cs": {
+      "bytes": 6070,
+      "sha256": "dd160e83f8369f2609e58f8ff88151225bfd2768914188e2bc4dc93667761dd5"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/ConstructionFlightCheckpoint.cs": {
+      "bytes": 5392,
+      "sha256": "5a37c49644e746007476a08c48bcf1cdef3c49d8fdd5028d0a3a9014b02ea24a"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/ConstructionWorkProbe.cs": {
+      "bytes": 1817,
+      "sha256": "8ea2b313054aa816777cc89972f3b93f9c4bf6f9b255153db8028bcf67a81536"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftClearance.cs": {
+      "bytes": 5602,
+      "sha256": "958ba2ebd85b98c135ad09649f47e78814e643f7d10c087536d4e406e0cd6339"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftDocumentMigration.cs": {
+      "bytes": 6068,
+      "sha256": "362bb508d35a66633dadda24630d5d85f1c9240fded3c6d797895cb77115ba18"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftDocumentStore.cs": {
+      "bytes": 4022,
+      "sha256": "2d63a7b3b65bec7c378da110816ebcc6740a4282fa9c5b000052290e3c373556"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs": {
+      "bytes": 2667,
+      "sha256": "5cfa9748d3d5d2290cb68b4148f5b3becbd2db34ec75d1fb5f703398f2d0c889"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftSweptTerrainClearance.cs": {
+      "bytes": 5846,
+      "sha256": "3a9f705a374e8c114431b86d649a8237c047f4e04016c5850b208e3e04540b38"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/PartCompatibilityEvaluator.cs": {
+      "bytes": 10179,
+      "sha256": "2238a6745de7911c3c28a58afde9833cc629086e3da2e431b1303962d9d79dc8"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandard.cs": {
+      "bytes": 14404,
+      "sha256": "5832df6c57f5ca1c8dfaf703e9216d41713f2b6dcc92401c4abacb1a24d8446e"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardAggregateConsistency.cs": {
+      "bytes": 3493,
+      "sha256": "6adfa8107f3a9a3012e750871ae3987d08c66217dbcc45e29405c438edf95b0d"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardExact.cs": {
+      "bytes": 2361,
+      "sha256": "fb7d58865ce45eec8810f48a16dae95323867cb67550f495462bc4219e6e0542"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardPhysicalConsistency.cs": {
+      "bytes": 3961,
+      "sha256": "8c1f66f905f4e6580c3c93c897df09602d9db17eee8881643fc2f8f956de9151"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftContactDescription.cs": {
+      "bytes": 4588,
+      "sha256": "fc300f15a95521d17a461964ce84014f2d7f00eade7d4d0af495da388ebb2f88"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftContactManifolds.cs": {
+      "bytes": 14778,
+      "sha256": "e448d7ee30bac0306dad36c5d920f52946a13ad755084157d631de818e2b5da9"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftContactMotionBounds.cs": {
+      "bytes": 3306,
+      "sha256": "ef7f3203784c2acd423a030cc1996dc8fd06c879484e1f06b9476d1960efecd7"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftSupportImport.cs": {
+      "bytes": 4063,
+      "sha256": "ba95d0891817ae7769c3df37711ac00aec48db2a34fee6f0169f72cb25792f6e"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftSupportPreparation.cs": {
+      "bytes": 10282,
+      "sha256": "4cfdb85cad4f56127fc7ee7ffa8d1fb6324a640bbcf236e4c0140c78e320fe45"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftSurfaceImpact.cs": {
+      "bytes": 1996,
+      "sha256": "a6ac2f2cdb6105397ba23c0ceb496f39b40632694571c06ccfc4eca8017706a7"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainColliders.cs": {
+      "bytes": 7680,
+      "sha256": "2be500cd4d3866272ecb075300b82c9de7bc29ba22f1b90971baad20e1d4f068"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainContacts.cs": {
+      "bytes": 9084,
+      "sha256": "61931cebf04226b0ea0112dbcfbf35397451678a464097cf4f3249129fc35c4c"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainFootprint.cs": {
+      "bytes": 11885,
+      "sha256": "a8873a6399132414df86d7c6f337a1b24e161f3a8b56efff2fff6f8dc6ae178b"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainGeometry.cs": {
+      "bytes": 8110,
+      "sha256": "22ea1c25e6c05caf2d239ae30e12f6905a11d69e3da63b4d8c90a86f4637c757"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs": {
+      "bytes": 7150,
+      "sha256": "abfc3abb7ac10340e73e2c057db19fabb4397c2fec876f8b9b378c3c7a6d33ec"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs": {
+      "bytes": 23787,
+      "sha256": "534139222ea974b979a931cda67c5f55583fed1b573fc921b15330feb88165fc"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Craft.cs": {
+      "bytes": 14599,
+      "sha256": "124a78052981d311be67b58758019116a0982d503229f25cd3b146afc1a6b062"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.CraftDiagnostics.cs": {
+      "bytes": 885,
+      "sha256": "e3bbb21d70ead86ecf7b63d462cdc8eac56a71df0576a4872d44c3062557b369"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.CraftPreparation.cs": {
+      "bytes": 5910,
+      "sha256": "ac7f5ceec3ecdeabc34c8a5e4f1ec553680deae686c2ea651b79c50bd695e496"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs": {
+      "bytes": 11121,
+      "sha256": "978f41106d8de346666bcd075340a2b00bd598ebdbe967207a87ddec32311cd5"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs": {
+      "bytes": 21456,
+      "sha256": "8dd3082bd760cf2c18820249574027003fed94d1f3252bfdf7a78de3c22c4d0b"
+    },
+    "src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs": {
+      "bytes": 7251,
+      "sha256": "97eb1605a5eb209ba78af2844b4ca3cec9c6a6a945c4790ff999af18b644664e"
+    },
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Construction.cs": {
+      "bytes": 2860,
+      "sha256": "8501c672d94c70c443a7d14f40de8f5d4390b1823a9767501a2e0a5337d7e24c"
+    },
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs": {
+      "bytes": 14779,
+      "sha256": "a0ffdf116df29dbf9fd3d4497c2a6d5984ecd8a2916e6afdc58b7ad137712ade"
+    },
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs": {
+      "bytes": 3217,
+      "sha256": "102092db5e0784f7890cac28c3374163d2348a0d6b8556d4c509ae4e34f577ca"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs": {
+      "bytes": 5001,
+      "sha256": "55d0f1520af203abf3f166db14555e64bff276a3ab0da42659e6433980674d8b"
+    },
+    "src/NovaCore.Simulation/Transactions/SimulationState.cs": {
+      "bytes": 8096,
+      "sha256": "15210642e43314cdeba58fc8c3b8ec7ed674c02f46081968ed6de6d2c379bf15"
+    },
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyControl.cs": {
+      "bytes": 10304,
+      "sha256": "84024777d7759b394ad0e35fa85aa990c7da6dfb9117fbe9ffa99433550dba85"
+    },
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Construction.cs": {
+      "bytes": 13112,
+      "sha256": "16dd8117d436e95d63c55798a73f6f3bbb669a244caa107bcda9ebd20a643c20"
+    },
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPersistence.cs": {
+      "bytes": 3535,
+      "sha256": "6f99677e0e4c884baebc1ea53bdc9d03a0aec30a555b9e7fca4ae93447a5086e"
+    },
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs": {
+      "bytes": 19908,
+      "sha256": "6176d4eb04e5bc3b7e792ea5b6d7158d17eed0128d2bdffa0fb8c18a2ebdc45a"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/NovaCore.App.Diagnostics.Tests.csproj": {
+      "bytes": 214,
+      "sha256": "04944dba55f170bde0b3b79997605756ead431c84e93982792a4309c1cd50ce7"
+    },
+    "tests/NovaCore.App.Diagnostics.Tests/Program.cs": {
+      "bytes": 3841,
+      "sha256": "a4cfc1cc3969f817fd51f8c931c6774a8ac29d0304b40de8c5b331471669e856"
+    },
+    "tests/NovaCore.Graphics.Tests/BenignRecorderRouteTests.cs": {
+      "bytes": 2682,
+      "sha256": "df86640ed8137fa6a7700c3ce68684e190ea77e6a3f2dd4f1033bee98a975ba7"
+    },
+    "tests/NovaCore.Graphics.Tests/EarthBlackoutOfflineTests.cs": {
+      "bytes": 19999,
+      "sha256": "9d7b71b05e75bbcefce006fbde7b1124680e96d271d96ec484df0cd6f2a6bfbb"
+    },
+    "tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs": {
+      "bytes": 28173,
+      "sha256": "da081ce0d86877b6404fe31f9be2c7d327fd0a30afc9f358c5bae1c1c170c9cc"
+    },
+    "tests/NovaCore.Graphics.Tests/FacilityLightingTests.cs": {
+      "bytes": 7591,
+      "sha256": "b4cbc509e534c6ac11e6ae31f8e1f946e8217e5bee1a2290bb1294d2da0a8f63"
+    },
+    "tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs": {
+      "bytes": 6226,
+      "sha256": "7ac668dd9d10377a5a04e6d8ca7ba9c6280dc814ed5f18b68bbf8cd4cf195dea"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularConnectorTests.cs": {
+      "bytes": 16549,
+      "sha256": "667ce56b61d4531c1127321e3f40af521b3ba5f9ad486f514ec5dd620c839504"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Application.cs": {
+      "bytes": 14299,
+      "sha256": "583d1daeff057cc7a113ca4eae85f200c291eb52bd62d6b9494b25fae2cb2a42"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Clearance.cs": {
+      "bytes": 4110,
+      "sha256": "a83287d72ebcff3df679be419b2e541071de9d74b58f0ff9f800016e2d7db917"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Dynamics.cs": {
+      "bytes": 4358,
+      "sha256": "a0db84bbe411f3ce12c443d9025527b115454cb55ac764506ad2029564a460ae"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Fixture.cs": {
+      "bytes": 2817,
+      "sha256": "3b550ca71ffad431c3b70d68acd4551467a634728c4f26352a28ed7cdd55a0c5"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Flight.cs": {
+      "bytes": 6776,
+      "sha256": "555553a3fd557825f59a4db3f85c841decfb682c44558e88182994df9f0f21c9"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightBoundary.cs": {
+      "bytes": 5595,
+      "sha256": "94ac491887d6c745228b13834436c7245badb0d0e7fd02fdc0d6c9eaf052eb58"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightControls.cs": {
+      "bytes": 8267,
+      "sha256": "f931c741bafd8590b0c30f27144149f47d6f836a5445f3ef7c59447eda928e07"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightMeasurements.cs": {
+      "bytes": 5254,
+      "sha256": "533d0efea15914b1b7ebf500a27f13aacfbd9e3427a29b4751ef8b04ebe1ea9a"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightOracle.cs": {
+      "bytes": 2398,
+      "sha256": "98e6d76c9b3dab9c3af901e67b357c4d4446fd70d533b46cebd536089c38aeb6"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Measurements.cs": {
+      "bytes": 3527,
+      "sha256": "773f489ff10f14f1046b792b313d36c3163e26d23eca4f799684ff0c6258eb64"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.PostContact.cs": {
+      "bytes": 4094,
+      "sha256": "c2e7c7d5e3617de3e023bd8ae8bf1814914128e0a8aa425852d2ee0598e205c3"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Support.cs": {
+      "bytes": 11106,
+      "sha256": "4a0e7a3492e5921d1c847e25b98087a87cba9d0618950b4e5c3cc3c6f24e48ac"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Surface.cs": {
+      "bytes": 11214,
+      "sha256": "7d2a8398ac945de928462f2e886dd288c8cdf4bc9fd75b938a99f5e0f142b783"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceCases.cs": {
+      "bytes": 11443,
+      "sha256": "1f03ee5caf09bb159af04eac012697edb7b981214a3fdd2be416bcd65c05f78f"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceCycles.cs": {
+      "bytes": 3636,
+      "sha256": "0397a8c1ed5e0db15ab5c96ce46c7f9d2eb6c3eac145a11dc810b21e0046b848"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceEnergy.cs": {
+      "bytes": 4192,
+      "sha256": "a61b90eafe4f9fb85166799a0958f44028f207cbba8071366a2c83afd475bd79"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceGeometry.cs": {
+      "bytes": 3016,
+      "sha256": "66f114c3cb4db5524e98c5706ce5ef46c034bb672ddb775100ba97e19fda88bb"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceLive.cs": {
+      "bytes": 2713,
+      "sha256": "4d8da6517cf27100e537d7fa770cdee44be293f7c41a1b39aff620d63b154c76"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfacePerformance.cs": {
+      "bytes": 7230,
+      "sha256": "05df8da2bcdaacc4c0325bde9ca50fc33f63a83d987886d0e9685461caf9ac3d"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfacePersistence.cs": {
+      "bytes": 6138,
+      "sha256": "6f88829efca1dadf675c10b542ec6ed3b12a4ba8dca9b88eb5d4b40caa279e71"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfacePlane.cs": {
+      "bytes": 5384,
+      "sha256": "9a0f8fb8466af348d6499cd7ba42705f0e2e2a4e9e6ea82c192c7c9563317fc8"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceRefinement.cs": {
+      "bytes": 11604,
+      "sha256": "7547c4e9a726504c05ade18e9c6f6e9bc6ea4b1cdda7fa6ec25ef4bb732472c4"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceRetry.cs": {
+      "bytes": 4396,
+      "sha256": "59230a31717810288abe0dcfe1d6fbebb99cc3e1c1df00dd5646d3e5edd29277"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceSeams.cs": {
+      "bytes": 12292,
+      "sha256": "8c4589941f412684689ad7e3e947c3025b1d35cabe5b64de91b6ce1849c3ca99"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SurfaceTerrain.cs": {
+      "bytes": 13656,
+      "sha256": "a6996bda43b227ca2091bbba3a32e73c8786a761e58b1ef19c33eec39b7b5940"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.SweptClearance.cs": {
+      "bytes": 12801,
+      "sha256": "8929885a3667c124e4e193d453218fe07813ae45ad703d4857930e9f85dccdc5"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.TerrainReuse.cs": {
+      "bytes": 5585,
+      "sha256": "e153b44827b77bab3f3f005be92c8d088e5dd37ef6e644ec33cee475d048290c"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.cs": {
+      "bytes": 22914,
+      "sha256": "f58b79f5a1f6e803b30734c5ed6384ea5d298db6769d64c66a56ba5cf2dd38af"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularGreyboxAssetTests.cs": {
+      "bytes": 3630,
+      "sha256": "267be58a068492434d630d2a509319265320da101af136d3524d404b0bc407b2"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularStabilizationTests.cs": {
+      "bytes": 8069,
+      "sha256": "5c5d16f3ee25ea8efc0f05fab61b140edc3f8c24f943437b066f293e35eae100"
+    },
+    "tests/NovaCore.Graphics.Tests/ModularViewportTests.cs": {
+      "bytes": 7864,
+      "sha256": "aafe8c6aa923b72972c646b123f1a785ccfea10811954d55fbe3a6fe6b1c42a7"
+    },
+    "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj": {
+      "bytes": 5841,
+      "sha256": "6e6e92bac8d6ba042911d83821f2a1f0685aab8028dd035d73aaff7b2b588f16"
+    },
+    "tests/NovaCore.Graphics.Tests/PhysicalCollisionNumericsTests.cs": {
+      "bytes": 10169,
+      "sha256": "0e25a221d0e22332b5ebc3584ab37a286216d73c0dfc89db130e2fda69932dde"
+    },
+    "tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardRuntimeTests.cs": {
+      "bytes": 82479,
+      "sha256": "9460e842eabce2b9f17629f660f0715a0293e0644e4275f2011a9494f6fc59cf"
+    },
+    "tests/NovaCore.Graphics.Tests/Program.cs": {
+      "bytes": 576489,
+      "sha256": "9c3ccc4eb418380eff43daf540bdf857b0e42596818089b2d8ea6184dd287a30"
+    },
+    "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs": {
+      "bytes": 12437,
+      "sha256": "fcb4a9dab0fcf95b06b7de4c4ddc884a99dec9cf2958d22b40d73f1c06d70340"
+    },
+    "tests/NovaCore.Graphics.Tests/fixtures/contact-angles.json": {
+      "bytes": 16650,
+      "sha256": "d0cfcfe715c297b667ce2857b343ac4bb13368282d6e04067f1879251769c9b9"
+    },
+    "tests/NovaCore.Launcher.Tests/Program.cs": {
+      "bytes": 17495,
+      "sha256": "934a69a03c88efcd2b6670f912afe3680f20e2761feece5216a6b31013e3eefc"
+    },
+    "tests/NovaCore.MinimumRecorder.Tests/JournalBatchQualification.cs": {
+      "bytes": 6078,
+      "sha256": "1e2b63de740b321b074852e8f1d1746feea5e859ffccb6993c68800a9cda6347"
+    },
+    "tests/NovaCore.MinimumRecorder.Tests/NativeLoadQualification.cs": {
+      "bytes": 8985,
+      "sha256": "731f0d4c893a7999934a3d3969e0444a46e4497a11926ffd3646082c45ed57f5"
+    },
+    "tests/NovaCore.MinimumRecorder.Tests/NovaCore.MinimumRecorder.Tests.csproj": {
+      "bytes": 308,
+      "sha256": "750d3d492420694c9e8ebdbe43fca650e6c3a43c6cf1ce523c05e98679f54fec"
+    },
+    "tests/NovaCore.MinimumRecorder.Tests/Program.cs": {
+      "bytes": 26099,
+      "sha256": "2e515aa4a622b8b2fe7e9ac1eeba5f543be08b734e37589f0f78ec8d7202a5e6"
+    },
+    "tests/NovaCore.MinimumRecorder.Tests/native-fixture.py": {
+      "bytes": 4484,
+      "sha256": "94eb432b5b93021fcb18f9d79a06a7ea5d2dac8ca651f2019e7b61641788a439"
+    },
+    "tests/NovaCore.Retention.Tests/AbnormalRetentionTests.cs": {
+      "bytes": 11737,
+      "sha256": "0f797657da1b21fd699d01a9fa7f99b350ca087560b6297775821a1239c4fbbc"
+    },
+    "tests/NovaCore.Retention.Tests/BoundedStorageTests.cs": {
+      "bytes": 24082,
+      "sha256": "49021a1141e2bf5fa8cb094c32ec1305aee646de426aaa7d0de91bdb728e4167"
+    },
+    "tests/NovaCore.Retention.Tests/NovaCore.Retention.Tests.csproj": {
+      "bytes": 308,
+      "sha256": "750d3d492420694c9e8ebdbe43fca650e6c3a43c6cf1ce523c05e98679f54fec"
+    },
+    "tests/NovaCore.Retention.Tests/Program.cs": {
+      "bytes": 5709,
+      "sha256": "38719ac61157fb6de830914a138ee3184a1584a9a2e9593bf2bb890abda374cd"
+    },
+    "tests/NovaCore.Retention.Tests/RecorderStorageTests.cs": {
+      "bytes": 6530,
+      "sha256": "f4129d695449a5ac4711c225c3a0034bcca8296bcfd681c1e3d6648a31eea460"
+    },
+    "tests/NovaCore.Retention.Tests/RetentionAdversaries.cs": {
+      "bytes": 11731,
+      "sha256": "599e79fb26dc4a7c05ee7fbe1304e1110b0eabda2c0b7cec6c559ad3f5afd2a5"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Articles.cs": {
+      "bytes": 11936,
+      "sha256": "3f2733bc59ee935a65f6fe517cd01ce9d2d7e53db1c7938b8ca6dc41313be901"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Editor.cs": {
+      "bytes": 10121,
+      "sha256": "00b8e43a20e5852f4c0d61a7acf65d376699959acd84f22ad18937da5f074211"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Fuel.cs": {
+      "bytes": 16961,
+      "sha256": "df33fd6ecc13c2947fd4967043863dcc4cedf477376b341cc7392445a89d384f"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Graph.cs": {
+      "bytes": 10693,
+      "sha256": "4415d3c41b68c087d79c3594ff83700583551a2ac2ec3670bb1cd2bef73fd332"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Measurements.cs": {
+      "bytes": 8273,
+      "sha256": "665c2fcd7d40c25c83a200e68dbb217a41c7695635814df30b83fcb83061f0ef"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Power.cs": {
+      "bytes": 12694,
+      "sha256": "1da3e9eec3e01146f720ca13333e4c0aec484b04430e120debc69391d88c7267"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.PowerWidths.cs": {
+      "bytes": 8994,
+      "sha256": "e109f78d81197cebd8cf93a4568b4401ff71819d4df02e497571f68490b62f96"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Runtime.cs": {
+      "bytes": 17977,
+      "sha256": "9ce744d95d0f87a484f9ae10a7650d1aae6416e2e7873be7e621ae3f749e05af"
+    },
+    "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.cs": {
+      "bytes": 8122,
+      "sha256": "3a46733a2757069b1120c84393c2cf38ea4db381715ef57c2902100439ab5fc7"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.AdmissionAudit.cs": {
+      "bytes": 3137,
+      "sha256": "e535531d084d5f773d6b9dbe3b010c75a5eab1ccb70a684fb98286ca9609601e"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.AggregateAdmission.cs": {
+      "bytes": 6463,
+      "sha256": "60457195a8470ceb99fae326828dcc215db85a4c2556c3cae5667e96eb163195"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.Compiler.cs": {
+      "bytes": 12426,
+      "sha256": "fa14f69e78332e0f151c2b3c2ae170bae2cacd55a2dfbcc770bc19254832e432"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.CraftDocument.cs": {
+      "bytes": 16405,
+      "sha256": "e54321c84301bb13e1d8b2dbe130b7c713dae53464a8b8b5157d611d252280e2"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.Gate1Closure.cs": {
+      "bytes": 12777,
+      "sha256": "3eef85f0ec6eb72fa3bbf660854dbc4d673c24c2972a98710a00ebe3f98c6af2"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.NumericalAdmission.cs": {
+      "bytes": 10216,
+      "sha256": "54d093912793e675de8ad86401c5da90656292f70076dd7f25b5beea107e113c"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.Persistence.cs": {
+      "bytes": 6777,
+      "sha256": "9c0e6a23c01d4d25bc914f29433fc1a76f6f1fa0126d5f39f2f9fe7879868f58"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalContact.cs": {
+      "bytes": 6351,
+      "sha256": "8f1b4f0003cb1a0a8ee8e55640d3fba1dd4d9130e0ae0e45f4016aa6d3deb5c1"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalMeasurements.cs": {
+      "bytes": 5821,
+      "sha256": "af5b637942a9ecbcced11bed2c4754bde9ab6820b080dc236005ef086bc4b2e1"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalPredicates.cs": {
+      "bytes": 5070,
+      "sha256": "f1a1d41974103a932aebd45989780bd81b90e912028b54180c4169b1e7a9c378"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalServices.cs": {
+      "bytes": 22061,
+      "sha256": "3c5f60a3d1ef947790a37cab5388fde23602924a05027cbb6c7272fc33f3a3c5"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.Placement.cs": {
+      "bytes": 14830,
+      "sha256": "c25880d394c677a9ddb157b70a268cdf89191d8b60c22f1c9f8dde82ca120329"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.PlacementMeasurements.cs": {
+      "bytes": 3859,
+      "sha256": "74e78f125c3575da0bf688578821f09c80324419c24ecc095dc05639a3885835"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.StarterDefinitions.cs": {
+      "bytes": 10640,
+      "sha256": "a4d72134fbc1944fed1cefff1fcefcef488cfd3ed391148e8b47bad7412dd832"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.Transactions.cs": {
+      "bytes": 17293,
+      "sha256": "325a4b3980df0f806b295102982b43e71ed04b19c88b189090c4992b39e9fdcc"
+    },
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.cs": {
+      "bytes": 10924,
+      "sha256": "eb97d8637bc67581edfc1ef21ed86e27614e4f344425d82957b5035a975a50b9"
+    },
+    "tests/NovaCore.Simulation.Tests/Program.cs": {
+      "bytes": 269337,
+      "sha256": "93be7bd9501c14c3a40d69c82e64622f1e886ffff452977d524fc5e94b3f9c3f"
+    },
+    "tests/NovaCore.Simulation.Tests/RcsScalabilityFixture.cs": {
+      "bytes": 5693,
+      "sha256": "2e675f5db7644d2374f5ef0fa191ae0dfe88aeb283e7eedc16768f6bfa425114"
+    },
+    "tests/NovaCore.Simulation.Tests/RcsScalabilityTests.cs": {
+      "bytes": 19324,
+      "sha256": "18579a7d2411d1c4c9a6b9c6eb0332776bacb3ee98764c40644b818c894e760d"
+    },
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportFixture.cs": {
+      "bytes": 1285,
+      "sha256": "75be08e60512ee1f0ce9a2f5400366d0e42d738007fea7f21e056c3773e72067"
+    },
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportTests.Friction.cs": {
+      "bytes": 2665,
+      "sha256": "d4a20d7221cfc4d75682a6c70574fd06fb6f264a05ff76238f22e697c0b35154"
+    },
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportTests.cs": {
+      "bytes": 13466,
+      "sha256": "fd206b8ae7dd70005dcd815199153a5ef8756a78b6ff9ff28e48ef05bed4566a"
+    },
+    "tests/NovaCore.Simulation.Tests/SurfaceContactResponseTests.cs": {
+      "bytes": 11077,
+      "sha256": "3c66d9e75776968e6712a28d193826d4abbb923e3d7af341cd6c04a7fc964ccc"
+    },
+    "tools/NovaCore.App/NovaCore.App.csproj": {
+      "bytes": 1127,
+      "sha256": "61b659699b2f8bdac510b628e3f97eff3b6904f0292beb92eaf30b08b84763a8"
+    },
+    "tools/NovaCore.App/Program.cs": {
+      "bytes": 3440,
+      "sha256": "d8575aa2bd10db90672f5a1bdd845f0bb01751df38cd339a7cc375b77eef8132"
+    },
+    "tools/NovaCore.App/RecorderStorageForm.cs": {
+      "bytes": 6943,
+      "sha256": "33d76d138dfd48305c3f8e781faf31be5b2282186a820e2de8f7b31e2c4c3d68"
+    },
+    "tools/NovaCore.App/SessionLog.cs": {
+      "bytes": 5671,
+      "sha256": "e24e71c09fe732d5eb13b987e1b6d8b8ae654a12a6cab40bbe24f104ade619cf"
+    },
+    "tools/NovaCore.Causal.Observer/AdaptiveCapturePolicy.cs": {
+      "bytes": 2823,
+      "sha256": "4f14fad7b3c1d89e96f7593d85f5e8622bec1359dadda20c3358af1c58ac37f7"
+    },
+    "tools/NovaCore.Causal.Observer/AdaptiveCaptureRegression.cs": {
+      "bytes": 5310,
+      "sha256": "42ced65c12f9618a46f7d7ad89773223966ba29377305084e27e0957e76e1356"
+    },
+    "tools/NovaCore.Causal.Observer/AlarmJournal.cs": {
+      "bytes": 6213,
+      "sha256": "dee7badedcc5439a3fb048266f888d7d5b32d2142816da791a2866c46a2a1dfa"
+    },
+    "tools/NovaCore.Causal.Observer/CaptureCostWatch.cs": {
+      "bytes": 8181,
+      "sha256": "ad314d8c986d72778b99142285b35dc820880e0399d080bd5c0b0f8794074f9a"
+    },
+    "tools/NovaCore.Causal.Observer/CausalJournal.cs": {
+      "bytes": 5590,
+      "sha256": "84d8ef77ad4fa361e22c218bca8cbde2b8940dfb77f31f15df1ff634fe971ba2"
+    },
+    "tools/NovaCore.Causal.Observer/DiagnosticCostCheckpoint.cs": {
+      "bytes": 3244,
+      "sha256": "ec1c002bd45f2439d5b18a2ec7ad5c04d810a641fa06cbdc968319297e87f2f9"
+    },
+    "tools/NovaCore.Causal.Observer/FirstAlarmRegression.cs": {
+      "bytes": 13147,
+      "sha256": "18a5013daeb0ebf8d61b5d751ee03ea647823a5924610a99a06a27ffec4f3f87"
+    },
+    "tools/NovaCore.Causal.Observer/FrozenAuthorities.cs": {
+      "bytes": 2588,
+      "sha256": "b9f82db1fba67a8c7b6f61c2f8a16a9f8d7a83df55431152c3e185b6e29ca328"
+    },
+    "tools/NovaCore.Causal.Observer/FrozenRegression.cs": {
+      "bytes": 6947,
+      "sha256": "333a121be02b9cadeb1a7275e9b74a84fd42d3210520deb34c50cdf8501c70cd"
+    },
+    "tools/NovaCore.Causal.Observer/FrozenSnapshot.cs": {
+      "bytes": 18448,
+      "sha256": "1490d1b0153a601bf23f3b346e66fd79131ddae6cc5cb199abb30b1028c4a27f"
+    },
+    "tools/NovaCore.Causal.Observer/LiveFrozenAudit.cs": {
+      "bytes": 2595,
+      "sha256": "01829dc5d7698c39fcaea51df50235b900fd06cc58aad2bbfbf7a33529cf2b0f"
+    },
+    "tools/NovaCore.Causal.Observer/NativeClosurePolicy.cs": {
+      "bytes": 518,
+      "sha256": "72cce0cc3658d5bbdf478cf0f04d898b08bb679d2c6b297e82536885bf0c35c2"
+    },
+    "tools/NovaCore.Causal.Observer/NovaCore.Causal.Observer.csproj": {
+      "bytes": 323,
+      "sha256": "8629006158a7e7a524a161f322e066cc777cf1fac513628c44cab64c36dedb86"
+    },
+    "tools/NovaCore.Causal.Observer/ProductionFrameRegression.cs": {
+      "bytes": 5103,
+      "sha256": "e4b87f3a6bfecba98f84e626dc14bef2073f2dab5b0aa718641032405c138ceb"
+    },
+    "tools/NovaCore.Causal.Observer/ProductionFrameWatch.cs": {
+      "bytes": 2838,
+      "sha256": "ba1e6eea3e2a6ed85ba35b8b56bfe2dee94840778e61f078bf70d0c468906c86"
+    },
+    "tools/NovaCore.Causal.Observer/Program.cs": {
+      "bytes": 29196,
+      "sha256": "39f59ec2bc2de3c47f81e90f86b843473a971f6dec58e38e719dcfe9dc88946f"
+    },
+    "tools/NovaCore.Causal.Observer/RecordingCallProgress.cs": {
+      "bytes": 6198,
+      "sha256": "92a6caec8a860be5de92cf265b49066402c84bfd1546f1bc96809a5294c04700"
+    },
+    "tools/NovaCore.Causal.Observer/RecordingCallRegression.cs": {
+      "bytes": 3640,
+      "sha256": "ab0bc8cd9922e713ba7f577394009411a27c032ec029ce4ef87b5db8536e1e8e"
+    },
+    "tools/NovaCore.Causal.Observer/ResourceLedger.cs": {
+      "bytes": 2556,
+      "sha256": "4d7afed0d55c20ab92ef0a80194281230b7816a25130ffb979f5a46fa255c4eb"
+    },
+    "tools/NovaCore.Causal.Observer/StartupLifecycle.cs": {
+      "bytes": 3585,
+      "sha256": "7f71904a50dfc9096e20ca80ff561a0fc6c1e2b8ca7f1b5f6357abceade9ffab"
+    },
+    "tools/NovaCore.Causal.Observer/StartupRegression.cs": {
+      "bytes": 6585,
+      "sha256": "547c2e533329c0f238e90a7f3b856710cd149164f8d2d708e708dc0d8a9809a4"
+    },
+    "tools/NovaCore.Causal.Observer/TopologyRegression.cs": {
+      "bytes": 11853,
+      "sha256": "0c6c57c7c61ec5e3aae89d8725777b45a50c7cd06c2b6c47194145d42a3283b5"
+    },
+    "tools/NovaCore.Causal.Observer/TopologyWitnessWatch.cs": {
+      "bytes": 10458,
+      "sha256": "a79171cc30d0282b7d369969d1f544ce4f69a91d2d662f2d96c223ba2ce129b3"
+    },
+    "tools/NovaCore.Causal.Observer/classify_recording_boundary.py": {
+      "bytes": 6343,
+      "sha256": "4ce1359bb9dee4f708196d4d04925b68819e3f494a1e1f0fc9c8021e29b68288"
+    },
+    "tools/NovaCore.Causal.Observer/measure_readback.py": {
+      "bytes": 7051,
+      "sha256": "bede007a7f17d3bc28ab047c194ce92dee8364ccf725c254694333aed268f1ea"
+    },
+    "tools/NovaCore.Causal.Observer/offline/FrozenControlProbe.cpp": {
+      "bytes": 2882,
+      "sha256": "f884e352a434757996341b3976d232356232782419195df38063f79162dd408f"
+    },
+    "tools/NovaCore.Causal.Observer/offline/FrozenOwnershipProbe.cpp": {
+      "bytes": 23670,
+      "sha256": "2dae5b0a6cdc67dcc1f3d52119f0a1ef8d436adcc311697cccc57560ae058c46"
+    },
+    "tools/NovaCore.Causal.Observer/offline/FrozenPackingProbe.cpp": {
+      "bytes": 4370,
+      "sha256": "e46106a8345caa35a6f91ba4242e5cd1d65295dd404f099750546d4d0b6b2dfd"
+    },
+    "tools/NovaCore.Causal.Observer/offline/FrozenPublicationProbe.cpp": {
+      "bytes": 5829,
+      "sha256": "ce9b413797940b703b72b74c2f3d4bdd409179d247566427dd8cb83c3c4b026b"
+    },
+    "tools/NovaCore.Causal.Observer/offline/FrozenTopologyProbe.cpp": {
+      "bytes": 6859,
+      "sha256": "04a30f074413db344ed306006246e508c23b9f6d1bda52494cce1b4348381607"
+    },
+    "tools/NovaCore.Causal.Observer/offline/RecordingCallProbe.cpp": {
+      "bytes": 11130,
+      "sha256": "088d52df9ec7fd2b8a5bc837005e3650e3badb37177a8069205dfafa2f623949"
+    },
+    "tools/NovaCore.Causal.Observer/offline/build_frozen_control_probe.cmd": {
+      "bytes": 622,
+      "sha256": "879d22aefbb5cdae5164581558ca21e9d31aa820dea58ad2cd7ebed3f6b9d824"
+    },
+    "tools/NovaCore.Causal.Observer/offline/build_frozen_ownership_probe.cmd": {
+      "bytes": 704,
+      "sha256": "40a7d242873ca6595fc5c01078836de04b73615086ec55d6e4fad676b4fdd1d9"
+    },
+    "tools/NovaCore.Causal.Observer/offline/build_frozen_ownership_probe.py": {
+      "bytes": 6617,
+      "sha256": "b1cb5acd76e652c614512ece35da293d9af5388e975e3f8e95a261429cac9bea"
+    },
+    "tools/NovaCore.Causal.Observer/offline/build_frozen_packing_probe.cmd": {
+      "bytes": 588,
+      "sha256": "7701644cd2dbe6e697cffe755062430467a0674d752bc654d4830c6cdda63443"
+    },
+    "tools/NovaCore.Causal.Observer/offline/build_frozen_publication_probe.cmd": {
+      "bytes": 604,
+      "sha256": "5ed248f5cba0ef4c8165f0b579ab5258ad49439989729b25c8cd6fa59929453a"
+    },
+    "tools/NovaCore.Causal.Observer/offline/build_frozen_topology_probe.cmd": {
+      "bytes": 628,
+      "sha256": "c16416e79f2defec49f449f5c7cc09c95df2fe71d778f811e7c48037da0f1f0a"
+    },
+    "tools/NovaCore.Causal.Observer/offline/build_recording_call_probe.cmd": {
+      "bytes": 703,
+      "sha256": "50d6aa76c69553ec71e1de02daa0b49ccd0e1ddbbed31a4dc58c91b7039ba3e6"
+    },
+    "tools/NovaCore.Causal.Observer/offline/capture_transfer_accounting.py": {
+      "bytes": 4310,
+      "sha256": "162d33d4a471585a82f2f5908da7667252046d8ee50e68f897649c937d456ec3"
+    },
+    "tools/NovaCore.Causal.Observer/reconcile_visibility.py": {
+      "bytes": 9566,
+      "sha256": "db7361e1260e08c6d3bd3776ec8515dda017c82d90363a5712853cbbcef18a6c"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs": {
+      "bytes": 20738,
+      "sha256": "de6f337d962c7c1d889c20e1ea87789e3e96e883cfbf83addc4bac0954239106"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs": {
+      "bytes": 22559,
+      "sha256": "0e83c72ab71068bb1203a0848254938b49f4ccd4be2031542cd61a4afbc1a065"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ConnectorQualification.cs": {
+      "bytes": 3450,
+      "sha256": "c14f4c42572a3ba39209f987ad433ea3647b246ec66f6bab6e95fd5a1e615c53"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Direct.cs": {
+      "bytes": 3422,
+      "sha256": "437e0f1a58a0d60741f3cc66aa6c7d4a1cc8bc0c51c7f73dbc8208984c191129"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.FlightPersistence.cs": {
+      "bytes": 2370,
+      "sha256": "004a43d9045f1fdb73c8aee9d50bdda70c3af6d011ab3a08e6a65d6efd0fc7e1"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Launch.cs": {
+      "bytes": 2991,
+      "sha256": "d7ab44d35a356126e5e60402d6c34ddece2c6c8a38a33f4280ff8d37a511418f"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs": {
+      "bytes": 2251,
+      "sha256": "2dbff9804fafa2ea34676cbdf3f6341a1cae22363a89b08e4533aabce36ad227"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs": {
+      "bytes": 10212,
+      "sha256": "6d9c473b2a8f22a89186a77f96983c0383b45201e8e83bfbf695fcb92ef29b4a"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Qualification.cs": {
+      "bytes": 5822,
+      "sha256": "2263de74fbeb3f3125b656157fb7976c81f7281d7b77c070680963277f703eaa"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.RecorderQualification.cs": {
+      "bytes": 3789,
+      "sha256": "460dffe9ade11cfd1a79586a51b087926715e9dc1746d2e4fc0ce605f4d6265c"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Saves.cs": {
+      "bytes": 3890,
+      "sha256": "aa97f6951fa712ca5ee17ef412321a02fa1140f4e754c6bb004dad867adf97f5"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.StabilizationQualification.cs": {
+      "bytes": 6458,
+      "sha256": "1d7da87d2233cabb27c3241ee6183cec97d88b8316907430ad5f0543ce6641e1"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.SurfaceQualification.cs": {
+      "bytes": 6639,
+      "sha256": "89e254e24b4ab2411521b8ec581ec99db470fbda144014bce7f132eac1252a3a"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs": {
+      "bytes": 19174,
+      "sha256": "0654b763f730bf2166d6b06cf17eb5ec8b3748d06fd7b9680b22637eef4ec93c"
+    },
+    "tools/NovaCore.ConstructionEditor/DiagnosticBrowser.cs": {
+      "bytes": 9348,
+      "sha256": "8b570eecf547e3d199d0b7ed93b7ed82e32a9b6fd49d35888d17ba7e5d50aabd"
+    },
+    "tools/NovaCore.ConstructionEditor/EditorCamera.cs": {
+      "bytes": 1635,
+      "sha256": "0dbabf08ecb52c7503a791ff136a77f095a8179fbfe72c5b73fd163fd321cf9c"
+    },
+    "tools/NovaCore.ConstructionEditor/EditorHost.cs": {
+      "bytes": 2457,
+      "sha256": "0fbf47126d0eb8ea85843584f89cb4ef2274e79fb4fcaf8e19fe34c4cc05b203"
+    },
+    "tools/NovaCore.ConstructionEditor/EditorRenderCapacity.cs": {
+      "bytes": 1126,
+      "sha256": "d31fd379c195ee04aa746b2b28ce5ca4ec27914698ab0f3a3b9ffa6f9974e799"
+    },
+    "tools/NovaCore.ConstructionEditor/EditorSocketTargets.cs": {
+      "bytes": 5769,
+      "sha256": "8bc3dc878d05fcdc75875dc37fae0236d60abc068db57247a3f207ca761eead3"
+    },
+    "tools/NovaCore.ConstructionEditor/EditorVisualAssets.cs": {
+      "bytes": 478,
+      "sha256": "eac73e3e3c7c1969a8562c9130dacc293d63239ed25c07518b92d32d8d73313f"
+    },
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj": {
+      "bytes": 1103,
+      "sha256": "43ca059b7e4a0b7f1df8b8b166538bcd87724866a952518a74ce715bed9a5e87"
+    },
+    "tools/NovaCore.ConstructionEditor/PartThumbnail.cs": {
+      "bytes": 2142,
+      "sha256": "b88d345eb2872ca53c900e606634d8228e52ee9100598add1ea3996c64683bce"
+    },
+    "tools/NovaCore.ConstructionEditor/PlayerApplication.cs": {
+      "bytes": 384,
+      "sha256": "498983391524b80f242fdd5336067128c3c9ad3acf8a872c2debfb4f97229c5f"
+    },
+    "tools/NovaCore.ConstructionEditor/Program.cs": {
+      "bytes": 1750,
+      "sha256": "da97bae6d53c59efff556010b47cd2056330375b8cb835d9f605d74f29410ddb"
+    },
+    "tools/NovaCore.ConstructionEditor/StabilizationCraftFixture.cs": {
+      "bytes": 2342,
+      "sha256": "001d983b882fd83f48e42f0fe2ad323787284de5618399e4bb8d02c602717f71"
+    },
+    "tools/NovaCore.ConstructionEditor/tests/geometry.mjs": {
+      "bytes": 1169,
+      "sha256": "16a5896bb93713ee4bd8bd4f27f44af30f64f4481ef0108f7390d4eb080362cc"
+    },
+    "tools/NovaCore.ConstructionEditor/wwwroot/editor.css": {
+      "bytes": 2651,
+      "sha256": "a14cfab90a3849271a4de2ed6a151f688086507535e88685d959c74eed05575a"
+    },
+    "tools/NovaCore.ConstructionEditor/wwwroot/editor.js": {
+      "bytes": 10109,
+      "sha256": "c4405609ded2d58d66140d35cf5887d44f947c672a67dd0b212cb90f1a8a054c"
+    },
+    "tools/NovaCore.ConstructionEditor/wwwroot/geometry.mjs": {
+      "bytes": 899,
+      "sha256": "bd1299cf831171edef4f2d7df598992aed98fb498413cc25a62190db00148625"
+    },
+    "tools/NovaCore.ConstructionEditor/wwwroot/index.html": {
+      "bytes": 4129,
+      "sha256": "955a408bf91c2d895ba4509a0d535b84726db281cdf636e4729dc64591f9db39"
+    },
+    "tools/NovaCore.Launcher/LaunchCommandBuilder.cs": {
+      "bytes": 4709,
+      "sha256": "829d308aea67e79ec03db42e032ee647e9d13dd2ee7dea9b6257661f67ae7265"
+    },
+    "tools/NovaCore.Launcher/LaunchConfiguration.cs": {
+      "bytes": 2747,
+      "sha256": "fc7bb2e1d3e1c92b1e8c5c0cf51ce2a826f7c70bd5a257a2d7b12fb1c1d0270b"
+    },
+    "tools/NovaCore.Launcher/RepositoryLocator.cs": {
+      "bytes": 971,
+      "sha256": "a54d67b083b6d682efffe378f27913691028a38bbdbca4c498552a37c27fb59a"
+    },
+    "tools/NovaCore.Launcher/ScenarioCatalog.cs": {
+      "bytes": 9741,
+      "sha256": "1f7cc8159cba13156c6b1364baaced3e3af549df1022e1fb699e7de95072bd06"
+    },
+    "tools/NovaCore.Recorder/NovaCore.Recorder.csproj": {
+      "bytes": 308,
+      "sha256": "750d3d492420694c9e8ebdbe43fca650e6c3a43c6cf1ce523c05e98679f54fec"
+    },
+    "tools/NovaCore.Recorder/Program.cs": {
+      "bytes": 1981,
+      "sha256": "5b6a2b20dd44749750fb7d3be79e1e87ae9a7583bea8d4e2f4a285a21fbc1c24"
+    },
+    "tools/analyze-minimum-recorder-load.py": {
+      "bytes": 3821,
+      "sha256": "06ece47b3e5883077003fcc1e500194d244384b55647ac43a66d7236ed42538b"
+    },
+    "tools/physics/analyze-final-gpu-payoff.py": {
+      "bytes": 4954,
+      "sha256": "dc2a8ce5f574013e7db13e1b344934d4f70318d442890ff04a93016f94f24826"
+    },
+    "tools/physics/analyze-post-contact.py": {
+      "bytes": 9998,
+      "sha256": "66ba0c2be8974f8b2b57d141563f9d27f2a52589523de98e6484bade7cdb165b"
+    },
+    "tools/physics/generate-contact-angle-witnesses.py": {
+      "bytes": 2549,
+      "sha256": "8028325db811628b15ed2e942174e496ffe7cdc9e67686dc04e3edcbe6782fe9"
+    },
+    "tools/physics/qualify-performance-150.ps1": {
+      "bytes": 4524,
+      "sha256": "644e74cee30079fde8e8b2c3923a99991ff958d2e796e9a04a97f8235e434e96"
+    },
+    "tools/physics/qualify-post-contact.ps1": {
+      "bytes": 3044,
+      "sha256": "a92dcd842b0c76ef92159e470e95add3a2ac51a78e071f5cbeb63f715f1bfdbe"
+    },
+    "tools/physics/qualify-recorder-bounded-storage.ps1": {
+      "bytes": 1844,
+      "sha256": "97d95708480cb379b2a85c9cca62015e8ce2be4bf19f67018e66cbb072b0a57d"
+    },
+    "tools/physics/qualify-recorder-maintenance.ps1": {
+      "bytes": 1870,
+      "sha256": "fa2ca23a1f54d95a64eb11fd1345b610cd81fa7a4367279e3bf2fc73653d85d5"
+    },
+    "tools/physics/qualify-surface-recontact.ps1": {
+      "bytes": 3134,
+      "sha256": "dd3511cb89d132c4170719545773cbeff7cf8bf5ef0c5f8cb96a4624998f7b4e"
+    },
+    "tools/physics/seal-performance-150-evidence.py": {
+      "bytes": 5530,
+      "sha256": "3ab7333403176ee645d81a5dafa23eca793f21a24ac739d3dc20ff114da6e84a"
+    },
+    "tools/physics/seal-performance-150.py": {
+      "bytes": 2494,
+      "sha256": "afbc8770b9a70decd6300c244f3ee122855b48154a86ffbbe0a8132d5bfd560e"
+    },
+    "tools/physics/seal-post-contact.py": {
+      "bytes": 2986,
+      "sha256": "2edd50d5c2a8bacd5d727a974f6ddd3f4e9e09f3aa8cdacbd4438741a1b94730"
+    },
+    "tools/physics/seal-recorder-bounded-storage.py": {
+      "bytes": 5850,
+      "sha256": "f93ae930f7803b1aceb2d0bdcc45b033b0ec5f37d5fd9aedb0b81d6183f0e30b"
+    },
+    "tools/physics/seal-surface-recontact.py": {
+      "bytes": 3213,
+      "sha256": "6886d49efa3093e54f505fe9f960cb643537a617724782f788a6234d27323e39"
+    },
+    "tools/physics/summarize-post-contact-journal.py": {
+      "bytes": 3865,
+      "sha256": "5ecfd186501407224e0e377445842af278a764552b6c373a7005e298c510a1b5"
+    },
+    "tools/physics/witness-performance-150.ps1": {
+      "bytes": 3459,
+      "sha256": "b829960982e625c14ca978bbdacab8602bfc7987b1a3af38de0da52592023bd7"
+    },
+    "tools/vehicle-construction/author-modular-starter.py": {
+      "bytes": 24699,
+      "sha256": "262b80b3c98c7143617a838783bbbcc46529df9d05cc27ab25bcf00d763d5757"
+    },
+    "tools/vehicle-construction/check-modular-dynamics.py": {
+      "bytes": 3640,
+      "sha256": "831b39763ee6a565c8e8adacee1972af8fdbc8015a60ceccf30eaae2fea0bfdf"
+    },
+    "tools/vehicle-construction/check-modular-geometry.py": {
+      "bytes": 6100,
+      "sha256": "19fcd0a2f0c6cfb224c18b0b5400064ab7d41021d2276614ac792b02d9f890fd"
+    },
+    "tools/vehicle-construction/consolidate-modular-gate10.py": {
+      "bytes": 1750,
+      "sha256": "e4857b5f6f395ad8978d224a25a23a558b3a45d5a775dfd610c096a63ea1199e"
+    },
+    "tools/vehicle-construction/consolidate-modular-gate12.py": {
+      "bytes": 7022,
+      "sha256": "6c2ba279e2043ef1321e721598a240ac9caed3c4b0b671aa4f01afd59ed97600"
+    },
+    "tools/vehicle-construction/import-development-library.py": {
+      "bytes": 15624,
+      "sha256": "485182e13419009236e15c29dfeb4f31d9f57f1743fe2cd73dfe75b0c4f2b5dd"
+    },
+    "tools/vehicle-construction/qualify-modular-gate1.ps1": {
+      "bytes": 2038,
+      "sha256": "4fb30de0eaf13b1454dbae9afa6e5ebe0b978b1c05c9a4e4439e3c985e62fed2"
+    },
+    "tools/vehicle-construction/qualify-modular-gate10.ps1": {
+      "bytes": 2587,
+      "sha256": "944dd39dd741dfcb761e400221ec9a2a17763cdae61d1a5b816e049658b842d8"
+    },
+    "tools/vehicle-construction/qualify-modular-gate12.ps1": {
+      "bytes": 2713,
+      "sha256": "a7c91913605ce4a0db3487b69707576e88f3da2c1719c773171f203b52074b1d"
+    },
+    "tools/vehicle-construction/qualify-modular-gate8.ps1": {
+      "bytes": 1736,
+      "sha256": "3a2811e37db6938010fd7d99f7d7d1a4e4a662c99a40cb72f1e89ed37364c206"
+    },
+    "tools/vehicle-construction/qualify-modular-gate9.ps1": {
+      "bytes": 2297,
+      "sha256": "56ae9ff41238dc58f07e2200a0d767345c2ab0a7d19c5e9bbe89a7a705568e23"
+    },
+    "tools/vehicle-construction/seal-modular-evidence.py": {
+      "bytes": 7445,
+      "sha256": "942e613929a3f9ada02625bfc58f6db9e2098bba002b6787b5235514aca9b0da"
+    },
+    "tools/verify-player-package.py": {
+      "bytes": 4720,
+      "sha256": "597075573253af3154295c6c80ad0e20d5e411144e0995c97af43b51cfe0d4c0"
+    }
+  },
+  "selfExcluded": "docs/engineering-evidence/m16-bank-preparation/file-identities.json",
+  "selfSeal": "SHA256 of this file is reported separately; verifier requires it as an explicit argument.",
+  "algorithm": "Per-path SHA256 of exact working-tree bytes before Git line-ending/LFS filters. Existing canonical runtime source/package hashes are preserved separately."
+}

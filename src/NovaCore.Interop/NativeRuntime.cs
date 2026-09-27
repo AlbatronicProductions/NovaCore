@@ -20,6 +20,36 @@ public struct NativeEncodedPosition
 [StructLayout(LayoutKind.Sequential)]
 public struct NativeMeshHandle { public uint Value; }
 
+/// <summary>Borrowed parent HWND and same-thread child-viewport input lease.
+/// No flight input or simulation authority. Press/release/wheel reset per callback.</summary>
+[StructLayout(LayoutKind.Explicit, Size=56)]
+public struct NativeEditorViewport
+{
+    [FieldOffset(0)] public uint Size;
+    [FieldOffset(4)] public uint Version;
+    [FieldOffset(8)] public ulong ParentWindow;
+    [FieldOffset(16)] public uint Width;
+    [FieldOffset(20)] public uint Height;
+    [FieldOffset(24)] public int PointerX;
+    [FieldOffset(28)] public int PointerY;
+    [FieldOffset(32)] public uint Buttons;
+    [FieldOffset(36)] public uint Pressed;
+    [FieldOffset(40)] public uint Released;
+    [FieldOffset(44)] public uint Focused;
+    [FieldOffset(48)] public float Wheel;
+    [FieldOffset(52)] public uint Stop;
+}
+
+/// <summary>One application viewport. Mode 0 edits, 1 admits scene input,
+/// 2 suspends scene input for menus. This lease owns no simulation state.</summary>
+[StructLayout(LayoutKind.Explicit, Size=64)]
+public struct NativeApplicationViewport
+{
+    [FieldOffset(0)] public NativeEditorViewport Input;
+    [FieldOffset(56)] public uint Mode;
+    [FieldOffset(60)] public uint Reserved;
+}
+
 [StructLayout(LayoutKind.Sequential)]
 public struct NativeRenderTransform
 {
@@ -360,6 +390,8 @@ public static partial class NativeRuntime
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void HostCallback(NativeHostEvent* hostEvent, IntPtr userData);
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate uint EditorMessageCallback(ulong window,uint message,ulong wParam,long lParam,IntPtr userData);
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer")]
     public static unsafe partial NativeResult RunRenderer(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData);
@@ -369,6 +401,13 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer_with_visual_meshes")]
     public static unsafe partial NativeResult RunRendererWithVisualMeshes(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity);
+
+    [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_editor_viewport")]
+    public static unsafe partial NativeResult RunEditorViewport(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity, NativeEditorViewport* viewport, EditorMessageCallback preprocess);
+
+    [LibraryImport("NovaCore.Native", EntryPoint="nc_run_application_viewport")]
+    [UnmanagedCallConv(CallConvs=[typeof(System.Runtime.CompilerServices.CallConvCdecl)])]
+    public static unsafe partial NativeResult RunApplicationViewport(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeRuntimeAssets* assets, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity, NativeApplicationViewport* viewport, EditorMessageCallback preprocess);
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_renderer_with_assets_and_visual_meshes")]
     public static unsafe partial NativeResult RunRendererWithAssetsAndVisualMeshes(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeRuntimeAssets* assets, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity);

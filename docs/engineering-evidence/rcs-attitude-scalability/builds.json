@@ -1,0 +1,12 @@
+[
+  {
+    "configuration": "debug",
+    "sha256": "1ec85bee817b504c9b3b146fee72decd35a3e54add1cc5fd2878b6b3c8e259fa",
+    "output": "Build succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.64"
+  },
+  {
+    "configuration": "release",
+    "sha256": "4570967ffe95b753864e4298a4b5a04d272b56b258bb55b5ea9c3156e0ab6f58",
+    "output": "Build succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.60"
+  }
+]

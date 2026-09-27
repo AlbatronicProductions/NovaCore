@@ -1,0 +1,273 @@
+{
+  "judgment": "ENGINEERING_PASS",
+  "manualPlayerPass": false,
+  "regressions": [
+    {
+      "log": "build/construction-connector-revision/modular-gate1-final.log",
+      "flag": "--modular-gate1",
+      "exit": 0,
+      "sha256": "86f5c3ea9303a0c63568c676a7b9688f143d58b4b85e71a123b7e58d7204a226",
+      "summary": [
+        "Modular Part Standard baseline PASS: 33 checks; catalog 751a86d1443f036c56505a845a7a644e09bdf74ba60c6c4c05ae60fe4a371818; full Gate 1 also requires red-team probes"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-redteam-final.log",
+      "flag": "--modular-gate1-redteam",
+      "exit": 0,
+      "sha256": "29b094cc6fd0048b71f93652bc72e3240fd5615649349410bcfebd781c142b26",
+      "summary": [
+        "Modular Part Standard red team PASS"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-closure-final.log",
+      "flag": "--modular-gate1-closure",
+      "exit": 0,
+      "sha256": "0458f04e3175a43de3c917b53fb801248384d0d97993736398e92cd0fcf56933",
+      "summary": [
+        "Modular Gate 1 bounded closure PASS: 58 checks; resource catalog 94d3ada39e190751cd02aa2a97a2cae0e3922982ee4269a710bdb9f09eceda17; socket catalog dde5d4c6d2b452f16da121a3ca24b727483b0c21b180c3f60c200329687e7738"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-admission-audit-final.log",
+      "flag": "--modular-gate1-admission-audit",
+      "exit": 0,
+      "sha256": "8232e8004580a886ab0145b4397b7b7c3f33e0b06a305774c3438c24a4ee806f",
+      "summary": [
+        "Modular full admission audit PASS"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-numerics-final.log",
+      "flag": "--modular-gate1-numerics",
+      "exit": 0,
+      "sha256": "098411f07de594c6596c7b7d1a2cabdcedd29e14f0cb1394b116b49397f272df",
+      "summary": [
+        "Modular Gate 1 numerical admission PASS: 251 independent-rational/scale/boundary checks"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-json-final.log",
+      "flag": "--modular-gate1-json",
+      "exit": 0,
+      "sha256": "8cb18250017f31faf65f6bb81aa611b16ab8578d8dc89ef876a363e5254a05b7",
+      "summary": [
+        "Modular Gate 1 JSON refusal PASS: 20 checks"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-aggregate-final.log",
+      "flag": "--modular-gate1-aggregate",
+      "exit": 0,
+      "sha256": "6ca95841915b4c7477e0548bf0c9a04b0f1bfd7122ea85e86e0d9f0cb27a209e",
+      "summary": [
+        "Modular Gate 1 dry aggregate admission PASS: 50 independent centre-first rational/boundary checks"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-size-final.log",
+      "flag": "--modular-gate1-size",
+      "exit": 0,
+      "sha256": "679305152014893803ddec204156a6449920cb4242a263606b0187b65e5a6d2a",
+      "summary": [
+        "Modular Gate 1 catalog bound PASS: 12 byte-boundary checks"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate1-predicates-final.log",
+      "flag": "--modular-gate1-predicates",
+      "exit": 0,
+      "sha256": "cf95d02a28580e9498c79acc15df17031696255abc7631cfe42e6d116639164b",
+      "summary": [
+        "Modular Gate 1 physical predicates PASS: 37 independent sign/overlap/boundary checks"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate2-final.log",
+      "flag": "--modular-gate2",
+      "exit": 0,
+      "sha256": "c85ee7d744747849b7f4bd455d1b10c2efc06941a6cb5058d98585f1955dee82",
+      "summary": [
+        "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate3-final.log",
+      "flag": "--modular-gate3",
+      "exit": 0,
+      "sha256": "ae55fc4852ad9fe18a0ea3a34039170c87d7feb50d62b24d18b0a3dcf5d1de64",
+      "summary": [
+        "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate4-final.log",
+      "flag": "--modular-gate4",
+      "exit": 0,
+      "sha256": "4073187cca8c006f32d8acf5c62da04ad3e00beab8d6d816fd9066c422616a2a",
+      "summary": [
+        "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 774d360412a53b0a330ffece63321aa16261135aef55a23d0af08a9f25f16466"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate5-operations-final.log",
+      "flag": "--modular-gate5-operations",
+      "exit": 0,
+      "sha256": "3412642d62251d4a0e56b8b2fc7b16d176c80ad053b0df5ea3657b4e24fdf09d",
+      "summary": [
+        "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate6-final.log",
+      "flag": "--modular-gate6",
+      "exit": 0,
+      "sha256": "b967161fad849ea865d833826b699a24e4105161e6244cafad833e8a20783792",
+      "summary": [
+        "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\0563f80ff07649e696a349d5bace9f5d"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate7-final.log",
+      "flag": "--modular-gate7",
+      "exit": 0,
+      "sha256": "e1d8b3efbd8f50277f3049e0425915c7cc16545caf2dbe10ec33f02bbd8b24b9",
+      "summary": [
+        "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate8-final.log",
+      "flag": "--modular-gate8",
+      "exit": 0,
+      "sha256": "7edd0b7fb0422cbe9523ec3fa8c23ceb24059ec99cebfc65ef618582255e33ec",
+      "summary": [
+        "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate8-oracle-final.log",
+      "flag": "--modular-gate8-oracle",
+      "exit": 0,
+      "sha256": "b32373eb17228a03c3dc27fb45039df936db2ad92251436b1f054caa107663b4",
+      "summary": []
+    },
+    {
+      "log": "build/construction-connector-revision/srv01-integration-final.log",
+      "flag": "--srv01-integration",
+      "exit": 0,
+      "sha256": "f672e14e501b8c2c67ce311a5406f280b6b7ee1ea386917ab5f0301e17d2f923",
+      "summary": [
+        "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+        "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-greybox-assets-final.log",
+      "exit": 0,
+      "flag": "--modular-greybox-assets",
+      "sha256": "3ef1fb80901dc0d130907c05c1ba1f48fa829999a9fa6fec439826754c339d4d",
+      "summary": [
+        "Modular greybox assets PASS: 6 assets, 29 meshes, 2124 triangles; strict production loader, no GPU/player acceptance claim"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-viewport-final.log",
+      "exit": 0,
+      "flag": "--modular-viewport",
+      "sha256": "4879f6ef378e4948b7f4d528b4bb8ea5deebd44d768113c8407d78605ab81251",
+      "summary": [
+        "Modular viewport CPU/ABI PASS: 74 checks; native window route separately required"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate9-final.log",
+      "exit": 0,
+      "flag": "--modular-gate9",
+      "sha256": "14a4f49dcb6826e1e7e277964ef7da6789d122ff1b86dad05767b89322feb3fe",
+      "summary": [
+        "MODULAR_GATE9 PASS checks=886"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate10-dynamics-final.log",
+      "exit": 0,
+      "flag": "--modular-gate10-dynamics",
+      "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586",
+      "summary": [
+        "MODULAR_GATE10_DYNAMICS PASS checks=23"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate10-flight-final.log",
+      "exit": 0,
+      "flag": "--modular-gate10-flight",
+      "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+      "summary": [
+        "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate11-final.log",
+      "exit": 0,
+      "flag": "--modular-gate11",
+      "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41",
+      "summary": [
+        "MODULAR_GATE11_LONG_FLIGHT_PASS checks=8064"
+      ]
+    },
+    {
+      "log": "build/construction-connector-revision/modular-gate12-application-final.log",
+      "exit": 0,
+      "flag": "--modular-gate12-application",
+      "sha256": "7e516e7265330d646ff7a69d08c9c13da6bf49f195537c699c752993e9f00e43",
+      "summary": [
+        "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+      ]
+    }
+  ],
+  "additionalLogs": [
+    {
+      "path": "build\\construction-connector-revision\\build-app-debug-final.log",
+      "sha256": "6159c6309ac843b16037d88855cc7f318c635fde1ac774d07d99d189b48d8f6f"
+    },
+    {
+      "path": "build\\construction-connector-revision\\build-app-release-final.log",
+      "sha256": "c94f690fecf6889c9b4f0c6c1af4beb7b2b30df116e2d90078d3bb909e9c05b7"
+    },
+    {
+      "path": "build\\construction-connector-revision\\build-graphics-debug-final.log",
+      "sha256": "b1e68ae61b05f54b921cc2dc7e96269f39b76682e7325083353c790aed1bf262"
+    },
+    {
+      "path": "build\\construction-connector-revision\\build-graphics-release-final.log",
+      "sha256": "3ae06d2ba53257e4cb7df105701b2666055c7751856c2e1e4516413dd1172e4f"
+    },
+    {
+      "path": "build\\construction-connector-revision\\build-simulation-release-final.log",
+      "sha256": "7eaa03678fba6a5e4badbc58659354c027ac9b334d7fa5377c7b9894ca7bcbbd"
+    },
+    {
+      "path": "build\\construction-connector-revision\\connectors-debug-final.log",
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05"
+    },
+    {
+      "path": "build\\construction-connector-revision\\connectors-release-final.log",
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05"
+    },
+    {
+      "path": "build\\construction-connector-revision\\modular-editor-regressions-final.log",
+      "sha256": "7388ec130539bc5f967cdfdfeb69922f3e038e870a725bb46e21670ef6fc867e"
+    }
+  ],
+  "nativeRoutes": [
+    "native-connectors.json",
+    "application-short.json",
+    "application-long.json"
+  ],
+  "independentGeometry": "geometry.json",
+  "preservation": "preservation.json",
+  "candidate": "candidate-identity.json",
+  "noBanking": true
+}

@@ -1,0 +1,21 @@
+{
+  "judgment": "PENDING_HELD_ATTITUDE_WITNESS",
+  "packageSha256": "e091635c8b60899113437e5bab70da3a84b5c244ecddfc73e5e383ade4cdf117",
+  "normalPlayerNoQualificationFlags": true,
+  "loadedStockJetCount": 64,
+  "partCount": 21,
+  "dryMassKg": 688,
+  "propellantKg": 1600,
+  "initiallyFilled": true,
+  "fillButtonExercised": true,
+  "supportedFlorida": true,
+  "poweredAscent": true,
+  "mainCutoff": true,
+  "returnedToConstruction": true,
+  "activeAttitudeObserved": false,
+  "firstExcursion": "Brief Q tap did not establish visible attitude; prolonged coast reached existing qualified-continuation boundary at displayed 70s; normal return to retained construction succeeded.",
+  "current": "Fresh supported normal-player flight awaiting requested user held-key witness; no further app input by agent.",
+  "existingSavesUnchanged": true,
+  "fixtureSha256": "306fd72076071f1aa73ab6583cd489fcca2cf9bf11a30e2f53a6d68ea074ec6c",
+  "observedUtc": "2026-09-26T20:26:16.636749+00:00"
+}

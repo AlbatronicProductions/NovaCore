@@ -1,0 +1,266 @@
+{
+  "disposition": "FROZEN UNBANKED - campaign closed; STOP FOR PROJECT CONTROL BANK DECISION",
+  "accepted": [
+    "unified application",
+    "construction/save-load",
+    "scalable RCS",
+    "scalable launch support",
+    "Florida authority",
+    "launch feedback",
+    "temporary qualification recorder",
+    "temporary qualification recorder retention/storage maintenance",
+    "Surface Recontact/grounded control/relaunch",
+    "Stage A CPU/contact performance",
+    "Debug/Release/package preservation"
+  ],
+  "open": {
+    "wholeFrame150Fps": "REVISE / OPEN",
+    "dominantGpuOwner": "detailed terrain/material draw",
+    "blackoutHistoricalCause": "UNRESOLVED",
+    "playerPublicPass": "UNASSIGNED"
+  },
+  "instrumentation": {
+    "minimumRecorder": "TEMPORARY QUALIFICATION INFRASTRUCTURE; not accepted permanent public-player architecture",
+    "engineeringBank": "Required diagnostic source and permanent tests may remain versioned for M16.0 reproducibility; no bank performed",
+    "developerOnly": [
+      "heavy causal mapping",
+      "forensic capture",
+      "fault injection",
+      "qualification harnesses",
+      "temporary observers",
+      "analysis tooling"
+    ],
+    "localOnlyNeverCommitOrPublicPackage": [
+      "runtime MinimumRecorder data",
+      "raw journals",
+      "dumps",
+      "blackout captures",
+      "bulk forensic evidence",
+      "temporary diagnostic outputs",
+      "generated qualification evidence not explicitly selected for preservation"
+    ],
+    "publicReleaseGate": "Explicit Project Control KEEP / DEV-ONLY / RETIRE source classification required",
+    "selectionScope": "Concise final engineering reports/measurements/hashes/reproduction only; no blanket inventory publication"
+  },
+  "closureActions": {
+    "productionChanges": 0,
+    "builds": 0,
+    "nativeLaunches": 0,
+    "rawRetirements": 0,
+    "commitsTagsPushesBanks": 0
+  },
+  "independentClosureReview": "PASS - source/package/Git/forensic identities and report/receipt scope reconcile; no edits/builds/launches",
+  "source": {
+    "root": "E:\\NovaCore",
+    "runtimeFiles": 741,
+    "runtimeSha256": "a2a26d94ecf84b08bb9d989b7012f7cd6eec7a44b578717daf287bb7ac9d72d6",
+    "workingFileCount": 4008,
+    "selfReferenceExclusions": [
+      "docs/engineering-evidence/performance-150fps/bank-candidate.json",
+      "docs/engineering-evidence/performance-150fps/evidence-manifest.json"
+    ]
+  },
+  "package": {
+    "judgment": "PASS",
+    "package": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows",
+    "fileCount": 134,
+    "bytes": 12893134,
+    "packageSha256": "9a82da5574c7075ca8115e064705e1cfc417c42a7564144014e1bacd7dd38f91",
+    "shaders": 66,
+    "errors": [],
+    "scope": "Repository-layout canonical build output; explicit verified terrain cache required. Not standalone publish qualification."
+  },
+  "executablesAndOwners": {
+    "NovaCore.exe": {
+      "bytes": 162304,
+      "sha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8"
+    },
+    "NovaCore.dll": {
+      "bytes": 22528,
+      "sha256": "cfebd3426e984c9f6f079ab07135374ffa714369944cbb757a6f2a043ba58560"
+    },
+    "NovaCore.Native.dll": {
+      "bytes": 481792,
+      "sha256": "7a3da8310c3f04f56424196758f584bf5936c48d025dbc6f3119070c89b2c10e"
+    },
+    "NovaCore.Diagnostics.dll": {
+      "bytes": 156160,
+      "sha256": "bcd17714901a4c0a5933e3c8aefe542e6b0881bedb8ae346f3fe2adea8b7657f"
+    },
+    "NovaCore.Recorder.exe": {
+      "bytes": 162304,
+      "sha256": "bc7ba08961e6e88160cb3f54b9752c27ba2297382ff548200bc4354db300eb31"
+    },
+    "NovaCore.Recorder.dll": {
+      "bytes": 9728,
+      "sha256": "0082e0c50971b5f1e1ce00ef62e12769ab42ef04339df245603b0634521e1ba5"
+    }
+  },
+  "git": {
+    "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+    "branch": "main",
+    "index": {
+      "bytes": 464995,
+      "sha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e"
+    },
+    "headsTagsCount": 87,
+    "headsTagsSha256": "c53c34740275406387ba5c3a1ad8329dd338de4880e39dba1583a8e5a7f55790",
+    "allRefsCount": 94,
+    "allRefsSha256": "5b955762c26443e41bd68ab5c7650b395ee7c9af59bb4feaa4027c57a9007693",
+    "stagedPaths": [],
+    "statusRecordCount": 951,
+    "note": "Current working tree contains preserved unbanked work; HEAD is not the candidate"
+  },
+  "preservation": {
+    "headUnchanged": true,
+    "refsUnchanged": true,
+    "protectedCount": 252,
+    "protectedFailures": [],
+    "frozenComparison": {
+      "head": true,
+      "sourceSha256": true,
+      "packageSha256": true
+    }
+  },
+  "storage": {
+    "root": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder",
+    "totalBytes": 588188037,
+    "protectedRawBytes": 588184913,
+    "ordinaryAbnormalRawBytes": 0,
+    "cleanEligibleBytes": 0,
+    "activeBytes": 0,
+    "capsuleBytes": 0,
+    "otherBytes": 3124,
+    "warningThresholdBytes": 536870912,
+    "ordinaryRawCeilingBytes": 340787200,
+    "disposition": "FULL KEEP / MANUAL REVIEW REQUIRED",
+    "sessions": [
+      {
+        "Session": "11b82e56-6ff4-4eb2-b337-9c782fdd89c8",
+        "Bytes": 83916379,
+        "Clean": true,
+        "Pinned": true,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Explicit preserve.pin; independent criticality unchanged",
+        "Classification": "CRITICAL_OR_UNRESOLVED",
+        "BaseClassification": "CRITICAL_OR_UNRESOLVED",
+        "Active": false,
+        "Directory": "11b82e566ff44eb2b3379c782fdd89c8",
+        "ActualBytes": 83916379
+      },
+      {
+        "Session": "5612981f-e989-46d6-b9d5-1655112a9697",
+        "Bytes": 84086062,
+        "Clean": false,
+        "Pinned": true,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Explicit preserve.pin; independent criticality unchanged",
+        "Classification": "CRITICAL_OR_UNRESOLVED",
+        "BaseClassification": "CRITICAL_OR_UNRESOLVED",
+        "Active": false,
+        "Directory": "5612981fe98946d6b9d51655112a9697",
+        "ActualBytes": 84086062
+      },
+      {
+        "Session": "b0a8e148-2b15-419a-9b6c-a5734428b404",
+        "Bytes": 83916383,
+        "Clean": true,
+        "Pinned": true,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Explicit preserve.pin; independent criticality unchanged",
+        "Classification": "CRITICAL_OR_UNRESOLVED",
+        "BaseClassification": "CRITICAL_OR_UNRESOLVED",
+        "Active": false,
+        "Directory": "b0a8e1482b15419a9b6ca5734428b404",
+        "ActualBytes": 83916383
+      },
+      {
+        "Session": "bf47741d-dda9-40b5-bbee-daba9f3bea88",
+        "Bytes": 84518977,
+        "Clean": false,
+        "Pinned": false,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Critical incident or unresolved criticality; preserve FULL RAW, exempt from ordinary budget",
+        "Classification": "CRITICAL_OR_UNRESOLVED",
+        "BaseClassification": "CRITICAL_OR_UNRESOLVED",
+        "Active": false,
+        "Directory": "bf47741ddda940b5bbeedaba9f3bea88",
+        "ActualBytes": 84518977
+      },
+      {
+        "Session": "c7de847a-1f9b-4ac3-89f6-1fe4a160517a",
+        "Bytes": 83915867,
+        "Clean": true,
+        "Pinned": false,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Critical incident or unresolved criticality; preserve FULL RAW, exempt from ordinary budget",
+        "Classification": "CRITICAL_OR_UNRESOLVED",
+        "BaseClassification": "CRITICAL_OR_UNRESOLVED",
+        "Active": false,
+        "Directory": "c7de847a1f9b4ac389f61fe4a160517a",
+        "ActualBytes": 83915867
+      },
+      {
+        "Session": "ea6841cc-d915-40c4-b0ce-3b0fc60b2b28",
+        "Bytes": 83916937,
+        "Clean": true,
+        "Pinned": true,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "Explicit preserve.pin; independent criticality unchanged",
+        "Classification": "ORDINARY",
+        "BaseClassification": "ORDINARY",
+        "Active": false,
+        "Directory": "ea6841ccd91540c4b0ce3b0fc60b2b28",
+        "ActualBytes": 83916937
+      },
+      {
+        "Session": "f967ea2a-be4b-4f55-b586-6bbfa2543a31",
+        "Bytes": 83914308,
+        "Clean": false,
+        "Pinned": false,
+        "Eligible": false,
+        "CloseUtcTicks": 0,
+        "Reason": "PRESERVE: InvalidDataException: Recovery metadata contradicts validated durable authority",
+        "Classification": "CRITICAL_OR_UNRESOLVED",
+        "BaseClassification": "CRITICAL_OR_UNRESOLVED",
+        "Active": false,
+        "Directory": "f967ea2abe4b4f55b5866bbfa2543a31",
+        "ActualBytes": 83914308
+      }
+    ],
+    "classificationAuthority": "Existing qualified maintenance receipt; unchanged session inventories"
+  },
+  "receipts": {
+    "build/performance-150fps/bank-candidate/package.json": {
+      "bytes": 21908,
+      "sha256": "86057b5f9d5a4908dbc3dbc2aa863396cb4ce37564acf9498115f6b1875364d3"
+    },
+    "build/performance-150fps/bank-candidate/preservation.json": {
+      "bytes": 130058,
+      "sha256": "d621932799fb3c404c6ee97a032319c28699e8f32a6f131e9c0039b609d4e57f"
+    },
+    "build/performance-150fps/bank-candidate/working-files.json": {
+      "bytes": 807511,
+      "sha256": "c79c232c735d9ce35b8a2bb294bb5eb1416ae205fba8e654fe8507b1d4a7341f"
+    },
+    "build/performance-150fps/bank-candidate/git.json": {
+      "bytes": 91452,
+      "sha256": "cd5284c280296a1092d24c3d19f128ac0a6ec0ac100b6d97760a2d670cfd2229"
+    },
+    "build/performance-150fps/bank-candidate/protected-recorder-files.json": {
+      "bytes": 11433,
+      "sha256": "740166ffcec3fbc4e97c1e8cea343654a5902ad1f441f8216659e7311d0e9f46"
+    }
+  },
+  "performanceAuthority": {
+    "summary": "results.json",
+    "native": "native-results.md",
+    "finalGpuPayoff": "final-gpu-payoff.json"
+  }
+}

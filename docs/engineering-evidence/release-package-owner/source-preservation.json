@@ -1,0 +1,9 @@
+{
+  "baselineFiles": 3598,
+  "changedFiles": [
+    "samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+    "tools/NovaCore.App/NovaCore.App.csproj",
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj"
+  ],
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99"
+}

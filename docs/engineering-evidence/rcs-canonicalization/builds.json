@@ -1,0 +1,134 @@
+[
+  {
+    "program": "C:/Program Files/CMake/bin/cmake.exe",
+    "logSha256": "86c29a374ff280b4317c1c164bc650f6ddc784b8d13a764b2b0498b93e101ad7",
+    "exit": 0,
+    "name": "configure-Debug",
+    "arguments": [
+      "-S",
+      "native/NovaCore.Native",
+      "-B",
+      "build/native-ninja",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Debug"
+    ],
+    "seconds": 0.1758306
+  },
+  {
+    "program": "C:/Program Files/CMake/bin/cmake.exe",
+    "logSha256": "acac31919faccf3f4748bb189d01bdd1bf66585df6e38e14f0e430554170749b",
+    "exit": 0,
+    "name": "native-Debug",
+    "arguments": [
+      "--build",
+      "build/native-ninja",
+      "--clean-first",
+      "-j8"
+    ],
+    "seconds": 4.3136305
+  },
+  {
+    "program": "dotnet",
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exit": 0,
+    "name": "clean-Debug",
+    "arguments": [
+      "clean",
+      "NovaCore.sln",
+      "-c",
+      "Debug",
+      "-v",
+      "quiet"
+    ],
+    "seconds": 1.2731184
+  },
+  {
+    "program": "dotnet",
+    "logSha256": "75f7308792ff7487b2ecd68c70f2e345516d1aca691d29ce75a64cfb2cefac94",
+    "exit": 0,
+    "name": "managed-Debug",
+    "arguments": [
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Debug",
+      "--no-incremental",
+      "-v",
+      "quiet"
+    ],
+    "seconds": 11.6140252
+  },
+  {
+    "program": "C:/Program Files/CMake/bin/cmake.exe",
+    "logSha256": "5b67522edde79b621b958e35bd567d90e220ddaec3edd503ac49409145227fe6",
+    "exit": 0,
+    "name": "configure-Release",
+    "arguments": [
+      "-S",
+      "native/NovaCore.Native",
+      "-B",
+      "build/native-ninja-release",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Release"
+    ],
+    "seconds": 0.1660306
+  },
+  {
+    "program": "C:/Program Files/CMake/bin/cmake.exe",
+    "logSha256": "9cc91fde16019dc05e7676992597467dcec7bc95dd279fe0fea8dc0b568973d4",
+    "exit": 0,
+    "name": "native-Release",
+    "arguments": [
+      "--build",
+      "build/native-ninja-release",
+      "--clean-first",
+      "-j8"
+    ],
+    "seconds": 4.3918444
+  },
+  {
+    "program": "dotnet",
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exit": 0,
+    "name": "clean-Release",
+    "arguments": [
+      "clean",
+      "NovaCore.sln",
+      "-c",
+      "Release",
+      "-v",
+      "quiet"
+    ],
+    "seconds": 0.7772267
+  },
+  {
+    "program": "dotnet",
+    "logSha256": "235dfe8f373583e69041869becfd71dbe9176a9cea3fc5d162e6fdf9881dd6e1",
+    "exit": 0,
+    "name": "managed-Release",
+    "arguments": [
+      "build",
+      "NovaCore.sln",
+      "-c",
+      "Release",
+      "--no-incremental",
+      "-v",
+      "quiet"
+    ],
+    "seconds": 9.0730199
+  },
+  {
+    "program": "python",
+    "logSha256": "5ab6b3dd1966225ae8309bbac60442a70a00fbd6e739cba008b14d307dae2c09",
+    "exit": 0,
+    "name": "package",
+    "arguments": [
+      "tools/verify-player-package.py",
+      "--output",
+      "build/rcs-canonicalization/canonical-package.json"
+    ],
+    "seconds": 0.7066574
+  }
+]

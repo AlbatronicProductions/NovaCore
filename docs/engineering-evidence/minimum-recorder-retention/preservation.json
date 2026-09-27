@@ -1,0 +1,27 @@
+{
+  "judgment": "PASS",
+  "entryFiles": 3896,
+  "changed": [
+    "NovaCore.sln",
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/README.md",
+    "src/NovaCore.Diagnostics/OrdinaryJournal.cs",
+    "src/NovaCore.Diagnostics/OrdinaryObserver.cs",
+    "src/NovaCore.Diagnostics/OrdinarySession.cs",
+    "tests/NovaCore.MinimumRecorder.Tests/Program.cs",
+    "tools/NovaCore.App/Program.cs",
+    "tools/NovaCore.Recorder/Program.cs"
+  ],
+  "newProductionAndTests": [
+    "src/NovaCore.Diagnostics/AssemblyInfo.cs",
+    "src/NovaCore.Diagnostics/OrdinaryOwnership.cs",
+    "src/NovaCore.Diagnostics/RuntimeRetention.Host.cs",
+    "src/NovaCore.Diagnostics/RuntimeRetention.Windows.cs",
+    "src/NovaCore.Diagnostics/RuntimeRetention.cs",
+    "tests/NovaCore.Retention.Tests/NovaCore.Retention.Tests.csproj",
+    "tests/NovaCore.Retention.Tests/Program.cs",
+    "tests/NovaCore.Retention.Tests/RetentionAdversaries.cs"
+  ],
+  "unrelatedEntryFilesPreserved": true,
+  "headRefsIndexUnchanged": true,
+  "nativeAndSettingsUnchanged": true
+}

@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><Compile Include="../../tools/NovaCore.App/SessionLog.cs" Link="SessionLog.cs" /></ItemGroup>
+</Project>

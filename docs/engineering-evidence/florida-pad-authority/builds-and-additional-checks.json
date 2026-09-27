@@ -1,0 +1,166 @@
+[
+  {
+    "name": "native-Debug.log",
+    "sha256": "2766d14f1ddbb8ebbb53c784f0d2bd1b9fd3070f908511b0be04f3ff35b8256a",
+    "tail": [
+      "[1/2] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[2/2] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  {
+    "name": "native-Release.log",
+    "sha256": "2766d14f1ddbb8ebbb53c784f0d2bd1b9fd3070f908511b0be04f3ff35b8256a",
+    "tail": [
+      "[1/2] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[2/2] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  {
+    "name": "managed-Debug.log",
+    "sha256": "f9bc17cba1a6855936bb7e02d5afb258f1f103a616a5136911415f7c30d3e73b",
+    "tail": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.12"
+    ]
+  },
+  {
+    "name": "managed-Release.log",
+    "sha256": "63adcc84d3db36cf22c498313f39135e1de901a61020595454cd5764dfbf1f13",
+    "tail": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.18"
+    ]
+  },
+  {
+    "name": "clean-native-Release.log",
+    "sha256": "2766d14f1ddbb8ebbb53c784f0d2bd1b9fd3070f908511b0be04f3ff35b8256a",
+    "tail": [
+      "[1/2] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+      "[2/2] Linking CXX shared library NovaCore.Native.dll"
+    ]
+  },
+  {
+    "name": "clean-managed-Release.log",
+    "sha256": "1ef56c16898527dbcb5ccc870256b696f6b842097f58e975a71238a6c50cc08c",
+    "tail": [
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:03.89"
+    ]
+  },
+  {
+    "name": "facility-final-Debug.log",
+    "sha256": "817c69d869bfa34ef7dabaf522b0125222771c787dc0b4c756d339de2ad3e554",
+    "tail": [
+      "FP32 boundary interval: case=6 rotation=1 camera=0 toleranceMetres=0.00199127",
+      "FP32 boundary interval: case=6 rotation=1 camera=600 toleranceMetres=0.00199127",
+      "Facility visibility PASS: 126 GPU/CPU cases; parallel/grazing/boundary/single-slab/no-legacy-casters/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates"
+    ]
+  },
+  {
+    "name": "facility-final-Release.log",
+    "sha256": "817c69d869bfa34ef7dabaf522b0125222771c787dc0b4c756d339de2ad3e554",
+    "tail": [
+      "FP32 boundary interval: case=6 rotation=1 camera=0 toleranceMetres=0.00199127",
+      "FP32 boundary interval: case=6 rotation=1 camera=600 toleranceMetres=0.00199127",
+      "Facility visibility PASS: 126 GPU/CPU cases; parallel/grazing/boundary/single-slab/no-legacy-casters/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates"
+    ]
+  },
+  {
+    "name": "flight-envelope-Debug.log",
+    "sha256": "a09d18db0626dc44be79593132a669582dcde60f823245c10c377fbd27ffca47",
+    "tail": [
+      "PAD_FLIGHT_ENVELOPE depth=1 shortOnly=true ADMITTED maxMass=1304.0000000000002",
+      "PAD_FLIGHT_ENVELOPE depth=2 shortOnly=true ADMITTED maxMass=2224.000000000001",
+      "PAD_FLIGHT_ENVELOPE depth=3 shortOnly=true REFUSED reason=Authored support load exceeded.",
+      "PAD_FLIGHT_ENVELOPE depth=4 shortOnly=true REFUSED reason=Authored support load exceeded.",
+      "PAD_FLIGHT_ENVELOPE depth=8 shortOnly=true REFUSED reason=Authored support load exceeded."
+    ]
+  },
+  {
+    "name": "flight-envelope-Release.log",
+    "sha256": "a09d18db0626dc44be79593132a669582dcde60f823245c10c377fbd27ffca47",
+    "tail": [
+      "PAD_FLIGHT_ENVELOPE depth=1 shortOnly=true ADMITTED maxMass=1304.0000000000002",
+      "PAD_FLIGHT_ENVELOPE depth=2 shortOnly=true ADMITTED maxMass=2224.000000000001",
+      "PAD_FLIGHT_ENVELOPE depth=3 shortOnly=true REFUSED reason=Authored support load exceeded.",
+      "PAD_FLIGHT_ENVELOPE depth=4 shortOnly=true REFUSED reason=Authored support load exceeded.",
+      "PAD_FLIGHT_ENVELOPE depth=8 shortOnly=true REFUSED reason=Authored support load exceeded."
+    ]
+  },
+  {
+    "name": "pad-final-Debug.log",
+    "sha256": "99e9d6a2f2531b166609169818e85f8e32ab19c66f94953457e44dff1bfd5e25",
+    "tail": [
+      "FLORIDA_PAD_AUTHORITY PASS mesh=7 singleSlab=true physicalCorners=24 maxRootErrorMetres=1.5728399755926745E-05 caster=1 legacyCasterRefused=true",
+      "Florida seating proof: H=15.134892258793116; root=21.970461536198854; minimumContactLocalZ=-6.5855692772856855; depth=6.835569277405739; bottomCenterHeight=15.134892258793116; denseMaximumBottomGap=1.862645149230957E-09; denseMinimumDeckClearance=8.335569275543094; regional=15.001533002687239; generation=4; owner=NCSM1; geography/time/LOD/pupil/return=stable"
+    ]
+  },
+  {
+    "name": "pad-final-Release.log",
+    "sha256": "99e9d6a2f2531b166609169818e85f8e32ab19c66f94953457e44dff1bfd5e25",
+    "tail": [
+      "FLORIDA_PAD_AUTHORITY PASS mesh=7 singleSlab=true physicalCorners=24 maxRootErrorMetres=1.5728399755926745E-05 caster=1 legacyCasterRefused=true",
+      "Florida seating proof: H=15.134892258793116; root=21.970461536198854; minimumContactLocalZ=-6.5855692772856855; depth=6.835569277405739; bottomCenterHeight=15.134892258793116; denseMaximumBottomGap=1.862645149230957E-09; denseMinimumDeckClearance=8.335569275543094; regional=15.001533002687239; generation=4; owner=NCSM1; geography/time/LOD/pupil/return=stable"
+    ]
+  },
+  {
+    "name": "presentation-allocation.log",
+    "sha256": "6bd6bbdaf2d05bc2b516dcfbccc67c1b53496c66e2ad9a07ce3a0e6a051c3f83",
+    "tail": [
+      "Stock SRV-01 Florida support slab: authenticated terrain-v5 site, one finite authored base/footing slab, centred physical support on its top. Earth-fixed display and lighting held at ready epoch; Space starts 20 seconds; engine/RCS OFF; Earth rotates in canonical inertial publication. Camera WASD/QE, mouse look, R reset. No launch, departure or launch-stack qualification. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+      "SRV01_COLD_PREPARATION ms=157.1722 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "ORDINARY_ALLOCATION gate=florida-stock-application-presentation bytes=0 entry=PASS exit=PASS",
+      "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+      "ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152",
+      "FLORIDA_PRESENTATION PASS copiedCanonicalEarthFixedDisplay=true terrainV5=true singleAuthoredSlab=true visualMeshBytes=1359096 displaySampleArraysBytes=640000 engine=OFF manualAcceptance=NOT_GRANTED"
+    ]
+  },
+  {
+    "name": "camera-warp.log",
+    "sha256": "c02ed7ffd031a9cae1fea980d4caeeda7a9b2c0eab1b813b01a454468b06544a",
+    "tail": [
+      "SRV01_COLD_PREPARATION ms=115.0263 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0",
+      "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+      "ACTIVE_VESSEL_COST {\"route\":\"camera-at-warp-86400\",\"warm\":512,\"count\":2048,\"median\":0.0293,\"p95\":0.032,\"p99\":0.0604,\"maximum\":0.1812,\"collections\":[0,0,0],\"allocated\":0,\"tails\":[{\"ms\":0.1812,\"index\":1759},{\"ms\":0.1436,\"index\":177},{\"ms\":0.1336,\"index\":1230},{\"ms\":0.1306,\"index\":701},{\"ms\":0.0979,\"index\":1896},{\"ms\":0.0952,\"index\":1920},{\"ms\":0.0915,\"index\":790},{\"ms\":0.091,\"index\":551}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+      "ACTIVE_VESSEL_COST {\"route\":\"supported-warp-86400\",\"warm\":512,\"count\":2048,\"median\":0.0567,\"p95\":0.0644,\"p99\":0.092,\"maximum\":0.1929,\"collections\":[0,0,0],\"allocated\":4751360,\"tails\":[{\"ms\":0.1929,\"index\":377},{\"ms\":0.1919,\"index\":112},{\"ms\":0.1864,\"index\":1718},{\"ms\":0.1566,\"index\":1454},{\"ms\":0.1548,\"index\":1988},{\"ms\":0.1395,\"index\":922},{\"ms\":0.1376,\"index\":1187},{\"ms\":0.1176,\"index\":1627}],\"scope\":\"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks\"}",
+      "ACTIVE_VESSEL_WARP {\"factor\":86400,\"frames\":600,\"maximumOffset\":1.428240232699955E-05,\"maximumHorizon\":5.076233532711742E-07,\"maximumDistance\":1.3057511441871839E-05,\"terrainCorrections\":0,\"canonicalUnchanged\":true}",
+      "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true"
+    ]
+  },
+  {
+    "name": "cache-global.log",
+    "sha256": "f37f3bf73c91db3b2a5c7a19e9d9c941a429146280aeaf9821df5ad7a19aebbe",
+    "tail": [
+      "Cache: E:\\NovaCore\\build\\florida-pad-authority\\clean-cache",
+      "Path: E:\\NovaCore\\build\\florida-pad-authority\\clean-cache\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+      "Status: Valid",
+      "Bytes: 61484224/61484224",
+      "SHA-256: 38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae",
+      "Verification buffer: 1048576 bytes"
+    ]
+  },
+  {
+    "name": "cache-florida.log",
+    "sha256": "57391a69894fa9c50a829dd0384b596f32c20c21a71a6225426c77d67cb1394f",
+    "tail": [
+      "Cache: E:\\NovaCore\\build\\florida-pad-authority\\clean-cache",
+      "Path: E:\\NovaCore\\build\\florida-pad-authority\\clean-cache\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+      "Status: Valid",
+      "Bytes: 210307596/210307596",
+      "SHA-256: c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe",
+      "Verification buffer: 1048576 bytes"
+    ]
+  }
+]

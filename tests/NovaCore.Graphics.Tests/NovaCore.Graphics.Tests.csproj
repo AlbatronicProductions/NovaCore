@@ -3,6 +3,8 @@
   <PropertyGroup><NativeBuildDirectory>native-ninja</NativeBuildDirectory></PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'"><NativeBuildDirectory>native-ninja-release</NativeBuildDirectory></PropertyGroup>
   <ItemGroup>
+    <Compile Include="../NovaCore.Simulation.Tests/ScalableLaunchSupportFixture.cs" Link="ScalableLaunchSupportFixture.cs" />
+    <Compile Include="../../samples/NovaCore.Triangle/BlackoutCameraQualification.cs" Link="BlackoutCameraQualification.cs" />
     <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
       <_Parameter1>NativeBuildDirectory</_Parameter1>
       <_Parameter2>$(NativeBuildDirectory)</_Parameter2>
@@ -11,11 +13,22 @@
   <ItemGroup>
     <Content Include="..\..\assets\visual\SRV01\*.glb" Link="assets\visual\SRV01\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
+    <Compile Include="../../src/NovaCore.Diagnostics/BenignRecorderRoute.cs" Link="BenignRecorderRoute.cs" />
     <ProjectReference Include="..\..\src\NovaCore.Graphics\NovaCore.Graphics.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Interop\NovaCore.Interop.csproj" />
     <ProjectReference Include="..\..\src\NovaCore.Simulation\NovaCore.Simulation.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="../../samples/NovaCore.Triangle/IApplicationVesselScene.cs" Link="IApplicationVesselScene.cs" />
+    <Compile Include="../../samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs" Link="ConstructionFlightMeasurements.cs" />
+    <Compile Include="../../samples/NovaCore.Triangle/SurfaceRetryObservation.cs" Link="SurfaceRetryObservation.cs" />
+    <Compile Include="../../samples/NovaCore.Triangle/ConstructionFlightScene.cs" Link="ConstructionFlightScene.cs" />
+    <Compile Include="../../samples/NovaCore.Triangle/CraftFlightOptions.cs" Link="CraftFlightOptions.cs" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorCamera.cs" Link="EditorCamera.cs" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorVisualAssets.cs" Link="EditorVisualAssets.cs" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorSocketTargets.cs" Link="EditorSocketTargets.cs" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorRenderCapacity.cs" Link="EditorRenderCapacity.cs" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/StabilizationCraftFixture.cs" Link="StabilizationCraftFixture.cs" />
     <Compile Include="..\..\tools\NovaCore.Launcher\LaunchConfiguration.cs" Link="Launcher/LaunchConfiguration.cs" />
     <Compile Include="..\..\tools\NovaCore.Launcher\LaunchCommandBuilder.cs" Link="Launcher/LaunchCommandBuilder.cs" />
     <Compile Include="..\..\tools\NovaCore.Launcher\ScenarioCatalog.cs" Link="Launcher/ScenarioCatalog.cs" />

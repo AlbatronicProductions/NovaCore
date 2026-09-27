@@ -1,0 +1,36 @@
+{
+  "modified": [
+    "README.md",
+    "docs/KNOWN_LIMITATIONS.md",
+    "docs/NOVACORE_CURRENT_STATE.md",
+    "samples/NovaCore.Triangle/ConstructionFlightScene.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.Physical.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftContact.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Craft.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.CraftDiagnostics.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs",
+    "tests/NovaCore.Graphics.Tests/FacilityLightingTests.cs",
+    "tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs",
+    "tests/NovaCore.Graphics.Tests/ModularStabilizationTests.cs",
+    "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "tests/NovaCore.Graphics.Tests/Program.cs",
+    "tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalContact.cs",
+    "tests/NovaCore.Simulation.Tests/Program.cs",
+    "tests/NovaCore.Simulation.Tests/RcsScalabilityTests.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs",
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.cs"
+  ],
+  "added": [
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftContactDescription.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftContactManifolds.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftSupportPreparation.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftSupportImport.cs",
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportFixture.cs",
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportTests.cs",
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportTests.Friction.cs",
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Support.cs"
+  ]
+}

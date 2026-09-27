@@ -1,0 +1,132 @@
+{
+  "selectedCompactEvidence": [
+    {
+      "path": "docs/engineering-evidence/minimum-recorder-bounded-storage/candidate-identity.json",
+      "bytes": 158361,
+      "sha256": "c9b1215d7c6ee23a17b3b223bb4c979b067be2c0d1672e7083f2038d89e7d2ec"
+    },
+    {
+      "path": "docs/engineering-evidence/minimum-recorder-bounded-storage/contract.md",
+      "bytes": 5500,
+      "sha256": "c09aab01232604e7c7cc9d7f9ff0e08afc2f376faabc3cbcfc2e13fee19a65c8"
+    },
+    {
+      "path": "docs/engineering-evidence/minimum-recorder-bounded-storage/preservation.json",
+      "bytes": 25005,
+      "sha256": "874b26ac7f3c189d3fa01fc31d32d7d74b18a244d6690217431b181a51317bf3"
+    },
+    {
+      "path": "docs/engineering-evidence/minimum-recorder-bounded-storage/README.md",
+      "bytes": 8303,
+      "sha256": "7b98d94905483f90ffe62b768497c001df2a930dec557f661c4e2fab38de77eb"
+    },
+    {
+      "path": "docs/engineering-evidence/minimum-recorder-bounded-storage/reproduce.md",
+      "bytes": 2358,
+      "sha256": "edc626d2850de300a122f3ff706c3a56ad135fbdfa45bd3bf824f4172b4fbc01"
+    },
+    {
+      "path": "docs/engineering-evidence/minimum-recorder-bounded-storage/results.json",
+      "bytes": 30126,
+      "sha256": "c8209413144451d154c6aebbd54a7285d380fff8d3fc34e700dfd50de359abc6"
+    },
+    {
+      "path": "docs/engineering-evidence/minimum-recorder-bounded-storage/review.md",
+      "bytes": 1665,
+      "sha256": "fe253df5e53dda788015024da9bb15a68d40080394d83dd78d44d73999db4380"
+    }
+  ],
+  "localOnlyReproductionReceipts": [
+    {
+      "path": "build/recorder-bounded-storage/entry.json",
+      "bytes": 633581,
+      "sha256": "064fec0c8d044a22f5b22217f2f0459f2bd962edb90697ea0c34b0ebf88a0637"
+    },
+    {
+      "path": "build/recorder-bounded-storage/package.json",
+      "bytes": 21908,
+      "sha256": "4d248dce6c63703f35233db687d62391f2800c8d0648b1c793251cdaf9badff4"
+    },
+    {
+      "path": "build/recorder-bounded-storage/qualification-driver.log",
+      "bytes": 364,
+      "sha256": "48bae30a5efa4d7e21b85b4fabd9d3d4ccf7d69cc1caac5b7c4fbd90bb465b97"
+    },
+    {
+      "path": "build/recorder-bounded-storage/runtime-maintenance.json",
+      "bytes": 3032,
+      "sha256": "ad15fd59fc8339b4b4a20f05bcc6e6e99ad9f19dbabdaf5f7a81553e691a0992"
+    },
+    {
+      "path": "build/recorder-bounded-storage/runtime-maintenance.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/recorder-bounded-storage/rolling-soak-Release.log",
+      "bytes": 7327,
+      "sha256": "4bc884d6731ffc7dd738d268a9504000e4c2551e7469590de090a087322b5420"
+    },
+    {
+      "path": "build/recorder-bounded-storage/build-NovaCore-Debug.log",
+      "bytes": 3294,
+      "sha256": "4d3ecd4701747f22d7dd9ac0e25ff1d644acacf3be4b69bcc51a0fb60a0110a6"
+    },
+    {
+      "path": "build/recorder-bounded-storage/build-NovaCore.MinimumRecorder.Tests-Debug.log",
+      "bytes": 344,
+      "sha256": "53c7140a00b976ac3a8cc442ce336384db21a3d2a8847629c36652a963f810b4"
+    },
+    {
+      "path": "build/recorder-bounded-storage/build-NovaCore.Retention.Tests-Debug.log",
+      "bytes": 326,
+      "sha256": "9fd28fd5324f181bc618b3c9afcefe49d77c2bc5cd1018e92356f9d698425547"
+    },
+    {
+      "path": "build/recorder-bounded-storage/recorder-Debug.log",
+      "bytes": 30,
+      "sha256": "427397198fde58b812c8af3015af8c7f25eefa9bd73a302b193efafb3bf79cff"
+    },
+    {
+      "path": "build/recorder-bounded-storage/retention-Debug.log",
+      "bytes": 21472,
+      "sha256": "7c1cbaa8b2b770052070bf6c0bbd915f91ab3694993df63fee34cf71c92b9460"
+    },
+    {
+      "path": "build/recorder-bounded-storage/ui-Debug.txt",
+      "bytes": 126,
+      "sha256": "7bd7228075ab8043231d596b66c95f6d80c6b6f93d3347835d37e9982c32d2db"
+    },
+    {
+      "path": "build/recorder-bounded-storage/build-NovaCore-Release.log",
+      "bytes": 3348,
+      "sha256": "c7b77c5e54d234ca8edf6bff976a8042516bd5cfa0344be03ccad1aee3768df4"
+    },
+    {
+      "path": "build/recorder-bounded-storage/build-NovaCore.MinimumRecorder.Tests-Release.log",
+      "bytes": 348,
+      "sha256": "104ce4f392e3d451475440edc90376154e2d90c388087e3a02d61824f9028d64"
+    },
+    {
+      "path": "build/recorder-bounded-storage/build-NovaCore.Retention.Tests-Release.log",
+      "bytes": 330,
+      "sha256": "c54c56e3850c4fde3941f23cef517c9e133fa7276b8303ea653fccbbb3a0097b"
+    },
+    {
+      "path": "build/recorder-bounded-storage/recorder-Release.log",
+      "bytes": 30,
+      "sha256": "427397198fde58b812c8af3015af8c7f25eefa9bd73a302b193efafb3bf79cff"
+    },
+    {
+      "path": "build/recorder-bounded-storage/retention-Release.log",
+      "bytes": 21472,
+      "sha256": "d93b9314ac64e1eed9aea9e5de4d702c0bde6ed63af54791fccf578750ec3773"
+    },
+    {
+      "path": "build/recorder-bounded-storage/ui-Release.txt",
+      "bytes": 126,
+      "sha256": "7bd7228075ab8043231d596b66c95f6d80c6b6f93d3347835d37e9982c32d2db"
+    }
+  ],
+  "publicationBoundary": "Only the listed concise documents/hash receipts are selected. Bulk build logs are local-only identities, not selected files. Runtime raw/capsules/indexes stay outside Git and outside public packages. Required diagnostic source/permanent tests remain eligible only for the prospective engineering bank; public-release KEEP/DEV-ONLY/RETIRE decision remains required."
+}

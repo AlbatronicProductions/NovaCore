@@ -1,0 +1,94 @@
+{
+  "judgment": "PRESERVATION_PASS",
+  "utc": "2026-09-26T23:57:22.361769+00:00",
+  "sealedManifestSha256": "ab37a3a6bff1173f224871f4978caec19402648eea897e1f62376d74407ef04e",
+  "manifestMatch": true,
+  "sealedFiles": 226,
+  "sealedBytes": 37471453,
+  "sealedMismatches": [],
+  "repositoryEntryFiles": 3839,
+  "entryChanges": [],
+  "newReportFiles": [
+    "docs/engineering-evidence/blackout-recurrence-20260926/README.md",
+    "docs/engineering-evidence/blackout-recurrence-20260926/causal-matrix.md",
+    "docs/engineering-evidence/blackout-recurrence-20260926/differential.md",
+    "docs/engineering-evidence/blackout-recurrence-20260926/reproduce.md",
+    "docs/engineering-evidence/blackout-recurrence-20260926/verification.md"
+  ],
+  "unexpectedNewFiles": [],
+  "gitChanges": [],
+  "sourceFiles": 926,
+  "sourceChanges": [],
+  "packageFiles": 127,
+  "packageChanges": [],
+  "packageExtras": [],
+  "terrain": [
+    {
+      "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube",
+      "identity": {
+        "bytes": 61484224,
+        "sha256": "38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae"
+      },
+      "matchIncident": true
+    },
+    {
+      "path": "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube",
+      "identity": {
+        "bytes": 210307596,
+        "sha256": "c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe"
+      },
+      "matchIncident": true
+    }
+  ],
+  "wheaPairs": [
+    {
+      "prior": 332,
+      "current": 340,
+      "sameEventData": true
+    },
+    {
+      "prior": 333,
+      "current": 341,
+      "sameEventData": true
+    },
+    {
+      "prior": 334,
+      "current": 342,
+      "sameEventData": true
+    },
+    {
+      "prior": 335,
+      "current": 343,
+      "sameEventData": true
+    },
+    {
+      "prior": 336,
+      "current": 344,
+      "sameEventData": true
+    },
+    {
+      "prior": 337,
+      "current": 345,
+      "sameEventData": true
+    },
+    {
+      "prior": 338,
+      "current": 346,
+      "sameEventData": true
+    },
+    {
+      "prior": 339,
+      "current": 347,
+      "sameEventData": true
+    }
+  ],
+  "analysisFileCount": 38,
+  "analysisBytes": 4692117,
+  "noBuild": true,
+  "noAppLaunch": true,
+  "noProductionEdits": true,
+  "noCleanup": true,
+  "blackoutCause": "UNRESOLVED",
+  "playerPass": "HOLD",
+  "banking": "HOLD"
+}

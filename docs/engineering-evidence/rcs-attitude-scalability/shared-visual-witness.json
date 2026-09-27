@@ -1,0 +1,7 @@
+{
+  "candidatePackageSha256": "e006e9b126a43cdace3972d2c94dd8d728b797f6ca25dbb859fbf3789a756491",
+  "error": "Distinct prepared visual assets required.",
+  "owner": "DesktopEditorForm cold upload preparation used one entry per definition instead of unique asset identity/hash",
+  "correction": "EditorVisualAssets.Prepare exact tuple dedup; per-definition mappings preserved; conflicting hashes still rejected",
+  "regression": "ModularViewportTests production-helper assertions plus full native96 route"
+}

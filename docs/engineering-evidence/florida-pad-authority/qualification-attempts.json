@@ -1,0 +1,46 @@
+[
+  {
+    "run": "native-long",
+    "outcome": "FAIL",
+    "step": 0,
+    "cause": "System.IO.InvalidDataException: Editor integration: daylight Florida witness; Solar system \u00b7 choose New vehicle to build, or Menu for navigation.\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.RequireQualification(Boolean value, String label) in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.Qualification.cs:line 46\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.PreparePadDaylight() in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.ApplicationQualification.cs:line 110\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.QualifyApplicationFrame(NativeInputState& input) in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.ApplicationQualification.cs:line 42",
+    "classification": "Qualification-only attempt to rewind monotonic Solar time; driver corrected to stop at first daytime epoch."
+  },
+  {
+    "run": "native-deep",
+    "outcome": "FAIL",
+    "step": 17,
+    "cause": "System.IO.InvalidDataException: Editor integration: same-application exact craft launch; Authored support load exceeded.\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.RequireQualification(Boolean value, String label) in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.Qualification.cs:line 46\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.QualifyApplicationFrame(NativeInputState& input) in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.ApplicationQualification.cs:line 69",
+    "classification": "Eight mixed tanks exceed unchanged authored foot-load admission. Expected product refusal retained."
+  },
+  {
+    "run": "native-deep-final",
+    "outcome": "FAIL",
+    "step": 17,
+    "cause": "System.IO.InvalidDataException: Editor integration: same-application exact craft launch; Authored support load exceeded.\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.RequireQualification(Boolean value, String label) in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.Qualification.cs:line 46\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.QualifyApplicationFrame(NativeInputState& input) in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.ApplicationQualification.cs:line 69",
+    "classification": "Four mixed tanks exceed unchanged authored foot-load admission. Expected product refusal retained."
+  },
+  {
+    "run": "native-two-tank",
+    "outcome": "FAIL",
+    "step": 24,
+    "cause": "System.InvalidOperationException: Sequence contains no elements\r\n   at System.Linq.ThrowHelper.ThrowNoElementsException()\r\n   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)\r\n   at System.Linq.ImmutableArrayExtensions.Single[T](ImmutableArray`1 immutableArray, Func`2 predicate)\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.RunApplicationAdversarialChecks() in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.PersistenceQualification.cs:line 40\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.QualifyApplicationFrame(NativeInputState& input) in E:\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.ApplicationQualification.cs:line 76",
+    "classification": "Flight and return passed; post-return test driver retained stale fixture IDs. Qualification-only IDs corrected."
+  },
+  {
+    "run": "initial native build",
+    "classification": "Wrong target name; rerun with declared NovaCoreFacilityVisibilityTests target."
+  },
+  {
+    "run": "initial GPU visibility tests",
+    "classification": "CPU/GPU comparisons agreed; Vulkan loader counted missing Epic overlay manifests as errors. Isolated implicit-layer path produced clean explicit-validation PASS."
+  },
+  {
+    "run": "initial package verification",
+    "classification": "Visibility-test SPIR-V had entered runtime shader directory. CMake now puts it in test-shaders; 8 generated copies moved to retained task tree. Final package contains exactly66 production shaders."
+  },
+  {
+    "run": "initial cache install",
+    "classification": "Unrecognized manifest ID refused before install. Correct earth-surface-v5 and earth-florida-m12 IDs verified successfully."
+  }
+]

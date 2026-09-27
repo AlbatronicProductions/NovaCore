@@ -14,6 +14,45 @@ using NovaCore.Simulation.Celestial;
 using NovaCore.Simulation.Spacecraft.Guidance;
 using NovaCore.Simulation.Time;
 
+if(args.Contains("--benign-recorder-route",StringComparer.Ordinal)){BenignRecorderRouteTests.Run();return 0;}
+
+if(args.Contains("--scalable-support-flight",StringComparer.Ordinal)){ModularFloridaTests.ScalableSupport();return 0;}
+if(args.Contains("--surface-recontact",StringComparer.Ordinal)){ModularFloridaTests.SurfaceRecontact();return 0;}
+if(args.Contains("--surface-terrain",StringComparer.Ordinal)){ModularFloridaTests.SurfaceTerrain();return 0;}
+if(args.Contains("--surface-geometry",StringComparer.Ordinal)){ModularFloridaTests.SurfaceGeometry();return 0;}
+if(args.Contains("--surface-cases",StringComparer.Ordinal)){ModularFloridaTests.SurfaceCases(args.ElementAtOrDefault(1),args.ElementAtOrDefault(2));return 0;}
+if(args.Contains("--surface-persistence",StringComparer.Ordinal)){ModularFloridaTests.SurfacePersistence();return 0;}
+if(args.Contains("--surface-cycles",StringComparer.Ordinal)){ModularFloridaTests.SurfaceCycles();return 0;}
+if(args.Contains("--surface-refinement",StringComparer.Ordinal)){ModularFloridaTests.SurfaceRefinement();return 0;}
+if(args.Contains("--surface-numerics",StringComparer.Ordinal)){PhysicalCollisionNumericsTests.Run();return 0;}
+if(args.Contains("--surface-seams",StringComparer.Ordinal)){ModularFloridaTests.SurfaceSeams();return 0;}
+if(args.Contains("--surface-plane",StringComparer.Ordinal)){ModularFloridaTests.SurfacePlane();return 0;}
+if(args.Contains("--swept-clearance",StringComparer.Ordinal)){ModularFloridaTests.SweptClearance();return 0;}
+if(args.Contains("--terrain-reuse",StringComparer.Ordinal)){ModularFloridaTests.TerrainReuse();return 0;}
+if(args.Contains("--post-contact",StringComparer.Ordinal)){ModularFloridaTests.PostContactFixture(args[1],args.Length>2?int.Parse(args[2],System.Globalization.CultureInfo.InvariantCulture):0);return 0;}
+if(args.Contains("--surface-retry-fixture",StringComparer.Ordinal)){ModularFloridaTests.SurfaceRetryFixture();return 0;}
+if(args.Contains("--surface-live-fixtures",StringComparer.Ordinal)){ModularFloridaTests.SurfaceLiveFixtures();return 0;}
+if(args.Contains("--surface-performance",StringComparer.Ordinal)){ModularFloridaTests.SurfacePerformance();return 0;}
+if(args.Contains("--scalable-support-site-probe",StringComparer.Ordinal)){ModularFloridaTests.SupportProbe();return 0;}
+
+if(args.Contains("--launch-readiness",StringComparer.Ordinal)){LaunchReadinessTests.Run();return 0;}
+if(args.Contains("--florida-pad-flight-envelope",StringComparer.Ordinal)){FacilityLightingTests.FlightEnvelope();return 0;}
+if(args.Contains("--florida-pad-authority",StringComparer.Ordinal)){FacilityLightingTests.Run();FloridaFoundationSeatingTests.Run();return 0;}
+if(args.Contains("--modular-connectors",StringComparer.Ordinal)){ModularConnectorTests.Run();return 0;}
+if(args.Contains("--modular-stabilization",StringComparer.Ordinal)){ModularStabilizationTests.Run();return 0;}
+if(args.Contains("--modular-greybox-assets",StringComparer.Ordinal)){ModularGreyboxAssetTests.Run();return 0;}
+if(args.Contains("--modular-gate9",StringComparer.Ordinal)){ModularFloridaTests.Admission();return 0;}
+if(args.Contains("--modular-gate9-measure",StringComparer.Ordinal)){ModularFloridaTests.Measurements();return 0;}
+if(args.Contains("--modular-gate10-dynamics",StringComparer.Ordinal)){ModularFloridaTests.RotatingDynamics();return 0;}
+if(args.Contains("--modular-gate10-flight",StringComparer.Ordinal)){ModularFloridaTests.Flight();return 0;}
+if(args.Contains("--modular-gate10-measure",StringComparer.Ordinal)){ModularFloridaTests.FlightMeasurements();return 0;}
+if(args.Contains("--modular-gate11",StringComparer.Ordinal)){ModularFloridaTests.LongFlight();return 0;}
+if(args.Contains("--modular-gate12-application",StringComparer.Ordinal)){ModularFloridaTests.ApplicationRoute();return 0;}
+if(args.Contains("--modular-viewport",StringComparer.Ordinal)){ModularViewportTests.Run();return 0;}
+if(args.Contains("--modular-editor-regressions",StringComparer.Ordinal)){
+    LayoutTest();StockAssemblyPresentationTests.Run();WindowLifecycleTests.ValidationPolicyTest();WindowLifecycleTests.RunGenericStartup();WindowLifecycleTests.Run();WindowLifecycleTests.RunInputBoundary();
+    PlayerEngineControlTests.Run();PlayerAttitudeControlTests.Run();PlayerIntegratedControlTests.Run();ActiveVesselCameraTests.StaticFlorida();ActiveVesselCameraTests.WarpFrames();ActiveVesselCameraTests.MovingAndPrecision();ActiveVesselCameraTests.AllocationAndCosts();return 0;
+}
 if(args.Contains("--player-integrated",StringComparer.Ordinal)){PlayerIntegratedControlTests.Run();return 0;}
 if(args.Contains("--player-attitude",StringComparer.Ordinal)){PlayerAttitudeControlTests.Run();return 0;}
 if(args.Contains("--player-engine",StringComparer.Ordinal)){PlayerEngineControlTests.Run();return 0;}
@@ -107,6 +146,10 @@ var tests = new (string, Action)[]
     ("Solar preset camera-path convergence", SolarPresetCameraPathConvergenceTest),
     ("Zoom motion-profile continuity", ZoomMotionProfileContinuityTest),
     ("Solar camera bounded-domain crash regression", SolarCameraBoundedDomainCrashRegressionTest),
+    ("Earth camera blackout offline workload", EarthBlackoutOfflineTests.Run),
+    ("Earth camera blackout replay", EarthBlackoutOfflineTests.Replay),
+    ("Earth horizon submission boundary", EarthHorizonSubmissionTests.Run),
+    ("Terrain tessellation CPU singular boundary", PlanetaryProductionSphericalBillboardRuntimeTests.RunTesCpuOnly),
     ("Surface visual-aim continuity", SurfaceVisualAimContinuityTest),
     ("Inertial visual-aim authority", InertialVisualAimAuthorityTest),
     ("Cube-sphere planetary surface", CubeSpherePlanetarySurfaceTest),

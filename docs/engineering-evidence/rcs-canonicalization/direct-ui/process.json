@@ -1,0 +1,62 @@
+{
+  "observedUtc": "2026-09-26T20:18:49.7902623Z",
+  "modules": [
+    {
+      "ModuleName": "novacore.exe",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\novacore.exe"
+    },
+    {
+      "ModuleName": "NovaCore.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.dll"
+    },
+    {
+      "ModuleName": "NovaCore.ConstructionEditor.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.ConstructionEditor.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Interop.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Interop.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Launcher.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Launcher.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Simulation.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Simulation.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Triangle.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Triangle.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Graphics.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Graphics.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Core.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Core.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Platform.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Platform.dll"
+    },
+    {
+      "ModuleName": "BepuPhysics.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\BepuPhysics.dll"
+    },
+    {
+      "ModuleName": "BepuUtilities.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\BepuUtilities.dll"
+    },
+    {
+      "ModuleName": "NovaCore.Native.dll",
+      "FileName": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\NovaCore.Native.dll"
+    }
+  ],
+  "process": {
+    "ProcessId": 10076,
+    "ExecutablePath": "E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\novacore.exe",
+    "CommandLine": "\"E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\novacore.exe\" "
+  }
+}

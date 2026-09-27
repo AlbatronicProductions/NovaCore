@@ -1,0 +1,16 @@
+{
+  "judgment": "ENGINEERING_PASS_INTEGRATION_PASS_UNBANKED",
+  "sealedUtc": "2026-09-26T19:30:17.046641+00:00",
+  "developmentRepository": "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore",
+  "frozenRepository": "E:\\NovaCore",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "sourceSha256": "2d631cb86231524e342c8138a1ab17e412f6565fed595a7c34621bb5716db45a",
+  "packageSha256": "4eeadff671b13768c49ece9f0ac45bd651af7c70e3f0f85b788f371c56ace533",
+  "candidateExecutable": "C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+  "frozenPackageSha256": "8bad01bb3a569465c24fb4466cb0ce039e3ec295d2d151cc157f5b239a5958ed",
+  "milestone": null,
+  "banked": false,
+  "playerPass": false,
+  "sourceCount": 918,
+  "changedFileCount": 31
+}

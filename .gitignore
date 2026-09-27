@@ -19,3 +19,13 @@ artifacts/
 *.avi
 *.mkv
 *.webm
+
+# Reproducible Python and read-only local reference scratch
+__pycache__/
+*.py[cod]
+/.ksa-reference/
+/.ksa-extraction/
+
+# Defensive exclusion for repository-local copies of the external recorder runtime root.
+# Production recorder source/tests and permanent binary fixtures remain visible.
+/MinimumRecorder/

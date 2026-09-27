@@ -1,0 +1,102 @@
+{
+  "judgment": "APPLICATION_INTEGRATION_PASS",
+  "playerPass": false,
+  "padRoutes": [
+    "editor",
+    "flight",
+    "flight-return",
+    "game",
+    "game-return"
+  ],
+  "checks": 546,
+  "tank": "deep",
+  "process": 26128,
+  "window": 5051670,
+  "parts": 13,
+  "source": "b2fc2268331316b3b54e9a63387db79edc7238e2f8a70038671e078ba7c61a8d",
+  "compiled": "f23c07511c9100f365b9b7c01c42d9ac43f820cf6234aef65a222397d07839d2",
+  "retainedEpoch": 843709230020231,
+  "finalEpoch": 843709230113981,
+  "frames": 10544,
+  "warmWindows": [
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.465100288391113,
+        "p95": 10.900899887084961,
+        "p99": 11.013099670410156,
+        "max": 11.06049919128418
+      },
+      "cpuMs": {
+        "median": 0.0055,
+        "p95": 0.023,
+        "p99": 0.0357,
+        "max": 0.0537
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.470099925994873,
+        "p95": 10.598099708557129,
+        "p99": 10.834700584411621,
+        "max": 10.929400444030762
+      },
+      "cpuMs": {
+        "median": 0.0056,
+        "p95": 0.0301,
+        "p99": 0.0373,
+        "max": 0.0377
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.521900177001953,
+        "p95": 10.750699996948242,
+        "p99": 10.96310043334961,
+        "max": 10.997300148010254
+      },
+      "cpuMs": {
+        "median": 0.0056,
+        "p95": 0.0232,
+        "p99": 0.0325,
+        "max": 0.0334
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99"
+}

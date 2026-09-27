@@ -1,0 +1,77 @@
+{
+  "entrySourceSealChanged": [],
+  "entryPackageSealChanged": [],
+  "witnessSha256": "a41ddc616da545a30f504a7c79fa217701aec0ccc9f39c00a3ca69a622ab4e70",
+  "headBefore": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "headAfter": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "indexBefore": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "indexAfter": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "branchTagRemoteRefsUnchanged": true,
+  "modifiedExistingFiles": {
+    "docs/CHANGELOG.md": {
+      "before": "e0df8f9483a7a114eaa3044735685eee584054bed20f73277edff6f3c0b158bd",
+      "after": "9f048b97223d45690d83fda4c886dbf5fae0d08b47f260385d8b5f3019d9f2ee"
+    },
+    "docs/KNOWN_LIMITATIONS.md": {
+      "before": "34da98317e8010a26237ac4ec6ca63a5caf939b5805a30f5b3c026251aae6d9c",
+      "after": "6bdc4ee344e791def3633affd1e65aadf1b8b8bc5105600f3da7d43c491bbc96"
+    },
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs": {
+      "before": "b6d09f43ccab2e2186763e86f373d766c192685415fc1592d1ceb29d803d67af",
+      "after": "d773a59b28f20e938b099efd8175ada3eddf0f151c75704a5bbda4cb55e5f13e"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs": {
+      "before": "a9dff40f888beb3e519c56fc58d933bb9bdde05acf1855a32b68e4de63b094ac",
+      "after": "f5990b4b96ea4e18df57fa33062b28e74068245ea5bd30d8f30d680a04bd747d"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs": {
+      "before": "4afc8cbf18a7c765d6f740d79291e2995b58a09556ac28294a33e20d7ccc00c2",
+      "after": "d09459a072bda8877b42b1feec9831e99a8c310d397abfbe3bc3666b5d45fa9b"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Launch.cs": {
+      "before": "58f6dbc8db1cb4fbe0acb7349475fb6a295088197cc07e673840b02af42926fc",
+      "after": "f4c40a69550d55c655f52ad323de1f9ddd7061536fc4b899db2ea5e173c83919"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs": {
+      "before": "ed150b059de0f5f04aef4741e11e83d49e1608a07b0a3c1193bd91d46f25c6c1",
+      "after": "a6e0ff6c166ebe621af7769456be029ad31fed06f728e912ded890c758dd7d74"
+    },
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs": {
+      "before": "6b5fbe2ae71b20a6a17d104e4081cfc7b95a30ac1aeb0b089ea0ab168da1f584",
+      "after": "44516fc52b509590678e1de018fa9d67e4ef42d358f9a225ad20864d38a98e99"
+    },
+    "docs/CODEX_HANDOFF.md": {
+      "before": "3e50ca637d2139a21bb16e62a9c8209412262e5490f6c67a9fb5f39e58a2238a",
+      "after": "ed7d44edb794d56ec4bff8ff922316059e41dfe0a67cebe7020f920a97fc3074"
+    },
+    "docs/NOVACORE_CURRENT_STATE.md": {
+      "before": "0365e23cd955be1353f97418c1b70431ea5d5a18e5f0af6b24e117fa8aa52cb1",
+      "after": "6ae28697060c22866dbeac80aef8d94a628c786a6ea819fb9c102e8b1614dbc4"
+    },
+    "docs/engineering-evidence/README.md": {
+      "before": "2db2698dd95ca636ee354cff591a3effa3ea3f05457ed99771651e63cb175546",
+      "after": "f2650a857f9b04d158f7e6be8b1e744910c8ad5fc8978bad60809299899c5cd9"
+    },
+    "tests/NovaCore.Graphics.Tests/Program.cs": {
+      "before": "231e3b8c9691dcd60f491123a65dc6d8bd4cd5fd0d6866efbb4cfb565c7d8bac",
+      "after": "a7e0bbf007870bbcb6c6820f31d5e98991cfa94229e3b0a29fbcaf2ec7c8e07b"
+    }
+  },
+  "newTest": {
+    "tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs": "9d7d49bf006d0f1eeb0e30158cf76d22c31405269ce1c478e2a458924733509b"
+  },
+  "nativeRelease": "61a1832895bdcff54d2ee727e63a6d942202502e2ab6bd3aea5539c77cdd7c99",
+  "floridaSealDifferencesAtExit": [
+    "docs/CHANGELOG.md",
+    "docs/CODEX_HANDOFF.md",
+    "docs/KNOWN_LIMITATIONS.md",
+    "docs/NOVACORE_CURRENT_STATE.md",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs",
+    "tests/NovaCore.Graphics.Tests/Program.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Launch.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs"
+  ]
+}

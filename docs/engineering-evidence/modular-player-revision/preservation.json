@@ -1,0 +1,88 @@
+{
+  "checkedUtc": "2026-09-22T06:59:49.343970+00:00",
+  "entry": {
+    "path": "docs/engineering-evidence/modular-player-revision/entry.json",
+    "bytes": 798423,
+    "sha256": "16ad9d4faf29cdb0b25a5b83ff6a5c9c6caa07424addeb883d964583803a6ca4"
+  },
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "publicRefsUnchanged": true,
+  "worktreesUnchanged": true,
+  "entryFiles": 3474,
+  "unchangedEntryFiles": 3456,
+  "changedEntryFiles": [
+    "NovaCore.sln",
+    "native/NovaCore.Native/NovaCoreNative.cpp",
+    "native/NovaCore.Native/NovaCoreNative.h",
+    "native/NovaCore.Native/shaders/triangle.frag",
+    "native/NovaCore.Native/shaders/triangle.vert",
+    "samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs",
+    "samples/NovaCore.Triangle/ConstructionFlightScene.cs",
+    "samples/NovaCore.Triangle/Program.cs",
+    "src/NovaCore.Graphics/ReusablePartVisuals.cs",
+    "src/NovaCore.Interop/NativeRuntime.cs",
+    "tests/NovaCore.Graphics.Tests/ModularViewportTests.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Launch.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Qualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs",
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj",
+    "tools/NovaCore.ConstructionEditor/Program.cs"
+  ],
+  "missingEntryFiles": [],
+  "addedImplementationFiles": [
+    "samples/NovaCore.Triangle/ApplicationAssemblyInfo.cs",
+    "samples/NovaCore.Triangle/IApplicationPresentation.cs",
+    "tools/NovaCore.App/NovaCore.App.csproj",
+    "tools/NovaCore.App/Program.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Direct.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Saves.cs",
+    "tools/NovaCore.ConstructionEditor/PartThumbnail.cs",
+    "tools/NovaCore.ConstructionEditor/PlayerApplication.cs"
+  ],
+  "protectedEntryStatusCount": 385,
+  "diffCheckExit": 0,
+  "appManagedRefChanges": {
+    "added": [
+      "bdea76254c635729c7673f7a906e0a2f8c977caf refs/codex/turn-diffs/captures/1790048808057/71a1e948-e928-409b-b02a-42e3b1f1dc2d/base",
+      "bdea76254c635729c7673f7a906e0a2f8c977caf refs/codex/turn-diffs/checkpoints/cea148f32fa295beb0e7f899b8db1105/5d4bf88203af06c36d838ee4b240fa73/1790048771089/4cce5a75-9963-4dfb-ab92-1457a11ffba4"
+    ],
+    "removed": [
+      "92f505f850841306991c4698691a84cada61d105 refs/codex/turn-diffs/captures/1790047387191/b2648e8b-06c3-4735-b6d5-97179d1a919f/base",
+      "92f505f850841306991c4698691a84cada61d105 refs/codex/turn-diffs/checkpoints/cea148f32fa295beb0e7f899b8db1105/bf275d474a748c070e4bed962550939b/1790045350340/e5bdf89a-fa52-44bc-9a5e-9f246946479d"
+    ]
+  },
+  "recovery": {
+    "path": "build/modular-player-revision/revision-entry.zip",
+    "sha256": "bea863d4bea4ee3f39666166aa05f1708a716a4f56e02adc689b9fc2e2e12e26"
+  },
+  "ksaInstallation": {
+    "root": "E:\\Kitten Space Agency",
+    "entryFiles": 1592,
+    "changed": [],
+    "missing": [],
+    "added": [],
+    "excludedTopLevel": []
+  },
+  "ksaUserContent": {
+    "root": "C:\\Users\\Tyler\\Documents\\My Games\\Kitten Space Agency",
+    "entryFiles": 88,
+    "changed": [],
+    "missing": [],
+    "added": [
+      "vehicles/NovaCore_UX_Convergence_20260921/meta.toml",
+      "vehicles/NovaCore_UX_Convergence_20260921/vehicle.xml"
+    ],
+    "excludedTopLevel": [
+      "logs",
+      "crashes",
+      "profiler"
+    ]
+  },
+  "launcherSettingsSha256": "0e45ef76b1b52d2d564b2da592149e3f8ae2b26e8a09e780fb6da099b9736da9",
+  "noCleanup": true
+}

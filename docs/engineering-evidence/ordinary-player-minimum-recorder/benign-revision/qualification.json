@@ -1,0 +1,735 @@
+{
+  "judgment": "PASS_BOUNDED_BENIGN_RECORDER_QUALIFICATION",
+  "launches": 1,
+  "relaunches": 0,
+  "route": "Production Earth focus once; 5 s verified warmup then >=20 s verified held view; normal shutdown",
+  "records": 88499,
+  "frames": 4476,
+  "successfulSubmissions": 4539,
+  "positiveCompletions": 4539,
+  "presentReturns": 4476,
+  "resourceBirths": 276,
+  "finalOpenOperations": 0,
+  "finalPendingSubmissions": 0,
+  "finalLiveResources": 0,
+  "generationPublicationTuples": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1
+    ]
+  ],
+  "eventCounts": {
+    "1:0": 1,
+    "12:0": 926,
+    "12:1": 915,
+    "12:2": 915,
+    "6:1": 9078,
+    "6:2": 9078,
+    "13:0": 90,
+    "7:1": 4539,
+    "7:2": 4539,
+    "17:1": 63,
+    "17:2": 63,
+    "9:0": 4539,
+    "2:1": 4476,
+    "3:1": 4476,
+    "8:1": 4476,
+    "8:2": 4476,
+    "14:0": 2,
+    "3:2": 4476,
+    "4:1": 4476,
+    "5:1": 4476,
+    "5:2": 4476,
+    "10:1": 4476,
+    "10:2": 4476,
+    "16:1": 3,
+    "16:2": 3,
+    "4:2": 4476,
+    "2:2": 4476,
+    "19:0": 31,
+    "20:1": 1,
+    "20:2": 1
+  },
+  "heldFrames": 3596,
+  "heldSeconds": 20.0001204,
+  "routeMarkerGpuJoins": [
+    {
+      "loop": 880,
+      "markerSequence": 19326,
+      "submission": 943,
+      "submitSequence": 19336,
+      "completionSequence": 19345,
+      "presentSequence": 19338,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1000,
+      "markerSequence": 21607,
+      "submission": 1063,
+      "submitSequence": 21617,
+      "completionSequence": 21626,
+      "presentSequence": 21619,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1120,
+      "markerSequence": 23888,
+      "submission": 1183,
+      "submitSequence": 23898,
+      "completionSequence": 23907,
+      "presentSequence": 23900,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1240,
+      "markerSequence": 26169,
+      "submission": 1303,
+      "submitSequence": 26179,
+      "completionSequence": 26188,
+      "presentSequence": 26181,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1360,
+      "markerSequence": 28450,
+      "submission": 1423,
+      "submitSequence": 28460,
+      "completionSequence": 28469,
+      "presentSequence": 28462,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1480,
+      "markerSequence": 30731,
+      "submission": 1543,
+      "submitSequence": 30741,
+      "completionSequence": 30750,
+      "presentSequence": 30743,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1600,
+      "markerSequence": 33012,
+      "submission": 1663,
+      "submitSequence": 33022,
+      "completionSequence": 33031,
+      "presentSequence": 33024,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1720,
+      "markerSequence": 35293,
+      "submission": 1783,
+      "submitSequence": 35303,
+      "completionSequence": 35312,
+      "presentSequence": 35305,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1840,
+      "markerSequence": 37574,
+      "submission": 1903,
+      "submitSequence": 37584,
+      "completionSequence": 37593,
+      "presentSequence": 37586,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 1960,
+      "markerSequence": 39855,
+      "submission": 2023,
+      "submitSequence": 39865,
+      "completionSequence": 39874,
+      "presentSequence": 39867,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2080,
+      "markerSequence": 42136,
+      "submission": 2143,
+      "submitSequence": 42146,
+      "completionSequence": 42155,
+      "presentSequence": 42148,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2200,
+      "markerSequence": 44417,
+      "submission": 2263,
+      "submitSequence": 44427,
+      "completionSequence": 44436,
+      "presentSequence": 44429,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2320,
+      "markerSequence": 46698,
+      "submission": 2383,
+      "submitSequence": 46708,
+      "completionSequence": 46717,
+      "presentSequence": 46710,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2440,
+      "markerSequence": 48979,
+      "submission": 2503,
+      "submitSequence": 48989,
+      "completionSequence": 48998,
+      "presentSequence": 48991,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2560,
+      "markerSequence": 51260,
+      "submission": 2623,
+      "submitSequence": 51270,
+      "completionSequence": 51279,
+      "presentSequence": 51272,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2680,
+      "markerSequence": 53541,
+      "submission": 2743,
+      "submitSequence": 53551,
+      "completionSequence": 53560,
+      "presentSequence": 53553,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2800,
+      "markerSequence": 55822,
+      "submission": 2863,
+      "submitSequence": 55832,
+      "completionSequence": 55841,
+      "presentSequence": 55834,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 2920,
+      "markerSequence": 58103,
+      "submission": 2983,
+      "submitSequence": 58113,
+      "completionSequence": 58122,
+      "presentSequence": 58115,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3040,
+      "markerSequence": 60384,
+      "submission": 3103,
+      "submitSequence": 60394,
+      "completionSequence": 60403,
+      "presentSequence": 60396,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3160,
+      "markerSequence": 62665,
+      "submission": 3223,
+      "submitSequence": 62675,
+      "completionSequence": 62684,
+      "presentSequence": 62677,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3280,
+      "markerSequence": 64946,
+      "submission": 3343,
+      "submitSequence": 64956,
+      "completionSequence": 64965,
+      "presentSequence": 64958,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3400,
+      "markerSequence": 67227,
+      "submission": 3463,
+      "submitSequence": 67237,
+      "completionSequence": 67246,
+      "presentSequence": 67239,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3520,
+      "markerSequence": 69508,
+      "submission": 3583,
+      "submitSequence": 69518,
+      "completionSequence": 69527,
+      "presentSequence": 69520,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3640,
+      "markerSequence": 71789,
+      "submission": 3703,
+      "submitSequence": 71799,
+      "completionSequence": 71808,
+      "presentSequence": 71801,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3760,
+      "markerSequence": 74070,
+      "submission": 3823,
+      "submitSequence": 74080,
+      "completionSequence": 74089,
+      "presentSequence": 74082,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 3880,
+      "markerSequence": 76351,
+      "submission": 3943,
+      "submitSequence": 76361,
+      "completionSequence": 76370,
+      "presentSequence": 76363,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 4000,
+      "markerSequence": 78632,
+      "submission": 4063,
+      "submitSequence": 78642,
+      "completionSequence": 78651,
+      "presentSequence": 78644,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 4120,
+      "markerSequence": 80913,
+      "submission": 4183,
+      "submitSequence": 80923,
+      "completionSequence": 80932,
+      "presentSequence": 80925,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 4240,
+      "markerSequence": 83194,
+      "submission": 4303,
+      "submitSequence": 83204,
+      "completionSequence": 83213,
+      "presentSequence": 83206,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 4360,
+      "markerSequence": 85475,
+      "submission": 4423,
+      "submitSequence": 85485,
+      "completionSequence": 85494,
+      "presentSequence": 85487,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    },
+    {
+      "loop": 4476,
+      "markerSequence": 87680,
+      "submission": 4539,
+      "submitSequence": 87690,
+      "completionSequence": 87697,
+      "presentSequence": 87692,
+      "distance": 73566072.91378917,
+      "radius": 6371008.8
+    }
+  ],
+  "producerPerFrameUs": {
+    "n": 3596,
+    "p50": 17.7,
+    "p95": 20.2,
+    "p99": 27.1,
+    "max": 136.2
+  },
+  "producerAmortizedPerEventUs": {
+    "n": 3596,
+    "p50": 0.9315789473684211,
+    "p95": 1.063157894736842,
+    "p99": 1.4263157894736842,
+    "max": 7.168421052631579
+  },
+  "producerThreadCycles": {
+    "n": 3596,
+    "p50": 49191,
+    "p95": 56655,
+    "p99": 66759,
+    "max": 100575
+  },
+  "producerOwnedTimedAllocations": 0,
+  "retainedCapacity": {
+    "Size": 64,
+    "Version": 1,
+    "Count": 3596,
+    "Frequency": 10000000,
+    "RetainedBytes": 4479176,
+    "OwnedCalls": 1,
+    "OwnedBytes": 2377928,
+    "Overflow": 0
+  },
+  "recurringOneSecondWindows": [
+    {
+      "second": 0,
+      "frames": 181,
+      "producerMeanUs": 18.128729281767956,
+      "cadenceMeanMs": 5.5562408839779005
+    },
+    {
+      "second": 1,
+      "frames": 180,
+      "producerMeanUs": 18.124444444444446,
+      "cadenceMeanMs": 5.5553027777777775
+    },
+    {
+      "second": 2,
+      "frames": 180,
+      "producerMeanUs": 18.281666666666666,
+      "cadenceMeanMs": 5.556821666666667
+    },
+    {
+      "second": 3,
+      "frames": 180,
+      "producerMeanUs": 18.106666666666666,
+      "cadenceMeanMs": 5.554262222222222
+    },
+    {
+      "second": 4,
+      "frames": 180,
+      "producerMeanUs": 18.627777777777776,
+      "cadenceMeanMs": 5.555812222222222
+    },
+    {
+      "second": 5,
+      "frames": 180,
+      "producerMeanUs": 18.535555555555554,
+      "cadenceMeanMs": 5.5555272222222225
+    },
+    {
+      "second": 6,
+      "frames": 180,
+      "producerMeanUs": 18.520555555555557,
+      "cadenceMeanMs": 5.55548
+    },
+    {
+      "second": 7,
+      "frames": 180,
+      "producerMeanUs": 17.91888888888889,
+      "cadenceMeanMs": 5.555997777777778
+    },
+    {
+      "second": 8,
+      "frames": 180,
+      "producerMeanUs": 18.00777777777778,
+      "cadenceMeanMs": 5.555622777777778
+    },
+    {
+      "second": 9,
+      "frames": 180,
+      "producerMeanUs": 17.795555555555556,
+      "cadenceMeanMs": 5.555475555555556
+    },
+    {
+      "second": 10,
+      "frames": 180,
+      "producerMeanUs": 17.94388888888889,
+      "cadenceMeanMs": 5.555621666666666
+    },
+    {
+      "second": 11,
+      "frames": 176,
+      "producerMeanUs": 18.211931818181817,
+      "cadenceMeanMs": 5.681592613636363
+    },
+    {
+      "second": 12,
+      "frames": 180,
+      "producerMeanUs": 18.35222222222222,
+      "cadenceMeanMs": 5.556148888888889
+    },
+    {
+      "second": 13,
+      "frames": 180,
+      "producerMeanUs": 18.234444444444446,
+      "cadenceMeanMs": 5.555741666666667
+    },
+    {
+      "second": 14,
+      "frames": 180,
+      "producerMeanUs": 18.13277777777778,
+      "cadenceMeanMs": 5.555257777777777
+    },
+    {
+      "second": 15,
+      "frames": 179,
+      "producerMeanUs": 18.456983240223465,
+      "cadenceMeanMs": 5.556019553072626
+    },
+    {
+      "second": 16,
+      "frames": 180,
+      "producerMeanUs": 18.36777777777778,
+      "cadenceMeanMs": 5.556348333333333
+    },
+    {
+      "second": 17,
+      "frames": 181,
+      "producerMeanUs": 18.40497237569061,
+      "cadenceMeanMs": 5.554601104972376
+    },
+    {
+      "second": 18,
+      "frames": 179,
+      "producerMeanUs": 18.077653631284917,
+      "cadenceMeanMs": 5.555675418994413
+    }
+  ],
+  "phaseWallLatencyMs": {
+    "12": {
+      "n": 915,
+      "p50": 0.0013,
+      "p95": 0.2191,
+      "p99": 3.329,
+      "max": 190.6631
+    },
+    "6": {
+      "n": 9078,
+      "p50": 0.002,
+      "p95": 0.0028,
+      "p99": 0.0045,
+      "max": 0.0577
+    },
+    "7": {
+      "n": 4539,
+      "p50": 0.0163,
+      "p95": 0.0204,
+      "p99": 0.0343,
+      "max": 1.3213
+    },
+    "17": {
+      "n": 63,
+      "p50": 0.1397,
+      "p95": 0.167,
+      "p99": 0.194,
+      "max": 0.194
+    },
+    "8": {
+      "n": 4476,
+      "p50": 5.0635,
+      "p95": 5.2027,
+      "p99": 5.2637,
+      "max": 5.771
+    },
+    "3": {
+      "n": 4476,
+      "p50": 5.2806,
+      "p95": 5.4494,
+      "p99": 5.5265,
+      "max": 38.1972
+    },
+    "5": {
+      "n": 4476,
+      "p50": 0.0361,
+      "p95": 0.0446,
+      "p99": 0.074,
+      "max": 0.1242
+    },
+    "10": {
+      "n": 4476,
+      "p50": 0.1645,
+      "p95": 0.1955,
+      "p99": 0.2551,
+      "max": 23.3719
+    },
+    "16": {
+      "n": 3,
+      "p50": 0.0018,
+      "p95": 4.893,
+      "p99": 4.893,
+      "max": 4.893
+    },
+    "4": {
+      "n": 4476,
+      "p50": 0.2637,
+      "p95": 0.3139,
+      "p99": 0.4072,
+      "max": 127.9554
+    },
+    "2": {
+      "n": 4476,
+      "p50": 5.5494,
+      "p95": 5.7283,
+      "p99": 5.8485,
+      "max": 153.9343
+    },
+    "20": {
+      "n": 1,
+      "p50": 0.0037,
+      "p95": 0.0037,
+      "p99": 0.0037,
+      "max": 0.0037
+    }
+  },
+  "wholeRunFrameCadenceMs": {
+    "n": 4475,
+    "p50": 5.5571,
+    "p95": 5.7391,
+    "p99": 5.8738,
+    "max": 154.7173
+  },
+  "heldFrameCadenceMs": {
+    "n": 3596,
+    "p50": 5.5567,
+    "p95": 5.7403,
+    "p99": 5.8806,
+    "max": 38.5999
+  },
+  "heldFrameWallMs": {
+    "n": 3596,
+    "p50": 5.5473,
+    "p95": 5.7283,
+    "p99": 5.8625,
+    "max": 38.595
+  },
+  "heldFramesAbove16_667ms": 1,
+  "nativeFrameSpanSeconds": 25.0217095,
+  "gpuSampledMs": {
+    "n": 37,
+    "p50": 0.683,
+    "p95": 0.83,
+    "p99": 2.95,
+    "max": 2.95
+  },
+  "gpuWholeRunMeanMs": 0.674,
+  "durableSequence": 88499,
+  "checkpoint": 76120,
+  "journalTailByteMatches": 12379,
+  "allLiveEventChecksumsValid": true,
+  "allOperationAndResourceCorrelationsValid": true,
+  "maxSampledProducedMinusDurable": 984,
+  "monotonicWatermarks": true,
+  "cleanRecoveryComplete": true,
+  "terminal": "COMPLETE recorder session through DurableSequence 88499; sealed final produced sequence fully persisted. Present return is not physical display completion.",
+  "persistence": {
+    "wallMs": 28283.7982,
+    "cpuMs": 1187.5,
+    "allocatedBytes": 169203800,
+    "managedRetainedBytes": 577608,
+    "peakWorkingSetBytes": 58978304,
+    "BytesWritten": 59409955,
+    "Flushes": 14284,
+    "Rotations": 3,
+    "commitCount": 7138,
+    "sampledCommits": 4096,
+    "p50ms": 1.5871,
+    "p95ms": 1.865,
+    "p99ms": 5.284,
+    "maxMs": 9.8612,
+    "storageBoundBytes": 83902464
+  },
+  "persistenceOneCorePercent": 4.198516732452149,
+  "persistenceWriteMiBPerSecond": 2.0031874015545434,
+  "measurementLimits": [
+    "Producer scopes measure bookkeeping including QPC/cycle-query overhead; tiny unscoped dispatch/setup instructions excluded. QPC includes scheduling; cycles are separately retained.",
+    "Live allocation count is actual recorder-owned storage; independent global-new CPU fixture verifies hot-path bypass absence. Retained capacity is not OS working set.",
+    "GPU samples are existing production timestamps; no recorder-disabled live A/B or per-frame GPU timestamp population is claimed. No unrelated-frame subtraction.",
+    "Only the benign distant-Earth held route was qualified; no close-Earth, ordinary exploration, blackout cause, recontact or Player PASS."
+  ],
+  "independentReviews": {
+    "nativeRouteCostIdentity": "PASS",
+    "durabilityCorrelation": "PASS"
+  },
+  "offline": {
+    "Debug": {
+      "recorderChecks": 8524,
+      "actualCameraChecks": 6010,
+      "nativeFrames": 1800,
+      "nativeProducedDurable": 35303
+    },
+    "Release": {
+      "recorderChecks": 8524,
+      "actualCameraChecks": 6010,
+      "nativeFrames": 1800,
+      "nativeProducedDurable": 35303
+    },
+    "buildWarnings": 0,
+    "buildErrors": 0,
+    "applicationDiagnosticsChecks": 113,
+    "launcherChecks": 19,
+    "presentationChecks": 18,
+    "pupilHandoff": "PASS",
+    "packageFiles": 134,
+    "shaders": 66
+  },
+  "identity": {
+    "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+    "sourceSha256": "e73864d78502d00125de2ede19b2230cec4bb3a0694fcdd052883e5c88acb830",
+    "sourceFiles": 955,
+    "packageSha256": "715efb23078db399c241ba346a1c7862247a80e7d212f50d0b02f46473627fd7",
+    "packageFiles": 134,
+    "settingsSha256": "0e45ef76b1b52d2d564b2da592149e3f8ae2b26e8a09e780fb6da099b9736da9",
+    "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+    "refsSha256": "0b439a74cf9596051535cb4ff8c1599b1f230cdb5249a12ac1ec98cbb6aa48fd",
+    "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8",
+    "nativeSha256": "2244a96be294c23032ab531d8865ec0d1be2c147a01afa4ce0c4f2a4152f7be6"
+  },
+  "fullStateReconstruction": {
+    "judgment": "PASS",
+    "events": 88499,
+    "Complete": true,
+    "canonicalStateBytes": 222230,
+    "canonicalStateSha256": "3B619AA9D8D43DFD8C0BFB4AFABFCA5292265D71C782EFA0E86927AF97EBCD6C",
+    "fullLiveReductionEqualsRecoveredState": true
+  },
+  "blackoutCause": "UNRESOLVED",
+  "playerAcceptance": "HOLD",
+  "banked": false,
+  "furtherGpuAuthorization": false,
+  "nativeDisplay": {
+    "windowWidth": 2560,
+    "windowHeight": 1440,
+    "rendererWidth": 2560,
+    "rendererHeight": 1322,
+    "mode": "BorderlessFullscreen",
+    "settingsChanged": false
+  }
+}

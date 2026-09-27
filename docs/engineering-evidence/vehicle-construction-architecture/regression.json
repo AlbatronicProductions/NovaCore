@@ -1,0 +1,109 @@
+{
+  "scope": "Final bounded construction campaign engineering qualification; manual acceptance pending",
+  "stage0": "PASS - current installed KSA/authenticated history mapped; newer versions separated",
+  "stage1": {
+    "status": "PASS",
+    "checks": 25,
+    "actualAcceptedGlbs": true
+  },
+  "stage2": {
+    "status": "PASS",
+    "checks": 28
+  },
+  "stage3": {
+    "status": "PASS",
+    "checks": 2075,
+    "independentFractionOracleCases": 400
+  },
+  "stage4": {
+    "status": "PASS",
+    "checks": 90,
+    "semanticChecks": 48,
+    "adversarialWidthChecks": 42,
+    "independentArithmeticReconstruction": "PASS",
+    "independentReviews": "PASS",
+    "additionalArithmeticDefect": false
+  },
+  "stage5": {
+    "status": "PASS",
+    "coreChecks": 31,
+    "actualBrowserRoute": "PASS",
+    "geometryMaxCombinedPoints": 8392704,
+    "singleCorrection": "Streaming geometry and bounded schematic presentation"
+  },
+  "stage6": {
+    "status": "PASS",
+    "checks": 93,
+    "independentExecution": "ksa_frames PASS",
+    "independentSourceReviews": "PASS",
+    "actualBrowserHandoff": "PASS",
+    "singleCorrection": "Shared canonical byte admission and permanent atomic registration"
+  },
+  "stage7": {
+    "status": "PASS",
+    "checks": 62,
+    "independentMassAndAcceptedSourceGlbReconstruction": "PASS",
+    "scope": "Static only; unqualified DLV consumption refused"
+  },
+  "stage8": {
+    "status": "PASS",
+    "nonDlvChecks": 18,
+    "proofs": [
+      "Capsule-only",
+      "Transformed repeated-engine platform"
+    ],
+    "redTeamItems": 40
+  },
+  "srvAssemblyProduction": {
+    "status": "PASS",
+    "checks": 41634,
+    "trajectories": 24
+  },
+  "srvLiveControlAuthority": {
+    "status": "PASS",
+    "checks": 1557
+  },
+  "pilotDemand": {
+    "status": "PASS",
+    "checks": 2939,
+    "admissionAllocationBytes": 0
+  },
+  "pilotAllocation": {
+    "status": "PASS",
+    "checks": 36768,
+    "serviceAllocationBytes": 0
+  },
+  "srvIntegration": {
+    "status": "PASS",
+    "fourHornOwnershipChecks": 16260,
+    "trajectories": 24
+  },
+  "poweredContactCheap": "PASS - physical thrust and retained ownership",
+  "contactAuthorityAndPoweredFailures": "PASS",
+  "clockOrchestration": {
+    "status": "PASS",
+    "events": 1000,
+    "hash": "0x4BAF8048C764B33E",
+    "allocatedBytes": 0
+  },
+  "camera": "PASS - existing controller tests; 0 allocations",
+  "launcher": {
+    "status": "PASS",
+    "checks": 19
+  },
+  "buildDebugManagedTests": {
+    "status": "PASS",
+    "warnings": 0,
+    "errors": 0
+  },
+  "buildReleaseManagedTestsAndEditor": {
+    "status": "PASS",
+    "warnings": 0,
+    "errors": 0
+  },
+  "solutionWideDebug": "NOT PASS - earlier attempt failed native-copy prerequisites: absent build/native-ninja shader SPVs and NovaCore.Native.dll; managed compilation passed; no workaround or deployment",
+  "manualAcceptance": "PENDING",
+  "deployment": "NONE - loopback editor development process only",
+  "milestone": "NOT ASSIGNED",
+  "banking": "NOT AUTHORIZED"
+}

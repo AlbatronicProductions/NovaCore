@@ -15,6 +15,48 @@ using NovaCore.Core;
 using NovaCore.Core.ReferenceFrames;
 using System.Diagnostics;
 
+if (args.Contains("--surface-response",StringComparer.Ordinal)) { SurfaceContactResponseTests.Run(); return; }
+if (args.Contains("--scalable-support",StringComparer.Ordinal)) { ScalableLaunchSupportTests.Run(); return; }
+
+if (args.Contains("--rcs-scalability",StringComparer.Ordinal)) { RcsScalabilityTests.Run(args.SkipWhile(a=>a!="--rcs-scalability").Skip(1).FirstOrDefault()); return; }
+if (args.Contains("--modular-gate1",StringComparer.Ordinal)) { ModularCraftTests.PartStandardGate(); return; }
+if (args.Contains("--modular-gate1-redteam",StringComparer.Ordinal)) { ModularCraftTests.PartStandardRedTeam(); return; }
+if (args.Contains("--modular-gate1-closure",StringComparer.Ordinal)) { ModularCraftTests.PartStandardClosure(); return; }
+if (args.Contains("--modular-gate1-admission-audit",StringComparer.Ordinal)) { ModularCraftTests.PartStandardAdmissionAudit(); return; }
+if (args.Contains("--modular-gate1-numerics",StringComparer.Ordinal)) { ModularCraftTests.PartStandardNumerics(); return; }
+if (args.Contains("--modular-gate1-json",StringComparer.Ordinal)) { ModularCraftTests.PartStandardJsonRefusal(); return; }
+if (args.Contains("--modular-gate1-aggregate",StringComparer.Ordinal)) { ModularCraftTests.PartStandardAggregateNumerics(); return; }
+if (args.Contains("--modular-gate1-size",StringComparer.Ordinal)) { ModularCraftTests.PartStandardCatalogBound(); return; }
+if (args.Contains("--modular-gate1-predicates",StringComparer.Ordinal)) { ModularCraftTests.PartStandardPhysicalPredicates(); return; }
+if (args.Contains("--modular-gate2",StringComparer.Ordinal)) { ModularCraftTests.CraftDocumentGate(); return; }
+if (args.Contains("--modular-gate3",StringComparer.Ordinal)) { ModularCraftTests.CraftTransactionsGate(); return; }
+if (args.Contains("--modular-gate5-measure",StringComparer.Ordinal)) { ModularCraftTests.PlacementMeasurements(); return; }
+if (args.Contains("--modular-gate6",StringComparer.Ordinal)) { ModularCraftTests.StarterPersistenceGate(); return; }
+if (args.Contains("--modular-gate6-measure",StringComparer.Ordinal)) { ModularCraftTests.StarterPersistenceMeasurements(); return; }
+if (args.Contains("--modular-gate7",StringComparer.Ordinal)) { ModularCraftTests.CraftCompilerGate(); return; }
+if (args.Contains("--modular-gate7-measure",StringComparer.Ordinal)) { ModularCraftTests.CraftCompilerMeasurements(); return; }
+if (args.Contains("--modular-gate8",StringComparer.Ordinal)) { ModularCraftTests.PhysicalServicesGate(); return; }
+if (args.Contains("--modular-gate8-measure",StringComparer.Ordinal)) { ModularCraftTests.PhysicalMeasurements(); return; }
+if (args.Contains("--modular-gate8-oracle",StringComparer.Ordinal)) { ModularCraftTests.PhysicalOracleFixtures(); return; }
+if (args.Contains("--modular-gate4",StringComparer.Ordinal)) { ModularCraftTests.StarterDefinitionsGate(); return; }
+if (args.Contains("--modular-gate4-measure",StringComparer.Ordinal)) { AssemblyConstructionTests.MeasureModularDefinitions(); return; }
+if (args.Contains("--modular-gate5-operations",StringComparer.Ordinal)) { ModularCraftTests.PlayerPlacementGate(); return; }
+
+if (args.Length>0&&args[0]=="--construction-stage1") { AssemblyConstructionTests.Definitions(args.Length>1?args[1]:null); return; }
+if (args.Length==2&&args[0]=="--construction-stage1-measure") { AssemblyConstructionTests.MeasureDefinitions(args[1]); return; }
+if (args.Length==3&&args[0]=="--author-construction-design") { AssemblyConstructionTests.AuthorDesign(args[1],args[2]); return; }
+if (args.Contains("--construction-stage2",StringComparer.Ordinal)) { AssemblyConstructionTests.Graph(); return; }
+if (args.Contains("--construction-stage2-measure",StringComparer.Ordinal)) { AssemblyConstructionTests.MeasureGraph(); return; }
+if (args.Contains("--construction-stage3",StringComparer.Ordinal)) { AssemblyConstructionTests.Fuel(); return; }
+if (args.Contains("--construction-stage3-measure",StringComparer.Ordinal)) { AssemblyConstructionTests.MeasureFuel(); return; }
+if (args.Contains("--construction-stage4",StringComparer.Ordinal)) { AssemblyConstructionTests.Power(); return; }
+if (args.Contains("--construction-stage4-measure",StringComparer.Ordinal)) { AssemblyConstructionTests.MeasurePower(); return; }
+if (args.Contains("--construction-stage5",StringComparer.Ordinal)) { AssemblyConstructionTests.Editor(); return; }
+if (args.Contains("--construction-stage5-measure",StringComparer.Ordinal)) { AssemblyConstructionTests.MeasureEditor(); return; }
+if (args.Contains("--construction-stage6",StringComparer.Ordinal)) { AssemblyConstructionTests.ConstructionRuntime(); return; }
+if (args.Contains("--construction-stage6-measure",StringComparer.Ordinal)) { AssemblyConstructionTests.MeasureConstructionRuntime(); return; }
+if (args.Contains("--construction-stage7",StringComparer.Ordinal)) { AssemblyConstructionTests.ConstructionArticle(); return; }
+if (args.Contains("--construction-stage8-reuse",StringComparer.Ordinal)) { AssemblyConstructionTests.ConstructionReuse(); return; }
 if (args.Contains("--assembly-control", StringComparer.Ordinal)) { AssemblyControlTests.Run(); return; }
 if (args.Contains("--pilot-demand", StringComparer.Ordinal)) { AssemblyPilotDemandTests.Run(); return; }
 if (args.Contains("--pilot-allocation", StringComparer.Ordinal)) { AssemblyPilotAllocationTests.Run(); return; }

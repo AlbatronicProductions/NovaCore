@@ -30,6 +30,7 @@ public static class LaunchCommandBuilder
         {
             $"--scene={SceneArgument(configuration.Scene)}"
         };
+        if (configuration.Preset == NovaCoreScenarioPreset.PlayerFlightControls) arguments.Add("--player-flight-controls");
         if (configuration is { Scene: NovaCoreScene.Solar, StartingBody: NovaCoreStartingBody.Earth })
         {
             arguments.Add("--focus=earth");

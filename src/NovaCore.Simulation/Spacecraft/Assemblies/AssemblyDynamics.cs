@@ -10,7 +10,7 @@ internal readonly record struct AssemblyMotion(Double3 PositionO,Double3 Velocit
 
 /// <summary>Qualified short-step co-moving point-removal law at fixed material O.
 /// Exact store amounts are only observed here. This evaluator cannot spend or publish.</summary>
-internal static class AssemblyDynamics
+internal static partial class AssemblyDynamics
 {
     internal static AssemblyMotion Evaluate(CompiledAssemblyDesign d,AssemblyMotion source,AssemblyConsumption c,AssemblyWrench poweredWrench,Double3 gravityRoot=default)
     {

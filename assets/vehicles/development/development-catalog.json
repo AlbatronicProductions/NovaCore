@@ -1,0 +1,6224 @@
+{
+  "schema": "novacore.construction-catalog/1",
+  "resources": [
+    {
+      "id": "nc.resource.He",
+      "revision": 1,
+      "name": "He"
+    },
+    {
+      "id": "nc.resource.LOX",
+      "revision": 1,
+      "name": "LOX"
+    },
+    {
+      "id": "nc.resource.MMH",
+      "revision": 1,
+      "name": "MMH"
+    },
+    {
+      "id": "nc.resource.NTO",
+      "revision": 1,
+      "name": "NTO"
+    },
+    {
+      "id": "nc.resource.RP1",
+      "revision": 1,
+      "name": "RP1"
+    }
+  ],
+  "definitions": [
+    {
+      "id": "nc.axial-release.capsule-collar-3650",
+      "revision": 1,
+      "visualReference": "nc.visual.axial-release.capsule-collar-3650",
+      "role": "Component",
+      "dryMassKg": 99.00000000000001,
+      "localCom": {
+        "x": -0.049999999999998934,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localInertia": {
+        "a": 320.82187500000003,
+        "b": 0.0,
+        "c": 0.0,
+        "d": 0.0,
+        "e": 160.49343750000003,
+        "f": 0.0,
+        "g": 0.0,
+        "h": 0.0,
+        "i": 160.49343750000003
+      },
+      "attachments": [
+        {
+          "id": "BOTTOM",
+          "family": "nc.axial-collar.3550-3620.paired.r1.mount",
+          "frame": {
+            "position": {
+              "x": -0.10000000149011612,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": -1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        },
+        {
+          "id": "TOP",
+          "family": "nc.axial-collar.3550-3620.paired.r1",
+          "frame": {
+            "position": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": 1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        }
+      ],
+      "stores": [],
+      "propulsion": null,
+      "gimbal": null,
+      "construction": {
+        "name": "nc.axial-release.capsule-collar-3650",
+        "development": true,
+        "asset": {
+          "id": "nc.visual.axial-release.capsule-collar-3650",
+          "revision": 1,
+          "sha256": "3e6414a22e9dfadc9e1637330502cff28a59d51d6ed11f6174dc067d8a250de9",
+          "relativePath": "Library/nc.axial-release.capsule-collar-3650.r1.glb",
+          "units": "m",
+          "basis": "gltf=(E.Y,-E.Z,-E.X)",
+          "materialOrigin": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "requiredNodes": [
+            "Part.nc.axial-release.capsule-collar-3650.r1",
+            "Part.nc.axial-release.capsule-collar-3650.r1.SOCKET_BOTTOM",
+            "Part.nc.axial-release.capsule-collar-3650.r1.SOCKET_TOP"
+          ],
+          "provenance": "accepted reusable-part asset digest 35b8048e2612beb5597074605eab0724f286af0c463b099fd58cec6d56b4dcfe"
+        },
+        "physicalSource": {
+          "id": "nc.development.engineering.regions",
+          "revision": 1,
+          "sha256": "a91051fa2b61506deefc755be0d6303c678481f48ca7ae2e3deb83f2e8a02af4",
+          "provenance": "development-launch-stack-preblender constituent files; not mesh mass"
+        },
+        "massRegions": [
+          {
+            "id": "Upper.SeparationHardware",
+            "massKg": 99.00000000000001,
+            "com": {
+              "x": -0.049999999999998934,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 320.82187500000003,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 160.49343750000003,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 160.49343750000003
+            }
+          }
+        ],
+        "storeGeometry": [],
+        "subparts": [],
+        "consumers": [],
+        "interfaces": [
+          {
+            "interface": "BOTTOM",
+            "services": "Data",
+            "detachable": false
+          },
+          {
+            "interface": "TOP",
+            "services": "Data",
+            "detachable": true
+          }
+        ],
+        "electrical": [],
+        "command": false,
+        "unqualifiedHardware": []
+      }
+    },
+    {
+      "id": "nc.axial-release.load-ring-3320",
+      "revision": 1,
+      "visualReference": "nc.visual.axial-release.load-ring-3320",
+      "role": "Component",
+      "dryMassKg": 154.0,
+      "localCom": {
+        "x": -0.10000000000000142,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localInertia": {
+        "a": 379.7332,
+        "b": 0.0,
+        "c": 0.0,
+        "d": 0.0,
+        "e": 190.37993333333335,
+        "f": 0.0,
+        "g": 0.0,
+        "h": 0.0,
+        "i": 190.37993333333335
+      },
+      "attachments": [
+        {
+          "id": "BOTTOM",
+          "family": "nc.axial-load-ring.3080-3320.paired.r1.mount",
+          "frame": {
+            "position": {
+              "x": -0.05000000074505806,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": -1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        },
+        {
+          "id": "TOP",
+          "family": "nc.axial-load-ring.3080-3320.paired.r1",
+          "frame": {
+            "position": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": 1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        }
+      ],
+      "stores": [],
+      "propulsion": null,
+      "gimbal": null,
+      "construction": {
+        "name": "nc.axial-release.load-ring-3320",
+        "development": true,
+        "asset": {
+          "id": "nc.visual.axial-release.load-ring-3320",
+          "revision": 1,
+          "sha256": "c39252ea7a9f01b6e77e9dffabf464c62cc07bab84dbcbc39bdebe419ae9cf58",
+          "relativePath": "Library/nc.axial-release.load-ring-3320.r1.glb",
+          "units": "m",
+          "basis": "gltf=(E.Y,-E.Z,-E.X)",
+          "materialOrigin": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "requiredNodes": [
+            "Part.nc.axial-release.load-ring-3320.r1",
+            "Part.nc.axial-release.load-ring-3320.r1.SOCKET_BOTTOM",
+            "Part.nc.axial-release.load-ring-3320.r1.SOCKET_TOP"
+          ],
+          "provenance": "accepted reusable-part asset digest a0b1a405d29da3fb536a3eb827c469afc505722997188a5c392ad405b18d20fa"
+        },
+        "physicalSource": {
+          "id": "nc.development.engineering.regions",
+          "revision": 1,
+          "sha256": "a91051fa2b61506deefc755be0d6303c678481f48ca7ae2e3deb83f2e8a02af4",
+          "provenance": "development-launch-stack-preblender constituent files; not mesh mass"
+        },
+        "massRegions": [
+          {
+            "id": "Booster.SeparationHardware",
+            "massKg": 154.0,
+            "com": {
+              "x": -0.10000000000000142,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 379.7332,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 190.37993333333335,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 190.37993333333335
+            }
+          }
+        ],
+        "storeGeometry": [],
+        "subparts": [],
+        "consumers": [],
+        "interfaces": [
+          {
+            "interface": "BOTTOM",
+            "services": "Data",
+            "detachable": false
+          },
+          {
+            "interface": "TOP",
+            "services": "Data",
+            "detachable": true
+          }
+        ],
+        "electrical": [],
+        "command": false,
+        "unqualifiedHardware": []
+      }
+    },
+    {
+      "id": "nc.booster-body.3600",
+      "revision": 1,
+      "visualReference": "nc.visual.booster-body.3600",
+      "role": "Component",
+      "dryMassKg": 9476.265656932335,
+      "localCom": {
+        "x": 15.39483380618309,
+        "y": 0.03264618961133033,
+        "z": 0.0
+      },
+      "localInertia": {
+        "a": 22027.016285539543,
+        "b": 1224.9495588817742,
+        "c": -5.684341886080802e-14,
+        "d": 1224.9495588817742,
+        "e": 761886.332674922,
+        "f": 0.0,
+        "g": -5.684341886080802e-14,
+        "h": 0.0,
+        "i": 762010.6931889014
+      },
+      "attachments": [
+        {
+          "id": "ENGINE_0",
+          "family": "nc.engine-mount.booster.r1",
+          "frame": {
+            "position": {
+              "x": 3.200000047683716,
+              "y": 0.949999988079071,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": -1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        },
+        {
+          "id": "ENGINE_1",
+          "family": "nc.engine-mount.booster.r1",
+          "frame": {
+            "position": {
+              "x": 3.200000047683716,
+              "y": -0.4749999940395355,
+              "z": 0.8227241039276123
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": -0.0,
+              "d": 0.0,
+              "e": 0.49999984335273556,
+              "f": -0.8660254942247602,
+              "g": 0.0,
+              "h": -0.8660254942247602,
+              "i": -0.49999984335273556
+            }
+          }
+        },
+        {
+          "id": "ENGINE_2",
+          "family": "nc.engine-mount.booster.r1",
+          "frame": {
+            "position": {
+              "x": 3.200000047683716,
+              "y": -0.4749999940395355,
+              "z": -0.8227241039276123
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.5000000514340687,
+              "f": 0.8660253740889633,
+              "g": 0.0,
+              "h": 0.8660253740889633,
+              "i": -0.5000000514340687
+            }
+          }
+        },
+        {
+          "id": "RELEASE_MOUNT",
+          "family": "nc.axial-load-ring.3080-3320.paired.r1.mount",
+          "frame": {
+            "position": {
+              "x": 31.617000579833984,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": 1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        }
+      ],
+      "stores": [
+        {
+          "id": "Booster.LOX.Tank.Liquid",
+          "species": "LOX",
+          "resourceIdentity": "nc.resource.LOX",
+          "datum": {
+            "x": 10.88301376727473,
+            "y": -0.004118328985184954,
+            "z": 3.56445754821683e-22
+          },
+          "capacityKg": 133394.53674131265
+        },
+        {
+          "id": "Booster.RP1.Tank.Liquid",
+          "species": "RP1",
+          "resourceIdentity": "nc.resource.RP1",
+          "datum": {
+            "x": 24.851695134343473,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "capacityKg": 50409.629615933925
+        },
+        {
+          "id": "Booster.Feed.0.Liquid",
+          "species": "RP1",
+          "resourceIdentity": "nc.resource.RP1",
+          "datum": {
+            "x": 12.316422556820319,
+            "y": 0.44133163785736873,
+            "z": 0.0
+          },
+          "capacityKg": 709.8147120287857
+        },
+        {
+          "id": "Booster.Feed.1.Liquid",
+          "species": "LOX",
+          "resourceIdentity": "nc.resource.LOX",
+          "datum": {
+            "x": 3.5424999999999995,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "capacityKg": 122.40142724471882
+        },
+        {
+          "id": "Booster.Feed.2.Liquid",
+          "species": "RP1",
+          "resourceIdentity": "nc.resource.RP1",
+          "datum": {
+            "x": 3.550000000000003,
+            "y": -2.840287892257827e-17,
+            "z": -2.7318046741507574e-17
+          },
+          "capacityKg": 174.8458414128745
+        },
+        {
+          "id": "Booster.Feed.3.Liquid",
+          "species": "RP1",
+          "resourceIdentity": "nc.resource.RP1",
+          "datum": {
+            "x": 3.5712657822522074,
+            "y": 7.619494854955119e-17,
+            "z": 1.2676681705589048e-16
+          },
+          "capacityKg": 94.59871951330177
+        },
+        {
+          "id": "Booster.Feed.4.Liquid",
+          "species": "LOX",
+          "resourceIdentity": "nc.resource.LOX",
+          "datum": {
+            "x": 3.05,
+            "y": -5.282379747714525e-17,
+            "z": 2.11295189908581e-17
+          },
+          "capacityKg": 94.17294255372515
+        },
+        {
+          "id": "Booster.LOX.Tank.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 17.765518930617024,
+            "y": -0.0054882510476122505,
+            "z": -7.867515414023631e-20
+          },
+          "capacityKg": 8.515308879673418
+        },
+        {
+          "id": "Booster.RP1.Tank.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 28.572783822454745,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "capacityKg": 2.436907938850883
+        },
+        {
+          "id": "Booster.He.0.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 19.043999999999997,
+            "y": 0.7212489168102786,
+            "z": 0.7212489168102786
+          },
+          "capacityKg": 28.63097289768446
+        },
+        {
+          "id": "Booster.He.1.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 19.043999999999997,
+            "y": -0.7212489168102785,
+            "z": 0.7212489168102786
+          },
+          "capacityKg": 28.63097289768446
+        },
+        {
+          "id": "Booster.He.2.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 19.043999999999997,
+            "y": -0.7212489168102787,
+            "z": -0.7212489168102785
+          },
+          "capacityKg": 28.63097289768446
+        },
+        {
+          "id": "Booster.He.3.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 19.043999999999997,
+            "y": 0.7212489168102784,
+            "z": -0.7212489168102787
+          },
+          "capacityKg": 28.63097289768446
+        },
+        {
+          "id": "Booster.He.4.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 20.343999999999998,
+            "y": 0.7212489168102786,
+            "z": 0.7212489168102786
+          },
+          "capacityKg": 28.63097289768446
+        },
+        {
+          "id": "Booster.He.5.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 20.343999999999998,
+            "y": -0.7212489168102785,
+            "z": 0.7212489168102786
+          },
+          "capacityKg": 28.63097289768446
+        },
+        {
+          "id": "Booster.He.6.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 20.343999999999998,
+            "y": -0.7212489168102787,
+            "z": -0.7212489168102785
+          },
+          "capacityKg": 28.63097289768446
+        },
+        {
+          "id": "Booster.He.7.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 20.343999999999998,
+            "y": 0.7212489168102784,
+            "z": -0.7212489168102787
+          },
+          "capacityKg": 28.63097289768446
+        }
+      ],
+      "propulsion": null,
+      "gimbal": null,
+      "construction": {
+        "name": "nc.booster-body.3600",
+        "development": true,
+        "asset": {
+          "id": "nc.visual.booster-body.3600",
+          "revision": 1,
+          "sha256": "d218c92e8a5f6e5900a57496965031bb18893f2664a07a865ae99da3979109e8",
+          "relativePath": "Library/nc.booster-body.3600.r1.glb",
+          "units": "m",
+          "basis": "gltf=(E.Y,-E.Z,-E.X)",
+          "materialOrigin": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "requiredNodes": [
+            "Part.nc.booster-body.3600.r1",
+            "Part.nc.booster-body.3600.r1.SOCKET_ENGINE_0",
+            "Part.nc.booster-body.3600.r1.SOCKET_ENGINE_1",
+            "Part.nc.booster-body.3600.r1.SOCKET_ENGINE_2",
+            "Part.nc.booster-body.3600.r1.SOCKET_RELEASE_MOUNT"
+          ],
+          "provenance": "accepted reusable-part asset digest f601d6476ee1d8fb9c8c7a85049981176bad44f61c2e70bac184130ed9e4160d"
+        },
+        "physicalSource": {
+          "id": "nc.development.engineering.regions",
+          "revision": 1,
+          "sha256": "a91051fa2b61506deefc755be0d6303c678481f48ca7ae2e3deb83f2e8a02af4",
+          "provenance": "development-launch-stack-preblender constituent files; not mesh mass"
+        },
+        "massRegions": [
+          {
+            "id": "Booster.AvionicsHarnessSensors",
+            "massKg": 165.0,
+            "com": {
+              "x": 31.167,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 189.05700000000002,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 96.212875,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 96.212875
+            }
+          },
+          {
+            "id": "Booster.BatteryPower",
+            "massKg": 110.00000000000001,
+            "com": {
+              "x": 31.167,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 42.38300000000002,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 22.016500000000008,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 22.016500000000008
+            }
+          },
+          {
+            "id": "Booster.EngineSkirtSupport",
+            "massKg": 462.00000000000006,
+            "com": {
+              "x": 2.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1476.2343750000002,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1354.1171875000002,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1354.1171875000002
+            }
+          },
+          {
+            "id": "Booster.Feed.0.PipeShell",
+            "massKg": 114.9331981717009,
+            "com": {
+              "x": 12.316422556820319,
+              "y": 0.44133163785736873,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.9415327594225736,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3052.8915612659926,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 3052.8915612659926
+            }
+          },
+          {
+            "id": "Booster.Feed.1.PipeShell",
+            "massKg": 10.01577279996637,
+            "com": {
+              "x": 3.5424999999999995,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.15866987269706723,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.1169898646183825,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.1169898646183825
+            }
+          },
+          {
+            "id": "Booster.Feed.2.PipeShell",
+            "massKg": 28.311038641572615,
+            "com": {
+              "x": 3.550000000000003,
+              "y": -2.840287892257827e-17,
+              "z": -2.7318046741507574e-17
+            },
+            "inertiaAtCom": {
+              "a": 0.23192402855176286,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 45.738068731413684,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 45.738068731413684
+            }
+          },
+          {
+            "id": "Booster.Feed.3.PipeShell",
+            "massKg": 22.65131968969026,
+            "com": {
+              "x": 3.5712657822522074,
+              "y": 7.619494854955119e-17,
+              "z": 1.2676681705589048e-16
+            },
+            "inertiaAtCom": {
+              "a": 0.08770590983848071,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 50.01706826810931,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 50.01706826810931
+            }
+          },
+          {
+            "id": "Booster.Feed.4.PipeShell",
+            "massKg": 13.571303193785303,
+            "com": {
+              "x": 3.05,
+              "y": -5.282379747714525e-17,
+              "z": 2.11295189908581e-17
+            },
+            "inertiaAtCom": {
+              "a": 0.07198897779143415,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 7.841868803381179,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 7.841868803381179
+            }
+          },
+          {
+            "id": "Booster.Feed.DryTunnelGuides",
+            "massKg": 0.34559999999999935,
+            "com": {
+              "x": 11.238499999999998,
+              "y": 0.43,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.007274879999999986,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 5.9399927711999885,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 5.9399927711999885
+            }
+          },
+          {
+            "id": "Booster.Feed.DryTunnelInsulation",
+            "massKg": 17.406476143191032,
+            "com": {
+              "x": 11.238499999999998,
+              "y": 0.43,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.3131773187682931,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 299.1468301236136,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 299.1468301236136
+            }
+          },
+          {
+            "id": "Booster.Feed.DryTunnelWall",
+            "massKg": 563.105276524483,
+            "com": {
+              "x": 11.238499999999998,
+              "y": 0.43,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 13.907574119601682,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 9679.387266003565,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 9679.387266003565
+            }
+          },
+          {
+            "id": "Booster.Feed.FlexibleThermalInterfaces",
+            "massKg": 48.3,
+            "com": {
+              "x": 3.5,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 45.48893999999999,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 23.2375325,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 23.2375325
+            }
+          },
+          {
+            "id": "Booster.Feed.InsulationJacketsAndSupports",
+            "massKg": 40.25,
+            "com": {
+              "x": 3.8,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 46.11845,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 23.89776666666667,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 23.89776666666667
+            }
+          },
+          {
+            "id": "Booster.Feed.RP1OutletReinforcement",
+            "massKg": 1.450201894557137,
+            "com": {
+              "x": 21.171640589523047,
+              "y": 0.43,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.03358160017131234,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.016808202508390855,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.016808202508390855
+            }
+          },
+          {
+            "id": "Booster.Feed.TunnelEndFittings",
+            "massKg": 18.0,
+            "com": {
+              "x": 11.238499999999998,
+              "y": 0.43,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.38952,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 309.3799335,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 309.3799335
+            }
+          },
+          {
+            "id": "Booster.Feed.TunnelHeadReinforcement.0",
+            "massKg": 2.0439114295077117,
+            "com": {
+              "x": 4.1,
+              "y": 0.43,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.0839240252513014,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.04197291348660807,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.04197291348660807
+            }
+          },
+          {
+            "id": "Booster.Feed.TunnelHeadReinforcement.1",
+            "massKg": 2.0439114295077117,
+            "com": {
+              "x": 18.377,
+              "y": 0.43,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.0839240252513014,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.04197291348660807,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.04197291348660807
+            }
+          },
+          {
+            "id": "Booster.Feed.ValvesManifoldsPumpsInterfaces",
+            "massKg": 176.0,
+            "com": {
+              "x": 3.4,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 201.66080000000002,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 103.17706666666668,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 103.17706666666668
+            }
+          },
+          {
+            "id": "Booster.He.0.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 19.043999999999997,
+              "y": 0.7212489168102786,
+              "z": 0.7212489168102786
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.He.1.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 19.043999999999997,
+              "y": -0.7212489168102785,
+              "z": 0.7212489168102786
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.He.2.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 19.043999999999997,
+              "y": -0.7212489168102787,
+              "z": -0.7212489168102785
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.He.3.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 19.043999999999997,
+              "y": 0.7212489168102784,
+              "z": -0.7212489168102787
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.He.4.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 20.343999999999998,
+              "y": 0.7212489168102786,
+              "z": 0.7212489168102786
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.He.5.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 20.343999999999998,
+              "y": -0.7212489168102785,
+              "z": 0.7212489168102786
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.He.6.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 20.343999999999998,
+              "y": -0.7212489168102787,
+              "z": -0.7212489168102785
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.He.7.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 20.343999999999998,
+              "y": 0.7212489168102784,
+              "z": -0.7212489168102787
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Booster.IntertankFrame",
+            "massKg": 198.00000000000003,
+            "com": {
+              "x": 19.694,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 620.4924000000001,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 421.78620000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 421.78620000000006
+            }
+          },
+          {
+            "id": "Booster.LOX.InsulationSupports",
+            "massKg": 166.55154128959276,
+            "com": {
+              "x": 11.238499999999998,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 510.21399158653844,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3084.161594144425,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 3084.161594144425
+            }
+          },
+          {
+            "id": "Booster.LOX.TankShell",
+            "massKg": 2713.302050536081,
+            "com": {
+              "x": 11.238499999999998,
+              "y": -0.0004605839739223367,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 7841.442926049273,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 50009.03492653007,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 50009.03492653007
+            }
+          },
+          {
+            "id": "Booster.LOX.WeldRingsBafflesPorts",
+            "massKg": 244.27559389140274,
+            "com": {
+              "x": 11.238499999999998,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 722.8847650028281,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 4510.72246008311,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 4510.72246008311
+            }
+          },
+          {
+            "id": "Booster.PassiveAeroFins",
+            "massKg": 121.00000000000001,
+            "com": {
+              "x": 4.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 387.80500000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 208.42250000000004,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 208.42250000000004
+            }
+          },
+          {
+            "id": "Booster.Pressurization.RegulatorsHeatExchangers",
+            "massKg": 198.00000000000003,
+            "com": {
+              "x": 19.694,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 15.840000000000005,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 12.045000000000003,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 12.045000000000003
+            }
+          },
+          {
+            "id": "Booster.RP1.InsulationSupports",
+            "massKg": 165.0,
+            "com": {
+              "x": 25.1055,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 505.46099999999996,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1115.87202375,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1115.87202375
+            }
+          },
+          {
+            "id": "Booster.RP1.TankShell",
+            "massKg": 1559.708461297297,
+            "com": {
+              "x": 25.1055,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 4507.5574531491875,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 10412.864410755907,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 10412.864410755907
+            }
+          },
+          {
+            "id": "Booster.RP1.WeldRingsBafflesPorts",
+            "massKg": 242.00000000000003,
+            "com": {
+              "x": 25.1055,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 716.1506,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1624.0162015000003,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1624.0162015000003
+            }
+          },
+          {
+            "id": "Booster.ThrustFrame",
+            "massKg": 605.0,
+            "com": {
+              "x": 3.5,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1588.3064999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 818.8574166666664,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 818.8574166666664
+            }
+          },
+          {
+            "id": "Booster.TopAdapterInterstage",
+            "massKg": 363.00000000000006,
+            "com": {
+              "x": 30.867,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1137.5694,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 619.9072000000001,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 619.9072000000001
+            }
+          },
+          {
+            "id": "Booster.UmbilicalsService",
+            "massKg": 55.00000000000001,
+            "com": {
+              "x": 4.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1.1458333333333335,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.8250000000000001,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.1458333333333335
+            }
+          }
+        ],
+        "storeGeometry": [
+          {
+            "store": "Booster.LOX.Tank.Liquid",
+            "usableVolumeM3": 116.91019872157112,
+            "inertiaPerKg": {
+              "a": 1.444207205070839,
+              "b": -0.0005165290831256261,
+              "c": -2.9036209970084876e-20,
+              "d": -0.0005165290831256261,
+              "e": 14.821111910018892,
+              "f": 1.805161368136171e-21,
+              "g": -2.9036209970084876e-20,
+              "h": 1.805161368136171e-21,
+              "i": 14.819324342504409
+            }
+          },
+          {
+            "store": "Booster.RP1.Tank.Liquid",
+            "usableVolumeM3": 62.234110636955464,
+            "inertiaPerKg": {
+              "a": 1.4210817635823507,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 4.645820105926324,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 4.645820105926324
+            }
+          },
+          {
+            "store": "Booster.Feed.0.Liquid",
+            "usableVolumeM3": 0.8763144592947972,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 26.55821680282673,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 26.55821680282673
+            }
+          },
+          {
+            "store": "Booster.Feed.1.Liquid",
+            "usableVolumeM3": 0.10727557164304892,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.1036020833333333,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.1036020833333333
+            }
+          },
+          {
+            "store": "Booster.Feed.2.Liquid",
+            "usableVolumeM3": 0.21585906347268458,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.6114600136974557,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.6114600136974557
+            }
+          },
+          {
+            "store": "Booster.Feed.3.Liquid",
+            "usableVolumeM3": 0.11678854260901453,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 2.20619442918972,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 2.20619442918972
+            }
+          },
+          {
+            "store": "Booster.Feed.4.Liquid",
+            "usableVolumeM3": 0.0825354448323621,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.5751750000000001,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.5751750000000001
+            }
+          },
+          {
+            "store": "Booster.LOX.Tank.HeUllage",
+            "usableVolumeM3": 6.367373306629062,
+            "inertiaPerKg": {
+              "a": 1.2274114983308326,
+              "b": 0.0005423905743731916,
+              "c": -1.495401819777697e-19,
+              "d": 0.0005423905743731916,
+              "e": 0.6737164873416215,
+              "f": -3.650813852355658e-21,
+              "g": -1.495401819777697e-19,
+              "h": -3.650813852355658e-21,
+              "i": 0.6713314600566584
+            }
+          },
+          {
+            "store": "Booster.RP1.Tank.HeUllage",
+            "usableVolumeM3": 4.555531331808325,
+            "inertiaPerKg": {
+              "a": 1.4449999999999998,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.4449999999999998,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.4449999999999998
+            }
+          },
+          {
+            "store": "Booster.He.0.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Booster.He.1.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Booster.He.2.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Booster.He.3.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Booster.He.4.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Booster.He.5.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Booster.He.6.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Booster.He.7.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          }
+        ],
+        "subparts": [],
+        "consumers": [],
+        "interfaces": [
+          {
+            "interface": "ENGINE_0",
+            "services": "Propellant, Data",
+            "detachable": false
+          },
+          {
+            "interface": "ENGINE_1",
+            "services": "Propellant, Data",
+            "detachable": false
+          },
+          {
+            "interface": "ENGINE_2",
+            "services": "Propellant, Data",
+            "detachable": false
+          },
+          {
+            "interface": "RELEASE_MOUNT",
+            "services": "Data",
+            "detachable": false
+          }
+        ],
+        "electrical": [],
+        "command": false,
+        "unqualifiedHardware": [
+          "Booster.AvionicsHarnessSensors",
+          "Booster.BatteryPower"
+        ]
+      }
+    },
+    {
+      "id": "nc.booster-engine.liquid-a",
+      "revision": 1,
+      "visualReference": "nc.visual.booster-engine.liquid-a",
+      "role": "Component",
+      "dryMassKg": 949.5,
+      "localCom": {
+        "x": 0.09478672985782,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localInertia": {
+        "a": 224.3633671875916,
+        "b": 0.0,
+        "c": 0.0,
+        "d": 0.0,
+        "e": 743.772127906592,
+        "f": 0.0,
+        "g": 0.0,
+        "h": 0.0,
+        "i": 743.772127906592
+      },
+      "attachments": [
+        {
+          "id": "ENGINE_MOUNT",
+          "family": "nc.engine-mount.booster.r1",
+          "frame": {
+            "position": {
+              "x": 1.1000001430511475,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": 1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        }
+      ],
+      "stores": [],
+      "propulsion": null,
+      "gimbal": null,
+      "construction": {
+        "name": "nc.booster-engine.liquid-a",
+        "development": true,
+        "asset": {
+          "id": "nc.visual.booster-engine.liquid-a",
+          "revision": 1,
+          "sha256": "2c1110cb0ba15be9620856be331e3660ba37228ca53b0f0cc497d870aa46fd32",
+          "relativePath": "Library/nc.booster-engine.liquid-a.r1.glb",
+          "units": "m",
+          "basis": "gltf=(E.Y,-E.Z,-E.X)",
+          "materialOrigin": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "requiredNodes": [
+            "Part.nc.booster-engine.liquid-a.r1",
+            "Part.nc.booster-engine.liquid-a.r1.Engine",
+            "Part.nc.booster-engine.liquid-a.r1.Engine.Mount",
+            "Part.nc.booster-engine.liquid-a.r1.SOCKET_ENGINE_MOUNT"
+          ],
+          "provenance": "accepted reusable-part asset digest 5ded33499440bcc95f503202115eee3fca565210f31f16faf96ee1bc6fa7bbd0"
+        },
+        "physicalSource": {
+          "id": "nc.development.engineering.regions",
+          "revision": 1,
+          "sha256": "a91051fa2b61506deefc755be0d6303c678481f48ca7ae2e3deb83f2e8a02af4",
+          "provenance": "development-launch-stack-preblender constituent files; not mesh mass"
+        },
+        "massRegions": [
+          {
+            "id": "Booster.Engine.0.Hardware",
+            "massKg": 900,
+            "com": {
+              "x": 0.10000000000000009,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 223.3527421875916,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 742.4263710937958,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 742.4263710937958
+            }
+          },
+          {
+            "id": "Booster.Engine.0.TVC",
+            "massKg": 49.50000000000001,
+            "com": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1.0106249999999999,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.8765625,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.8765625
+            }
+          }
+        ],
+        "storeGeometry": [],
+        "subparts": [
+          {
+            "id": "Engine",
+            "parent": null,
+            "pose": {
+              "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "rotation": {
+                "a": 1.0,
+                "b": 0.0,
+                "c": 0.0,
+                "d": 0.0,
+                "e": 1.0,
+                "f": 0.0,
+                "g": 0.0,
+                "h": 0.0,
+                "i": 1.0
+              }
+            },
+            "visualNode": "Part.nc.booster-engine.liquid-a.r1.Engine",
+            "kind": "Gimbal",
+            "massRegions": [
+              "Booster.Engine.0.Hardware",
+              "Booster.Engine.0.TVC"
+            ],
+            "actuators": [
+              "Main"
+            ]
+          }
+        ],
+        "consumers": [
+          {
+            "id": "Main",
+            "subpart": "Engine",
+            "model": "nc.development.launch_main",
+            "totalFlowKgS": 380.2331641612614,
+            "mixture": [
+              {
+                "resource": "nc.resource.RP1",
+                "weight": 5
+              },
+              {
+                "resource": "nc.resource.LOX",
+                "weight": 13
+              }
+            ],
+            "feedStores": [],
+            "feedInterfaces": [
+              "ENGINE_MOUNT"
+            ],
+            "flowRule": "FarthestFirst",
+            "forcePoint": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 1249152.5423728814,
+            "gimbal": {
+              "id": "Gimbal",
+              "pivot": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "nozzleOffset": {
+                "x": -1.6500000000000001,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "limitY": 0.05235987755982989,
+              "limitZ": 0.05235987755982989,
+              "slewRate": 0
+            }
+          }
+        ],
+        "interfaces": [
+          {
+            "interface": "ENGINE_MOUNT",
+            "services": "Propellant, Data",
+            "detachable": false
+          }
+        ],
+        "electrical": [],
+        "command": false,
+        "unqualifiedHardware": []
+      }
+    },
+    {
+      "id": "nc.capsule.return-3500",
+      "revision": 1,
+      "visualReference": "nc.visual.capsule.return-3500",
+      "role": "Component",
+      "dryMassKg": 2882.3499999999976,
+      "localCom": {
+        "x": 1.0014288688049688,
+        "y": -2.6152529838032044e-17,
+        "z": 1.9721206259062244e-17
+      },
+      "localInertia": {
+        "a": 5951.900968669865,
+        "b": -1.2806912151036136e-14,
+        "c": 1.1110108486915788e-14,
+        "d": -1.2806912151036136e-14,
+        "e": 4530.640426855434,
+        "f": -88.53424500000004,
+        "g": 1.1110108486915788e-14,
+        "h": -88.53424500000004,
+        "i": 4530.640426855434
+      },
+      "attachments": [
+        {
+          "id": "BOTTOM_RECEIVER",
+          "family": "nc.axial-collar.3550-3620.paired.r1",
+          "frame": {
+            "position": {
+              "x": 0.36000001430511475,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": -1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        }
+      ],
+      "stores": [
+        {
+          "id": "Capsule.MMH.0.Liquid",
+          "species": "MMH",
+          "resourceIdentity": "nc.resource.MMH",
+          "datum": {
+            "x": 0.83,
+            "y": 1.12,
+            "z": 0.0
+          },
+          "capacityKg": 188.67924528301887
+        },
+        {
+          "id": "Capsule.NTO.0.Liquid",
+          "species": "NTO",
+          "resourceIdentity": "nc.resource.NTO",
+          "datum": {
+            "x": 0.83,
+            "y": 6.858022075225179e-17,
+            "z": 1.12
+          },
+          "capacityKg": 311.3207547169811
+        },
+        {
+          "id": "Capsule.MMH.1.Liquid",
+          "species": "MMH",
+          "resourceIdentity": "nc.resource.MMH",
+          "datum": {
+            "x": 0.83,
+            "y": -1.12,
+            "z": 1.3716044150450358e-16
+          },
+          "capacityKg": 188.67924528301887
+        },
+        {
+          "id": "Capsule.NTO.1.Liquid",
+          "species": "NTO",
+          "resourceIdentity": "nc.resource.NTO",
+          "datum": {
+            "x": 0.83,
+            "y": -2.0574066225675535e-16,
+            "z": -1.12
+          },
+          "capacityKg": 311.3207547169811
+        },
+        {
+          "id": "Capsule.MMH.0.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 0.83,
+            "y": 1.12,
+            "z": 0.0
+          },
+          "capacityKg": 0.05445413676711846
+        },
+        {
+          "id": "Capsule.NTO.0.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 0.83,
+            "y": 6.858022075225179e-17,
+            "z": 1.12
+          },
+          "capacityKg": 0.048152256390080715
+        },
+        {
+          "id": "Capsule.MMH.1.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 0.83,
+            "y": -1.12,
+            "z": 1.3716044150450358e-16
+          },
+          "capacityKg": 0.05445413676711846
+        },
+        {
+          "id": "Capsule.NTO.1.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 0.83,
+            "y": -2.0574066225675535e-16,
+            "z": -1.12
+          },
+          "capacityKg": 0.048152256390080715
+        },
+        {
+          "id": "Capsule.He.0.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 1.72,
+            "y": 0.6010407640085654,
+            "z": 0.6010407640085654
+          },
+          "capacityKg": 3.897393606842801
+        },
+        {
+          "id": "Capsule.He.1.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 1.72,
+            "y": -0.6010407640085655,
+            "z": -0.6010407640085653
+          },
+          "capacityKg": 3.897393606842801
+        }
+      ],
+      "propulsion": null,
+      "gimbal": null,
+      "construction": {
+        "name": "nc.capsule.return-3500",
+        "development": true,
+        "asset": {
+          "id": "nc.visual.capsule.return-3500",
+          "revision": 1,
+          "sha256": "9867cc351e059433abd6822ff6d22cf39be760652bc723fa2f1e07ade19c4f35",
+          "relativePath": "Library/nc.capsule.return-3500.r1.glb",
+          "units": "m",
+          "basis": "gltf=(E.Y,-E.Z,-E.X)",
+          "materialOrigin": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "requiredNodes": [
+            "Part.nc.capsule.return-3500.r1",
+            "Part.nc.capsule.return-3500.r1.Capsule.Pod.0",
+            "Part.nc.capsule.return-3500.r1.Capsule.Pod.1",
+            "Part.nc.capsule.return-3500.r1.Capsule.Pod.2",
+            "Part.nc.capsule.return-3500.r1.Capsule.Pod.3",
+            "Part.nc.capsule.return-3500.r1.SOCKET_BOTTOM_RECEIVER"
+          ],
+          "provenance": "accepted reusable-part asset digest 69f2804f9fc747887a846659040defa08877ad336a0beb65d4e02dea40a59bd4"
+        },
+        "physicalSource": {
+          "id": "nc.development.engineering.regions",
+          "revision": 1,
+          "sha256": "a91051fa2b61506deefc755be0d6303c678481f48ca7ae2e3deb83f2e8a02af4",
+          "provenance": "development-launch-stack-preblender constituent files; not mesh mass"
+        },
+        "massRegions": [
+          {
+            "id": "Capsule.AttachmentSeparation",
+            "massKg": 92.0,
+            "com": {
+              "x": 0.39,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 286.787,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 143.4211,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 143.4211
+            }
+          },
+          {
+            "id": "Capsule.AvionicsHarness",
+            "massKg": 103.49999999999999,
+            "com": {
+              "x": 1.625,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 188.88749999999996,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 94.6378125,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 94.6378125
+            }
+          },
+          {
+            "id": "Capsule.BackshellTPS",
+            "massKg": 86.25,
+            "com": {
+              "x": 1.55,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 226.43212499999993,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 154.61606249999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 154.61606249999997
+            }
+          },
+          {
+            "id": "Capsule.BaseTPS",
+            "massKg": 229.99999999999997,
+            "com": {
+              "x": 0.07,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 352.18749999999994,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 177.29166666666663,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 177.29166666666663
+            }
+          },
+          {
+            "id": "Capsule.BatteryPower.0",
+            "massKg": 43.125,
+            "com": {
+              "x": 0.65,
+              "y": 0.85,
+              "z": 0.85
+            },
+            "inertiaAtCom": {
+              "a": 0.8804687499999999,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.7636718749999999,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.7636718749999999
+            }
+          },
+          {
+            "id": "Capsule.BatteryPower.1",
+            "massKg": 43.125,
+            "com": {
+              "x": 0.65,
+              "y": -0.85,
+              "z": -0.85
+            },
+            "inertiaAtCom": {
+              "a": 0.8804687499999999,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.7636718749999999,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.7636718749999999
+            }
+          },
+          {
+            "id": "Capsule.FeedRegulation",
+            "massKg": 97.74999999999999,
+            "com": {
+              "x": 1.36,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 36.1675,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 18.13588333333333,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 18.13588333333333
+            }
+          },
+          {
+            "id": "Capsule.He.0.COPV",
+            "massKg": 23.0,
+            "com": {
+              "x": 1.72,
+              "y": 0.6010407640085654,
+              "z": 0.6010407640085654
+            },
+            "inertiaAtCom": {
+              "a": 1.530962284402663,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.530962284402663,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.530962284402663
+            }
+          },
+          {
+            "id": "Capsule.He.1.COPV",
+            "massKg": 23.0,
+            "com": {
+              "x": 1.72,
+              "y": -0.6010407640085655,
+              "z": -0.6010407640085653
+            },
+            "inertiaAtCom": {
+              "a": 1.530962284402663,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.530962284402663,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.530962284402663
+            }
+          },
+          {
+            "id": "Capsule.HeatShieldCarrier",
+            "massKg": 206.99999999999997,
+            "com": {
+              "x": 0.18,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 577.4885999999998,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 288.9926999999999,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 288.9926999999999
+            }
+          },
+          {
+            "id": "Capsule.Leg.0",
+            "massKg": 46.0,
+            "com": {
+              "x": 0.85,
+              "y": 1.1278353159925434,
+              "z": 1.1278353159925434
+            },
+            "inertiaAtCom": {
+              "a": 0.42358333333333337,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 2.6651250000000006,
+              "f": 0.009008333333333285,
+              "g": 0.0,
+              "h": 0.009008333333333285,
+              "i": 2.6651250000000006
+            }
+          },
+          {
+            "id": "Capsule.Leg.1",
+            "massKg": 46.0,
+            "com": {
+              "x": 0.85,
+              "y": -1.1278353159925432,
+              "z": 1.1278353159925434
+            },
+            "inertiaAtCom": {
+              "a": 0.42358333333333337,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 2.6651250000000006,
+              "f": -0.009008333333333285,
+              "g": 0.0,
+              "h": -0.009008333333333285,
+              "i": 2.6651250000000006
+            }
+          },
+          {
+            "id": "Capsule.Leg.2",
+            "massKg": 46.0,
+            "com": {
+              "x": 0.85,
+              "y": -1.1278353159925436,
+              "z": -1.1278353159925432
+            },
+            "inertiaAtCom": {
+              "a": 0.42358333333333337,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 2.6651249999999997,
+              "f": 0.009008333333333285,
+              "g": 0.0,
+              "h": 0.009008333333333285,
+              "i": 2.6651249999999997
+            }
+          },
+          {
+            "id": "Capsule.Leg.3",
+            "massKg": 46.0,
+            "com": {
+              "x": 0.85,
+              "y": 1.127835315992543,
+              "z": -1.1278353159925436
+            },
+            "inertiaAtCom": {
+              "a": 0.42358333333333337,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 2.6651250000000006,
+              "f": -0.009008333333333285,
+              "g": 0.0,
+              "h": -0.009008333333333285,
+              "i": 2.6651250000000006
+            }
+          },
+          {
+            "id": "Capsule.OMS.0",
+            "massKg": 8.049999999999999,
+            "com": {
+              "x": 0.375,
+              "y": 2.02,
+              "z": 0.28
+            },
+            "inertiaAtCom": {
+              "a": 0.02456674228541258,
+              "b": 0.018078958333333332,
+              "c": 0.0,
+              "d": 0.018078958333333332,
+              "e": 0.08719409104792075,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.09203833333333332
+            }
+          },
+          {
+            "id": "Capsule.OMS.1",
+            "massKg": 8.049999999999999,
+            "com": {
+              "x": 0.375,
+              "y": 0.28000000000000014,
+              "z": 2.02
+            },
+            "inertiaAtCom": {
+              "a": 0.02456674228541258,
+              "b": 1.1070169227417514e-18,
+              "c": 0.018078958333333332,
+              "d": 1.1070169227417514e-18,
+              "e": 0.09203833333333332,
+              "f": -2.966242904562388e-19,
+              "g": 0.018078958333333332,
+              "h": -2.966242904562388e-19,
+              "i": 0.08719409104792075
+            }
+          },
+          {
+            "id": "Capsule.OMS.2",
+            "massKg": 8.049999999999999,
+            "com": {
+              "x": 0.375,
+              "y": -2.02,
+              "z": -0.2799999999999998
+            },
+            "inertiaAtCom": {
+              "a": 0.02456674228541258,
+              "b": -0.018078958333333332,
+              "c": 2.214033845483503e-18,
+              "d": -0.018078958333333332,
+              "e": 0.08719409104792075,
+              "f": 5.932485809124776e-19,
+              "g": 2.214033845483503e-18,
+              "h": 5.932485809124776e-19,
+              "i": 0.09203833333333332
+            }
+          },
+          {
+            "id": "Capsule.OMS.3",
+            "massKg": 8.049999999999999,
+            "com": {
+              "x": 0.375,
+              "y": -0.2800000000000004,
+              "z": -2.02
+            },
+            "inertiaAtCom": {
+              "a": 0.02456674228541258,
+              "b": -3.321050768225253e-18,
+              "c": -0.018078958333333332,
+              "d": -3.321050768225253e-18,
+              "e": 0.09203833333333332,
+              "f": -8.898728713687164e-19,
+              "g": -0.018078958333333332,
+              "h": -8.898728713687164e-19,
+              "i": 0.08719409104792075
+            }
+          },
+          {
+            "id": "Capsule.Payload",
+            "massKg": 250,
+            "com": {
+              "x": 0.85,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 41.666666666666664,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 37.708333333333336,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 37.708333333333336
+            }
+          },
+          {
+            "id": "Capsule.PayloadSupport",
+            "massKg": 69.0,
+            "com": {
+              "x": 0.85,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 13.915000000000001,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 12.707500000000001,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 12.707500000000001
+            }
+          },
+          {
+            "id": "Capsule.PodCaps.0",
+            "massKg": 11.5,
+            "com": {
+              "x": 0.45,
+              "y": 2.05,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.5937833333333332,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.49114583333333334,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.1457625
+            }
+          },
+          {
+            "id": "Capsule.PodCaps.1",
+            "massKg": 11.5,
+            "com": {
+              "x": 0.45,
+              "y": 1.2552629691260368e-16,
+              "z": 2.05
+            },
+            "inertiaAtCom": {
+              "a": 0.5937833333333332,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.14576250000000004,
+              "f": -7.669050579769042e-17,
+              "g": 0.0,
+              "h": -7.669050579769042e-17,
+              "i": 0.49114583333333356
+            }
+          },
+          {
+            "id": "Capsule.PodCaps.2",
+            "massKg": 11.5,
+            "com": {
+              "x": 0.45,
+              "y": -2.05,
+              "z": 2.5105259382520737e-16
+            },
+            "inertiaAtCom": {
+              "a": 0.5937833333333332,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.49114583333333334,
+              "f": -4.2297259364551e-17,
+              "g": 0.0,
+              "h": -4.2297259364551e-17,
+              "i": 0.1457625
+            }
+          },
+          {
+            "id": "Capsule.PodCaps.3",
+            "massKg": 11.5,
+            "com": {
+              "x": 0.45,
+              "y": -3.7657889073781105e-16,
+              "z": -2.05
+            },
+            "inertiaAtCom": {
+              "a": 0.5937833333333332,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.1457625,
+              "f": 7.66905057976904e-17,
+              "g": 0.0,
+              "h": 7.66905057976904e-17,
+              "i": 0.49114583333333334
+            }
+          },
+          {
+            "id": "Capsule.PodStructure.0",
+            "massKg": 23.0,
+            "com": {
+              "x": 0.85,
+              "y": 2.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1.1979166666666667,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 4.459891666666667,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 4.038225
+            }
+          },
+          {
+            "id": "Capsule.PodStructure.1",
+            "massKg": 23.0,
+            "com": {
+              "x": 0.85,
+              "y": 1.2246467991473532e-16,
+              "z": 2.0
+            },
+            "inertiaAtCom": {
+              "a": 1.1979166666666667,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 4.0382250000000015,
+              "f": -9.362880841005491e-17,
+              "g": 0.0,
+              "h": -9.362880841005491e-17,
+              "i": 4.459891666666668
+            }
+          },
+          {
+            "id": "Capsule.PodStructure.2",
+            "massKg": 23.0,
+            "com": {
+              "x": 0.85,
+              "y": -2.0,
+              "z": 2.4492935982947064e-16
+            },
+            "inertiaAtCom": {
+              "a": 1.1979166666666667,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 4.459891666666667,
+              "f": -5.1639273364046765e-17,
+              "g": 0.0,
+              "h": -5.1639273364046765e-17,
+              "i": 4.038225
+            }
+          },
+          {
+            "id": "Capsule.PodStructure.3",
+            "massKg": 23.0,
+            "com": {
+              "x": 0.85,
+              "y": -3.6739403974420594e-16,
+              "z": -2.0
+            },
+            "inertiaAtCom": {
+              "a": 1.1979166666666667,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 4.038225,
+              "f": 9.362880841005491e-17,
+              "g": 0.0,
+              "h": 9.362880841005491e-17,
+              "i": 4.459891666666667
+            }
+          },
+          {
+            "id": "Capsule.PodTPS.0",
+            "massKg": 17.25,
+            "com": {
+              "x": 0.7,
+              "y": 2.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.8984375,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.3449187499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 3.0286687499999996
+            }
+          },
+          {
+            "id": "Capsule.PodTPS.1",
+            "massKg": 17.25,
+            "com": {
+              "x": 0.7,
+              "y": 1.2246467991473532e-16,
+              "z": 2.0
+            },
+            "inertiaAtCom": {
+              "a": 0.8984375,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.0286687500000014,
+              "f": -7.022160630754118e-17,
+              "g": 0.0,
+              "h": -7.022160630754118e-17,
+              "i": 3.3449187500000015
+            }
+          },
+          {
+            "id": "Capsule.PodTPS.2",
+            "massKg": 17.25,
+            "com": {
+              "x": 0.7,
+              "y": -2.0,
+              "z": 2.4492935982947064e-16
+            },
+            "inertiaAtCom": {
+              "a": 0.8984375,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.3449187499999997,
+              "f": -3.8729455023035073e-17,
+              "g": 0.0,
+              "h": -3.8729455023035073e-17,
+              "i": 3.0286687499999996
+            }
+          },
+          {
+            "id": "Capsule.PodTPS.3",
+            "massKg": 17.25,
+            "com": {
+              "x": 0.7,
+              "y": -3.6739403974420594e-16,
+              "z": -2.0
+            },
+            "inertiaAtCom": {
+              "a": 0.8984375,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.0286687499999996,
+              "f": 7.022160630754118e-17,
+              "g": 0.0,
+              "h": 7.022160630754118e-17,
+              "i": 3.3449187499999997
+            }
+          },
+          {
+            "id": "Capsule.PrimaryShellFrames",
+            "massKg": 436.99999999999994,
+            "com": {
+              "x": 1.25,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1105.173,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 762.3465000000001,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 762.3465000000001
+            }
+          },
+          {
+            "id": "Capsule.RCS.0.0",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.19,
+              "y": 2.08,
+              "z": -0.3
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.0.1",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 1.3099999999999998,
+              "y": 2.1,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.0.2",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": 2.1,
+              "z": -0.21
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": 0.0,
+              "c": -1.6805307145872908e-18,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": -1.6805307145872908e-18,
+              "h": 0.0,
+              "i": 0.003493124999999998
+            }
+          },
+          {
+            "id": "Capsule.RCS.0.3",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": 2.1,
+              "z": 0.21
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": 0.0,
+              "c": 1.6805307145872908e-18,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 1.6805307145872908e-18,
+              "h": 0.0,
+              "i": 0.003493124999999998
+            }
+          },
+          {
+            "id": "Capsule.RCS.1.0",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.19,
+              "y": -0.2999999999999999,
+              "z": 2.08
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.1.1",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 1.3099999999999998,
+              "y": 1.285879139104721e-16,
+              "z": 2.1
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.1.2",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": 0.2100000000000001,
+              "z": 2.1
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": 1.6805307145872908e-18,
+              "c": -1.925929944387236e-34,
+              "d": 1.6805307145872908e-18,
+              "e": 0.003493124999999998,
+              "f": 4.634331379460898e-19,
+              "g": -1.925929944387236e-34,
+              "h": 4.634331379460898e-19,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.1.3",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": -0.20999999999999988,
+              "z": 2.1
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": -1.6805307145872908e-18,
+              "c": 1.925929944387236e-34,
+              "d": -1.6805307145872908e-18,
+              "e": 0.003493124999999998,
+              "f": 4.634331379460898e-19,
+              "g": 1.925929944387236e-34,
+              "h": 4.634331379460898e-19,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.2.0",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.19,
+              "y": -2.08,
+              "z": 0.30000000000000027
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.2.1",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 1.3099999999999998,
+              "y": -2.1,
+              "z": 2.571758278209442e-16
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.2.2",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": -2.1,
+              "z": 0.21000000000000027
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": 3.851859888774472e-34,
+              "c": 1.6805307145872906e-18,
+              "d": 3.851859888774472e-34,
+              "e": 0.011061562499999997,
+              "f": -9.268662758921796e-19,
+              "g": 1.6805307145872906e-18,
+              "h": -9.268662758921796e-19,
+              "i": 0.003493124999999998
+            }
+          },
+          {
+            "id": "Capsule.RCS.2.3",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": -2.1,
+              "z": -0.20999999999999971
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": -3.851859888774472e-34,
+              "c": -1.6805307145872906e-18,
+              "d": -3.851859888774472e-34,
+              "e": 0.011061562499999997,
+              "f": -9.268662758921796e-19,
+              "g": -1.6805307145872906e-18,
+              "h": -9.268662758921796e-19,
+              "i": 0.003493124999999998
+            }
+          },
+          {
+            "id": "Capsule.RCS.3.0",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.19,
+              "y": 0.2999999999999996,
+              "z": -2.08
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.3.1",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 1.3099999999999998,
+              "y": -3.8576374173141627e-16,
+              "z": -2.1
+            },
+            "inertiaAtCom": {
+              "a": 0.0034931249999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.011061562499999997,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.3.2",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": -0.21000000000000038,
+              "z": -2.1
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": -1.6805307145872904e-18,
+              "c": 3.851859888774472e-34,
+              "d": -1.6805307145872904e-18,
+              "e": 0.003493124999999998,
+              "f": 1.3902994138382693e-18,
+              "g": 3.851859888774472e-34,
+              "h": 1.3902994138382693e-18,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RCS.3.3",
+            "massKg": 3.4499999999999997,
+            "com": {
+              "x": 0.75,
+              "y": 0.2099999999999996,
+              "z": -2.1
+            },
+            "inertiaAtCom": {
+              "a": 0.011061562499999993,
+              "b": 1.6805307145872904e-18,
+              "c": -3.851859888774472e-34,
+              "d": 1.6805307145872904e-18,
+              "e": 0.003493124999999998,
+              "f": 1.3902994138382693e-18,
+              "g": -3.851859888774472e-34,
+              "h": 1.3902994138382693e-18,
+              "i": 0.011061562499999997
+            }
+          },
+          {
+            "id": "Capsule.RecoveryAssembly",
+            "massKg": 252.99999999999997,
+            "com": {
+              "x": 2.4,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 114.16624999999998,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 74.160625,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 74.160625
+            }
+          },
+          {
+            "id": "Capsule.RecoveryCoverMechanisms",
+            "massKg": 34.5,
+            "com": {
+              "x": 2.78,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 26.1441,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 13.251737499999999,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 13.251737499999999
+            }
+          },
+          {
+            "id": "Capsule.Tank.0.Hardware",
+            "massKg": 36.8,
+            "com": {
+              "x": 0.83,
+              "y": 1.12,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 3.598770133333333,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.598770133333333,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 3.598770133333333
+            }
+          },
+          {
+            "id": "Capsule.Tank.1.Hardware",
+            "massKg": 36.8,
+            "com": {
+              "x": 0.83,
+              "y": 6.858022075225179e-17,
+              "z": 1.12
+            },
+            "inertiaAtCom": {
+              "a": 3.598770133333333,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.598770133333333,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 3.598770133333333
+            }
+          },
+          {
+            "id": "Capsule.Tank.2.Hardware",
+            "massKg": 36.8,
+            "com": {
+              "x": 0.83,
+              "y": -1.12,
+              "z": 1.3716044150450358e-16
+            },
+            "inertiaAtCom": {
+              "a": 3.598770133333333,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.598770133333333,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 3.598770133333333
+            }
+          },
+          {
+            "id": "Capsule.Tank.3.Hardware",
+            "massKg": 36.8,
+            "com": {
+              "x": 0.83,
+              "y": -2.0574066225675535e-16,
+              "z": -1.12
+            },
+            "inertiaAtCom": {
+              "a": 3.598770133333333,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 3.598770133333333,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 3.598770133333333
+            }
+          },
+          {
+            "id": "Capsule.TerminalEngine.0",
+            "massKg": 51.74999999999999,
+            "com": {
+              "x": 0.71,
+              "y": 1.95,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.8852378996461288,
+              "b": 0.5129718749999996,
+              "c": 0.0,
+              "d": 0.5129718749999996,
+              "e": 2.6622246003538703,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 2.7996749999999992
+            }
+          },
+          {
+            "id": "Capsule.TerminalEngine.1",
+            "massKg": 51.74999999999999,
+            "com": {
+              "x": 0.71,
+              "y": 1.1940306291686693e-16,
+              "z": 1.95
+            },
+            "inertiaAtCom": {
+              "a": 0.8852378996461288,
+              "b": 3.14104682385683e-17,
+              "c": 0.5129718749999996,
+              "d": 3.14104682385683e-17,
+              "e": 2.7996749999999992,
+              "f": -8.416409598407802e-18,
+              "g": 0.5129718749999996,
+              "h": -8.416409598407802e-18,
+              "i": 2.6622246003538703
+            }
+          },
+          {
+            "id": "Capsule.TerminalEngine.2",
+            "massKg": 51.74999999999999,
+            "com": {
+              "x": 0.71,
+              "y": -1.95,
+              "z": 2.3880612583373386e-16
+            },
+            "inertiaAtCom": {
+              "a": 0.8852378996461288,
+              "b": -0.5129718749999996,
+              "c": 6.28209364771366e-17,
+              "d": -0.5129718749999996,
+              "e": 2.6622246003538703,
+              "f": 1.6832819196815604e-17,
+              "g": 6.28209364771366e-17,
+              "h": 1.6832819196815604e-17,
+              "i": 2.7996749999999992
+            }
+          },
+          {
+            "id": "Capsule.TerminalEngine.3",
+            "massKg": 51.74999999999999,
+            "com": {
+              "x": 0.71,
+              "y": -3.5820918875060077e-16,
+              "z": -1.95
+            },
+            "inertiaAtCom": {
+              "a": 0.8852378996461288,
+              "b": -9.423140471570487e-17,
+              "c": -0.5129718749999996,
+              "d": -9.423140471570487e-17,
+              "e": 2.7996749999999992,
+              "f": -2.524922879522341e-17,
+              "g": -0.5129718749999996,
+              "h": -2.524922879522341e-17,
+              "i": 2.6622246003538703
+            }
+          },
+          {
+            "id": "Capsule.ThermalService",
+            "massKg": 57.49999999999999,
+            "com": {
+              "x": 1.4,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 133.75937499999998,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 66.92760416666665,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 66.92760416666665
+            }
+          }
+        ],
+        "storeGeometry": [
+          {
+            "store": "Capsule.MMH.0.Liquid",
+            "usableVolumeM3": 0.21440823327615782,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.NTO.0.Liquid",
+            "usableVolumeM3": 0.21619496855345913,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.MMH.1.Liquid",
+            "usableVolumeM3": 0.21440823327615782,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.NTO.1.Liquid",
+            "usableVolumeM3": 0.21619496855345913,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.MMH.0.HeUllage",
+            "usableVolumeM3": 0.015439062840881007,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.NTO.0.HeUllage",
+            "usableVolumeM3": 0.013652327563579703,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.MMH.1.HeUllage",
+            "usableVolumeM3": 0.015439062840881007,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.NTO.1.HeUllage",
+            "usableVolumeM3": 0.013652327563579703,
+            "inertiaPerKg": {
+              "a": 0.057760000000000006,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.057760000000000006,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.057760000000000006
+            }
+          },
+          {
+            "store": "Capsule.He.0.Gas",
+            "usableVolumeM3": 0.12,
+            "inertiaPerKg": {
+              "a": 0.037450281156077986,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.037450281156077986,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.037450281156077986
+            }
+          },
+          {
+            "store": "Capsule.He.1.Gas",
+            "usableVolumeM3": 0.12,
+            "inertiaPerKg": {
+              "a": 0.037450281156077986,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.037450281156077986,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.037450281156077986
+            }
+          }
+        ],
+        "subparts": [
+          {
+            "id": "Pod.0",
+            "parent": null,
+            "pose": {
+              "position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rotation": {
+                "a": 1.0,
+                "b": 0.0,
+                "c": 0.0,
+                "d": 0.0,
+                "e": 1.0,
+                "f": 0.0,
+                "g": 0.0,
+                "h": 0.0,
+                "i": 1.0
+              }
+            },
+            "visualNode": "Part.nc.capsule.return-3500.r1.Capsule.Pod.0",
+            "kind": "Physical",
+            "massRegions": [],
+            "actuators": [
+              "Capsule.TerminalEngine.0",
+              "Capsule.OMS.0",
+              "Capsule.RCS.0.0",
+              "Capsule.RCS.0.1",
+              "Capsule.RCS.0.2",
+              "Capsule.RCS.0.3"
+            ]
+          },
+          {
+            "id": "Pod.1",
+            "parent": null,
+            "pose": {
+              "position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rotation": {
+                "a": 1.0,
+                "b": 0.0,
+                "c": 0.0,
+                "d": 0.0,
+                "e": 1.0,
+                "f": 0.0,
+                "g": 0.0,
+                "h": 0.0,
+                "i": 1.0
+              }
+            },
+            "visualNode": "Part.nc.capsule.return-3500.r1.Capsule.Pod.1",
+            "kind": "Physical",
+            "massRegions": [],
+            "actuators": [
+              "Capsule.TerminalEngine.1",
+              "Capsule.OMS.1",
+              "Capsule.RCS.1.0",
+              "Capsule.RCS.1.1",
+              "Capsule.RCS.1.2",
+              "Capsule.RCS.1.3"
+            ]
+          },
+          {
+            "id": "Pod.2",
+            "parent": null,
+            "pose": {
+              "position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rotation": {
+                "a": 1.0,
+                "b": 0.0,
+                "c": 0.0,
+                "d": 0.0,
+                "e": 1.0,
+                "f": 0.0,
+                "g": 0.0,
+                "h": 0.0,
+                "i": 1.0
+              }
+            },
+            "visualNode": "Part.nc.capsule.return-3500.r1.Capsule.Pod.2",
+            "kind": "Physical",
+            "massRegions": [],
+            "actuators": [
+              "Capsule.TerminalEngine.2",
+              "Capsule.OMS.2",
+              "Capsule.RCS.2.0",
+              "Capsule.RCS.2.1",
+              "Capsule.RCS.2.2",
+              "Capsule.RCS.2.3"
+            ]
+          },
+          {
+            "id": "Pod.3",
+            "parent": null,
+            "pose": {
+              "position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rotation": {
+                "a": 1.0,
+                "b": 0.0,
+                "c": 0.0,
+                "d": 0.0,
+                "e": 1.0,
+                "f": 0.0,
+                "g": 0.0,
+                "h": 0.0,
+                "i": 1.0
+              }
+            },
+            "visualNode": "Part.nc.capsule.return-3500.r1.Capsule.Pod.3",
+            "kind": "Physical",
+            "massRegions": [],
+            "actuators": [
+              "Capsule.TerminalEngine.3",
+              "Capsule.OMS.3",
+              "Capsule.RCS.3.0",
+              "Capsule.RCS.3.1",
+              "Capsule.RCS.3.2",
+              "Capsule.RCS.3.3"
+            ]
+          }
+        ],
+        "consumers": [
+          {
+            "id": "Capsule.TerminalEngine.0",
+            "subpart": "Pod.0",
+            "model": "nc.development.terminal_SL",
+            "totalFlowKgS": 4.930678213814744,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.35,
+              "y": 2.05,
+              "z": 0.0
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": -0.25881904510252074,
+              "z": 0.0
+            },
+            "thrustN": 10000,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.OMS.0",
+            "subpart": "Pod.0",
+            "model": "nc.development.orbital_vacuum",
+            "totalFlowKgS": 0.1618597163457029,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.2,
+              "y": 2.04,
+              "z": 0.28
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": -0.25881904510252074,
+              "z": 0.0
+            },
+            "thrustN": 500,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.0.0",
+            "subpart": "Pod.0",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.1,
+              "y": 2.08,
+              "z": -0.3
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.0.1",
+            "subpart": "Pod.0",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 1.4,
+              "y": 2.1,
+              "z": 0.0
+            },
+            "axis": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.0.2",
+            "subpart": "Pod.0",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": 2.1,
+              "z": -0.3
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.0.3",
+            "subpart": "Pod.0",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": 2.1,
+              "z": 0.3
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -1.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.TerminalEngine.1",
+            "subpart": "Pod.1",
+            "model": "nc.development.terminal_SL",
+            "totalFlowKgS": 4.930678213814744,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.35,
+              "y": 1.2552629691260368e-16,
+              "z": 2.05
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": -1.5848095757158825e-17,
+              "z": -0.25881904510252074
+            },
+            "thrustN": 10000,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.OMS.1",
+            "subpart": "Pod.1",
+            "model": "nc.development.orbital_vacuum",
+            "totalFlowKgS": 0.1618597163457029,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.2,
+              "y": 0.28000000000000014,
+              "z": 2.04
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": -1.5848095757158825e-17,
+              "z": -0.25881904510252074
+            },
+            "thrustN": 500,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.1.0",
+            "subpart": "Pod.1",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.1,
+              "y": -0.2999999999999999,
+              "z": 2.08
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.1.1",
+            "subpart": "Pod.1",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 1.4,
+              "y": 1.285879139104721e-16,
+              "z": 2.1
+            },
+            "axis": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.1.2",
+            "subpart": "Pod.1",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": 0.3000000000000001,
+              "z": 2.1
+            },
+            "axis": {
+              "x": 0.0,
+              "y": -1.0,
+              "z": 6.123233995736766e-17
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.1.3",
+            "subpart": "Pod.1",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": -0.2999999999999999,
+              "z": 2.1
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": -6.123233995736766e-17
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.TerminalEngine.2",
+            "subpart": "Pod.2",
+            "model": "nc.development.terminal_SL",
+            "totalFlowKgS": 4.930678213814744,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.35,
+              "y": -2.05,
+              "z": 2.5105259382520737e-16
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": 0.25881904510252074,
+              "z": -3.169619151431765e-17
+            },
+            "thrustN": 10000,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.OMS.2",
+            "subpart": "Pod.2",
+            "model": "nc.development.orbital_vacuum",
+            "totalFlowKgS": 0.1618597163457029,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.2,
+              "y": -2.04,
+              "z": -0.27999999999999975
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": 0.25881904510252074,
+              "z": -3.169619151431765e-17
+            },
+            "thrustN": 500,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.2.0",
+            "subpart": "Pod.2",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.1,
+              "y": -2.08,
+              "z": 0.30000000000000027
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.2.1",
+            "subpart": "Pod.2",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 1.4,
+              "y": -2.1,
+              "z": 2.571758278209442e-16
+            },
+            "axis": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.2.2",
+            "subpart": "Pod.2",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": -2.1,
+              "z": 0.30000000000000027
+            },
+            "axis": {
+              "x": 0.0,
+              "y": -1.2246467991473532e-16,
+              "z": -1.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.2.3",
+            "subpart": "Pod.2",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": -2.1,
+              "z": -0.2999999999999997
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 1.2246467991473532e-16,
+              "z": 1.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.TerminalEngine.3",
+            "subpart": "Pod.3",
+            "model": "nc.development.terminal_SL",
+            "totalFlowKgS": 4.930678213814744,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.35,
+              "y": -3.7657889073781105e-16,
+              "z": -2.05
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": 4.7544287271476465e-17,
+              "z": 0.25881904510252074
+            },
+            "thrustN": 10000,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.OMS.3",
+            "subpart": "Pod.3",
+            "model": "nc.development.orbital_vacuum",
+            "totalFlowKgS": 0.1618597163457029,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.2,
+              "y": -0.2800000000000004,
+              "z": -2.04
+            },
+            "axis": {
+              "x": 0.9659258262890683,
+              "y": 4.7544287271476465e-17,
+              "z": 0.25881904510252074
+            },
+            "thrustN": 500,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.3.0",
+            "subpart": "Pod.3",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.1,
+              "y": 0.2999999999999996,
+              "z": -2.08
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.3.1",
+            "subpart": "Pod.3",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 1.4,
+              "y": -3.8576374173141627e-16,
+              "z": -2.1
+            },
+            "axis": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.3.2",
+            "subpart": "Pod.3",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": -0.3000000000000004,
+              "z": -2.1
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": -1.8369701987210297e-16
+            },
+            "thrustN": 115,
+            "gimbal": null
+          },
+          {
+            "id": "Capsule.RCS.3.3",
+            "subpart": "Pod.3",
+            "model": "nc.development.bipropellant_RCS",
+            "totalFlowKgS": 0.04736176008108993,
+            "mixture": [
+              {
+                "resource": "nc.resource.MMH",
+                "weight": 20
+              },
+              {
+                "resource": "nc.resource.NTO",
+                "weight": 33
+              }
+            ],
+            "feedStores": [
+              "Capsule.MMH.0.Liquid",
+              "Capsule.NTO.0.Liquid",
+              "Capsule.MMH.1.Liquid",
+              "Capsule.NTO.1.Liquid"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.75,
+              "y": 0.2999999999999996,
+              "z": -2.1
+            },
+            "axis": {
+              "x": 0.0,
+              "y": -1.0,
+              "z": 1.8369701987210297e-16
+            },
+            "thrustN": 115,
+            "gimbal": null
+          }
+        ],
+        "interfaces": [
+          {
+            "interface": "BOTTOM_RECEIVER",
+            "services": "Data",
+            "detachable": true
+          }
+        ],
+        "electrical": [],
+        "command": true,
+        "unqualifiedHardware": [
+          "Capsule.AvionicsHarness",
+          "Capsule.BatteryPower.0",
+          "Capsule.BatteryPower.1",
+          "Capsule.Leg.0",
+          "Capsule.Leg.1",
+          "Capsule.Leg.2",
+          "Capsule.Leg.3"
+        ]
+      }
+    },
+    {
+      "id": "nc.upper-body.3600",
+      "revision": 1,
+      "visualReference": "nc.visual.upper-body.3600",
+      "role": "Component",
+      "dryMassKg": 2875.498857504593,
+      "localCom": {
+        "x": 6.473089052021884,
+        "y": 0.026625147524105632,
+        "z": 0.0
+      },
+      "localInertia": {
+        "a": 6746.548959466474,
+        "b": -30.58429871352421,
+        "c": 1.4210854715202004e-14,
+        "d": -30.58429871352421,
+        "e": 31764.639236785915,
+        "f": -5.797440000000021,
+        "g": 1.4210854715202004e-14,
+        "h": -5.797440000000021,
+        "i": 31709.35343015722
+      },
+      "attachments": [
+        {
+          "id": "BOTTOM_RECEIVER",
+          "family": "nc.axial-load-ring.3080-3320.paired.r1",
+          "frame": {
+            "position": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": -1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        },
+        {
+          "id": "ENGINE_0",
+          "family": "nc.engine-mount.upper.r1",
+          "frame": {
+            "position": {
+              "x": 2.799999952316284,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": -1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": -1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        },
+        {
+          "id": "RELEASE_MOUNT",
+          "family": "nc.axial-collar.3550-3620.paired.r1.mount",
+          "frame": {
+            "position": {
+              "x": 11.897000312805176,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": 1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        }
+      ],
+      "stores": [
+        {
+          "id": "Upper.LOX.Tank.Liquid",
+          "species": "LOX",
+          "resourceIdentity": "nc.resource.LOX",
+          "datum": {
+            "x": 4.845028080821891,
+            "y": -0.001054069774213881,
+            "z": -3.428989542362119e-22
+          },
+          "capacityKg": 30313.170198983513
+        },
+        {
+          "id": "Upper.RP1.Tank.Liquid",
+          "species": "RP1",
+          "resourceIdentity": "nc.resource.RP1",
+          "datum": {
+            "x": 9.465617040781167,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "capacityKg": 11619.8025353988
+        },
+        {
+          "id": "Upper.Feed.0.Liquid",
+          "species": "RP1",
+          "resourceIdentity": "nc.resource.RP1",
+          "datum": {
+            "x": 5.486932208953541,
+            "y": 0.4,
+            "z": 0.0
+          },
+          "capacityKg": 45.215172115850365
+        },
+        {
+          "id": "Upper.Feed.1.Liquid",
+          "species": "LOX",
+          "resourceIdentity": "nc.resource.LOX",
+          "datum": {
+            "x": 2.6,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "capacityKg": 20.163134349820993
+        },
+        {
+          "id": "Upper.Feed.2.Liquid",
+          "species": "RP1",
+          "resourceIdentity": "nc.resource.RP1",
+          "datum": {
+            "x": 2.50390625,
+            "y": 0.2860937499999999,
+            "z": 0.0
+          },
+          "capacityKg": 1.6489591520162097
+        },
+        {
+          "id": "Upper.LOX.Tank.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 6.498359060740575,
+            "y": -0.002273610991665864,
+            "z": -3.629154724920608e-21
+          },
+          "capacityKg": 1.9010676296376516
+        },
+        {
+          "id": "Upper.RP1.Tank.HeUllage",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 10.443815608638381,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "capacityKg": 0.43857076161526387
+        },
+        {
+          "id": "Upper.He.0.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 7.575,
+            "y": 4.898587196589413e-17,
+            "z": 0.8
+          },
+          "capacityKg": 26.83018080437354
+        },
+        {
+          "id": "Upper.He.1.Gas",
+          "species": "He",
+          "resourceIdentity": "nc.resource.He",
+          "datum": {
+            "x": 7.575,
+            "y": -1.4695761589768238e-16,
+            "z": -0.8
+          },
+          "capacityKg": 26.83018080437354
+        }
+      ],
+      "propulsion": null,
+      "gimbal": null,
+      "construction": {
+        "name": "nc.upper-body.3600",
+        "development": true,
+        "asset": {
+          "id": "nc.visual.upper-body.3600",
+          "revision": 1,
+          "sha256": "a1684556e85fd0e58bcd41bb606d2cd9c35015bd8a06b04da54ac99d62e372fe",
+          "relativePath": "Library/nc.upper-body.3600.r1.glb",
+          "units": "m",
+          "basis": "gltf=(E.Y,-E.Z,-E.X)",
+          "materialOrigin": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "requiredNodes": [
+            "Part.nc.upper-body.3600.r1",
+            "Part.nc.upper-body.3600.r1.SOCKET_BOTTOM_RECEIVER",
+            "Part.nc.upper-body.3600.r1.SOCKET_ENGINE_0",
+            "Part.nc.upper-body.3600.r1.SOCKET_RELEASE_MOUNT"
+          ],
+          "provenance": "accepted reusable-part asset digest 455788f88c4da4ae0dafbae4e5b7d0b2055d0a4f7c3c9bab8c4890ccaf808ab2"
+        },
+        "physicalSource": {
+          "id": "nc.development.engineering.regions",
+          "revision": 1,
+          "sha256": "a91051fa2b61506deefc755be0d6303c678481f48ca7ae2e3deb83f2e8a02af4",
+          "provenance": "development-launch-stack-preblender constituent files; not mesh mass"
+        },
+        "massRegions": [
+          {
+            "id": "Upper.AvionicsHarnessSensors",
+            "massKg": 110.00000000000001,
+            "com": {
+              "x": 11.137,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 126.03800000000004,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 64.14191666666667,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 64.14191666666667
+            }
+          },
+          {
+            "id": "Upper.BatteryPower",
+            "massKg": 82.5,
+            "com": {
+              "x": 11.137,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 31.787250000000007,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 16.512375000000002,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 16.512375000000002
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.0",
+            "massKg": 4.4,
+            "com": {
+              "x": 0.8,
+              "y": 1.83,
+              "z": 0.09
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": 0.0,
+              "c": -1.8990364836213297e-18,
+              "d": 0.0,
+              "e": 0.0152075,
+              "f": 0.0,
+              "g": -1.8990364836213297e-18,
+              "h": 0.0,
+              "i": 0.006654999999999997
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.1",
+            "massKg": 4.4,
+            "com": {
+              "x": 0.8,
+              "y": 0.09000000000000011,
+              "z": 1.83
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": -1.8990364836213297e-18,
+              "c": 1.925929944387236e-34,
+              "d": -1.8990364836213297e-18,
+              "e": 0.006654999999999997,
+              "f": 5.236895874853871e-19,
+              "g": 1.925929944387236e-34,
+              "h": 5.236895874853871e-19,
+              "i": 0.0152075
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.2",
+            "massKg": 4.4,
+            "com": {
+              "x": 0.8,
+              "y": -1.83,
+              "z": -0.08999999999999977
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": 3.851859888774472e-34,
+              "c": 1.8990364836213297e-18,
+              "d": 3.851859888774472e-34,
+              "e": 0.0152075,
+              "f": -1.0473791749707741e-18,
+              "g": 1.8990364836213297e-18,
+              "h": -1.0473791749707741e-18,
+              "i": 0.006654999999999997
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.3",
+            "massKg": 4.4,
+            "com": {
+              "x": 0.8,
+              "y": -0.09000000000000033,
+              "z": -1.83
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": 1.8990364836213293e-18,
+              "c": -3.851859888774472e-34,
+              "d": 1.8990364836213293e-18,
+              "e": 0.006654999999999997,
+              "f": 1.5710687624561614e-18,
+              "g": -3.851859888774472e-34,
+              "h": 1.5710687624561614e-18,
+              "i": 0.0152075
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.4",
+            "massKg": 4.4,
+            "com": {
+              "x": 11.137,
+              "y": 1.83,
+              "z": 0.09
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": 0.0,
+              "c": -1.8990364836213297e-18,
+              "d": 0.0,
+              "e": 0.0152075,
+              "f": 0.0,
+              "g": -1.8990364836213297e-18,
+              "h": 0.0,
+              "i": 0.006654999999999997
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.5",
+            "massKg": 4.4,
+            "com": {
+              "x": 11.137,
+              "y": 0.09000000000000011,
+              "z": 1.83
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": -1.8990364836213297e-18,
+              "c": 1.925929944387236e-34,
+              "d": -1.8990364836213297e-18,
+              "e": 0.006654999999999997,
+              "f": 5.236895874853871e-19,
+              "g": 1.925929944387236e-34,
+              "h": 5.236895874853871e-19,
+              "i": 0.0152075
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.6",
+            "massKg": 4.4,
+            "com": {
+              "x": 11.137,
+              "y": -1.83,
+              "z": -0.08999999999999977
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": 3.851859888774472e-34,
+              "c": 1.8990364836213297e-18,
+              "d": 3.851859888774472e-34,
+              "e": 0.0152075,
+              "f": -1.0473791749707741e-18,
+              "g": 1.8990364836213297e-18,
+              "h": -1.0473791749707741e-18,
+              "i": 0.006654999999999997
+            }
+          },
+          {
+            "id": "Upper.ColdGasAttitude.7",
+            "massKg": 4.4,
+            "com": {
+              "x": 11.137,
+              "y": -0.09000000000000033,
+              "z": -1.83
+            },
+            "inertiaAtCom": {
+              "a": 0.015207499999999994,
+              "b": 1.8990364836213293e-18,
+              "c": -3.851859888774472e-34,
+              "d": 1.8990364836213293e-18,
+              "e": 0.006654999999999997,
+              "f": 1.5710687624561614e-18,
+              "g": -3.851859888774472e-34,
+              "h": 1.5710687624561614e-18,
+              "i": 0.0152075
+            }
+          },
+          {
+            "id": "Upper.ColdGasControl",
+            "massKg": 16.5,
+            "com": {
+              "x": 11.137,
+              "y": 1.1,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.11000000000000003,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.11000000000000003,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.11000000000000003
+            }
+          },
+          {
+            "id": "Upper.ColdGasFeed",
+            "massKg": 22.0,
+            "com": {
+              "x": 5.8185,
+              "y": 1.7,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.036666666666666674,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 207.4522431666667,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 207.4522431666667
+            }
+          },
+          {
+            "id": "Upper.ColdGasSettling.0",
+            "massKg": 4.4,
+            "com": {
+              "x": 0.35,
+              "y": 1.6,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.009295000000000001,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.019314166666666674,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.019314166666666674
+            }
+          },
+          {
+            "id": "Upper.ColdGasSettling.1",
+            "massKg": 4.4,
+            "com": {
+              "x": 0.35,
+              "y": -1.6,
+              "z": 1.9594348786357652e-16
+            },
+            "inertiaAtCom": {
+              "a": 0.009295000000000001,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.019314166666666674,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.019314166666666674
+            }
+          },
+          {
+            "id": "Upper.EngineSkirtSupport",
+            "massKg": 165.0,
+            "com": {
+              "x": 1.5,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 527.2265625,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 387.36328125,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 387.36328125
+            }
+          },
+          {
+            "id": "Upper.Feed.0.PipeShell",
+            "massKg": 11.160549370744343,
+            "com": {
+              "x": 5.486932208953541,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.018130312452774185,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 32.0977680776014,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 32.0977680776014
+            }
+          },
+          {
+            "id": "Upper.Feed.1.PipeShell",
+            "massKg": 2.578619250066506,
+            "com": {
+              "x": 2.6,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.007644316766822157,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.21870709588895323,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.21870709588895323
+            }
+          },
+          {
+            "id": "Upper.Feed.2.PipeShell",
+            "massKg": 0.49943783369709105,
+            "com": {
+              "x": 2.50390625,
+              "y": 0.2860937499999999,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.0005516290873184371,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.00453768405787439,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.00453768405787439
+            }
+          },
+          {
+            "id": "Upper.Feed.DryTunnelGuides",
+            "massKg": 0.12959999999999994,
+            "com": {
+              "x": 4.929,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.0006750863999999997,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.15124209839999994,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.15124209839999994
+            }
+          },
+          {
+            "id": "Upper.Feed.DryTunnelInsulation",
+            "massKg": 1.7473990728608557,
+            "com": {
+              "x": 4.929,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.006760687012898651,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 2.0380291077576826,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 2.0380291077576826
+            }
+          },
+          {
+            "id": "Upper.Feed.DryTunnelWall",
+            "massKg": 32.016860431773104,
+            "com": {
+              "x": 4.929,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.20519605850723385,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 37.382614096824604,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 37.382614096824604
+            }
+          },
+          {
+            "id": "Upper.Feed.FlexibleThermalInterfaces",
+            "massKg": 9.2,
+            "com": {
+              "x": 2.5,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1.2677600000000002,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.7277966666666668,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.7277966666666668
+            }
+          },
+          {
+            "id": "Upper.Feed.InsulationJacketsAndSupports",
+            "massKg": 11.5,
+            "com": {
+              "x": 2.8,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 2.5507,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.5149333333333335,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.5149333333333335
+            }
+          },
+          {
+            "id": "Upper.Feed.RP1OutletReinforcement",
+            "massKg": 0.5107023283158026,
+            "com": {
+              "x": 8.423864417907085,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.0034863094442478273,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.0017458784678749315,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.0017458784678749315
+            }
+          },
+          {
+            "id": "Upper.Feed.TunnelEndFittings",
+            "massKg": 6.0,
+            "com": {
+              "x": 4.929,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.030414000000000004,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 7.001529000000001,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 7.001529000000001
+            }
+          },
+          {
+            "id": "Upper.Feed.TunnelHeadReinforcement.0",
+            "massKg": 0.61168587220848,
+            "com": {
+              "x": 3.1,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.007680939497321885,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.003842304806277568,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.003842304806277568
+            }
+          },
+          {
+            "id": "Upper.Feed.TunnelHeadReinforcement.1",
+            "massKg": 0.61168587220848,
+            "com": {
+              "x": 6.758,
+              "y": 0.4,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.007680939497321885,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.003842304806277568,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.003842304806277568
+            }
+          },
+          {
+            "id": "Upper.Feed.ValvesManifoldsPumpsInterfaces",
+            "massKg": 93.50000000000001,
+            "com": {
+              "x": 2.4,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 107.13230000000003,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 54.812816666666684,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 54.812816666666684
+            }
+          },
+          {
+            "id": "Upper.He.0.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 7.575,
+              "y": 4.898587196589413e-17,
+              "z": 0.8
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Upper.He.1.COPV",
+            "massKg": 131.25,
+            "com": {
+              "x": 7.575,
+              "y": -1.4695761589768238e-16,
+              "z": -0.8
+            },
+            "inertiaAtCom": {
+              "a": 29.804171656854777,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 29.804171656854777,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 29.804171656854777
+            }
+          },
+          {
+            "id": "Upper.IntertankFrame",
+            "massKg": 99.00000000000001,
+            "com": {
+              "x": 7.575,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 310.24620000000004,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 170.15872500000003,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 170.15872500000003
+            }
+          },
+          {
+            "id": "Upper.LOX.InsulationSupports",
+            "massKg": 60.64921896409976,
+            "com": {
+              "x": 4.929,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 185.79281737462318,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 160.52515998620626,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 160.52515998620626
+            }
+          },
+          {
+            "id": "Upper.LOX.TankShell",
+            "massKg": 652.2392682524571,
+            "com": {
+              "x": 4.929,
+              "y": -0.0003797654443366473,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1884.9714852496008,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1669.7849232808396,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1669.7849232808396
+            }
+          },
+          {
+            "id": "Upper.LOX.WeldRingsBafflesPorts",
+            "massKg": 88.21704576596328,
+            "com": {
+              "x": 4.929,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 261.0607035352151,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 228.89944456599983,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 228.89944456599983
+            }
+          },
+          {
+            "id": "Upper.PassiveAeroFins",
+            "massKg": 44.0,
+            "com": {
+              "x": 3.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 141.02,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 75.79,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 75.79
+            }
+          },
+          {
+            "id": "Upper.Pressurization.RegulatorsHeatExchangers",
+            "massKg": 88.0,
+            "com": {
+              "x": 7.575,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 7.040000000000001,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 5.353333333333334,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 5.353333333333334
+            }
+          },
+          {
+            "id": "Upper.RP1.InsulationSupports",
+            "massKg": 60.50000000000001,
+            "com": {
+              "x": 9.5185,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 185.3357,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 117.89720204166667,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 117.89720204166667
+            }
+          },
+          {
+            "id": "Upper.RP1.TankShell",
+            "massKg": 437.32678449019846,
+            "com": {
+              "x": 9.5185,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 1263.8744071766735,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 814.308631739631,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 814.308631739631
+            }
+          },
+          {
+            "id": "Upper.RP1.WeldRingsBafflesPorts",
+            "massKg": 88.0,
+            "com": {
+              "x": 9.5185,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 260.41839999999996,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 166.90643933333334,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 166.90643933333334
+            }
+          },
+          {
+            "id": "Upper.ThrustFrame",
+            "massKg": 220.00000000000003,
+            "com": {
+              "x": 2.5,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 577.5659999999999,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 297.76633333333325,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 297.76633333333325
+            }
+          },
+          {
+            "id": "Upper.TopAdapterInterstage",
+            "massKg": 132.0,
+            "com": {
+              "x": 10.837,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 413.66159999999996,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 225.42079999999999,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 225.42079999999999
+            }
+          },
+          {
+            "id": "Upper.UmbilicalsService",
+            "massKg": 33.0,
+            "com": {
+              "x": 3.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.6875,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.49499999999999994,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.6875
+            }
+          }
+        ],
+        "storeGeometry": [
+          {
+            "store": "Upper.LOX.Tank.Liquid",
+            "usableVolumeM3": 26.56719561698818,
+            "inertiaPerKg": {
+              "a": 1.3749673721058313,
+              "b": -0.00010825645211634126,
+              "c": 1.9152729022401557e-22,
+              "d": -0.00010825645211634126,
+              "e": 1.4278669986222179,
+              "f": -8.40325005292957e-24,
+              "g": 1.9152729022401557e-22,
+              "h": -8.40325005292957e-24,
+              "i": 1.4274443276684043
+            }
+          },
+          {
+            "store": "Upper.RP1.Tank.Liquid",
+            "usableVolumeM3": 14.345435228887407,
+            "inertiaPerKg": {
+              "a": 1.2875798585239129,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.8780800783927902,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.8780800783927902
+            }
+          },
+          {
+            "store": "Upper.Feed.0.Liquid",
+            "usableVolumeM3": 0.05582120014302514,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 2.8751902666629117,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 2.8751902666629117
+            }
+          },
+          {
+            "store": "Upper.Feed.1.Liquid",
+            "usableVolumeM3": 0.017671458676442587,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.08333333333333333,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.08333333333333333
+            }
+          },
+          {
+            "store": "Upper.Feed.2.Liquid",
+            "usableVolumeM3": 0.002035752039526185,
+            "inertiaPerKg": {
+              "a": 0.01,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.008533333333333325,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.008533333333333325
+            }
+          },
+          {
+            "store": "Upper.LOX.Tank.HeUllage",
+            "usableVolumeM3": 1.421534726467332,
+            "inertiaPerKg": {
+              "a": 0.7323223636646572,
+              "b": 0.00010931691129791813,
+              "c": 6.5511491298462226e-21,
+              "d": 0.00010931691129791813,
+              "e": 0.375690483420907,
+              "f": -1.2954930234428898e-21,
+              "g": 6.5511491298462226e-21,
+              "h": -1.2954930234428898e-21,
+              "i": 0.37477714093002856
+            }
+          },
+          {
+            "store": "Upper.RP1.Tank.HeUllage",
+            "usableVolumeM3": 0.819859796055967,
+            "inertiaPerKg": {
+              "a": 1.4449999999999998,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.4449999999999998,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.4449999999999998
+            }
+          },
+          {
+            "store": "Upper.He.0.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          },
+          {
+            "store": "Upper.He.1.Gas",
+            "usableVolumeM3": 0.75,
+            "inertiaPerKg": {
+              "a": 0.12706962864561294,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.12706962864561294,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.12706962864561294
+            }
+          }
+        ],
+        "subparts": [],
+        "consumers": [
+          {
+            "id": "Upper.ColdGasAttitude.0",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.8,
+              "y": 1.83,
+              "z": 0.0
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasAttitude.1",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.8,
+              "y": 1.1205518212198283e-16,
+              "z": 1.83
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": -6.123233995736766e-17
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasAttitude.2",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.8,
+              "y": -1.83,
+              "z": 2.2411036424396566e-16
+            },
+            "axis": {
+              "x": 0.0,
+              "y": -1.2246467991473532e-16,
+              "z": -1.0
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasAttitude.3",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.8,
+              "y": -3.3616554636594846e-16,
+              "z": -1.83
+            },
+            "axis": {
+              "x": 0.0,
+              "y": -1.0,
+              "z": 1.8369701987210297e-16
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasAttitude.4",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 11.137,
+              "y": 1.83,
+              "z": 0.0
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasAttitude.5",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 11.137,
+              "y": 1.1205518212198283e-16,
+              "z": 1.83
+            },
+            "axis": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": -6.123233995736766e-17
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasAttitude.6",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 11.137,
+              "y": -1.83,
+              "z": 2.2411036424396566e-16
+            },
+            "axis": {
+              "x": 0.0,
+              "y": -1.2246467991473532e-16,
+              "z": -1.0
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasAttitude.7",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.050985810648896415,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 11.137,
+              "y": -3.3616554636594846e-16,
+              "z": -1.83
+            },
+            "axis": {
+              "x": 0.0,
+              "y": -1.0,
+              "z": 1.8369701987210297e-16
+            },
+            "thrustN": 50,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasSettling.0",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.10197162129779283,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.25,
+              "y": 1.6,
+              "z": 0.0
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 100,
+            "gimbal": null
+          },
+          {
+            "id": "Upper.ColdGasSettling.1",
+            "subpart": null,
+            "model": "nc.development.helium_cold_gas",
+            "totalFlowKgS": 0.10197162129779283,
+            "mixture": [
+              {
+                "resource": "nc.resource.He",
+                "weight": 1
+              }
+            ],
+            "feedStores": [
+              "Upper.He.0.Gas",
+              "Upper.He.1.Gas"
+            ],
+            "feedInterfaces": [],
+            "flowRule": "NearestFirst",
+            "forcePoint": {
+              "x": 0.25,
+              "y": -1.6,
+              "z": 1.9594348786357652e-16
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 100,
+            "gimbal": null
+          }
+        ],
+        "interfaces": [
+          {
+            "interface": "BOTTOM_RECEIVER",
+            "services": "Data",
+            "detachable": true
+          },
+          {
+            "interface": "ENGINE_0",
+            "services": "Propellant, Data",
+            "detachable": false
+          },
+          {
+            "interface": "RELEASE_MOUNT",
+            "services": "Data",
+            "detachable": false
+          }
+        ],
+        "electrical": [],
+        "command": false,
+        "unqualifiedHardware": [
+          "Upper.AvionicsHarnessSensors",
+          "Upper.BatteryPower"
+        ]
+      }
+    },
+    {
+      "id": "nc.upper-engine.vacuum-a",
+      "revision": 1,
+      "visualReference": "nc.visual.upper-engine.vacuum-a",
+      "role": "Component",
+      "dryMassKg": 644.0,
+      "localCom": {
+        "x": 0.046583850931677266,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localInertia": {
+        "a": 145.80583333333337,
+        "b": 0.0,
+        "c": 0.0,
+        "d": 0.0,
+        "e": 373.46040113871646,
+        "f": 0.0,
+        "g": 0.0,
+        "h": 0.0,
+        "i": 373.46040113871646
+      },
+      "attachments": [
+        {
+          "id": "ENGINE_MOUNT",
+          "family": "nc.engine-mount.upper.r1",
+          "frame": {
+            "position": {
+              "x": 0.6499998569488525,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "a": 1.0,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 1.0,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 1.0
+            }
+          }
+        }
+      ],
+      "stores": [],
+      "propulsion": null,
+      "gimbal": null,
+      "construction": {
+        "name": "nc.upper-engine.vacuum-a",
+        "development": true,
+        "asset": {
+          "id": "nc.visual.upper-engine.vacuum-a",
+          "revision": 1,
+          "sha256": "369336fa31390f0a9637602357ff92b2355e889c80d522e83289a6978219d9f3",
+          "relativePath": "Library/nc.upper-engine.vacuum-a.r1.glb",
+          "units": "m",
+          "basis": "gltf=(E.Y,-E.Z,-E.X)",
+          "materialOrigin": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "requiredNodes": [
+            "Part.nc.upper-engine.vacuum-a.r1",
+            "Part.nc.upper-engine.vacuum-a.r1.Engine",
+            "Part.nc.upper-engine.vacuum-a.r1.Engine.Mount",
+            "Part.nc.upper-engine.vacuum-a.r1.SOCKET_ENGINE_MOUNT"
+          ],
+          "provenance": "accepted reusable-part asset digest 7fae74412f102ddb35c75cc746c407176c4235d0a6b1eb7b3ac870b9ba30d963"
+        },
+        "physicalSource": {
+          "id": "nc.development.engineering.regions",
+          "revision": 1,
+          "sha256": "a91051fa2b61506deefc755be0d6303c678481f48ca7ae2e3deb83f2e8a02af4",
+          "provenance": "development-launch-stack-preblender constituent files; not mesh mass"
+        },
+        "massRegions": [
+          {
+            "id": "Upper.Engine.0.Hardware",
+            "massKg": 600,
+            "com": {
+              "x": 0.050000000000000266,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 144.90750000000003,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 372.5787500000001,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 372.5787500000001
+            }
+          },
+          {
+            "id": "Upper.Engine.0.TVC",
+            "massKg": 44.0,
+            "com": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "inertiaAtCom": {
+              "a": 0.8983333333333333,
+              "b": 0.0,
+              "c": 0.0,
+              "d": 0.0,
+              "e": 0.7791666666666665,
+              "f": 0.0,
+              "g": 0.0,
+              "h": 0.0,
+              "i": 0.7791666666666665
+            }
+          }
+        ],
+        "storeGeometry": [],
+        "subparts": [
+          {
+            "id": "Engine",
+            "parent": null,
+            "pose": {
+              "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "rotation": {
+                "a": 1.0,
+                "b": 0.0,
+                "c": 0.0,
+                "d": 0.0,
+                "e": 1.0,
+                "f": 0.0,
+                "g": 0.0,
+                "h": 0.0,
+                "i": 1.0
+              }
+            },
+            "visualNode": "Part.nc.upper-engine.vacuum-a.r1.Engine",
+            "kind": "Gimbal",
+            "massRegions": [
+              "Upper.Engine.0.Hardware",
+              "Upper.Engine.0.TVC"
+            ],
+            "actuators": [
+              "Main"
+            ]
+          }
+        ],
+        "consumers": [
+          {
+            "id": "Main",
+            "subpart": "Engine",
+            "model": "nc.development.launch_main",
+            "totalFlowKgS": 131.10637024001934,
+            "mixture": [
+              {
+                "resource": "nc.resource.RP1",
+                "weight": 5
+              },
+              {
+                "resource": "nc.resource.LOX",
+                "weight": 13
+              }
+            ],
+            "feedStores": [],
+            "feedInterfaces": [
+              "ENGINE_MOUNT"
+            ],
+            "flowRule": "FarthestFirst",
+            "forcePoint": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "axis": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "thrustN": 450000.0,
+            "gimbal": {
+              "id": "Gimbal",
+              "pivot": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "nozzleOffset": {
+                "x": -1.7,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "limitY": 0.06981317007977318,
+              "limitZ": 0.06981317007977318,
+              "slewRate": 0
+            }
+          }
+        ],
+        "interfaces": [
+          {
+            "interface": "ENGINE_MOUNT",
+            "services": "Propellant, Data",
+            "detachable": false
+          }
+        ],
+        "electrical": [],
+        "command": false,
+        "unqualifiedHardware": []
+      }
+    }
+  ]
+}

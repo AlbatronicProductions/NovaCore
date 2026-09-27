@@ -1,0 +1,102 @@
+{
+  "judgment": "PASS",
+  "playerPass": false,
+  "utc": "2026-09-26T22:28:12.659634+00:00",
+  "packageSha256": "15ec023278f85a720f838c35ff638831c576e6becd5d83a63b2a69d15a707a00",
+  "executable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+  "executableSha256": "4a14ff8b27d9bd4d42867b4179679f02afb9d6647b2aa07f05e74d8b59f581c8",
+  "normalPlayerNoQualificationFlags": true,
+  "observedProcessId": 13884,
+  "observedCommandLine": "\"E:\\novacore\\tools\\novacore.app\\bin\\release\\net10.0-windows\\novacore.exe\" ",
+  "display": "Native 3440x1440 borderless; existing settings",
+  "craft": {
+    "parts": 21,
+    "dryMassKg": 808,
+    "propellantKg": 3200,
+    "totalMassKg": 4008,
+    "rcsJets": 64,
+    "recipe": "Core, two long tanks with eight RCS blocks each, adapter and main engine",
+    "sourceDocumentDigest": "970df30eaf0e1f36bd8c53875504d03b90edd73248fd54f6bea32fa51b5c036c",
+    "compiledDigest": "87c24b46cf0de86bb5e6d1a0363707b10eba30670aec89d1e865916e75771649"
+  },
+  "observed": [
+    "Normal startup and Solar game to construction",
+    "Load current qualification craft, explicitly Fill consumables, Launch",
+    "Stable physical supported state; stock 4008 kg article",
+    "Z ignition, X cutoff and re-ignition in first bounded-support attempt",
+    "Camera zoom without control interference",
+    "Second fresh launch: continuous fuel burn, physical contact release and POWERED ASCENT",
+    "Pause at displayed 100 s; return to retained 21-part construction document",
+    "Save new qualification file without overwriting originals",
+    "Normal Quit; final flight failed=False reason=none; process exitCode=0"
+  ],
+  "acceptedFlight": {
+    "generation": 2,
+    "initialEpoch": 843733406593961,
+    "finalEpoch": 843733506875211,
+    "sequence": 6418,
+    "elapsedSeconds": 100.28125,
+    "finalMassKg": 3087.53125,
+    "finalPosition": [
+      -0.0003482920404123211,
+      0.6367542204953018,
+      1.6982866876354894
+    ],
+    "finalVelocity": [
+      -0.00025601248464074834,
+      0.37810416125763013,
+      0.822912057496966
+    ],
+    "failed": false
+  },
+  "otherAttempt": {
+    "generation": 1,
+    "classification": "Existing ClearanceRefused boundary reached after observed successful liftoff; return action arrived too late. Not a clean lifecycle PASS, not a support overload.",
+    "elapsedSeconds": 123.984375,
+    "sequence": 7935
+  },
+  "limits": [
+    "Direct keyboard API provides taps, not held attitude intervals; sustained attitude and resource-response proof belongs to permanent lifecycle and canonical native routes.",
+    "No landing/recontact or continuation outside the existing Florida domain.",
+    "No Project Control manual Player PASS claimed."
+  ],
+  "originalLog": {
+    "path": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Logs\\20260926-221944-061-13884-583795c1d35f47058b6c6a9ed3f30b0e\\segment-0.log",
+    "bytes": 475809,
+    "sha256": "b65ba074026f62269c32b131b6cc1dddac6012afa429890f87834751b3e5c5f4"
+  },
+  "compactLog": {
+    "path": "direct-ui/runtime-witness.log",
+    "sha256": "c689984094c3a944bc8d55aceb00685df761fe7bbd5af542443af32ccc15f918"
+  },
+  "screenshots": [
+    {
+      "path": "direct-ui/final-filled.png",
+      "sha256": "077e9ca22c80eb88a5b6faecb6f51a19acab6d0e10950c0041c324aa67127b88"
+    },
+    {
+      "path": "direct-ui/final-supported.png",
+      "sha256": "e4eeb83338b686e6aa1e59940b047185ab8741f089145bc94b0fe88b81d0bc24"
+    },
+    {
+      "path": "direct-ui/final-ignition.png",
+      "sha256": "9b8eb1c448b12dfd79a2811f9aa4a27def61d42372a6602bd809f248d9561f51"
+    },
+    {
+      "path": "direct-ui/final-cutoff.png",
+      "sha256": "cb9fe39f6b73e7df58c42dcc74935c5c1201f834fc77742138ab88b1a7436f8e"
+    },
+    {
+      "path": "direct-ui/final-bounded-paused-flight.png",
+      "sha256": "95776b715a0b805d1a140b4a00994c695dab39ef98f0cbc78f22abafaf0f6e26"
+    },
+    {
+      "path": "direct-ui/final-bounded-return.png",
+      "sha256": "5d7626fbd7e40a7458885408b49eb7addce189a7cfc90a058288fbb110ac2d37"
+    }
+  ],
+  "newSave": {
+    "path": "C:/Users/Tyler/Documents/NovaCore/Craft/Scalable-support-final-4008kg.craft.json",
+    "sha256": "970df30eaf0e1f36bd8c53875504d03b90edd73248fd54f6bea32fa51b5c036c"
+  }
+}

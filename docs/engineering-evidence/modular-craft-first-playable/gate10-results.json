@@ -1,0 +1,924 @@
+{
+  "reports": [
+    {
+      "file": "build/modular-craft-first-playable/gate10-qualification.json",
+      "sha256": "c951ba689c59413be41b688f87a7f75aff54ebf385ca7a95211528c129be5b6c",
+      "results": [
+        {
+          "kind": "solution-build",
+          "arguments": [
+            "build",
+            "NovaCore.sln",
+            "-c",
+            "Debug",
+            "--no-restore",
+            "-v:q",
+            "-p:NativeBuildDirectory=modular-craft-first-playable/native-debug"
+          ],
+          "elapsedMs": 1919.5413,
+          "exitCode": 0,
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "kind": "editor-build",
+          "arguments": [
+            "build",
+            "tools/NovaCore.ConstructionEditor",
+            "-c",
+            "Debug",
+            "--no-restore",
+            "-v:q",
+            "-p:NativeBuildDirectory=modular-craft-first-playable/native-debug"
+          ],
+          "elapsedMs": 1614.4296,
+          "exitCode": 0,
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate2"
+          ],
+          "elapsedMs": 401.5751,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate3"
+          ],
+          "elapsedMs": 20243.7845,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate4"
+          ],
+          "elapsedMs": 542.6072,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 996a19fc0550ea5af01ae7748eea493263c08e1c54a8ef8ba3fda1c90eeeab4a"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate5-operations"
+          ],
+          "elapsedMs": 2145.8633,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate6"
+          ],
+          "elapsedMs": 3352.0267,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\042360916a8345eb8695fdac4b6b51a4"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate7"
+          ],
+          "elapsedMs": 1414.7464,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate8"
+          ],
+          "elapsedMs": 3991.4672,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate9"
+          ],
+          "elapsedMs": 6085.9312,
+          "exitCode": 0,
+          "outcomes": [
+            "MODULAR_GATE9 PASS checks=886"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-dynamics"
+          ],
+          "elapsedMs": 2158.8442,
+          "exitCode": 0,
+          "outcomes": [
+            "MODULAR_GATE10_DYNAMICS PASS checks=23"
+          ]
+        },
+        {
+          "kind": "Debug",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-flight"
+          ],
+          "elapsedMs": 12813.7723,
+          "exitCode": 0,
+          "outcomes": [
+            "CONTACT_IMPULSE long=False residualNs=9.049991735530853E-06 recoveryVelocity=0.003305961605667126 slices=16",
+            "FLIGHT_ORACLE long=False position=1.1896916848748416E-07 velocity=2.1790945194232696E-11 contactPosition=0.00015665838617935675 contactVelocity=0.003305953880000645 handoffTicks=1062500",
+            "CONTACT_IMPULSE long=True residualNs=6.790322769041022E-06 recoveryVelocity=0.006287147845941257 slices=16",
+            "FLIGHT_ORACLE long=True position=2.5526564705494318E-08 velocity=8.079744757155179E-11 contactPosition=0.00013034641760283666 contactVelocity=0.006287147074434613 handoffTicks=1125000",
+            "MODULAR_GATE10_FLIGHT_PASS checks=78303"
+          ]
+        },
+        {
+          "kind": "solution-build",
+          "arguments": [
+            "build",
+            "NovaCore.sln",
+            "-c",
+            "Release",
+            "--no-restore",
+            "-v:q",
+            "-p:NativeBuildDirectory=modular-craft-first-playable/native-release"
+          ],
+          "elapsedMs": 4022.2979,
+          "exitCode": 0,
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "kind": "editor-build",
+          "arguments": [
+            "build",
+            "tools/NovaCore.ConstructionEditor",
+            "-c",
+            "Release",
+            "--no-restore",
+            "-v:q",
+            "-p:NativeBuildDirectory=modular-craft-first-playable/native-release"
+          ],
+          "elapsedMs": 1500.5304,
+          "exitCode": 0,
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate2"
+          ],
+          "elapsedMs": 385.4216,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate3"
+          ],
+          "elapsedMs": 3730.3906,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate4"
+          ],
+          "elapsedMs": 317.3031,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 996a19fc0550ea5af01ae7748eea493263c08e1c54a8ef8ba3fda1c90eeeab4a"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate5-operations"
+          ],
+          "elapsedMs": 1326.0511,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate6"
+          ],
+          "elapsedMs": 2924.1863,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\ed383ec63ead4bc5b7a762b788f3287b"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate7"
+          ],
+          "elapsedMs": 1095.8819,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate8"
+          ],
+          "elapsedMs": 2684.5133,
+          "exitCode": 0,
+          "outcomes": [
+            "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate9"
+          ],
+          "elapsedMs": 3061.0127,
+          "exitCode": 0,
+          "outcomes": [
+            "MODULAR_GATE9 PASS checks=886"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-dynamics"
+          ],
+          "elapsedMs": 1343.379,
+          "exitCode": 0,
+          "outcomes": [
+            "MODULAR_GATE10_DYNAMICS PASS checks=23"
+          ]
+        },
+        {
+          "kind": "Release",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-flight"
+          ],
+          "elapsedMs": 3908.3453,
+          "exitCode": 0,
+          "outcomes": [
+            "CONTACT_IMPULSE long=False residualNs=9.049991735530853E-06 recoveryVelocity=0.003305961605667126 slices=16",
+            "FLIGHT_ORACLE long=False position=1.1896916848748416E-07 velocity=2.1790945194232696E-11 contactPosition=0.00015665838617935675 contactVelocity=0.003305953880000645 handoffTicks=1062500",
+            "CONTACT_IMPULSE long=True residualNs=6.790322769041022E-06 recoveryVelocity=0.006287147845941257 slices=16",
+            "FLIGHT_ORACLE long=True position=2.5526564705494318E-08 velocity=8.079744757155179E-11 contactPosition=0.00013034641760283666 contactVelocity=0.006287147074434613 handoffTicks=1125000",
+            "MODULAR_GATE10_FLIGHT_PASS checks=78303"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-correctness"
+          ],
+          "elapsedMs": 1570.8255,
+          "exitCode": 0,
+          "outcomes": [
+            "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=9.017920290485749E-07 gravity=Double3 { X = -8.105698039195347E-06, Y = -9.79401894838773, Z = 0.014248775455661259, LengthSquared = 95.92301018904558, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=0",
+            "FLORIDA_SLAB_INITIAL PASS minHeight=-6.661338147750939E-16 allCornerEdgeMargin=23.24410285091158 supportCorners=4 comProjection=(-2.313043373857347E-16,0) supportRectangle=(-0.2599999999999997,0.26000000000000045,-0.26,0.26)",
+            "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e origin=Double3 { X = -5270997.711609826, Y = -1870990.5537414225, Z = 3050582.128838567, LengthSquared = 40590073852774.91, IsFinite = True } velocity=Double3 { X = 136.4347925649703, Y = -384.3672157626637, Z = 1.6237584470144013E-05, LengthSquared = 166352.6091753888, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+            "FLORIDA_SITE_CHEAP PASS peakPenetration=9.750102006811368E-05 support=600/600 intervals=1200",
+            "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=7.861267317148919E-09 maxVelocity=5.796914039811765E-13 maxOrientationMatrix=1.887379141862766E-15 maxAngular=1.258635097526423E-19 departure=REFUSED_NOT_QUALIFIED",
+            "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-allocation"
+          ],
+          "elapsedMs": 906.4661,
+          "exitCode": 0,
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-static"
+          ],
+          "elapsedMs": 1434.175,
+          "exitCode": 0,
+          "outcomes": [
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-warp"
+          ],
+          "elapsedMs": 4037.9349,
+          "exitCode": 0,
+          "outcomes": [
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-moving"
+          ],
+          "elapsedMs": 869.5552,
+          "exitCode": 0,
+          "outcomes": []
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-costs"
+          ],
+          "elapsedMs": 2054.965,
+          "exitCode": 0,
+          "outcomes": [
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--player-engine"
+          ],
+          "elapsedMs": 1012.0497,
+          "exitCode": 0,
+          "outcomes": [
+            "PLAYER_ENGINE PASS checks=9898"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--player-attitude"
+          ],
+          "elapsedMs": 847.3924,
+          "exitCode": 0,
+          "outcomes": [
+            "PLAYER_ATTITUDE PASS checks=8264"
+          ]
+        },
+        {
+          "kind": "preserved-graphics",
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--player-integrated"
+          ],
+          "elapsedMs": 1301.9916,
+          "exitCode": 0,
+          "outcomes": [
+            "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "build/modular-craft-first-playable/gate10-regressions.json",
+      "sha256": "b657bd6a83e1314272bd063e6a427e9987f9f8e28658e89db397cb7f37a03afc",
+      "results": [
+        {
+          "kind": "managed-build",
+          "arguments": [
+            "build",
+            "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+            "-c",
+            "Debug",
+            "--no-restore",
+            "-v",
+            "quiet"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1075.2571,
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "kind": "managed-build",
+          "arguments": [
+            "build",
+            "tests/NovaCore.Simulation.Tests/NovaCore.Simulation.Tests.csproj",
+            "-c",
+            "Release",
+            "--no-restore",
+            "-v",
+            "quiet"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 750.7009,
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 241.729,
+          "outcomes": [
+            "Modular Part Standard baseline PASS: 33 checks; catalog 751a86d1443f036c56505a845a7a644e09bdf74ba60c6c4c05ae60fe4a371818; full Gate 1 also requires red-team probes"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-redteam"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 198.9989,
+          "outcomes": [
+            "Modular Part Standard red team PASS"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-closure"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 253.8317,
+          "outcomes": [
+            "Modular Gate 1 bounded closure PASS: 58 checks; resource catalog 94d3ada39e190751cd02aa2a97a2cae0e3922982ee4269a710bdb9f09eceda17; socket catalog dde5d4c6d2b452f16da121a3ca24b727483b0c21b180c3f60c200329687e7738"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-admission-audit"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 194.4188,
+          "outcomes": [
+            "Modular full admission audit PASS"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-numerics"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 259.0699,
+          "outcomes": [
+            "Modular Gate 1 numerical admission PASS: 251 independent-rational/scale/boundary checks"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-json"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 204.1152,
+          "outcomes": [
+            "Modular Gate 1 JSON refusal PASS: 20 checks"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-aggregate"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 559.6088,
+          "outcomes": [
+            "Modular Gate 1 dry aggregate admission PASS: 50 independent centre-first rational/boundary checks"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-size"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 505.9245,
+          "outcomes": [
+            "Modular Gate 1 catalog bound PASS: 12 byte-boundary checks"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-predicates"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 163.5561,
+          "outcomes": [
+            "Modular Gate 1 physical predicates PASS: 37 independent sign/overlap/boundary checks"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage1"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 257.5179,
+          "outcomes": [
+            "Construction Stage 1 PASS: 24 checks; catalog c25d1615ade47d3e375d1bb13259c98fc0f2fea8f5cbe815fba16208dfc275ce"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage2"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 262.3559,
+          "outcomes": [
+            "Construction Stage 2 PASS: 28 checks; design 6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage3"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 2289.6491,
+          "outcomes": [
+            "Construction Stage 3 PASS: 2075 checks; exact oracle 400 cases; DLV graph only, no ignition"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage4"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 384.6418,
+          "outcomes": [
+            "Construction Stage 4 PASS: 90 checks; power/data independent; no DLV electrical admission"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage5"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 267.1009,
+          "outcomes": [
+            "Construction Stage 5 core PASS: 31 checks; isolated revision-bound editor; UI qualification separate"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage6"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 518.3731,
+          "outcomes": [
+            "Construction Stage 6 PASS: 93 checks; shared design admission and once-only runtime registration; no physical-flight admission"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage7"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 278.8794,
+          "outcomes": [
+            "Construction Stage 7 PASS: 62 checks; 150 dry + 36 resource regions; 38 actuators; mass 247283.61451443686; COM Double3 { X = 19.305845298919515, Y = 0.0005515133792867957, Z = 1.1493567613128163E-18, LengthSquared = 372.7156630099798, IsFinite = True }; static only"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage8-reuse"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 275.7371,
+          "outcomes": [
+            "Construction Stage 8 reuse PASS: 18 checks; capsule-only design 016a853a405a2de74e3f33e40dd756d927f37158f2e7f3c4c771f054477ce163; no launcher assumptions"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--srv01-integration"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 890.3577,
+          "outcomes": [
+            "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+            "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--assembly-control"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 350.4947,
+          "outcomes": [
+            "Live command authority PASS: 1557 checks"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--pilot-demand"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 368.2652,
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "PILOT_DEMAND PASS checks=2939"
+          ]
+        },
+        {
+          "kind": "qualification",
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--pilot-allocation"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 884.6474,
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "build/modular-craft-first-playable/gate10-extra-regressions.json",
+      "sha256": "59a8818e148d4720c5becc8bad8d2e97c8b7fd4ba84f51a6a6295e938b7d1a75",
+      "results": [
+        {
+          "exitCode": 0,
+          "suite": "NovaCore.ReferenceFrames.Tests",
+          "outcomes": [
+            "PASS transform algebra",
+            "PASS hierarchy and conversion",
+            "PASS reference-frame graph",
+            "PASS reference-frame paths",
+            "PASS transform resolution",
+            "PASS static universe fixture",
+            "PASS ORB",
+            "PASS CCI/CCF",
+            "PASS rotating velocity",
+            "PASS surface anchor authority",
+            "PASS validation"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "suite": "NovaCore.Precision.Tests",
+          "outcomes": [
+            "kilometre        1000           0              PASS",
+            "metre            1              0              PASS",
+            "centimetre       0.02001953125  0              PASS",
+            "millimetre       0.0009765625   0              PASS",
+            "negative root    0.5            0              PASS",
+            "mixed signs      0.02978515625  0              PASS",
+            "near zero        1000           5.204170427930421E-18 PASS",
+            "log options: parsing and verbose-input compatibility passed",
+            "PASS"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "suite": "NovaCore.BepuDependency.Tests",
+          "outcomes": [
+            "  \"result\": \"PASS\","
+          ]
+        },
+        {
+          "exitCode": 1,
+          "suite": "NovaCore.Launcher.Tests",
+          "outcomes": []
+        }
+      ]
+    },
+    {
+      "file": "build/modular-craft-first-playable/gate10-launcher-regression.json",
+      "sha256": "b988b24eade56d1308602d18743bb482660dc325d272f27ca7e831414654280f",
+      "results": [
+        {
+          "previousAttempt": "Incorrect net10.0 path; no test executed. Correct TFM is net10.0-windows.",
+          "exitCode": 0,
+          "suite": "NovaCore.Launcher.Tests",
+          "outcomes": [
+            "PASS default selection",
+            "PASS scenario catalog",
+            "PASS contact development scenarios",
+            "PASS powered free-flight scenario",
+            "PASS stock assembly scenario",
+            "PASS player flight control scenario",
+            "PASS Earth fullscreen native preset",
+            "PASS M12D spherical billboard GPU proof preset",
+            "PASS new Earth renderer preset",
+            "PASS Earth fullscreen Solar camera path",
+            "PASS structured launch environment",
+            "PASS launcher build configuration",
+            "PASS Earth orbital arguments",
+            "PASS invariant altitude formatting",
+            "PASS subdivision diagnostic mapping",
+            "PASS Florida launch mapping",
+            "PASS invalid configuration rejection",
+            "PASS diagnostics arguments",
+            "PASS existing production scenarios",
+            "NovaCore launcher tests passed: 19"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "build/modular-craft-first-playable/gate10-final.json",
+      "sha256": "6fab394d75eb14f4325617c73060127ad25f140cff081b8b8e36bd253a1e836d",
+      "results": [
+        {
+          "exitCode": 0,
+          "kind": "solution-build",
+          "configuration": "Debug",
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "kind": "--modular-gate9",
+          "configuration": "Debug",
+          "outcomes": [
+            "MODULAR_GATE9 PASS checks=886"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "kind": "--modular-gate10-dynamics",
+          "configuration": "Debug",
+          "outcomes": [
+            "MODULAR_GATE10_DYNAMICS PASS checks=23"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "kind": "--modular-gate10-flight",
+          "configuration": "Debug",
+          "outcomes": [
+            "CONTACT_IMPULSE long=False residualNs=9.049991735530853E-06 recoveryVelocity=0.003305961605667126 slices=16",
+            "FLIGHT_ORACLE long=False position=1.1896916848748416E-07 velocity=2.1790945194232696E-11 contactPosition=0.00015665838617935675 contactVelocity=0.003305953880000645 handoffTicks=1062500",
+            "CONTACT_IMPULSE long=True residualNs=6.790322769041022E-06 recoveryVelocity=0.006287147845941257 slices=16",
+            "FLIGHT_ORACLE long=True position=2.5526564705494318E-08 velocity=8.079744757155179E-11 contactPosition=0.00013034641760283666 contactVelocity=0.006287147074434613 handoffTicks=1125000",
+            "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "kind": "solution-build",
+          "configuration": "Release",
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "kind": "--modular-gate9",
+          "configuration": "Release",
+          "outcomes": [
+            "MODULAR_GATE9 PASS checks=886"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "kind": "--modular-gate10-dynamics",
+          "configuration": "Release",
+          "outcomes": [
+            "MODULAR_GATE10_DYNAMICS PASS checks=23"
+          ]
+        },
+        {
+          "exitCode": 0,
+          "kind": "--modular-gate10-flight",
+          "configuration": "Release",
+          "outcomes": [
+            "CONTACT_IMPULSE long=False residualNs=9.049991735530853E-06 recoveryVelocity=0.003305961605667126 slices=16",
+            "FLIGHT_ORACLE long=False position=1.1896916848748416E-07 velocity=2.1790945194232696E-11 contactPosition=0.00015665838617935675 contactVelocity=0.003305953880000645 handoffTicks=1062500",
+            "CONTACT_IMPULSE long=True residualNs=6.790322769041022E-06 recoveryVelocity=0.006287147845941257 slices=16",
+            "FLIGHT_ORACLE long=True position=2.5526564705494318E-08 velocity=8.079744757155179E-11 contactPosition=0.00013034641760283666 contactVelocity=0.006287147074434613 handoffTicks=1125000",
+            "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+          ]
+        }
+      ]
+    }
+  ],
+  "invocationCorrection": "The initial Launcher invocation used net10.0 and executed no test. Corrected net10.0-windows invocation passed 19 tests; original raw failure retained.",
+  "finalSource": "gate10-final.json reruns builds, Gate 9, dynamics and flight after the final publication guard."
+}

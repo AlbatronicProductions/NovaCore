@@ -39,7 +39,7 @@ inline void LocalizeReceiverBounds(GpuVisibility&g){
 }
 inline double Dot(const double*a,const double*b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2];}
 inline void Validate(const NcFacilityCasterDefinition& d){
-  if(!d.bodyId||!d.facilityId||!d.objectId||d.version!=GeometryVersion||d.geometrySet!=3||
+  if(!d.bodyId||!d.facilityId||!d.objectId||d.version!=GeometryVersion||d.geometrySet!=SupportSlabGeometry||
      !std::isfinite(d.maximumRayDistance)||d.maximumRayDistance<=0||d.maximumRayDistance>2048)
     throw std::runtime_error("invalid authored facility caster identity/range");
   for(auto x:d.origin)if(!std::isfinite(x))throw std::runtime_error("invalid facility origin");
@@ -51,12 +51,12 @@ inline void Validate(const NcFacilityCasterDefinition& d){
   if(std::abs(Dot(cross,d.up)-1)>1e-12)throw std::runtime_error("facility caster frame must be right handed");
 }
 inline GpuVisibility Prepare(const NcFacilityCasterDefinition& d){
-  Validate(d);GpuVisibility g{};g.control[0]=5;g.control[1]=d.version;g.control[2]=uint32_t(d.bodyId);g.control[3]=uint32_t(d.bodyId>>32);
+  Validate(d);GpuVisibility g{};g.control[0]=1;g.control[1]=d.version;g.control[2]=uint32_t(d.bodyId);g.control[3]=uint32_t(d.bodyId>>32);
   for(int k=0;k<3;k++){g.east[k]=d.east[k];g.north[k]=d.north[k];g.up[k]=d.up[k];g.boundsMin[k]=INFINITY;g.boundsMax[k]=-INFINITY;}
   g.boundsMin[3]=float(d.maximumRayDistance);
-  for(uint32_t i=0;i<5;i++)for(int k=0;k<3;k++){
-    g.boxes[i].minimum[k]=i<4?LaunchPadBoxes[i].minimum[k]:float(FoundationUnit.minimum[k]*d.foundationScale[k]);
-    g.boxes[i].maximum[k]=i<4?LaunchPadBoxes[i].maximum[k]:float(FoundationUnit.maximum[k]*d.foundationScale[k]);
+  for(uint32_t i=0;i<g.control[0];i++)for(int k=0;k<3;k++){
+    g.boxes[i].minimum[k]=float(SupportSlabUnit.minimum[k]*d.foundationScale[k]);
+    g.boxes[i].maximum[k]=float(SupportSlabUnit.maximum[k]*d.foundationScale[k]);
     g.boundsMin[k]=std::min(g.boundsMin[k],g.boxes[i].minimum[k]);g.boundsMax[k]=std::max(g.boundsMax[k],g.boxes[i].maximum[k]);
   }
   double cornerSquared=0;for(int k=0;k<3;k++){double extent=std::max(std::abs(g.boundsMin[k]),std::abs(g.boundsMax[k]));cornerSquared+=extent*extent;}

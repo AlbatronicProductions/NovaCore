@@ -1,0 +1,175 @@
+ M NovaCore.sln
+ D docs/engineering-evidence/conservative-pre-refinement-visibility/__pycache__/summarize.cpython-311.pyc
+ M native/NovaCore.Native/CMakeLists.txt
+ M native/NovaCore.Native/NovaCoreNative.cpp
+ M native/NovaCore.Native/NovaCoreNative.h
+ M native/NovaCore.Native/RegionalPhysicalResidency.inl
+ M native/NovaCore.Native/shaders/production_spherical_billboard.tesc
+ M native/NovaCore.Native/shaders/triangle.frag
+ M native/NovaCore.Native/shaders/triangle.vert
+ M samples/NovaCore.Triangle/NovaCore.Triangle.csproj
+ M samples/NovaCore.Triangle/PlayerFlightControlInput.cs
+ M samples/NovaCore.Triangle/Program.cs
+ M samples/NovaCore.Triangle/SampleOptions.cs
+ M samples/NovaCore.Triangle/SolarSystemScene.cs
+ M samples/NovaCore.Triangle/StockAssemblyDevelopmentScene.cs
+ M src/NovaCore.Graphics/EarthElevationDataset.cs
+ M src/NovaCore.Graphics/PlanetaryLocalTerrain.cs
+ M src/NovaCore.Graphics/PlanetaryNaturalTerrainFamilies.cs
+ M src/NovaCore.Graphics/PlanetaryPhysicalSurfacePointQuery.cs
+ M src/NovaCore.Graphics/PlanetaryProductionSphericalBillboardRuntime.cs
+ M src/NovaCore.Graphics/ReusablePartVisuals.cs
+ M src/NovaCore.Graphics/SceneObjectFocusObservation.cs
+ M src/NovaCore.Interop/NativeRuntime.cs
+ M src/NovaCore.Simulation/Properties/AssemblyInfo.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyControl.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs
+ M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyProfileAdmission.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Publication.cs
+ M src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs
+ M src/NovaCore.Simulation/Spacecraft/ReferenceFrames/SpacecraftReferenceFrameEvaluator.cs
+ M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs
+ M src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs
+ M src/NovaCore.Simulation/Spacecraft/Translation/SpacecraftMotionEvaluator.cs
+ M src/NovaCore.Simulation/Transactions/SimulationState.cs
+ M src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.AssemblyControl.cs
+ M tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj
+ M tests/NovaCore.Graphics.Tests/PlanetaryProductionSphericalBillboardRuntimeTests.cs
+ M tests/NovaCore.Graphics.Tests/Program.cs
+ M tests/NovaCore.Launcher.Tests/Program.cs
+ M tests/NovaCore.Simulation.Tests/Program.cs
+ M tools/NovaCore.Launcher/LaunchCommandBuilder.cs
+ M tools/NovaCore.Launcher/LaunchConfiguration.cs
+ M tools/NovaCore.Launcher/ScenarioCatalog.cs
+?? assets/vehicles/
+?? docs/engineering-evidence/development-launch-stack-preblender/
+?? docs/engineering-evidence/earth-blackout-closure/
+?? docs/engineering-evidence/earth-camera-blackout-20260922/
+?? docs/engineering-evidence/earth-orbit-return-vehicle-trade-study/
+?? docs/engineering-evidence/final-blackout-build-retirement/
+?? docs/engineering-evidence/modular-craft-first-playable/
+?? docs/engineering-evidence/modular-player-revision/
+?? docs/engineering-evidence/post-blackout-storage-hygiene/
+?? docs/engineering-evidence/post-camera-command-review/
+?? docs/engineering-evidence/post-m15.3-first-playable-launch-review/
+?? docs/engineering-evidence/release-package-owner/
+?? docs/engineering-evidence/srv01-production-integration/closeout.json
+?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md
+?? docs/engineering-evidence/vehicle-construction-architecture/
+?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md
+?? docs/legal/LEGAL-REVIEW-TODO.md
+?? docs/legal/MODDING-POLICY-DRAFT.md
+?? docs/legal/ROOT-LICENSE-CANDIDATE.md
+?? docs/legal/finalization/
+?? native/NovaCore.Native/CausalNative.inl
+?? native/NovaCore.Native/CausalRecorder.h
+?? native/NovaCore.Native/CausalRecorderMock.cpp
+?? native/NovaCore.Native/FrozenCapture.h
+?? native/NovaCore.Native/FrozenCaptureMock.cpp
+?? native/NovaCore.Native/FrozenCaptureNative.inl
+?? native/NovaCore.Native/FrozenControlNative.inl
+?? native/NovaCore.Native/FrozenPacking.h
+?? native/NovaCore.Native/FrozenPackingNative.inl
+?? native/NovaCore.Native/FrozenTopologyNative.inl
+?? native/NovaCore.Native/PresentationResult.h
+?? native/NovaCore.Native/PresentationResultTests.cpp
+?? native/NovaCore.Native/RecordingCallTrace.h
+?? native/NovaCore.Native/RegionalPupilLifetime.h
+?? native/NovaCore.Native/RegionalPupilLifetimeTests.cpp
+?? native/NovaCore.Native/StartupLifecycle.h
+?? native/NovaCore.Native/TerrainTessellationTests.cpp
+?? native/NovaCore.Native/shaders/frozen_capture_pack.comp
+?? native/NovaCore.Native/shaders/frozen_capture_pack_shared.glsl
+?? native/NovaCore.Native/shaders/production_tessellation_factor.glsl
+?? samples/NovaCore.Triangle/ApplicationAssemblyInfo.cs
+?? samples/NovaCore.Triangle/BlackoutCameraQualification.cs
+?? samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs
+?? samples/NovaCore.Triangle/ConstructionFlightScene.cs
+?? samples/NovaCore.Triangle/CraftFlightOptions.cs
+?? samples/NovaCore.Triangle/IApplicationPresentation.cs
+?? samples/NovaCore.Triangle/IApplicationVesselScene.cs
+?? src/NovaCore.Core/Surface/IPhysicalSurfaceHeightBounds.cs
+?? src/NovaCore.Graphics/PartVisualPicking.cs
+?? src/NovaCore.Interop/DiagnosticStartup.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.Placement.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.Transactions.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionFuel.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionGraph.Craft.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionGraph.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionNumerics.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPhysical.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPower.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.Physical.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDynamics.Craft.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraft.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftAllocation.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftContact.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftControl.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftPorts.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CraftClearance.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CraftDocumentMigration.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CraftDocumentStore.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/PartCompatibilityEvaluator.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandard.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardAggregateConsistency.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardExact.cs
+?? src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardPhysicalConsistency.cs
+?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Craft.cs
+?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.CraftDiagnostics.cs
+?? src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.CraftPreparation.cs
+?? src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Construction.cs
+?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Construction.cs
+?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs
+?? tests/NovaCore.App.Diagnostics.Tests/
+?? tests/NovaCore.Graphics.Tests/EarthBlackoutOfflineTests.cs
+?? tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.Application.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.Clearance.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.Dynamics.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.Fixture.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.Flight.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightBoundary.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightControls.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightMeasurements.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.FlightOracle.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.Measurements.cs
+?? tests/NovaCore.Graphics.Tests/ModularFloridaTests.cs
+?? tests/NovaCore.Graphics.Tests/ModularGreyboxAssetTests.cs
+?? tests/NovaCore.Graphics.Tests/ModularViewportTests.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Articles.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Editor.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Fuel.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Graph.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Measurements.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Power.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.PowerWidths.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Runtime.cs
+?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.AdmissionAudit.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.AggregateAdmission.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.Compiler.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.CraftDocument.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.Gate1Closure.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.NumericalAdmission.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.Persistence.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalContact.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalMeasurements.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalPredicates.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalServices.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.Placement.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.PlacementMeasurements.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.StarterDefinitions.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.Transactions.cs
+?? tests/NovaCore.Simulation.Tests/ModularCraftTests.cs
+?? tools/NovaCore.App/
+?? tools/NovaCore.Causal.Observer/
+?? tools/NovaCore.ConstructionEditor/
+?? tools/vehicle-construction/

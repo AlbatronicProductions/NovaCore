@@ -1,0 +1,12 @@
+[
+  {
+    "case": "missing-native",
+    "exitCode": 1,
+    "message": "E:\\NovaCore\\samples\\NovaCore.Triangle\\NovaCore.Triangle.csproj(24,5): error : Native runtime is missing from E:\\NovaCore\\samples\\NovaCore.Triangle\\..\\..\\build\\release-package-owner/missing-native\\. Build the matching native configuration before building or publishing the application."
+  },
+  {
+    "case": "empty-shaders",
+    "exitCode": 1,
+    "message": "E:\\NovaCore\\samples\\NovaCore.Triangle\\NovaCore.Triangle.csproj(25,5): error : Native SPIR-V shader package is empty in E:\\NovaCore\\samples\\NovaCore.Triangle\\..\\..\\build\\release-package-owner/empty-shaders\\shaders. Build the matching native configuration before building or publishing the application."
+  }
+]

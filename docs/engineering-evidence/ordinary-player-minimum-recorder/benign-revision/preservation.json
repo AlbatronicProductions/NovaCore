@@ -1,0 +1,32 @@
+{
+  "judgment": "PASS",
+  "entryFiles": 3880,
+  "changed": [
+    "docs/engineering-evidence/ordinary-player-minimum-recorder/README.md",
+    "native/NovaCore.Native/NovaCoreNative.cpp",
+    "native/NovaCore.Native/OrdinaryNative.inl",
+    "native/NovaCore.Native/OrdinaryRecorder.h",
+    "native/NovaCore.Native/OrdinaryRecorderMock.cpp",
+    "src/NovaCore.Diagnostics/OrdinaryJournal.cs",
+    "src/NovaCore.Diagnostics/OrdinaryObserver.cs",
+    "src/NovaCore.Diagnostics/OrdinaryProtocol.cs",
+    "src/NovaCore.Diagnostics/OrdinarySession.cs",
+    "src/NovaCore.Interop/MinimumRecorder.cs",
+    "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+    "tests/NovaCore.Graphics.Tests/Program.cs",
+    "tests/NovaCore.MinimumRecorder.Tests/Program.cs",
+    "tests/NovaCore.MinimumRecorder.Tests/native-fixture.py",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs",
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj",
+    "tools/NovaCore.ConstructionEditor/Program.cs"
+  ],
+  "newProductionAndTests": [
+    "native/NovaCore.Native/OrdinaryMeasurement.h",
+    "src/NovaCore.Diagnostics/BenignRecorderRoute.cs",
+    "tests/NovaCore.Graphics.Tests/BenignRecorderRouteTests.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.RecorderQualification.cs"
+  ],
+  "unrelatedEntryFilesPreserved": true,
+  "headRefsIndexUnchanged": true
+}

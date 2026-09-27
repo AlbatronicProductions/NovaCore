@@ -1,0 +1,522 @@
+{
+  "schema": "novacore.modular-gate6-results/1",
+  "judgment": "PASS",
+  "playerPass": false,
+  "backendDebug": 98,
+  "backendRelease": 98,
+  "regressions": {
+    "gate5": 195,
+    "gate3": 88
+  },
+  "builds": {
+    "editorRelease": "PASS",
+    "simulationRelease": "PASS",
+    "editorDebug": "PASS",
+    "simulationDebug": "PASS"
+  },
+  "routes": [
+    {
+      "configuration": "Release",
+      "size": "short",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 180,
+        "tank": "nc.tank.short-2",
+        "parts": 12,
+        "document": "a9a8779356dcea05414a01f73e0b2339105c69530e58181d5f56a1a9a558a95b",
+        "bytes": 9685,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\909f54342fd7400ea2ec607235515dfd",
+        "native": "c24d00b81dc6069b41faa3ee6cdb5b35dd5d795b419289e428bca5dd40c41242",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    },
+    {
+      "configuration": "Release",
+      "size": "long",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 180,
+        "tank": "nc.tank.long-2",
+        "parts": 12,
+        "document": "36f9fc1c97ba0e62f62dcb2485d81f073e0813b6068a70c9dad47350e89b79e0",
+        "bytes": 9670,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\8810ac58bc7646a48531f890004c9cac",
+        "native": "c24d00b81dc6069b41faa3ee6cdb5b35dd5d795b419289e428bca5dd40c41242",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    },
+    {
+      "configuration": "Debug",
+      "size": "short",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 180,
+        "tank": "nc.tank.short-2",
+        "parts": 12,
+        "document": "7a7c8488197d2dfe7052e5c76b4770d65acbfa6ae333841839651c3a4b17489f",
+        "bytes": 9685,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\aa7515c28e344f55b0aca07825f1830d",
+        "native": "d96297269630a5cdfd6ee19abc05d92b7b7151dce6b68d6b0d19cc50196dd71d",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    },
+    {
+      "configuration": "Debug",
+      "size": "long",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 180,
+        "tank": "nc.tank.long-2",
+        "parts": 12,
+        "document": "f32acdfdcefc57073c317b585eda6c6bab3f0f7695dfd2963448f8110510b8a9",
+        "bytes": 9670,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\a49d47c79d7f4dabb9f1bb60bf1713c7",
+        "native": "d96297269630a5cdfd6ee19abc05d92b7b7151dce6b68d6b0d19cc50196dd71d",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    }
+  ],
+  "independentReview": "PASS; six exact file roundtrips, ten state-preserving adversarial probes, source hashes unchanged; both path-association witnesses closed",
+  "measurements": {
+    "scope": "Cold persistence; normal GC; equivalent fresh sessions; setup excluded; actual atomic filesystem writes; report only",
+    "rows": [
+      {
+        "craft": "short",
+        "operation": "serialize",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 0.0781,
+          "p95": 0.0936,
+          "p99": 0.0936,
+          "maximum": 0.0936
+        },
+        "allocatedBytes": {
+          "median": 15304,
+          "p95": 15304,
+          "p99": 15304,
+          "maximum": 15304
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "serialize",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 0.0785,
+          "p95": 0.0871,
+          "p99": 0.0871,
+          "maximum": 0.0871
+        },
+        "allocatedBytes": {
+          "median": 15304,
+          "p95": 15304,
+          "p99": 15304,
+          "maximum": 15304
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "serialize",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 0.0777,
+          "p95": 0.1159,
+          "p99": 0.1159,
+          "maximum": 0.1159
+        },
+        "allocatedBytes": {
+          "median": 15304,
+          "p95": 15304,
+          "p99": 15304,
+          "maximum": 15304
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "atomic-save",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 15.3172,
+          "p95": 19.1809,
+          "p99": 19.1809,
+          "maximum": 19.1809
+        },
+        "allocatedBytes": {
+          "median": 2019200,
+          "p95": 2019424,
+          "p99": 2019424,
+          "maximum": 2019424
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "atomic-save",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 11.2646,
+          "p95": 14.3274,
+          "p99": 14.3274,
+          "maximum": 14.3274
+        },
+        "allocatedBytes": {
+          "median": 2019200,
+          "p95": 2019424,
+          "p99": 2019424,
+          "maximum": 2019424
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "atomic-save",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 9.8213,
+          "p95": 12.8603,
+          "p99": 12.8603,
+          "maximum": 12.8603
+        },
+        "allocatedBytes": {
+          "median": 2011360,
+          "p95": 2012128,
+          "p99": 2012128,
+          "maximum": 2012128
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "load",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 6.377,
+          "p95": 6.5806,
+          "p99": 6.5806,
+          "maximum": 6.5806
+        },
+        "allocatedBytes": {
+          "median": 2271520,
+          "p95": 2271744,
+          "p99": 2271744,
+          "maximum": 2271744
+        },
+        "gc": [
+          1,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "load",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 6.3625,
+          "p95": 6.7768,
+          "p99": 6.7768,
+          "maximum": 6.7768
+        },
+        "allocatedBytes": {
+          "median": 2261392,
+          "p95": 2263072,
+          "p99": 2263072,
+          "maximum": 2263072
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "short",
+        "operation": "load",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 6.2594,
+          "p95": 6.4328,
+          "p99": 6.4328,
+          "maximum": 6.4328
+        },
+        "allocatedBytes": {
+          "median": 2261392,
+          "p95": 2261616,
+          "p99": 2261616,
+          "maximum": 2261616
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9618
+      },
+      {
+        "craft": "long",
+        "operation": "serialize",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 0.0189,
+          "p95": 0.0196,
+          "p99": 0.0196,
+          "maximum": 0.0196
+        },
+        "allocatedBytes": {
+          "median": 15288,
+          "p95": 15288,
+          "p99": 15288,
+          "maximum": 15288
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "serialize",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 0.019,
+          "p95": 0.0206,
+          "p99": 0.0206,
+          "maximum": 0.0206
+        },
+        "allocatedBytes": {
+          "median": 15288,
+          "p95": 15288,
+          "p99": 15288,
+          "maximum": 15288
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "serialize",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 0.0181,
+          "p95": 0.0188,
+          "p99": 0.0188,
+          "maximum": 0.0188
+        },
+        "allocatedBytes": {
+          "median": 15288,
+          "p95": 15288,
+          "p99": 15288,
+          "maximum": 15288
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "atomic-save",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 8.788,
+          "p95": 9.7568,
+          "p99": 9.7568,
+          "maximum": 9.7568
+        },
+        "allocatedBytes": {
+          "median": 2006568,
+          "p95": 2006792,
+          "p99": 2006792,
+          "maximum": 2006792
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "atomic-save",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 8.8698,
+          "p95": 9.5646,
+          "p99": 9.5646,
+          "maximum": 9.5646
+        },
+        "allocatedBytes": {
+          "median": 2006568,
+          "p95": 2006792,
+          "p99": 2006792,
+          "maximum": 2006792
+        },
+        "gc": [
+          3,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "atomic-save",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 8.923,
+          "p95": 10.4651,
+          "p99": 10.4651,
+          "maximum": 10.4651
+        },
+        "allocatedBytes": {
+          "median": 2006568,
+          "p95": 2006792,
+          "p99": 2006792,
+          "maximum": 2006792
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "load",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 6.4987,
+          "p95": 6.8326,
+          "p99": 6.8326,
+          "maximum": 6.8326
+        },
+        "allocatedBytes": {
+          "median": 2268760,
+          "p95": 2268984,
+          "p99": 2268984,
+          "maximum": 2268984
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "load",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 6.4869,
+          "p95": 6.9021,
+          "p99": 6.9021,
+          "maximum": 6.9021
+        },
+        "allocatedBytes": {
+          "median": 2268760,
+          "p95": 2268984,
+          "p99": 2268984,
+          "maximum": 2268984
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      },
+      {
+        "craft": "long",
+        "operation": "load",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 6.1898,
+          "p95": 6.4222,
+          "p99": 6.4222,
+          "maximum": 6.4222
+        },
+        "allocatedBytes": {
+          "median": 2268760,
+          "p95": 2268984,
+          "p99": 2268984,
+          "maximum": 2268984
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "documentBytes": 9604
+      }
+    ]
+  },
+  "ksaWrites": 0
+}

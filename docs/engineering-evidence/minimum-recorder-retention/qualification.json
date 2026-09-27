@@ -1,0 +1,51 @@
+{
+  "judgment": "PASS",
+  "configurations": {
+    "Debug": {
+      "build": "PASS, zero warnings/errors",
+      "retentionChecks": 198,
+      "durabilityChecks": 8524,
+      "nativeCpuMock": "PASS native transport no Vulkan; produced/durable=35303; p99=86.000us"
+    },
+    "Release": {
+      "build": "PASS, zero warnings/errors",
+      "retentionChecks": 198,
+      "durabilityChecks": 8524,
+      "nativeCpuMock": "PASS native transport no Vulkan; produced/durable=35303; p99=54.100us"
+    }
+  },
+  "appDiagnostics": 113,
+  "launcherChecks": 19,
+  "package": {
+    "judgment": "PASS",
+    "repository": "E:\\NovaCore",
+    "package": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows",
+    "fileCount": 134,
+    "bytes": 12585098,
+    "packageSha256": "f53c55cd50ab80cfc41dc0c39f9fdceac409bbfd8bb1127883f75a3e550aaf3c",
+    "shaders": 66,
+    "errors": [],
+    "scope": "Repository-layout canonical build output; explicit verified terrain cache required. Not standalone publish qualification."
+  },
+  "independentRedTeam": "PASS",
+  "runtimeRetirement": "PASS; 0 deletions, all original hashes preserved",
+  "gpuExposure": 0,
+  "supersededFailures": [
+    {
+      "failure": "Fixture cleanup sharing violation",
+      "cause": "Recovery publication precedes observer lease release",
+      "correction": "Test-only cleanup waits for exact observer incarnation exit"
+    },
+    {
+      "failure": "CPU native fixture observer readiness",
+      "cause": "Observer metadata write preceded journal directory creation",
+      "correction": "Publish identity after journal constructor and before Ready"
+    }
+  ],
+  "permanentTestPaths": [
+    "tests/NovaCore.Retention.Tests",
+    "tests/NovaCore.MinimumRecorder.Tests"
+  ],
+  "rawEvidence": "build/minimum-recorder-retention (regeneratable)",
+  "disposition": "STOP FOR PROJECT CONTROL; UNBANKED"
+}

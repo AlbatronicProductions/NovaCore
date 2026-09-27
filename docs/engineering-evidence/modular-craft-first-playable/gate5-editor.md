@@ -1,0 +1,30 @@
+# Gate 5 — direct construction editor
+
+The player route is one Windows desktop editor with the existing native Vulkan renderer embedded as a child viewport. The same `ConstructionEditorSession` owns all accepted documents, previews, history and configuration. The old browser remains available through `--diagnostic-browser`; its retirement awaits replacement acceptance. No Player PASS is claimed.
+
+## Responsibilities and corrections
+
+- Six catalog assets resolve through the admitted asset identities. Neutral visual composition retains every original triangle/material and gives one immutable mesh per part. Upload handles belong to each renderer lease; they cannot mutate another lease or the source asset.
+- Direct mesh picking selects the whole authored group. Displayed and pickable socket candidates share one list, capped at 1,024; selecting a target prioritizes its sockets. Refused complete placements are red ghosts, never accepted document state. Placement, reconnection, indexed clocking, configuration, deletion, undo and redo use the existing transaction owner. Fresh placement identifiers are checked against loaded instances, groups and joints.
+- FIT uses explicit interface rules and convex collision/clearance checks. Containment uses directed exit distances. Part origins are subtracted before local vertices are added. Outward interval arithmetic certifies projected separation, including far-offset local geometry; uncertain contact refuses. The metric contact band is multiplied by a downward-certified axis length rather than assuming floating-point axes are exactly unit. Rotated bounds are cached only within one immutable fit query, reducing measured cold allocation without changing acceptance rules.
+- Reconnection derives services from the new endpoints. Every Part Standard editor session enforces FIT on load, edits, history and recovery; omitting a prepared cache cannot bypass it.
+- The native child borrows its parent, owns its input/capture and renderer lease, forwards ordinary Windows keyboard preprocessing, follows resize, and never publishes flight controls. Focus/capture loss clears pending commands. A completed click retains its down position despite later release/motion before delivery. Left selection takes priority over simultaneous drag, then rebases the drag baseline. Closing the child cannot destroy the borrowed parent or post process-wide quit.
+- Explicit readable control colors correct the system-theme contrast defect observed during visual inspection. Orbit, pan, zoom, selection, preview colors, ordinary controls and text navigation were exercised. Engineering checks do not replace Project Control manual acceptance.
+
+## Qualification and limits
+
+Permanent Gate 5 simulation coverage includes short/long 1×/2×/4×/8× placement, atomic whole-group operations, stale/refused operations, automatic FIT, service reconnection, containment, large coordinates and an independently reconstructed binary-rational contact-boundary witness. Graphics coverage verifies ABI offsets, invalid leases, immutable mesh handles, geometry/picking parity and camera projection. The opt-in `--qualify-editor` route drives real child-window messages and the same visible button handlers, including click→release→later movement, foreign capture, text/Tab/ComboBox isolation, resize and eight-member refusal.
+
+Final counts, identities and measurements are in `gate5-results.json`; source and preservation hashes are in `gate5-seal.json`. Cold edit timings and warm viewport windows are separate. The editor allocates per frame and is not claimed to meet a zero-allocation flight contract. Existing flight-camera allocation checks remain separate regressions. No flight, compiler FUNCTION, or launch ADMITTED qualification is implied.
+
+## Reproduction and provenance
+
+1. In the x64 Visual Studio development environment with Vulkan SDK 1.4.357.0, build the existing CMake candidate caches `build/modular-craft-first-playable/native-release` and `native-debug` (preserve the old x86 Release cache).
+2. Build `NovaCore.sln` for Debug/Release with `-p:NativeBuildDirectory=modular-craft-first-playable/native-debug` or `native-release`. Build `tools/NovaCore.ConstructionEditor` explicitly with the matching property and an isolated `--artifacts-path`.
+3. Run Simulation.Tests flags `--modular-gate2`, `--modular-gate3`, `--modular-gate4`, `--modular-gate5-operations`, and `--modular-gate5-measure`. Run `tools/vehicle-construction/qualify-modular-gate1.ps1 -OutputPath build/modular-craft-first-playable/gate5-regressions.json` for preserved admission/construction/SRV/control suites.
+4. Run Graphics.Tests `--modular-viewport`, `--modular-greybox-assets`, `--modular-editor-regressions` against the matching candidate build and Triangle output. Run each editor configuration with `--qualify-editor <output.json>`; the engineering driver requires its own visible foreground window. Do not operate that window during the bounded driver run.
+5. Run `author-modular-starter.py --check`, the independent NumPy `check-modular-geometry.py`, `seal-modular-evidence.py --gate 5`, and `git diff --check`.
+
+Full solution builds refresh ordinary sample/test/launcher build outputs, including Triangle native/shader copies. No launcher preparation/deployment script, published package promotion, commit, tag, push or banking occurred. An initial build passed an absolute path to the relative `NativeBuildDirectory` property and failed only at copying; the corrected relative property rebuilt successfully. The strict window regression correctly rejected stale Triangle native output before the matching solution rebuild. These failures were not suppressed.
+
+Rebuildable outputs, measurements, logs and GUID-named IO witnesses remain under `build/modular-craft-first-playable`; no automatic cleanup is authorized. The entry recovery archive and prior stopped evidence remain preserved. The independent geometry checker now includes eight manufactured SAT cases (containment formula corrected); accepted six-definition geometry is unchanged.

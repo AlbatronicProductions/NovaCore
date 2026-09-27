@@ -141,7 +141,7 @@ public static class TerrainAssetRepository
         if (!directory.Exists && directory.Parent is not null) directory = directory.Parent;
         while (directory is not null)
         {
-            if (Directory.Exists(Path.Combine(directory.FullName, ".git")) &&
+            if ((Directory.Exists(Path.Combine(directory.FullName, ".git")) || File.Exists(Path.Combine(directory.FullName, ".git"))) &&
                 Directory.Exists(Path.Combine(directory.FullName, "assets", "terrain", "manifests")))
             {
                 root = directory.FullName;

@@ -49,6 +49,30 @@ public static class EarthElevationDataset
 
     public static double SampleHeight(in Double3 bodyDirection) => Math.Max(0d, SampleElevation(bodyDirection));
 
+    internal static double CapElevationUpperBound(in Double3 direction,double angularRadius)
+    {
+        var values=Volatile.Read(ref _elevation)??throw new InvalidOperationException("Physical height data not loaded.");
+        if(!direction.IsFinite||Math.Abs(direction.LengthSquared-1)>1e-10||!double.IsFinite(angularRadius)||angularRadius<0||angularRadius>Math.PI)
+            throw new ArgumentOutOfRangeException(nameof(angularRadius));
+        var unit=direction.Normalized();var horizontal=Math.Sqrt(unit.X*unit.X+unit.Z*unit.Z);
+        var latitude=Math.Atan2(unit.Y,horizontal);
+        var a=Math.BitIncrement(angularRadius+64*Math.ScaleB(1d,-52));
+        if(Math.Abs(latitude)+a>=Math.PI/2)return MaximumElevationMetres;
+        var longitude=BodyFixedGeography.LongitudeRadians(unit);
+        var longitudeRadius=Math.Asin(Math.Min(1,Math.Sin(a)/horizontal));
+        var u=(longitude/Math.Tau+.5)*Width-.5;
+        var lowX=(int)Math.Floor(u-longitudeRadius/Math.Tau*Width)-1;
+        var highX=(int)Math.Floor(u+longitudeRadius/Math.Tau*Width)+2;
+        var lowY=Math.Clamp((int)Math.Floor((.5-(latitude+a)/Math.PI)*Height-.5)-1,0,Height-1);
+        var highY=Math.Clamp((int)Math.Floor((.5-(latitude-a)/Math.PI)*Height-.5)+2,0,Height-1);
+        // Every bilinear sample is a convex combination of these texels. The
+        // extra cell collar encloses floating address/normalization rounding.
+        if((long)(highX-lowX+1)*(highY-lowY+1)>4096)return MaximumElevationMetres;
+        ushort maximum=0;
+        for(var y=lowY;y<=highY;y++)for(var x=lowX;x<=highX;x++)maximum=Math.Max(maximum,values[y*Width+Mod(x,Width)]);
+        return Math.BitIncrement(Decode(maximum)+128*Math.ScaleB(1d,-52)*(MaximumElevationMetres-MinimumElevationMetres));
+    }
+
     public static double SampleElevation(in Double3 bodyDirection)
     {
         if (!bodyDirection.IsFinite || bodyDirection.LengthSquared <= 0d) throw new ArgumentOutOfRangeException(nameof(bodyDirection));
@@ -68,6 +92,30 @@ public static class EarthElevationDataset
     }
 
     private static double Decode(ushort value) => MinimumElevationMetres + value / 65535d * (MaximumElevationMetres - MinimumElevationMetres);
+    internal static CollisionJet CollisionBounds(CollisionJet px,CollisionJet py,double finiteYError=0)
+    {
+        var values=Volatile.Read(ref _elevation)??throw new InvalidDataException("Collision elevation unavailable.");
+        var x0=(int)Math.Floor(px.V.Low);var x1=(int)Math.Floor(px.V.High);var y0=(int)Math.Floor(py.V.Low);var y1=(int)Math.Floor(py.V.High);
+        // Production clamps the row index before taking the fractional part.
+        // At the north polar clamped-row join that can be discontinuous. A
+        // gradient union is not a certificate across a discontinuity.
+        var finitePy=py.V.Inflate(finiteYError);
+        if(finitePy.Low<0&&finitePy.High>=0)throw new InvalidDataException("Collision geographic polar clamp join requires a separate bound.");
+        if(x1-x0>4||y1-y0>4)throw new InvalidDataException("Collision geographic cell extent requires refinement.");
+        CollisionJet? result=null;
+        for(var y=y0;y<=y1;y++)for(var x=x0;x<=x1;x++)
+        {
+            var iy=Math.Clamp(y,0,Height-1);var jy=Math.Min(iy+1,Height-1);var ix=Mod(x,Width);var jx=Mod(x+1,Width);
+            var u=px.WithRange(px.V.Clip(x,x+1))-x;var v=py.WithRange(py.V.Clip(y,y+1))-y;
+            // Shared finite decoded texels define one continuous reference
+            // field. Coefficient algebra must remain real interval algebra;
+            // rounding b-a before promotion would break endpoint agreement.
+            CollisionJet a=Decode(values[iy*Width+ix]),b=Decode(values[iy*Width+jx]),c=Decode(values[jy*Width+ix]),d=Decode(values[jy*Width+jx]);
+            var sample=a+(b-a)*u+(c-a)*v+(d-b-c+a)*u*v;
+            result=result is {} prior?prior.Union(sample):sample;
+        }
+        return result!.Value;
+    }
     private static int Mod(int value, int modulus) => (value % modulus + modulus) % modulus;
     private static double Lerp(double a, double b, double t) => a + (b - a) * t;
     private static double SampleFallback(in Double3 bodyDirection)

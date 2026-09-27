@@ -1,0 +1,1174 @@
+{
+  "schema": 1,
+  "date": "2026-09-27",
+  "judgment": "REVISE / STOP FOR PROJECT CONTROL",
+  "offlineCorrectness": "PASS",
+  "productionPerformance": "NOT FULLY QUALIFIED; terrain preparation tails remain",
+  "nativeAcceptance": "FAIL: mandatory recorder overflow",
+  "sourceAndPackage": {
+    "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+    "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+    "refsSha256": "2c5645bb57d83ab8f4f0f20734f81fece50ed1dd933621ed02d150366cdc23be",
+    "sourceSha256": "dd2e25fed486667785525164ae30e4b24adec57d7b73ec9429b6f88c147be50c",
+    "sourceFileCount": 730,
+    "packageSha256": "c7b4128f553f4eec72f06e3cb28f6931fa6d806696e49f20013fb1bdd4835bd7",
+    "packageFileCount": 134,
+    "settingsSha256": "0e45ef76b1b52d2d564b2da592149e3f8ae2b26e8a09e780fb6da099b9736da9",
+    "entryFiles": 3913,
+    "missing": [],
+    "entryHeadUnchanged": true,
+    "ksaSha256": "ce43d022e7dac9beb2352b6106164bc1f521dda1ae9d0b898b8dba0c59a69723",
+    "entryProtectedUnchanged": true,
+    "comparison": {
+      "head": true,
+      "indexSha256": true,
+      "refsSha256": true,
+      "sourceSha256": true,
+      "packageSha256": true,
+      "settingsSha256": true,
+      "ksaSha256": true
+    }
+  },
+  "resultInputs": [
+    {
+      "path": "build/surface-recontact/qualification/results.json",
+      "sha256": "e0d9b89373ee04281a74b7cc8c32a6522ce8e8117568f92bc4f6a8c981c17193"
+    },
+    {
+      "path": "build/surface-recontact/qualification/reference-results.json",
+      "sha256": "e5148367f9f22f437898bbf3307d2e5aef35af091314fe7afa050c4ffbd02de0"
+    },
+    {
+      "path": "build/surface-recontact/qualification/closure-results.json",
+      "sha256": "280a5fa1364e8af7889163c44e6eeef6659cc768a9a96f65579d775cc6d43c3e"
+    },
+    {
+      "path": "build/surface-recontact/qualification/observer-results.json",
+      "sha256": "a44ee8867a6f580846bbfd6520e040fb623b15e801fa6ad2735bcbe13aa41a6d"
+    }
+  ],
+  "latestOfflineResults": [
+    {
+      "name": "build-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-build-Debug.log",
+      "sha256": "1997b1cbac0c22fd8b5b7ae6fa02242fd051a11b8f7a47294ce78c533369cf0d"
+    },
+    {
+      "name": "build-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-build-Release.log",
+      "sha256": "8965dd74acd7a807ed25ef446cf76b1364928335d767ed2efcdf6d7ad42e5a53"
+    },
+    {
+      "name": "florida-pad-authority-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/florida-pad-authority-Debug.log",
+      "sha256": "99e9d6a2f2531b166609169818e85f8e32ab19c66f94953457e44dff1bfd5e25"
+    },
+    {
+      "name": "florida-pad-authority-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/florida-pad-authority-Release.log",
+      "sha256": "99e9d6a2f2531b166609169818e85f8e32ab19c66f94953457e44dff1bfd5e25"
+    },
+    {
+      "name": "modular-connectors-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-connectors-Debug.log",
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05"
+    },
+    {
+      "name": "modular-connectors-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-connectors-Release.log",
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05"
+    },
+    {
+      "name": "modular-editor-regressions-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-editor-regressions-Debug.log",
+      "sha256": "15f824a038f3306030d0cde5f73deb7c9039467d9a5b8ad8dd9ebb03993e1943"
+    },
+    {
+      "name": "modular-editor-regressions-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-editor-regressions-Release.log",
+      "sha256": "a246aabe15612244d8e715ae450b219723d01fa6b633b4606ef89db828dc405e"
+    },
+    {
+      "name": "modular-gate10-dynamics-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate10-dynamics-Debug.log",
+      "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586"
+    },
+    {
+      "name": "modular-gate10-dynamics-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate10-dynamics-Release.log",
+      "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586"
+    },
+    {
+      "name": "modular-gate10-flight-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate10-flight-Debug.log",
+      "sha256": "7c5a4ea0fc907a733742a887c5bfa99e335e9ceb43069daefbb7c2e0348d0e2e"
+    },
+    {
+      "name": "modular-gate10-flight-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate10-flight-Release.log",
+      "sha256": "7c5a4ea0fc907a733742a887c5bfa99e335e9ceb43069daefbb7c2e0348d0e2e"
+    },
+    {
+      "name": "modular-gate11-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate11-Debug.log",
+      "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41"
+    },
+    {
+      "name": "modular-gate11-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate11-Release.log",
+      "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41"
+    },
+    {
+      "name": "modular-gate12-application-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-modular-gate12-application-Debug.log",
+      "sha256": "6f306f83f859893dde9d1cb649e2703c3f69dec9b085fe17f18e79ea4f36fa5f"
+    },
+    {
+      "name": "modular-gate12-application-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-modular-gate12-application-Release.log",
+      "sha256": "71af14ebc9e33e7d7ef668ea4f583bb7fee9a9a3748cc8a65b3048a48687d2e4"
+    },
+    {
+      "name": "modular-gate9-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate9-Debug.log",
+      "sha256": "3301df0739e8ea2951bb29f7698b3b5e52ea7b8bc889ede82406bb9176adeabf"
+    },
+    {
+      "name": "modular-gate9-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-gate9-Release.log",
+      "sha256": "735db84c55d27231c20893b41f70d4eafcd5bae2aae3e6118440801c437b380c"
+    },
+    {
+      "name": "modular-stabilization-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-stabilization-Debug.log",
+      "sha256": "c37a7a97d94da4b69b93f797b1ef34a7944f871df4bcb3150afed3a592d2aeaa"
+    },
+    {
+      "name": "modular-stabilization-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-stabilization-Release.log",
+      "sha256": "c37a7a97d94da4b69b93f797b1ef34a7944f871df4bcb3150afed3a592d2aeaa"
+    },
+    {
+      "name": "modular-viewport-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-viewport-Debug.log",
+      "sha256": "818d33cc056623c9b851bef2e21dcff2a83543c73574947753b64efcbc532539"
+    },
+    {
+      "name": "modular-viewport-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/modular-viewport-Release.log",
+      "sha256": "818d33cc056623c9b851bef2e21dcff2a83543c73574947753b64efcbc532539"
+    },
+    {
+      "name": "physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Debug.log",
+      "sha256": "b8c09f063cfba6070574df9ced563ce4c1cf7f8d2193970a901ac8bda13b1564"
+    },
+    {
+      "name": "physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Canonical-SurfaceAnchor-physical-terrain-authority-Release.log",
+      "sha256": "7dc61547155cc0dd277ddc5abcde470c436dbc28300348878bbad92760de4ec9"
+    },
+    {
+      "name": "physical-reference-Canonical-body-fixed-geographic-handedness-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Canonical-body-fixed-geographic-handedness-Debug.log",
+      "sha256": "fbb397a0f5c02b261087fd70095a54a66d82d5d60d96d9e0c5b674098fb5078c"
+    },
+    {
+      "name": "physical-reference-Canonical-body-fixed-geographic-handedness-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Canonical-body-fixed-geographic-handedness-Release.log",
+      "sha256": "7e15feb2836ff58de3486bde19c67eb7a573b77cf31b015104a79595680cdeb8"
+    },
+    {
+      "name": "physical-reference-Earth-CPU-elevation-oracle-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Earth-CPU-elevation-oracle-Debug.log",
+      "sha256": "4f8e314d694e1f6753d1c6e44dec3db884578e8e67bb2029ad4eabf6819566b0"
+    },
+    {
+      "name": "physical-reference-Earth-CPU-elevation-oracle-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Earth-CPU-elevation-oracle-Release.log",
+      "sha256": "cbcda35f46dd4c8c46a23a39a39f62d48c347dc826af10bb69cd66f2011d05bb"
+    },
+    {
+      "name": "physical-reference-Global-anchored-physical-frequency-continuity-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Global-anchored-physical-frequency-continuity-Debug.log",
+      "sha256": "be45fb507877380267782922c55f539f4b3b1571e38dc1f2ae5f02ee8ed7dd57"
+    },
+    {
+      "name": "physical-reference-Global-anchored-physical-frequency-continuity-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Global-anchored-physical-frequency-continuity-Release.log",
+      "sha256": "19f355aabbf000caa37cb16c773e608f7943c9cbb4dafee12523dbf203cc4030"
+    },
+    {
+      "name": "physical-reference-Local-terrain-format-and-GPU-compression-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Local-terrain-format-and-GPU-compression-Debug.log",
+      "sha256": "a98b711b8638809b1d22083c94d4416fc67aceec49f6aeae57b84d1e80f3deb1"
+    },
+    {
+      "name": "physical-reference-Local-terrain-format-and-GPU-compression-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Local-terrain-format-and-GPU-compression-Release.log",
+      "sha256": "5def78e9f0b59df0be5033ebd09823f90c83355c404d013cde1ede45924ea844"
+    },
+    {
+      "name": "physical-reference-Local-terrain-payload-2-authoring-contract-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Local-terrain-payload-2-authoring-contract-Debug.log",
+      "sha256": "e27e59bf5233f1a065869a8a774bca1d4ba15e744de1d8c637a68417fe57bc4c"
+    },
+    {
+      "name": "physical-reference-Local-terrain-payload-2-authoring-contract-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Local-terrain-payload-2-authoring-contract-Release.log",
+      "sha256": "08ed0f9542fc032e61194ba6fc1246cb45f3adfbcffa3aece11b73a2506221a0"
+    },
+    {
+      "name": "physical-reference-M12-Florida-regional-physical-surface-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-M12-Florida-regional-physical-surface-Debug.log",
+      "sha256": "63707b3fcc1d67e383f55531d36010d5b5f0ff5d8c025f659658a27825b43439"
+    },
+    {
+      "name": "physical-reference-M12-Florida-regional-physical-surface-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-M12-Florida-regional-physical-surface-Release.log",
+      "sha256": "6a926d8c33a4911256c041bfd33e4a1b1338751f231bdb290b80ba49a2ba170a"
+    },
+    {
+      "name": "physical-reference-Multiscale-physical-terrain-modifier-foundation-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Multiscale-physical-terrain-modifier-foundation-Debug.log",
+      "sha256": "2e154023bf7581bd7a7454b04110104de3bb1613fcdda607f9818707ac91139f"
+    },
+    {
+      "name": "physical-reference-Multiscale-physical-terrain-modifier-foundation-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Multiscale-physical-terrain-modifier-foundation-Release.log",
+      "sha256": "56c4e359006dee58b14b09f2523c004e3666e4491cc9b7399b192eb448a59585"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-query-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Physical-surface-point-query-Debug.log",
+      "sha256": "226281f495f38ed593e19d4a81224438c21f7342c40f101126db910a5f7916ca"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-query-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Physical-surface-point-query-Release.log",
+      "sha256": "018f736e113669a9f21ea2ba7f368dbffef0f35745e5d9272c50249153f4c75f"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-stale-snapshot-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Physical-surface-point-stale-snapshot-Debug.log",
+      "sha256": "4f8e314d694e1f6753d1c6e44dec3db884578e8e67bb2029ad4eabf6819566b0"
+    },
+    {
+      "name": "physical-reference-Physical-surface-point-stale-snapshot-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Physical-surface-point-stale-snapshot-Release.log",
+      "sha256": "cbcda35f46dd4c8c46a23a39a39f62d48c347dc826af10bb69cd66f2011d05bb"
+    },
+    {
+      "name": "physical-reference-Single-canonical-physical-surface-authority-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Single-canonical-physical-surface-authority-Debug.log",
+      "sha256": "625a4277df272ca301296026ef04d9d831398b793b25ce6463b8b40b3973f5c4"
+    },
+    {
+      "name": "physical-reference-Single-canonical-physical-surface-authority-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/physical-reference-Single-canonical-physical-surface-authority-Release.log",
+      "sha256": "acf8d552568d2c8b7ba1ef01ae6baf4b87ece7a1bc5195b0ebd0b1a86f968263"
+    },
+    {
+      "name": "response-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/response-Debug.log",
+      "sha256": "46976dcf702fc9d2eea120f884b3f092c547af7520213df3a7d0ce04500de795"
+    },
+    {
+      "name": "response-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/response-Release.log",
+      "sha256": "46976dcf702fc9d2eea120f884b3f092c547af7520213df3a7d0ce04500de795"
+    },
+    {
+      "name": "scalable-support-flight-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/scalable-support-flight-Debug.log",
+      "sha256": "66a1d0c07ccda22b868616b44ebea9b30d701e20a53c457cefda3e36b9761cb4"
+    },
+    {
+      "name": "scalable-support-flight-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/scalable-support-flight-Release.log",
+      "sha256": "14d99ffa93ed6fdf389410e16fb1e925a4cef4ed97ea063b219daeeaf67983fb"
+    },
+    {
+      "name": "simulation-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-simulation-Debug.log",
+      "sha256": "e558f79ec2bfe65b6f23472e92f40151cfbc852e6f6bc44deed785ad7c22a5e7"
+    },
+    {
+      "name": "simulation-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-simulation-Release.log",
+      "sha256": "5b4d65212e39d6057d577e7c2a2bdc2c8182e886a9403063e851f84d204f39f6"
+    },
+    {
+      "name": "surface-cases-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-cases-Debug.log",
+      "sha256": "eaebc2aa637940badc6c28fc52341beee5953065c25bd9320f735c35bf3ebed1"
+    },
+    {
+      "name": "surface-cases-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-cases-Release.log",
+      "sha256": "b28f26039cf1c6a74c4fb402bb0ec21634d915513dac9e68df53539ef9f40d93"
+    },
+    {
+      "name": "surface-cycles-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-cycles-Debug.log",
+      "sha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb"
+    },
+    {
+      "name": "surface-cycles-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-cycles-Release.log",
+      "sha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb"
+    },
+    {
+      "name": "surface-live-fixtures-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-live-fixtures-Release.log",
+      "sha256": "37847cb5bb40b1318cce98dcc557940bfa38a12f24280536d6e446e89be47ad3"
+    },
+    {
+      "name": "surface-numerics-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-numerics-Debug.log",
+      "sha256": "88a6595741f7ace6136c9d6a6f2a0d441e5e500ccc09fd8813281afb8506d3da"
+    },
+    {
+      "name": "surface-numerics-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-numerics-Release.log",
+      "sha256": "88a6595741f7ace6136c9d6a6f2a0d441e5e500ccc09fd8813281afb8506d3da"
+    },
+    {
+      "name": "surface-performance-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-surface-performance-Release.log",
+      "sha256": "a16f5c2025863d696d65592df14b3794151673ae68b0191e3ea7727bedfdf482"
+    },
+    {
+      "name": "surface-persistence-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-surface-persistence-Debug.log",
+      "sha256": "eb743fdb1140015d03c4a2e0c6620b7d4b908f7ad682756c3810502815b901db"
+    },
+    {
+      "name": "surface-persistence-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-surface-persistence-Release.log",
+      "sha256": "8bc56047213ddf02a17ed9a5040f4baa173f1756fe742b9fa4a4a6abf0d04768"
+    },
+    {
+      "name": "surface-plane-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-plane-Debug.log",
+      "sha256": "55beabb9567ab3076209ae37f9333c094e25a8751405229801a043b7a9912f61"
+    },
+    {
+      "name": "surface-plane-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-plane-Release.log",
+      "sha256": "55beabb9567ab3076209ae37f9333c094e25a8751405229801a043b7a9912f61"
+    },
+    {
+      "name": "surface-recontact-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-recontact-Debug.log",
+      "sha256": "664d02a921bc1829437e64013ad05e7d69275ccb1ff45f7c37b599970ee02879"
+    },
+    {
+      "name": "surface-recontact-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-recontact-Release.log",
+      "sha256": "664d02a921bc1829437e64013ad05e7d69275ccb1ff45f7c37b599970ee02879"
+    },
+    {
+      "name": "surface-refinement-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-refinement-Debug.log",
+      "sha256": "fa26a034c90289c6ebcb05699f140b4f5eca821652e63466780406ce1d554c80"
+    },
+    {
+      "name": "surface-refinement-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-refinement-Release.log",
+      "sha256": "fa26a034c90289c6ebcb05699f140b4f5eca821652e63466780406ce1d554c80"
+    },
+    {
+      "name": "surface-seams-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-seams-Debug.log",
+      "sha256": "26b680cb2f07b77e5dbc55498dead83e1577da0e497519971f9ca63b985b2678"
+    },
+    {
+      "name": "surface-seams-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/surface-seams-Release.log",
+      "sha256": "f50d59fd7e74fae8b20e08d0ef33924242e3aad22a18d4a8b5092b48a71b5ff6"
+    },
+    {
+      "name": "surface-terrain-Debug",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-surface-terrain-Debug.log",
+      "sha256": "e47479f234a9a8ed79dff49e01eb80a58b6a63da2a4c2df31c2b3968ddc8ef9e"
+    },
+    {
+      "name": "surface-terrain-Release",
+      "exitCode": 0,
+      "log": "build/surface-recontact/qualification/observer-surface-terrain-Release.log",
+      "sha256": "67c5516c03b8b222ff1e5103cbb88d5df9d5726c82170792cf8fbeb345bd0ee2"
+    }
+  ],
+  "supersededFailures": [
+    {
+      "name": "surface-terrain-Release",
+      "exitCode": -532462766,
+      "log": "build/surface-recontact/qualification/surface-terrain-Release.log",
+      "sha256": "ef38442983c3e647a274dc90fcd7687216605d664ec8cf9993a579928832a6ec"
+    }
+  ],
+  "failureResolution": "Release terrain test confused physical separation with conservative proof ownership; corrected deadline and independent rise/contact assertions; final Debug and Release pass. Original failure retained.",
+  "cpuPerformanceRows": [
+    {
+      "kind": "short",
+      "mode": "gentle",
+      "prepareMs": 260.6541,
+      "firstPublishedContactStep": 1,
+      "firstPublishedContact": {
+        "Milliseconds": 13.018,
+        "Allocated": 60664,
+        "LastSliceContacts": 32,
+        "PoolBytes": 950272,
+        "Constraints": 8
+      },
+      "transient": {
+        "samples": 256,
+        "milliseconds": {
+          "median": 1.9288,
+          "p95": 14.4892,
+          "p99": 16.3034,
+          "maximum": 21.4328
+        },
+        "allocated": {
+          "median": 59248,
+          "p95": 61552,
+          "p99": 63344,
+          "maximum": 63344
+        },
+        "maximumSampledContacts": 32,
+        "maximumSampledConstraints": 8,
+        "nativePoolMaximum": 950272
+      },
+      "restWindows": [
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.9293,
+            "p95": 2.2235,
+            "p99": 3.1491,
+            "maximum": 3.2194
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 950272
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.9132,
+            "p95": 2.0363,
+            "p99": 5.129,
+            "maximum": 5.3986
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 950272
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.9266,
+            "p95": 2.0401,
+            "p99": 2.0825,
+            "maximum": 2.2144
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 950272
+        }
+      ],
+      "rcs": {
+        "samples": 4,
+        "milliseconds": {
+          "median": 2.1104,
+          "p95": 4.3299,
+          "p99": 4.3299,
+          "maximum": 4.3299
+        },
+        "allocated": {
+          "median": 86720,
+          "p95": 86856,
+          "p99": 86856,
+          "maximum": 86856
+        },
+        "maximumSampledContacts": 32,
+        "maximumSampledConstraints": 8,
+        "nativePoolMaximum": 950272
+      },
+      "ignition": {
+        "samples": 4,
+        "milliseconds": {
+          "median": 1.9342,
+          "p95": 3.2405,
+          "p99": 3.2405,
+          "maximum": 3.2405
+        },
+        "allocated": {
+          "median": 73392,
+          "p95": 76560,
+          "p99": 76560,
+          "maximum": 76560
+        },
+        "maximumSampledContacts": 0,
+        "maximumSampledConstraints": 0,
+        "nativePoolMaximum": 950272
+      },
+      "baselineNativeMaximum": 950272,
+      "retainedManagedBefore": 252675760,
+      "retainedManagedAfter": 252677544,
+      "retainedManagedDelta": 1784,
+      "nativeAfterDispose": 0
+    },
+    {
+      "kind": "short",
+      "mode": "skid",
+      "prepareMs": 80.7536,
+      "firstPublishedContactStep": 1,
+      "firstPublishedContact": {
+        "Milliseconds": 1.8366,
+        "Allocated": 59896,
+        "LastSliceContacts": 32,
+        "PoolBytes": 950272,
+        "Constraints": 8
+      },
+      "transient": {
+        "samples": 256,
+        "milliseconds": {
+          "median": 1.8858,
+          "p95": 2.0156,
+          "p99": 3.1306,
+          "maximum": 5.3377
+        },
+        "allocated": {
+          "median": 59248,
+          "p95": 59248,
+          "p99": 59248,
+          "maximum": 59896
+        },
+        "maximumSampledContacts": 32,
+        "maximumSampledConstraints": 8,
+        "nativePoolMaximum": 983040
+      },
+      "restWindows": [
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8952,
+            "p95": 1.9397,
+            "p99": 1.9663,
+            "maximum": 2.0688
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 983040
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8804,
+            "p95": 1.9263,
+            "p99": 1.9735,
+            "maximum": 2.5602
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 983040
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8791,
+            "p95": 1.9393,
+            "p99": 5.068,
+            "maximum": 5.156
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 983040
+        }
+      ],
+      "rcs": null,
+      "ignition": null,
+      "baselineNativeMaximum": 983040,
+      "retainedManagedBefore": 253265456,
+      "retainedManagedAfter": 253266832,
+      "retainedManagedDelta": 1376,
+      "nativeAfterDispose": 0
+    },
+    {
+      "kind": "short",
+      "mode": "roll",
+      "prepareMs": 44.7309,
+      "firstPublishedContactStep": 1,
+      "firstPublishedContact": {
+        "Milliseconds": 2.1926,
+        "Allocated": 59304,
+        "LastSliceContacts": 4,
+        "PoolBytes": 557056,
+        "Constraints": 1
+      },
+      "transient": {
+        "samples": 256,
+        "milliseconds": {
+          "median": 1.8562,
+          "p95": 1.9309,
+          "p99": 2.481,
+          "maximum": 4.2311
+        },
+        "allocated": {
+          "median": 59248,
+          "p95": 59248,
+          "p99": 59248,
+          "maximum": 59448
+        },
+        "maximumSampledContacts": 8,
+        "maximumSampledConstraints": 4,
+        "nativePoolMaximum": 720896
+      },
+      "restWindows": [
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8821,
+            "p95": 1.9844,
+            "p99": 2.0886,
+            "maximum": 2.5627
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 8,
+          "maximumSampledConstraints": 4,
+          "nativePoolMaximum": 720896
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.9127,
+            "p95": 2.0132,
+            "p99": 2.1038,
+            "maximum": 2.1439
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 8,
+          "maximumSampledConstraints": 4,
+          "nativePoolMaximum": 720896
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8788,
+            "p95": 2.009,
+            "p99": 2.2133,
+            "maximum": 2.4042
+          },
+          "allocated": {
+            "median": 59248,
+            "p95": 59248,
+            "p99": 59248,
+            "maximum": 59360
+          },
+          "maximumSampledContacts": 8,
+          "maximumSampledConstraints": 4,
+          "nativePoolMaximum": 720896
+        }
+      ],
+      "rcs": null,
+      "ignition": null,
+      "baselineNativeMaximum": 720896,
+      "retainedManagedBefore": 253717680,
+      "retainedManagedAfter": 253717904,
+      "retainedManagedDelta": 224,
+      "nativeAfterDispose": 0
+    },
+    {
+      "kind": "long",
+      "mode": "gentle",
+      "prepareMs": 49.7148,
+      "firstPublishedContactStep": 1,
+      "firstPublishedContact": {
+        "Milliseconds": 1.8693,
+        "Allocated": 59920,
+        "LastSliceContacts": 32,
+        "PoolBytes": 950272,
+        "Constraints": 8
+      },
+      "transient": {
+        "samples": 256,
+        "milliseconds": {
+          "median": 1.913,
+          "p95": 2.0119,
+          "p99": 2.0787,
+          "maximum": 2.7368
+        },
+        "allocated": {
+          "median": 59272,
+          "p95": 59272,
+          "p99": 59272,
+          "maximum": 59920
+        },
+        "maximumSampledContacts": 32,
+        "maximumSampledConstraints": 8,
+        "nativePoolMaximum": 950272
+      },
+      "restWindows": [
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8783,
+            "p95": 1.9425,
+            "p99": 1.9857,
+            "maximum": 2.2575
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 950272
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8792,
+            "p95": 1.9279,
+            "p99": 2.0872,
+            "maximum": 2.2833
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 950272
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8774,
+            "p95": 1.9248,
+            "p99": 1.9801,
+            "maximum": 2.0175
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 950272
+        }
+      ],
+      "rcs": {
+        "samples": 4,
+        "milliseconds": {
+          "median": 2.1362,
+          "p95": 2.3197,
+          "p99": 2.3197,
+          "maximum": 2.3197
+        },
+        "allocated": {
+          "median": 86744,
+          "p95": 86856,
+          "p99": 86856,
+          "maximum": 86856
+        },
+        "maximumSampledContacts": 32,
+        "maximumSampledConstraints": 8,
+        "nativePoolMaximum": 950272
+      },
+      "ignition": {
+        "samples": 8,
+        "milliseconds": {
+          "median": 1.9028,
+          "p95": 2.0415,
+          "p99": 2.0415,
+          "maximum": 2.0415
+        },
+        "allocated": {
+          "median": 73416,
+          "p95": 76584,
+          "p99": 76584,
+          "maximum": 76584
+        },
+        "maximumSampledContacts": 0,
+        "maximumSampledConstraints": 0,
+        "nativePoolMaximum": 950272
+      },
+      "baselineNativeMaximum": 950272,
+      "retainedManagedBefore": 253709000,
+      "retainedManagedAfter": 253717792,
+      "retainedManagedDelta": 8792,
+      "nativeAfterDispose": 0
+    },
+    {
+      "kind": "long",
+      "mode": "skid",
+      "prepareMs": 65.861,
+      "firstPublishedContactStep": 1,
+      "firstPublishedContact": {
+        "Milliseconds": 1.8435,
+        "Allocated": 59920,
+        "LastSliceContacts": 32,
+        "PoolBytes": 950272,
+        "Constraints": 8
+      },
+      "transient": {
+        "samples": 256,
+        "milliseconds": {
+          "median": 1.8781,
+          "p95": 1.9867,
+          "p99": 2.0612,
+          "maximum": 2.6371
+        },
+        "allocated": {
+          "median": 59272,
+          "p95": 59272,
+          "p99": 59328,
+          "maximum": 59920
+        },
+        "maximumSampledContacts": 32,
+        "maximumSampledConstraints": 8,
+        "nativePoolMaximum": 999424
+      },
+      "restWindows": [
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8797,
+            "p95": 1.9179,
+            "p99": 1.9644,
+            "maximum": 2.1303
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 999424
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.892,
+            "p95": 1.9895,
+            "p99": 2.0759,
+            "maximum": 2.1427
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 999424
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8775,
+            "p95": 1.9255,
+            "p99": 1.9691,
+            "maximum": 2.0196
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 32,
+          "maximumSampledConstraints": 8,
+          "nativePoolMaximum": 999424
+        }
+      ],
+      "rcs": null,
+      "ignition": null,
+      "baselineNativeMaximum": 999424,
+      "retainedManagedBefore": 253272080,
+      "retainedManagedAfter": 253273432,
+      "retainedManagedDelta": 1352,
+      "nativeAfterDispose": 0
+    },
+    {
+      "kind": "long",
+      "mode": "roll",
+      "prepareMs": 43.5974,
+      "firstPublishedContactStep": 1,
+      "firstPublishedContact": {
+        "Milliseconds": 1.7843,
+        "Allocated": 59328,
+        "LastSliceContacts": 4,
+        "PoolBytes": 557056,
+        "Constraints": 1
+      },
+      "transient": {
+        "samples": 256,
+        "milliseconds": {
+          "median": 1.8761,
+          "p95": 1.9716,
+          "p99": 2.0271,
+          "maximum": 2.5939
+        },
+        "allocated": {
+          "median": 59272,
+          "p95": 59272,
+          "p99": 59272,
+          "maximum": 59472
+        },
+        "maximumSampledContacts": 8,
+        "maximumSampledConstraints": 4,
+        "nativePoolMaximum": 720896
+      },
+      "restWindows": [
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8755,
+            "p95": 1.9336,
+            "p99": 2.0127,
+            "maximum": 2.2331
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 8,
+          "maximumSampledConstraints": 4,
+          "nativePoolMaximum": 720896
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8856,
+            "p95": 1.9413,
+            "p99": 1.9586,
+            "maximum": 2.3292
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 8,
+          "maximumSampledConstraints": 4,
+          "nativePoolMaximum": 720896
+        },
+        {
+          "samples": 256,
+          "milliseconds": {
+            "median": 1.8726,
+            "p95": 1.9245,
+            "p99": 2.0091,
+            "maximum": 2.2108
+          },
+          "allocated": {
+            "median": 59272,
+            "p95": 59272,
+            "p99": 59272,
+            "maximum": 59384
+          },
+          "maximumSampledContacts": 8,
+          "maximumSampledConstraints": 4,
+          "nativePoolMaximum": 720896
+        }
+      ],
+      "rcs": null,
+      "ignition": null,
+      "baselineNativeMaximum": 720896,
+      "retainedManagedBefore": 253724280,
+      "retainedManagedAfter": 253724480,
+      "retainedManagedDelta": 200,
+      "nativeAfterDispose": 0
+    }
+  ],
+  "nativeRecovery": {
+    "Session": "5612981f-e989-46d6-b9d5-1655112a9697",
+    "DurableSequence": 1230976,
+    "CommittedTarget": 1230976,
+    "CheckpointSequence": 1217824,
+    "Corrupt": false,
+    "Complete": false,
+    "Clean": false,
+    "Faults": 65,
+    "Dropped": 3383,
+    "LastProducedObserved": 1230976,
+    "liveResourceCount": 0,
+    "retainedResourceCount": 315,
+    "faultNames": [
+      "Overflow",
+      "Protocol"
+    ],
+    "openCount": 273,
+    "pendingCount": 38,
+    "recorderDirectory": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder\\5612981fe98946d6b9d51655112a9697",
+    "appLog": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Logs\\20260927-080546-467-47272-b63211bfc119403ab77436cc9b3b2d96\\segment-0.log"
+  },
+  "nativeEvidence": [
+    {
+      "path": "build/surface-recontact/native/os-events.json",
+      "bytes": 310,
+      "sha256": "a892b1558e290aa9b28c041c681545387db38389342c4fa28e1b69a7081784b2"
+    },
+    {
+      "path": "build/surface-recontact/native/performance.json",
+      "bytes": 393,
+      "sha256": "d1a2856d2f910d9261abe88becaef0bcf838b4110e761efa4ea122e7295fd323"
+    },
+    {
+      "path": "build/surface-recontact/native/player.log",
+      "bytes": 464744,
+      "sha256": "ea6e374fa248cd4dfa0bcdb06d6871fa64e0646006de67e39254cc5b5bb31432"
+    },
+    {
+      "path": "build/surface-recontact/native/recovery.json",
+      "bytes": 181925,
+      "sha256": "565de5fbf6c74e196470ae1d4ccf392d85ea09019953c243a783afe202ac139b"
+    },
+    {
+      "path": "build/surface-recontact/native/session.json",
+      "bytes": 1106,
+      "sha256": "5c1c6b3b7fe8bc3c28d89284ffeb121fd3518c91d2ab7395359d82f5695da7ad"
+    },
+    {
+      "path": "build/surface-recontact/native/summary.json",
+      "bytes": 18864,
+      "sha256": "b3bbe36b8a4bd214007207e7d4360f998c3f1cd5662b3940882ca51abe212dc2"
+    }
+  ],
+  "nativeSavedCheckpoint": {
+    "path": "build/surface-recontact/native-short-grounded.ncflight.json",
+    "sha256": "42780acd5d8f4e3c25d9fbbc51e8095dbb534a59ff7129823bc9a15383f9a2a4"
+  },
+  "review": "Independent contact lifetime/disposition and adversarial reviews agree STOP; no remaining demonstrated physical authority defect. No complete live relaunch or terrain visual qualification."
+}

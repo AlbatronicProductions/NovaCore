@@ -1,0 +1,158 @@
+{
+  "schema": "novacore.gate1-exception-seal/1",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "headPreserved": true,
+  "refsPreserved": false,
+  "worktreesPreserved": true,
+  "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "indexPreserved": true,
+  "gate0": "PASS preserved; verification only",
+  "campaignEntryFiles": 3322,
+  "unchangedCampaignEntryFiles": 3319,
+  "changedFromCampaignEntry": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs",
+      "entrySha256": "624d1a2c891ac082955cae1f3c4b500d09b30075effaaa6f1748d0c9223a1a4d",
+      "sha256": "339586d7467ce59b0be452501e752570c385f385a3616732005fd1552b0cf014"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "entrySha256": "6e87ec5b75b859a6e4705a0cf8e2f5b4696ee42e9723dc79739bb577e31ac809",
+      "sha256": "c5bf5f8368157347671a6366c0e410106ea2ec1e168f77a7e0e84889f3986ebe"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "entrySha256": "f17aa31c41c9de8dc7864a2ab886353eed88b5cfd08428df5e1a7d0e27f262c6",
+      "sha256": "af02c9d7e4e091630e425af8a78672e53dba62beebce99645d4f9ca5d38d246b"
+    }
+  ],
+  "missing": [],
+  "unexpectedChanged": [],
+  "changedFromFirstStop": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs",
+      "priorSha256": "b77118d57a8f13c7aab730bd7325a9a0f11fbd78e50f79ad975f413389386ca5",
+      "sha256": "339586d7467ce59b0be452501e752570c385f385a3616732005fd1552b0cf014"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "priorSha256": "a8ebd5ef541d35f75d048f8eafd6b963bdc2de007517dc2c7680f980d73e2f5f",
+      "sha256": "af02c9d7e4e091630e425af8a78672e53dba62beebce99645d4f9ca5d38d246b"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/README.md",
+      "priorSha256": "566d666d229b9df6c4c0087e60ee1e910fbfa85b571a9882dc66a8d0a23306bb",
+      "sha256": "a332bcc3ee92e4b98db5fb2153c97cbb79131c86f143595f6f744568a09c5f52"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandard.cs",
+      "priorSha256": "49ccd3d8ee8643dcca46f6d3d35d71563bfda6e752c09ead1d040d940bd73c6e",
+      "sha256": "182ef780a768b44075d4f5dd5b24122ef59c6db9673aeadb6b3475c8ce448cd8"
+    }
+  ],
+  "missingFromFirstStop": [],
+  "unexpectedExceptionChanges": [],
+  "sourceRecoveryByteVerified": true,
+  "sourceRecoveryPath": "build\\modular-craft-first-playable\\gate1-exception\\pre-correction-source.zip",
+  "sourceRecoverySha256": "756882c2c6d8b842f5bfef5f40a6f03b0796056b905ad045f774702f472c94ec",
+  "sealed": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandard.cs",
+      "bytes": 15345,
+      "sha256": "182ef780a768b44075d4f5dd5b24122ef59c6db9673aeadb6b3475c8ce448cd8"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs",
+      "bytes": 24050,
+      "sha256": "339586d7467ce59b0be452501e752570c385f385a3616732005fd1552b0cf014"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "bytes": 25754,
+      "sha256": "c5bf5f8368157347671a6366c0e410106ea2ec1e168f77a7e0e84889f3986ebe"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "bytes": 266724,
+      "sha256": "af02c9d7e4e091630e425af8a78672e53dba62beebce99645d4f9ca5d38d246b"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.cs",
+      "bytes": 10970,
+      "sha256": "6bf1ebe51800f6cbad72669d5e0d1fbdd73204db98bc7cab13fcf4d16ab607dd"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.Gate1Closure.cs",
+      "bytes": 10698,
+      "sha256": "cea7c89ada5b28bdd6529a764bdd93648376a25a4838024384ebfd0b534d1358"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.AdmissionAudit.cs",
+      "bytes": 3205,
+      "sha256": "dee67f522b3e0ac66eedad7cd6c9a3a6e4bff88c3401cc42b1bc859fab2f607e"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/README.md",
+      "bytes": 3512,
+      "sha256": "a332bcc3ee92e4b98db5fb2153c97cbb79131c86f143595f6f744568a09c5f52"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/gate1-exception-report.md",
+      "bytes": 10412,
+      "sha256": "4bea05e6c17300d2450447cad30ee52f9992a8756196332fc20d9849cec1fc52"
+    },
+    {
+      "path": "docs/engineering-evidence/modular-craft-first-playable/gate1-exception-results.json",
+      "bytes": 8816,
+      "sha256": "0d6b0f184c9b1e818b8d03a23af241da58b44e8f7babeea8162a9154bc6ea6e9"
+    }
+  ],
+  "compiledArtifacts": [
+    {
+      "path": "src/NovaCore.Simulation/bin/Debug/net10.0/NovaCore.Simulation.dll",
+      "sha256": "71f5847e52d3abde793c7afeefe9be90fd384c3286c064592fd8e2c1be8a6fdf"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "65a372805a9e8f4e8fa4b8e4653ef8d5c069bfa1e538c7e7efc7b10e3b4e0478"
+    },
+    {
+      "path": "src/NovaCore.Simulation/bin/Release/net10.0/NovaCore.Simulation.dll",
+      "sha256": "9257170cfdde4d81fd46949283fc0bf90712493baaae60a3b76e0ad34eb53bf9"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+      "sha256": "7a6caf37cbf58b87f3f182fc4618a3267a16b6ea42534ea72666568264901436"
+    }
+  ],
+  "trailingWhitespace": [],
+  "evidenceBytesExcludingThisSeal": 846180.0,
+  "exceptionDiagnosticBytes": 72765.0,
+  "cleanup": "NONE",
+  "ksaWrites": 0,
+  "gate1": "FAIL_STOP",
+  "correctionCycles": 2,
+  "gate2": "NOT_STARTED",
+  "refDifferences": [
+    {
+      "entry": "a5200ca2a38dbe4231629d6c15e70d4203b4911f refs/codex/turn-diffs/captures/1790022427358/b4aca048-db7c-40ad-8ae7-aa427125913d/base",
+      "direction": "=>"
+    },
+    {
+      "entry": "a5200ca2a38dbe4231629d6c15e70d4203b4911f refs/codex/turn-diffs/checkpoints/cea148f32fa295beb0e7f899b8db1105/d6b43032c0b5da7a3ff542d2a6b07d88/1790022208828/b117d164-790a-4cdb-b21f-3fa3059f5666",
+      "direction": "=>"
+    },
+    {
+      "entry": "2f61b12485fb59fc4e638ad5482fac043dce993b refs/codex/turn-diffs/captures/1790020810986/b9cd0689-640a-4fdd-bc0c-33c860f23030/base",
+      "direction": "<="
+    },
+    {
+      "entry": "2f61b12485fb59fc4e638ad5482fac043dce993b refs/codex/turn-diffs/checkpoints/cea148f32fa295beb0e7f899b8db1105/714110494ee032ba2c4df1aa82b7cbe4/1789966970545/336e44c8-9e6e-4597-a5ce-621d85a67e66",
+      "direction": "<="
+    }
+  ],
+  "refsOutsideCodexTurnDiffsPreserved": true,
+  "oldTurnDiffObjectType": "tree",
+  "refObservation": "Only refs/codex/turn-diffs differs. No task ref-mutating command issued; mechanism not independently audited; no restoration attempted.",
+  "gitWhitespace": "git diff --check PASS"
+}

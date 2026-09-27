@@ -1,0 +1,242 @@
+{
+  "schema": "novacore.modular-gate7-results/1",
+  "judgment": "PASS",
+  "playerPass": false,
+  "compilerDebug": 78,
+  "compilerRelease": 78,
+  "regressions": {
+    "preservedSuites": 21,
+    "gate5": 195,
+    "gate2": 86,
+    "gate6": 98,
+    "gate4": 160,
+    "gate3": 88
+  },
+  "builds": {
+    "solutionRelease": "PASS",
+    "editorRelease": "PASS",
+    "solutionDebug": "PASS",
+    "editorDebug": "PASS"
+  },
+  "routes": [
+    {
+      "configuration": "Release",
+      "size": "short",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 181,
+        "tank": "nc.tank.short-2",
+        "parts": 12,
+        "document": "08aab390655008ef643c0a4fe0724173e9bcc390afba8d0af5248edc5edf5957",
+        "bytes": 9685,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\291d1192b4514e688296c90f6a53dbe3",
+        "native": "c24d00b81dc6069b41faa3ee6cdb5b35dd5d795b419289e428bca5dd40c41242",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    },
+    {
+      "configuration": "Release",
+      "size": "long",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 181,
+        "tank": "nc.tank.long-2",
+        "parts": 12,
+        "document": "b45685c9d656012e428dfb17baaacca591942e8d6ab7734e930bdf0fd2f67cb2",
+        "bytes": 9670,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\1e325b73d00b42b9bd9453ba78f59441",
+        "native": "c24d00b81dc6069b41faa3ee6cdb5b35dd5d795b419289e428bca5dd40c41242",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    },
+    {
+      "configuration": "Debug",
+      "size": "short",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 181,
+        "tank": "nc.tank.short-2",
+        "parts": 12,
+        "document": "10e837649ea6ab7e68a61cd9e2d9ed7a7920ffcbd9afaae48358b77350d6358f",
+        "bytes": 9685,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\d9d088088af04e1db3fdcf6a79c57575",
+        "native": "d96297269630a5cdfd6ee19abc05d92b7b7151dce6b68d6b0d19cc50196dd71d",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    },
+    {
+      "configuration": "Debug",
+      "size": "long",
+      "result": {
+        "judgment": "ENGINEERING_PERSISTENCE_PASS",
+        "playerPass": false,
+        "checks": 181,
+        "tank": "nc.tank.long-2",
+        "parts": 12,
+        "document": "000d4a1bf62764596fdf37e345fba806b8fc3195b1d4689be0b66dcff6d3e717",
+        "bytes": 9670,
+        "directory": "E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\1f37763a12ed4cdc94068d85417f7e51",
+        "native": "d96297269630a5cdfd6ee19abc05d92b7b7151dce6b68d6b0d19cc50196dd71d",
+        "scope": "Actual native viewport construction and visible handlers; deterministic file/prompt choices; OS dialog interaction reserved for manual player route"
+      }
+    }
+  ],
+  "measurements": {
+    "scope": "Cold full compiler; fresh preparation and asset verification each sample; normal GC; warm OS file cache possible; report only",
+    "rows": [
+      {
+        "craft": "short",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 17.4584,
+          "p95": 45.2821,
+          "p99": 45.2821,
+          "maximum": 45.2821
+        },
+        "allocatedBytes": {
+          "median": 3267656,
+          "p95": 3267880,
+          "p99": 3267880,
+          "maximum": 3267880
+        },
+        "gc": [
+          4,
+          2,
+          1
+        ],
+        "source": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4",
+        "compiled": "262ed0a53c55d0cc1474d1498caf40fa0c61607c0c87d72dbe2df46d07e7fff3"
+      },
+      {
+        "craft": "short",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 16.4228,
+          "p95": 18.886,
+          "p99": 18.886,
+          "maximum": 18.886
+        },
+        "allocatedBytes": {
+          "median": 3267656,
+          "p95": 3267880,
+          "p99": 3267880,
+          "maximum": 3267880
+        },
+        "gc": [
+          3,
+          1,
+          1
+        ],
+        "source": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4",
+        "compiled": "262ed0a53c55d0cc1474d1498caf40fa0c61607c0c87d72dbe2df46d07e7fff3"
+      },
+      {
+        "craft": "short",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 16.1155,
+          "p95": 18.2181,
+          "p99": 18.2181,
+          "maximum": 18.2181
+        },
+        "allocatedBytes": {
+          "median": 3267656,
+          "p95": 3267880,
+          "p99": 3267880,
+          "maximum": 3267880
+        },
+        "gc": [
+          3,
+          1,
+          1
+        ],
+        "source": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4",
+        "compiled": "262ed0a53c55d0cc1474d1498caf40fa0c61607c0c87d72dbe2df46d07e7fff3"
+      },
+      {
+        "craft": "long",
+        "window": 0,
+        "samples": 16,
+        "milliseconds": {
+          "median": 16.801,
+          "p95": 23.148,
+          "p99": 23.148,
+          "maximum": 23.148
+        },
+        "allocatedBytes": {
+          "median": 3267272,
+          "p95": 3267496,
+          "p99": 3267496,
+          "maximum": 3267496
+        },
+        "gc": [
+          3,
+          1,
+          1
+        ],
+        "source": "30416f35d97d4e271969a823bd305dde75250b61cea47f55eca71bd4f8caa354",
+        "compiled": "211628d44dce383b1323514ecbea2a56a5def81a1bd5e2b5cd2fa0555823a56b"
+      },
+      {
+        "craft": "long",
+        "window": 1,
+        "samples": 16,
+        "milliseconds": {
+          "median": 15.6973,
+          "p95": 19.8482,
+          "p99": 19.8482,
+          "maximum": 19.8482
+        },
+        "allocatedBytes": {
+          "median": 3267656,
+          "p95": 3267880,
+          "p99": 3267880,
+          "maximum": 3267880
+        },
+        "gc": [
+          3,
+          1,
+          1
+        ],
+        "source": "30416f35d97d4e271969a823bd305dde75250b61cea47f55eca71bd4f8caa354",
+        "compiled": "211628d44dce383b1323514ecbea2a56a5def81a1bd5e2b5cd2fa0555823a56b"
+      },
+      {
+        "craft": "long",
+        "window": 2,
+        "samples": 16,
+        "milliseconds": {
+          "median": 15.0269,
+          "p95": 17.7386,
+          "p99": 17.7386,
+          "maximum": 17.7386
+        },
+        "allocatedBytes": {
+          "median": 3267656,
+          "p95": 3267880,
+          "p99": 3267880,
+          "maximum": 3267880
+        },
+        "gc": [
+          3,
+          2,
+          1
+        ],
+        "source": "30416f35d97d4e271969a823bd305dde75250b61cea47f55eca71bd4f8caa354",
+        "compiled": "211628d44dce383b1323514ecbea2a56a5def81a1bd5e2b5cd2fa0555823a56b"
+      }
+    ]
+  },
+  "independentReview": {
+    "capsule_closure": "PASS; 514 unequal-fill decimal reconstructions, 104 exact bound checks, 12 quantity refusals, ten frame variants, three asset-integrity refusals, source and runtime generation preserved",
+    "architecture_verifier": "PASS; 2137 signed exact-dyadic cases; 27 union allocations on each craft; zero net force, unused-axis residual <=8.88e-16 Nm; reported defects closed"
+  },
+  "qualificationLimit": "Immutable compilation and static allocation only; no runtime, power event, dynamics, contact or flight admission",
+  "ksaWrites": 0
+}

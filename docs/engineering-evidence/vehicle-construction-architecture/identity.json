@@ -1,0 +1,467 @@
+{
+  "judgment": "PASS bounded construction engineering; manual acceptance PENDING; STOP FOR PROJECT CONTROL; UNBANKED",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "entry_head_unchanged": true,
+  "refs_sha256": "4d0030d2a22c155075ba2ea83a026878bf44ac884c200e78c4f32b7d9f543301",
+  "refs_unchanged": true,
+  "index_sha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "index_unchanged": true,
+  "entry_files_compared": 3240,
+  "changed_entry_files": [
+    "src/NovaCore.Simulation/Properties/AssemblyInfo.cs",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs",
+    "src/NovaCore.Simulation/Transactions/SimulationState.cs",
+    "tests/NovaCore.Simulation.Tests/Program.cs"
+  ],
+  "missing_entry_files": [],
+  "only_authorized_entry_changes": true,
+  "preexisting_launcher_edits_preserved": true,
+  "changed_entry_hashes": {
+    "src/NovaCore.Simulation/Properties/AssemblyInfo.cs": "5bd9e95f2ab1701957d04a89732b9b378c5f5d277bdb5a675c2ddbe235fcb712",
+    "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs": "6e87ec5b75b859a6e4705a0cf8e2f5b4696ee42e9723dc79739bb577e31ac809",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs": "a0ffdf116df29dbf9fd3d4497c2a6d5984ecd8a2916e6afdc58b7ad137712ade",
+    "src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs": "102092db5e0784f7890cac28c3374163d2348a0d6b8556d4c509ae4e34f577ca",
+    "src/NovaCore.Simulation/Transactions/SimulationState.cs": "15210642e43314cdeba58fc8c3b8ec7ed674c02f46081968ed6de6d2c379bf15",
+    "tests/NovaCore.Simulation.Tests/Program.cs": "f17aa31c41c9de8dc7864a2ab886353eed88b5cfd08428df5e1a7d0e27f262c6"
+  },
+  "added_files_excluding_this_seal": [
+    {
+      "path": "assets/vehicles/development/content-provenance.json",
+      "bytes": 8970,
+      "sha256": "ff5abc9ac60377b93786c71adae2e6aa4e6846f690ff6c56332abfe39fdc3e7e"
+    },
+    {
+      "path": "assets/vehicles/development/development-catalog.json",
+      "bytes": 178980,
+      "sha256": "956d615377cadd5604b63bd07838a101fce839e37f3044f68526c8d735c5c204"
+    },
+    {
+      "path": "assets/vehicles/development/development-design.authoring.json",
+      "bytes": 13757,
+      "sha256": "98cfafe74a8abbb4398ce1e9528f15de57fa94f003dca6b69bcc7dfdbac0a62a"
+    },
+    {
+      "path": "assets/vehicles/development/development-design.json",
+      "bytes": 8153,
+      "sha256": "6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564"
+    },
+    {
+      "path": "docs/engineering-evidence/development-launch-stack-preblender/__pycache__/calculate.cpython-311.pyc",
+      "bytes": 72462,
+      "sha256": "08598869e54c826870a1c44357722ac75a3cd2d2f0761747a93bef694bb37af1"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/README.md",
+      "bytes": 2886,
+      "sha256": "6340bd635881c1e2825c08f38d27c7fa2261dbf351ed34c24fc87c6641562fde"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/asset-identity.md",
+      "bytes": 1492,
+      "sha256": "0226ebd2ad3a3d7561e6ff3115ba85ae178e3abe67c4f941c21115334d9dac81"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/cleanup.md",
+      "bytes": 2154,
+      "sha256": "72ed70a2f129c21bda2df56188c0b74b1cfc0091eef7e2e78ae3050adec177cf"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/command-data.md",
+      "bytes": 985,
+      "sha256": "741a28641afd04845ef96335e84252125c8cfed9ed8db8b0368009d71bd9dd49"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/connection-graph.md",
+      "bytes": 2431,
+      "sha256": "e98abbed9da18b38574c70245d9fb1c0845fb7f71727739816296f715e187ad6"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/convergence-matrix.md",
+      "bytes": 3275,
+      "sha256": "5d86fae0cac62f85b72ed649177a759476606ebeab31f603b1e874a80319721d"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/dlv-physical-reconciliation.md",
+      "bytes": 2946,
+      "sha256": "fac0f8371ab587a8d869556848cd8e66f15b46075577629f11bccd0955c6955a"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/editor-session.md",
+      "bytes": 2608,
+      "sha256": "6fbce928912d2698a1fd2974c74111ed087ae26522ddf0bcc9f2d7332825c922"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/electricity.md",
+      "bytes": 3536,
+      "sha256": "7e8b3cd7e125c7bfb6550f06791b2a544b7fc6c1f4876a187bc3343153d87662"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/entry-seal.json",
+      "bytes": 501021,
+      "sha256": "5a25ea896f6dc0f388dd036ac9dae2838e5dabe4d82c03a859615641e493c61e"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/final-red-team.md",
+      "bytes": 3742,
+      "sha256": "ef67b980a8668fba20b6003c38302ed76e93801aa2029e10657a8b64503d9edc"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/fuel-arithmetic-contract.md",
+      "bytes": 2278,
+      "sha256": "c97118d7a104349d4b1839ddd69d8ba54ce646a278d38b3061488f555be7d1b8"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/fuel-flow.md",
+      "bytes": 3919,
+      "sha256": "e9fb0eb1ad998cf185a58ea3937cbddd78b7beb0181449d568b5aa3e8cd740a4"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/identity-stage4-stop.json",
+      "bytes": 13681,
+      "sha256": "9bd71b8ac9952c752e845b2399a1b90c1fbecd41ef0d8aff4261029683f1b5d4"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/inspect-closeout.py",
+      "bytes": 4279,
+      "sha256": "f695a6867a288a2c751ae7453582ddadab6018f79562306c6816411b0954325b"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/ksa-current-construction-map.md",
+      "bytes": 6305,
+      "sha256": "57e3b132c17eee159efa55bf102e4efa06f9205ed3f85b23eb10950e7de56466"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/ksa-live-history.md",
+      "bytes": 5686,
+      "sha256": "0ee2f8a75a958e4a1e0626d17ac25958366bac4e0c2ae0d4e8aee566988bd706"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/ksa-methods.json",
+      "bytes": 2406,
+      "sha256": "7ee377dee9a50bd3f5b332d84e3040af26cda5cdc5f09b99d65ad157dad78dbe"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/manual-route.md",
+      "bytes": 2985,
+      "sha256": "d025d8ef091c3e3febf970e0965bf5cc1283812b942777a48611e5575c1a0af7"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/novacore-current-owner-map.md",
+      "bytes": 3593,
+      "sha256": "fca1676825229c983894d5f9bb86025629cfe1217a236d50bb2373cb8736f3aa"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/part-definition-contract.md",
+      "bytes": 1581,
+      "sha256": "2c50fa9de3591f674972868c2cee8ca2eb22c489b285d43507875236e590d300"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage1.json",
+      "bytes": 2281,
+      "sha256": "4a4db707ecbf6d15bbc33cb2ba30852974b7d753a287d7acca08bd496bf0751e"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage2.json",
+      "bytes": 2133,
+      "sha256": "d087b1644aa3c1b61e5dafb250380ad4a97a2d4a12e26f111f22ae06523a5316"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage3.json",
+      "bytes": 2824,
+      "sha256": "35f5779d8f90cbb1684ad8414f63c16ffb82034d145902666249a8b07f7bd31c"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage4.json",
+      "bytes": 2486,
+      "sha256": "5333b9e0b3c09f54df73742fb53543e3ac39192ad14d7dfa0d1d6497938737f9"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage5.json",
+      "bytes": 2418,
+      "sha256": "6f617fe8785dcb51f0596420e29da2d48ffe4df71c701b547f05000fd6ba4247"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-final-stage6.json",
+      "bytes": 3478,
+      "sha256": "6d62321b00079a16f5a8005d49a7aa4e6c49497067981756af3b2d8b52f7bc4f"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-stage1.json",
+      "bytes": 1671,
+      "sha256": "9b1dea287bbc46df3516fdd4bd683a1080148b77066ca85d90084151251d2096"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-stage2.json",
+      "bytes": 2040,
+      "sha256": "aad40ae4c3caa7d9891c36c265e123c54f11999d63627db00a00b4ca29529e7e"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-stage3.json",
+      "bytes": 2697,
+      "sha256": "df994d4e5d51aaf92a13a613d996fab08a38664b5793dd3e0438b94a7d0f2d53"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance-stage4.json",
+      "bytes": 2562,
+      "sha256": "41c47d64f6a82de50880174d20bcc6a44a98d08018634df3fef7e6f6a6970972"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/performance.md",
+      "bytes": 4027,
+      "sha256": "1bcc51eb7a92846c1683d872414b0049b9076f344f5e4beaf50e5cee3183b33a"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/red-team.md",
+      "bytes": 3075,
+      "sha256": "35c6f23a741db6022af57df402c54729cb7019d7a7395ab450dce7a80bda96b5"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/regression.json",
+      "bytes": 2988,
+      "sha256": "86d2a7d29e7ce25bf9a1d20fe09523d83ea78407405191f9851f54a81343a0bb"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/repo-truth.md",
+      "bytes": 2056,
+      "sha256": "f6e09c18f1182da5509dfb0fa81125dd5c69e4353d6d9111b737445358ec9800"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/reproduce.md",
+      "bytes": 4128,
+      "sha256": "a958a2e1bd8b6fcc492c6dfb0389076ce4f1cf8865bc5bb14cb19b6b0e687096"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/resource-types.md",
+      "bytes": 1154,
+      "sha256": "d94b45330f20c13f4726aadbdddca0f6a0fcac79ac856319a0321e7bec911516"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/runtime-instantiation.md",
+      "bytes": 5030,
+      "sha256": "c68d2ab8b4272db134b38336370d0e44b927ae7447fcb79bac029fef5df43e96"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/runtime-integration-plan.md",
+      "bytes": 2347,
+      "sha256": "d97998f341b4247f34d8431c1ad530d75b539f97980afb7d509bd02d0d65f9b2"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage4-corrected-performance.json",
+      "bytes": 2496,
+      "sha256": "5f652d893051ad9dcf14eb1c91b2f5dff5550cd72aebb2e3bb12aee7bc9d22ed"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage4-requalification.md",
+      "bytes": 2422,
+      "sha256": "6999aa30fffd3bd4702ad2587f71d5a778954caaf7103c9195f66b85c9e66ff8"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage4-scratch-repro.json",
+      "bytes": 638,
+      "sha256": "2bfb79022c42d0b542dd9042048b89c605e5e970ff70128e783041ddb251392d"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage4-scratch-repro.py",
+      "bytes": 2457,
+      "sha256": "2287db15bb399fb37935a55062b9a0961f017c193cec798ad4cffa0488e220a2"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage4-stop.md",
+      "bytes": 2704,
+      "sha256": "9e7a40986fc7ec2b9eb18ed4851fb95a0e546e3d479dfba3cc379b8baef42ab3"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage4-width-derivation.md",
+      "bytes": 8925,
+      "sha256": "77a74c275b4db6e11b49763a4871897977e6670452e836d41d1bbf140b4a9994"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage4-width-reconstruct.py",
+      "bytes": 2738,
+      "sha256": "5089f034c23c560c3a979b201e3a24c70b45eb99717390096a9b7859a328c6dd"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage5-browser-proof.md",
+      "bytes": 3059,
+      "sha256": "74ff4e9f6752dc6dcd7fcb0c5b4835c603bbd0d7419ee69624c7e04f86472b6e"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/stage5-performance.json",
+      "bytes": 2420,
+      "sha256": "c5216ff408dc3eb639d8ebb44ec54850bf7f0975e194289c67e41164f5758a4f"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/subpart-contract.md",
+      "bytes": 1137,
+      "sha256": "719f6fd8f961007577a35bf239f8a409da025c53a8d11ff1a13f5d020aba207b"
+    },
+    {
+      "path": "docs/engineering-evidence/vehicle-construction-architecture/vehicle-design.md",
+      "bytes": 1473,
+      "sha256": "8fc690e0b95288f401d702ad3f365072f69d27d857f2f1c0c6ebae927c62b1c7"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs",
+      "bytes": 22629,
+      "sha256": "624d1a2c891ac082955cae1f3c4b500d09b30075effaaa6f1748d0c9223a1a4d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.cs",
+      "bytes": 9570,
+      "sha256": "939965a3d431b211869f0be3d3ff6e859eb7697031defed28cbc94747724bd8e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionFuel.cs",
+      "bytes": 15860,
+      "sha256": "47c910e2878d0a6b621906befc8fa3789c6af2f7192ce5ac9b2f5f1da9634b3a"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionGraph.cs",
+      "bytes": 15212,
+      "sha256": "fdecb4cfdf83b28904efc5d22494ff62f69524278020cafc1069d11de0f62220"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPower.cs",
+      "bytes": 15122,
+      "sha256": "7230e85e06dcafe3cb6b4ba6cfbad78fd61e5ebf604bb4728d3ae64e05fc302d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.cs",
+      "bytes": 9431,
+      "sha256": "a87b5114d0fc2aa0d3dce39b392810649dcf58a9d8e4365a29f0d22d18ea788f"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Construction.cs",
+      "bytes": 2444,
+      "sha256": "c85404211eb5189bd70c83d4b7be05281c904c997b2cec1e91571dc027a0f519"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Construction.cs",
+      "bytes": 9856,
+      "sha256": "daeb776809b9bd69d0ef64ac52aeaa3a5a4a274bdd5c4432fcc7cd328c90cd32"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Articles.cs",
+      "bytes": 11936,
+      "sha256": "3f2733bc59ee935a65f6fe517cd01ce9d2d7e53db1c7938b8ca6dc41313be901"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Editor.cs",
+      "bytes": 10121,
+      "sha256": "00b8e43a20e5852f4c0d61a7acf65d376699959acd84f22ad18937da5f074211"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Fuel.cs",
+      "bytes": 16961,
+      "sha256": "df33fd6ecc13c2947fd4967043863dcc4cedf477376b341cc7392445a89d384f"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Graph.cs",
+      "bytes": 10693,
+      "sha256": "4415d3c41b68c087d79c3594ff83700583551a2ac2ec3670bb1cd2bef73fd332"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Measurements.cs",
+      "bytes": 6681,
+      "sha256": "b4de492c86f3a1009abe887fc90f21d16f753eac3df3b9f277b49e74ecb4ea80"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Power.cs",
+      "bytes": 12694,
+      "sha256": "1da3e9eec3e01146f720ca13333e4c0aec484b04430e120debc69391d88c7267"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.PowerWidths.cs",
+      "bytes": 8994,
+      "sha256": "e109f78d81197cebd8cf93a4568b4401ff71819d4df02e497571f68490b62f96"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Runtime.cs",
+      "bytes": 17977,
+      "sha256": "9ce744d95d0f87a484f9ae10a7650d1aae6416e2e7873be7e621ae3f749e05af"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.cs",
+      "bytes": 8122,
+      "sha256": "3a46733a2757069b1120c84393c2cf38ea4db381715ef57c2902100439ab5fc7"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/EditorHost.cs",
+      "bytes": 2457,
+      "sha256": "0fbf47126d0eb8ea85843584f89cb4ef2274e79fb4fcaf8e19fe34c4cc05b203"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj",
+      "bytes": 376,
+      "sha256": "24e1e155d99a2ab3677f398ba33bbdfd61db0ecc1a03d042c8691d5eb4220814"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/Program.cs",
+      "bytes": 9254,
+      "sha256": "a49417832605584cdb6b9d21fc9887fe325a717b559856ce426f6e541674c580"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/tests/geometry.mjs",
+      "bytes": 1169,
+      "sha256": "16a5896bb93713ee4bd8bd4f27f44af30f64f4481ef0108f7390d4eb080362cc"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/wwwroot/editor.css",
+      "bytes": 2651,
+      "sha256": "a14cfab90a3849271a4de2ed6a151f688086507535e88685d959c74eed05575a"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/wwwroot/editor.js",
+      "bytes": 10109,
+      "sha256": "c4405609ded2d58d66140d35cf5887d44f947c672a67dd0b212cb90f1a8a054c"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/wwwroot/geometry.mjs",
+      "bytes": 899,
+      "sha256": "bd1299cf831171edef4f2d7df598992aed98fb498413cc25a62190db00148625"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/wwwroot/index.html",
+      "bytes": 4129,
+      "sha256": "955a408bf91c2d895ba4509a0d535b84726db281cdf636e4729dc64591f9db39"
+    },
+    {
+      "path": "tools/vehicle-construction/import-development-library.py",
+      "bytes": 15624,
+      "sha256": "485182e13419009236e15c29dfeb4f31d9f57f1743fe2cd73dfe75b0c4f2b5dd"
+    }
+  ],
+  "added_storage_bytes_by_category": {
+    "content": 209860,
+    "disposable-cache-retained": 72462,
+    "evidence": 653653,
+    "source-tests-tooling": 250971
+  },
+  "build_artifacts_not_deployed": {
+    "src/NovaCore.Simulation/bin/Debug/net10.0/NovaCore.Simulation.dll": {
+      "sha256": "56c478837881204f409ba890482cefd100c3ced9cd2483d070dba3540d679d7b",
+      "bytes": 4829184
+    },
+    "src/NovaCore.Simulation/bin/Release/net10.0/NovaCore.Simulation.dll": {
+      "sha256": "66ece713518c30c71103c84beac49833b31127d67023d85773e94c1e8d418012",
+      "bytes": 4774912
+    },
+    "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll": {
+      "sha256": "7f744e5532fa702879ea20c5867d28e3a5ea32b8bceb7fc5bdbe170c07bbcfe3",
+      "bytes": 1340416
+    },
+    "tools/NovaCore.ConstructionEditor/bin/Release/net10.0/NovaCore.ConstructionEditor.dll": {
+      "sha256": "66856972e2561ef1a94c8ece0c9f00b07d5d89fc56b9264239f1a953f1e02a1d",
+      "bytes": 53760
+    },
+    "tools/NovaCore.ConstructionEditor/bin/Release/net10.0/NovaCore.Simulation.dll": {
+      "sha256": "66ece713518c30c71103c84beac49833b31127d67023d85773e94c1e8d418012",
+      "bytes": 4774912
+    }
+  },
+  "ksa_dll_sha256": "a03e98153c6f353af6f280cd3bdc1c71c718008e2049f508dc6fbe54457a0aa8",
+  "self_reference_policy": "identity.json is excluded from its own added-file hash set; all other current nonignored additions are inventoried",
+  "status": "M src/NovaCore.Simulation/Properties/AssemblyInfo.cs\n M src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs\n M src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.cs\n M src/NovaCore.Simulation/Spacecraft/SpacecraftStateView.cs\n M src/NovaCore.Simulation/Transactions/SimulationState.cs\n M tests/NovaCore.Launcher.Tests/Program.cs\n M tests/NovaCore.Simulation.Tests/Program.cs\n M tools/NovaCore.Launcher/LaunchCommandBuilder.cs\n M tools/NovaCore.Launcher/LaunchConfiguration.cs\n M tools/NovaCore.Launcher/ScenarioCatalog.cs\n?? assets/vehicles/\n?? docs/engineering-evidence/development-launch-stack-preblender/\n?? docs/engineering-evidence/earth-orbit-return-vehicle-trade-study/\n?? docs/engineering-evidence/post-camera-command-review/\n?? docs/engineering-evidence/post-m15.3-first-playable-launch-review/\n?? docs/engineering-evidence/srv01-production-integration/closeout.json\n?? docs/engineering-evidence/srv01-production-integration/exhaust-ksa.md\n?? docs/engineering-evidence/vehicle-construction-architecture/\n?? docs/legal/CREATOR-CONTENT-POLICY-DRAFT.md\n?? docs/legal/LEGAL-REVIEW-TODO.md\n?? docs/legal/MODDING-POLICY-DRAFT.md\n?? docs/legal/ROOT-LICENSE-CANDIDATE.md\n?? docs/legal/finalization/\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionEditor.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionFuel.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionGraph.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionPower.cs\n?? src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.cs\n?? src/NovaCore.Simulation/Spacecraft/SpacecraftStateStore.Construction.cs\n?? src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.Construction.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Articles.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Editor.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Fuel.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Graph.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Measurements.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Power.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.PowerWidths.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.Runtime.cs\n?? tests/NovaCore.Simulation.Tests/AssemblyConstructionTests.cs\n?? tools/NovaCore.ConstructionEditor/\n?? tools/vehicle-construction/"
+}

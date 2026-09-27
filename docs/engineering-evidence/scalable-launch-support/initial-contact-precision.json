@@ -1,0 +1,31 @@
+{
+  "classification": "Native initial-contact representation mismatch; not physical overload",
+  "validWitness": "Stock short craft, engine clock 0, unequal tank fills 0.125/0.375, epoch -123456789",
+  "preCorrectionFloat32ValuesMetres": {
+    "bodyY": 2.3193371295928955,
+    "slabHalfHeight": 4.167784690856934,
+    "hullMinY": -0.019999999552965164,
+    "childLocalY": -2.2993369102478027,
+    "roundedChildBottom": -2.3193368911743164,
+    "roundedSlabLocalQueryMax": -2.3193368911743164,
+    "roundedWorldBottom": 2.384185791015625e-7,
+    "roundedChildRelativeFace": -0.019999980926513672
+  },
+  "observation": "Child query admitted equality, but separately summed world bound was positive; no native child callback occurred.",
+  "requiredNativePredicates": [
+    "fl(fl(hullMinY + childLocalY) + bodyY) <= 0",
+    "fl(hullMinY + childLocalY) <= fl(slabHalfHeight - fl(bodyY + slabHalfHeight))",
+    "hullMinY <= fl(slabHalfHeight - fl(childLocalY + fl(bodyY + slabHalfHeight)))"
+  ],
+  "correction": "Greatest downward float32 body encoding satisfying all carrier predicates, bounded by existing contactTolerance/16; at most 32 ordered-float rank decisions. Exact float64 position remains in residue. Actual zero-time native coverage is mandatory.",
+  "permanentCoverage": [
+    "All five stock support recipes at unequal partial fill",
+    "Independent short convex supports at 0.15 m and 0.1 m slab thickness",
+    "One-above selected encoding fails at least one predicate",
+    "Precision boundary and beyond-boundary refusal without source mutation",
+    "Midpoint mass recenter before first integration",
+    "Full ModularFlorida Gate 9 variants"
+  ],
+  "reproduction": "Build canonical; run NovaCore.Simulation.Tests --scalable-support and NovaCore.Graphics.Tests --modular-gate9. Final source/package identities and log hashes are in identity.json and regressions.json.",
+  "limits": "This is initial native representation only. No canonical pose correction, time step, force, release impulse or integrated-trajectory snapping."
+}

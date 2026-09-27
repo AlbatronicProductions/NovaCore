@@ -11,7 +11,7 @@ internal readonly record struct AssemblyCommand(bool MainOn,string? Pair,double 
     [property:System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] ushort JetMask=0);
 internal readonly record struct CompiledAssemblyCommand(AssemblyCommand Request,ushort Jets,PropellantInteger ExtentRate);
 internal enum AssemblyFeedState { NoDemand,Available,Exhausted }
-internal enum AssemblyPhysicalConsumer { FreeFlight, SupportedContact }
+internal enum AssemblyPhysicalConsumer { FreeFlight, SupportedContact, SurfaceContact }
 internal readonly record struct AssemblyRealization(bool MainOn,ushort Jets,AssemblyFeedState Feed);
 internal readonly record struct AssemblyRuntimeState(SimulationInstant Epoch,AssemblyStores Stores,AssemblyMass Mass,
     AssemblyMotion Motion,AssemblyGimbal Gimbal,AssemblyCommand AppliedCommand,AssemblyRealization Actual,

@@ -1,0 +1,206 @@
+--- before/src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs
++++ after/src/NovaCore.Simulation/Spacecraft/Assemblies/CraftLaunchAdmission.cs
+@@ -24,7 +24,20 @@
+         if(design.Digest!=documentDigest)throw new InvalidDataException("Craft launch document identity changed.");
+         var craft=CraftCompiler.Compile(catalog,design.Data,assetRoot);
+         if(craft.Digest!=compiledDigest)throw new InvalidDataException("Craft launch compiled dependency identity changed.");
+-        if(!craft.Function||!craft.AdmissionDiagnostics.IsEmpty)throw new InvalidDataException("Craft launch requires functional services and valid physical support.");
++        if(!craft.Function||!craft.AdmissionDiagnostics.IsEmpty)throw new InvalidDataException(RefusalReason(craft));
+         return craft;
+     }
++    // Describe the actual failed predicates. This is not a second admission policy.
++    internal static string RefusalReason(CompiledCraft craft)
++    {
++        var problems=craft.Diagnostics.Concat(craft.AdmissionDiagnostics).ToArray();
++        var reasons=problems.GroupBy(d=>d.Code,StringComparer.Ordinal).Select(group=>group.Key switch {
++            "FUEL_PATH"=>"Propellant is unavailable to one or more engines or attitude jets. Fill and enable connected tanks; check fuel connections if the problem remains.",
++            "POWER_PATH"=>"Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.",
++            "ATTITUDE_COUNT"=>$"This craft has {craft.Allocation.JetActuators.Length} attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
++            "ATTITUDE_AUTHORITY" when problems.Any(d=>d.Code=="ATTITUDE_COUNT")=>null,
++            _=>string.Join(" ",group.Select(d=>d.Message).Distinct(StringComparer.Ordinal))
++        }).Where(reason=>reason is not null);
++        return "Launch refused. "+string.Join("\n\n",reasons);
++    }
+ }
+--- before/tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs
++++ after/tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs
+@@ -97,7 +97,7 @@
+         var history=new FlowLayoutPanel(){Width=232,Height=42};ActionButton(history,"Undo",()=>NavigateHistory(true),108);ActionButton(history,"Redo",()=>NavigateHistory(false),108);inspector.Controls.Add(history);
+         inspector.Controls.Add(launchInfo);craftName.Width=225;inspector.Controls.Add(craftName);
+         craftName.Validated+=(_,_)=>Attempt(()=>{if(session.Current is not null&&session.Current.Design.Data.Craft!.Name!=craftName.Text)session.SetName(session.Revision,craftName.Text);});
+-        ActionButton(inspector,"Fill consumables",()=>{CancelGhost();session.FillForLaunch(session.Revision);RefreshInspector();},225);
++        ActionButton(inspector,"Fill consumables",FillConsumables,225);
+         ActionButton(inspector,"Launch vehicle",LaunchCraft,225,42);
+         ActionButton(inspector,"Save / Load",()=>ShowSaveBrowser(false),225);
+         Controls.Add(contextInspector);RefreshCatalog();SetEditorPanels(false);Resize+=(_,_)=>CenterOverlay();
+--- before/tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs
++++ after/tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs
+@@ -63,7 +63,14 @@
+                     // Deep stack uses the already-qualified 32-jet flight profile: keep one eight-block group.
+                     session.Remove(session.Revision,"r1-0");qualificationTank="t0-0";qualificationAdapter="adapter-0";
+                     RequireQualification(session.Current!.Design.Parts.Length==13,"two-short-tank flight witness admitted structurally");
+-                }ClickButton("Fill consumables");compiled=CraftCompiler.Compile(session.Catalog,session.Current.Design.Data,assetRoot);RequireQualification(compiled.Function&&compiled.AdmissionDiagnostics.IsEmpty,"exact source compiles and admits");qualificationSaved=session.Save(session.Revision);ClickButton("Save / Load");break;
++                }
++                var emptySource=session.Save(session.Revision);var emptyRevision=session.Revision;var emptyHistory=session.UndoCount;
++                ClickButton("Launch vehicle");
++                RequireQualification(editing&&flight is null&&overlay is not null&&diagnostic!.Contains("Propellant is unavailable",StringComparison.Ordinal)&&diagnostic.Contains("Electrical power is unavailable",StringComparison.Ordinal),"fresh empty craft refuses with both actual service blockers");
++                RequireQualification(session.Save(session.Revision).SequenceEqual(emptySource)&&session.Revision==emptyRevision&&session.UndoCount==emptyHistory,"refused fresh launch preserves exact draft and history");
++                ClickButton("Back to construction");ClickButton("Fill consumables");
++                RequireQualification(diagnostic is null&&message.StartsWith("Consumables filled",StringComparison.Ordinal),"fill clears stale refusal and reports preparation");
++                compiled=CraftCompiler.Compile(session.Catalog,session.Current!.Design.Data,assetRoot);RequireQualification(compiled.Function&&compiled.AdmissionDiagnostics.IsEmpty,"exact source compiles and admits");qualificationSaved=session.Save(session.Revision);ClickButton("Save / Load");break;
+                 case 15: applicationSave="Application-"+qualificationTankDefinition+"-"+Guid.NewGuid().ToString("N")[..8];overlay!.Controls.OfType<TextBox>().Single().Text=applicationSave;ClickButton("Save new");RequireQualification(!session.Dirty&&File.ReadAllBytes(savePath!).SequenceEqual(qualificationSaved!),"in-product save exact bytes");ClickButton("New vehicle");RequireQualification(session.Current is null,"new draft");ClickButton("Save / Load");break;
+                 case 16: var list=overlay!.Controls.OfType<ListBox>().Single();list.SelectedItem=list.Items.Cast<SavedEntry>().Single(x=>x.Text==applicationSave);ClickButton("Load selected");RequireQualification(session.Save(session.Revision).SequenceEqual(qualificationSaved!),"in-product reload exact craft");qualificationSaved=session.Save(session.Revision);launchedDigest=session.Current!.Design.Digest;launchedRevision=session.Revision;launchedDirty=session.Dirty;ClickButton("Launch vehicle");break;
+                 case 17: RequireQualification(flight is not null&&!editing&&flight.Craft.Design.Digest==launchedDigest,"same-application exact craft launch");retainedFlight=flight;ViewportMessage(0x201,1);ViewportMessage(0x202);break;
+@@ -73,7 +80,7 @@
+                 case 21: RequireQualification(!flight!.Actuation.Main&&!flight.Failed,"hosted X cutoff");if(!flight.Measurements.PhaseComplete(2)){applicationStep--;break;}RequireQualification(status.Text.Contains("COAST",StringComparison.Ordinal)&&status.Text.Contains("main OFF",StringComparison.Ordinal),"coast and cutoff feedback remain visible without a title bar");ClickButton("Menu");ClickButton("New vehicle / retained design");retainedEpoch=flight.State.Epoch.Ticks;break;
+                 case 22: RequireQualification(editing&&ReferenceEquals(flight,retainedFlight)&&session.Current!.Design.Digest==launchedDigest&&session.Revision==launchedRevision&&session.Dirty==launchedDirty,"return retains owners, draft, history and dirty baseline");RequireQualification(flight!.State.Epoch.Ticks==retainedEpoch&&solar!.CurrentTime.Ticks==retainedEpoch,"editor preserves single physical/Solar epoch");ClickButton("Return to flight");break;
+                 case 23: RequireQualification(ReferenceEquals(flight,retainedFlight)&&flight!.State.Epoch.Ticks>=retainedEpoch&&!flight.Failed,"resume continues canonical flight");ClickButton("Menu");ClickButton("New vehicle / retained design");break;
+-                case 24: RunApplicationAdversarialChecks();qualificationName=craftName.Text;ClientSize=new(1100,740);break;
++                case 24: RunLaunchRefusalChecks();RunApplicationAdversarialChecks();qualificationName=craftName.Text;ClientSize=new(1100,740);break;
+                 case 25: RequireQualification(native->Width==(uint)viewport.ClientSize.Width&&native->Height==(uint)viewport.ClientSize.Height,"resize keeps native child extent");craftName.Focus();PostMessageW(craftName.Handle,0x102,'Z',1);PostMessageW(craftName.Handle,0x100,9,1);break;
+                 case 26: RequireQualification(native->Focused==0&&!craftName.Focused&&craftName.Text.Contains('Z')&&flight!.PlayerInput.Observation.Requested==default,"text and Tab remain isolated from physical controls");craftName.Text=qualificationName;ValidateChildren();count.SelectedItem=8;count.Focus();PostMessageW(count.Handle,0x100,0x26,1);break;
+                 case 27: RequireQualification(Convert.ToInt32(count.SelectedItem)==4,"combo keyboard input survives native message pump");qualificationSaved=session.Save(session.Revision);qualificationYaw=camera.Yaw;ViewportMessage(0x204,2);break;
+--- before/tools/NovaCore.ConstructionEditor/DesktopEditorForm.Launch.cs
++++ after/tools/NovaCore.ConstructionEditor/DesktopEditorForm.Launch.cs
+@@ -11,10 +11,27 @@
+         var source=session.Current?.Design??throw new InvalidDataException("Build a craft before launch.");
+         var bytes=source.Save();var candidate=CraftCompiler.Compile(session.Catalog,source.Data,assetRoot);
+         // Preserve exact-source admission after removing the process boundary.
+-        var admitted=CraftLaunchAdmission.Prepare(session.Catalog,bytes,assetRoot,CraftLaunchAdmission.SourceHash(bytes),source.Digest,candidate.Digest,session.Catalog.Digest);
+-        var next=new ConstructionFlightScene(admitted,assetRoot,solar,visuals);
++        CompiledCraft admitted;ConstructionFlightScene next;
++        try{
++            admitted=CraftLaunchAdmission.Prepare(session.Catalog,bytes,assetRoot,CraftLaunchAdmission.SourceHash(bytes),source.Digest,candidate.Digest,session.Catalog.Digest);
++            next=new ConstructionFlightScene(admitted,assetRoot,solar,visuals);
++        }catch(InvalidDataException e){
++            Console.WriteLine($"APPLICATION_LAUNCH_REFUSED source={source.Digest} codes={string.Join(',',candidate.Diagnostics.Concat(candidate.AdmissionDiagnostics).Select(d=>d.Code).Distinct(StringComparer.Ordinal))} reason={e.Message}");
++            diagnostic=e.Message;message="Launch refused. Review the launch details and correct the craft.";
++            var panel=OpenOverlay("LAUNCH DETAILS",570,480);
++            panel.Controls.Add(new TextBox(){Text=e.Message.ReplaceLineEndings(Environment.NewLine),Multiline=true,ReadOnly=true,ScrollBars=ScrollBars.Vertical,Width=515,Height=245,BackColor=BackColor,ForeColor=ForeColor});
++            if(candidate.Diagnostics.Any(d=>d.Code is "FUEL_PATH" or "POWER_PATH"))
++                panel.Controls.Add(new Label(){Text="Fill consumables fills tanks and charges batteries. Launch checks all services and physical support again.",Width=515,Height=58});
++            ActionButton(panel,"Back to construction",CloseOverlay,515);
++            return;
++        }
+         var previous=flight;flight=next;compiled=admitted;previous?.Dispose();
+         LeaveEditor();message="Z ignite · X cutoff · WASD/QE attitude · mouse orbit · F craft · Menu returns to construction";
+         Console.WriteLine($"APPLICATION_LAUNCH process={Environment.ProcessId} source={source.Digest} compiled={admitted.Digest} epoch={next.PhysicalEpochTicks} sourceRevision={session.Revision} dirty={session.Dirty}");
+     }
++    private void FillConsumables()
++    {
++        CancelGhost();session.FillForLaunch(session.Revision);RefreshInspector();diagnostic=null;
++        message="Consumables filled and batteries charged. Launch will recheck services and physical support.";
++    }
+ }
+--- before/tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs
++++ after/tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs
+@@ -5,4 +5,23 @@
+     private string? launchedDigest;
+     private long launchedRevision;
+     private bool launchedDirty;
++    private void RunLaunchRefusalChecks()
++    {
++        var saved=session.Save(session.Revision);var owner=flight;var epoch=flight!.State.Epoch.Ticks;
++        foreach(var supportCase in new[]{false,true}){
++            var depth=supportCase?3:2;
++            session.Load(session.Revision,NovaCore.Simulation.Spacecraft.Assemblies.AssemblyJson.Write(StabilizationCraftFixture.Create(session.Catalog,depth,shortOnly:true)),true);
++            if(supportCase)foreach(var host in new[]{1,2})session.Remove(session.Revision,$"r{host}-0");
++            ClickButton("Fill consumables");var before=EditorFingerprint();
++            ClickButton("Launch vehicle");
++            var expected=supportCase?"Authored support load exceeded.":"64 attitude jets";
++            RequireQualification(overlay is not null&&overlay.Controls.OfType<TextBox>().Single().Text.Contains(expected,StringComparison.Ordinal),"native launch details explain "+expected);
++            RequireQualification(EditorFingerprint()==before&&ReferenceEquals(flight,owner)&&flight!.State.Epoch.Ticks==epoch,"invalid launch preserves draft, history, flight owner and epoch");
++            RequireQualification(owner!.Session.Engine.ObserveConstructionServices(owner.Session.Authority,out var retained)==NovaCore.Simulation.Spacecraft.Assemblies.ConstructionServiceStatus.Ready&&retained!.Epoch.Ticks==epoch,"refused replacement leaves retained flight authority usable");
++            Console.WriteLine($"APPLICATION_REFUSAL_RECOVERY_PASS case={(supportCase?"support-load":"64-jets")} reason={diagnostic}");
++            ClickButton("Back to construction");
++        }
++        session.Load(session.Revision,saved,true);RefreshInspector();
++        RequireQualification(session.Save(session.Revision).SequenceEqual(saved)&&ReferenceEquals(flight,owner),"valid retained craft restored after refusal witnesses");
++    }
+ }
+--- before/tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs
++++ after/tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs
+@@ -64,6 +64,7 @@
+         TestLoad(partialPath);ClickButton("Undo");RequireQualification(session.Save(session.Revision).SequenceEqual(renamed)&&savePath==copyPath,"same-ID copy undo restores exact snapshot association");
+         ClickButton("Redo");RequireQualification(session.Save(session.Revision).SequenceEqual(partial)&&savePath==partialPath,"redo restores corresponding original file association");
+         ClickButton("Launch vehicle");RequireQualification(editing&&ReferenceEquals(flight,originalFlight)&&flight.State.Epoch.Ticks==physicalEpoch,"refused partial launch preserves existing physical owner and epoch");
++        RequireQualification(overlay is not null&&diagnostic is not null,"refused partial launch explains its blockers");ClickButton("Back to construction");
+         TestRename("Discarded "+suffix);TestLoad(baselinePath);ClickButton("Discard changes");RequireQualification(session.Save(session.Revision).SequenceEqual(baseline),"Discard loads exact chosen source without refilling");
+         TestInspect(qualificationAdapter!);var beforeClock=session.Save(session.Revision);var oldAngle=session.Current!.Design.Data.Connections.Single(c=>c.Child==qualificationAdapter).Construction!.ClockDegrees;
+         ClickButton("Rotate");RequireQualification(session.Current!.Design.Data.Connections.Single(c=>c.Child==qualificationAdapter).Construction!.ClockDegrees!=oldAngle,"Rotate advances the connected part's admitted clock");
+--- before/tests/NovaCore.Graphics.Tests/Program.cs
++++ after/tests/NovaCore.Graphics.Tests/Program.cs
+@@ -14,6 +14,7 @@
+ using NovaCore.Simulation.Spacecraft.Guidance;
+ using NovaCore.Simulation.Time;
+ 
++if(args.Contains("--launch-readiness",StringComparer.Ordinal)){LaunchReadinessTests.Run();return 0;}
+ if(args.Contains("--florida-pad-flight-envelope",StringComparer.Ordinal)){FacilityLightingTests.FlightEnvelope();return 0;}
+ if(args.Contains("--florida-pad-authority",StringComparer.Ordinal)){FacilityLightingTests.Run();FloridaFoundationSeatingTests.Run();return 0;}
+ if(args.Contains("--modular-connectors",StringComparer.Ordinal)){ModularConnectorTests.Run();return 0;}
+--- /dev/null
++++ after/tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs
+@@ -0,0 +1,63 @@
++using System.Collections.Immutable;
++using NovaCore.Core;
++using NovaCore.Simulation.Spacecraft.Assemblies;
++
++internal static class LaunchReadinessTests
++{
++    internal static void Run()
++    {
++        const string assets="assets/vehicles/modular-starter";
++        var catalog=AssemblyDefinitionCatalog.Load(File.ReadAllBytes(Path.Combine(assets,"catalog.json")));
++        var checks=0;void Need(bool value,string label){checks++;if(!value)throw new InvalidDataException(label);}
++        using var editor=new ConstructionEditorSession(catalog);
++        void Build(AssemblyDefinitionCatalog library,string[] tanks,int rings)
++        {
++            editor.Clear(editor.Revision,true);
++            DefinitionReference D(string id)=>library.Reference(library.Data.Definitions.Single(d=>d.Id==id));
++            editor.PreviewRoot(editor.Revision,D("nc.core.command-2"),"core","readiness",new(Double3.Zero,Matrix3.Identity));editor.AcceptPreview(editor.Revision);
++            void Add(string id,string parent,string target,string child,string name,int count=1){editor.PreviewPlacement(editor.Revision,new(D(id),parent,target,child,0,count,name));editor.AcceptPreview(editor.Revision);}
++            for(var i=0;i<tanks.Length;i++)Add(tanks[i],i==0?"core":$"tank{i-1}-0","aft","fore",$"tank{i}");
++            Add("nc.mount.single-2to1",$"tank{tanks.Length-1}-0","aft","fore","adapter");Add("nc.engine.main-1","adapter-0","engine","fore","engine");
++            for(var i=0;i<rings;i++)Add("nc.rcs.block-r1",$"tank{i}-0","radial-1","mount",$"rcs{i}",8);
++        }
++        CompiledCraft Compile()=>CraftCompiler.Compile(catalog,editor.Current!.Design.Data,assets);
++        CompiledCraft Admit(CompiledCraft craft)=>CraftLaunchAdmission.Prepare(catalog,craft.Design.Save(),assets,CraftLaunchAdmission.SourceHash(craft.Design.Save()),craft.Design.Digest,craft.Digest,catalog.Digest);
++        string Refuse(CompiledCraft craft,params string[] codes)
++        {
++            var before=editor.Save(editor.Revision);var revision=editor.Revision;var history=editor.UndoCount;
++            Need(codes.All(code=>craft.Diagnostics.Concat(craft.AdmissionDiagnostics).Any(d=>d.Code==code)),"actual failed predicates");
++            try{Admit(craft);throw new Exception("Invalid craft admitted");}
++            catch(InvalidDataException e){
++                Need(editor.Save(editor.Revision).SequenceEqual(before)&&editor.Revision==revision&&editor.UndoCount==history,"refusal is observational");return e.Message;
++            }
++        }
++        foreach(var tanks in new[]{new[]{"nc.tank.short-2"},new[]{"nc.tank.long-2"},new[]{"nc.tank.short-2","nc.tank.short-2"}}){
++            Build(catalog,tanks,1);var empty=editor.Save(editor.Revision);var positions=editor.Current!.Design.Data.Instances;
++            var reason=Refuse(Compile(),"FUEL_PATH","POWER_PATH");
++            Need(reason.Contains("Propellant is unavailable",StringComparison.Ordinal)&&reason.Contains("Electrical power is unavailable",StringComparison.Ordinal)&&!reason.Contains("support",StringComparison.OrdinalIgnoreCase),"empty craft explains fuel and charge without falsely blaming support");
++            editor.FillForLaunch(editor.Revision);var full=editor.Save(editor.Revision);var craft=Admit(Compile());
++            Need(craft.Function&&craft.AdmissionDiagnostics.IsEmpty&&editor.Current!.Design.Data.Instances.SequenceEqual(positions),"fill admits unchanged geometry and routes");
++            editor.Undo(editor.Revision);Need(editor.Save(editor.Revision).SequenceEqual(empty),"fill undo restores exact empty draft");
++            editor.Redo(editor.Revision);Need(editor.Save(editor.Revision).SequenceEqual(full),"fill redo restores exact prepared draft");
++            editor.Load(editor.Revision,full,true);Need(Admit(Compile()).Digest==craft.Digest,"save/reload retains exact readiness and symmetry");
++            editor.ConfigureSelection(editor.Revision,"tank0-0",.375,1,true,true);var partial=editor.Save(editor.Revision);Admit(Compile());
++            Need(editor.Save(editor.Revision).SequenceEqual(partial),"launch never silently refills partial tanks");
++            editor.ConfigureSelection(editor.Revision,"tank0-0",.375,1,false,true);
++            if(tanks.Length==1)Refuse(Compile(),"FUEL_PATH");
++            editor.ConfigureSelection(editor.Revision,"core",1,0,true,true);Refuse(Compile(),"POWER_PATH");
++            editor.FillForLaunch(editor.Revision);Admit(Compile());
++            Console.WriteLine($"LAUNCH_READINESS tanks={string.Join(',',tanks)} parts={craft.Render.Length} empty=REFUSED filled=ADMITTED partial=ADMITTED persistence=PASS");
++        }
++        Build(catalog,["nc.tank.long-2","nc.tank.long-2"],2);editor.FillForLaunch(editor.Revision);
++        var excessive=Refuse(Compile(),"ATTITUDE_COUNT");Need(excessive.Contains("64 attitude jets",StringComparison.Ordinal)&&!excessive.Contains("balanced authority",StringComparison.Ordinal),"witness explains 64 jets instead of misleading service/support text");
++        Build(catalog,["nc.tank.short-2"],1);editor.FillForLaunch(editor.Revision);
++        var prepared=editor.Save(editor.Revision);var data=editor.Current!.Design.Data;
++        foreach(var service in new[]{ConstructionService.Propellant,ConstructionService.Electricity,ConstructionService.Data}){
++            var edge=data.Connections.Single(e=>e.Child=="engine-0");
++            editor.SetConnection(editor.Revision,edge.Construction! with {Services=edge.Construction.Services&~service});
++            Refuse(Compile(),service==ConstructionService.Propellant?"FUEL_PATH":service==ConstructionService.Electricity?"POWER_PATH":"DATA_PATH");
++            editor.Load(editor.Revision,prepared,true);Admit(Compile());
++        }
++        Console.WriteLine($"LAUNCH_READINESS PASS checks={checks}; fresh construction, explicit preparation, disabled/empty services, broken routes, oversized RCS, observational refusal, deterministic history/save/reload");
++    }
++}

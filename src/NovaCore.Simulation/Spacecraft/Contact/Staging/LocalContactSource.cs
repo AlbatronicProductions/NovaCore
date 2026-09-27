@@ -13,7 +13,7 @@ internal enum LocalContactStatus : byte
     Success, InvalidConfiguration, InvalidSource, UnsupportedForceTorqueState,
     ForeignEngine, ChangedAuthority, TimelineConflict, PendingEvent, InvalidInterval,
     ConfigurationMismatch, GenerationMismatch, FrontierMismatch, WrongThread,
-    Disposed, Invalidated, PrecisionEnvelopeExceeded, SolverFailure, PublicationPending,
+    Disposed, Invalidated, PrecisionEnvelopeExceeded, SolverFailure, PublicationPending, SupportRefused,
 }
 
 /// <summary>Immutable qualification geometry and fixed inertial transport; not gameplay collision authority.</summary>
@@ -27,6 +27,7 @@ internal sealed class LocalContactConfiguration
     internal Double3 BoxDimensions { get; }
     internal EngineeringContactArticle? Article { get; }
     internal AssemblyContactProfile? AssemblyProfile { get; private init; }
+    internal CompiledCraftContact? CraftProfile {get;private init;}
     internal bool ResourceAwareNumericalFixture { get; private init; }
     internal AssemblyFloridaSite? Site {get; private init;}
     // The new article uses the original 2 m thick slab. Legacy box fixtures retain their exact geometry.
@@ -40,7 +41,10 @@ internal sealed class LocalContactConfiguration
     internal double Margin => 20 * ContactTolerance;
     // Speculative reach must cover the admitted surface speed over a whole exact step.
     // Margin alone is a geometric/depth cushion, not the motion horizon.
-    internal double MaximumSpeculativeMargin => ResourceAwareNumericalFixture ? .01 : MaximumSpeed * (16667d / 1_000_000) + Margin;
+    private double MaximumNativeSlice {get;init;}=16667d/1_000_000;
+    internal int CraftRefinement {get;private init;}=-1;
+    internal double CraftStepSeconds=>CraftRefinement<0?CraftSurfaceImpact.MaximumNativeSliceSeconds:MaximumNativeSlice;
+    internal double MaximumSpeculativeMargin => ResourceAwareNumericalFixture ? .01 : MaximumSpeed * MaximumNativeSlice + Margin;
     private double? assemblyRadius;
     internal double BoundingRadius => assemblyRadius ?? AssemblyProfile?.BoundingRadius ?? Article?.BoundingRadius ?? Math.Sqrt(BoxDimensions.LengthSquared) * .5;
 
@@ -78,6 +82,36 @@ internal sealed class LocalContactConfiguration
         configuration=new(1,launch.Spacecraft.CarrierFrame,origin,launch.Departure?.FrameVelocity??launch.Initial.Motion.VelocityO,DoubleQuaternion.Identity,
             new(1,1,1),8,tolerance,bound,null){AssemblyProfile=profile,assemblyRadius=radius,MaximumSpeed=speed,MaximumAngularSpeed=speed/radius,Site=launch.Site};
         return LocalContactStatus.Success;
+    }
+
+    internal static LocalContactConfiguration CreateCraft(ConstructionRuntimeBinding binding,bool postFlight=false,AssemblyMotion? motion=null,int refinement=0,AssemblyMass? mass=null)
+    {
+        var physical=binding.Physical??throw new InvalidDataException("Missing physical craft.");var profile=physical.Contact;
+        var tolerance=profile.ContactTolerance;var bound=Math.Pow(2,Math.Floor(Math.Log2(tolerance/8))+23);
+        var origin=new Double3(0,profile.SupportPlane,0);
+        // Conservatively cover every admitted COM, not just the cold fill.
+        var radius=physical.Craft.Collision.SelectMany(c=>c.Vertices).Max(v=>{
+            var low=physical.Craft.Mass.ComMinimum;var high=physical.Craft.Mass.ComMaximum;
+            var p=new Double3(Math.Max(Math.Abs(v.X-low.X),Math.Abs(v.X-high.X)),Math.Max(Math.Abs(v.Y-low.Y),Math.Abs(v.Y-high.Y)),Math.Max(Math.Abs(v.Z-low.Z),Math.Abs(v.Z-high.Z)));
+            return Math.Sqrt(p.LengthSquared);
+        });
+        var slab=physical.Site.Slab!;var extent=Math.Max(slab.Dimensions.X,slab.Dimensions.Z)*.5;
+        if(!RootSpacingFits(origin,tolerance)||!FloatGeometryFits(slab.Dimensions,extent,tolerance)||radius*2>=extent||extent>=bound)
+            throw new InvalidDataException("Craft contact precision envelope exceeded.");
+        // Use the authored pad width as the smallest contact feature.
+        var feature=physical.Craft.Support.Min(s=>2*Math.Min(s.Foot.HalfWidthY,s.Foot.HalfWidthZ));
+        if(refinement is <0 or >CraftSurfaceImpact.MaximumRefinement)throw new InvalidDataException("Finite contact subdivision capacity exceeded.");
+        var nativeSlice=postFlight?Math.ScaleB(CraftSurfaceImpact.MaximumNativeSliceSeconds,-refinement):16667d/1_000_000;
+        var speed=postFlight?profile.MinimumNativeHalfWidth/nativeSlice:feature*.5/nativeSlice;
+        if(postFlight)
+        {
+            var endpoint=motion??binding.Initial.Physical!.Motion;
+            var com=AssemblyContactProfile.ToCom(endpoint,(mass??binding.Initial.ReferenceMass!.Value).Com);
+            var surfaceSpeed=Math.Sqrt(com.Velocity.LengthSquared)+radius*Math.Sqrt(endpoint.AngularVelocityBody.LengthSquared);
+            while(surfaceSpeed>speed&&refinement<CraftSurfaceImpact.MaximumRefinement){refinement++;nativeSlice*=.5;speed*=2;}
+        }
+        return new(1,binding.Spacecraft.CarrierFrame,origin,default,DoubleQuaternion.Identity,new(1,1,1),extent,tolerance,bound,null)
+            {CraftProfile=profile,Site=physical.Site,assemblyRadius=radius,MaximumSpeed=speed,MaximumAngularSpeed=speed/radius,MaximumNativeSlice=nativeSlice,CraftRefinement=postFlight?refinement:-1};
     }
 
     internal static LocalContactStatus TryCreateArticle(long revision, ReferenceFrameId root, Double3 origin,
@@ -163,6 +197,8 @@ internal sealed class LocalContactSource
     private readonly SpacecraftTranslationState linear;
     private readonly SpacecraftRigidBodyRotationState angular;
     internal AssemblyFlightAuthority? AssemblyAuthority { get; private init; }
+    internal ConstructionServiceAuthority? ConstructionAuthority {get;private init;}
+    internal ConstructionRuntimeState? ConstructionState {get;private init;}
     internal ContinuationClockState AssemblyClock {get;private init;}
     private Double3 assemblyForce;
     internal SpacecraftMotion Motion { get; }
@@ -207,6 +243,12 @@ internal sealed class LocalContactSource
         if (!ReferenceEquals(current, engine)) return LocalContactStatus.ForeignEngine;
         if (!current.IsContactProofOwnerThread) return LocalContactStatus.WrongThread;
         if (!ReferenceEquals(configuration, Configuration)) return LocalContactStatus.ConfigurationMismatch;
+        if(ConstructionAuthority is {} construction)
+        {
+            if(target<Motion.Time||target>End)return LocalContactStatus.InvalidInterval;
+            if(current.CheckConstructionContactSource(construction)!=ConstructionServiceStatus.Ready)return LocalContactStatus.ChangedAuthority;
+            return current.HasContactProofBoundaryThrough(target)?LocalContactStatus.PendingEvent:LocalContactStatus.Success;
+        }
         if(AssemblyAuthority is {} assembly)
         {
             if(target<Motion.Time||target>End)return LocalContactStatus.InvalidInterval;
@@ -269,5 +311,16 @@ internal sealed class LocalContactSource
             com.Position,com.Velocity,state.Motion.BodyToWorld,state.Motion.AngularVelocityBody,new(mass.Mass),new(mass.Inertia.A,mass.Inertia.E,mass.Inertia.I));
         return new(engine,configuration,default,default,motion,engine.ContactProofTimelineRevision,launch.End)
         {AssemblyAuthority=authority,AssemblyClock=engine.CaptureContinuationClock(),assemblyForce=new(0,-9.81*mass.Mass,0)};
+    }
+    internal static LocalContactSource CaptureCraft(SimulationTransactionEngine engine,ConstructionServiceAuthority authority,LocalContactConfiguration configuration)
+    {
+        if(!engine.OwnsPersistentPublicationPhase||engine.CheckConstructionContactSource(authority)!=ConstructionServiceStatus.Ready)
+            throw new InvalidOperationException("Craft source requires prepared owner authority.");
+        var binding=authority.Binding;var state=engine.CaptureConstructionContactState(authority);var mass=state.ReferenceMass!.Value;var physical=state.Physical!;
+        var com=AssemblyContactProfile.ToCom(physical.Motion,mass.Com);
+        var motion=new SpacecraftMotion(binding.Spacecraft.Id,state.Epoch,engine.State.Revision,binding.Spacecraft.CarrierFrame,
+            com.Position,com.Velocity,physical.Motion.BodyToWorld,physical.Motion.AngularVelocityBody,new(mass.Mass),new(mass.Inertia.A,mass.Inertia.E,mass.Inertia.I));
+        return new(engine,configuration,default,default,motion,engine.ContactProofTimelineRevision,binding.Physical!.Site.End)
+            {ConstructionAuthority=authority,ConstructionState=state,AssemblyClock=engine.CaptureContinuationClock()};
     }
 }

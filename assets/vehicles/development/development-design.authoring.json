@@ -1,0 +1,576 @@
+{
+  "schema": "novacore.construction-authoring-template/1",
+  "id": "nc.development.dlv-b1-r1",
+  "revision": 1,
+  "dependencyDigest": "AUTHOR",
+  "root": "Booster",
+  "controlPart": "Capsule",
+  "instances": [
+    {
+      "id": "Booster",
+      "order": 0,
+      "definition": {
+        "id": "nc.booster-body.3600",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 0.0,
+          "y": 0,
+          "z": 0
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": 1.0,
+          "f": 0.0,
+          "g": 0.0,
+          "h": 0.0,
+          "i": 1.0
+        }
+      }
+    },
+    {
+      "id": "Upper",
+      "order": 1,
+      "definition": {
+        "id": "nc.upper-body.3600",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 31.667,
+          "y": 0,
+          "z": 0
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": 1.0,
+          "f": 0.0,
+          "g": 0.0,
+          "h": 0.0,
+          "i": 1.0
+        }
+      }
+    },
+    {
+      "id": "Capsule",
+      "order": 2,
+      "definition": {
+        "id": "nc.capsule.return-3500",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 43.304,
+          "y": 0,
+          "z": 0
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": 1.0,
+          "f": 0.0,
+          "g": 0.0,
+          "h": 0.0,
+          "i": 1.0
+        }
+      }
+    },
+    {
+      "id": "Booster.Engine.0",
+      "order": 3,
+      "definition": {
+        "id": "nc.booster-engine.liquid-a",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 2.1,
+          "y": 0.95,
+          "z": 0.0
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": 1.0,
+          "f": 0.0,
+          "g": 0.0,
+          "h": 0.0,
+          "i": 1.0
+        }
+      }
+    },
+    {
+      "id": "Booster.Engine.1",
+      "order": 4,
+      "definition": {
+        "id": "nc.booster-engine.liquid-a",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 2.1,
+          "y": -0.47499999999999976,
+          "z": 0.8227241335952168
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": -0.49999984335273556,
+          "f": -0.8660254942247602,
+          "g": 0.0,
+          "h": 0.8660254942247602,
+          "i": -0.49999984335273556
+        }
+      }
+    },
+    {
+      "id": "Booster.Engine.2",
+      "order": 5,
+      "definition": {
+        "id": "nc.booster-engine.liquid-a",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 2.1,
+          "y": -0.4750000000000004,
+          "z": -0.8227241335952166
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": -0.5000000514340687,
+          "f": 0.8660253740889633,
+          "g": 0.0,
+          "h": -0.8660253740889633,
+          "i": -0.5000000514340687
+        }
+      }
+    },
+    {
+      "id": "Upper.Engine.0",
+      "order": 6,
+      "definition": {
+        "id": "nc.upper-engine.vacuum-a",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 33.817,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": 1.0,
+          "f": 0.0,
+          "g": 0.0,
+          "h": 0.0,
+          "i": 1.0
+        }
+      }
+    },
+    {
+      "id": "DLV.Connection.BoosterUpper.Lower",
+      "order": 7,
+      "definition": {
+        "id": "nc.axial-release.load-ring-3320",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 31.667,
+          "y": 0,
+          "z": 0
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": 1.0,
+          "f": 0.0,
+          "g": 0.0,
+          "h": 0.0,
+          "i": 1.0
+        }
+      }
+    },
+    {
+      "id": "DLV.Connection.UpperCapsule.Lower",
+      "order": 8,
+      "definition": {
+        "id": "nc.axial-release.capsule-collar-3650",
+        "revision": 1,
+        "digest": "AUTHOR"
+      },
+      "pose": {
+        "position": {
+          "x": 43.664,
+          "y": 0,
+          "z": 0
+        },
+        "rotation": {
+          "a": 1.0,
+          "b": 0.0,
+          "c": 0.0,
+          "d": 0.0,
+          "e": 1.0,
+          "f": 0.0,
+          "g": 0.0,
+          "h": 0.0,
+          "i": 1.0
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "parent": "Booster",
+      "parentEndpoint": "ENGINE_0",
+      "child": "Booster.Engine.0",
+      "childEndpoint": "ENGINE_MOUNT",
+      "construction": {
+        "id": "Booster.Engine.0.Mount",
+        "detachable": false,
+        "services": "Propellant, Data"
+      }
+    },
+    {
+      "parent": "Booster",
+      "parentEndpoint": "ENGINE_1",
+      "child": "Booster.Engine.1",
+      "childEndpoint": "ENGINE_MOUNT",
+      "construction": {
+        "id": "Booster.Engine.1.Mount",
+        "detachable": false,
+        "services": "Propellant, Data"
+      }
+    },
+    {
+      "parent": "Booster",
+      "parentEndpoint": "ENGINE_2",
+      "child": "Booster.Engine.2",
+      "childEndpoint": "ENGINE_MOUNT",
+      "construction": {
+        "id": "Booster.Engine.2.Mount",
+        "detachable": false,
+        "services": "Propellant, Data"
+      }
+    },
+    {
+      "parent": "Upper",
+      "parentEndpoint": "ENGINE_0",
+      "child": "Upper.Engine.0",
+      "childEndpoint": "ENGINE_MOUNT",
+      "construction": {
+        "id": "Upper.Engine.0.Mount",
+        "detachable": false,
+        "services": "Propellant, Data"
+      }
+    },
+    {
+      "parent": "Booster",
+      "parentEndpoint": "RELEASE_MOUNT",
+      "child": "DLV.Connection.BoosterUpper.Lower",
+      "childEndpoint": "BOTTOM",
+      "construction": {
+        "id": "DLV.Connection.BoosterUpper.Lower.Mount",
+        "detachable": false,
+        "services": "Data"
+      }
+    },
+    {
+      "parent": "DLV.Connection.BoosterUpper.Lower",
+      "parentEndpoint": "TOP",
+      "child": "Upper",
+      "childEndpoint": "BOTTOM_RECEIVER",
+      "construction": {
+        "id": "DLV.Connection.BoosterUpper.Lower.Release",
+        "detachable": true,
+        "services": "Data"
+      }
+    },
+    {
+      "parent": "Upper",
+      "parentEndpoint": "RELEASE_MOUNT",
+      "child": "DLV.Connection.UpperCapsule.Lower",
+      "childEndpoint": "BOTTOM",
+      "construction": {
+        "id": "DLV.Connection.UpperCapsule.Lower.Mount",
+        "detachable": false,
+        "services": "Data"
+      }
+    },
+    {
+      "parent": "DLV.Connection.UpperCapsule.Lower",
+      "parentEndpoint": "TOP",
+      "child": "Capsule",
+      "childEndpoint": "BOTTOM_RECEIVER",
+      "construction": {
+        "id": "DLV.Connection.UpperCapsule.Lower.Release",
+        "detachable": true,
+        "services": "Data"
+      }
+    }
+  ],
+  "serviceLinks": [],
+  "configuration": [
+    {
+      "part": "Booster",
+      "stores": [
+        {
+          "store": "Booster.LOX.Tank.Liquid",
+          "quantityKg": 133394.53674131265,
+          "enabled": true
+        },
+        {
+          "store": "Booster.RP1.Tank.Liquid",
+          "quantityKg": 50409.629615933925,
+          "enabled": true
+        },
+        {
+          "store": "Booster.Feed.0.Liquid",
+          "quantityKg": 709.8147120287857,
+          "enabled": false
+        },
+        {
+          "store": "Booster.Feed.1.Liquid",
+          "quantityKg": 122.40142724471882,
+          "enabled": false
+        },
+        {
+          "store": "Booster.Feed.2.Liquid",
+          "quantityKg": 174.8458414128745,
+          "enabled": false
+        },
+        {
+          "store": "Booster.Feed.3.Liquid",
+          "quantityKg": 94.59871951330177,
+          "enabled": false
+        },
+        {
+          "store": "Booster.Feed.4.Liquid",
+          "quantityKg": 94.17294255372515,
+          "enabled": false
+        },
+        {
+          "store": "Booster.LOX.Tank.HeUllage",
+          "quantityKg": 8.515308879673418,
+          "enabled": false
+        },
+        {
+          "store": "Booster.RP1.Tank.HeUllage",
+          "quantityKg": 2.436907938850883,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.0.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.1.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.2.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.3.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.4.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.5.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.6.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        },
+        {
+          "store": "Booster.He.7.Gas",
+          "quantityKg": 28.63097289768446,
+          "enabled": false
+        }
+      ],
+      "electrical": []
+    },
+    {
+      "part": "Upper",
+      "stores": [
+        {
+          "store": "Upper.LOX.Tank.Liquid",
+          "quantityKg": 30313.170198983513,
+          "enabled": true
+        },
+        {
+          "store": "Upper.RP1.Tank.Liquid",
+          "quantityKg": 11619.8025353988,
+          "enabled": true
+        },
+        {
+          "store": "Upper.Feed.0.Liquid",
+          "quantityKg": 45.215172115850365,
+          "enabled": false
+        },
+        {
+          "store": "Upper.Feed.1.Liquid",
+          "quantityKg": 20.163134349820993,
+          "enabled": false
+        },
+        {
+          "store": "Upper.Feed.2.Liquid",
+          "quantityKg": 1.6489591520162097,
+          "enabled": false
+        },
+        {
+          "store": "Upper.LOX.Tank.HeUllage",
+          "quantityKg": 1.9010676296376516,
+          "enabled": false
+        },
+        {
+          "store": "Upper.RP1.Tank.HeUllage",
+          "quantityKg": 0.43857076161526387,
+          "enabled": false
+        },
+        {
+          "store": "Upper.He.0.Gas",
+          "quantityKg": 26.83018080437354,
+          "enabled": true
+        },
+        {
+          "store": "Upper.He.1.Gas",
+          "quantityKg": 26.83018080437354,
+          "enabled": true
+        }
+      ],
+      "electrical": []
+    },
+    {
+      "part": "Capsule",
+      "stores": [
+        {
+          "store": "Capsule.MMH.0.Liquid",
+          "quantityKg": 188.67924528301887,
+          "enabled": true
+        },
+        {
+          "store": "Capsule.NTO.0.Liquid",
+          "quantityKg": 311.3207547169811,
+          "enabled": true
+        },
+        {
+          "store": "Capsule.MMH.1.Liquid",
+          "quantityKg": 188.67924528301887,
+          "enabled": true
+        },
+        {
+          "store": "Capsule.NTO.1.Liquid",
+          "quantityKg": 311.3207547169811,
+          "enabled": true
+        },
+        {
+          "store": "Capsule.MMH.0.HeUllage",
+          "quantityKg": 0.05445413676711846,
+          "enabled": false
+        },
+        {
+          "store": "Capsule.NTO.0.HeUllage",
+          "quantityKg": 0.048152256390080715,
+          "enabled": false
+        },
+        {
+          "store": "Capsule.MMH.1.HeUllage",
+          "quantityKg": 0.05445413676711846,
+          "enabled": false
+        },
+        {
+          "store": "Capsule.NTO.1.HeUllage",
+          "quantityKg": 0.048152256390080715,
+          "enabled": false
+        },
+        {
+          "store": "Capsule.He.0.Gas",
+          "quantityKg": 3.897393606842801,
+          "enabled": true
+        },
+        {
+          "store": "Capsule.He.1.Gas",
+          "quantityKg": 3.897393606842801,
+          "enabled": true
+        }
+      ],
+      "electrical": []
+    },
+    {
+      "part": "Booster.Engine.0",
+      "stores": [],
+      "electrical": []
+    },
+    {
+      "part": "Booster.Engine.1",
+      "stores": [],
+      "electrical": []
+    },
+    {
+      "part": "Booster.Engine.2",
+      "stores": [],
+      "electrical": []
+    },
+    {
+      "part": "Upper.Engine.0",
+      "stores": [],
+      "electrical": []
+    },
+    {
+      "part": "DLV.Connection.BoosterUpper.Lower",
+      "stores": [],
+      "electrical": []
+    },
+    {
+      "part": "DLV.Connection.UpperCapsule.Lower",
+      "stores": [],
+      "electrical": []
+    }
+  ],
+  "symmetry": [],
+  "actions": []
+}

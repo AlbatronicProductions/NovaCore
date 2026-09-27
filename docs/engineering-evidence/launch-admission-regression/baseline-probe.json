@@ -1,0 +1,107 @@
+[
+  {
+    "label": "short",
+    "filled": false,
+    "parts": 12,
+    "jets": 32,
+    "Function": false,
+    "admission": "Craft launch requires functional services and valid physical support.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "short",
+    "filled": true,
+    "parts": 12,
+    "jets": 32,
+    "Function": true,
+    "admission": "early readiness passed",
+    "unchanged": true,
+    "diagnosticCodes": [],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "long",
+    "filled": false,
+    "parts": 12,
+    "jets": 32,
+    "Function": false,
+    "admission": "Craft launch requires functional services and valid physical support.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "long",
+    "filled": true,
+    "parts": 12,
+    "jets": 32,
+    "Function": true,
+    "admission": "early readiness passed",
+    "unchanged": true,
+    "diagnosticCodes": [],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "two-short",
+    "filled": false,
+    "parts": 13,
+    "jets": 32,
+    "Function": false,
+    "admission": "Craft launch requires functional services and valid physical support.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "two-short",
+    "filled": true,
+    "parts": 13,
+    "jets": 32,
+    "Function": true,
+    "admission": "early readiness passed",
+    "unchanged": true,
+    "diagnosticCodes": [],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "witness-long-two-rings",
+    "filled": false,
+    "parts": 21,
+    "jets": 64,
+    "Function": false,
+    "admission": "Craft launch requires functional services and valid physical support.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "ATTITUDE_AUTHORITY",
+      "ATTITUDE_COUNT",
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "witness-long-two-rings",
+    "filled": true,
+    "parts": 21,
+    "jets": 64,
+    "Function": false,
+    "admission": "Craft launch requires functional services and valid physical support.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "ATTITUDE_AUTHORITY",
+      "ATTITUDE_COUNT"
+    ],
+    "admissionDiagnosticCodes": []
+  }
+]

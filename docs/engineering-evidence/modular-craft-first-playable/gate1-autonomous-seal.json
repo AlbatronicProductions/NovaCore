@@ -1,0 +1,103 @@
+{
+  "schema": "novacore.gate1-autonomous-seal/1",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "headPreserved": true,
+  "indexPreserved": true,
+  "publicRefsPreserved": true,
+  "worktreesPreserved": true,
+  "refDelta": [
+    {
+      "InputObject": "a5200ca2a38dbe4231629d6c15e70d4203b4911f refs/codex/turn-diffs/captures/1790022427358/b4aca048-db7c-40ad-8ae7-aa427125913d/base",
+      "SideIndicator": "=>"
+    },
+    {
+      "InputObject": "a5200ca2a38dbe4231629d6c15e70d4203b4911f refs/codex/turn-diffs/checkpoints/cea148f32fa295beb0e7f899b8db1105/d6b43032c0b5da7a3ff542d2a6b07d88/1790022208828/b117d164-790a-4cdb-b21f-3fa3059f5666",
+      "SideIndicator": "=>"
+    },
+    {
+      "InputObject": "2f61b12485fb59fc4e638ad5482fac043dce993b refs/codex/turn-diffs/captures/1790020810986/b9cd0689-640a-4fdd-bc0c-33c860f23030/base",
+      "SideIndicator": "<="
+    },
+    {
+      "InputObject": "2f61b12485fb59fc4e638ad5482fac043dce993b refs/codex/turn-diffs/checkpoints/cea148f32fa295beb0e7f899b8db1105/714110494ee032ba2c4df1aa82b7cbe4/1789966970545/336e44c8-9e6e-4597-a5ce-621d85a67e66",
+      "SideIndicator": "<="
+    }
+  ],
+  "entryFiles": 3322,
+  "unchangedEntryFiles": 3319,
+  "changedEntryFiles": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs",
+      "sha256": "66a6c236b40c86c850a230a44b1c80df14bcef382759e8aae043942b4c53132b",
+      "entrySha256": "624d1a2c891ac082955cae1f3c4b500d09b30075effaaa6f1748d0c9223a1a4d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "sha256": "951fd5e35908a27fc00809292839695bf6ecb0cafc3214b68d6d0cdc00119adf",
+      "entrySha256": "6e87ec5b75b859a6e4705a0cf8e2f5b4696ee42e9723dc79739bb577e31ac809"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "8cf6d8aeec43909bbb8ee9690637fe444017416ae7182f22c21327d2d5219dbd",
+      "entrySha256": "f17aa31c41c9de8dc7864a2ab886353eed88b5cfd08428df5e1a7d0e27f262c6"
+    }
+  ],
+  "missing": [],
+  "unexpectedChanged": [],
+  "sourceHashes": [
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionDefinitions.cs",
+      "sha256": "66a6c236b40c86c850a230a44b1c80df14bcef382759e8aae043942b4c53132b"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyDesign.cs",
+      "sha256": "951fd5e35908a27fc00809292839695bf6ecb0cafc3214b68d6d0cdc00119adf"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandard.cs",
+      "sha256": "5832df6c57f5ca1c8dfaf703e9216d41713f2b6dcc92401c4abacb1a24d8446e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardAggregateConsistency.cs",
+      "sha256": "6adfa8107f3a9a3012e750871ae3987d08c66217dbcc45e29405c438edf95b0d"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardExact.cs",
+      "sha256": "fb7d58865ce45eec8810f48a16dae95323867cb67550f495462bc4219e6e0542"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/PartStandardPhysicalConsistency.cs",
+      "sha256": "8c1f66f905f4e6580c3c93c897df09602d9db17eee8881643fc2f8f956de9151"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.AdmissionAudit.cs",
+      "sha256": "e535531d084d5f773d6b9dbe3b010c75a5eab1ccb70a684fb98286ca9609601e"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.AggregateAdmission.cs",
+      "sha256": "60457195a8470ceb99fae326828dcc215db85a4c2556c3cae5667e96eb163195"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.cs",
+      "sha256": "eb97d8637bc67581edfc1ef21ed86e27614e4f344425d82957b5035a975a50b9"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.Gate1Closure.cs",
+      "sha256": "34004d7972750013124586661de3ee14bb896f7415523e1c754fd0d41d03a49b"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.NumericalAdmission.cs",
+      "sha256": "54d093912793e675de8ad86401c5da90656292f70076dd7f25b5beea107e113c"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalPredicates.cs",
+      "sha256": "f1a1d41974103a932aebd45989780bd81b90e912028b54180c4169b1e7a9c378"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "sha256": "8cf6d8aeec43909bbb8ee9690637fe444017416ae7182f22c21327d2d5219dbd"
+    }
+  ],
+  "resultsSha256": "f319b380d28f597c03313fdc0907d2bfcbc3c29d38e07ed426b2743e3e27f7be",
+  "recoveryPreserved": true
+}

@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "judgment": "PASS: frame-168 AuthorityScalars defect causal closure OFFLINE ONLY",
+  "blackoutCause": "UNRESOLVED",
+  "gpuExecution": false,
+  "scopeDeclaration": "constexpr uint32_t Width = 960, Height = 540;",
+  "headerWords": 64,
+  "old": {
+    "expressions": [
+      "h[Width]=a.extent.width;",
+      "h[Height]=a.extent.height;"
+    ],
+    "resolvedIndices": [
+      960,
+      540
+    ],
+    "outOfRange": [
+      true,
+      true
+    ],
+    "witnessSafety": "Checked substitute records indices; original Release undefined access not executed"
+  },
+  "corrected": {
+    "expressions": [
+      "h[nc::frozen::Width]=a.extent.width;",
+      "h[nc::frozen::Height]=a.extent.height;"
+    ],
+    "slots": [
+      23,
+      24
+    ],
+    "viewportValues": [
+      960,
+      540
+    ],
+    "clampOrMask": false
+  },
+  "compiled": {
+    "oldDebugWidth": "preferred VA 0x18002EF20 (RVA 0x2EF20; ASLR base not retained)",
+    "oldDebugHeight": "preferred VA 0x18002EF4D (RVA 0x2EF4D)",
+    "correctedDebug": "Native assignment lambdas pass edx=0x17/0x18 to Header operator[]",
+    "correctedRelease": {
+      "linkedDllVerified": true,
+      "headerBase": "rbp+0xC0",
+      "widthStore": "[rbp+0x178] from extent.width at [rbx+0x2594]",
+      "heightStore": "[rbp+0x180] from extent.height at [rbx+0x2598]",
+      "slots": [
+        23,
+        24
+      ],
+      "valueTransform": "zero extend uint32 to uint64; no clamp or mask"
+    },
+    "oldReleaseLimit": "Original C++ expressions are out of bounds and undefined; retained optimized scalar block omits intended width/height stores. No claim of observed Release stack corruption.",
+    "binaries": [
+      {
+        "path": "E:\\NovaCore\\build\\earth-blackout-closure\\recording-call-instrumentation\\native-debug\\NovaCore.Native.dll",
+        "sha256": "4afa0608e255711fe0fd1edbdc4d04601aa3009fc375a43d54d9b815ece911ff"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\earth-blackout-closure\\recording-call-instrumentation\\app\\bin\\NovaCore.App\\debug\\NovaCore.Native.dll",
+        "sha256": "4afa0608e255711fe0fd1edbdc4d04601aa3009fc375a43d54d9b815ece911ff"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\earth-blackout-closure\\recording-call-instrumentation\\native-release\\NovaCore.Native.dll",
+        "sha256": "d67161e07ea5479046f584329824514e079c6b7ac4d0ea8b6d655528e67a2d90"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\earth-blackout-closure\\authority-scalars\\native-debug\\NovaCore.Native.dll",
+        "sha256": "103f16aa1089fcc443b4cd7a9deb92b1f4beead395f385cf57acee5dfcc10b89"
+      },
+      {
+        "path": "E:\\NovaCore\\build\\earth-blackout-closure\\authority-scalars\\native-release\\NovaCore.Native.dll",
+        "sha256": "8adf30d7f1abf01f2e60d0021def43a120282f6df1dcbd88871ee3f84b6cbd32"
+      }
+    ]
+  },
+  "executedResults": {
+    "debug": {
+      "oldKeys": [
+        960,
+        540
+      ],
+      "capacity": 64,
+      "oldOutOfRange": true,
+      "correctedSlots": [
+        23,
+        24
+      ],
+      "storedValues": [
+        960,
+        540
+      ],
+      "otherWordsUnchanged": true,
+      "secondViewport": [
+        960,
+        582
+      ],
+      "valuesFollowViewport": true,
+      "passed": true,
+      "gpuExecution": false
+    },
+    "release": {
+      "oldKeys": [
+        960,
+        540
+      ],
+      "capacity": 64,
+      "oldOutOfRange": true,
+      "correctedSlots": [
+        23,
+        24
+      ],
+      "storedValues": [
+        960,
+        540
+      ],
+      "otherWordsUnchanged": true,
+      "secondViewport": [
+        960,
+        582
+      ],
+      "valuesFollowViewport": true,
+      "passed": true,
+      "gpuExecution": false
+    }
+  },
+  "sourceComparison": {
+    "scalarExpressionsUnchanged": 23,
+    "onlyHeaderKeyQualificationAndMarkersChanged": true,
+    "outsideScalarBlockUnchanged": true
+  },
+  "identities": [
+    {
+      "path": "build/earth-blackout-closure/authority-scalars/source-at-entry/native/NovaCore.Native/FrozenCaptureNative.inl",
+      "sha256": "d49e2b9748e921a15ce11604da7f3069c687044b0062f81bc52cb744031f2ad4"
+    },
+    {
+      "path": "native/NovaCore.Native/FrozenCaptureNative.inl",
+      "sha256": "df764a91f39010846c443997ac00d00be3aef1cc970d7ed696a5efdcffa2c5d7"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "sha256": "a2a736e21eafd5bf17135132cc1e4a4da937f95ce195c6fb09fcd4302e61a2db"
+    },
+    {
+      "path": "native/NovaCore.Native/FrozenCapture.h",
+      "sha256": "b063d7deba80ceb350f3fdec49d2c8ced851561d7950069fb52094a974d89662"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/build_frozen_ownership_probe.py",
+      "sha256": "48fdf27872101ca1673ef5c32e5e14afbe4633466895cf15939b4e746e4392c4"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/RecordingCallProbe.cpp",
+      "sha256": "8c73fa6863c97ea5ae63a5e92fef9aa5b9424684af6971d1df95e661cdb22c76"
+    },
+    {
+      "path": "build/earth-blackout-closure/authority-scalars/dimension-witness.cpp",
+      "sha256": "572b812fc69971547e594e0f752e87da3c44febd84c16b2f4608634a39de717b"
+    },
+    {
+      "path": "build/earth-blackout-closure/authority-scalars/dimension-Debug.exe",
+      "sha256": "69e06d4a68a55087f720df273d08cff68c9bb5e6eafe678f123293aefbf749f6"
+    },
+    {
+      "path": "build/earth-blackout-closure/authority-scalars/dimension-Release.exe",
+      "sha256": "dc931ab046e872f23eb1feaaede10b8d26b9f837e53fa1bf82b5aaa99a14478e"
+    }
+  ],
+  "permanentRegression": {
+    "extractor": "tools/NovaCore.Causal.Observer/offline/build_frozen_ownership_probe.py",
+    "probe": "tools/NovaCore.Causal.Observer/offline/RecordingCallProbe.cpp",
+    "extents": [
+      [
+        960,
+        582
+      ],
+      [
+        960,
+        540
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        3440,
+        1440
+      ]
+    ],
+    "enclosingProductionDeclarationsRetained": true
+  },
+  "reproduction": "Offline only: make_dimension_witness.py extracts the two source assignments under the actual renderer declarations; build-dimension-witness.cmd compiles Debug/Release; dimension-Debug.exe and dimension-Release.exe emit the retained JSON. Full production-scope probe and 50/23 interrupted-prefix qualification remain separate permanent regressions."
+}

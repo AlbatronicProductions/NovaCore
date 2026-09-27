@@ -105,13 +105,8 @@ void UpdateRegionalPhysical(App& a){
     uint64_t generation=slot?a.productionBillboardIncomingGeneration:a.productionBillboardGeneration;
     uint64_t topology=slot?a.productionBillboardIncomingTopologyHash:a.productionBillboardTopologyHash;
     bool allResident=a.regionalPhysical->AllContributingResident();
-    if(!allResident&&job.generation==generation&&job.topology==topology&&job.frame.metadata[0]&&
-       !(job.phase==2&&a.regionalPhysical->Complete(job.mask)))target=job.frame;
-    if(!allResident&&(job.frame.identity[0]!=target.identity[0]||job.generation!=generation||job.topology!=topology)){
-      job={};job.frame=target;job.generation=generation;job.topology=topology;job.started=std::chrono::steady_clock::now();
-      demand->frames[slot]=target;demand->masks[slot].fill(0);
-    }
-    bool ready=allResident||(job.phase==2&&a.regionalPhysical->Complete(job.mask));
+    bool ready=ResolveDependencyTarget(target,job,*demand,slot,generation,topology,allResident,
+      a.productionBillboardPreparedFrameIdentity,[&](const auto& mask){return a.regionalPhysical->Complete(mask);});
     a.regionalReady[slot]=ready;
     if(ready&&job.phase==2&&!job.logged){job.logged=true;double delay=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-job.started).count();a.regionalDependencyDelayMs=std::max(a.regionalDependencyDelayMs,delay);
       char message[384];std::snprintf(message,sizeof message,"NCSM1 regional ready: incoming=%u; pupil=%u; dependencyDelayMs=%.3f; requests=%llu; resident=%llu; uploadedBytes=%llu; complete=true; gpuVisibility=hostBarrierBeforePrepare",slot,target.identity[0],delay,(unsigned long long)a.regionalPhysical->requests,(unsigned long long)a.regionalPhysical->loaded,(unsigned long long)a.regionalPhysical->uploadBytes);a.Log(NC_LOG_ALWAYS,message);

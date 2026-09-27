@@ -15,6 +15,8 @@ internal sealed class LocalContactMetrics
     internal float MaximumDepth;
     internal int ArticleChildMask;
     internal CompoundContactCoverage? Coverage;
+    internal CraftContactManifolds? Craft;
+    internal CraftTerrainContacts? Terrain;
 }
 
 internal struct LocalContactCallbacks(LocalContactMetrics metrics) : INarrowPhaseCallbacks
@@ -29,6 +31,8 @@ internal struct LocalContactCallbacks(LocalContactMetrics metrics) : INarrowPhas
         // Qualification dry contact: dimensionless mu=.5, critical damping, 30 Hz spring.
         // Recovery 2 m/s bounds penetration correction separately from physical source force.
         material = new PairMaterialProperties(.5f, 2f, new SpringSettings(30, 1));
+        if(metrics.Terrain is {} terrain&&terrain.Owns(pair)){material=CraftSurfaceImpact.Material;return terrain.Parent(workerIndex,pair,ref manifold);}
+        if(metrics.Craft is {} craft)return craft.Parent(workerIndex,pair);
         if (metrics.Coverage is { } coverage && !coverage.Parent(workerIndex, pair, ref manifold)) return false;
         metrics.Contacts = Math.Max(metrics.Contacts, manifold.Count);
         for (var i = 0; i < manifold.Count; i++) metrics.MaximumDepth = Math.Max(metrics.MaximumDepth, manifold.GetDepth(i));
@@ -37,12 +41,13 @@ internal struct LocalContactCallbacks(LocalContactMetrics metrics) : INarrowPhas
     public bool ConfigureContactManifold(int workerIndex, CollidablePair pair, int childA, int childB,
         ref ConvexContactManifold manifold)
     {
+        if(metrics.Terrain is {} terrain&&terrain.Owns(pair))return terrain.Child(workerIndex,pair,childA,childB,ref manifold);
         // Bounded diagnostic only. Independent corner/support tests establish physical support;
         // this mask establishes which of the three distinct compound children supplied manifolds.
         var child = pair.A.Mobility == CollidableMobility.Dynamic ? childA : childB;
         if (manifold.Count > 0 && (uint)child < EngineeringContactArticle.ChildCount)
             metrics.ArticleChildMask |= 1 << child;
-        return metrics.Coverage?.Child(workerIndex, pair, childA, childB, ref manifold) ?? true;
+        return metrics.Craft?.Child(workerIndex,pair,childA,childB,ref manifold) ?? metrics.Coverage?.Child(workerIndex, pair, childA, childB, ref manifold) ?? true;
     }
     public void Dispose() { }
 }
@@ -54,6 +59,8 @@ internal sealed class LocalContactStepInput
     internal AssemblySiteFrame SiteFrame;
     internal Matrix3 SiteInertia;
     internal Double3 SiteOrigin;
+    internal AssemblyMass? CraftMass;
+    internal AssemblyWrench CraftWrench;
 }
 
 internal struct LocalContactIntegrator(Vector3 acceleration, LocalContactStepInput? prepared = null) : IPoseIntegratorCallbacks
@@ -70,8 +77,8 @@ internal struct LocalContactIntegrator(Vector3 acceleration, LocalContactStepInp
     {
         if(prepared?.Site is {} site)
         {
-            // Only the bounded engine-off site profile. All frame/model values were
-            // prepared at the exact source epoch by the transaction owner.
+            // Shared rotating-site transport. Frame, tensor and optional craft
+            // wrench are prepared for this native slice by the existing owner.
             for(var i=0;i<Vector<float>.Count;i++)
             {
                 if(integrationMask[i]==0)continue;
@@ -83,6 +90,12 @@ internal struct LocalContactIntegrator(Vector3 acceleration, LocalContactStepInp
                 // BEPU retains its relative-rate gyro solve. This is the difference
                 // needed for physical absolute angular momentum in rotating axes.
                 var alpha=AssemblyFloridaSite.AngularCorrection(prepared.SiteFrame,q,w,prepared.SiteInertia);
+                if(prepared.CraftMass is {} mass)
+                {
+                    a+=q.Rotate(prepared.CraftWrench.Force/mass.Mass);
+                    var torque=prepared.CraftWrench.MomentAtOrigin-Double3.Cross(mass.Com,prepared.CraftWrench.Force);
+                    alpha+=q.Rotate(mass.Inertia.Inverse().Apply(torque));
+                }
                 velocity.Linear.X=Vector.WithElement(velocity.Linear.X,i,velocity.Linear.X[i]+(float)a.X*dt[i]);
                 velocity.Linear.Y=Vector.WithElement(velocity.Linear.Y,i,velocity.Linear.Y[i]+(float)a.Y*dt[i]);
                 velocity.Linear.Z=Vector.WithElement(velocity.Linear.Z,i,velocity.Linear.Z[i]+(float)a.Z*dt[i]);

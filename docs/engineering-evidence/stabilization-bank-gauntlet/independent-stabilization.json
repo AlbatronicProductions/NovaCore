@@ -1,0 +1,138 @@
+{
+  "judgment": "STABILIZATION_NATIVE_PASS",
+  "playerPass": false,
+  "checks": 1026,
+  "frames": 3040,
+  "profiles": [
+    {
+      "profile": 0,
+      "depth": 1,
+      "parts": 12,
+      "radialHosts": 1,
+      "source": "8cf035b86b11ccee5a2f8d92569e7e58e57b4c78ecb94b5c4e89ab3196ffa2ff"
+    },
+    {
+      "profile": 1,
+      "depth": 2,
+      "parts": 21,
+      "radialHosts": 2,
+      "source": "5a2f9a406f37349d54c7358624a261a0a37ddf7d2d8ab5099ce31eb7a70a3123"
+    },
+    {
+      "profile": 2,
+      "depth": 1,
+      "parts": 12,
+      "radialHosts": 1,
+      "source": "14a56d91e0da9a1bfb705bea1dc580e9a090388d2d95886958f33714f68e4151"
+    },
+    {
+      "profile": 3,
+      "depth": 4,
+      "parts": 31,
+      "radialHosts": 3,
+      "source": "cf0347ad9765d35a32c9f4cdf28d3f7e88feaca3e7abe06d925ca9458a1738a7"
+    },
+    {
+      "profile": 4,
+      "depth": 16,
+      "parts": 43,
+      "radialHosts": 3,
+      "source": "b93af3594f90a4f7cb8db6b530e8737d467c3608cd11e13fec1bc3d91258b859"
+    },
+    {
+      "profile": 5,
+      "depth": 64,
+      "parts": 91,
+      "radialHosts": 3,
+      "source": "26be9e9afc60497fd85d284c37c2ffd3df8b8e0d95e2d50c2901279533ed4cce"
+    }
+  ],
+  "dense": {
+    "parts": 901,
+    "renderEntries": 4101,
+    "renderCapacity": 18585,
+    "heldFrames": 424,
+    "seconds": 2.3464331,
+    "warmWindows": [
+      {
+        "samples": 120,
+        "frameMs": {
+          "median": 5.511499881744385,
+          "p95": 5.983400344848633,
+          "p99": 6.130500316619873,
+          "max": 6.252999782562256
+        },
+        "cpuMs": {
+          "median": 0.087,
+          "p95": 0.1721,
+          "p99": 0.1978,
+          "max": 0.1989
+        },
+        "allocatedBytes": {
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "samples": 120,
+        "frameMs": {
+          "median": 5.552299976348877,
+          "p95": 5.9552998542785645,
+          "p99": 6.234699726104736,
+          "max": 10.44629955291748
+        },
+        "cpuMs": {
+          "median": 0.0958,
+          "p95": 0.1718,
+          "p99": 0.1725,
+          "max": 0.1975
+        },
+        "allocatedBytes": {
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "samples": 120,
+        "frameMs": {
+          "median": 5.546899795532227,
+          "p95": 5.935799598693848,
+          "p99": 6.014699935913086,
+          "max": 6.055200099945068
+        },
+        "cpuMs": {
+          "median": 0.0943,
+          "p95": 0.1718,
+          "p99": 0.1754,
+          "max": 0.2197
+        },
+        "allocatedBytes": {
+          "median": 0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "native": "fa3e188a5f45585d5e5074258de5f86662b2b556e68c9ce46954e352075161fe"
+}

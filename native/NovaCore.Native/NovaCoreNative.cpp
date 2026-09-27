@@ -1,9 +1,18 @@
 #include "NovaCoreNative.h"
 #include "PreparedSubmissionStorage.h"
+#include "PostContactTiming.h"
 #include "ProductionCubeSurface.h"
 #include "LocalTerrainPack.h"
 #include "RegionalPhysicalResidency.h"
+#include "RegionalPupilLifetime.h"
 #include "MappedBufferMemory.h"
+#include "PresentationResult.h"
+#include "CausalRecorder.h"
+#include "OrdinaryRecorder.h"
+#include "RecordingCallTrace.h"
+#include "StartupLifecycle.h"
+#include "FrozenCapture.h"
+#include "FrozenPacking.h"
 #include <bit>
 #include "PlanetaryHeightQuery.h"
 #include "PlanetaryMeshPreparation.h"
@@ -265,7 +274,7 @@ struct ProductionBillboardTopologyResource {
   VkDeviceMemory latticeMemory{},indexMemory{};
   void *latticeMapped{},*indexMapped{};
   uint32_t family{},vertexCount{},indexCount{};
-  uint64_t hash{},bytes{};
+  uint64_t hash{},bytes{},indexBirth{};
 };
 constexpr uint32_t ProductionBillboardTopologyResourceCapacity=18u;
 struct RegionalDemandBuffer {
@@ -283,8 +292,8 @@ struct RegionalDependencyJob {
   std::chrono::steady_clock::time_point started{};
 };
 // Compute-only scheduling data; no change to the production tessellation ABI.
-constexpr uint32_t RegionalPreparationVertexBudget=65536u;
-constexpr uint32_t RegionalDemandVertexBudget=32768u;
+using nc::regionalphysical::RegionalPreparationVertexBudget;
+using nc::regionalphysical::RegionalDemandVertexBudget;
 struct RegionalPreparationControl {
   NcProductionBillboardPupilFrame previous{},current{},incoming{};
   uint32_t ranges[2][4]{}; // first, count, staged, reserved
@@ -295,7 +304,33 @@ struct RegionalPreparationJob {
   uint64_t generation{};uint32_t cursor{};bool active{},fencePending{};
   std::chrono::steady_clock::time_point started{};
 };
+struct App;
+void CausalFault(App&,VkResult);
 struct App {
+  nc::causal::Recorder causal;
+  nc::causal::RecordingCallTrace recordingTrace;
+  nc::startup::Channel startup;
+  uint64_t frozenDisableRequest{};bool frozenDrainReported{};
+  nc::frozen::Writer frozen;
+  uint64_t causalBufferBirth{};
+  std::array<VkBuffer,nc::frozen::TopologyCount> frozenTopologyBuffers{};
+  std::array<VkDeviceMemory,nc::frozen::TopologyCount> frozenTopologyMemory{};
+  VkQueryPool frozenTopologyQueries{};
+  std::array<VkBuffer,nc::frozen::SlotCount> frozenBuffers{};
+  std::array<VkDeviceMemory,nc::frozen::SlotCount> frozenMemory{};
+  std::array<uint64_t,3> frozenDeviceIdentity{};
+  VkQueryPool frozenTimingQueries{};
+  VkDescriptorSetLayout frozenPackDescriptorLayout{};VkDescriptorPool frozenPackPool{};
+  VkPipelineLayout frozenPackLayout{};VkPipeline frozenPackPipeline{};
+  std::array<VkDescriptorSet,nc::frozen::SlotCount> frozenPackSets{};
+  std::array<VkBuffer,nc::frozen::SlotCount> frozenPackMetadataBuffers{};
+  std::array<VkDeviceMemory,nc::frozen::SlotCount> frozenPackMetadataMemory{};
+  std::array<void*,nc::frozen::SlotCount> frozenPackMetadataMapped{};
+  PFN_vkCmdBeginDebugUtilsLabelEXT beginLabel{};
+  PFN_vkCmdEndDebugUtilsLabelEXT endLabel{};
+  PFN_vkGetDeviceFaultInfoEXT getFault{};
+  bool faultCollected{},memoryBudget{};
+  ULONGLONG nextBudgetSample{};
   NcHostCallback cb{};
   void *cbData{};
   NcFrameSubmission *submission{};
@@ -303,6 +338,11 @@ struct App {
   std::string localTerrainPath;
   std::string elevationOraclePath;
   HWND window{};
+  NcEditorViewport* editor{};
+  NcApplicationViewport* application{};
+  uint32_t previousApplicationMode{2u};
+  bool editorReleasingCapture{};
+  int32_t editorPointerX{},editorPointerY{},editorPressX{},editorPressY{};
   VkInstance instance{};
   VkDebugUtilsMessengerEXT debug{};
   VkSurfaceKHR surface{};
@@ -489,6 +529,7 @@ struct App {
   bool timestampFrameSubmitted{};
   static constexpr uint32_t TimestampCount=11;
   std::array<double,TimestampCount> timestampAccumulatedMs{};
+  PostContactTiming postContactTiming;
   std::array<double,TimestampCount> lastGpuTimingMs{};
   uint64_t lastGpuTimingFrame{};
   uint64_t timestampSampleCount{};
@@ -520,6 +561,7 @@ struct App {
   uint32_t engineActions{};
   uint32_t pilotKeys{};
   uint32_t surfaceDiagnostic{};
+  ULONGLONG nextHealthLog{};
   void Log(uint32_t cat, const char *msg) const {
     if (cb) {
       NcHostEvent e{NC_DIAGNOSTIC, cat, msg, {}, {}};
@@ -528,9 +570,11 @@ struct App {
   }
   void Check(VkResult r, const char *what) {
     if (r != VK_SUCCESS) {
+      nc::minimum::ErrorResult(r);
       char failure[192];
       std::snprintf(failure, sizeof failure, "%s: VkResult=%d", what, int(r));
       Log(NC_LOG_ALWAYS, failure);
+      CausalFault(*this,r);
       throw std::runtime_error(failure);
     }
   }
@@ -568,6 +612,8 @@ void SeedProductionTerrainCacheHighWater(App &a) {
   char message[160];std::snprintf(message,sizeof message,"Production cache extent seeded: records=%u; controlHighWater=%u; offset=%zu",a.productionPack->RecordCount(),control->padding[0],offsetof(GpuPlanetaryControl,padding));a.Log(NC_LOG_ALWAYS,message);
 }
 App *gApp{};
+#include "CausalNative.inl"
+#include "OrdinaryNative.inl"
 void ClearRawInput(App &a) {
   a.rawMouseX = 0;
   a.rawMouseY = 0;
@@ -605,10 +651,31 @@ uint32_t PilotKey(WPARAM key) {
     case 'D': return 8u; case 'Q': return 16u; case 'E': return 32u; default: return 0u; }
 }
 LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
+  if(gApp&&gApp->application&&(m==WM_CLOSE||m==WM_DESTROY)){gApp->editor->stop=1;return 0;}
+  if(gApp&&gApp->application&&m==WM_LBUTTONDOWN)SetFocus(h);
+  if(gApp&&gApp->application&&m==WM_RBUTTONDOWN)SetFocus(h);
+  if(gApp&&gApp->editor&&(!gApp->application||gApp->application->mode!=1u)){
+    auto& input=*gApp->editor;
+    const uint32_t down=m==WM_LBUTTONDOWN?1u:m==WM_RBUTTONDOWN?2u:m==WM_MBUTTONDOWN?4u:0u;
+    const uint32_t up=m==WM_LBUTTONUP?1u:m==WM_RBUTTONUP?2u:m==WM_MBUTTONUP?4u:0u;
+    if(m==WM_MOUSEMOVE||down||up){gApp->editorPointerX=static_cast<int16_t>(LOWORD(l));gApp->editorPointerY=static_cast<int16_t>(HIWORD(l));}
+    // A later move/release in this pump must not relocate an unconsumed click.
+    // Preserve the first left press until delivery; motion remains separately
+    // available to the next callback. Focus/capture refusal still clears edges.
+    if(down==1u&&!(input.pressed&1u)){gApp->editorPressX=gApp->editorPointerX;gApp->editorPressY=gApp->editorPointerY;}
+    if(down){SetFocus(h);SetCapture(h);input.buttons|=down;input.pressed|=down;return 0;}
+    if(up){input.buttons&=~up;input.released|=up;if(!input.buttons&&GetCapture()==h){gApp->editorReleasingCapture=true;ReleaseCapture();gApp->editorReleasingCapture=false;}return 0;}
+    if(m==WM_MOUSEWHEEL){input.wheel+=float(GET_WHEEL_DELTA_WPARAM(w))/WHEEL_DELTA;return 0;}
+    if(m==WM_KILLFOCUS||m==WM_CANCELMODE||m==WM_CAPTURECHANGED){input.released|=input.buttons;input.buttons=0;if(m!=WM_CAPTURECHANGED||!gApp->editorReleasingCapture){input.pressed=0;input.wheel=0;} }
+    if(m==WM_SIZE)gApp->resized=true;
+    if(m==WM_CLOSE){input.stop=1;return 0;}
+    if(m==WM_DESTROY){input.stop=1;return 0;}
+    return DefWindowProcW(h,m,w,l);
+  }
   if ((m == WM_KEYUP || m == WM_SYSKEYUP) && gApp) gApp->pilotKeys &= ~PilotKey(w);
   // Press edges survive until one host callback; OS repeat/release never toggles
   // an engine. This is requested input only, consumed by an explicit context.
-  if (m == WM_KEYDOWN && gApp && GetForegroundWindow() == h && GetFocus() == h &&
+  if (m == WM_KEYDOWN && gApp && GetForegroundWindow() == (gApp->application?GetAncestor(h,GA_ROOT):h) && GetFocus() == h &&
       (GetCapture() == nullptr || GetCapture() == h) && (l & (1LL << 30)) == 0) {
     if (w == 'Z') gApp->engineActions |= 1u;
     if (w == 'X') gApp->engineActions |= 2u;
@@ -643,6 +710,7 @@ Debug(VkDebugUtilsMessageSeverityFlagBitsEXT severity, VkDebugUtilsMessageTypeFl
   const std::string message = std::string("Vulkan validation [") +
       ((severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) ? "error" : "warning") +
       "][" + (d->pMessageIdName ? d->pMessageIdName : "unnamed") + "]: " + d->pMessage;
+  static_cast<App *>(u)->causal.Text(Phase::Validation,(severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)?1:0,message.c_str());
   static_cast<App *>(u)->Log(NC_LOG_VALIDATION, message.c_str());
   // Opt-in causal evidence for external interception; never changes severity or result.
   if ((severity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) && std::getenv("NOVACORE_VULKAN_CALLSTACK")) {
@@ -759,7 +827,7 @@ void CreateMesh(App &a) {
   // Opt-in contact witness meshes: centered unit cubes, independent of facility geometry.
   for(int kind=0;kind<3;kind++){
     padVertices.clear();padIndices.clear();
-    box(-.5f,-.5f,-.5f,.5f,.5f,.5f,kind==0?std::array<float,3>{.12f,.55f,.95f}:kind==1?std::array<float,3>{.32f,.34f,.38f}:nc::facility::LaunchPadBoxes[0].color);
+    box(-.5f,-.5f,-.5f,.5f,.5f,.5f,kind==0?std::array<float,3>{.12f,.55f,.95f}:kind==1?std::array<float,3>{.32f,.34f,.38f}:nc::facility::SupportSlabUnit.color);
     auto& mesh=kind==0?a.contactQualificationBody:kind==1?a.contactQualificationSupport:a.floridaSupportSlab;
     Buffer(a,sizeof(Vertex)*padVertices.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,mesh.vb,mesh.vm,padVertices.data());
     Buffer(a,sizeof(uint32_t)*padIndices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT,mesh.ib,mesh.im,padIndices.data());
@@ -908,6 +976,14 @@ void Window(App &a) {
                .hInstance = GetModuleHandleW(nullptr),
                .lpszClassName = L"NovaCoreWindow"};
   RegisterClassW(&wc);
+  if(a.editor){
+    const auto parent=reinterpret_cast<HWND>(static_cast<uintptr_t>(a.editor->parentWindow));
+    RECT r{};GetClientRect(parent,&r);
+    a.window=CreateWindowExW(0,wc.lpszClassName,L"NovaCore craft viewport",WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS,0,0,std::max(1L,r.right),std::max(1L,r.bottom),parent,nullptr,wc.hInstance,nullptr);
+    if(!a.window)throw std::runtime_error("editor child window creation failed");
+    if(a.application){RAWINPUTDEVICE device{1,2,RIDEV_INPUTSINK,a.window};if(!RegisterRawInputDevices(&device,1,sizeof(device)))throw std::runtime_error("application raw input registration failed");}
+    return;
+  }
   auto requestedDimension=[](const char *name,int fallback){char buffer[32]{};const DWORD length=GetEnvironmentVariableA(name,buffer,DWORD(std::size(buffer)));if(!length||length>=std::size(buffer))return fallback;char *end=nullptr;const auto parsed=std::strtol(buffer,&end,10);return end!=buffer&&*end=='\0'&&parsed>=320&&parsed<=8192?int(parsed):fallback;};
   auto environmentEnabled=[](const char *name){char buffer[8]{};const DWORD length=GetEnvironmentVariableA(name,buffer,DWORD(std::size(buffer)));return length==1&&buffer[0]=='1';};
   const int clientWidth=requestedDimension("NOVACORE_WINDOW_CLIENT_WIDTH",Width);
@@ -937,7 +1013,7 @@ void Instance(App &a) {
                        1,
                        "NovaCore",
                        1,
-                       VK_API_VERSION_1_0};
+                       a.causal.Active()?VK_API_VERSION_1_1:VK_API_VERSION_1_0};
   VkInstanceCreateInfo ci{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};
   ci.pApplicationInfo = &ai;
   ci.enabledExtensionCount = 3;
@@ -988,6 +1064,7 @@ bool Suitable(VkPhysicalDevice d, VkSurfaceKHR s) {
          });
 }
 void Device(App &a) {
+  CausalScope causalScope(a,Phase::Device);
   uint32_t n = 0;
   vkEnumeratePhysicalDevices(a.instance, &n, nullptr);
   std::vector<VkPhysicalDevice> d(n);
@@ -1003,8 +1080,9 @@ void Device(App &a) {
   vkGetPhysicalDeviceProperties(a.physical, &p);
   a.timestampPeriodNanoseconds=p.limits.timestampPeriod;
   char text[256];
-  std::snprintf(text, sizeof text, "GPU: %s | Vulkan %u.%u", p.deviceName,
-                VK_VERSION_MAJOR(p.apiVersion), VK_VERSION_MINOR(p.apiVersion));
+  std::snprintf(text, sizeof text, "GPU: %.128s | Vulkan %u.%u | vendor=%04x device=%04x driverRaw=%u maxTessellation=%u", p.deviceName,
+                VK_VERSION_MAJOR(p.apiVersion), VK_VERSION_MINOR(p.apiVersion),
+                p.vendorID, p.deviceID, p.driverVersion, p.limits.maxTessellationGenerationLevel);
   a.Log(NC_LOG_STARTUP, text);
   auto q = FindQueues(a.physical, a.surface);
   float pri = 1;
@@ -1015,15 +1093,20 @@ void Device(App &a) {
                      [id](auto &v) { return v.queueFamilyIndex == id; }))
       qs.push_back({VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO, nullptr, 0, id,
                     1, &pri});
-  const char *ex = VK_KHR_SWAPCHAIN_EXTENSION_NAME;
+  std::vector<const char*> extensions{VK_KHR_SWAPCHAIN_EXTENSION_NAME};
   VkDeviceCreateInfo ci{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
   ci.queueCreateInfoCount = (uint32_t)qs.size();
   ci.pQueueCreateInfos = qs.data();
-  ci.enabledExtensionCount = 1;
-  ci.ppEnabledExtensionNames = &ex;
+  VkPhysicalDeviceFaultFeaturesEXT fault{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT};
+  CausalDeviceOptions(a,extensions,ci,fault);
+  ci.enabledExtensionCount = uint32_t(extensions.size());
+  ci.ppEnabledExtensionNames = extensions.data();
   VkPhysicalDeviceFeatures enabledFeatures{};enabledFeatures.shaderFloat64=VK_TRUE;enabledFeatures.samplerAnisotropy=VK_TRUE;enabledFeatures.multiDrawIndirect=VK_TRUE;enabledFeatures.tessellationShader=VK_TRUE;enabledFeatures.vertexPipelineStoresAndAtomics=VK_TRUE;enabledFeatures.pipelineStatisticsQuery=VK_TRUE;ci.pEnabledFeatures=&enabledFeatures;
   a.Check(vkCreateDevice(a.physical, &ci, nullptr, &a.device),
           "logical device failed");
+  a.beginLabel=(PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(a.device,"vkCmdBeginDebugUtilsLabelEXT");
+  a.endLabel=(PFN_vkCmdEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(a.device,"vkCmdEndDebugUtilsLabelEXT");
+  if(fault.deviceFault)a.getFault=(PFN_vkGetDeviceFaultInfoEXT)vkGetDeviceProcAddr(a.device,"vkGetDeviceFaultInfoEXT");
   vkGetDeviceQueue(a.device, *q.graphics, 0, &a.graphicsQueue);
   vkGetDeviceQueue(a.device, *q.present, 0, &a.presentQueue);
 #ifdef NC_DEBUG_BUILD
@@ -1328,6 +1411,7 @@ void CreateSceneColor(App &a){
   }
 }
 void Swap(App &a) {
+  CausalScope causalScope(a,Phase::Swap);++a.causal.swap;
   VkSurfaceCapabilitiesKHR c;
   a.Check(vkGetPhysicalDeviceSurfaceCapabilitiesKHR(a.physical, a.surface, &c),
           "surface caps failed");
@@ -1685,6 +1769,8 @@ void CreatePatchBuffer(App &a,VkDeviceSize size) {
   a.Check(vkCreateBuffer(a.device,&pci,nullptr,&a.patchBuffer),"patch buffer failed");VkMemoryRequirements pr;vkGetBufferMemoryRequirements(a.device,a.patchBuffer,&pr);VkMemoryAllocateInfo pai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};pai.allocationSize=pr.size;pai.memoryTypeIndex=Memory(a,pr.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&pai,nullptr,&a.patchMemory),"patch memory failed");a.Check(vkBindBufferMemory(a.device,a.patchBuffer,a.patchMemory,0),"patch bind failed");a.Check(vkMapMemory(a.device,a.patchMemory,0,a.patchSize,0,&a.patchMapped),"patch map failed");
 }
 void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped,const char *failure,nc::MappedBufferUse use) {
+  // Diagnostic readback only. Ordinary renderer buffer usage is unchanged.
+  if(a.causal.Active())usage|=VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
   if(use==nc::MappedBufferUse::TerrainGpuWorkingSet||use==nc::MappedBufferUse::TerrainRequestKeys){
     VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};ci.size=size;ci.usage=usage;ci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;
     a.Check(vkCreateBuffer(a.device,&ci,nullptr,&buffer),failure);
@@ -1710,6 +1796,10 @@ void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer
 void DestroyHostBuffer(App &a,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped) {
   if(mapped)vkUnmapMemory(a.device,memory);if(buffer)vkDestroyBuffer(a.device,buffer,nullptr);if(memory)vkFreeMemory(a.device,memory,nullptr);mapped=nullptr;buffer={};memory={};
 }
+#include "FrozenControlNative.inl"
+#include "FrozenTopologyNative.inl"
+#include "FrozenPackingNative.inl"
+#include "FrozenCaptureNative.inl"
 void DestroyGlobalTerrainPreparation(App &a){
   DestroyHostBuffer(a,a.naturalGlobalPreparedBuffer,a.naturalGlobalPreparedMemory,a.naturalGlobalPreparedMapped);
   a.naturalGlobalPreparationPending=false;a.naturalGlobalPrepared=false;
@@ -1763,9 +1853,9 @@ void UpdateProductionBillboardDescriptors(App &a,bool incoming){
   VkDescriptorBufferInfo infos[7]{};VkWriteDescriptorSet writes[7]{};for(uint32_t i=0;i<7;i++){infos[i]={buffers[i],0,sizes[i]};writes[i].sType=VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;writes[i].dstSet=a.descriptor;writes[i].dstBinding=base+i;writes[i].descriptorCount=1;writes[i].descriptorType=VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;writes[i].pBufferInfo=&infos[i];}vkUpdateDescriptorSets(a.device,7,writes,0,nullptr);
 }
 ProductionBillboardTopologyResource& AcquireProductionBillboardTopology(App &a,const NcProductionSphericalBillboardSubmission &candidate,bool &reused){
-  for(auto &resource:a.productionBillboardTopologyResources)if(resource.hash==candidate.topologyHash&&resource.family==candidate.topologyFamily&&resource.vertexCount==candidate.vertexCount&&resource.indexCount==candidate.indexCount){reused=true;a.productionBillboardTopologyReuseHits++;return resource;}
+  for(auto &resource:a.productionBillboardTopologyResources)if(resource.hash==candidate.topologyHash&&resource.family==candidate.topologyFamily&&resource.vertexCount==candidate.vertexCount&&resource.indexCount==candidate.indexCount){reused=true;a.productionBillboardTopologyReuseHits++;AcquireFrozenTopology(a,resource);return resource;}
   if(a.productionBillboardTopologyResources.size()>=ProductionBillboardTopologyResourceCapacity)throw std::runtime_error("production billboard bounded topology residency exhausted");
-  reused=false;a.productionBillboardTopologyResources.emplace_back();auto &resource=a.productionBillboardTopologyResources.back();resource.family=candidate.topologyFamily;resource.vertexCount=candidate.vertexCount;resource.indexCount=candidate.indexCount;resource.hash=candidate.topologyHash;resource.bytes=uint64_t(candidate.vertexCount)*sizeof(NcProductionBillboardLatticeVertex)+uint64_t(candidate.indexCount)*sizeof(uint32_t);CreateHostBuffer(a,VkDeviceSize(candidate.vertexCount)*sizeof(NcProductionBillboardLatticeVertex),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,resource.lattice,resource.latticeMemory,resource.latticeMapped,"resident production billboard lattice buffer failed",nc::MappedBufferUse::TerrainGpuWorkingSet);CreateHostBuffer(a,VkDeviceSize(candidate.indexCount)*sizeof(uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,resource.index,resource.indexMemory,resource.indexMapped,"resident production billboard index buffer failed",nc::MappedBufferUse::TerrainGpuWorkingSet);std::memcpy(resource.latticeMapped,candidate.latticeVertices,VkDeviceSize(candidate.vertexCount)*sizeof(NcProductionBillboardLatticeVertex));std::memcpy(resource.indexMapped,candidate.indices,VkDeviceSize(candidate.indexCount)*sizeof(uint32_t));a.productionBillboardTopologyUploads++;a.productionBillboardTopologyResidentBytes+=resource.bytes;a.productionBillboardTopologyPeakResidentBytes=std::max(a.productionBillboardTopologyPeakResidentBytes,a.productionBillboardTopologyResidentBytes);return resource;
+  reused=false;a.productionBillboardTopologyResources.emplace_back();auto &resource=a.productionBillboardTopologyResources.back();resource.family=candidate.topologyFamily;resource.vertexCount=candidate.vertexCount;resource.indexCount=candidate.indexCount;resource.hash=candidate.topologyHash;resource.bytes=uint64_t(candidate.vertexCount)*sizeof(NcProductionBillboardLatticeVertex)+uint64_t(candidate.indexCount)*sizeof(uint32_t);CreateHostBuffer(a,VkDeviceSize(candidate.vertexCount)*sizeof(NcProductionBillboardLatticeVertex),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,resource.lattice,resource.latticeMemory,resource.latticeMapped,"resident production billboard lattice buffer failed",nc::MappedBufferUse::TerrainGpuWorkingSet);CreateHostBuffer(a,VkDeviceSize(candidate.indexCount)*sizeof(uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,resource.index,resource.indexMemory,resource.indexMapped,"resident production billboard index buffer failed",nc::MappedBufferUse::TerrainGpuWorkingSet);resource.indexBirth=a.causalBufferBirth;std::memcpy(resource.latticeMapped,candidate.latticeVertices,VkDeviceSize(candidate.vertexCount)*sizeof(NcProductionBillboardLatticeVertex));std::memcpy(resource.indexMapped,candidate.indices,VkDeviceSize(candidate.indexCount)*sizeof(uint32_t));a.productionBillboardTopologyUploads++;a.productionBillboardTopologyResidentBytes+=resource.bytes;a.productionBillboardTopologyPeakResidentBytes=std::max(a.productionBillboardTopologyPeakResidentBytes,a.productionBillboardTopologyResidentBytes);AcquireFrozenTopology(a,resource);return resource;
 }
 void DestroyProductionBillboardTopologyResources(App &a){
   for(auto &resource:a.productionBillboardTopologyResources){DestroyHostBuffer(a,resource.lattice,resource.latticeMemory,resource.latticeMapped);DestroyHostBuffer(a,resource.index,resource.indexMemory,resource.indexMapped);}a.productionBillboardTopologyResources.clear();a.productionBillboardTopologyResidentBytes=0;
@@ -1786,7 +1876,7 @@ void CreateProductionBillboard(App &a){
   const double submittedBodyRadius=double(a.submission->planetaryGpu.radiusHigh)+double(a.submission->planetaryGpu.radiusLow);
   const bool gpuPreparation=candidate->physicalPreparationMode==1u;
   if(candidate->size!=sizeof(NcProductionSphericalBillboardSubmission)||candidate->version!=4||!candidate->latticeVertices||!candidate->indices||(!gpuPreparation&&!candidate->physicalVertices)||candidate->physicalPreparationMode>1u||(gpuPreparation&&!nestedScaleMesh)||candidate->vertexCount==0||candidate->indexCount==0||candidate->indexCount%3u||candidate->latticeScale==0||candidate->topologyHash==0||candidate->physicalGeneration!=a.submission->physicalSurfaceGeneration||!knownFamily||conflictsWithResidentIdentity||!std::isfinite(candidate->displacementEnvelopeMetres)||candidate->displacementEnvelopeMetres<0.0f||(!nestedScaleMesh&&(candidate->planetOcclusionSupportRadiusMetres!=0.0f||candidate->displacementEnvelopeMetres<a.submission->planetaryGpu.maximumTerrainHeightMetres))||(nestedScaleMesh&&(!std::isfinite(candidate->planetOcclusionSupportRadiusMetres)||candidate->planetOcclusionSupportRadiusMetres<=0.0f||double(candidate->planetOcclusionSupportRadiusMetres)>=submittedBodyRadius)))throw std::runtime_error("invalid production spherical billboard submission");
-  a.productionBillboardIncomingVertexCount=candidate->vertexCount;a.productionBillboardIncomingTriangleCount=candidate->indexCount/3u;a.productionBillboardIncomingTopologyFamily=candidate->topologyFamily;a.productionBillboardIncomingDisplacementEnvelopeMetres=candidate->displacementEnvelopeMetres;a.productionBillboardIncomingOcclusionSupportRadiusMetres=nestedScaleMesh?candidate->planetOcclusionSupportRadiusMetres:0.0f;a.productionBillboardIncomingTopologyHash=candidate->topologyHash;a.productionBillboardIncomingGeneration=candidate->publicationGeneration;
+  a.productionBillboardIncomingVertexCount=candidate->vertexCount;a.productionBillboardIncomingTriangleCount=candidate->indexCount/3u;a.productionBillboardIncomingTopologyFamily=candidate->topologyFamily;a.productionBillboardIncomingDisplacementEnvelopeMetres=candidate->displacementEnvelopeMetres;a.productionBillboardIncomingOcclusionSupportRadiusMetres=nestedScaleMesh?candidate->planetOcclusionSupportRadiusMetres:0.0f;a.productionBillboardIncomingTopologyHash=candidate->topologyHash;a.productionBillboardIncomingGeneration=candidate->publicationGeneration;MinimumGeneration(a,3);
   bool reuseTopology=false;auto &topology=AcquireProductionBillboardTopology(a,*candidate,reuseTopology);a.productionBillboardIncomingLatticeBuffer=topology.lattice;a.productionBillboardIncomingLatticeMemory=topology.latticeMemory;a.productionBillboardIncomingLatticeMapped=topology.latticeMapped;a.productionBillboardIncomingIndexBuffer=topology.index;a.productionBillboardIncomingIndexMemory=topology.indexMemory;a.productionBillboardIncomingIndexMapped=topology.indexMapped;a.productionBillboardIncomingOwnsTopology=!reuseTopology;
   AcquireProductionBillboardIncomingWork(a,candidate->vertexCount,a.productionBillboardIncomingTriangleCount);
   if(!gpuPreparation)std::memcpy(a.productionBillboardIncomingPhysicalMapped,candidate->physicalVertices,VkDeviceSize(candidate->vertexCount)*sizeof(NcSphericalBillboardPhysicalVertex));auto *counters=static_cast<uint32_t*>(a.productionBillboardIncomingCounterMapped);std::memset(counters,0,sizeof(uint32_t)*ProductionBillboardCounterCount);counters[5]=a.productionBillboardIncomingTriangleCount;counters[6]=a.productionBillboardIncomingVertexCount;counters[7]=static_cast<uint32_t>(a.productionBillboardIncomingGeneration);std::memcpy(counters+9,&candidate->displacementEnvelopeMetres,sizeof(float));std::memcpy(counters+10,&a.productionBillboardIncomingOcclusionSupportRadiusMetres,sizeof(float));a.productionBillboardIncomingGpuPreparation=gpuPreparation;a.productionBillboardIncomingEnabled=true;a.productionBillboardEnabled=true;UpdateProductionBillboardDescriptors(a,true);
@@ -1844,6 +1934,9 @@ void Submission(App &a) {
 }
 void CreateSubmission(App &a) {
   a.submissionSize = nc::SubmissionBytes(a.preparedObjectCapacity);
+  VkPhysicalDeviceProperties submissionProperties{};vkGetPhysicalDeviceProperties(a.physical,&submissionProperties);
+  if(!nc::PreparedCapacityFits(a.preparedObjectCapacity,a.submission->objectCount,submissionProperties.limits.maxStorageBufferRange))
+    throw std::runtime_error("prepared submission exceeds device storage-buffer range");
   VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};
   ci.size = a.submissionSize;
   ci.usage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
@@ -1919,7 +2012,7 @@ void CreateSubmission(App &a) {
 void EnsurePatchCapacity(App &a,uint32_t count) {
   const auto required=sizeof(NcPlanetaryPatch)*std::max<uint32_t>(1,count);
   if(required<=a.patchSize)return;
-  vkDeviceWaitIdle(a.device);
+  a.Check(vkDeviceWaitIdle(a.device), "patch growth idle wait failed");
   DestroyPatchBuffer(a);
   CreatePatchBuffer(a,required);
   VkDescriptorBufferInfo info{a.patchBuffer,0,a.patchSize};
@@ -1939,7 +2032,7 @@ void UploadFacilityVisibility(App& a) {
   if(d&&d->bodyId==body&&a.productionBillboardAuthoritative&&a.productionBillboardTopologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE){
     if(!a.facilityPreparedValid||std::memcmp(d,&a.facilityDefinition,sizeof(*d))!=0){
       a.facilityPrepared=nc::facility::Prepare(*d);a.facilityDefinition=*d;a.facilityPreparedValid=true;++a.facilityGeometryBuilds;
-      a.Log(NC_LOG_ALWAYS,"Authored facility light occlusion: casters=5; geometryVersion=1; maximumRayMetres=2048; physicalAuthority=unchanged");
+      char message[192];std::snprintf(message,sizeof(message),"Authored facility light occlusion: casters=%u; geometryVersion=%u; maximumRayMetres=%.0f; physicalAuthority=unchanged",a.facilityPrepared.control[0],a.facilityPrepared.control[1],d->maximumRayDistance);a.Log(NC_LOG_ALWAYS,message);
     }
     value=a.facilityPrepared;
     const auto& g=a.submission->planetaryGpu;
@@ -1950,9 +2043,10 @@ void UploadFacilityVisibility(App& a) {
   std::memcpy(a.facilityVisibilityMapped,&value,sizeof(value));
 }
 void Upload(App &a) {
+  CausalScope causalScope(a,Phase::Upload);
   UploadFacilityVisibility(a);
   nc::CopyPreparedSubmission(a.mapped,a.submissionSize,a.preparedObjectCapacity,*a.submission);
-  auto gpuInput=a.submission->planetaryGpu;gpuInput.terrainFrame=static_cast<uint32_t>(++a.frame);if((a.submission->productionBillboardFlags&32u)!=0u)gpuInput.targetTexelPixels=-1001.0f;else if((a.submission->productionBillboardFlags&64u)!=0u)gpuInput.targetTexelPixels=-1002.0f;else if((a.submission->productionBillboardFlags&256u)!=0u)gpuInput.targetTexelPixels=-1003.0f;else if((a.submission->productionBillboardFlags&512u)!=0u)gpuInput.targetTexelPixels=-1004.0f;else if((a.submission->productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f;else if((a.submission->productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f;else if((a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=-std::abs(gpuInput.targetTexelPixels);const bool productionSurface=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;if(productionSurface){if(!a.productionPack)throw std::runtime_error("production cube pack is required for mode 2");gpuInput.maximumLevel=std::min(gpuInput.maximumLevel,a.productionPack->MaximumLevel());}if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)gpuInput.terrainVersion=0;
+  auto gpuInput=a.submission->planetaryGpu;gpuInput.terrainFrame=static_cast<uint32_t>(++a.frame);MinimumSync(a);if((a.submission->productionBillboardFlags&32u)!=0u)gpuInput.targetTexelPixels=-1001.0f;else if((a.submission->productionBillboardFlags&64u)!=0u)gpuInput.targetTexelPixels=-1002.0f;else if((a.submission->productionBillboardFlags&256u)!=0u)gpuInput.targetTexelPixels=-1003.0f;else if((a.submission->productionBillboardFlags&512u)!=0u)gpuInput.targetTexelPixels=-1004.0f;else if((a.submission->productionBillboardFlags&16384u)!=0u)gpuInput.targetTexelPixels=-1005.0f;else if((a.submission->productionBillboardFlags&32768u)!=0u)gpuInput.targetTexelPixels=-1006.0f;else if((a.submission->productionBillboardFlags&2u)!=0u)gpuInput.targetTexelPixels=-std::abs(gpuInput.targetTexelPixels);const bool productionSurface=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;if(productionSurface){if(!a.productionPack)throw std::runtime_error("production cube pack is required for mode 2");gpuInput.maximumLevel=std::min(gpuInput.maximumLevel,a.productionPack->MaximumLevel());}if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)gpuInput.terrainVersion=0;
   const auto &contextPresentation=a.submission->planetaryPresentation;
   const uint64_t contextBody=uint64_t(contextPresentation.bodyIdLow)|(uint64_t(contextPresentation.bodyIdHigh)<<32u);
   uint32_t radiusHighBits{},radiusLowBits{};
@@ -2061,6 +2155,7 @@ void Commands(App &a) {
     "anchored pipeline statistics query pool failed");
 }
 void RecordProductionBillboardWork(App &a,VkCommandBuffer c,bool incoming){
+  CausalGpuLabel causalLabel(a,c,incoming?"Earth incoming prepare/cull/compact":"Earth current prepare/cull/compact");
   if(incoming&&RegionalPhysicalEnabled(a)&&!a.regionalReady[1])return;
   const bool enabled=incoming?a.productionBillboardIncomingEnabled:a.productionBillboardAuthoritative;if(!enabled)return;if(incoming&&a.productionBillboardIncomingWorkRecorded)return;const uint32_t triangles=incoming?a.productionBillboardIncomingTriangleCount:a.productionBillboardTriangleCount;
   if(!incoming&&RegionalPhysicalEnabled(a))RecordRegionalPreparation(a,c,false);
@@ -2074,14 +2169,17 @@ static_assert(ProductionBillboardPresentationEnabled(true,1u));
 static_assert(!ProductionBillboardPresentationEnabled(true,0u));
 static_assert(!ProductionBillboardPresentationEnabled(false,1u));
 void Record(App &a, uint32_t image) {
+  CausalScope causalScope(a,Phase::Record);a.causal.draws=a.causal.dispatches=a.causal.groups=0;
   auto c = a.commands[image];
   vkResetCommandBuffer(c, 0);
   VkCommandBufferBeginInfo bi{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
   a.Check(vkBeginCommandBuffer(c, &bi), "command begin failed");
+  if(a.causal.Active()&&a.beginLabel){VkDebugUtilsLabelEXT label{VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT};label.pLabelName="Frame transfers / terrain preparation";a.beginLabel(c,&label);}
   RecordProductionUploads(a,c);
 
   vkCmdResetQueryPool(c,a.regionalTimingQueries,0,6);
   vkCmdResetQueryPool(c,a.timestampQueries,0,App::TimestampCount);vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,a.timestampQueries,0);
+  RecordFrozenTopologies(a,c);
   vkCmdResetQueryPool(c,a.anchoredPipelineStatistics,0,1);
   const auto &presentation=a.submission->planetaryPresentation;const bool candidateRequested=(a.submission->productionBillboardFlags&1u)!=0u;const bool candidate=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);const bool production=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;const bool handoff=presentation.enabled!=0;const bool detailedPresentation=!handoff||presentation.regime!=NC_PLANETARY_DISTANT_ONLY;const bool distantPresentation=!candidate&&handoff&&!production&&presentation.regime!=NC_PLANETARY_DETAILED_ONLY&&presentation.distantAlpha>0;const bool diagnosticGlobal=(a.surfaceDiagnostic&SurfaceDiagnosticDisableGlobal)==0;const bool regional=production||detailedPresentation;const bool gpuPlanetary=!candidate&&regional&&a.submission->planetaryMode!=NC_PLANETARY_CPU_REFERENCE;
   const bool productionBillboardCompute=candidateRequested&&(a.productionBillboardAuthoritative||a.productionBillboardIncomingEnabled);
@@ -2102,6 +2200,7 @@ void Record(App &a, uint32_t image) {
   rp.clearValueCount = a.exhaustMeshHandle?5u:3u;
   rp.pClearValues = clears;
   vkCmdBeginRenderPass(c, &rp, VK_SUBPASS_CONTENTS_INLINE);
+  if(a.causal.Active()&&a.endLabel){a.endLabel(c);VkDebugUtilsLabelEXT label{VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT};label.pLabelName="Scene / Earth surface / overlays";a.beginLabel(c,&label);}
   vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.backgroundPipeline);
   vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
   vkCmdDraw(c,3,1,0,0);
@@ -2172,12 +2271,21 @@ void Record(App &a, uint32_t image) {
   vkCmdNextSubpass(c,VK_SUBPASS_CONTENTS_INLINE);
   vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.toneMapPipeline);
   vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
-  vkCmdDraw(c,3,1,0,0);
-  vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,a.timestampQueries,8);
-  vkCmdEndRenderPass(c);
-  a.Check(vkEndCommandBuffer(c), "command end failed");
+  // First eligible capture only; recording is still before the frame submission.
+  BeginRecordingCallTrace(a,c);
+  using RO=nc::causal::RecordingOp;
+  a.recordingTrace.Call(RO::FinalDraw,[&]{vkCmdDraw(c,3,1,0,0);});
+  if(!a.frozen.Active())vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,a.timestampQueries,8);
+  a.recordingTrace.Call(RO::EndRenderPass,[&]{vkCmdEndRenderPass(c);});
+  if(a.causal.Active()&&a.endLabel)a.recordingTrace.Call(RO::SceneLabelEnd,[&]{a.endLabel(c);});
+  RecordFrozenCapture(a,c);
+  // Total GPU-frame timing includes diagnostic transfers, never hides them.
+  if(a.frozen.Active())a.recordingTrace.Call(RO::FrameTimestamp,[&]{vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,a.timestampQueries,8);},uint64_t(a.timestampQueries),8);
+  a.Check(a.recordingTrace.Call(RO::EndCommandBuffer,[&]{return vkEndCommandBuffer(c);}), "command end failed");
+  a.recordingTrace.Finish();
 }
 void Recreate(App &a) {
+  CausalScope causalScope(a,Phase::Recreate);
   int w = 0, h = 0;
   while (!w || !h) {
     RECT r;
@@ -2190,7 +2298,8 @@ void Recreate(App &a) {
       DispatchMessage(&m);
     }
   }
-  vkDeviceWaitIdle(a.device);
+  a.Check(vkDeviceWaitIdle(a.device), "swapchain idle wait failed");
+  CompleteFrozenCapture(a);
   for (auto s : a.renderFinished)
     vkDestroySemaphore(a.device, s, nullptr);
   a.renderFinished.clear();
@@ -2233,7 +2342,7 @@ void InspectGpuPlanetary(App &a) {
 }
 void InspectGpuTimings(App &a){
   if(!a.timestampFrameSubmitted||!a.timestampQueries)return;std::array<uint64_t,App::TimestampCount> ticks{};const auto result=vkGetQueryPoolResults(a.device,a.timestampQueries,0,App::TimestampCount,sizeof(ticks),ticks.data(),sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);if(result!=VK_SUCCESS)return;
-  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
+  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.postContactTiming.Completed();a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;a.causal.Emit(Phase::Snapshot,Kind::Info,0,{7,a.lastGpuTimingFrame,nc::causal::Recorder::Bits(values[0]),nc::causal::Recorder::Bits(values[1]),nc::causal::Recorder::Bits(values[2]),nc::causal::Recorder::Bits(values[3]),nc::causal::Recorder::Bits(values[4]),nc::causal::Recorder::Bits(values[5]),nc::causal::Recorder::Bits(values[6]),nc::causal::Recorder::Bits(values[7]),nc::causal::Recorder::Bits(values[8]),nc::causal::Recorder::Bits(values[9]),nc::causal::Recorder::Bits(values[10])});for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
   if((a.submission->productionBillboardFlags&2u)!=0u)
     for(uint32_t i=0;i<App::TimestampCount;i++)a.c3GpuMs[i].push_back(values[i]);
   if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);}
@@ -2248,6 +2357,7 @@ void InspectAnchoredPipelineStatistics(App &a){
   const auto result=vkGetQueryPoolResults(a.device,a.anchoredPipelineStatistics,0,1,
     sizeof values,values.data(),sizeof values,VK_QUERY_RESULT_64_BIT);
   if(result!=VK_SUCCESS)return;
+  a.causal.Emit(Phase::Snapshot,Kind::Info,0,{6,a.anchoredPipelineStatisticsTerrainFrame,values[0],values[1],values[2],values[3]});
   a.anchoredClippingPrimitives+=values[0];
   a.anchoredFragmentShaderInvocations+=values[1];
   a.anchoredTessellationControlPatches+=values[2];
@@ -2357,21 +2467,22 @@ void InspectAnchoredPipelineStatistics(App &a){
   }
 }
 void Draw(App &a) {
+  MinimumSync(a);minimum::Scope minimumScope(minimum::Draw);
+  a.causal.frame=a.frame;CausalSnapshot(a,false);CausalBudget(a);
   uint32_t image{};
+  a.causal.Emit(Phase::Acquire,Kind::Begin);
   VkResult ar = vkAcquireNextImageKHR(a.device, a.swapchain, UINT64_MAX,
                                       a.imageAvailable, {}, &image);
+  a.causal.Emit(Phase::Acquire,Kind::End,ar,{image,uint64_t(a.swapchain)});
   if (ar == VK_ERROR_OUT_OF_DATE_KHR) {
     a.Log(NC_LOG_ALWAYS, "Acquire out of date; recreating swapchain");
     Recreate(a);
     return;
   }
-  if (ar != VK_SUCCESS && ar != VK_SUBOPTIMAL_KHR) {
-    char failure[96];
-    std::snprintf(failure, sizeof failure, "acquire image failed: VkResult=%d", int(ar));
-    throw std::runtime_error(failure);
-  }
+  if (ar != VK_SUCCESS && ar != VK_SUBOPTIMAL_KHR)
+    a.Check(ar, "acquire image failed");
   bool recreate = ar == VK_SUBOPTIMAL_KHR || a.resized;
-  vkResetFences(a.device, 1, &a.fence);
+  a.Check(vkResetFences(a.device, 1, &a.fence), "frame fence reset failed");
   const auto recordStart=std::chrono::steady_clock::now();Record(a, image);const auto recordEnd=std::chrono::steady_clock::now();
   a.recordSerial++;
   const bool detailedPresentation = !a.submission->planetaryPresentation.enabled ||
@@ -2398,16 +2509,29 @@ void Draw(App &a) {
   pi.pImageIndices = &image;
   const auto presentStart=std::chrono::steady_clock::now();VkResult pr = vkQueuePresentKHR(a.presentQueue, &pi);a.presentSerial++;const auto presentEnd=std::chrono::steady_clock::now();
   if(a.earthSubmissionTraceRemaining&&a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE){const bool candidate=a.productionBillboardAuthoritative;char trace[448];std::snprintf(trace,sizeof trace,"Earth Vulkan submission: terrainFrame=%llu; swapchainImage=%u; recordSerial=%llu; submitSerial=%llu; presentSerial=%llu; serializedFence=true; globalDraw=%u; dynamicHierarchyDraw=%u; candidateIndirectDraw=%u; visibleEarthOwners=1",(unsigned long long)a.frame,image,(unsigned long long)a.recordSerial,(unsigned long long)a.submitSerial,(unsigned long long)a.presentSerial,candidate?0u:1u,0u,candidate?1u:0u);a.Log(NC_LOG_ALWAYS,trace);a.earthSubmissionTraceRemaining--;}
-  const double recordMs=std::chrono::duration<double,std::milli>(recordEnd-recordStart).count(),submitMs=std::chrono::duration<double,std::milli>(submitEnd-submitStart).count(),presentMs=std::chrono::duration<double,std::milli>(presentEnd-presentStart).count();a.cpuRecordMs+=recordMs;a.cpuSubmitMs+=submitMs;a.cpuPresentMs+=presentMs;a.cpuTimingSamples++;if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[5].push_back(recordMs);a.c3CpuMs[6].push_back(submitMs);a.c3CpuMs[7].push_back(presentMs);}a.timestampFrameSubmitted=true;
-  if (pr == VK_ERROR_OUT_OF_DATE_KHR || pr == VK_SUBOPTIMAL_KHR || recreate) {
+  const double recordMs=std::chrono::duration<double,std::milli>(recordEnd-recordStart).count(),submitMs=std::chrono::duration<double,std::milli>(submitEnd-submitStart).count(),presentMs=std::chrono::duration<double,std::milli>(presentEnd-presentStart).count();a.cpuRecordMs+=recordMs;a.cpuSubmitMs+=submitMs;a.cpuPresentMs+=presentMs;a.cpuTimingSamples++;if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[5].push_back(recordMs);a.c3CpuMs[6].push_back(submitMs);a.c3CpuMs[7].push_back(presentMs);}a.timestampFrameSubmitted=true;a.postContactTiming.Submitted(a.frame);
+  a.postContactTiming.cpu[5]=recordMs;a.postContactTiming.cpu[6]=submitMs;a.postContactTiming.cpu[7]=presentMs;
+  const auto outcome = nc::ClassifyPresentation(pr, recreate);
+  if (outcome == nc::PresentationResult::Failed)
+    a.Check(pr, "present failed");
+  if (outcome == nc::PresentationResult::Recreate) {
     Recreate(a);
     return;
   }
   a.Check(pr, "present failed");
 }
 void Destroy(App &a) {
-  if (a.device)
-    vkDeviceWaitIdle(a.device);
+  CausalScope causalScope(a,Phase::Cleanup);
+  if (a.device) {
+    const auto result = vkDeviceWaitIdle(a.device);
+    if (result != VK_SUCCESS) {
+      char failure[96];
+      std::snprintf(failure, sizeof failure, "cleanup idle wait: VkResult=%d", int(result));
+      a.Log(NC_LOG_ALWAYS, failure);
+    }
+    if(result==VK_SUCCESS)CompleteFrozenCapture(a);
+  }
+  DestroyFrozenCapture(a);
   if (a.device) {
     if (a.fence)
       vkDestroyFence(a.device, a.fence, nullptr);
@@ -2441,6 +2565,7 @@ void Destroy(App &a) {
     vkDestroyInstance(a.instance, nullptr);
   if (a.window)
     DestroyWindow(a.window);
+  a.startup.Mark(nc::startup::Cleanup);
   gApp = nullptr;
 }
 void InspectProductionBillboardPublication(App &a){
@@ -2480,16 +2605,46 @@ void InspectProductionBillboardPublication(App &a){
   const auto*publishedFrame=static_cast<const NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);a.productionBillboardPreparedFrameIdentity=publishedFrame?publishedFrame->incoming.identity[0]:0u;a.productionBillboardCullFrameIdentity=a.productionBillboardPreparedFrameIdentity;if(RegionalPhysicalEnabled(a)&&publishedFrame)a.regionalPublishedPupil=publishedFrame->incoming;
   a.productionBillboardWorkingBytes=ProductionBillboardWorkBytes(a.productionBillboardVertexCapacity,a.productionBillboardTriangleCapacity)+ProductionBillboardWorkBytes(a.productionBillboardSpareVertexCapacity,a.productionBillboardSpareTriangleCapacity);a.productionBillboardPeakWorkingBytes=std::max(a.productionBillboardPeakWorkingBytes,a.productionBillboardWorkingBytes);char residency[512];std::snprintf(residency,sizeof residency,"Production billboard resource residency: generation=%llu; level=%u; topologyFamily=%u; topologyUpload=%u; topologyReused=%u; topologyUploads=%llu; topologyReuseHits=%llu; residentTopologyLevels=%zu; residentTopologyBytes=%llu; peakTopologyBytes=%llu; workAllocations=%llu; workReuses=%llu; workingBytes=%llu; peakWorkingBytes=%llu; currentIncomingSlots=1+0; spareSlots=%u",(unsigned long long)a.productionBillboardGeneration,a.submission->productionBillboard?a.submission->productionBillboard->level:0u,a.productionBillboardTopologyFamily,topologyReused?0u:1u,topologyReused?1u:0u,(unsigned long long)a.productionBillboardTopologyUploads,(unsigned long long)a.productionBillboardTopologyReuseHits,a.productionBillboardTopologyResources.size(),(unsigned long long)a.productionBillboardTopologyResidentBytes,(unsigned long long)a.productionBillboardTopologyPeakResidentBytes,(unsigned long long)a.productionBillboardWorkAllocations,(unsigned long long)a.productionBillboardWorkReuses,(unsigned long long)a.productionBillboardWorkingBytes,(unsigned long long)a.productionBillboardPeakWorkingBytes,a.productionBillboardSparePhysicalBuffer?1u:0u);a.Log(NC_LOG_ALWAYS,residency);
   a.productionBillboardIncomingLatticeBuffer={};a.productionBillboardIncomingLatticeMemory={};a.productionBillboardIncomingLatticeMapped=nullptr;a.productionBillboardIncomingIndexBuffer={};a.productionBillboardIncomingIndexMemory={};a.productionBillboardIncomingIndexMapped=nullptr;a.productionBillboardIncomingPhysicalBuffer={};a.productionBillboardIncomingPhysicalMemory={};a.productionBillboardIncomingPhysicalMapped=nullptr;a.productionBillboardIncomingVisibilityBuffer={};a.productionBillboardIncomingVisibilityMemory={};a.productionBillboardIncomingVisibilityMapped=nullptr;a.productionBillboardIncomingCompactedBuffer={};a.productionBillboardIncomingCompactedMemory={};a.productionBillboardIncomingCompactedMapped=nullptr;a.productionBillboardIncomingIndirectBuffer={};a.productionBillboardIncomingIndirectMemory={};a.productionBillboardIncomingIndirectMapped=nullptr;a.productionBillboardIncomingCounterBuffer={};a.productionBillboardIncomingCounterMemory={};a.productionBillboardIncomingCounterMapped=nullptr;a.productionBillboardIncomingEnabled=false;a.productionBillboardIncomingWorkRecorded=false;a.productionBillboardIncomingFencePending=false;a.productionBillboardIncomingOwnsTopology=false;a.productionBillboardIncomingGpuPreparation=false;a.productionBillboardIncomingVertexCount=0;a.productionBillboardIncomingTriangleCount=0;a.productionBillboardIncomingVertexCapacity=0;a.productionBillboardIncomingTriangleCapacity=0;a.productionBillboardIncomingTopologyFamily=NC_PLANETARY_PRODUCTION_TOPOLOGY_RADIAL_NCTOP2;a.productionBillboardIncomingDisplacementEnvelopeMetres=0;a.productionBillboardIncomingOcclusionSupportRadiusMetres=0;a.productionBillboardIncomingTopologyHash=0;a.productionBillboardIncomingGeneration=0;
-  a.productionBillboardFencePending=false;a.productionBillboardAuthoritative=true;a.productionBillboardWorkRecorded=false;a.productionBillboardPublications++;a.productionBillboardDeferredRetirements+=a.productionBillboardPublications>1?1u:0u;a.submission->productionBillboardPadding=static_cast<uint32_t>(a.productionBillboardGeneration);UpdateProductionBillboardDescriptors(a,false);char message[1024];std::snprintf(message,sizeof message,"Production spherical billboard publication: generation=%llu; level=%u; topologyFamily=%u; hash=0x%016llX; topologyResident=true; topologyReused=%u; topologyUploads=%llu; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=%u; postHorizonTriangles=%u; horizonRejected=%u; postScreenConeTriangles=%u; screenConeRejected=%u; compactedIndices=%u; visibleTriangles=%u; zeroVisible=%u; noOpIndirect=%u; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=%llu; deferredRetirements=%llu",(unsigned long long)a.productionBillboardGeneration,a.submission->productionBillboard?a.submission->productionBillboard->level:0u,a.productionBillboardTopologyFamily,(unsigned long long)a.productionBillboardTopologyHash,topologyReused?1u:0u,(unsigned long long)a.productionBillboardTopologyUploads,a.productionBillboardTriangleCount,a.productionBillboardTriangleCount-counters[1]-counters[3],counters[1],visible,counters[8],compacted,visible,visible==0u?1u:0u,compacted==0u?1u:0u,(unsigned long long)a.productionBillboardPublications,(unsigned long long)a.productionBillboardDeferredRetirements);a.Log(NC_LOG_ALWAYS,message);
+  a.productionBillboardFencePending=false;a.productionBillboardAuthoritative=true;a.productionBillboardWorkRecorded=false;a.productionBillboardPublications++;MinimumPublication(a,1);a.productionBillboardDeferredRetirements+=a.productionBillboardPublications>1?1u:0u;a.submission->productionBillboardPadding=static_cast<uint32_t>(a.productionBillboardGeneration);UpdateProductionBillboardDescriptors(a,false);char message[1024];std::snprintf(message,sizeof message,"Production spherical billboard publication: generation=%llu; level=%u; topologyFamily=%u; hash=0x%016llX; topologyResident=true; topologyReused=%u; topologyUploads=%llu; physicalReady=true; normalsReady=true; cullReady=true; compactReady=true; tesDrawReady=true; indirectValid=true; fenceComplete=true; inputTriangles=%u; postHorizonTriangles=%u; horizonRejected=%u; postScreenConeTriangles=%u; screenConeRejected=%u; compactedIndices=%u; visibleTriangles=%u; zeroVisible=%u; noOpIndirect=%u; indirectDraws=1; invalidDraws=0; zeroOwner=0; overlapOwner=0; staleGenerationDraws=0; atomicFrameBoundary=true; publications=%llu; deferredRetirements=%llu",(unsigned long long)a.productionBillboardGeneration,a.submission->productionBillboard?a.submission->productionBillboard->level:0u,a.productionBillboardTopologyFamily,(unsigned long long)a.productionBillboardTopologyHash,topologyReused?1u:0u,(unsigned long long)a.productionBillboardTopologyUploads,a.productionBillboardTriangleCount,a.productionBillboardTriangleCount-counters[1]-counters[3],counters[1],visible,counters[8],compacted,visible,visible==0u?1u:0u,compacted==0u?1u:0u,(unsigned long long)a.productionBillboardPublications,(unsigned long long)a.productionBillboardDeferredRetirements);a.Log(NC_LOG_ALWAYS,message);
 }
 void Update(App &a, float dt) {
+  MinimumSync(a);minimum::Scope minimumScope(minimum::Update);
+  if(a.application){
+    if(a.application->mode>2u||a.application->reserved)throw std::runtime_error("invalid application input context");
+    if(a.application->mode!=a.previousApplicationMode){ClearRawInput(a);a.editor->buttons=a.editor->pressed=a.editor->released=0;a.editor->wheel=0;a.previousApplicationMode=a.application->mode;}
+  }
   const auto updateStart=std::chrono::steady_clock::now();
+  // The owning message loop checks the observer stop before beginning a frame.
+  a.causal.Emit(Phase::Fence,Kind::Begin,0,{uint64_t(a.fence)});
   a.Check(vkWaitForFences(a.device, 1, &a.fence, VK_TRUE, UINT64_MAX), "frame fence wait failed");
+  a.causal.completed=a.causal.submitted.load();
+  a.startup.Completed(a.causal.completed.load());
+  a.causal.Emit(Phase::Fence,Kind::End,0,{uint64_t(a.fence)});
+  a.causal.Emit(Phase::Completed,Kind::Info);
+  CompleteFrozenCapture(a); // Existing fence, before either publication can swap resources.
+  CausalSnapshot(a,true); // Capture completed ownership before a replacement is published.
   const auto fenceEnd=std::chrono::steady_clock::now();
+  const auto healthTime = GetTickCount64();
+  if (healthTime >= a.nextHealthLog) {
+    a.nextHealthLog = healthTime + 5000;
+    const auto &s = *a.submission;
+    char health[512];
+    std::snprintf(health, sizeof health,
+      "Renderer health: completedFrame=%llu; extent=%ux%u; applicationMode=%u; surfaceMode=%u; patches=%u; billboardOwner=%u; camera=(%.9g,%.9g,%.9g); fenceMs=%.3f",
+      (unsigned long long)a.frame, a.extent.width, a.extent.height,
+      a.application ? a.application->mode : UINT32_MAX, uint32_t(s.planetarySurfaceMode),
+      s.planetaryPatchCount, uint32_t(a.productionBillboardAuthoritative),
+      double(s.camera.position.high[0])+s.camera.position.low[0],
+      double(s.camera.position.high[1])+s.camera.position.low[1],
+      double(s.camera.position.high[2])+s.camera.position.low[2],
+      std::chrono::duration<double,std::milli>(fenceEnd-updateStart).count());
+    a.Log(NC_LOG_STARTUP, health);
+  }
   InspectRegionalPhysical(a);
   InspectProductionBillboardPublication(a);
   InspectGpuTimings(a);
   InspectAnchoredPipelineStatistics(a);
+  CausalSnapshot(a,true);
   RegionalPhysicalProbe::Capture(a);
   InspectGpuPlanetary(a);
   const auto inspectionEnd=std::chrono::steady_clock::now();
@@ -2522,8 +2677,9 @@ void Update(App &a, float dt) {
   for (int index = 0; index < 10; ++index) { const int key = index == 9 ? '0' : '1' + index; if (rising(key, a.presentationFocusWasDown[index])) { presentationFocus = static_cast<uint32_t>(index + 1); break; } }
   const bool focusVessel = rising('F', a.focusVesselWasDown);
   // HOME is unbound: surface free navigation needs an explicit frame owner.
-  const uint32_t cameraActions = GetForegroundWindow() == a.window && focusVessel ? 1u : 0u;
-  const uint32_t controlInputActive = GetForegroundWindow() == a.window && GetFocus() == a.window && (GetCapture() == nullptr || GetCapture() == a.window) ? 1u : 0u;
+  const bool sceneFocused=GetForegroundWindow()==(a.application?GetAncestor(a.window,GA_ROOT):a.window)&&GetFocus()==a.window&&(!a.application||a.application->mode==1u);
+  const uint32_t cameraActions = (a.application?sceneFocused:GetForegroundWindow()==a.window) && focusVessel ? 1u : 0u;
+  const uint32_t controlInputActive = sceneFocused && (GetCapture() == nullptr || GetCapture() == a.window) ? 1u : 0u;
   // Per-frame player deactivation must not reset camera rising-edge history.
   if (!controlInputActive) { a.engineActions = 0; a.pilotKeys = 0; }
   const uint32_t engineActions = controlInputActive ? a.engineActions : 0u;
@@ -2549,7 +2705,19 @@ void Update(App &a, float dt) {
                   a.extent.width,
                   a.extent.height, cameraActions, engineActions, controlInputActive, controlInputActive ? a.pilotKeys : 0u};
   NcHostEvent e{NC_UPDATE_FRAME, NC_LOG_NONE, nullptr, in, a.submission};
+  if(a.editor){
+    // Ordinary text fields and editor actions must never enter flight control.
+    if(!sceneFocused){e.input={};e.input.deltaSeconds=dt;e.input.viewportWidthPixels=a.extent.width;e.input.viewportHeightPixels=a.extent.height;}
+    a.editor->width=a.extent.width;a.editor->height=a.extent.height;
+    a.editor->pointerX=(a.editor->pressed&1u)?a.editorPressX:a.editorPointerX;
+    a.editor->pointerY=(a.editor->pressed&1u)?a.editorPressY:a.editorPointerY;
+    a.editor->focused=GetForegroundWindow()==GetAncestor(a.window,GA_ROOT)&&GetFocus()==a.window&&(GetCapture()==nullptr||GetCapture()==a.window)?1u:0u;
+    if(a.editor->pressed){char line[256];std::snprintf(line,sizeof line,"EDITOR_NATIVE_INPUT window=%p root=%p foreground=%p focus=%p capture=%p",a.window,GetAncestor(a.window,GA_ROOT),GetForegroundWindow(),GetFocus(),GetCapture());a.Log(NC_LOG_INPUT,line);}
+  }
+  a.causal.Emit(Phase::Host,Kind::Begin);
   a.cb(&e, a.cbData);
+  a.causal.Emit(Phase::Host,Kind::End);
+  if(a.editor){a.editor->pressed=0;a.editor->released=0;a.editor->wheel=0;}
   const auto callbackEnd=std::chrono::steady_clock::now();
   CreateProductionBillboard(a);
   if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)EnsurePatchCapacity(a,a.submission->planetaryPatchCount);
@@ -2566,6 +2734,7 @@ void Update(App &a, float dt) {
   a.cpuInspectionMs+=std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count();
   a.cpuHostCallbackMs+=std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count();
   a.cpuUploadMs+=std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count();
+  a.postContactTiming.cpu[0]=updateMs;a.postContactTiming.cpu[1]=fenceWaitMs;a.postContactTiming.cpu[2]=std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count();a.postContactTiming.cpu[3]=std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count();a.postContactTiming.cpu[4]=std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count();
   if((a.submission->productionBillboardFlags&2u)!=0u){a.c3CpuMs[0].push_back(updateMs);a.c3CpuMs[1].push_back(fenceWaitMs);a.c3CpuMs[2].push_back(std::chrono::duration<double,std::milli>(inspectionEnd-fenceEnd).count());a.c3CpuMs[3].push_back(std::chrono::duration<double,std::milli>(callbackEnd-inspectionEnd).count());a.c3CpuMs[4].push_back(std::chrono::duration<double,std::milli>(updateEnd-callbackEnd).count());a.c3FenceMs.push_back(fenceWaitMs);}
 
 }
@@ -2623,12 +2792,19 @@ extern "C" NC_API NcResult __cdecl nc_get_abi_layout(NcAbiLayout *o) {
         (uint32_t)offsetof(NcInputState, engineActions), (uint32_t)offsetof(NcInputState, controlInputActive), (uint32_t)offsetof(NcInputState, pilotKeys)};
   return NC_SUCCESS;
 }
-static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets,const NcVisualMesh* meshes=nullptr,uint32_t meshCount=0,uint32_t preparedObjectCapacity=0) {
+static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets,const NcVisualMesh* meshes=nullptr,uint32_t meshCount=0,uint32_t preparedObjectCapacity=0,NcEditorViewport* editor=nullptr,NcEditorMessageCallback preprocess=nullptr,NcApplicationViewport* application=nullptr) {
   if (!cb || !s || !s->objects || !s->objectCount || !s->batches ||
       !s->batchCount || (assets && (assets->size != sizeof(NcRuntimeAssets) || assets->version != 3u || !assets->productionTerrainPathUtf8 || !assets->elevationOraclePathUtf8)))
     return NC_INVALID_ARGUMENT;
-  if(meshCount && (!preparedObjectCapacity || preparedObjectCapacity<s->objectCount || preparedObjectCapacity>4096u))return NC_INVALID_ARGUMENT;
+  // Storage range is a uint32 device limit. Validate the actual device again
+  // before allocation; an unrelated fixed object-count cap is not an owner.
+  if(meshCount && !nc::PreparedCapacityFits(preparedObjectCapacity,s->objectCount,UINT32_MAX))return NC_INVALID_ARGUMENT;
+  static volatile LONG rendererLease=0;
+  if(InterlockedCompareExchange(&rendererLease,1,0)!=0)return NC_INVALID_ARGUMENT;
+  struct Lease { volatile LONG* value; ~Lease(){InterlockedExchange(value,0);} } lease{&rendererLease};
   App a;
+  a.editor=editor;
+  a.application=application;
   a.preparedObjectCapacity=preparedObjectCapacity?preparedObjectCapacity:s->objectCount;
   a.cb = cb;
   a.cbData = data;
@@ -2636,23 +2812,36 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
   if(assets){a.productionTerrainPath=assets->productionTerrainPathUtf8;if(assets->localTerrainPathUtf8)a.localTerrainPath=assets->localTerrainPathUtf8;a.elevationOraclePath=assets->elevationOraclePathUtf8;}
   try {
     gApp = &a;
+    a.startup.Open();
+    a.causal.Open();
+    a.startup.BeginNative();
     a.surfaceDiagnostic=SurfaceDiagnosticFromEnvironment();
     if(a.surfaceDiagnostic){char message[128];std::snprintf(message,sizeof message,"Surface diagnostic isolation flags: 0x%02X",a.surfaceDiagnostic);a.Log(NC_LOG_ALWAYS,message);}
     LogLoadedRuntimePaths(a);
     Window(a);
+    a.startup.CheckAllowed();
     Instance(a);
     SetupDebug(a);
     Surface(a);
+    a.startup.CheckAllowed();
     Device(a);
     CreateMesh(a);
     CreateVisualMeshes(a,meshes,meshCount);
+    a.startup.CheckAllowed();
     CreateProductionCubeSurface(a);
     CreateLocalTerrain(a);
+    a.startup.CheckAllowed();
     Validate(a);
     Swap(a);
+    a.startup.CheckAllowed();
     CreateSubmission(a);
     Commands(a);
+    CreateFrozenCapture(a);
+    a.startup.CheckAllowed();
     BootstrapProductionHierarchy(a);
+    a.startup.CheckAllowed();
+    a.startup.Mark(nc::startup::NativeReady);
+    a.causal.Emit(Phase::Setup,Kind::End);
     a.Log(NC_LOG_STARTUP, "Native host callback is active");
     auto start = std::chrono::steady_clock::now(), last = start;
     uint64_t frames = 0;
@@ -2662,19 +2851,38 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
       while (PeekMessage(&m, nullptr, 0, 0, PM_REMOVE)) {
         if (m.message == WM_QUIT)
           run = false;
+        if(editor&&preprocess&&preprocess(reinterpret_cast<uintptr_t>(m.hwnd),m.message,static_cast<uint64_t>(m.wParam),static_cast<int64_t>(m.lParam),data))continue;
         TranslateMessage(&m);
         DispatchMessage(&m);
       }
+      if(editor){
+        const auto parent=reinterpret_cast<HWND>(static_cast<uintptr_t>(editor->parentWindow));
+        if(editor->stop||!IsWindow(parent)||!IsWindow(a.window))run=false;
+        if(run){
+          RECT r{},current{};GetClientRect(parent,&r);GetClientRect(a.window,&current);
+          if(r.right<=0||r.bottom<=0||!IsWindowVisible(parent)||IsIconic(GetAncestor(parent,GA_ROOT))){Sleep(10);continue;}
+          if(r.right!=current.right||r.bottom!=current.bottom)SetWindowPos(a.window,nullptr,0,0,r.right,r.bottom,SWP_NOZORDER|SWP_NOACTIVATE);
+        }
+      }
+      if(a.frozen.failure.load()){a.causal.Emit(Phase::FrozenCapture,Kind::Info,-7001,{a.frozen.failure.load()});a.causal.Text(Phase::FrozenCapture,-7001,a.frozen.FailureText());run=false;}
+      if(a.causal.StopRequested())run=false;
       if (run) {
+        if(minimum::recorder)++minimum::recorder->loop;
+        minimum::FrameMeasurement minimumMeasurement(minimum::recorder.get());
+        minimum::Scope minimumFrame(minimum::Frame);
         auto frameBegin=std::chrono::steady_clock::now();auto now = frameBegin;
+        const double cadenceMs=std::chrono::duration<double,std::milli>(now-last).count();
+        a.postContactTiming.Begin();const auto previousSubmit=a.submitSerial;
         Update(a, std::chrono::duration<float>(now - last).count());
         last = now;
         Draw(a);
         const double frameMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-frameBegin).count();a.frameTimesMs[a.frameTimeCursor]=frameMs;a.frameTimeCursor=(a.frameTimeCursor+1)%a.frameTimesMs.size();a.frameTimeCount=std::min(a.frameTimeCount+1,a.frameTimesMs.size());if((a.submission->productionBillboardFlags&2u)!=0u){a.c3FrameMs.push_back(frameMs);if((a.submission->productionBillboardFlags&4u)!=0u)a.c3SnapFrameMs.push_back(frameMs);if((a.submission->productionBillboardFlags&8u)!=0u)a.c3ScaleFrameMs.push_back(frameMs);if((a.submission->productionBillboardFlags&16u)!=0u)a.c3PublicationFrameMs.push_back(frameMs);}
+        a.postContactTiming.Record(frames+1,a.frame,a.postContactTiming.completedTerrain,frameMs,cadenceMs,a.lastGpuTimingMs,a.timestampSampleCount,a.submitSerial,a.submitSerial!=previousSubmit);
         frames++;
       }
     }
-    vkDeviceWaitIdle(a.device);
+    a.startup.Mark(nc::startup::Shutdown);
+    a.Check(vkDeviceWaitIdle(a.device), "renderer shutdown idle wait failed");
     char text[512];
     auto ms = std::chrono::duration<double, std::milli>(
                   std::chrono::steady_clock::now() - start)
@@ -2698,13 +2906,33 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     }
     if(a.anchoredPipelineStatisticsSamples){const double n=double(a.anchoredPipelineStatisticsSamples);std::snprintf(text,sizeof text,"GPU anchored refinement averages: tcsPatches=%.1f; refinedVertices=%.1f; clippingOutputPrimitives=%.1f; fragmentInvocations=%.1f; samples=%llu; CPUFinalRaster=false",double(a.anchoredTessellationControlPatches)/n,double(a.anchoredTessellationEvaluationInvocations)/n,double(a.anchoredClippingPrimitives)/n,double(a.anchoredFragmentShaderInvocations)/n,(unsigned long long)a.anchoredPipelineStatisticsSamples);a.Log(NC_LOG_ALWAYS,text);}
     if(a.timestampSampleCount){const double n=double(a.timestampSampleCount);std::snprintf(text,sizeof text,"GPU timing averages: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; toneMap=%.3f",a.timestampAccumulatedMs[0]/n,a.timestampAccumulatedMs[1]/n,a.timestampAccumulatedMs[2]/n,a.timestampAccumulatedMs[3]/n,a.timestampAccumulatedMs[4]/n,a.timestampAccumulatedMs[6]/n);a.Log(NC_LOG_ALWAYS,text);}
+    a.postContactTiming.Write();
+    Destroy(a);
+    return NC_SUCCESS;
+  } catch (const nc::startup::Cancelled&) {
+    a.startup.Mark(nc::startup::Shutdown);
     Destroy(a);
     return NC_SUCCESS;
   } catch (const std::exception &e) {
+    a.startup.Mark(nc::startup::Shutdown);
     a.Log(NC_LOG_ALWAYS, e.what());
     Destroy(a);
     return NC_FAILURE;
   }
+}
+extern "C" NC_API NcResult __cdecl nc_run_editor_viewport(NcFrameSubmission* s,NcHostCallback cb,void* data,const NcVisualMesh* meshes,uint32_t count,uint32_t capacity,NcEditorViewport* viewport,NcEditorMessageCallback preprocess){
+  if(!preprocess||!viewport||viewport->size!=sizeof(NcEditorViewport)||viewport->version!=1u||!viewport->parentWindow||viewport->stop||!count||!meshes)return NC_INVALID_ARGUMENT;
+  const auto parent=reinterpret_cast<HWND>(static_cast<uintptr_t>(viewport->parentWindow));DWORD process{};
+  if(!IsWindow(parent)||GetWindowThreadProcessId(parent,&process)!=GetCurrentThreadId()||process!=GetCurrentProcessId())return NC_INVALID_ARGUMENT;
+  viewport->buttons=viewport->pressed=viewport->released=viewport->focused=0;viewport->wheel=0;
+  return RunRenderer(s,cb,data,nullptr,meshes,count,capacity,viewport,preprocess);
+}
+extern "C" NC_API NcResult __cdecl nc_run_application_viewport(NcFrameSubmission* s,NcHostCallback cb,void* data,const NcRuntimeAssets* assets,const NcVisualMesh* meshes,uint32_t count,uint32_t capacity,NcApplicationViewport* viewport,NcEditorMessageCallback preprocess){
+  if(!preprocess||!viewport||viewport->input.size!=sizeof(NcApplicationViewport)||viewport->input.version!=1u||!viewport->input.parentWindow||viewport->input.stop||viewport->mode>2u||viewport->reserved||!count||!meshes||!assets)return NC_INVALID_ARGUMENT;
+  const auto parent=reinterpret_cast<HWND>(static_cast<uintptr_t>(viewport->input.parentWindow));DWORD process{};
+  if(!IsWindow(parent)||GetWindowThreadProcessId(parent,&process)!=GetCurrentThreadId()||process!=GetCurrentProcessId())return NC_INVALID_ARGUMENT;
+  viewport->input.buttons=viewport->input.pressed=viewport->input.released=viewport->input.focused=0;viewport->input.wheel=0;
+  return RunRenderer(s,cb,data,assets,meshes,count,capacity,&viewport->input,preprocess,viewport);
 }
 extern "C" NC_API NcResult __cdecl nc_validate_terrain_asset(const char *path, uint64_t bodyId, uint32_t terrainVersion, uint32_t expectedRecordCount) {
   if(!path||!*path||!bodyId||!terrainVersion||!expectedRecordCount)return NC_INVALID_ARGUMENT;
@@ -2728,3 +2956,24 @@ extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostC
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission *s,NcHostCallback cb,void *data,const NcVisualMesh* meshes,uint32_t count,uint32_t preparedObjectCapacity){return RunRenderer(s,cb,data,nullptr,meshes,count,preparedObjectCapacity);}
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets_and_visual_meshes(NcFrameSubmission *s,NcHostCallback cb,void *data,const NcRuntimeAssets* assets,const NcVisualMesh* meshes,uint32_t count,uint32_t preparedObjectCapacity){return RunRenderer(s,cb,data,assets,meshes,count,preparedObjectCapacity);}
+
+// Explicit ordinary-player registration, before the first renderer/GPU lifetime.
+extern "C" NC_API int __cdecl nc_configure_minimum_recorder(const wchar_t* name,uint64_t lo,uint64_t hi){
+  if(!name||nc::minimum::recorder)return 1;
+  try{auto recorder=std::make_unique<nc::minimum::Recorder>();if(!recorder->Open(name,lo,hi))return 1;nc::minimum::recorder=std::move(recorder);return 0;}catch(...){return 1;}
+}
+extern "C" NC_API void __cdecl nc_close_minimum_recorder(){nc::minimum::recorder.reset();}
+
+// Qualification-only CPU accounting; no Vulkan calls and no persistence waits.
+extern "C" NC_API int __cdecl nc_minimum_measurement(int action){
+  auto* r=nc::minimum::recorder.get();if(!r)return 1;
+  if(action==1)r->measurement.Start(r->loop+1);else if(action==0)r->measurement.stop=true;else return 1;return 0;
+}
+extern "C" NC_API int __cdecl nc_read_minimum_measurement(nc::minimum::MeasurementHeader* h,nc::minimum::MeasurementSample* samples,uint32_t capacity){
+  auto* r=nc::minimum::recorder.get();if(!r||!h||!samples||capacity<r->measurement.count||r->measurement.frame)return 1;
+  auto& m=r->measurement;*h={sizeof(*h),1,m.count,m.frequency,nc::minimum::ownedRetainedBytes+4096+8192*256,nc::minimum::ownedAllocationCalls,nc::minimum::ownedAllocationBytes,m.overflow?1ull:0ull};
+  std::memcpy(samples,m.samples.data(),size_t(m.count)*sizeof(*samples));return 0;
+}
+extern "C" NC_API int __cdecl nc_minimum_route_marker(uint64_t body,double distance,double radius,uint64_t epoch){
+  auto* r=nc::minimum::recorder.get();if(!r)return 1;auto e=r->Make(nc::minimum::Window);e.w[17]=1;e.w[18]=body;std::memcpy(e.w+19,&distance,8);std::memcpy(e.w+20,&radius,8);e.w[21]=epoch;return r->Emit(e)?0:1;
+}

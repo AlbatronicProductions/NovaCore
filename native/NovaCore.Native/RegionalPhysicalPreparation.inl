@@ -13,6 +13,7 @@ void InspectRegionalPreparation(App& a){
   std::swap(a.productionBillboardVertexCapacity,a.regionalScratchCapacity);
   a.regionalPublishedPupil=control.current;
   a.productionBillboardPreparedFrameIdentity=control.current.identity[0];
+  MinimumPublication(a,2);
   UpdateProductionBillboardDescriptors(a,false);
   RegionalDescriptor(a,57,a.regionalScratchBuffer,VkDeviceSize(a.regionalScratchCapacity)*sizeof(NcSphericalBillboardPhysicalVertex));
   char message[384];std::snprintf(message,sizeof message,"NCSM1 staged pupil publication: generation=%llu; pupil=%u; vertices=%u; readinessMs=%.3f; fenceComplete=true; atomicFrameBoundary=true",(unsigned long long)job.generation,control.current.identity[0],job.cursor,std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-job.started).count());a.Log(NC_LOG_ALWAYS,message);

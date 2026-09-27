@@ -1,4 +1,20 @@
 # Architecture
+## Current unbanked generation — feature freeze
+
+The normal player entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+Startup/configuration, Solar game, generic construction, launch, bounded Florida
+flight/control and return share the unified application. `NovaCore.Launcher.exe`
+remains a legacy scenario/engineering entry, not the normal player workflow.
+
+The [stabilization gauntlet](engineering-evidence/stabilization-bank-gauntlet/README.md)
+is the current disposition record. All milestone sections below describe their
+banked scope; their historical future-work statements do not override the newer
+unbanked generation. Feature expansion is frozen. No banking or new milestone is
+authorized. Project Control alone decides PASS—BANK / REVISE / REJECT / ESCALATE.
+Automated integration, direct native runtime evidence and reproducibility may
+establish acceptance without mandatory manual retest; Engineering does not claim
+Player PASS. [Known limitations](KNOWN_LIMITATIONS.md) separate construction,
+flight, terrain and distribution qualification.
 
 ## Banked M15.5 — player flight controls
 

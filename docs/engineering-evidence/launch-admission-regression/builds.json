@@ -1,0 +1,70 @@
+{
+  "build-App-Debug.log": {
+    "sha256": "228b6f8c17daf25e4746a9fe93b7255e1fbee1564a2bdb0af2bd5d632d243af4",
+    "tail": [
+      "  NovaCore.App -> E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows\\NovaCore.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.09"
+    ]
+  },
+  "build-App-Release.log": {
+    "sha256": "ec63cbdc0e856c3d6f1ea4da3ddbc2fae595a400c012cd0d512bea5d39259fe6",
+    "tail": [
+      "  NovaCore.App -> E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:04.30"
+    ]
+  },
+  "build-Debug-attempt1.log": {
+    "sha256": "556ee1365dd81a74dac638f5d78fc03635ab6ed993b7a0d9b7764dc53c31764e",
+    "tail": [
+      "",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\LaunchReadinessTests.cs(57,75): error CS0117: 'ConstructionConnection' does not contain a definition for 'EnabledServices' [E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\NovaCore.Graphics.Tests.csproj]",
+      "E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\LaunchReadinessTests.cs(57,109): error CS1061: 'ConstructionConnection' does not contain a definition for 'EnabledServices' and no accessible extension method 'EnabledServices' accepting a first argument of type 'ConstructionConnection' could be found (are you missing a using directive or an assembly reference?) [E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\NovaCore.Graphics.Tests.csproj]",
+      "    0 Warning(s)",
+      "    2 Error(s)",
+      "",
+      "Time Elapsed 00:00:10.10"
+    ]
+  },
+  "build-Debug.log": {
+    "sha256": "58fdcbcc1d4a4885721c68cb12feab46861ed3b8b56703751acb14affe70c42b",
+    "tail": [
+      "  NovaCore.Graphics.Tests -> E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:05.65"
+    ]
+  },
+  "build-Release.log": {
+    "sha256": "479c81be3e9a9203d226d974e48defdf9de7547b8873be99cce0a3d64c512add",
+    "tail": [
+      "  NovaCore.App -> E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.dll",
+      "",
+      "Build succeeded.",
+      "    0 Warning(s)",
+      "    0 Error(s)",
+      "",
+      "Time Elapsed 00:00:05.59"
+    ]
+  },
+  "native-Debug.log": {
+    "sha256": "71aa391ec7d7e291b419a7f40fba91919e14ac2394ab4e8b66ed126e267d70f6",
+    "text": "ninja: no work to do.\n"
+  },
+  "native-Release.log": {
+    "sha256": "71aa391ec7d7e291b419a7f40fba91919e14ac2394ab4e8b66ed126e267d70f6",
+    "text": "ninja: no work to do.\n"
+  }
+}

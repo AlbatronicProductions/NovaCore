@@ -325,6 +325,8 @@ internal sealed class SolarSystemScene
     private bool _surfaceCameraToggleWasDown;
     private SurfaceCameraTransitionMetrics _surfaceCameraLastTransitionMetrics;
     private FloridaLaunchSite _floridaLaunchSite;
+    private Double3 _floridaSlabBodyFixedCenter;
+    private DoubleQuaternion _floridaSlabBodyFixedOrientation;
     internal NativeFacilityCasterDefinition FacilityCaster { get; private set; }
 
 
@@ -376,8 +378,17 @@ internal sealed class SolarSystemScene
     }
 
     internal PlanetaryPresentationSnapshot Presentation { get; private set; } = null!;
-    internal NativePlanetaryPresentation[] DistantBodies { get; }
-    internal NativeOrbitLineVertex[] OrbitVertices { get; }
+    internal NativePlanetaryPresentation[] DistantBodies { get; private set; }
+    internal NativeOrbitLineVertex[] OrbitVertices { get; private set; }
+    // The application renderer pins these buffers for its entire lifetime.
+    // A prepared save/load successor takes over publication into those same
+    // buffers only at commit; it never changes a native pointer or GPU owner.
+    internal void RetainRendererBuffers(SolarSystemScene previous)
+    {
+        if(DistantBodies.Length!=previous.DistantBodies.Length||OrbitVertices.Length!=previous.OrbitVertices.Length||!FacilityCaster.Equals(previous.FacilityCaster))
+            throw new InvalidDataException("Restored presentation renderer contract differs.");
+        DistantBodies=previous.DistantBodies;OrbitVertices=previous.OrbitVertices;
+    }
     internal ReadOnlySpan<Double3> OrbitRootSamples => _rootOrbitSamples;
     internal ReadOnlySpan<Double3> OrbitParentLocalSamples => _parentLocalOrbitSamples;
     internal ReadOnlySpan<Double3> OrbitPresentationLocalSamples => _presentationLocalOrbitSamples;
@@ -601,7 +612,7 @@ internal sealed class SolarSystemScene
     internal bool BindActiveVessel(in SceneObjectFocusObservation value)
     {
         if(_activeVesselId!=0&&_activeVessel.Status!=SceneObjectFocusStatus.Retired)return false;
-        if(!value.IsAvailable||value.MaterialOrigin.Frame!=Presentation.RootFrame||value.DisplayTicks!=CurrentTime.Ticks||value.DisplayTicks!=PresentationTicks)return false;
+        if(!value.IsAvailable||3*value.BoundingRadius>SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu||value.MaterialOrigin.Frame!=Presentation.RootFrame||value.DisplayTicks!=CurrentTime.Ticks||value.DisplayTicks!=PresentationTicks)return false;
         var environment=-1;
         for(var i=0;i<Presentation.Count;i++)if(Presentation.Bodies[i].BodyId==value.EnvironmentalBodyId){environment=i;break;}
         if(environment<0||!TryResolveVesselFrameIndex(value.ReferenceFrame,out var frameIndex))return false;
@@ -655,7 +666,7 @@ internal sealed class SolarSystemScene
     }
 
     private bool ValidVesselObservation(in SceneObjectFocusObservation value) =>
-        value.IsAvailable&&value.MaterialOrigin.Frame==Presentation.RootFrame&&
+        value.IsAvailable&&3*value.BoundingRadius<=SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu&&value.MaterialOrigin.Frame==Presentation.RootFrame&&
         value.DisplayTicks==CurrentTime.Ticks&&value.DisplayTicks==PresentationTicks&&_activeVesselEnvironmentIndex>=0&&
         Presentation.Bodies[_activeVesselEnvironmentIndex].BodyId==value.EnvironmentalBodyId;
 
@@ -689,7 +700,7 @@ internal sealed class SolarSystemScene
             if(!initialOffset.IsFinite||initialOffset.LengthSquared<1d||initialOffset.LengthSquared>1600d)
                 initialOffset=(_activeVessel.MaterialOrigin.Value-FocusedBody.Position.Value).Normalized()*2d+Double3.UnitY;
             var radial=_vesselFrameToRoot.Conjugate().Rotate(initialOffset.Normalized());
-            _orbitDistance=24d;_orbitYawRadians=Math.Atan2(radial.X,radial.Z);
+            _orbitDistance=Math.Max(24d,3*_activeVessel.BoundingRadius);_orbitYawRadians=Math.Atan2(radial.X,radial.Z);
             _orbitPitchRadians=-Math.Asin(Math.Clamp(radial.Y,-1d,1d));
             _vesselOrbitOrientation=(DoubleQuaternion.FromAxisAngle(Double3.UnitY,_orbitYawRadians)*
                 DoubleQuaternion.FromAxisAngle(Double3.UnitX,_orbitPitchRadians)).Normalized();
@@ -740,7 +751,7 @@ internal sealed class SolarSystemScene
         {
             _surfaceCameraToggleWasDown=input.MoveUp!=0;
             if(input.MouseWheelDetents!=0)_orbitDistance=SolarCameraZoomPolicy.ApplyTargetRelative(
-                _orbitDistance,.5d,SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu,input.MouseWheelDetents);
+                _orbitDistance,Math.Max(.5d,1.05*_activeVessel.BoundingRadius),SolAnalyticalDefinition.AstronomicalUnitMetres*MaximumOverviewDistanceAu,input.MouseWheelDetents);
             if(input.LookActive!=0)ApplyVesselLook(input.MouseDeltaX,input.MouseDeltaY);
             // Final display placement follows the refreshed copied observation.
             if(!deferVesselPose)ApplyOrbitPose(camera);
@@ -866,6 +877,21 @@ internal sealed class SolarSystemScene
         }
     }
 
+    // A live craft's accepted physical endpoint selects presentation time. No
+    // additional host credit, warp or independent debt enters this path.
+    internal bool TryPresentPhysicalEpoch(SimulationInstant epoch,CameraState camera,out string error)
+    {
+        if(epoch.Ticks<CurrentTime.Ticks||Rate!=SimulationRate.One||IsPaused||_clock.PendingSimulationDebt.Ticks!=0||_clock.Timeline.PendingCount!=0)
+        {error="Craft presentation epoch/clock mismatch.";return false;}
+        if(epoch==CurrentTime){error=string.Empty;return true;}
+        if(!TryPublishAt(epoch,out error))return false;
+        // The private presentation timeline is empty and epoch is monotonic.
+        // Finish its cursor only after every fallible ephemeris preparation.
+        if(_clock.AdvanceTo(epoch).Reason!=SimulationAdvanceStopReason.ReachedTarget)
+            throw new InvalidOperationException("Prepared presentation clock invariant failed.");
+        if(_focusTarget.Kind!=FocusTargetKind.SceneObject)ApplyOrbitPose(camera);
+        return true;
+    }
     internal bool TryAdvanceByHostDuration(SimulationDuration hostDuration, CameraState camera, out string error)
     {
         var host = _clock.AdvanceByHostDuration(hostDuration);
@@ -1232,13 +1258,17 @@ internal sealed class SolarSystemScene
         if(!FloridaLaunchSite.TryCreate(earth.BodyId,earth.RadiusMetres,
             PlanetaryTerrainDefinition.EarthProductionCubeV5,out _floridaLaunchSite))return false;
         if(!SurfaceEnuFrame.TryCreate(_floridaLaunchSite.Object.Anchor,out var frame))return false;
-        var origin=_floridaLaunchSite.Object.Anchor.NormalizedBodyFixedDirection*_floridaLaunchSite.LocalPhysicalSurfaceRadiusMetres;
-        var scale=_floridaLaunchSite.FoundationScale;
+        var origin=_floridaLaunchSite.Object.Anchor.NormalizedBodyFixedDirection*(_floridaLaunchSite.LocalPhysicalSurfaceRadiusMetres+_floridaLaunchSite.SupportSlabCenterUp);
+        if(!TryEvaluateFloridaLaunchSite(out var authoredPose))return false;
+        _floridaSlabBodyFixedCenter=origin;
+        _floridaSlabBodyFixedOrientation=authoredPose.BodyFixedOrientation*DoubleQuaternion.FromAxisAngle(Double3.UnitX,Math.PI*.5d);
+        var slabScale=_floridaLaunchSite.SupportSlabScale;
+        var scale=new Double3(slabScale.X,slabScale.Z,slabScale.Y); // Caster coordinates are East/North/Up.
         // Created once with the authored site. Camera/Sun/pupil updates do not rebuild casters.
         // A separate finite near-field presentation policy: 2 km ray reach, local FP32
         // intersection quantum below 0.5 mm. This is not the grading footprint.
         FacilityCaster=new(){BodyId=earth.BodyId,FacilityId=FloridaLaunchSite.ObjectId.Value,ObjectId=FloridaLaunchSite.ObjectId.Value,
-            Version=1,GeometrySet=MeshHandle.FloridaLaunchPad.Value,
+            Version=1,GeometrySet=MeshHandle.FloridaSupportSlab.Value,
             OriginX=origin.X,OriginY=origin.Y,OriginZ=origin.Z,
             EastX=frame.East.X,EastY=frame.East.Y,EastZ=frame.East.Z,
             NorthX=frame.North.X,NorthY=frame.North.Y,NorthZ=frame.North.Z,
@@ -1271,6 +1301,15 @@ internal sealed class SolarSystemScene
             1080d/(2d*Math.Tan(camera.Projection.VerticalFieldOfViewRadians*.5d));
         if(!double.IsFinite(projectedPixels)||projectedPixels<.75d)return false;
         position=pose.RootPosition;orientation=pose.RootOrientation;return true;
+    }
+
+    // One visual authority for browsing, supported spacecraft and free flight.
+    // This only presents the existing base/footing union; it never authors support.
+    internal ResolvedRenderObject FloridaSupportSlab()
+    {
+        if(!Presentation.TryGetBody(FloridaLaunchSite.Object.Anchor.BodyId,out var earth))throw new InvalidDataException("Florida slab presentation unavailable.");
+        return new(new(0xFFFF0001u),new(earth.Position.Value+earth.BodyFixedToRoot.Rotate(_floridaSlabBodyFixedCenter),Presentation.RootFrame),
+            earth.BodyFixedToRoot*_floridaSlabBodyFixedOrientation,FloridaLaunchSite.SupportSlabScale,MeshHandle.FloridaSupportSlab);
     }
 
     internal bool TryStartAtFloridaLaunchSite(CameraState camera) => TryStartAtFloridaSite(camera,new(115,-135,72),new(0,0,4));

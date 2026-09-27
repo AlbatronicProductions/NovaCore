@@ -1,0 +1,22 @@
+[
+  {
+    "path": "build/native-ninja",
+    "bytes": 34248221,
+    "classification": "REGENERATABLE; retained, no deletion authorized/performed"
+  },
+  {
+    "path": "build/native-ninja-release",
+    "bytes": 6792965,
+    "classification": "REGENERATABLE; retained, no deletion authorized/performed"
+  },
+  {
+    "path": "build/rcs-scalability",
+    "bytes": 6402019,
+    "classification": "REGENERATABLE; retained, no deletion authorized/performed"
+  },
+  {
+    "path": "tools/NovaCore.App/bin/Release/net10.0-windows",
+    "bytes": 12195331,
+    "classification": "KEEP current manual-inspection package"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "schema": "novacore.greybox-analytic-source/1",
+  "definition": "nc.rcs.block-r1",
+  "provenance": "Original NovaCore analytic greybox; author-modular-starter.py; SI; not flight certification",
+  "primitives": [
+    {
+      "id": "block",
+      "massKg": 8.0,
+      "center": [
+        0.0,
+        0.15,
+        0.0
+      ],
+      "kind": "box",
+      "dimensions": [
+        0.25,
+        0.3,
+        0.2
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "assumptions": [
+    "Effective dry distributions are fixed in the material frame; gimbal motion changes actuator direction and visual geometry only.",
+    "No plume heating/aerodynamics/stress certification; support load and geometric keep-out qualification only.",
+    "RCS placement uses authored mount and solid body/nozzle collision volumes; exhaust location/direction remain actuator facts. No expanding plume placement veto or plume impingement certification."
+  ]
+}

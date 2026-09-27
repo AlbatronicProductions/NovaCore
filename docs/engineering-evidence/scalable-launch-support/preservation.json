@@ -1,0 +1,130 @@
+{
+  "judgment": "PASS",
+  "entryFileCount": 3792,
+  "changed": [
+    {
+      "path": "README.md",
+      "before": "ab81a4d0e1a0812998f310bfd2bed27dd94d0376595e381e1d29aa57b4e25fcf",
+      "after": "d36328156f49e4df0342df87f9bd173a1edadd1cb773bbea1c723fb19808c4de"
+    },
+    {
+      "path": "docs/KNOWN_LIMITATIONS.md",
+      "before": "f7a68c5c5c65366f2fc0a8d0fdc1a2955abebec29669729b62ced7b0771d4fc1",
+      "after": "70044f2aecd9613f50311339ba42c04b427f78a65b4b7d28c73d23ed27c2a5b2"
+    },
+    {
+      "path": "docs/NOVACORE_CURRENT_STATE.md",
+      "before": "898c613cc2e7a19fe37786447a3b6ca1faecac1bd33c6426ff6b13f52ff4ff4a",
+      "after": "2046a0ae312c2bb31ddc680995690470a838c2c195b642739e5db55595a089ce"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ConstructionFlightScene.cs",
+      "before": "ce9aea0596d314d54fb2d655b902ea99018ccf848a46f8544910ce84fa4df9a5",
+      "after": "e3383a3faa5be90dc98bafb47745fab71a2d74c1c8d1db3c3ceb8243f01093f9"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyConstructionRuntime.Physical.cs",
+      "before": "9c1b5cc015fb46d9818d1ce41797203bd4b967c06d5f564870959658ebf56a59",
+      "after": "be2e4ae14c176b89962b449ceae48e2e66c26ededfe70feffc91e57aa19c4edb"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/CompiledCraftContact.cs",
+      "before": "d78b063d1447c04ce94bfe1e68a64f4944a9701c9192aa5b95667c072c536f81",
+      "after": "4cd714bc88acee13c634fbdeddcb3018d18294b4d3d33313442f77c904d23225"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactCallbacks.cs",
+      "before": "d041bfb73f5e1490281646a1bba6a84d450a317aeac1583c3527fe5a809286a2",
+      "after": "d01bf89e6d974f6d917dfda377a2c55ae37dd13e09fe9a7eeddf23fa17ca757e"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactSource.cs",
+      "before": "fbaaf0daa86ad613ae0a02c871242f0358e854e5107b7a4c84ddb78691cb30ad",
+      "after": "0bfe226ea791a50306983ef145d083252b27d0b81be7cc7f3bf661109ec492ae"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.Craft.cs",
+      "before": "334788bdc0384cefff4f8faaa6c6f5056cb18e150a76ff29241c4cdae9e8fedf",
+      "after": "42c0c26ca6ccc1225e2647b0f404735dea995ce3dfc9a3b109aecf519c7c3141"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.CraftDiagnostics.cs",
+      "before": "bbc114c195b8dcc0ce27cac378f73b126ac8a58084e70cc951988702c353665e",
+      "after": "e3bbb21d70ead86ecf7b63d462cdc8eac56a71df0576a4872d44c3062557b369"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/LocalContactWorld.cs",
+      "before": "7624717f7182fc776a5d8d4d36afabbc693b4ba5ef1a6789acb6dde82fba6950",
+      "after": "dd68ca6cde6da7ef4555a4fa07cbca586cef45458170a574cd4b1f102d00a8ba"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Transactions/SimulationTransactionEngine.ConstructionPhysical.cs",
+      "before": "880a0f828ff373cd9a105bb2235d629aa57c702ec264f64b14a869ca89952c4e",
+      "after": "796f74983ddc0984297b3cee2fa8c261cebfe7d93e16c8ba393e2b101da9c7e5"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FacilityLightingTests.cs",
+      "before": "3b1f706234d295408d9c83d4412fa693d065092f924cf155fc74b9e75f397bf3",
+      "after": "b4cbc509e534c6ac11e6ae31f8e1f946e8217e5bee1a2290bb1294d2da0a8f63"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/LaunchReadinessTests.cs",
+      "before": "7a66ea86ed8fef37152b5bf288dcea1d1fd31bbb79bbbc98dac7b3d6a1dea2c7",
+      "after": "7ac668dd9d10377a5a04e6d8ca7ba9c6280dc814ed5f18b68bbf8cd4cf195dea"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.cs",
+      "before": "722b24276339b21e33d13e2cc0f295255d592f3eb8003a973ef16eb6432f2117",
+      "after": "c6cb1d212c2989c080359fc07b82fc701063604f8e454d672a3c203cfd6aa496"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ModularStabilizationTests.cs",
+      "before": "19c05d77db85d5b7c779147c479da0e3fd88cc5e7ce7f7d72c5c4e4f2f8cda63",
+      "after": "5c5d16f3ee25ea8efc0f05fab61b140edc3f8c24f943437b066f293e35eae100"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "before": "33042554ca23c2ae2f5df48cffd4f3a2320335353d8c4392165adaefdc37d8e6",
+      "after": "0b7b92a40d936f91ebedd3a5ae1b43aab60bc17062305eff4c978a95eba43ab7"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "before": "a7e0bbf007870bbcb6c6820f31d5e98991cfa94229e3b0a29fbcaf2ec7c8e07b",
+      "after": "456bbcdc363dd10e7299a19bb7bddaa51f7207927fa2db264b48412cbf6142bb"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.PhysicalContact.cs",
+      "before": "b47ff0857b18f84933a36d475749eafcb8d0acf6f88766f73da1cd5d2ba1d8f4",
+      "after": "8f1b4f0003cb1a0a8ee8e55640d3fba1dd4d9130e0ae0e45f4016aa6d3deb5c1"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/Program.cs",
+      "before": "392e6d9bd0d4006e56e0e704fdc861d33066ad094882c934e13d62e6250aa467",
+      "after": "951a95fc3424b1bd66fcb18ff5001ebf7b5deb5b15af670431ae8feaebd10122"
+    },
+    {
+      "path": "tests/NovaCore.Simulation.Tests/RcsScalabilityTests.cs",
+      "before": "7d53266f9edb28e9673f7e10ebcc2f5965fa6ffcd6b4a6dfacb8696d30bc2090",
+      "after": "18579a7d2411d1c4c9a6b9c6eb0332776bacb3ee98764c40644b818c894e760d"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs",
+      "before": "9d9e3a6155c3cb55e0894dd3d7f8347267c1c39630944040dc1867e311a003f4",
+      "after": "2dbff9804fafa2ea34676cbdf3f6341a1cae22363a89b08e4533aabce36ad227"
+    }
+  ],
+  "added": [
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftContactDescription.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftContactManifolds.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftSupportPreparation.cs",
+    "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftSupportImport.cs",
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportFixture.cs",
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportTests.cs",
+    "tests/NovaCore.Simulation.Tests/ScalableLaunchSupportTests.Friction.cs",
+    "tests/NovaCore.Graphics.Tests/ModularFloridaTests.Support.cs"
+  ],
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "indexSha256": "83aa8c801a40ba244619029a424f13401247a6e10ec307691e0254c9770a809e",
+  "durableRefsUnchanged": true,
+  "ksaWrites": 0
+}

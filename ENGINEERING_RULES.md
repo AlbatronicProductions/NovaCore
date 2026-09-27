@@ -25,6 +25,26 @@ GPU LOD, culling, label selection, and representation handoff are presentation-o
 
 ## Architecture and delivery discipline
 
+### Canonical development ownership
+
+Project Control's standing policy is parallel read-only brains, one production
+writer, and one canonical production tree: **E:\NovaCore**. Normal bounded
+development, qualification and manual testing use that tree and its normal
+`tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe` entry.
+
+Temporary worktrees are exceptions for destructive experiments, mutually
+exclusive hypotheses, forensic preservation, read-only comparison or temporary
+proof. A winning result must be reconciled into the current canonical tree before
+acceptance, preserving newer accepted work. Worktrees are not successor production
+generations. Git commit/tag history is recovery authority; do not retain several
+semi-canonical generations merely for rollback.
+
+The cycle is banked baseline → one bounded responsibility → diagnose/implement →
+qualify → canonical manual test and same-candidate corrections → Project Control
+acceptance → separately authorized commit/tag/push/bank → next major front. When
+the canonical tree is FROZEN, no new major front opens until Project Control banks,
+rejects or explicitly unfreezes it. Acceptance never implies automatic banking.
+
 - Prefer bounded tickets with an explicit authority boundary, acceptance gate, and stop condition.
 - Measure before optimizing. Performance comparisons require an equivalent workload fingerprint; a fixed-pose improvement is not evidence of dynamic player-facing correctness.
 - Do not broaden scope after a failed test. If implementation exposes an architectural conflict, stop and request explicit review rather than silently redesigning.

@@ -1,0 +1,86 @@
+{
+  "build/ordinary-recorder-benign-revision/analysis.log": {
+    "bytes": 2987,
+    "sha256": "d36681f11147ad2dfbe25f55097ad7a01795a6ae9cf32a475ff4d7b713b12958"
+  },
+  "build/ordinary-recorder-benign-revision/app-diagnostics.log": {
+    "bytes": 54,
+    "sha256": "ecd1f166f5bd29046f0aece24fca6e4fa08391897368bd6c61986742c66d6db4"
+  },
+  "build/ordinary-recorder-benign-revision/build-debug.log": {
+    "bytes": 3247,
+    "sha256": "4bbd1734b138970593cdf47d94678cf90a5d3b7aeb58453135e699ab43040e78"
+  },
+  "build/ordinary-recorder-benign-revision/build-release.log": {
+    "bytes": 3299,
+    "sha256": "7c4b4ed4bec2cbacd8b1a71c569d59ccafa64ce64fa4d5af6a1bfa80ada7c298"
+  },
+  "build/ordinary-recorder-benign-revision/camera-debug.log": {
+    "bytes": 76,
+    "sha256": "9750f88f5ef0bd67061e255053b93ab41650f1261371795672853cb675b34cf4"
+  },
+  "build/ordinary-recorder-benign-revision/camera-release.log": {
+    "bytes": 76,
+    "sha256": "9750f88f5ef0bd67061e255053b93ab41650f1261371795672853cb675b34cf4"
+  },
+  "build/ordinary-recorder-benign-revision/debug-native.log": {
+    "bytes": 71,
+    "sha256": "43e923ffe65cb13890db9645f60b26d76da3d6c196996c0e4195c1922508166a"
+  },
+  "build/ordinary-recorder-benign-revision/debug-tests-final.log": {
+    "bytes": 29,
+    "sha256": "27e20700dd8de879394a93eddad70c4dbcc8f7f0b406274a00d2073cd0974a24"
+  },
+  "build/ordinary-recorder-benign-revision/debug-tests.log": {
+    "bytes": 29,
+    "sha256": "0c5f0ca40635ff0e78c613fdb58e32734b12519fc7800d1a3485234721e7a263"
+  },
+  "build/ordinary-recorder-benign-revision/final-identity.log": {
+    "bytes": 720,
+    "sha256": "85b00b2ec5a008b75fff27dbea529940a25e72acabd6a9d438077f124f2a40f9"
+  },
+  "build/ordinary-recorder-benign-revision/launcher.log": {
+    "bytes": 684,
+    "sha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b"
+  },
+  "build/ordinary-recorder-benign-revision/native-debug-build.log": {
+    "bytes": 8373,
+    "sha256": "62cb57c299d9854db42c8bacd8c3a7e365e34014fcecd7481a74f503692d8ec9"
+  },
+  "build/ordinary-recorder-benign-revision/native-release-build.log": {
+    "bytes": 8805,
+    "sha256": "7e8f2786aca72d387a824e90deb7ffe168e36ad7e2c3dc2c463ca289a02e9012"
+  },
+  "build/ordinary-recorder-benign-revision/presentation.log": {
+    "bytes": 57,
+    "sha256": "f29f51b8a1e888d7a278e613ecc308b585544f06e6bbf7da05ca948cdd148718"
+  },
+  "build/ordinary-recorder-benign-revision/pupil.log": {
+    "bytes": 3008,
+    "sha256": "28a89f2f00dc1ee76f66580639ec1d8db3c69a234bc4a3ead1efe832e134daec"
+  },
+  "build/ordinary-recorder-benign-revision/release-native.log": {
+    "bytes": 71,
+    "sha256": "2256b793c64e8e0726a1a4ff0b4ab204e499664d596477ddd499a12b794be633"
+  },
+  "build/ordinary-recorder-benign-revision/release-tests.log": {
+    "bytes": 29,
+    "sha256": "27e20700dd8de879394a93eddad70c4dbcc8f7f0b406274a00d2073cd0974a24"
+  },
+  "build/ordinary-recorder-benign-revision/package.json": {
+    "bytes": 21907,
+    "sha256": "21c4f0a2542d53e480bfa9e9b8c703fb732860e4a8c8b2565d2fa65badf5a10f"
+  },
+  "build/ordinary-recorder-benign-revision/live-retry/retained-hashes.json": {
+    "bytes": 3320,
+    "sha256": "1f6afa1d18bfff7ed6d5894df49605b786497425a2e53aaa528c19cc2af6d6ee"
+  },
+  "build/ordinary-recorder-benign-revision/live-retry/full-state-reconciliation.json": {
+    "bytes": 216,
+    "sha256": "1dfd423e06783015829631b40cffbdaa0f57c2acb5ceea9fe2064c1d0e5c0f71"
+  },
+  "build/ordinary-recorder-benign-revision/live-retry/outlier-analysis.json": {
+    "bytes": 1363,
+    "sha256": "80a0c501f51a570fc62fc55012f82e4ed80941f5298caf216fe93518d2193185"
+  }
+}

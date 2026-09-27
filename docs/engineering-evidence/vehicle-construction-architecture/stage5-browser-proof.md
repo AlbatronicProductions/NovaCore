@@ -1,0 +1,15 @@
+# Stage5 browser engineering exercise
+
+Local tool, verified accepted catalog/GLBs, port58742. This is automated engineering exercise, **not Project Control manual acceptance**.
+
+Stage6 later extended this same tool with static instantiate/retire. Browser proof: DLV identity1/digest6101bcb887568d9d remained unchanged while draft rotated; player two-part identity2/digest2aa49163dfd15595 remained unchanged while draft cleared; both retired. Capsule-only player identity3 showed one part/four pods/ten stores/24 actuators and2882.350kg empty-store reference mass. No console errors. This is the same catalog/compiler/runtime path, not DLV-specific handoff code.
+
+Through visible browser controls: selected booster-body definition; previewed/accepted p1 root; attempted wrong-family release socket and received Invalid snap contract without changing draft; attached p2 and p3 using one booster-engine definition at ENGINE_0/ENGINE_1 with explicit Propellant/Data; reconnected p3 to ENGINE_2; rotated whole assembly90 degrees; removed p3; downloaded canonical two-part design; loaded nine-part stock DLV through the same Load operation; inspected connection/service graphs; reloaded the downloaded two-part design through the actual file chooser.
+
+Saved/reloaded player design revision6: SHA256 `2aa49163dfd15595cf1f7b457b80d5cd812d828b50a614be4dd293c2e78ace00`,2158bytes. Stock DLV design digest remains `6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564`. Browser screenshot inspection found controls legible and schematic labeled honestly.
+
+Download retained at `C:/Users/Tyler/Downloads/vehicle-design.json`. This small generated proof is disposable/reproducible; no automatic deletion. It is not accepted DLV source or a runtime save. Browser temporary session draft is also disposable. No deployment or physics admission occurred.
+
+Core permanent suite:31 assertions, including immutable refusal, stale previews, repeated definitions, exact roundtrip, ordinary-mount reconnection, whole-subtree transforms, metadata/control pruning, wrong thread and retired session. Stage5 performance is in stage5-performance.json; cached inspection is distinct from cold compile/edit work. UI build Release0 warnings/errors.
+
+Independent initial UI review found an argument-count failure in Math.min/Math.max over admitted large designs. The one Stage5 correction streams geometry extents, retains shared catalog socket/subpart data instead of repeating it per placement, and limits schematic socket markers to2048 with an explicit detail note. Full model/inspection data remain. A committed edit is no longer mislabeled refused if presentation refresh fails. Permanent Node coverage reconstructs528384 points,4196352 per-document maximum and8392704 combined current/preview points, plus empty/rigid-transform cases. Core31 checks still pass; corrected UI Release build and actual stock/rotation/file-reload browser retest pass, no console errors. Independent corrected-source review PASS. **Stage5 PASS — PROMOTE**. Manual acceptance remains PENDING.

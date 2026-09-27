@@ -469,9 +469,12 @@ public static class PlanetaryProductionSphericalBillboardTes
             targetPixels <= 0d) throw new ArgumentOutOfRangeException();
         var midpoint = (firstCameraRelative + secondCameraRelative) * .5d;
         var distance = Math.Sqrt(midpoint.LengthSquared);
+        var distanceFade = 1d - Math.Clamp(distance / rangeMetres, 0d, 1d);
+        if (distanceFade == 0d || firstCameraRelative == secondCameraRelative) return 1d;
         var focal = viewportHeight / (2d * Math.Tan(verticalFovRadians * .5d));
         var aDepth = -firstCameraRelative.Z;
         var bDepth = -secondCameraRelative.Z;
+        if (aDepth == 0d || bDepth == 0d) return 64d;
         var ax = focal * firstCameraRelative.X / aDepth;
         var ay = focal * firstCameraRelative.Y / aDepth;
         var bx = focal * secondCameraRelative.X / bDepth;
@@ -485,11 +488,12 @@ public static class PlanetaryProductionSphericalBillboardTes
         {
             var skew = (alignment - .8d) / .2d;
             var midpointDepth = -(firstCameraRelative.Z + secondCameraRelative.Z) * .5d;
+            if (midpointDepth == 0d) return 64d;
             var compensated = Math.Sqrt(2d) * focal * (.6d * edgeLength) /
                 Math.Abs(midpointDepth);
-            screen = screen + (compensated - screen) * skew;
+            screen = skew >= 1d ? compensated : screen + (compensated - screen) * skew;
         }
-        var distanceFade = 1d - Math.Clamp(distance / rangeMetres, 0d, 1d);
+        if (!double.IsFinite(screen)) return 64d;
         return Math.Clamp(screen * distanceFade / targetPixels, 1d, 64d);
     }
 

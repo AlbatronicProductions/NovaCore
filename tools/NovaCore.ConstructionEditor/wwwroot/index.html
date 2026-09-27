@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="editor-token" content="__EDITOR_TOKEN__"><title>NovaCore Construction</title><link rel="stylesheet" href="editor.css"></head>
+<body><header><div><b>NOVACORE</b> <span>Construction / development library</span></div><small id="revision">Connecting…</small></header>
+<main><aside>
+<h1>Build a design</h1><p>Place a root, then preview and accept each attachment. New stores start empty.</p>
+<label>Part definition<select id="definition"></select></label><div id="definitionInfo" class="note"></div>
+<label>Design name<input id="designId" value="player.development"></label>
+<label>New instance ID<input id="instance" value="p1"></label>
+<button id="root">Preview root</button>
+<hr><label>Operation<select id="mode"><option value="add">Add selected definition</option><option value="reconnect">Reconnect selected part</option></select></label>
+<label>Parent part<select id="parent"></select></label><label>Parent interface<select id="parentInterface"></select></label>
+<label>Child interface<select id="childInterface"></select></label>
+<label>Connection ID<input id="connectionId" value="c1"></label>
+<fieldset><legend>Connection services</legend><label><input id="propellant" type="checkbox"> Propellant</label><label><input id="electricity" type="checkbox"> Electricity</label><label><input id="data" type="checkbox"> Command/data</label><label><input id="detachable" type="checkbox"> Detachable metadata</label></fieldset>
+<button id="preview">Preview connection</button><div class="row"><button id="accept">Accept preview</button><button id="cancel" class="quiet">Cancel preview</button></div>
+<hr><label>Stock design<select id="stock"></select></label><button id="loadStock">Load stock design</button>
+<div class="row"><button id="save">Save design</button><label class="button quiet">Reload file<input id="load" type="file" accept=".json,application/json" hidden></label></div>
+<button id="clear" class="quiet">Clear draft</button>
+<hr><button id="instantiate">Instantiate static runtime</button><button id="retire" class="quiet">Retire runtime</button>
+<p id="runtime" class="note">No runtime instance.</p>
+</aside><section class="workspace">
+<div id="status" role="status">Ready.</div>
+<div class="heading"><div><h2>Assembly schematic</h2><p>Physical frames, sockets and dry COM. Mesh rendering and flight are outside this route.</p></div><label>Projection<select id="projection"><option value="XY">X / Y</option><option value="XZ">X / Z</option><option value="YZ">Y / Z</option></select></label></div>
+<svg id="scene" viewBox="0 0 1000 460" role="img" aria-label="Assembly and placement preview"></svg>
+<div id="summary" class="note"></div>
+<div class="toolbar"><label>Selected part<select id="selected"></select></label><button id="remove" class="quiet">Remove subtree</button><button id="control" class="quiet">Select control part</button><span>Rotate assembly</span><button data-axis="X">X +90°</button><button data-axis="Y">Y +90°</button><button data-axis="Z">Z +90°</button></div>
+<div class="inspection"><section><h2>Part & services</h2><pre id="inspection">Place a root to inspect its interfaces.</pre></section>
+<section><h2>Initial configuration</h2><p>Saved design quantities; these do not mutate a running vehicle.</p><textarea id="config" spellcheck="false" aria-label="Initial configuration JSON"></textarea><button id="applyConfig">Apply configuration</button></section></div>
+<details><summary>Connection, fuel and electrical graphs</summary><pre id="graphs"></pre><button id="applyConnection">Apply service flags to connection ID</button></details>
+<details><summary>Symmetry, actions and explicit service links</summary><p>Design metadata only. Keyed sockets fix mating orientation. No separation or flight staging executes here.</p><textarea id="metadata" spellcheck="false" aria-label="Design metadata JSON"></textarea><button id="applyMetadata">Apply metadata</button></details>
+</section></main><script type="module" src="editor.js"></script></body></html>

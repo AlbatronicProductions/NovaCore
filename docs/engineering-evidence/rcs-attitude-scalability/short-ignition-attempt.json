@@ -1,0 +1,8 @@
+{
+  "judgment": "FAIL",
+  "step": 19,
+  "checks": 148,
+  "error": "System.IO.InvalidDataException: Editor integration: hosted Z ignition; Z ignite \u00b7 X cutoff \u00b7 WASD/QE attitude \u00b7 mouse orbit \u00b7 F craft \u00b7 Menu returns to construction\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.RequireQualification(Boolean value, String label) in C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.Qualification.cs:line 46\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.QualifyApplicationFrame(NativeInputState& input) in C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.ApplicationQualification.cs:line 86",
+  "candidatePackageSha256": "4eeadff671b13768c49ece9f0ac45bd651af7c70e3f0f85b788f371c56ace533",
+  "classification": "One scripted Z action did not activate; engine remained healthy and supported, mass unchanged. Original run did not enable input trace; exact cause is not established. No production correction or retry injection added. Independent fresh trace-enabled route records actual native action, focus-active state, admitted main command, and realized main output. Retained as a nonreproduced integration-attempt failure, not erased by the passing rerun."
+}

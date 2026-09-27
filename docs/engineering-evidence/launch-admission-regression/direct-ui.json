@@ -1,0 +1,28 @@
+{
+  "executable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+  "mode": "ordinary application; no qualification arguments",
+  "display": "native 3440x1440 BorderlessFullscreen; native viewport 3440x1322 inside application controls",
+  "actions": [
+    "load original Test 1",
+    "Launch: readable POWER_PATH/FUEL_PATH dialog with distinct paragraphs",
+    "Back to construction",
+    "Fill consumables: 1600 kg propellant; charged; stale error cleared",
+    "Launch: single Florida slab, SUPPORTED, mass 2164 kg",
+    "return to retained editor",
+    "resume same SUPPORTED flight",
+    "return; Undo only temporary fill; saved/empty state restored",
+    "close; normal exit 0"
+  ],
+  "savedFilesAfter": {
+    "Test 1.craft.json": "f9ed66d68fc9691e11e25cbc95e0c1e024700699b5e2d4eed5912ab3c0bc599d",
+    "UX-Review-20260922.craft.json": "7936a61295828a13c10fb39c7d43adfe6e3b86d1b8c35d865c8a9feda7459d2a"
+  },
+  "logPath": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Logs\\20260926-172114-018-35192-aa834468747043dfab069fb78a36e9e2\\segment-0.log",
+  "logSha256": "8355c851f79fe8de8c67463b85507af677f5a9063a65e6ff10c32a31d3f91f90",
+  "witnessLines": [
+    "APPLICATION_LAUNCH_REFUSED source=f9ed66d68fc9691e11e25cbc95e0c1e024700699b5e2d4eed5912ab3c0bc599d codes=POWER_PATH,FUEL_PATH reason=Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.",
+    "MODULAR_FLIGHT_READY source=b00aeae3c9e6ae8b0c433fd9f887553ea72b99147e608da897b706405e943aea compiled=12460e22b107c43bb8852ea572f60916f2b8ee5ed755bd1c00f28a52ebaf44e7 vehicle=ConstructionVehicleIdentity { Vessel = SpacecraftId { Value = 1 }, Generation = 1 } parts=12 epoch=843715364023657 mass=2164 physical=continuous-64Hz main=OFF controls=neutral",
+    "APPLICATION_LAUNCH process=35192 source=b00aeae3c9e6ae8b0c433fd9f887553ea72b99147e608da897b706405e943aea compiled=12460e22b107c43bb8852ea572f60916f2b8ee5ed755bd1c00f28a52ebaf44e7 epoch=843715364023657 sourceRevision=2 dirty=True",
+    "Session ended; exitCode=0"
+  ]
+}

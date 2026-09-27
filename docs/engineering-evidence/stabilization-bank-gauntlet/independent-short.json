@@ -1,0 +1,95 @@
+{
+  "judgment": "APPLICATION_INTEGRATION_PASS",
+  "playerPass": false,
+  "checks": 391,
+  "tank": "nc.tank.short-2",
+  "process": 9072,
+  "window": 5965898,
+  "parts": 12,
+  "source": "a39332ca1929b13fbc290b98cddeab131e5393e1582319f6c8df060ef2abc224",
+  "compiled": "704fc859f46616c945cd206605fec1ddc23e6383a302220cd6e63a419d6909fb",
+  "retainedEpoch": 843671223117999,
+  "finalEpoch": 843671223211749,
+  "frames": 3800,
+  "warmWindows": [
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.554200172424316,
+        "p95": 5.88129997253418,
+        "p99": 6.069200038909912,
+        "max": 6.270199775695801
+      },
+      "cpuMs": {
+        "median": 0.0095,
+        "p95": 0.0411,
+        "p99": 0.0894,
+        "max": 0.0981
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.55079984664917,
+        "p95": 5.9182000160217285,
+        "p99": 6.072700023651123,
+        "max": 10.073999404907227
+      },
+      "cpuMs": {
+        "median": 0.0049,
+        "p95": 0.0229,
+        "p99": 0.055,
+        "max": 0.0612
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.548399925231934,
+        "p95": 5.869100093841553,
+        "p99": 6.080499649047852,
+        "max": 6.368100166320801
+      },
+      "cpuMs": {
+        "median": 0.0062,
+        "p95": 0.0341,
+        "p99": 0.0552,
+        "max": 0.0564
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native": "fa3e188a5f45585d5e5074258de5f86662b2b556e68c9ce46954e352075161fe"
+}

@@ -283,7 +283,9 @@ public static class EarthLocalTerrainElevationDataset
     {
         internal Snapshot(PlanetaryLocalTerrainPackHeader header, byte detailFrequency, byte payloadVersion,
             Dictionary<PlanetaryLocalTerrainSectorId, DecodedSector> residuals, string sha256, long byteCount)
-        { Header = header; DetailFrequency = detailFrequency; PayloadVersion = payloadVersion; Residuals = residuals; Sha256 = sha256; ByteCount = byteCount; }
+        { Header = header; DetailFrequency = detailFrequency; PayloadVersion = payloadVersion; Residuals = residuals; Sha256 = sha256; ByteCount = byteCount;
+          ResidualUpperBound=residuals.Values.Max(s=>CollisionResidualUpperBound(s.MinimumMetres,s.MaximumMetres)); }
+        internal double ResidualUpperBound {get;}
         internal string Sha256 { get; }
         internal long ByteCount { get; }
         internal PlanetaryLocalTerrainPackHeader Header { get; }
@@ -295,6 +297,22 @@ public static class EarthLocalTerrainElevationDataset
     private static readonly object Gate = new();
     private static Snapshot? _snapshot;
     public static bool IsLoaded => Volatile.Read(ref _snapshot) is not null;
+    // Include finite encoded interpolation, the source float delta and smooth
+    // coverage arithmetic, plus absent-sector zero, at every published level.
+    internal static double ResidualUpperBound=>(Volatile.Read(ref _snapshot)??throw new InvalidOperationException("Physical regional data not loaded.")).ResidualUpperBound;
+    internal static double CollisionResidualUpperBound(float minimum,float maximum)
+    {
+        var delta=maximum-minimum;
+        if(!float.IsFinite(minimum)||!float.IsFinite(maximum)||!float.IsFinite(delta)||minimum>maximum)
+            throw new InvalidDataException("Invalid regional physical height range.");
+        CollisionFinite code=new(new(0,65535)),fraction=new(new(0,1));
+        var row=CollisionFinite.Lerp(code,code,fraction).Tighten(code.I);
+        var interpolation=CollisionFinite.Lerp(row,row,fraction).Tighten(code.I);
+        var decoded=minimum+(interpolation/65535)*delta;
+        var coverage=(fraction*fraction*(3-2*fraction)).Tighten(new(0,1));
+        var sample=decoded*coverage;
+        return Math.Max(0,((CollisionRange)sample.I.High+sample.E).High);
+    }
 
     // Identity belongs to the once-published winning snapshot, never a later path or load attempt.
     internal static bool TryGetPublishedIdentity(out PlanetaryLocalTerrainPackHeader header, out string sha256, out long byteCount)
@@ -367,7 +385,7 @@ public static class EarthLocalTerrainElevationDataset
             lock (Gate) _snapshot ??= new Snapshot(header, detailFrequency, payloadVersion, residuals, sha256, package.LongLength);
             error = string.Empty; return true;
         }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or OverflowException or OutOfMemoryException)
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or OverflowException or OutOfMemoryException or InvalidDataException)
         { error = $"Local terrain elevation oracle: {exception.Message}"; return false; }
     }
 
@@ -482,6 +500,87 @@ public static class EarthLocalTerrainElevationDataset
         return result;
     }
 
+    internal static bool TryCollisionBounds(CubeSphereFace face,CollisionJet u,CollisionJet v,double addressError,out CollisionJet result,out double heightError)
+    {
+        result=0;heightError=0;var snapshot=Volatile.Read(ref _snapshot);if(snapshot is null)return false;
+        for(var level=(int)snapshot.Header.MaximumSectorLevel;level>=snapshot.Header.MinimumSectorLevel;level--)
+        {
+            var cells=1<<level;var ur=u.V.Inflate(addressError);var vr=v.V.Inflate(addressError);
+            if(ur.Low<0||ur.High>=1||vr.Low<0||vr.High>=1)return false;
+            var x0=(int)Math.Floor(ur.Low*cells);var x1=(int)Math.Floor(ur.High*cells);var y0=(int)Math.Floor(vr.Low*cells);var y1=(int)Math.Floor(vr.High*cells);
+            if(x1-x0>1||y1-y0>1)return false;
+            PlanetaryLocalTerrainSectorId Id(int x,int y)=>new(snapshot.Header.BodyId,snapshot.Header.TerrainVersion,face,level,x,y,snapshot.DetailFrequency,snapshot.PayloadVersion);
+            var any=false;for(var y=y0;y<=y1;y++)for(var x=x0;x<=x1;x++)any|=snapshot.Residuals.ContainsKey(Id(x,y));
+            if(!any)continue;
+            CollisionJet? combined=null;var maxUvGradient=0d;var maximumSamplingError=0d;
+            for(var y=y0;y<=y1;y++)for(var x=x0;x<=x1;x++)
+            {
+                var id=Id(x,y);if(!snapshot.Residuals.TryGetValue(id,out var sector))return false;
+                var lu=(u*cells-x).WithRange((ur*cells-x).Clip(0,1));var lv=(v*cells-y).WithRange((vr*cells-y).Clip(0,1));
+                var sx=3.5+lu*PlanetaryLocalTerrainPackContract.InteriorTexels;var sy=3.5+lv*PlanetaryLocalTerrainPackContract.InteriorTexels;
+                var ex=PlanetaryLocalTerrainPackContract.StoredExtent;var ix0=(int)Math.Floor(sx.V.Low);var ix1=(int)Math.Floor(sx.V.High);var iy0=(int)Math.Floor(sy.V.Low);var iy1=(int)Math.Floor(sy.V.High);
+                if(ix0<0||iy0<0||ix1+1>=ex||iy1+1>=ex||ix1-ix0>4||iy1-iy0>4)return false;
+                CollisionJet? field=null;var gradient=0d;
+                // Exact real decode with the source's stored float delta.
+                // Equal encoded edge sums then prove shared-edge continuity;
+                // finite sample/decode error is accounted separately below.
+                CollisionJet Decode(int xx,int yy)=>new((CollisionRange)sector.MinimumMetres+
+                    ((CollisionRange)sector.Residuals[yy*ex+xx]/65535)*(sector.MaximumMetres-sector.MinimumMetres),0,0,0,0,0);
+                for(var yy=iy0;yy<=iy1;yy++)for(var xx=ix0;xx<=ix1;xx++)
+                {
+                    var tx=sx.WithRange(sx.V.Clip(xx,xx+1))-xx;var ty=sy.WithRange(sy.V.Clip(yy,yy+1))-yy;
+                    var a=Decode(xx,yy);var b=Decode(xx+1,yy);var c=Decode(xx,yy+1);var d=Decode(xx+1,yy+1);
+                    var sample=a+(b-a)*tx+(c-a)*ty+(d-b-c+a)*tx*ty;
+                    field=field is {} prior?prior.Union(sample):sample;
+                    gradient=Math.Max(gradient,CollisionRange.UpperNorm(Math.Max((b.V-a.V).Magnitude,(d.V-c.V).Magnitude),Math.Max((c.V-a.V).Magnitude,(d.V-b.V).Magnitude)));
+                }
+                CollisionJet coverage=1;var full=true;
+                void Edge(bool present,CollisionJet distance){if(present)return;full=false;var t=(distance*32).ClampUnit();coverage=CollisionJet.Minimum(coverage,t*t*(3-2*t));}
+                Edge(x>0&&snapshot.Residuals.ContainsKey(Id(x-1,y)),lu);Edge(x+1<cells&&snapshot.Residuals.ContainsKey(Id(x+1,y)),1-lu);
+                Edge(y>0&&snapshot.Residuals.ContainsKey(Id(x,y-1)),lv);Edge(y+1<cells&&snapshot.Residuals.ContainsKey(Id(x,y+1)),1-lv);
+                // Same-level joins are admitted only with identical physical
+                // edge values and full coverage on both sides. Finest-level
+                // transitions are explicitly unresolved, never replaced by zero.
+                if(x0!=x1||y0!=y1)
+                {
+                    if(!full)return false;
+                    if(x<x1&&!SharedEdge(id,Id(x+1,y),true)||y<y1&&!SharedEdge(id,Id(x,y+1),false))return false;
+                }
+                var value=field!.Value*coverage;combined=combined is {} old?old.Union(value):value;
+                maxUvGradient=Math.Max(maxUvGradient,(((CollisionRange)gradient)*256*cells+((CollisionRange)field.Value.V.Magnitude)*1.5*32*cells*((CollisionRange)2).Sqrt()).High);
+                // Production interpolates encoded integers before decoding;
+                // the analytical field interpolates finite decoded corners.
+                // Bound both source orders, rather than assuming they are equal.
+                CollisionFinite code=new(new(0,65535));CollisionFinite fraction=new(new(0,1));
+                var row=CollisionFinite.Lerp(code,code,fraction).Tighten(code.I);
+                var encoded=CollisionFinite.Lerp(row,row,fraction).Tighten(code.I)/65535;
+                var delta=sector.MaximumMetres-sector.MinimumMetres;
+                var actual=sector.MinimumMetres+encoded*delta;
+                var decoded=sector.MinimumMetres+(code/65535)*delta;
+                var w=full?(CollisionFinite)1:(fraction*fraction*(3-2*fraction)).Tighten(new(0,1));
+                // Power-of-two local scaling and the active edge subtraction
+                // are exact. Only sampleX=3.5+256*local and its Y counterpart
+                // move the interpolation point; their maximum result is259.5.
+                var moved=(((CollisionRange)gradient)*((CollisionRange)2).Sqrt()*CollisionFinite.Round(259.5)).High;
+                var arithmetic=(actual*w).E;
+                maximumSamplingError=Math.Max(maximumSamplingError,(((CollisionRange)moved)+arithmetic+decoded.E).High);
+            }
+            result=combined!.Value;heightError=(((CollisionRange)maxUvGradient)*addressError*((CollisionRange)2).Sqrt()+maximumSamplingError).High;return true;
+        }
+        return true; // The complete selected-region search proves absent residual, as in H.
+        bool SharedEdge(PlanetaryLocalTerrainSectorId a,PlanetaryLocalTerrainSectorId b,bool horizontal)
+        {
+            var left=snapshot.Residuals[a];var right=snapshot.Residuals[b];var n=PlanetaryLocalTerrainPackContract.StoredExtent;
+            if(left.MinimumMetres!=right.MinimumMetres||left.MaximumMetres!=right.MaximumMetres)return false;
+            for(var k=0;k<n;k++)
+            {
+                var l=horizontal?(int)left.Residuals[k*n+259]+left.Residuals[k*n+260]:(int)left.Residuals[259*n+k]+left.Residuals[260*n+k];
+                var r=horizontal?(int)right.Residuals[k*n+3]+right.Residuals[k*n+4]:(int)right.Residuals[3*n+k]+right.Residuals[4*n+k];
+                if(l!=r)return false;
+            }
+            return true;
+        }
+    }
     private static double Lerp(double first, double second, double amount) => first + (second - first) * amount;
 
     private static double Coverage(Snapshot snapshot, in PlanetaryLocalTerrainSectorId sector, double localU, double localV)

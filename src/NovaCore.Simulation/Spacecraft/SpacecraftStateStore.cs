@@ -27,7 +27,7 @@ internal sealed partial class SpacecraftStateStore
     // Optional cold storage: unchanged legacy/contact stores incur no new endpoint array.
     internal void PrepareAppliedEndpointStorage() => _appliedEndpoints ??= new SpacecraftAppliedEndpoint[_definitions.Length];
     private bool IsApplied(int index) => _appliedEndpoints is not null && _appliedEndpoints[index].Validity != AppliedEndpointValidity.Invalid;
-    private bool IsInstantaneous(int index) => IsApplied(index) || IsAssembly(index);
+    private bool IsInstantaneous(int index) => IsApplied(index) || IsAssembly(index) || IsConstruction(index);
     internal bool TryGetAppliedEndpoint(SpacecraftId id, out SpacecraftAppliedEndpoint endpoint)
     {
         if (TryGetIndex(id, out var index) && IsApplied(index)) { endpoint = _appliedEndpoints![index]; return true; }
@@ -36,7 +36,7 @@ internal sealed partial class SpacecraftStateStore
     internal bool TryPrepareAppliedSlot(SpacecraftId id, in SpacecraftPhysicalSource expected, out int index)
     {
         if (!TryGetIndex(id, out index) || _appliedEndpoints is null) return false;
-        if (IsAssembly(index)) return false;
+        if (IsAssembly(index) || IsConstruction(index)) return false;
         if (expected.IsEndpoint) return IsApplied(index) && _appliedEndpoints[index].SameBits(expected.Endpoint);
         return !IsApplied(index) && _hasRigidBody[index] && _translations[index] == expected.Linear &&
             _rigidBodies[index] == expected.Angular && _properties[index] == expected.Properties;

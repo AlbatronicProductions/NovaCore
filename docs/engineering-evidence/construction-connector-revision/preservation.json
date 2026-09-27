@@ -1,0 +1,70 @@
+{
+  "utc": "2026-09-26T04:29:26.3731145Z",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "headUnchanged": true,
+  "indexUnchanged": true,
+  "publicRefsUnchanged": true,
+  "worktreesUnchanged": true,
+  "entryFiles": 3646,
+  "unchanged": 3635,
+  "changed": [
+    {
+      "before": "d602fc1e563d9fc40c030425b113b36ea54ba5195d66a5e9c3ca3aa1ced0b409",
+      "after": "b4fe56075701c6470b9615305b869ed798707d66761ef001fa465d44268bb60d",
+      "path": "assets/vehicles/modular-starter/block.physics.json"
+    },
+    {
+      "before": "378a8a7abd773266e910cb84f77e33faa9b24d59ffbd0245834a36f61a3f2957",
+      "after": "2356329a680ac6091645419094e90539c4ee6ddeb2597a3e5888fd433d662852",
+      "path": "assets/vehicles/modular-starter/catalog.json"
+    },
+    {
+      "before": "f6e5edd893b9ad79324edcc9a9ce5afeb0de6058db7034819565dea515fedd16",
+      "after": "c8303e4ae295b1e4ca1b5d0648188a0fc5e9aa37d9abc2bb31138b5c1e6da136",
+      "path": "assets/vehicles/modular-starter/content-provenance.json"
+    },
+    {
+      "before": "0760eb67a528435cc33e209df649bc424ee01140b6a3ed4bd4a0d21a283385ff",
+      "after": "388bb89d68c4f687ca7383d7022b3a7e8f1675f142939baddc30a53189802d9b",
+      "path": "tests/NovaCore.Simulation.Tests/ModularCraftTests.Compiler.cs"
+    },
+    {
+      "before": "7d69e0b2ccc5190201f469cef421ea74d8d7ac8b5034f09a175a97dc067c5866",
+      "after": "c05cf5423396ecc598cbee6ba623b7e1c04984f2392e50108b991d62e233a6cc",
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs"
+    },
+    {
+      "before": "a0738f79a408e196b7819f3a6eeb894c68a37693abe512ae2d46b2ebdad63fe9",
+      "after": "a993c613a086ddb1e4415c708b943caa47b9fd6dcbf17bf88364a3e99e121681",
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs"
+    },
+    {
+      "before": "73b3c29dde099a9515a131758696f9a16946878333b3d3b455d685f39eceebcf",
+      "after": "262b80b3c98c7143617a838783bbbcc46529df9d05cc27ab25bcf00d763d5757",
+      "path": "tools/vehicle-construction/author-modular-starter.py"
+    },
+    {
+      "before": "fcef1a09db3b84bf90a34e54066bf6c96b23b95e4b419c57e6745a4d556afebe",
+      "after": "19fcd0a2f0c6cfb224c18b0b5400064ab7d41021d2276614ac792b02d9f890fd",
+      "path": "tools/vehicle-construction/check-modular-geometry.py"
+    },
+    {
+      "before": "3982b2acb383ebdd0d35b3fcb49eec71cd2e7222cb308278f0fb1d2513fbd1e5",
+      "after": "9720ba7014ff9453599605be88d00c8d54f2fa360d5bce51062c8fed5718228c",
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj"
+    },
+    {
+      "before": "e503dc3a445a98e1a7d64e94a69fc2dda2d56afbbdcbc71f6eddb6549b4b2566",
+      "after": "78ab9cbf51d014d5f06ee469d7c297bd50739f044f03fb1559b1480458766d3f",
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs"
+    },
+    {
+      "before": "750813aa4f21a0df63df2ca23aedf97826753f8993dd87a6f89c7a3dcd39e8f4",
+      "after": "fcb4a9dab0fcf95b06b7de4c4ddc884a99dec9cf2958d22b40d73f1c06d70340",
+      "path": "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs"
+    }
+  ],
+  "missing": [],
+  "ksaUnchanged": true,
+  "settingsUnchanged": true
+}

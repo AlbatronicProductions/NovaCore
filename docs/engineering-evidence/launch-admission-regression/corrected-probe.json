@@ -1,0 +1,124 @@
+[
+  {
+    "label": "short",
+    "filled": false,
+    "parts": 12,
+    "jets": 32,
+    "Function": false,
+    "admission": "Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.\n\nPropellant is unavailable to one or more engines or attitude jets. Fill and enable connected tanks; check fuel connections if the problem remains.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "short",
+    "filled": true,
+    "parts": 12,
+    "jets": 32,
+    "Function": true,
+    "admission": "early readiness passed",
+    "unchanged": true,
+    "diagnosticCodes": [],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "long",
+    "filled": false,
+    "parts": 12,
+    "jets": 32,
+    "Function": false,
+    "admission": "Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.\n\nPropellant is unavailable to one or more engines or attitude jets. Fill and enable connected tanks; check fuel connections if the problem remains.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "long",
+    "filled": true,
+    "parts": 12,
+    "jets": 32,
+    "Function": true,
+    "admission": "early readiness passed",
+    "unchanged": true,
+    "diagnosticCodes": [],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "two-short",
+    "filled": false,
+    "parts": 13,
+    "jets": 32,
+    "Function": false,
+    "admission": "Launch refused. Electrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.\n\nPropellant is unavailable to one or more engines or attitude jets. Fill and enable connected tanks; check fuel connections if the problem remains.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "two-short",
+    "filled": true,
+    "parts": 13,
+    "jets": 32,
+    "Function": true,
+    "admission": "early readiness passed",
+    "unchanged": true,
+    "diagnosticCodes": [],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "witness-long-two-rings",
+    "filled": false,
+    "parts": 21,
+    "jets": 64,
+    "Function": false,
+    "admission": "Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.\n\nElectrical power is unavailable to one or more required systems. Charge connected batteries and enable electrical systems.\n\nPropellant is unavailable to one or more engines or attitude jets. Fill and enable connected tanks; check fuel connections if the problem remains.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "ATTITUDE_AUTHORITY",
+      "ATTITUDE_COUNT",
+      "FUEL_PATH",
+      "POWER_PATH"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "label": "witness-long-two-rings",
+    "filled": true,
+    "parts": 21,
+    "jets": 64,
+    "Function": false,
+    "admission": "Launch refused. This craft has 64 attitude jets. The current flight profile supports 1 to 32 jets; adjust the attitude hardware.",
+    "unchanged": true,
+    "diagnosticCodes": [
+      "ATTITUDE_AUTHORITY",
+      "ATTITUDE_COUNT"
+    ],
+    "admissionDiagnosticCodes": []
+  },
+  {
+    "savedWitness": "Test 1.craft.json",
+    "sourceHash": "f9ed66d68fc9691e11e25cbc95e0c1e024700699b5e2d4eed5912ab3c0bc599d",
+    "load": "passed",
+    "before": [
+      "POWER_PATH",
+      "FUEL_PATH"
+    ],
+    "after": true,
+    "fileUnchanged": true
+  },
+  {
+    "savedWitness": "UX-Review-20260922.craft.json",
+    "sourceHash": "7936a61295828a13c10fb39c7d43adfe6e3b86d1b8c35d865c8a9feda7459d2a",
+    "load": "Missing revision or changed part definition.",
+    "fileUnchanged": true
+  }
+]

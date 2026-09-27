@@ -26,6 +26,7 @@ layout(location = 1) out vec3 normal;
 layout(location = 2) out vec3 cameraRelativePosition;
 layout(location = 3) flat out uint mesh;
 layout(location = 4) out vec3 material;
+layout(location = 5) flat out uint editorStyle;
 
 // Right-handed Hamilton rotation, XYZW quaternion: q * v * conjugate(q).
 vec3 Rotate(vec4 q, vec3 v) {
@@ -40,6 +41,20 @@ void main() {
   vec3 presented = local + relativePosition;
   gl_Position = frameData.camera.viewProjection * vec4(presented, 1.0);
   color = inColor;
+  editorStyle=0u;
+  // Presentation-only editor tint. All ordinary and exhaust padding semantics
+  // remain unchanged; no mesh/material duplication or physical data is needed.
+  if ((object.padding0 & 0xffffff00u) == 0x4e434500u) {
+    uint mode = object.padding0 & 255u;
+    editorStyle=mode;
+    if (mode == 1u) color = mix(inColor, vec3(0.12,1.0,0.36),0.78);
+    if (mode == 2u) color = mix(inColor, vec3(1.0,0.10,0.12),0.82);
+    if (mode == 3u) color = mix(inColor, vec3(0.1,0.65,1.0),0.48);
+    if (mode == 4u) color = vec3(1.0,0.75,0.10);
+    if (mode == 5u) color = vec3(1.0,0.15,0.1);
+    if (mode == 7u) color = vec3(0.2,1.0,0.55);
+    if (mode == 6u) color = mix(inColor,vec3(0.20,0.70,1.0),0.7);
+  }
   normal = normalize(Rotate(object.rotation, object.mesh>=1024u?inNormal/object.scale.xyz:inNormal));
   cameraRelativePosition = presented;
   mesh = object.mesh;

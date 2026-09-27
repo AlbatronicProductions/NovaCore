@@ -1,0 +1,903 @@
+{
+  "schema": "novacore.modular-gate5-results/1",
+  "judgment": "PASS",
+  "playerPass": false,
+  "tests": {
+    "simulationOperationsDebug": 195,
+    "gate3": 88,
+    "gate2": 86,
+    "simulationOperationsRelease": 195,
+    "graphicsAbi": 68,
+    "preservedRegressionSuites": 21,
+    "graphicsSharedRegression": "PASS",
+    "gate4": 160
+  },
+  "builds": {
+    "solutionDebug": "PASS",
+    "nativeDebug": "PASS",
+    "editorDebug": "PASS",
+    "solutionRelease": "PASS",
+    "nativeRelease": "PASS",
+    "editorRelease": "PASS"
+  },
+  "viewport": {
+    "release": {
+      "judgment": "ENGINEERING_VIEWPORT_PASS",
+      "playerPass": false,
+      "checks": 514,
+      "frames": 455,
+      "parts": 12,
+      "sourceDocument": "2ac7cbe12db2a54166e40df8e7a83ec6e772fd0ec270c896e17edabbc086ba2d",
+      "operationAndFrameMs": {
+        "median": 5.546799659729004,
+        "p95": 7.724800109863281,
+        "p99": 38.872798919677734,
+        "max": 91.84040069580078
+      },
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.5590996742248535,
+            "p95": 5.977899551391602,
+            "p99": 6.309799671173096,
+            "max": 6.433599948883057
+          },
+          "cpuMs": {
+            "median": 0.0314,
+            "p95": 0.1023,
+            "p99": 0.2159,
+            "max": 1.5983
+          },
+          "allocatedBytes": {
+            "median": 1512,
+            "p95": 1512,
+            "p99": 1512,
+            "max": 1512
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.5528998374938965,
+            "p95": 5.948899745941162,
+            "p99": 7.724800109863281,
+            "max": 11.613399505615234
+          },
+          "cpuMs": {
+            "median": 0.0169,
+            "p95": 0.0833,
+            "p99": 0.2194,
+            "max": 0.8797
+          },
+          "allocatedBytes": {
+            "median": 1512,
+            "p95": 1512,
+            "p99": 1512,
+            "max": 1512
+          },
+          "gc": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.5308003425598145,
+            "p95": 5.8622002601623535,
+            "p99": 5.900400161743164,
+            "max": 5.958099842071533
+          },
+          "cpuMs": {
+            "median": 0.009,
+            "p95": 0.0685,
+            "p99": 0.0794,
+            "max": 0.0903
+          },
+          "allocatedBytes": {
+            "median": 1320,
+            "p95": 1320,
+            "p99": 1320,
+            "max": 1320
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "c24d00b81dc6069b41faa3ee6cdb5b35dd5d795b419289e428bca5dd40c41242"
+    },
+    "debug": {
+      "judgment": "ENGINEERING_VIEWPORT_PASS",
+      "playerPass": false,
+      "checks": 514,
+      "frames": 455,
+      "parts": 12,
+      "sourceDocument": "6474625fa693ecc86545a0d7d8f23e9be68c7639e806df0c87f8be5557884ed2",
+      "operationAndFrameMs": {
+        "median": 5.543900012969971,
+        "p95": 8.982000350952148,
+        "p99": 51.986000061035156,
+        "max": 128.79168701171875
+      },
+      "warmWindows": [
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.5406999588012695,
+            "p95": 6.07480001449585,
+            "p99": 6.309999942779541,
+            "max": 6.490000247955322
+          },
+          "cpuMs": {
+            "median": 0.036,
+            "p95": 0.1065,
+            "p99": 0.177,
+            "max": 0.1997
+          },
+          "allocatedBytes": {
+            "median": 1512,
+            "p95": 1512,
+            "p99": 1512,
+            "max": 1512
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.555300235748291,
+            "p95": 6.163099765777588,
+            "p99": 10.947800636291504,
+            "max": 20.99989891052246
+          },
+          "cpuMs": {
+            "median": 0.0331,
+            "p95": 0.0834,
+            "p99": 0.097,
+            "max": 0.1159
+          },
+          "allocatedBytes": {
+            "median": 1512,
+            "p95": 1512,
+            "p99": 1512,
+            "max": 1512
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 120,
+          "frameMs": {
+            "median": 5.583399772644043,
+            "p95": 6.189399719238281,
+            "p99": 6.591099739074707,
+            "max": 6.920400142669678
+          },
+          "cpuMs": {
+            "median": 0.0222,
+            "p95": 0.0934,
+            "p99": 0.2004,
+            "max": 0.2077
+          },
+          "allocatedBytes": {
+            "median": 1512,
+            "p95": 1512,
+            "p99": 1512,
+            "max": 1512
+          },
+          "gc": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "native": "d96297269630a5cdfd6ee19abc05d92b7b7151dce6b68d6b0d19cc50196dd71d"
+    }
+  },
+  "coldPerformance": {
+    "scope": "Gate 5 cold operations, equivalent fresh fixtures; report-only; preparation excluded; normal GC",
+    "catalog": "996a19fc0550ea5af01ae7748eea493263c08e1c54a8ef8ba3fda1c90eeeab4a",
+    "source": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4",
+    "rows": [
+      {
+        "Name": "preview-one",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 5581.8,
+          "p95": 8038.3,
+          "p99": 8038.3,
+          "max": 8038.3,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 755440,
+          "p95": 755440,
+          "p99": 755440,
+          "max": 755440,
+          "longestP95Run": 16
+        },
+        "gc": [
+          1,
+          1,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/470a9f1a24a55225817a32438fa6e5c37351e5abfbf98747263b7668389509a7"
+      },
+      {
+        "Name": "preview-one",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 5221.5,
+          "p95": 7641.6,
+          "p99": 7641.6,
+          "max": 7641.6,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 755440,
+          "p95": 755440,
+          "p99": 755440,
+          "max": 755440,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/470a9f1a24a55225817a32438fa6e5c37351e5abfbf98747263b7668389509a7"
+      },
+      {
+        "Name": "preview-one",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 6262.8,
+          "p95": 6564.7,
+          "p99": 6564.7,
+          "max": 6564.7,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 755440,
+          "p95": 755440,
+          "p99": 755440,
+          "max": 755440,
+          "longestP95Run": 16
+        },
+        "gc": [
+          1,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/470a9f1a24a55225817a32438fa6e5c37351e5abfbf98747263b7668389509a7"
+      },
+      {
+        "Name": "preview-eight",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 40334,
+          "p95": 48849.2,
+          "p99": 48849.2,
+          "max": 48849.2,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1651392,
+          "p95": 1651392,
+          "p99": 1651392,
+          "max": 1651392,
+          "longestP95Run": 16
+        },
+        "gc": [
+          3,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/ca58a1f1e851444428fde26df078a909f81862bee36afbafc07fd6b3973b433d"
+      },
+      {
+        "Name": "preview-eight",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 37352.2,
+          "p95": 42537.4,
+          "p99": 42537.4,
+          "max": 42537.4,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1651776,
+          "p95": 1651776,
+          "p99": 1651776,
+          "max": 1651776,
+          "longestP95Run": 12
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/ca58a1f1e851444428fde26df078a909f81862bee36afbafc07fd6b3973b433d"
+      },
+      {
+        "Name": "preview-eight",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 5011.3,
+          "p95": 5717.7,
+          "p99": 5717.7,
+          "max": 5717.7,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1651776,
+          "p95": 1651776,
+          "p99": 1651776,
+          "max": 1651776,
+          "longestP95Run": 16
+        },
+        "gc": [
+          3,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/ca58a1f1e851444428fde26df078a909f81862bee36afbafc07fd6b3973b433d"
+      },
+      {
+        "Name": "refused-eight",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 3873.4,
+          "p95": 4208.6,
+          "p99": 4208.6,
+          "max": 4208.6,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1830912,
+          "p95": 1830912,
+          "p99": 1830912,
+          "max": 1830912,
+          "longestP95Run": 16
+        },
+        "gc": [
+          3,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/empty"
+      },
+      {
+        "Name": "refused-eight",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 3609.9,
+          "p95": 3698.8,
+          "p99": 3698.8,
+          "max": 3698.8,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1829888,
+          "p95": 1830912,
+          "p99": 1830912,
+          "max": 1830912,
+          "longestP95Run": 3
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/empty"
+      },
+      {
+        "Name": "refused-eight",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 3609.6,
+          "p95": 3893.4,
+          "p99": 3893.4,
+          "max": 3893.4,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1829888,
+          "p95": 1829888,
+          "p99": 1829888,
+          "max": 1829888,
+          "longestP95Run": 11
+        },
+        "gc": [
+          3,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/empty"
+      },
+      {
+        "Name": "commit-eight",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 8,
+          "p95": 16.8,
+          "p99": 16.8,
+          "max": 16.8,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 3912,
+          "p95": 3912,
+          "p99": 3912,
+          "max": 3912,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "ca58a1f1e851444428fde26df078a909f81862bee36afbafc07fd6b3973b433d/empty"
+      },
+      {
+        "Name": "commit-eight",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 8.2,
+          "p95": 9.8,
+          "p99": 9.8,
+          "max": 9.8,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 3912,
+          "p95": 3912,
+          "p99": 3912,
+          "max": 3912,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "ca58a1f1e851444428fde26df078a909f81862bee36afbafc07fd6b3973b433d/empty"
+      },
+      {
+        "Name": "commit-eight",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 8.1,
+          "p95": 22.5,
+          "p99": 22.5,
+          "max": 22.5,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 3912,
+          "p95": 3912,
+          "p99": 3912,
+          "max": 3912,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "ca58a1f1e851444428fde26df078a909f81862bee36afbafc07fd6b3973b433d/empty"
+      },
+      {
+        "Name": "group-configuration",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 5666.2,
+          "p95": 5804,
+          "p99": 5804,
+          "max": 5804,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1957576,
+          "p95": 1957576,
+          "p99": 1957576,
+          "max": 1957576,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "59ecfb48274adb708b5bc4ed06a860ec41de4bb2dfa44a61f800b417eedea669/empty"
+      },
+      {
+        "Name": "group-configuration",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 5649.3,
+          "p95": 5977.9,
+          "p99": 5977.9,
+          "max": 5977.9,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1957576,
+          "p95": 1961416,
+          "p99": 1961416,
+          "max": 1961416,
+          "longestP95Run": 1
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "59ecfb48274adb708b5bc4ed06a860ec41de4bb2dfa44a61f800b417eedea669/empty"
+      },
+      {
+        "Name": "group-configuration",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 5745.6,
+          "p95": 5937,
+          "p99": 5937,
+          "max": 5937,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1961296,
+          "p95": 1961416,
+          "p99": 1961416,
+          "max": 1961416,
+          "longestP95Run": 3
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "59ecfb48274adb708b5bc4ed06a860ec41de4bb2dfa44a61f800b417eedea669/empty"
+      },
+      {
+        "Name": "group-delete",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 1032.8,
+          "p95": 1154.7,
+          "p99": 1154.7,
+          "max": 1154.7,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 560952,
+          "p95": 560952,
+          "p99": 560952,
+          "max": 560952,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/empty"
+      },
+      {
+        "Name": "group-delete",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 968.6,
+          "p95": 1031,
+          "p99": 1031,
+          "max": 1031,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 560440,
+          "p95": 560440,
+          "p99": 560440,
+          "max": 560440,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/empty"
+      },
+      {
+        "Name": "group-delete",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 957.2,
+          "p95": 1022.6,
+          "p99": 1022.6,
+          "max": 1022.6,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 560440,
+          "p95": 560440,
+          "p99": 560440,
+          "max": 560440,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/empty"
+      },
+      {
+        "Name": "group-reconnect",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 4827.5,
+          "p95": 5158.3,
+          "p99": 5158.3,
+          "max": 5158.3,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1617496,
+          "p95": 1617496,
+          "p99": 1617496,
+          "max": 1617496,
+          "longestP95Run": 16
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/97ed5f84b8199ba7c50b4d6d4c125859dc144fee7db897e7da757ad277837505"
+      },
+      {
+        "Name": "group-reconnect",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 4697.9,
+          "p95": 4975,
+          "p99": 4975,
+          "max": 4975,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1617048,
+          "p95": 1617496,
+          "p99": 1617496,
+          "max": 1617496,
+          "longestP95Run": 8
+        },
+        "gc": [
+          1,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/97ed5f84b8199ba7c50b4d6d4c125859dc144fee7db897e7da757ad277837505"
+      },
+      {
+        "Name": "group-reconnect",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 4711.3,
+          "p95": 5000.8,
+          "p99": 5000.8,
+          "max": 5000.8,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 1617048,
+          "p95": 1617048,
+          "p99": 1617048,
+          "max": 1617048,
+          "longestP95Run": 16
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/97ed5f84b8199ba7c50b4d6d4c125859dc144fee7db897e7da757ad277837505"
+      },
+      {
+        "Name": "undo",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 5737.1,
+          "p95": 6093.4,
+          "p99": 6093.4,
+          "max": 6093.4,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 2229824,
+          "p95": 2229824,
+          "p99": 2229824,
+          "max": 2229824,
+          "longestP95Run": 16
+        },
+        "gc": [
+          1,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/empty"
+      },
+      {
+        "Name": "undo",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 5751,
+          "p95": 6013.4,
+          "p99": 6013.4,
+          "max": 6013.4,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 2229824,
+          "p95": 2229824,
+          "p99": 2229824,
+          "max": 2229824,
+          "longestP95Run": 16
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/empty"
+      },
+      {
+        "Name": "undo",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 5717.1,
+          "p95": 5979.8,
+          "p99": 5979.8,
+          "max": 5979.8,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 2229824,
+          "p95": 2229824,
+          "p99": 2229824,
+          "max": 2229824,
+          "longestP95Run": 16
+        },
+        "gc": [
+          2,
+          0,
+          0
+        ],
+        "result": "1cac8b29c0a1b67255a544bac5cedffe9758ef374d6c05b95452ce0e9bdddfe4/empty"
+      },
+      {
+        "Name": "redo",
+        "window": 0,
+        "samples": 16,
+        "microseconds": {
+          "median": 1222.1,
+          "p95": 1438.6,
+          "p99": 1438.6,
+          "max": 1438.6,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 737816,
+          "p95": 737816,
+          "p99": 737816,
+          "max": 737816,
+          "longestP95Run": 16
+        },
+        "gc": [
+          1,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/empty"
+      },
+      {
+        "Name": "redo",
+        "window": 1,
+        "samples": 16,
+        "microseconds": {
+          "median": 1208,
+          "p95": 1233.6,
+          "p99": 1233.6,
+          "max": 1233.6,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 737816,
+          "p95": 737816,
+          "p99": 737816,
+          "max": 737816,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/empty"
+      },
+      {
+        "Name": "redo",
+        "window": 2,
+        "samples": 16,
+        "microseconds": {
+          "median": 1259.4,
+          "p95": 1367.3,
+          "p99": 1367.3,
+          "max": 1367.3,
+          "longestP95Run": 1
+        },
+        "allocatedBytes": {
+          "median": 737816,
+          "p95": 737816,
+          "p99": 737816,
+          "max": 737816,
+          "longestP95Run": 16
+        },
+        "gc": [
+          0,
+          0,
+          0
+        ],
+        "result": "209932061a09b5fdd11d09ad8d0359aa6201468ba9185e65c554e320e3139dbb/empty"
+      }
+    ]
+  },
+  "review": {
+    "capsule_closure": "PASS; 160 independent geometry cases and 22 malformed-operation probes; cached geometry immutable",
+    "architecture_verifier": "PASS; final input, socket, conservative geometry review"
+  },
+  "provenance": "Candidate build outputs only; full solution refreshes ordinary sample/test/launcher outputs; no prepare-launcher/package promotion",
+  "ksaWrites": 0
+}

@@ -17,8 +17,11 @@ internal static class WindowLifecycleTests
         Require(File.Exists(sample), "Build the matching Triangle configuration before window tests: " + sample);
         var native = Path.Combine(directory, "NovaCore.Native.dll");
         Require(GraphicsTestHarness.Hash(native) == GraphicsTestHarness.Hash(Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "NovaCore.Native.dll")), "Sample native DLL is stale.");
-        var project = XDocument.Load(Path.Combine(root, "samples", "NovaCore.Triangle", "NovaCore.Triangle.csproj"));
-        var shaders = project.Descendants("RuntimeShader").Select(e => Path.GetFileName(e.Attribute("Include")!.Value.Replace('\\', Path.DirectorySeparatorChar))).ToArray();
+        // The production owner now publishes the complete native shader glob.
+        // Reading the unevaluated MSBuild Include would try to hash literal *.spv.
+        var shaders = Directory.GetFiles(Path.Combine(root,"build",GraphicsTestHarness.NativeDirectory,"shaders"),"*.spv").Select(p=>Path.GetFileName(p)!).ToArray();
+        Require(shaders.Length>0,"Native shader package is empty.");
+        Require(shaders.Order().SequenceEqual(Directory.GetFiles(Path.Combine(directory,"shaders"),"*.spv").Select(Path.GetFileName).Order()),"Sample shader inventory differs from native owner.");
         foreach (var shader in shaders)
             Require(GraphicsTestHarness.Hash(Path.Combine(directory, "shaders", shader)) ==
                 GraphicsTestHarness.Hash(Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "shaders", shader)), "Stale deployed shader: " + shader);

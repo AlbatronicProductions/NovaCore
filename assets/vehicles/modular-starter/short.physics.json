@@ -1,0 +1,37 @@
+{
+  "schema": "novacore.greybox-analytic-source/1",
+  "definition": "nc.tank.short-2",
+  "provenance": "Original NovaCore analytic greybox; author-modular-starter.py; SI; not flight certification",
+  "primitives": [
+    {
+      "id": "shell",
+      "massKg": 120.0,
+      "center": [
+        0.75,
+        0.0,
+        0.0
+      ],
+      "kind": "annulus",
+      "dimensions": [
+        0.5,
+        0.6,
+        1.5
+      ],
+      "rotation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "assumptions": [
+    "Effective dry distributions are fixed in the material frame; gimbal motion changes actuator direction and visual geometry only.",
+    "No plume heating/aerodynamics/stress certification; support load and geometric keep-out qualification only."
+  ]
+}

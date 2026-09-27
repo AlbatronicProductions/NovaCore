@@ -1,0 +1,8 @@
+{
+  "judgment": "FAIL",
+  "step": 24,
+  "checks": 756,
+  "error": "System.InvalidOperationException: Sequence contains more than one element\r\n   at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()\r\n   at System.Linq.Enumerable.TryGetSingle[TSource](IEnumerable`1 source, Boolean& found)\r\n   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.RunApplicationAdversarialChecks() in C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.PersistenceQualification.cs:line 36\r\n   at NovaCore.ConstructionEditor.DesktopEditorForm.QualifyApplicationFrame(NativeInputState& input) in C:\\Users\\Tyler\\.codex\\worktrees\\rcs-scalability\\NovaCore\\tools\\NovaCore.ConstructionEditor\\DesktopEditorForm.ApplicationQualification.cs:line 91",
+  "candidatePackageSha256": "e660f22f0a1bce3e60db10e17667f0896e884daba231be0216bee998a1636ae3",
+  "classification": "Qualification harness incorrectly assumed one symmetry group; flight and768activeRCSframes completed; no final integration acceptance from this attempt."
+}

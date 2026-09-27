@@ -1,0 +1,1348 @@
+{
+  "schema": "novacore.modular-player-regressions/1",
+  "playerPass": false,
+  "reports": [
+    {
+      "report": {
+        "path": "build/modular-player-revision/regressions/results.json",
+        "bytes": 57340,
+        "sha256": "15859696336b59d750dff7a944c5cd369e90e4f42fb568425e4086868a6b95be"
+      },
+      "checkedUtc": "2026-09-22T06:08:30.770070+00:00",
+      "commands": 66,
+      "results": [
+        {
+          "arguments": [
+            "build",
+            "NovaCore.sln",
+            "-c",
+            "Debug",
+            "-p:NativeBuildDirectory=modular-player-revision/native-debug",
+            "-v:q"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 4624.854,
+          "log": "build\\modular-player-revision\\regressions\\00.log",
+          "bytes": 82,
+          "sha256": "72bc5c89b61ed72d019b07598dcb2b07c66cd357f0f57433924c6b2b22ce5ad7",
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Warning(s)",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "arguments": [
+            "build",
+            "NovaCore.sln",
+            "-c",
+            "Release",
+            "-p:NativeBuildDirectory=modular-player-revision/native-release",
+            "-v:q"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 3795.787,
+          "log": "build\\modular-player-revision\\regressions\\01.log",
+          "bytes": 82,
+          "sha256": "2bdd68f1b43f0cd2f9f6c5d46f10c27db09b27f0854d7700742b6ae8a8dcec68",
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Warning(s)",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate2"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 328.688,
+          "log": "build\\modular-player-revision\\regressions\\02.log",
+          "bytes": 81,
+          "sha256": "c85ee7d744747849b7f4bd455d1b10c2efc06941a6cb5058d98585f1955dee82",
+          "outcomes": [
+            "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate3"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 19514.029,
+          "log": "build\\modular-player-revision\\regressions\\03.log",
+          "bytes": 203,
+          "sha256": "e802580a4f67ce7b87121cf10d61c73adc1f0ecc56cea1e820f7ffe41744b80c",
+          "outcomes": [
+            "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate4"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 313.794,
+          "log": "build\\modular-player-revision\\regressions\\04.log",
+          "bytes": 189,
+          "sha256": "4dcf36bd9052960aebbadfb8f14e645e847587d90ce906b11abb6c89fab64912",
+          "outcomes": [
+            "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 996a19fc0550ea5af01ae7748eea493263c08e1c54a8ef8ba3fda1c90eeeab4a"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate5-operations"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 2027.937,
+          "log": "build\\modular-player-revision\\regressions\\05.log",
+          "bytes": 106,
+          "sha256": "3412642d62251d4a0e56b8b2fc7b16d176c80ad053b0df5ea3657b4e24fdf09d",
+          "outcomes": [
+            "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate6"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 3326.629,
+          "log": "build\\modular-player-revision\\regressions\\06.log",
+          "bytes": 147,
+          "sha256": "bd75f00aec9584f465acb72b3cdfbee6d1ae05ecbc6ee1daa75fdbcc6fae3f21",
+          "outcomes": [
+            "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\803c3d8479b348749b0d88147d8e66b3"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate7"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1395.927,
+          "log": "build\\modular-player-revision\\regressions\\07.log",
+          "bytes": 100,
+          "sha256": "e1d8b3efbd8f50277f3049e0425915c7cc16545caf2dbe10ec33f02bbd8b24b9",
+          "outcomes": [
+            "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Debug/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate8"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 3833.49,
+          "log": "build\\modular-player-revision\\regressions\\08.log",
+          "bytes": 654,
+          "sha256": "7edd0b7fb0422cbe9523ec3fa8c23ceb24059ec99cebfc65ef618582255e33ec",
+          "outcomes": [
+            "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate9"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 5451.205,
+          "log": "build\\modular-player-revision\\regressions\\09.log",
+          "bytes": 7282,
+          "sha256": "d155c604a5a11aaa33c681c6b6898ca061a85d3559814637c3db83694adc27b3",
+          "outcomes": [
+            "MODULAR_GATE9 PASS checks=886"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-dynamics"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 2060.68,
+          "log": "build\\modular-player-revision\\regressions\\10.log",
+          "bytes": 1102,
+          "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586",
+          "outcomes": [
+            "MODULAR_GATE10_DYNAMICS PASS checks=23"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-flight"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 12375.709,
+          "log": "build\\modular-player-revision\\regressions\\11.log",
+          "bytes": 2300,
+          "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+          "outcomes": [
+            "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate11"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 6009.428,
+          "log": "build\\modular-player-revision\\regressions\\12.log",
+          "bytes": 45,
+          "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41",
+          "outcomes": [
+            "MODULAR_GATE11_LONG_FLIGHT_PASS checks=8064"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate12-application"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 14070.013,
+          "log": "build\\modular-player-revision\\regressions\\13.log",
+          "bytes": 16145,
+          "sha256": "dbb4fb2f702eca40f208873b1a445ad2e9bc8e77fa5d99e8e194ea885c696072",
+          "outcomes": [
+            "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate2"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 304.492,
+          "log": "build\\modular-player-revision\\regressions\\14.log",
+          "bytes": 81,
+          "sha256": "c85ee7d744747849b7f4bd455d1b10c2efc06941a6cb5058d98585f1955dee82",
+          "outcomes": [
+            "Modular Gate 2 CraftDocument PASS: 86 strict-version/roundtrip/migration checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate3"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 3823.788,
+          "log": "build\\modular-player-revision\\regressions\\15.log",
+          "bytes": 203,
+          "sha256": "55b864ee81f62210ea6816a9fe7d7e8132f0b66507af15a3b24e8c5ed29bf03e",
+          "outcomes": [
+            "Modular Gate 3 transactions PASS: 88 atomic/history/persistence/recovery checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate4"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 304.387,
+          "log": "build\\modular-player-revision\\regressions\\16.log",
+          "bytes": 189,
+          "sha256": "4dcf36bd9052960aebbadfb8f14e645e847587d90ce906b11abb6c89fab64912",
+          "outcomes": [
+            "Modular starter definitions PASS: 160 checks; six definitions; geometric feasibility only, no runtime/flight PASS; catalog 996a19fc0550ea5af01ae7748eea493263c08e1c54a8ef8ba3fda1c90eeeab4a"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate5-operations"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1387.832,
+          "log": "build\\modular-player-revision\\regressions\\17.log",
+          "bytes": 106,
+          "sha256": "3412642d62251d4a0e56b8b2fc7b16d176c80ad053b0df5ea3657b4e24fdf09d",
+          "outcomes": [
+            "Modular Gate 5 operations PASS: 195 checks; direct viewport and integration qualification still required"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate6"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1931.024,
+          "log": "build\\modular-player-revision\\regressions\\18.log",
+          "bytes": 147,
+          "sha256": "7ff8be10dc2d36f021b09bc12c6c1d3327044ff978b2f11d46ac8adfae5069d0",
+          "outcomes": [
+            "Modular Gate 6 persistence PASS: 98 checks; witnesses E:\\NovaCore\\build\\modular-craft-first-playable\\gate6-tests\\cdf854d1ecb74b7186f54be3dd317545"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate7"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1136.069,
+          "log": "build\\modular-player-revision\\regressions\\19.log",
+          "bytes": 100,
+          "sha256": "e1d8b3efbd8f50277f3049e0425915c7cc16545caf2dbe10ec33f02bbd8b24b9",
+          "outcomes": [
+            "Modular Gate 7 compiler PASS: 78 immutable compilation/port/physical checks; runtime not qualified"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate8"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 2647.03,
+          "log": "build\\modular-player-revision\\regressions\\20.log",
+          "bytes": 654,
+          "sha256": "7edd0b7fb0422cbe9523ec3fa8c23ceb24059ec99cebfc65ef618582255e33ec",
+          "outcomes": [
+            "Modular Gate 8 physical service checks PASS: 1911; full gate qualification pending"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate9"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 3886.098,
+          "log": "build\\modular-player-revision\\regressions\\21.log",
+          "bytes": 7283,
+          "sha256": "0381a78b9ed7c990810c66a463e6a2acfeb480b4900bcec172e7ce85a11a2715",
+          "outcomes": [
+            "MODULAR_GATE9 PASS checks=886"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-dynamics"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1270.655,
+          "log": "build\\modular-player-revision\\regressions\\22.log",
+          "bytes": 1102,
+          "sha256": "d880b85cff5a9d7b2d159c8fcc55a72004d7b5fefe04eb9bbfa93b60250bf586",
+          "outcomes": [
+            "MODULAR_GATE10_DYNAMICS PASS checks=23"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-flight"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 3998.176,
+          "log": "build\\modular-player-revision\\regressions\\23.log",
+          "bytes": 2300,
+          "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+          "outcomes": [
+            "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate11"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 2359.452,
+          "log": "build\\modular-player-revision\\regressions\\24.log",
+          "bytes": 45,
+          "sha256": "d7209e3a49a00baab0b2218345fa74e6d0416933eebf7a2cdaac92c5b1488c41",
+          "outcomes": [
+            "MODULAR_GATE11_LONG_FLIGHT_PASS checks=8064"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate12-application"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 5827.579,
+          "log": "build\\modular-player-revision\\regressions\\25.log",
+          "bytes": 16147,
+          "sha256": "7a695df7d0ded378db39404870c9c8feab74b4b2d855aa23671a2c11aaeea0f0",
+          "outcomes": [
+            "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-correctness"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1609.705,
+          "log": "build\\modular-player-revision\\regressions\\26.log",
+          "bytes": 5269,
+          "sha256": "0b4b13c526a4f43058cb82bf769590192fccd4445283682a552970f6da952172",
+          "outcomes": [
+            "FLORIDA_SITE_FRAME PASS positionRoundTrip=4.0783538020105096E-10 velocityRoundTrip=3.0468225842716704E-14 derivativeError=9.017920290485749E-07 gravity=Double3 { X = -8.105698039195347E-06, Y = -9.79401894838773, Z = 0.014248775455661259, LengthSquared = 95.92301018904558, IsFinite = True } authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } east=0",
+            "FLORIDA_SLAB_INITIAL PASS minHeight=-6.661338147750939E-16 allCornerEdgeMargin=23.24410285091158 supportCorners=4 comProjection=(-2.313043373857347E-16,0) supportRectangle=(-0.2599999999999997,0.26000000000000045,-0.26,0.26)",
+            "FLORIDA_STOCK_IDENTITY PASS digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf mass=705 com=Double3 { X = 1.0417021276595744, Y = 0, Z = 0, LengthSquared = 1.085143322770484, IsFinite = True } inertia=Matrix3 { A = 190.47255, B = 0, C = 0, D = 0, E = 731.6006491134758, F = 0, G = 0, H = 0, I = 731.6006491134758 } fuel=30 oxidizer=45 siteDigest=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e origin=Double3 { X = -5270997.711609826, Y = -1870990.5537414225, Z = 3050582.128838567, LengthSquared = 40590073852774.91, IsFinite = True } velocity=Double3 { X = 136.4347925649703, Y = -384.3672157626637, Z = 1.6237584470144013E-05, LengthSquared = 166352.6091753888, IsFinite = True } omega=Double3 { X = -2.9030875231159892E-12, Y = 3.491614592575382E-05, Z = -6.401841061959949E-05, LengthSquared = 5.317494144568192E-09, IsFinite = True }",
+            "FLORIDA_SITE_CHEAP PASS peakPenetration=9.750102006811368E-05 support=600/600 intervals=1200",
+            "FLORIDA_INERTIAL_ORACLE PASS intervals=1200 shortTicks=400 longTicks=800 maxPosition=7.861267317148919E-09 maxVelocity=5.796914039811765E-13 maxOrientationMatrix=1.887379141862766E-15 maxAngular=1.258635097526423E-19 departure=REFUSED_NOT_QUALIFIED",
+            "FLORIDA_SCHEDULE PASS fps=30 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=60 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=150 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=240 intervals=1200 budgetExhausted=0 allFrontiers=EXACT debt=0",
+            "FLORIDA_SCHEDULE PASS fps=0 intervals=1200 budgetExhausted=40 allFrontiers=EXACT debt=0"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-allocation"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 900.066,
+          "log": "build\\modular-player-revision\\regressions\\27.log",
+          "bytes": 373,
+          "sha256": "23a238321a5524a656715431b8e37030872b836b5f111b0f819694448fa00dde",
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=florida-stock-complete-inertial bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=florida-stock-backlog bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=florida-stock-no-work bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-static"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1405.603,
+          "log": "build\\modular-player-revision\\regressions\\28.log",
+          "bytes": 2132,
+          "sha256": "4e2cc77aeb89628f9555bc666b4ad5987cb458d79ee87ea51825efced90137e2",
+          "outcomes": [
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-warp"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 3930.543,
+          "log": "build\\modular-player-revision\\regressions\\29.log",
+          "bytes": 12935,
+          "sha256": "e59a202dfe76afc591c489fbc04268079aae2721b423a943c84013b2e27343be",
+          "outcomes": [
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-moving"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 867.715,
+          "log": "build\\modular-player-revision\\regressions\\30.log",
+          "bytes": 795,
+          "sha256": "00d6124b359e452668e1d5a0e7ffe6960426fa0ddbe900a028719ce70b2e4c65",
+          "outcomes": []
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--florida-slab-camera-costs"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 2238.11,
+          "log": "build\\modular-player-revision\\regressions\\31.log",
+          "bytes": 4450,
+          "sha256": "8a626982bbb849c503898c598757e83483095a7a08775f5a3d9a263e992fd927",
+          "outcomes": [
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--player-engine"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1037.146,
+          "log": "build\\modular-player-revision\\regressions\\32.log",
+          "bytes": 813,
+          "sha256": "4f81a0fff31ee15a845ce29aa5d41c237b9b5661a5c4d9cd60a67504b8b62cc6",
+          "outcomes": [
+            "PLAYER_ENGINE PASS checks=9898"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--player-attitude"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 996.894,
+          "log": "build\\modular-player-revision\\regressions\\33.log",
+          "bytes": 184,
+          "sha256": "4398f6d0e1930d4880d374d72c5b08969d7714747cb9a6bf3be426926b9fdc26",
+          "outcomes": [
+            "PLAYER_ATTITUDE PASS checks=8264"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--player-integrated"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 1402.983,
+          "log": "build\\modular-player-revision\\regressions\\34.log",
+          "bytes": 9782,
+          "sha256": "bd23dd8875576ed48f13cb9a8fc0805a5dec6a2ddbaa38a4af726104a8fc8147",
+          "outcomes": [
+            "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.ReferenceFrames.Tests/bin/Release/net10.0/NovaCore.ReferenceFrames.Tests.dll"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 348.76,
+          "log": "build\\modular-player-revision\\regressions\\35.log",
+          "bytes": 934,
+          "sha256": "854288d65602819deb8d5f40190555305cf734feb043b6eebe38727924638d9f",
+          "outcomes": [
+            "PASS transform algebra",
+            "PASS hierarchy and conversion",
+            "PASS reference-frame graph",
+            "PASS reference-frame paths",
+            "PASS transform resolution",
+            "PASS static universe fixture",
+            "PASS ORB",
+            "PASS CCI/CCF",
+            "PASS rotating velocity",
+            "PASS surface anchor authority",
+            "PASS validation"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Precision.Tests/bin/Release/net10.0/NovaCore.Precision.Tests.dll"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 125.098,
+          "log": "build\\modular-player-revision\\regressions\\36.log",
+          "bytes": 692,
+          "sha256": "ad27ecfa2e6355282e10330cc46be00aa860b7b7ac71989ed2ff75f61871b4cc",
+          "outcomes": [
+            "kilometre        1000           0              PASS",
+            "metre            1              0              PASS",
+            "centimetre       0.02001953125  0              PASS",
+            "millimetre       0.0009765625   0              PASS",
+            "negative root    0.5            0              PASS",
+            "mixed signs      0.02978515625  0              PASS",
+            "near zero        1000           5.204170427930421E-18 PASS",
+            "log options: parsing and verbose-input compatibility passed",
+            "PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.BepuDependency.Tests/bin/Release/net10.0/NovaCore.BepuDependency.Tests.dll"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 79.675,
+          "log": "build\\modular-player-revision\\regressions\\37.log",
+          "bytes": 2215,
+          "sha256": "46b9f239058362b8bf65ab1eec1459970d5561559439d3bf0b2fe9c8ab6a2a00",
+          "outcomes": [
+            "  \"result\": \"PASS\","
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Launcher.Tests/bin/Release/net10.0-windows/NovaCore.Launcher.Tests.dll"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 81.519,
+          "log": "build\\modular-player-revision\\regressions\\38.log",
+          "bytes": 684,
+          "sha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b",
+          "outcomes": [
+            "PASS default selection",
+            "PASS scenario catalog",
+            "PASS contact development scenarios",
+            "PASS powered free-flight scenario",
+            "PASS stock assembly scenario",
+            "PASS player flight control scenario",
+            "PASS Earth fullscreen native preset",
+            "PASS M12D spherical billboard GPU proof preset",
+            "PASS new Earth renderer preset",
+            "PASS Earth fullscreen Solar camera path",
+            "PASS structured launch environment",
+            "PASS launcher build configuration",
+            "PASS Earth orbital arguments",
+            "PASS invariant altitude formatting",
+            "PASS subdivision diagnostic mapping",
+            "PASS Florida launch mapping",
+            "PASS invalid configuration rejection",
+            "PASS diagnostics arguments",
+            "PASS existing production scenarios",
+            "NovaCore launcher tests passed: 19"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 248.468,
+          "log": "build\\modular-player-revision\\regressions\\39.log",
+          "bytes": 165,
+          "sha256": "86f5c3ea9303a0c63568c676a7b9688f143d58b4b85e71a123b7e58d7204a226",
+          "outcomes": [
+            "Modular Part Standard baseline PASS: 33 checks; catalog 751a86d1443f036c56505a845a7a644e09bdf74ba60c6c4c05ae60fe4a371818; full Gate 1 also requires red-team probes"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-redteam"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 207.802,
+          "log": "build\\modular-player-revision\\regressions\\40.log",
+          "bytes": 188,
+          "sha256": "29b094cc6fd0048b71f93652bc72e3240fd5615649349410bcfebd781c142b26",
+          "outcomes": [
+            "Modular Part Standard red team PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-closure"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 262.802,
+          "log": "build\\modular-player-revision\\regressions\\41.log",
+          "bytes": 212,
+          "sha256": "0458f04e3175a43de3c917b53fb801248384d0d97993736398e92cd0fcf56933",
+          "outcomes": [
+            "Modular Gate 1 bounded closure PASS: 58 checks; resource catalog 94d3ada39e190751cd02aa2a97a2cae0e3922982ee4269a710bdb9f09eceda17; socket catalog dde5d4c6d2b452f16da121a3ca24b727483b0c21b180c3f60c200329687e7738"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-admission-audit"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 195.597,
+          "log": "build\\modular-player-revision\\regressions\\42.log",
+          "bytes": 771,
+          "sha256": "8232e8004580a886ab0145b4397b7b7c3f33e0b06a305774c3438c24a4ee806f",
+          "outcomes": [
+            "Modular full admission audit PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-numerics"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 252.112,
+          "log": "build\\modular-player-revision\\regressions\\43.log",
+          "bytes": 89,
+          "sha256": "098411f07de594c6596c7b7d1a2cabdcedd29e14f0cb1394b116b49397f272df",
+          "outcomes": [
+            "Modular Gate 1 numerical admission PASS: 251 independent-rational/scale/boundary checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-json"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 201.002,
+          "log": "build\\modular-player-revision\\regressions\\44.log",
+          "bytes": 45,
+          "sha256": "8cb18250017f31faf65f6bb81aa611b16ab8578d8dc89ef876a363e5254a05b7",
+          "outcomes": [
+            "Modular Gate 1 JSON refusal PASS: 20 checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-aggregate"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 520.068,
+          "log": "build\\modular-player-revision\\regressions\\45.log",
+          "bytes": 99,
+          "sha256": "6ca95841915b4c7477e0548bf0c9a04b0f1bfd7122ea85e86e0d9f0cb27a209e",
+          "outcomes": [
+            "Modular Gate 1 dry aggregate admission PASS: 50 independent centre-first rational/boundary checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-size"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 534.823,
+          "log": "build\\modular-player-revision\\regressions\\46.log",
+          "bytes": 60,
+          "sha256": "679305152014893803ddec204156a6449920cb4242a263606b0187b65e5a6d2a",
+          "outcomes": [
+            "Modular Gate 1 catalog bound PASS: 12 byte-boundary checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--modular-gate1-predicates"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 168.223,
+          "log": "build\\modular-player-revision\\regressions\\47.log",
+          "bytes": 86,
+          "sha256": "cf95d02a28580e9498c79acc15df17031696255abc7631cfe42e6d116639164b",
+          "outcomes": [
+            "Modular Gate 1 physical predicates PASS: 37 independent sign/overlap/boundary checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage1"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 259.446,
+          "log": "build\\modular-player-revision\\regressions\\48.log",
+          "bytes": 112,
+          "sha256": "a0acc2698ec5abc04bd485da2e51bdd2861a1f082ad476dccca678f85ad85897",
+          "outcomes": [
+            "Construction Stage 1 PASS: 24 checks; catalog c25d1615ade47d3e375d1bb13259c98fc0f2fea8f5cbe815fba16208dfc275ce"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage2"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 264.339,
+          "log": "build\\modular-player-revision\\regressions\\49.log",
+          "bytes": 111,
+          "sha256": "0ec2788136429f7fbaa522b3da6fe52f61b70f5a69f8ecbcc493385911b0997e",
+          "outcomes": [
+            "Construction Stage 2 PASS: 28 checks; design 6101bcb887568d9d75e32fbfabf2dfb133c534b014a903517cf5737923722564"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage3"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 2379.578,
+          "log": "build\\modular-player-revision\\regressions\\50.log",
+          "bytes": 93,
+          "sha256": "ba966d1bec17f9b4e73eb92399005e131599a93c6c749e5bd9a9877dc3a2b73d",
+          "outcomes": [
+            "Construction Stage 3 PASS: 2075 checks; exact oracle 400 cases; DLV graph only, no ignition"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage4"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 388.243,
+          "log": "build\\modular-player-revision\\regressions\\51.log",
+          "bytes": 91,
+          "sha256": "6667c7cd462d1dba3a55bd7db9f0591987b88f3799ccf8ccf07455223c9eca9c",
+          "outcomes": [
+            "Construction Stage 4 PASS: 90 checks; power/data independent; no DLV electrical admission"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage5"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 275.761,
+          "log": "build\\modular-player-revision\\regressions\\52.log",
+          "bytes": 102,
+          "sha256": "7d7cafb42e07a99947e09fcaf37d27ebb700c5588121114375a20db5de14dff3",
+          "outcomes": [
+            "Construction Stage 5 core PASS: 31 checks; isolated revision-bound editor; UI qualification separate"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage6"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 539.682,
+          "log": "build\\modular-player-revision\\regressions\\53.log",
+          "bytes": 128,
+          "sha256": "858934df6686eb8f0cf8ef875a096f9d05de1f6d8c5c130e33e4e4e6fe25e25d",
+          "outcomes": [
+            "Construction Stage 6 PASS: 93 checks; shared design admission and once-only runtime registration; no physical-flight admission"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage7"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 288.556,
+          "log": "build\\modular-player-revision\\regressions\\54.log",
+          "bytes": 268,
+          "sha256": "f704501b5a60c8960ec544b248ab12fc3cc8c7230eef144ee665f94db038dc0d",
+          "outcomes": [
+            "Construction Stage 7 PASS: 62 checks; 150 dry + 36 resource regions; 38 actuators; mass 247283.61451443686; COM Double3 { X = 19.305845298919515, Y = 0.0005515133792867957, Z = 1.1493567613128163E-18, LengthSquared = 372.7156630099798, IsFinite = True }; static only"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--construction-stage8-reuse"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 281.319,
+          "log": "build\\modular-player-revision\\regressions\\55.log",
+          "bytes": 155,
+          "sha256": "789507c5d6b82f50fc8bc1fdcbd0bb4ceca3aed219e02268548f88928b0c80e3",
+          "outcomes": [
+            "Construction Stage 8 reuse PASS: 18 checks; capsule-only design 016a853a405a2de74e3f33e40dd756d927f37158f2e7f3c4c771f054477ce163; no launcher assumptions"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--srv01-integration"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 893.937,
+          "log": "build\\modular-player-revision\\regressions\\56.log",
+          "bytes": 220,
+          "sha256": "f672e14e501b8c2c67ce311a5406f280b6b7ee1ea386917ab5f0301e17d2f923",
+          "outcomes": [
+            "ASSEMBLY_FOUR_HORN_OWNERSHIP PASS checks=16260 independent_trajectories=24",
+            "SRV01_INTEGRATION PASS sixteen endpoints/identity/shared-feed/mass/COM/tensor/command-wrench/bit15/refusals/replay/24-independent-trajectories"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--assembly-control"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 370.93,
+          "log": "build\\modular-player-revision\\regressions\\57.log",
+          "bytes": 42,
+          "sha256": "c9aef2b6eeb0d0f460376ee75a59f4e432db4290fea929a11817d7de768b05c2",
+          "outcomes": [
+            "Live command authority PASS: 1557 checks"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--pilot-demand"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 369.575,
+          "log": "build\\modular-player-revision\\regressions\\58.log",
+          "bytes": 512,
+          "sha256": "dc90e422e975cf6c39496e033bf71ec8aab7f0c0304784a24d8827a2b8ecff6d",
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=pilot-admission bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "PILOT_DEMAND PASS checks=2939"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Simulation.Tests/bin/Release/net10.0/NovaCore.Simulation.Tests.dll",
+            "--pilot-allocation"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 914.13,
+          "log": "build\\modular-player-revision\\regressions\\59.log",
+          "bytes": 507,
+          "sha256": "8cf7ebec42873e5b59624fa010a491bebee8ac885ad738dbbee29684f13e8de6",
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=pilot-allocation-service bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "PILOT_ALLOCATION PASS checks=36768 off_max_jets=5 off_max_force=67.5 off_max_torque=44.47661000458556"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-viewport"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 85.56,
+          "log": "build\\modular-player-revision\\regressions\\60.log",
+          "bytes": 83,
+          "sha256": "4879f6ef378e4948b7f4d528b4bb8ea5deebd44d768113c8407d78605ab81251",
+          "outcomes": [
+            "Modular viewport CPU/ABI PASS: 74 checks; native window route separately required"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-greybox-assets"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 66.62,
+          "log": "build\\modular-player-revision\\regressions\\61.log",
+          "bytes": 124,
+          "sha256": "3ef1fb80901dc0d130907c05c1ba1f48fa829999a9fa6fec439826754c339d4d",
+          "outcomes": [
+            "Modular greybox assets PASS: 6 assets, 29 meshes, 2124 triangles; strict production loader, no GPU/player acceptance claim"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-editor-regressions"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 73729.347,
+          "log": "build\\modular-player-revision\\regressions\\62.log",
+          "bytes": 97957,
+          "sha256": "893da15f51bfcf90da401ab7b4d6cc496af3db9b5ebd8a1578111bf340104d4a",
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion",
+            "ORDINARY_ALLOCATION gate=supported-assembly-application-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_SUPPORTED_PRESENTATION PASS copied-O/38-draws/no-exhaust/camera/backlog/held-endpoint visualMeshBytes=1359096 displaySampleArraysBytes=640000 slabUsesExistingMesh=true",
+            "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+            "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=False; nativeMessageDelivered=true; solarZoom=True",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=True; nativeMessageDelivered=true; solarZoom=False",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "PLAYER_ENGINE PASS checks=9898",
+            "PLAYER_ATTITUDE PASS checks=8264",
+            "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-viewport"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 108.632,
+          "log": "build\\modular-player-revision\\regressions\\63.log",
+          "bytes": 83,
+          "sha256": "4879f6ef378e4948b7f4d528b4bb8ea5deebd44d768113c8407d78605ab81251",
+          "outcomes": [
+            "Modular viewport CPU/ABI PASS: 74 checks; native window route separately required"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-greybox-assets"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 79.358,
+          "log": "build\\modular-player-revision\\regressions\\64.log",
+          "bytes": 124,
+          "sha256": "3ef1fb80901dc0d130907c05c1ba1f48fa829999a9fa6fec439826754c339d4d",
+          "outcomes": [
+            "Modular greybox assets PASS: 6 assets, 29 meshes, 2124 triangles; strict production loader, no GPU/player acceptance claim"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-editor-regressions"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 27820.911,
+          "log": "build\\modular-player-revision\\regressions\\65.log",
+          "bytes": 86653,
+          "sha256": "76a30b117ea8f7da0747595e9da7ff6093b1b1f50cfe6cf71c6be78516bf721c",
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion",
+            "ORDINARY_ALLOCATION gate=supported-assembly-application-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_SUPPORTED_PRESENTATION PASS copied-O/38-draws/no-exhaust/camera/backlog/held-endpoint visualMeshBytes=1359096 displaySampleArraysBytes=640000 slabUsesExistingMesh=true",
+            "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+            "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=False; nativeMessageDelivered=true; solarZoom=True",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=True; nativeMessageDelivered=true; solarZoom=False",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "PLAYER_ENGINE PASS checks=9898",
+            "PLAYER_ATTITUDE PASS checks=8264",
+            "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "build/modular-player-revision/regressions-final/results.json",
+        "bytes": 19453,
+        "sha256": "6403beffe63314525257d979347ab18d8ba283a2ddffff058d8e35a9982dc657"
+      },
+      "checkedUtc": "2026-09-22T06:17:34.010511+00:00",
+      "commands": 10,
+      "results": [
+        {
+          "arguments": [
+            "build",
+            "NovaCore.sln",
+            "-c",
+            "Debug",
+            "-p:NativeBuildDirectory=modular-player-revision/native-debug",
+            "-v:q"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 6018.553,
+          "log": "build\\modular-player-revision\\regressions-final\\00.log",
+          "bytes": 82,
+          "sha256": "ee6b2d591982c9f3fdddba218f6ae448f30b9d8071b80938b38a246c697e1539",
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Warning(s)",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "arguments": [
+            "build",
+            "NovaCore.sln",
+            "-c",
+            "Release",
+            "-p:NativeBuildDirectory=modular-player-revision/native-release",
+            "-v:q"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 5646.896,
+          "log": "build\\modular-player-revision\\regressions-final\\01.log",
+          "bytes": 82,
+          "sha256": "8093e6a8d39752450cc481c197dbf90d47a75c65b6f338bc904c01d415b034f2",
+          "outcomes": [
+            "Build succeeded.",
+            "    0 Warning(s)",
+            "    0 Error(s)"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-viewport"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 128.41,
+          "log": "build\\modular-player-revision\\regressions-final\\02.log",
+          "bytes": 83,
+          "sha256": "4879f6ef378e4948b7f4d528b4bb8ea5deebd44d768113c8407d78605ab81251",
+          "outcomes": [
+            "Modular viewport CPU/ABI PASS: 74 checks; native window route separately required"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-editor-regressions"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 74175.539,
+          "log": "build\\modular-player-revision\\regressions-final\\03.log",
+          "bytes": 98266,
+          "sha256": "a245809480c7370606978e635aed4925a736dd5d2ea923eb5dd30d4f04f17624",
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion",
+            "ORDINARY_ALLOCATION gate=supported-assembly-application-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_SUPPORTED_PRESENTATION PASS copied-O/38-draws/no-exhaust/camera/backlog/held-endpoint visualMeshBytes=1359096 displaySampleArraysBytes=640000 slabUsesExistingMesh=true",
+            "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+            "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=False; nativeMessageDelivered=true; solarZoom=True",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=True; nativeMessageDelivered=true; solarZoom=False",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "PLAYER_ENGINE PASS checks=9898",
+            "PLAYER_ATTITUDE PASS checks=8264",
+            "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-flight"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 12067.884,
+          "log": "build\\modular-player-revision\\regressions-final\\04.log",
+          "bytes": 2300,
+          "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+          "outcomes": [
+            "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Debug/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate12-application"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 13985.539,
+          "log": "build\\modular-player-revision\\regressions-final\\05.log",
+          "bytes": 16146,
+          "sha256": "fb8384617354655f18ee9698e71097e01b056007d4c582d6833664bd85e43242",
+          "outcomes": [
+            "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-viewport"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 129.692,
+          "log": "build\\modular-player-revision\\regressions-final\\06.log",
+          "bytes": 83,
+          "sha256": "4879f6ef378e4948b7f4d528b4bb8ea5deebd44d768113c8407d78605ab81251",
+          "outcomes": [
+            "Modular viewport CPU/ABI PASS: 74 checks; native window route separately required"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-editor-regressions"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 27691.817,
+          "log": "build\\modular-player-revision\\regressions-final\\07.log",
+          "bytes": 86367,
+          "sha256": "f8fb3826d6b6e619987a27845b9bd43ad2f3985d305c7ad734cafa6dd87da364",
+          "outcomes": [
+            "ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion",
+            "ORDINARY_ALLOCATION gate=supported-assembly-application-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ASSEMBLY_SUPPORTED_PRESENTATION PASS copied-O/38-draws/no-exhaust/camera/backlog/held-endpoint visualMeshBytes=1359096 displaySampleArraysBytes=640000 slabUsesExistingMesh=true",
+            "ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS",
+            "ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=False; nativeMessageDelivered=true; solarZoom=True",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.",
+            "Wheel boundary PASS: diagnosticIsolation=True; nativeMessageDelivered=true; solarZoom=False",
+            "Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true",
+            "PLAYER_ENGINE PASS checks=9898",
+            "PLAYER_ATTITUDE PASS checks=8264",
+            "PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS",
+            "ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true",
+            "Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.",
+            "ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS",
+            "ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate10-flight"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 4017.73,
+          "log": "build\\modular-player-revision\\regressions-final\\08.log",
+          "bytes": 2300,
+          "sha256": "66e8b3dc546c43890a1fb38bb97aa56fe67f2e1c9b203e8217bbea3ef782eab1",
+          "outcomes": [
+            "MODULAR_GATE10_FLIGHT_PASS checks=78307"
+          ]
+        },
+        {
+          "arguments": [
+            "tests/NovaCore.Graphics.Tests/bin/Release/net10.0/NovaCore.Graphics.Tests.dll",
+            "--modular-gate12-application"
+          ],
+          "exitCode": 0,
+          "elapsedMs": 5698.717,
+          "log": "build\\modular-player-revision\\regressions-final\\09.log",
+          "bytes": 16147,
+          "sha256": "7be957db02780aa6a6f8d34811ac44d02977eca9564d88413e1eed18b5724bcb",
+          "outcomes": [
+            "MODULAR_GATE12_APPLICATION_PASS checks=9918"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1261 @@
+{
+  "judgment": "REVISE",
+  "disposition": "FROZEN_UNBANKED_STOP_FOR_PROJECT_CONTROL",
+  "nativeLaunches": 1,
+  "exitCode": 0,
+  "blackout": "UNRESOLVED; no observed anomaly in this bounded retry",
+  "sourceFreezeSha256": "2f57a80a0f2a972a5bb1d8742fee92f169b634cdab8564e5335bceccd1b146a2",
+  "head": "8c189b28ce2a68f97de734d1589acb500c41fd99",
+  "package": {
+    "package": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows",
+    "packageSha256": "b542d8908055543b41f5543dee8fda2ba4e7f54d36c33ac8b30c6bb030bd7d6e",
+    "fileCount": 134,
+    "bytes": 12787474,
+    "shaders": 66
+  },
+  "sourceFreezeManifest": "build\\surface-recontact\\retry\\source-freeze.json",
+  "input": {
+    "path": "build\\surface-recontact\\retry\\native.json.input.ncflight.json",
+    "sha256": "8502d85afb64021f5666770525da605e1920848d3af54f6e629a84dd40ee7414"
+  },
+  "offline": {
+    "debugReleaseBuild": "PASS zero warnings/errors",
+    "recorderChecksEach": 22708,
+    "retentionChecksEach": 198,
+    "batchCuts": 342,
+    "nativeStub": {
+      "gpu": false,
+      "events": 35303,
+      "p99us": 53.6
+    },
+    "burst": {
+      "events": 78855,
+      "drops": 0,
+      "faults": 0,
+      "producerAllocations": 0,
+      "capacity": 8192,
+      "highWater": 2433
+    },
+    "routeChecksEach": 1259,
+    "routeTicks": 537
+  },
+  "native": {
+    "renderedFrames": 623,
+    "renderSecondsApprox": 14.077,
+    "recorderSeconds": 17.4314627,
+    "vessel": "ConstructionVehicleIdentity { Vessel = SpacecraftId { Value = 1 }, Generation = 1 }",
+    "source": "79234b824be311679ef21bc7a52497c4d0d238abbb89332089d218e106995c2e",
+    "terrainObservedFrames": 110,
+    "contactChain": [
+      {
+        "Physical": {
+          "Epoch": 18000000000,
+          "Sequence": 0,
+          "Consumer": 0,
+          "Position": {
+            "X": 80,
+            "Y": -8.413828381113708,
+            "Z": 0,
+            "LengthSquared": 6470.792508026834,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 0.1,
+            "Y": -0.1,
+            "Z": 0,
+            "LengthSquared": 0.020000000000000004,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "Mass": 1304,
+          "Main": false,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 1,
+          "Frontier": 0,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 0,
+        "FrameMs": 5.581699848175049,
+        "ServiceMs": 0,
+        "ServiceAllocated": 0,
+        "ObserverMs": 1.3628,
+        "ObserverAllocated": 3688,
+        "sampleIndex": 0
+      },
+      {
+        "Physical": {
+          "Epoch": 18000093750,
+          "Sequence": 6,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.02857910617693,
+            "Y": -8.43210955750198,
+            "Z": 0.004428108918608385,
+            "LengthSquared": 6475.673964951484,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 0.5571248157057767,
+            "Y": -0.17900191205273433,
+            "Z": -0.024555137357794483,
+            "LengthSquared": 0.3430326995643906,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": 0.0010468807814640688,
+            "Y": 0.007022311499704832,
+            "Z": -0.16954258350913548,
+            "LengthSquared": 0.028795096441121663,
+            "IsFinite": true
+          },
+          "Mass": 1304,
+          "Main": false,
+          "Jets": 0,
+          "Contacts": 4,
+          "World": 1,
+          "Frontier": 6,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 4,
+          "Pair": "body=0/surface=1",
+          "Feature0": 101518600,
+          "Feature1": 111217929,
+          "Feature2": 118165760,
+          "Feature3": 118165769,
+          "Depth": 0.0003759082464966923,
+          "Impulse": {
+            "X": 3.5763192433302002,
+            "Y": 9.330488602195443,
+            "Z": -3.317641595965152,
+            "LengthSquared": 110.85482264519116,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 0,
+        "FrameMs": 76.21329498291016,
+        "ServiceMs": 79.4226,
+        "ServiceAllocated": 237224,
+        "ObserverMs": 0.0885,
+        "ObserverAllocated": 152,
+        "sampleIndex": 2
+      },
+      {
+        "Physical": {
+          "Epoch": 18001593750,
+          "Sequence": 102,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.07307705554116,
+            "Y": -8.447002164552787,
+            "Z": 0.0022391502091069445,
+            "LengthSquared": 6483.049519724385,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 3.7093023742887744e-06,
+            "Y": 4.548188445328002e-05,
+            "Z": -3.0050781011843083e-06,
+            "LengthSquared": 2.091391231919636e-09,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -5.419701824272018e-08,
+            "Y": 9.06706121552676e-07,
+            "Z": -8.166331481700765e-07,
+            "LengthSquared": 1.491943006337668e-12,
+            "IsFinite": true
+          },
+          "Mass": 1304,
+          "Main": false,
+          "Jets": 0,
+          "Contacts": 4,
+          "World": 1,
+          "Frontier": 102,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 4,
+          "Pair": "body=0/surface=1",
+          "Feature0": 332991234,
+          "Feature1": 187108354,
+          "Feature2": 111152386,
+          "Feature3": 413600258,
+          "Depth": 0.0006077123689465225,
+          "Impulse": {
+            "X": 0.0010170571542835738,
+            "Y": 12.47350970636549,
+            "Z": -0.018468825009463563,
+            "LengthSquared": 155.58878652669657,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 1,
+        "FrameMs": 22.020200729370117,
+        "ServiceMs": 10.186,
+        "ServiceAllocated": 236992,
+        "ObserverMs": 0.1002,
+        "ObserverAllocated": 104,
+        "sampleIndex": 26
+      },
+      {
+        "Physical": {
+          "Epoch": 18001718750,
+          "Sequence": 110,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.07307708010012,
+            "Y": -8.447002165348094,
+            "Z": 0.002240546897000325,
+            "LengthSquared": 6483.049523677101,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 2.4595259239153765e-05,
+            "Y": 2.9834534304932542e-05,
+            "Z": -1.788252191421651e-05,
+            "LengthSquared": 1.814810804245809e-09,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -3.734893312765718e-08,
+            "Y": 5.414395504778894e-06,
+            "Z": -7.26003652702171e-06,
+            "LengthSquared": 8.202520399866513e-11,
+            "IsFinite": true
+          },
+          "Mass": 1303.99755859375,
+          "Main": false,
+          "Jets": 8,
+          "Contacts": 4,
+          "World": 1,
+          "Frontier": 110,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 4,
+          "Pair": "body=0/surface=1",
+          "Feature0": 332991234,
+          "Feature1": 187108354,
+          "Feature2": 111152386,
+          "Feature3": 413600258,
+          "Depth": 0.0006086660432629287,
+          "Impulse": {
+            "X": -0.001969291285689012,
+            "Y": 12.475897175347844,
+            "Z": -0.023354863063393516,
+            "LengthSquared": 155.6485596575892,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 1,
+        "FrameMs": 23.279701232910156,
+        "ServiceMs": 12.8804,
+        "ServiceAllocated": 346904,
+        "ObserverMs": 0.0115,
+        "ObserverAllocated": 104,
+        "sampleIndex": 28
+      },
+      {
+        "Physical": {
+          "Epoch": 18001781250,
+          "Sequence": 114,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.07307705230042,
+            "Y": -8.447002164739718,
+            "Z": 0.002240441163555482,
+            "LengthSquared": 6483.049519214334,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": -3.884834469461038e-06,
+            "Y": -1.200086514847264e-05,
+            "Z": 1.207356152164864e-05,
+            "LengthSquared": 3.0488359098397244e-10,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": 1.5104550907396602e-08,
+            "Y": -3.657321049540855e-06,
+            "Z": 1.0999908490203838e-06,
+            "LengthSquared": 1.4586205274801318e-11,
+            "IsFinite": true
+          },
+          "Mass": 1303.9951171875,
+          "Main": false,
+          "Jets": 8,
+          "Contacts": 4,
+          "World": 1,
+          "Frontier": 114,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 4,
+          "Pair": "body=0/surface=1",
+          "Feature0": 332991234,
+          "Feature1": 187108354,
+          "Feature2": 111152386,
+          "Feature3": 413600258,
+          "Depth": 0.0006076430436223745,
+          "Impulse": {
+            "X": -0.002577379408597147,
+            "Y": 12.47154797043498,
+            "Z": -0.01950622131145474,
+            "LengthSquared": 155.53989591441533,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 2,
+        "FrameMs": 18.402799606323242,
+        "ServiceMs": 10.9048,
+        "ServiceAllocated": 346880,
+        "ObserverMs": 0.0136,
+        "ObserverAllocated": 104,
+        "sampleIndex": 29
+      },
+      {
+        "Physical": {
+          "Epoch": 18001843750,
+          "Sequence": 118,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.07307705883916,
+            "Y": -8.447002164874025,
+            "Z": 0.002240421414689943,
+            "LengthSquared": 6483.049520263669,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": -2.23741500032671e-06,
+            "Y": 2.760292213083901e-05,
+            "Z": -3.2377232910887075e-05,
+            "LengthSquared": 1.8152125470106782e-09,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -3.431508127462905e-08,
+            "Y": 9.8091465931633e-06,
+            "Z": 8.561668095811923e-07,
+            "LengthSquared": 9.69535560167985e-11,
+            "IsFinite": true
+          },
+          "Mass": 1303.99267578125,
+          "Main": false,
+          "Jets": 8,
+          "Contacts": 4,
+          "World": 1,
+          "Frontier": 118,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 4,
+          "Pair": "body=0/surface=1",
+          "Feature0": 332991234,
+          "Feature1": 187108354,
+          "Feature2": 111152386,
+          "Feature3": 413600258,
+          "Depth": 0.0006086660432629287,
+          "Impulse": {
+            "X": -0.0024355279803793817,
+            "Y": 12.472184515651332,
+            "Z": -0.02444412838753396,
+            "LengthSquared": 155.55599003966202,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 2,
+        "FrameMs": 19.66230010986328,
+        "ServiceMs": 10.8627,
+        "ServiceAllocated": 346880,
+        "ObserverMs": 0.0123,
+        "ObserverAllocated": 104,
+        "sampleIndex": 30
+      },
+      {
+        "Physical": {
+          "Epoch": 18002781250,
+          "Sequence": 178,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.07307705228125,
+            "Y": -8.447002164684479,
+            "Z": 0.0022401566737859195,
+            "LengthSquared": 6483.049519209056,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 3.786972132038364e-06,
+            "Y": 2.6163683978713755e-05,
+            "Z": 6.549655945038315e-06,
+            "LengthSquared": 7.417775102652137e-10,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -3.093018578544445e-08,
+            "Y": -1.9870686427242233e-06,
+            "Z": -9.681148877499033e-07,
+            "LengthSquared": 4.8866449031736164e-12,
+            "IsFinite": true
+          },
+          "Mass": 1303.99267578125,
+          "Main": false,
+          "Jets": 0,
+          "Contacts": 4,
+          "World": 1,
+          "Frontier": 178,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 4,
+          "Pair": "body=0/surface=1",
+          "Feature0": 332991234,
+          "Feature1": 187108354,
+          "Feature2": 111152386,
+          "Feature3": 413600258,
+          "Depth": 0.0006081198807805777,
+          "Impulse": {
+            "X": 0.0007891447777438332,
+            "Y": 12.471687348272859,
+            "Z": -0.01931798243635985,
+            "LengthSquared": 155.54335912026417,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 13.021299362182617,
+        "ServiceMs": 2.4189,
+        "ServiceAllocated": 59248,
+        "ObserverMs": 0.002,
+        "ObserverAllocated": 104,
+        "sampleIndex": 110
+      },
+      {
+        "Physical": {
+          "Epoch": 18002781250,
+          "Sequence": 178,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.07307705228125,
+            "Y": -8.447002164684479,
+            "Z": 0.0022401566737859195,
+            "LengthSquared": 6483.049519209056,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 3.786972132038364e-06,
+            "Y": 2.6163683978713755e-05,
+            "Z": 6.549655945038315e-06,
+            "LengthSquared": 7.417775102652137e-10,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -3.093018578544445e-08,
+            "Y": -1.9870686427242233e-06,
+            "Z": -9.681148877499033e-07,
+            "LengthSquared": 4.8866449031736164e-12,
+            "IsFinite": true
+          },
+          "Mass": 1303.99267578125,
+          "Main": false,
+          "Jets": 0,
+          "Contacts": 4,
+          "World": 1,
+          "Frontier": 178,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 4,
+          "Pair": "body=0/surface=1",
+          "Feature0": 332991234,
+          "Feature1": 187108354,
+          "Feature2": 111152386,
+          "Feature3": 413600258,
+          "Depth": 0.0006081198807805777,
+          "Impulse": {
+            "X": 0.0007891447777438332,
+            "Y": 12.471687348272859,
+            "Z": -0.01931798243635985,
+            "LengthSquared": 155.54335912026417,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 13.081500053405762,
+        "ServiceMs": 0.0011,
+        "ServiceAllocated": 0,
+        "ObserverMs": 0.0036,
+        "ObserverAllocated": 104,
+        "sampleIndex": 111
+      },
+      {
+        "Physical": {
+          "Epoch": 18003375000,
+          "Sequence": 216,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.16093978825256,
+            "Y": -6.009443409198877,
+            "Z": 0.00784230251905552,
+            "LengthSquared": 6461.889739325926,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 0.29561588234318736,
+            "Y": 8.204745484632792,
+            "Z": 0.01887265713669615,
+            "LengthSquared": 67.40559339468312,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -1.302795373346842e-05,
+            "Y": -2.9371750287355635e-06,
+            "Z": 1.0455905849928166e-05,
+            "LengthSquared": 2.876805427733836e-10,
+            "IsFinite": true
+          },
+          "Mass": 1298.05517578125,
+          "Main": true,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 2,
+          "Frontier": 1,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 10.370599746704102,
+        "ServiceMs": 295.4551,
+        "ServiceAllocated": 5529016,
+        "ObserverMs": 0.0038,
+        "ObserverAllocated": 48,
+        "sampleIndex": 158
+      },
+      {
+        "Physical": {
+          "Epoch": 18003968750,
+          "Sequence": 254,
+          "Consumer": 2,
+          "Position": {
+            "X": 80.42455233564223,
+            "Y": 1.3148010037164157,
+            "Z": 0.024681789078576998,
+            "LengthSquared": 6469.837929258542,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 0.5920106766204318,
+            "Y": 16.470487786525393,
+            "Z": 0.037848606587447195,
+            "LengthSquared": 271.62887708433533,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -1.302723332507965e-05,
+            "Y": -2.9378653736482834e-06,
+            "Z": 1.0456908206763428e-05,
+            "LengthSquared": 2.876867903044237e-10,
+            "IsFinite": true
+          },
+          "Mass": 1292.11767578125,
+          "Main": true,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 3,
+          "Frontier": 1,
+          "TerrainGeneration": 1,
+          "Tiles": 4,
+          "Triangles": 7936,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 8.56820011138916,
+        "ServiceMs": 81.0762,
+        "ServiceAllocated": 5596752,
+        "ObserverMs": 0.0398,
+        "ObserverAllocated": 3688,
+        "sampleIndex": 172
+      },
+      {
+        "Physical": {
+          "Epoch": 18005125000,
+          "Sequence": 328,
+          "Consumer": 2,
+          "Position": {
+            "X": 81.44393075716711,
+            "Y": 29.750544737922496,
+            "Z": 0.08992298157034267,
+            "LengthSquared": 7518.216855523972,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 1.1711162298457602,
+            "Y": 32.753761483377225,
+            "Z": 0.07504747546585241,
+            "LengthSquared": 1074.1860366573474,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -1.302590274340309e-05,
+            "Y": -2.939420475418447e-06,
+            "Z": 1.0460028714830906e-05,
+            "LengthSquared": 2.8772653572699247e-10,
+            "IsFinite": true
+          },
+          "Mass": 1280.55517578125,
+          "Main": true,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 4,
+          "Frontier": 1,
+          "TerrainGeneration": 1,
+          "Tiles": 2,
+          "Triangles": 3968,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 16.358299255371094,
+        "ServiceMs": 51.015,
+        "ServiceAllocated": 3130904,
+        "ObserverMs": 0.0464,
+        "ObserverAllocated": 3688,
+        "sampleIndex": 226
+      },
+      {
+        "Physical": {
+          "Epoch": 18006187500,
+          "Sequence": 396,
+          "Consumer": 2,
+          "Position": {
+            "X": 82.97187057526749,
+            "Y": 72.59957076352337,
+            "Z": 0.18795378694734288,
+            "LengthSquared": 12155.064308432804,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 1.7054507638091834,
+            "Y": 47.93696994892029,
+            "Z": 0.10952339259396632,
+            "LengthSquared": 2300.8736455649896,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -1.3022781943187234e-05,
+            "Y": -2.9418282945812246e-06,
+            "Z": 1.0467255191869179e-05,
+            "LengthSquared": 2.878106345063144e-10,
+            "IsFinite": true
+          },
+          "Mass": 1269.93017578125,
+          "Main": true,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 4,
+          "Frontier": 69,
+          "TerrainGeneration": 2,
+          "Tiles": 4,
+          "Triangles": 8498,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 81.30789947509766,
+        "ServiceMs": 95.3644,
+        "ServiceAllocated": 4192528,
+        "ObserverMs": 0.0038,
+        "ObserverAllocated": 48,
+        "sampleIndex": 243
+      },
+      {
+        "Physical": {
+          "Epoch": 18007437500,
+          "Sequence": 476,
+          "Consumer": 2,
+          "Position": {
+            "X": 85.50070111980752,
+            "Y": 143.82826983296704,
+            "Z": 0.3503941767609409,
+            "LengthSquared": 27997.06387120254,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 2.337004287246317,
+            "Y": 66.07732410539182,
+            "Z": 0.15044445703892043,
+            "LengthSquared": 4371.696983502256,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -1.3018459776223746e-05,
+            "Y": -2.9445079724106467e-06,
+            "Z": 1.0475430326638808e-05,
+            "LengthSquared": 2.8788506267300953e-10,
+            "IsFinite": true
+          },
+          "Mass": 1257.43017578125,
+          "Main": true,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 5,
+          "Frontier": 3,
+          "TerrainGeneration": 1,
+          "Tiles": 2,
+          "Triangles": 4530,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 81.3521957397461,
+        "ServiceMs": 163.4347,
+        "ServiceAllocated": 5166480,
+        "ObserverMs": 0.004,
+        "ObserverAllocated": 48,
+        "sampleIndex": 263
+      },
+      {
+        "Physical": {
+          "Epoch": 18008062500,
+          "Sequence": 516,
+          "Consumer": 2,
+          "Position": {
+            "X": 87.06108777488716,
+            "Y": 187.99077593528415,
+            "Z": 0.45085966949314643,
+            "LengthSquared": 42920.3681157384,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 2.6543870915015098,
+            "Y": 75.26052875653409,
+            "Z": 0.17104382224349937,
+            "LengthSquared": 5671.222215533751,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -1.3018431065009649e-05,
+            "Y": -2.944558490556188e-06,
+            "Z": 1.048474386896094e-05,
+            "LengthSquared": 2.8807982609642883e-10,
+            "IsFinite": true
+          },
+          "Mass": 1251.18017578125,
+          "Main": true,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 5,
+          "Frontier": 43,
+          "TerrainGeneration": 2,
+          "Tiles": 4,
+          "Triangles": 8498,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 3,
+        "FrameMs": 156.968994140625,
+        "ServiceMs": 170.6412,
+        "ServiceAllocated": 4616784,
+        "ObserverMs": 0.0047,
+        "ObserverAllocated": 48,
+        "sampleIndex": 273
+      },
+      {
+        "Physical": {
+          "Epoch": 18008500000,
+          "Sequence": 544,
+          "Consumer": 0,
+          "Position": {
+            "X": 88.27183453816991,
+            "Y": 222.33031450866142,
+            "Z": 0.528860778434166,
+            "LengthSquared": 57222.96521597731,
+            "IsFinite": true
+          },
+          "Velocity": {
+            "X": 2.87655505680707,
+            "Y": 81.73136921060352,
+            "Z": 0.18554734595092123,
+            "LengthSquared": 6688.325709852421,
+            "IsFinite": true
+          },
+          "Angular": {
+            "X": -1.301846075750137e-05,
+            "Y": -2.944617981094829e-06,
+            "Z": 1.0488625854354558e-05,
+            "LengthSquared": 2.88162367861825e-10,
+            "IsFinite": true
+          },
+          "Mass": 1246.80517578125,
+          "Main": true,
+          "Jets": 0,
+          "Contacts": 0,
+          "World": 0,
+          "Frontier": 0,
+          "TerrainGeneration": 0,
+          "Tiles": 0,
+          "Triangles": 0,
+          "TerrainContacts": 0,
+          "Pair": "",
+          "Feature0": -1,
+          "Feature1": -1,
+          "Feature2": -1,
+          "Feature3": -1,
+          "Depth": 0,
+          "Impulse": {
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "LengthSquared": 0,
+            "IsFinite": true
+          },
+          "RawCapture": false
+        },
+        "Stage": 4,
+        "FrameMs": 152.71890258789062,
+        "ServiceMs": 145.1131,
+        "ServiceAllocated": 1978888,
+        "ObserverMs": 0.0013,
+        "ObserverAllocated": 0,
+        "sampleIndex": 280
+      }
+    ]
+  },
+  "recorder": {
+    "judgment": "PASS bounded native retry",
+    "session": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder\\b0a8e1482b15419a9b6ca5734428b404",
+    "produced": 15283,
+    "durable": 15283,
+    "complete": true,
+    "faults": 0,
+    "dropped": 0,
+    "open": 0,
+    "pending": 0,
+    "submits": 686,
+    "completions": 686,
+    "resourceBirths": 278,
+    "resourceRetirements": 278,
+    "ringCapacity": 8192,
+    "ringPeakInclusiveBounds": [
+      1233,
+      1233
+    ],
+    "volatileLagPeakInclusiveBounds": [
+      1233,
+      1233
+    ],
+    "headroomPercent": 84.94873046875,
+    "persistence": {
+      "wallMs": 17431.4627,
+      "cpuMs": 296.875,
+      "allocatedBytes": 25600464,
+      "managedRetainedBytes": 621936,
+      "peakWorkingSetBytes": 58900480,
+      "BytesWritten": 8458317,
+      "Flushes": 1266,
+      "Rotations": 0,
+      "commitCount": 632,
+      "sampledCommits": 632,
+      "p50ms": 1.7175,
+      "p95ms": 2.501,
+      "p99ms": 5.4591,
+      "maxMs": 30.3401,
+      "longestCommitMs": 30.3401,
+      "ringPeakLower": 1233,
+      "ringPeakUpper": 1233,
+      "volatileLagPeakLower": 1233,
+      "volatileLagPeakUpper": 1233,
+      "peakSemantics": "Observer publication brackets; exact peak lies within inclusive lower/upper bounds. Ring upper is additionally bounded by capacity.",
+      "storageBoundBytes": 83902464
+    },
+    "eventsPerSecondAverage": 876.7479965981282,
+    "writtenBytesPerSecondAverage": 485232.7739541903,
+    "sessionBytes": 83916383,
+    "producerMicroseconds": {
+      "median": 20.3,
+      "p95": 26.1,
+      "p99": 39.2,
+      "max": 93.4
+    },
+    "timedAllocationCalls": 0,
+    "timedAllocationBytes": 0,
+    "measurementHeader": {
+      "Size": 64,
+      "Version": 1,
+      "Count": 281,
+      "Frequency": 10000000,
+      "RetainedBytes": 4479176,
+      "OwnedCalls": 1,
+      "OwnedBytes": 2377928,
+      "Overflow": 0
+    }
+  },
+  "performance": {
+    "distributions": {
+      "ServiceMs": {
+        "n": 281,
+        "median": 9.0166,
+        "p95": 142.3734,
+        "p99": 163.4347,
+        "max": 295.4551
+      },
+      "ObserverMs": {
+        "n": 281,
+        "median": 0.0036,
+        "p95": 0.0162,
+        "p99": 0.0885,
+        "max": 1.3628
+      },
+      "FrameMs": {
+        "n": 281,
+        "median": 16.32670021057129,
+        "p95": 151.83920288085938,
+        "p99": 182.5432891845703,
+        "max": 1111.2249755859375
+      },
+      "ServiceAllocated": {
+        "n": 281,
+        "median": 157536,
+        "p95": 1975872,
+        "p99": 5166480,
+        "max": 5596752
+      },
+      "ObserverAllocated": {
+        "n": 281,
+        "median": 48,
+        "p95": 152,
+        "p99": 3688,
+        "max": 3744
+      }
+    },
+    "serviceAbove25ms": 83,
+    "zeroContactServiceAbove25ms": 61,
+    "longestRunAbove25ms": 55,
+    "worldTerrainTransitions": [
+      {
+        "i": 0,
+        "world": 1,
+        "generation": 1,
+        "ms": 0,
+        "epoch": 18000000000,
+        "position": {
+          "X": 80,
+          "Y": -8.413828381113708,
+          "Z": 0,
+          "LengthSquared": 6470.792508026834,
+          "IsFinite": true
+        },
+        "tiles": 4,
+        "triangles": 7936
+      },
+      {
+        "i": 158,
+        "world": 2,
+        "generation": 1,
+        "ms": 295.4551,
+        "epoch": 18003375000,
+        "position": {
+          "X": 80.16093978825256,
+          "Y": -6.009443409198877,
+          "Z": 0.00784230251905552,
+          "LengthSquared": 6461.889739325926,
+          "IsFinite": true
+        },
+        "tiles": 4,
+        "triangles": 7936
+      },
+      {
+        "i": 172,
+        "world": 3,
+        "generation": 1,
+        "ms": 81.0762,
+        "epoch": 18003968750,
+        "position": {
+          "X": 80.42455233564223,
+          "Y": 1.3148010037164157,
+          "Z": 0.024681789078576998,
+          "LengthSquared": 6469.837929258542,
+          "IsFinite": true
+        },
+        "tiles": 4,
+        "triangles": 7936
+      },
+      {
+        "i": 226,
+        "world": 4,
+        "generation": 1,
+        "ms": 51.015,
+        "epoch": 18005125000,
+        "position": {
+          "X": 81.44393075716711,
+          "Y": 29.750544737922496,
+          "Z": 0.08992298157034267,
+          "LengthSquared": 7518.216855523972,
+          "IsFinite": true
+        },
+        "tiles": 2,
+        "triangles": 3968
+      },
+      {
+        "i": 243,
+        "world": 4,
+        "generation": 2,
+        "ms": 95.3644,
+        "epoch": 18006187500,
+        "position": {
+          "X": 82.97187057526749,
+          "Y": 72.59957076352337,
+          "Z": 0.18795378694734288,
+          "LengthSquared": 12155.064308432804,
+          "IsFinite": true
+        },
+        "tiles": 4,
+        "triangles": 8498
+      },
+      {
+        "i": 263,
+        "world": 5,
+        "generation": 1,
+        "ms": 163.4347,
+        "epoch": 18007437500,
+        "position": {
+          "X": 85.50070111980752,
+          "Y": 143.82826983296704,
+          "Z": 0.3503941767609409,
+          "LengthSquared": 27997.06387120254,
+          "IsFinite": true
+        },
+        "tiles": 2,
+        "triangles": 4530
+      },
+      {
+        "i": 273,
+        "world": 5,
+        "generation": 2,
+        "ms": 170.6412,
+        "epoch": 18008062500,
+        "position": {
+          "X": 87.06108777488716,
+          "Y": 187.99077593528415,
+          "Z": 0.45085966949314643,
+          "LengthSquared": 42920.3681157384,
+          "IsFinite": true
+        },
+        "tiles": 4,
+        "triangles": 8498
+      },
+      {
+        "i": 280,
+        "world": 0,
+        "generation": 0,
+        "ms": 145.1131,
+        "epoch": 18008500000,
+        "position": {
+          "X": 88.27183453816991,
+          "Y": 222.33031450866142,
+          "Z": 0.528860778434166,
+          "LengthSquared": 57222.96521597731,
+          "IsFinite": true
+        },
+        "tiles": 0,
+        "triangles": 0
+      }
+    ],
+    "serviceAllocatedBytes": 126451392,
+    "observerAllocatedBytes": 49392,
+    "wholeFrameMs": {
+      "median": 5.963,
+      "p95": 82.972,
+      "p99": 156.899,
+      "max": 1110.031,
+      "average": 22.596,
+      "samples": 623
+    },
+    "gpuReportedMeanMs": 4.299,
+    "gpuFullPercentiles": "not retained; periodic text samples are not a full GPU distribution",
+    "fenceMs": {
+      "average": 6.436,
+      "p95": 10.068,
+      "max": 12.65
+    },
+    "owner": "production post-contact continuation/refinement, conservative free-flight handoff and terrain reconstruction",
+    "timingLimit": "Service timer includes exact services, dynamics, native solver, clearance and preparation. It does not separately time every sub-owner. 54 consecutive-world4/5 rows exceed25ms; only4 change world/mesh generation.",
+    "nativeProcessPeakSampledWorkingSetBytes": 3414978560
+  },
+  "preservation": {
+    "frozenSource": true,
+    "package": true,
+    "forensic": true,
+    "head": true,
+    "index": true,
+    "settings": true,
+    "userRefs": true
+  },
+  "independentReview": {
+    "recorder": "PASS independently reconstructed full journal/correlation",
+    "contactChain": "PASS true terrain/RCS/separation/free-flight; no hidden landed bypass",
+    "overall": "REVISE production continuation performance"
+  },
+  "limits": [
+    "No second native run authorized.",
+    "No journal rotations in this native run; offline cut/rotation/stress evidence retained.",
+    "No harder-impact/destruction/warp/blackout-closure acceptance.",
+    "Text diagnostic buffer dropped72561characters; mandatory journal and281-row physical evidence are complete.",
+    "CPU-only3m/s seam route settled sideways and later reached frozen geometry refusal atx192; retained as unsuitable relaunch fixture, no physics correction."
+  ],
+  "evidence": {
+    "build\\surface-recontact\\retry\\native.json": {
+      "bytes": 455528,
+      "sha256": "07040dfa2253b5a8f8a21d2bc92e2f7cbcbe8c86b9fc7ac1c2c032174ff8c609"
+    },
+    "build\\surface-recontact\\retry\\process.json": {
+      "bytes": 14167,
+      "sha256": "e58fd744a9b5d741e3535145dc43d972daf55ad62265dc7aac7d9623b6fe8a53"
+    },
+    "build\\surface-recontact\\retry\\package.json": {
+      "bytes": 21908,
+      "sha256": "cac5097b3caf0922e86e5e3542a44181f250d82a1029c4a4ae09294d0a595719"
+    },
+    "build\\surface-recontact\\retry\\source-freeze.json": {
+      "bytes": 133403,
+      "sha256": "242ea1990fa4be3ed5786ddc36d1d8b198dcd42db1caaddec81278b9283a6b2e"
+    },
+    "build\\surface-recontact\\retry\\entry.json": {
+      "bytes": 632837,
+      "sha256": "3b0f193c53efc53780e3a773ddd05fc74e60126bb384757731f96a85d0c8d44f"
+    },
+    "build\\surface-recontact\\retry\\final-preservation.json": {
+      "bytes": 146,
+      "sha256": "beacb20288e218e8c3bb2930dd0e2ef49763351d9ff4d7cf39c7d3efc2102577"
+    },
+    "build\\surface-recontact\\retry\\recorder-manifest.json": {
+      "bytes": 1658,
+      "sha256": "86f892c782bc3f26924605420c6b0c3b90c546668318749cbecc0cab722d9481"
+    },
+    "build\\surface-recontact\\retry\\player-segment-0.log": {
+      "bytes": 128351,
+      "sha256": "ee3e7cc914328842668495bdbde6ee86b71d55ef77b6a3151b5cbdf771d04b8e"
+    },
+    "build\\surface-recontact\\retry\\os-after.json": {
+      "bytes": 224,
+      "sha256": "e8b9bb19067a47e545fc212a0ff7bb5cdcb4c77c7d0ca409192b7cee4aab0816"
+    },
+    "build\\surface-recontact\\retry\\seam-route-unsuitable.log": {
+      "bytes": 1632,
+      "sha256": "97d97991f998f4665413d2066df27a42b8fd6b625a76e7369026185f9ead6286"
+    }
+  }
+}

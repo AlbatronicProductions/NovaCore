@@ -27,7 +27,7 @@ internal sealed class AssemblyControlAuthority
 }
 
 internal readonly record struct AssemblyControlAdmission(AssemblyControlIdentity Identity,
-    long Sequence, int Frontier, long HostSequence, AssemblyControlRequest Requested,
+    long Sequence, long Frontier, long HostSequence, AssemblyControlRequest Requested,
     AssemblyControlRequest Effective);
 
 internal enum AssemblyControlStatus
@@ -40,6 +40,6 @@ internal enum AssemblyControlStatus
 internal readonly record struct AssemblyControlResult(AssemblyControlStatus Status,
     AssemblyControlAdmission Admission = default);
 internal readonly record struct AssemblyControlObservation(AssemblyControlIdentity Identity,
-    AssemblyControlRequest Requested, int AdmissionCount, int Capacity, int Frontier, bool Retired);
+    AssemblyControlRequest Requested, long AdmissionCount, int Capacity, long Frontier, bool Retired);
 internal sealed record AssemblyControlSave(long Generation, int Capacity, AssemblyControlAdmission[] Admissions, string Digest,
     [property:JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingDefault)] AssemblyControlExecution Execution=AssemblyControlExecution.DemandOnly);
