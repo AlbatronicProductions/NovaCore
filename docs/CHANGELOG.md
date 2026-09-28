@@ -1,6 +1,20 @@
 # Development change record
 
-## 2026-09-27 � M16.0: Unified Modular Spaceflight Baseline (bank preparation)
+## 2026-09-27 — M16.0: Unified Modular Spaceflight Baseline (banked)
+
+M16.0 is banked at `78b557b670517da90d005629c087bab7472fb4fc`, annotated tag
+[`m16.0`](https://github.com/AlbatronicProductions/NovaCore/tree/m16.0).
+It integrates the unified application, modular construction and save/load,
+scalable RCS/support, Florida launch, physical flight, terrain/pad recontact,
+grounded commands and powered relaunch within the accepted development domain.
+
+Stable 150 FPS remains **OPEN / REVISE**, historical blackout cause **UNRESOLVED**,
+Player/public-release PASS **UNASSIGNED**, and MinimumRecorder public disposition
+**UNDECIDED — KEEP / DEV-ONLY / RETIRE**. This is an internal engineering baseline,
+not a packaged player release. See [current state](NOVACORE_CURRENT_STATE.md).
+The entries and evidence below retain their original preparation-time status.
+
+## 2026-09-27 — M16.0: Unified Modular Spaceflight Baseline (bank preparation)
 
 Project Control accepts the frozen engineering candidate for manual bank preparation.
 Accepted outcomes, open performance/blackout/public limits, exact identities and

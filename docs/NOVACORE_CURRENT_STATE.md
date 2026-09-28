@@ -1,60 +1,76 @@
 # NovaCore current engineering state
-## Current unbanked generation — feature freeze
 
-Latest disposition: **campaign closed; FROZEN / UNBANKED for Project Control bank decision**.
-The [final canonical bank candidate](engineering-evidence/performance-150fps/bank-candidate.md)
-consolidates accepted scope, open limits and exact source/package/Git identities.
-The [150 FPS performance closure](engineering-evidence/performance-150fps/README.md)
-retains the underlying measurement and payoff evidence.
-Surface Recontact correctness and the one bounded native physical route PASS;
-the mandatory recorder remains native PASS. Stage A CPU/contact performance is
-accepted by Project Control. Storage warnings/safe maintenance pass Debug/Release
-and adversarial review. The final authorized GPU attempt stopped at its payoff
-gate before any production GPU change or new native verification. Production
-whole-frame 150 FPS remains REVISE / OPEN. The candidate is FROZEN / UNBANKED; blackout remains
-UNRESOLVED, Player acceptance and banking HOLD. The authorized native witness is
-consumed; no relaunch or new production responsibility without Project Control.
-Normal startup performs safe maintenance, reserves a complete recorder session,
-starts MinimumRecorder, then launches the game. Only exceptional protected-evidence
-exhaustion permits explicitly unrecorded play; mandatory-recorder qualification
-cannot pass without coverage. The total runtime cap remains 512 MiB.
-That requirement is temporary qualification infrastructure while blackout causality
-is unresolved, not accepted permanent public-player architecture. For the prospective
-M16.0 engineering bank, necessary recorder/diagnostic source and permanent tests may
-remain versioned for reproducibility. Heavy forensic/fault/harness/observer/analysis
-work is developer-only. Runtime data, raw journals, dumps/captures, bulk and unselected
-generated evidence remain local-only, never committed or public-packaged. Project
-Control must classify instrumentation source KEEP / DEV-ONLY / RETIRE before any
-public GitHub/player-release decision; engineering banking does not grant that decision.
+## Current bank — M16.0
 
-Preserved launch foundation: [scalable launch support](engineering-evidence/scalable-launch-support/README.md),
-preserving the [RCS canonicalization](engineering-evidence/rcs-canonicalization/README.md).
-`E:\NovaCore` is the sole production tree. The generic 32-jet limit and fixed-width
-selection masks are retired; complete immutable actuator identity, deterministic
-allocation and exact services are preserved. Current canonical qualification and
-Project Control disposition are recorded in that package. The previous isolated
-candidate is historical integration authority, not another production entry.
-The [launch refusal diagnosis and recovery](engineering-evidence/launch-admission-regression/README.md),
-the [Florida pad authority](engineering-evidence/florida-pad-authority/README.md)
-and existing physical/service admission remain intact. Fresh parts have empty
-consumables; explicitly fill before launch. Refusals now identify their cause.
-Affected candidate/package identities are superseded; banking remains unauthorized.
+**M16.0 — Unified Modular Spaceflight Baseline is BANKED** at
+`78b557b670517da90d005629c087bab7472fb4fc`, annotated tag
+[`m16.0`](https://github.com/AlbatronicProductions/NovaCore/tree/m16.0).
+This is the internal engineering baseline. Banking does not assign Player/public
+PASS or approve a packaged player release.
 
-The normal player entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
-Startup/configuration, Solar game, generic construction, launch, bounded Florida
-flight/control and return share the unified application. `NovaCore.Launcher.exe`
-remains a legacy scenario/engineering entry, not the normal player workflow.
+| Open responsibility | Current disposition |
+|---|---|
+| Stable 150 FPS / 6.6667 ms whole-frame performance | **OPEN / REVISE**; detailed terrain/material draw remains the dominant GPU owner. |
+| Historical blackout cause | **UNRESOLVED**; healthy bounded runs do not establish causality. |
+| Player/public-release PASS | **UNASSIGNED**. |
+| MinimumRecorder public disposition | **UNDECIDED — KEEP / DEV-ONLY / RETIRE**; temporary qualification infrastructure, not accepted permanent player architecture. |
 
-The [final bank-candidate record](engineering-evidence/performance-150fps/bank-candidate.md)
-is the current disposition, preserving the earlier support/stabilization evidence.
-All milestone sections below describe their
-banked scope; their historical future-work statements do not override the newer
-unbanked generation. Feature expansion is frozen. M16.0 is assigned for preparation only; banking
-remains a separate manual Project Control action. Project Control alone decides PASS—BANK / REVISE / REJECT / ESCALATE.
-Automated integration, direct native runtime evidence and reproducibility may
-establish acceptance without mandatory manual retest; Engineering does not claim
-Player PASS. [Known limitations](KNOWN_LIMITATIONS.md) separate construction,
-flight, terrain and distribution qualification.
+The bank includes the unified application, generic modular construction,
+1×/2×/4×/8× symmetry, Undo/Redo, deterministic save/load, scalable RCS and launch
+support, the canonical Florida pad, explicit consumable filling and truthful
+launch-refusal feedback. Construction supports 1,024 parts / 4,000,000 bytes;
+editing capacity does not imply physical flight admission.
+
+Within the qualified physical domain, flight connects to terrain/pad contact,
+rocking/sliding/recontact and settling, grounded commands, checkpoint restoration
+and powered relaunch. Surface Recontact correctness and the bounded native route
+are accepted; Stage A recurring CPU/contact performance is accepted. Physical
+flight remains at 1×. Excessive impacts still refuse continuation, and damage,
+destruction and a complete orbital/atmospheric-return mission are not qualified.
+
+The [campaign scope and measurements](engineering-evidence/performance-150fps/bank-candidate.md)
+and [final recorder-storage supplement](engineering-evidence/minimum-recorder-bounded-storage/README.md)
+retain the accepted engineering evidence. Stable 150 FPS remains open: the final
+GPU payoff gate stopped before a production GPU correction or additional native
+verification. CPU transition tails and unresolved spikes are retained in the
+measurements. Engineering acceptance is not a blanket performance or Player PASS.
+
+MinimumRecorder remains temporary developer/qualification infrastructure while
+blackout causality is unresolved. Normal development startup performs safe
+maintenance, reserves a full session, starts recording, then launches the game.
+The hard total runtime cap is 512 MiB, with preventive maintenance at 400 MiB.
+Only exceptional protected-evidence exhaustion permits explicitly unrecorded play;
+mandatory-recorder qualification cannot pass without coverage. Necessary source
+and permanent tests remain versioned for reproducibility. Heavy forensic/fault/
+harness/observer/analysis work is developer-only. Runtime data, raw journals,
+dumps/captures, bulk and unselected generated evidence remain local-only and must
+not be committed or included in a player package. The engineering source bank
+does not decide permanent public instrumentation or player-distribution policy.
+
+[Scalable launch support](engineering-evidence/scalable-launch-support/README.md)
+and [RCS canonicalization](engineering-evidence/rcs-canonicalization/README.md)
+preserve complete actuator identity, deterministic allocation and exact services.
+The generic 32-jet ceiling and fixed-width selection masks are retired. Actual
+authored support patches and load ratings govern support; there is no generic
+four-foot or tank-count envelope. The
+[Florida pad authority](engineering-evidence/florida-pad-authority/README.md) and
+[launch-refusal recovery](engineering-evidence/launch-admission-regression/README.md)
+remain intact. New consumables are empty; explicitly fill before launch.
+
+`E:\NovaCore` remains the sole canonical production tree. Its normal development
+entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+Startup/configuration, Solar exploration, construction, Florida launch, physical
+flight/control and return to the retained design share this application.
+`NovaCore.Launcher.exe` remains a legacy scenario/engineering entry.
+
+Earlier reports retain their original pre-bank scope, identities and dispositions,
+including preparation and cleanup records. Their UNBANKED/HOLD wording does not
+override the M16.0 tag and current status above. Earlier milestone exclusions
+describe those milestones; only the accepted M16.0 responsibilities supersede them.
+No next major engineering front is opened by this documentation update.
+[Known limitations](KNOWN_LIMITATIONS.md) and [Windows build/run](build-windows.md)
+describe the current development boundary. Project Control retains product
+acceptance, public-release and future banking decisions.
 
 This is the primary current-state and architecture-handoff document. Durable
 engineering rules live in [ENGINEERING_RULES.md](../ENGINEERING_RULES.md), and
@@ -67,7 +83,7 @@ renderer. Simulation owns celestial identity, exact time, physical state, and
 reference-frame transforms. Graphics consumes immutable root-resolved snapshots
 and performs FP64 camera-relative subtraction before GPU transport.
 
-## Current bank — M15.5
+## Previous bank — M15.5
 
 **M15.5 — Player Flight Controls is BANKED** at
 `3d4de806b9856da9a56f3b4e48ec0e68a927de45`, annotated tag

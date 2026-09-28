@@ -1,24 +1,25 @@
-# Current unbanked generation — limitations
+# M16.0 — current limitations
 
-Feature freeze is active. The stabilization gauntlet is evidence for Project
-Control disposition, not a bank or a self-declared manual Player PASS.
-The campaign is now closed; the [canonical bank-candidate report](engineering-evidence/performance-150fps/bank-candidate.md)
-is the consolidated disposition. Accepted contracts are closed while the limits
-below remain explicit. Player/public PASS is unassigned.
+**M16.0 is a banked internal engineering baseline. Player/public-release PASS is
+UNASSIGNED; there is no packaged player release.** The
+[current engineering state](NOVACORE_CURRENT_STATE.md) records the bank identity.
+Earlier [campaign reports](engineering-evidence/performance-150fps/bank-candidate.md)
+retain their historical pre-bank status and measurements. Banking preserves the
+accepted engineering capabilities without closing the limits below.
 
-- MinimumRecorder is temporary developer/qualification infrastructure while
-  blackout causality remains unresolved, not permanent public-player architecture.
-  An M16.0 engineering bank may retain necessary source/permanent tests for
-  reproducibility; public GitHub/player release requires Project Control's explicit
-  KEEP / DEV-ONLY / RETIRE source classification. Runtime recorder data, raw
-  journals, dumps/captures, bulk forensics and unselected generated evidence are
-  local-only and must never be committed or public-packaged.
+- MinimumRecorder remains temporary developer/qualification infrastructure while
+  historical blackout causality is **UNRESOLVED**. Its permanent public disposition
+  remains **UNDECIDED — KEEP / DEV-ONLY / RETIRE**. The source bank retains necessary
+  source and permanent tests for reproducibility; this is not acceptance of
+  permanent public-player instrumentation. Runtime recorder data, raw journals,
+  dumps/captures, bulk forensics and unselected generated evidence remain local-only
+  and must never be committed or included in a player package.
 
 - Latest [performance qualification](engineering-evidence/performance-150fps/README.md):
   Stage A CPU/contact closure is accepted, but stable 150 FPS at the saved 3440x1440 /
   actual 3440x1322 viewport remains OPEN. The final GPU payoff gate found no proven
   single sufficient safe correction; no new GPU implementation/exposure followed.
-  Blackout cause remains unresolved; Player acceptance and banking remain on hold.
+  Blackout cause remains unresolved; Player/public-release PASS remains unassigned.
 - [Recorder storage](engineering-evidence/minimum-recorder-bounded-storage/README.md)
   now has a 512 MiB hard total cap, including metadata/capsules/indexes, with
   preventive maintenance at 400 MiB and full-session reservation before recording.
@@ -61,7 +62,7 @@ below remain explicit. Player/public PASS is unassigned.
   Construction depth alone does not imply support, thrust or resource feasibility.
   Upper tanks do not automatically cross-feed the engine-connected tank. Heavy
   supported articles can require a long pad burn before T/W reaches one.
-- The later [Surface Recontact candidate](engineering-evidence/surface-recontact/README.md)
+- The banked Surface Recontact implementation (see the historical [campaign](engineering-evidence/surface-recontact/README.md))
   supersedes the stabilization-era blanket terrain-impact refusal within its
   qualified domain: contact continuation, rocking/sliding/recontact, grounded
   commands and powered relaunch use the physical solver. Excessive/unqualified

@@ -1,38 +1,59 @@
 # Build on Windows 11
 
-The normal unified player entry for the current **unbanked, feature-frozen**
-generation is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
-Run it without arguments for startup/configuration → game → construction → launch
-→ flight/control → return. `NovaCore.Launcher.exe` is the legacy scenario tool.
+These instructions build **M16.0 — Unified Modular Spaceflight Baseline**, the
+banked internal engineering baseline. Player/public-release PASS remains unassigned.
 This is a repository-layout development build, not a standalone installer.
-Resolve Git LFS before building (`git lfs pull` in a fresh clone). M15.5 HEAD alone
-does not include all current unbanked work; the
-[canonical source/package manifest](engineering-evidence/rcs-canonicalization/README.md)
-identifies the prospective source set reproduced before banking.
-The later frozen candidate identity and current performance/storage qualification
-are consolidated in the [final bank-candidate report](engineering-evidence/performance-150fps/bank-candidate.md).
-Its full working-file receipt preserves the later source/test/evidence additions;
-older prospective source exports are historical and insufficient on their own.
-Its strict final GPU payoff gate stopped before implementation; stable 150 FPS is
-still open. Do not interpret these build instructions as permission to consume a
-new native qualification exposure. The [final recorder-storage supplement](engineering-evidence/minimum-recorder-bounded-storage/README.md)
-supersedes prior storage policy and source/package identities only. Ordinary
-startup silently runs maintenance as needed, reserves a complete session within
-the 512 MiB total cap, starts MinimumRecorder, then launches the game. The 400 MiB
-preventive threshold leaves maintenance headroom. Unique protected evidence that
-cannot safely change representation may exceptionally force an explicit
-unrecorded launch; such a run cannot satisfy mandatory-recorder qualification.
-The recorder is temporary qualification infrastructure in this development package,
-not approved permanent public-player architecture. Do not package runtime journals,
-dumps/captures, bulk or unselected generated evidence. A public GitHub/player release
-requires Project Control's separate KEEP / DEV-ONLY / RETIRE decision for developer
-instrumentation source, even after an M16.0 engineering bank.
-Build and run from `E:\NovaCore`, the sole canonical production tree. No isolated
-RCS worktree, copied worktree executable or test catalog is needed for the normal
-player route. The 96-jet qualification catalog remains an explicit test input.
+
+The unified entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+Run it without arguments for startup/configuration → Solar exploration →
+construction → Florida launch → flight/control → return to the retained design.
+See the [player walkthrough and controls](../README.md#try-novacore).
+`NovaCore.Launcher.exe` is the legacy scenario/engineering tool.
+
+## Get the source
+
+For a new source checkout, with Git and Git LFS installed:
+
+```powershell
+git clone --branch m16.0 https://github.com/AlbatronicProductions/NovaCore.git
+cd NovaCore
+git lfs install
+git lfs pull
+```
+
+The tag checkout is intentionally detached at the banked source revision. Run the
+commands below from that repository root. Project Control's canonical development
+tree remains `E:\NovaCore`; source builders can use their own checkout location.
+No private prospective-source export, isolated worktree executable or test catalog
+is needed for the normal application.
+
+Both `earth-surface-v5` and `earth-florida-m12` must be built and verified before
+starting Earth/Solar scenes, even away from Florida. Runtime does not download
+missing terrain, and no prebuilt terrain download is currently configured. See
+the [terrain setup guide](terrain-assets.md) for cache preparation and recovery.
+
+## Development instrumentation and status
+
+Performance optimization is ongoing; stable 150 FPS is open and historical
+blackout causality is unresolved. Earlier qualification reports retain their
+original pre-bank identities; the [current engineering state](NOVACORE_CURRENT_STATE.md)
+records the bank and all open acceptance boundaries.
+
+The [bounded recorder-storage policy](engineering-evidence/minimum-recorder-bounded-storage/README.md)
+is part of this development build. Startup performs maintenance as needed,
+reserves a full session within the 512 MiB hard cap, starts MinimumRecorder,
+then launches the game. Preventive maintenance begins at 400 MiB. Unique protected
+evidence may exceptionally force an explicit unrecorded launch; that run cannot
+satisfy mandatory-recorder qualification. MinimumRecorder remains temporary
+qualification infrastructure. Its public KEEP / DEV-ONLY / RETIRE disposition is
+undecided. Do not package runtime journals, dumps/captures, bulk or unselected
+generated evidence. The source bank does not grant player-release acceptance.
+
+## Toolchain and build
 
 Required tools:
 
+- Git with Git LFS, plus Ninja
 - .NET 10 SDK
 - Visual Studio 2026 with Desktop development with C++ and Windows 11 SDK
 - CMake 4.4 or later
@@ -59,6 +80,8 @@ dotnet run --project tools/NovaCore.AssetTool -- build earth-surface-v5
 # Florida M12 regional source and production refinement:
 pwsh tools/earth_data/acquire_florida_m12.ps1
 dotnet run --project tools/NovaCore.AssetTool -- build earth-florida-m12
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-surface-v5
+dotnet run --project tools/NovaCore.AssetTool -- verify earth-florida-m12
 
 cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja -DCMAKE_BUILD_TYPE=Debug
 cmake --build build/native-ninja
