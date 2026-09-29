@@ -11,3 +11,5 @@ external/bepu/**/*.dll -text
 external/bepu/**/*.nupkg -text
 external/bepu/**/manifest/*.json -text
 external/bepu/**/LICENSE.txt -text
+# Canonical physical-history fixture retains its qualified byte identity.
+tests/fixtures/physical-history/*.ncflight.json -text

@@ -1,12 +1,7 @@
 #ifndef NOVACORE_PRODUCTION_SPHERICAL_BILLBOARD_PHYSICAL_GLSL
 #define NOVACORE_PRODUCTION_SPHERICAL_BILLBOARD_PHYSICAL_GLSL
 
-// Temporary, whole-pipeline A/B bridge for the unbanked render-authority migration.
-// Compile preparation (current and incoming) and TES with the same value. The
-// candidate is the development default; value 0 reproduces the banked shader path.
-#ifndef NOVACORE_PREPARED_RENDER_TERRAIN
-#define NOVACORE_PREPARED_RENDER_TERRAIN 1
-#endif
+#include "prepared_surface_contract.h"
 
 double CandidateNaturalBaseHeightD(dvec3 direction)
 {

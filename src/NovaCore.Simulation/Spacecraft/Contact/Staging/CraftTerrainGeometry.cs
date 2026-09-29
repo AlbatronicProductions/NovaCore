@@ -17,7 +17,13 @@ internal static class CraftTerrainGeometry
     {public int CompareTo(Tile b){var c=X.CompareTo(b.X);return c==0?Y.CompareTo(b.Y):c;}}
     private readonly record struct Node(int X,int Y);
     private readonly record struct Cell(int X,int Y,int Size);
-    internal sealed record Prepared(Triangle[] Triangles,double MaximumError,double MaximumConversionError);
+    internal sealed class Prepared(Triangle[] triangles,double maximumError,double maximumConversionError)
+    {
+        internal ReadOnlySpan<Triangle> Triangles=>triangles;
+        internal double MaximumError=>maximumError;
+        internal double MaximumConversionError=>maximumConversionError;
+        internal long TriangleBytes=>(long)triangles.Length*System.Runtime.InteropServices.Marshal.SizeOf<Triangle>();
+    }
     internal static Prepared Prepare(AssemblyFloridaSite site,Double3 origin,Tile tile,double tolerance,Action<string,double,int>? measure=null)
     {
         if(ConstructionWorkProbe.Current is {} probe)probe.Tiles++;

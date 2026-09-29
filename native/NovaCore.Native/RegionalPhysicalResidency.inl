@@ -24,8 +24,9 @@ void CreateRegionalPhysical(App& a){
   RegionalDescriptor(a,57,a.regionalScratchBuffer,VkDeviceSize(std::max(1u,a.regionalScratchCapacity))*sizeof(NcSphericalBillboardPhysicalVertex));
 }
 void DestroyRegionalPhysical(App& a){
-  if(a.regionalPhysical){const auto& r=*a.regionalPhysical;char message[768];
-    std::snprintf(message,sizeof message,"NCSM1 regional physical totals: requests=%llu; hits=%llu; misses=%llu; loaded=%llu; readBytes=%llu; uploadedBytes=%llu; residentHighWater=%llu; allocatedBytes=%llu; maximumBytes=%llu; queueHighWater=%u; readyCapacity=%u; uploadBudget=%u; demandDispatches=%llu; dependencyDelayMsMax=%.3f; recordReadDecodeVerifyMs=%.3f; contributingRecords=%u; anchoredDemandRequired=false",(unsigned long long)r.requests,(unsigned long long)r.hits,(unsigned long long)r.misses,(unsigned long long)r.loaded,(unsigned long long)r.readBytes,(unsigned long long)r.uploadBytes,(unsigned long long)r.loaded,(unsigned long long)a.regionalPayloadBytes,(unsigned long long)nc::regionalphysical::MaximumPayloadBytes,r.queueHighWater,nc::regionalphysical::ReadyCapacity,nc::regionalphysical::UploadBudget,(unsigned long long)a.regionalDemandDispatches,a.regionalDependencyDelayMs,r.transcodeMs,r.contributingRecords);a.Log(NC_LOG_ALWAYS,message);}
+  if(a.regionalPhysical){const auto& r=*a.regionalPhysical;char message[1024];
+    std::snprintf(message,sizeof message,"NCSM1 regional physical totals: requests=%llu; hits=%llu; misses=%llu; loaded=%llu; readBytes=%llu; uploadedBytes=%llu; residentHighWater=%llu; allocatedBytes=%llu; maximumBytes=%llu; queueHighWater=%u; completionCapacity=%u; payloadWriter=workerWriteOnce; publicationBatches=%llu; maximumPublicationRecords=%u; workerCopyMs=%.3f; demandDispatches=%llu; dependencyDelayMsMax=%.3f; recordReadDecodeVerifyMs=%.3f; contributingRecords=%u; anchoredDemandRequired=false",(unsigned long long)r.requests,(unsigned long long)r.hits,(unsigned long long)r.misses,(unsigned long long)r.loaded,(unsigned long long)r.readBytes,(unsigned long long)r.uploadBytes,(unsigned long long)r.loaded,(unsigned long long)a.regionalPayloadBytes,(unsigned long long)nc::regionalphysical::MaximumPayloadBytes,r.queueHighWater,nc::regionalphysical::MaximumRecords,(unsigned long long)r.publicationBatches,r.maximumPublicationRecords,r.workerCopyMs,(unsigned long long)a.regionalDemandDispatches,a.regionalDependencyDelayMs,r.transcodeMs,r.contributingRecords);a.Log(NC_LOG_ALWAYS,message);}
+  // Join the write-once payload owner before releasing its mapped allocation.
   a.regionalPhysical.reset();
   DestroyHostBuffer(a,a.regionalPreparationBuffer,a.regionalPreparationMemory,a.regionalPreparationMapped);
   DestroyHostBuffer(a,a.regionalScratchBuffer,a.regionalScratchMemory,a.regionalScratchMapped);
@@ -43,8 +44,9 @@ bool RegionalPhysicalEnabled(const App& a){
 #include "RegionalPhysicalPreparation.inl"
 void InspectRegionalPhysical(App& a){
   InspectRegionalPreparation(a);
-  // Caller has waited for the frame fence. GPU demand readback and host-coherent
-  // residual writes therefore cannot race an authoritative draw.
+  // Caller has waited for the frame fence. Demand readback and subsequent
+  // resident-catalog publication are render-owned. Worker payload writes touch
+  // only unpublished, disjoint ranges; authoritative draws cannot read them.
   if(!a.regionalPhysical)return;
   for(uint32_t slot=0;slot<3;++slot)if(a.regionalTimingRecorded[slot]){
     uint64_t ticks[2]{};a.Check(vkGetQueryPoolResults(a.device,a.regionalTimingQueries,slot*2,2,sizeof ticks,ticks,sizeof(uint64_t),VK_QUERY_RESULT_64_BIT),"regional physical GPU timing readback failed");
@@ -65,6 +67,7 @@ void InspectRegionalPhysical(App& a){
 }
 void UpdateRegionalPhysical(App& a){
   using namespace nc::regionalphysical;
+  PostContactTiming::Lap lap(a.postContactTiming.rows.empty()?nullptr:a.postContactTiming.regional.data());
   auto* frames=static_cast<NcProductionBillboardFrame*>(a.productionBillboardFrameMapped);
   const bool enabled=RegionalPhysicalEnabled(a);
   if(!a.regionalPhysical){
@@ -77,24 +80,27 @@ void UpdateRegionalPhysical(App& a){
   // requires a fresh cache and full generation, not repair of published vertices.
   if(enabled&&!a.regionalPhysical->Matches(*a.localPack,a.submission->physicalSurfaceGeneration))
     throw std::runtime_error("NCSM1 regional physical identity changed; full renderer-generation replacement required");
-  Completion value;
-  for(uint32_t upload=0;upload<UploadBudget&&a.regionalPhysical->Pop(value);++upload){
-    if(!value.error.empty())throw std::runtime_error(value.error);
-    if(a.regionalPayloadBytes==4){
+  lap.Part(0);
+  if(a.regionalPayloadBytes==4&&a.regionalPhysical->requests){
       VkDeviceSize bytes=VkDeviceSize(a.regionalPhysical->catalog.count)*nc::localterrain::R16Bytes;
       VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(a.physical,&properties);
       if(bytes>MaximumPayloadBytes||bytes>properties.limits.maxStorageBufferRange)throw std::runtime_error("regional physical payload exceeds bounded GPU storage range");
       DestroyHostBuffer(a,a.regionalPayloadBuffer,a.regionalPayloadMemory,a.regionalPayloadMapped);
-      CreateHostBuffer(a,bytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.regionalPayloadBuffer,a.regionalPayloadMemory,a.regionalPayloadMapped,"regional physical payload allocation failed");
+      lap.Part(1);
+      CreateHostBuffer(a,bytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,a.regionalPayloadBuffer,a.regionalPayloadMemory,a.regionalPayloadMapped,"regional physical payload allocation failed",nc::MappedBufferUse::Host,a.postContactTiming.rows.empty()?nullptr:a.postContactTiming.allocation.data());
+      lap.Part(2);
       a.regionalPayloadBytes=bytes;RegionalDescriptor(a,54,a.regionalPayloadBuffer,bytes);
-    }
-    std::memcpy(static_cast<uint8_t*>(a.regionalPayloadMapped)+size_t(value.record)*nc::localterrain::R16Bytes,value.payload.elevationBc4.data(),nc::localterrain::R16Bytes);
-    a.regionalPhysical->Published(value);
+      lap.Part(3);
+      a.regionalPhysical->BindPayload(a.regionalPayloadMapped,bytes);
+      lap.Part(4);
   }
+  a.regionalPhysical->PublishCompleted();
+  lap.Part(5);
   auto catalog=a.regionalPhysical->catalog;catalog.physicalGeneration=enabled?4u:0u;
   catalog.entries[0].reserved=enabled&&std::getenv("NOVACORE_REGIONAL_PHYSICAL_PROBE")&&a.regionalPhysical->AllContributingResident()?1u:0u;
   std::memcpy(a.regionalCatalogMapped,&catalog,sizeof catalog);
-  if(!enabled){UpdateRegionalPreparation(a);return;}
+  lap.Part(6);
+  if(!enabled){UpdateRegionalPreparation(a);lap.Part(8);return;}
   auto* demand=static_cast<RegionalDemandBuffer*>(a.regionalDemandMapped);
   for(uint32_t slot=0;slot<2;++slot){
     bool exists=slot?a.productionBillboardIncomingEnabled:a.productionBillboardAuthoritative;
@@ -108,8 +114,8 @@ void UpdateRegionalPhysical(App& a){
     bool ready=ResolveDependencyTarget(target,job,*demand,slot,generation,topology,allResident,
       a.productionBillboardPreparedFrameIdentity,[&](const auto& mask){return a.regionalPhysical->Complete(mask);});
     a.regionalReady[slot]=ready;
-    if(ready&&job.phase==2&&!job.logged){job.logged=true;double delay=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-job.started).count();a.regionalDependencyDelayMs=std::max(a.regionalDependencyDelayMs,delay);
-      char message[384];std::snprintf(message,sizeof message,"NCSM1 regional ready: incoming=%u; pupil=%u; dependencyDelayMs=%.3f; requests=%llu; resident=%llu; uploadedBytes=%llu; complete=true; gpuVisibility=hostBarrierBeforePrepare",slot,target.identity[0],delay,(unsigned long long)a.regionalPhysical->requests,(unsigned long long)a.regionalPhysical->loaded,(unsigned long long)a.regionalPhysical->uploadBytes);a.Log(NC_LOG_ALWAYS,message);
+    if(ready&&job.frame.metadata[0]&&!job.logged){job.logged=true;double delay=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-job.started).count();a.regionalDependencyDelayMs=std::max(a.regionalDependencyDelayMs,delay);
+      char message[448];std::snprintf(message,sizeof message,"NCSM1 regional ready: incoming=%u; pupil=%u; dependencyDelayMs=%.3f; requests=%llu; resident=%llu; uploadedBytes=%llu; complete=true; allContributing=%u; demandComplete=%u; gpuVisibility=hostBarrierBeforePrepare",slot,target.identity[0],delay,(unsigned long long)a.regionalPhysical->requests,(unsigned long long)a.regionalPhysical->loaded,(unsigned long long)a.regionalPhysical->uploadBytes,allResident?1u:0u,job.phase==2?1u:0u);a.Log(NC_LOG_ALWAYS,message);
     }
     if(!slot){
       // Preserve the exact last prepared pupil during preflight/acquisition.
@@ -119,7 +125,9 @@ void UpdateRegionalPhysical(App& a){
       if(!ready)frames->current=a.regionalPublishedPupil;
     }
   }
+  lap.Part(7);
   UpdateRegionalPreparation(a);
+  lap.Part(8);
 }
 void RecordRegionalPhysicalDemand(App& a,VkCommandBuffer command){
   if(!RegionalPhysicalEnabled(a))return;

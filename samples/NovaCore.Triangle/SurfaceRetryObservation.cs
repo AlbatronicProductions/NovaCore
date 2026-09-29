@@ -32,6 +32,12 @@ internal readonly record struct SurfaceRetryObservation(long Epoch,long Sequence
 internal enum SurfaceRetryAction { None,Roll,Release,Ignite,Complete }
 internal sealed class SurfaceRetryRoute
 {
+    private readonly long groundedHold;
+    internal SurfaceRetryRoute(long groundedHoldMicroseconds=500_000)
+    {
+        if(groundedHoldMicroseconds<500_000||groundedHoldMicroseconds>15_000_000)throw new ArgumentOutOfRangeException(nameof(groundedHoldMicroseconds));
+        groundedHold=groundedHoldMicroseconds;
+    }
     private long freeFlightSince;
     internal int Stage {get;private set;}
     internal long Start {get;private set;}=-1;
@@ -48,7 +54,7 @@ internal sealed class SurfaceRetryRoute
         if(Stage==0){
             bool rest=v.TerrainContacts>0&&v.Velocity.LengthSquared<.000004&&v.Angular.LengthSquared<.000004;
             if(!rest)steady=-1;else if(steady<0)steady=v.Epoch;
-            if(steady>=0&&v.Epoch-steady>=500_000){groundedMass=v.Mass;groundedHeight=v.Position.Y;phase=v.Epoch;Stage=1;return SurfaceRetryAction.Roll;}
+            if(steady>=0&&v.Epoch-steady>=groundedHold){groundedMass=v.Mass;groundedHeight=v.Position.Y;phase=v.Epoch;Stage=1;return SurfaceRetryAction.Roll;}
         }else if(Stage==1){
             if(v.Jets>0&&activeRcs<0)activeRcs=v.Epoch;
             GroundedRcs|=v.TerrainContacts>0&&v.Jets>0&&v.Mass<groundedMass;

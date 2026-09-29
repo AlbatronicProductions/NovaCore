@@ -1,70 +1,44 @@
 # NovaCore engineering handoff
-## Current unbanked generation — feature freeze
 
-Latest bounded revision: [post-contact performance correction](engineering-evidence/post-contact-performance/README.md).
-Correctness, native physical lifecycle and recorder PASS; whole-frame 150 FPS
-performance REVISE. FROZEN / UNBANKED; blackout UNRESOLVED; banking/Player acceptance
-HOLD. The one native witness is consumed. STOP FOR PROJECT CONTROL; no relaunch.
+## Current bank — M16.1; front closed
 
-Preserved construction foundation: [qualified RCS canonicalization](engineering-evidence/rcs-canonicalization/README.md).
-`E:\NovaCore` is the sole production tree; the former RCS worktree is read-only
-provenance awaiting separately authorized retirement after acceptance/banking.
-The qualified 31-file source delta is integrated; current canonical qualification
-and frozen disposition are recorded in that evidence package.
-The [launch refusal diagnosis and recovery](engineering-evidence/launch-admission-regression/README.md),
-the [Florida pad authority](engineering-evidence/florida-pad-authority/README.md)
-and existing physical/service admission remain intact. Fresh parts have empty
-consumables; explicitly fill before launch. Refusals now identify their cause.
-Affected candidate/package identities are superseded; banking remains unauthorized.
+**NovaCore M16.1 — Planetary Rendering & Terrain Lifecycle Convergence is BANKED.**
+Annotated tag [`m16.1`](https://github.com/AlbatronicProductions/NovaCore/tree/m16.1)
+identifies the exact bank commit. **STOP FOR PROJECT CONTROL. No next front.**
+See [M16.1 scope](milestones/M16.1.md), [publication verification](milestones/M16.1-publication.json)
+and [current state](NOVACORE_CURRENT_STATE.md).
 
-The normal player entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
-Startup/configuration, Solar game, generic construction, launch, bounded Florida
-flight/control and return share the unified application. `NovaCore.Launcher.exe`
-remains a legacy scenario/engineering entry, not the normal player workflow.
+Canonical tree `E:\NovaCore`, branch `main`. Pre-bank HEAD was
+`3feabe8e8b42280adbafa6584cd4152d4f85fcaa`; preserved M16.0 ancestor is
+`78b557b670517da90d005629c087bab7472fb4fc`. Historical tags remain unchanged.
+The current tree retains the accepted prepared-raster/receiver, compiler artifact,
+contact cache, readiness worker/publication and background visibility corrections.
+The async regional-allocation trial, JIT policies and generic material content are rejected.
 
-The [post-contact record](engineering-evidence/post-contact-performance/README.md)
-is the current disposition, preserving the earlier RCS/stabilization evidence.
-All milestone sections below describe their
-banked scope; their historical future-work statements do not override the newer
-unbanked generation. Feature expansion is frozen. M16.0 is assigned for preparation only; banking
-remains a separate manual Project Control action. Project Control alone decides PASS—BANK / REVISE / REJECT / ESCALATE.
-Automated integration, direct native runtime evidence and reproducibility may
-establish acceptance without mandatory manual retest; Engineering does not claim
-Player PASS. [Known limitations](KNOWN_LIMITATIONS.md) separate construction,
-flight, terrain and distribution qualification.
+Current 3440×1322 grounded frame: **6.687 / 13.575 / 15.643 ms**;
+GPU **5.723 / 9.892 / 11.451 ms**. Readiness **374.539 ms**, 36 fallback frames.
+150 FPS and cold closure **OPEN / REVISE**; planetary fidelity **REVISE**;
+blackout **UNRESOLVED**; Player/public acceptance **UNASSIGNED**.
+MinimumRecorder and the manual S24 witness remain temporary qualification tools;
+synthetic FIXTURE ARMED is not real coverage and automated qualification does not
+depend on the phone. The final authenticated KSA-history browser mismatch is an
+explicit evidence-access limit, not a claim of fresh verification.
 
-This document is the concise workflow handoff. The authoritative current
-architecture and milestone state is
-[NOVACORE_CURRENT_STATE.md](NOVACORE_CURRENT_STATE.md). Durable scope,
-acceptance, KSA-reference, and authority rules are in
-[ENGINEERING_RULES.md](../ENGINEERING_RULES.md). Do not reproduce their full
-terrain narrative here.
+Normal development entry: `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+It is the repository-layout engineering package, not a public standalone release.
+The exact reviewed source/docs/tests form this bank; raw evidence,
+generated diagnostics, local KSA references and legal drafts are excluded.
+See [engineering rules](../ENGINEERING_RULES.md) and
+[repository ownership](repository-structure.md). Earlier milestone statements below
+are historical and do not supersede this stop boundary.
 
-Start with the [repository ownership map](repository-structure.md) for placement,
-project dependencies, fixtures and generated state. Repository-local `.codex/` is
-ignored scratch, not session authority. Investigation archives are indexed under
-[engineering history](engineering-evidence/README.md); consult them for provenance,
-not as an onboarding requirement.
-
-## Current bank and stop boundary
-
-Current bank: **M15.5 — Player Flight Controls**, commit
-`3d4de806b9856da9a56f3b4e48ec0e68a927de45`, annotated tag
-`m15.5-player-flight-controls`. Project Control accepted the bounded Z/X and
-WASD/QE free-flight control route. The [campaign evidence](engineering-evidence/player-flight-controls-gauntlet/README.md)
-records qualification and historical pre-bank wording. M15.4 at
-`6e1e8ef424eef4ad022a30ca4b2b261eb580b0ae` remains the unified camera bank;
-M15.3 below remains the Florida support bank. Rotating-site powered departure,
-a lift-capable development vehicle and connected Florida player launch are not
-qualified. Review the smallest next responsibility with Project Control before
-production implementation or banking. Four modified launcher preset files are
-outside the sealed M15.5 bank and require separate disposition.
+## Historical banks and qualifications
 
 The canonical SRV-01 surface-to-flight foundation (Stage1–5) has Project Control
 manual acceptance **PASS** for the final simplified Florida slab route, including
 **FL Launchpad → Play** and preserved Solar navigation. Use the
 [final closeout](engineering-evidence/srv01-surface-to-flight-foundation-final/README.md)
-for qualification; its pre-bank wording is historical. The bank identity below is current.
+for qualification; its pre-bank wording is historical. The bank identity below is historical.
 Full final Debug/Release builds, Simulation80/80, Launcher18/18 and76 total gates pass.
 
 Earlier bank: **M15.3 — Canonical SRV-01 Florida Supported-Flight Foundation**,

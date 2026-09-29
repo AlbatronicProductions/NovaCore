@@ -1,6 +1,6 @@
 # Build on Windows 11
 
-These instructions build **M16.0 — Unified Modular Spaceflight Baseline**, the
+These instructions build **M16.1 — Planetary Rendering & Terrain Lifecycle Convergence**, the
 banked internal engineering baseline. Player/public-release PASS remains unassigned.
 This is a repository-layout development build, not a standalone installer.
 
@@ -15,7 +15,7 @@ See the [player walkthrough and controls](../README.md#try-novacore).
 For a new source checkout, with Git and Git LFS installed:
 
 ```powershell
-git clone --branch m16.0 https://github.com/AlbatronicProductions/NovaCore.git
+git clone --branch m16.1 https://github.com/AlbatronicProductions/NovaCore.git
 cd NovaCore
 git lfs install
 git lfs pull
@@ -108,13 +108,18 @@ cmake -S native/NovaCore.Native -B build/native-ninja -G Ninja -DCMAKE_BUILD_TYP
 cmake --build build/native-ninja
 dotnet build NovaCore.sln -c Debug
 cmake -S native/NovaCore.Native -B build/native-ninja-release -G Ninja -DCMAKE_BUILD_TYPE=Release
-cmake --build build/native-ninja-release
-dotnet build NovaCore.sln -c Release
+cmake --build build/native-ninja-release --target NovaCore.Native
+dotnet build tools/NovaCore.App -c Release
 python tools/verify-player-package.py --output build/player-package-verification.json
 & ./tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe
 ```
 
-The current source-derived package contains 66 shaders, the native DLL, managed
+The final M16.1 preflight rebuilt native Release from source, rebuilt NovaCore.App
+through its project references, verified the package and ran CPU integration/startup
+smoke checks. No historical DLL/shader copying or KSA dependency was used.
+See the [publication verification record](milestones/M16.1-publication.json).
+
+The current source-derived package contains 68 shaders, the native DLL, managed
 dependencies, starter/SRV assets and third-party notices. Native content flows
 through project references; do not hand-copy DLLs or shaders. The verifier checks
 the CMake target output closure and current source content, not an old candidate.

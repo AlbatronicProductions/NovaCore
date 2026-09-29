@@ -23,6 +23,7 @@
     <Compile Include="../../samples/NovaCore.Triangle/ConstructionFlightMeasurements.cs" Link="ConstructionFlightMeasurements.cs" />
     <Compile Include="../../samples/NovaCore.Triangle/SurfaceRetryObservation.cs" Link="SurfaceRetryObservation.cs" />
     <Compile Include="../../samples/NovaCore.Triangle/ConstructionFlightScene.cs" Link="ConstructionFlightScene.cs" />
+    <Compile Include="../../samples/NovaCore.Triangle/QualificationExecutionProbe.cs" Link="QualificationExecutionProbe.cs" />
     <Compile Include="../../samples/NovaCore.Triangle/CraftFlightOptions.cs" Link="CraftFlightOptions.cs" />
     <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorCamera.cs" Link="EditorCamera.cs" />
     <Compile Include="../../tools/NovaCore.ConstructionEditor/EditorVisualAssets.cs" Link="EditorVisualAssets.cs" />

@@ -10,7 +10,9 @@ internal static class RegionalPhysicalResidencyTests
     {
         Require(TerrainAssetRepository.TryFindRoot(out var root),"repository root");
         VerifyPreparationScheduling(root);
-        var output=Path.Combine(root,"build","regional-live-tests",Guid.NewGuid().ToString("N"));
+        var retainedOutput=Environment.GetEnvironmentVariable("NOVACORE_REGIONAL_TEST_OUTPUT");
+        var output=retainedOutput is null?Path.Combine(root,"build","regional-live-tests",Guid.NewGuid().ToString("N")):Path.GetFullPath(retainedOutput);
+        Require(!Directory.Exists(output),"live regional evidence requires a fresh directory");
         Directory.CreateDirectory(output);
         var sample=WindowLifecycleTests.VerifyDeployment(root);
         // Leave a bounded drain interval after frame-660 reentry for every
@@ -32,12 +34,14 @@ internal static class RegionalPhysicalResidencyTests
         var isolated=Path.Combine(output,"non-earth");Directory.CreateDirectory(isolated);
         var away=RunSample(sample,root,isolated,"--scene=sol --solar-epoch=j2000 --benchmark-frames=60 --log=validation","regional-isolation");
         Require(away.Contains("NCSM1 regional physical totals: requests=0;"),"non-Earth body requested Florida physical data");
-        // This GUID directory is created by this test and contains only its readbacks.
-        // Successful numerical summaries are already in stdout; failures retain inputs.
-        Require(Path.GetFullPath(output).StartsWith(Path.GetFullPath(Path.Combine(root,"build","regional-live-tests"))+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase),"capture cleanup boundary");
-        Require(!Directory.EnumerateFileSystemEntries(output,"*",SearchOption.AllDirectories).Any(p=>(File.GetAttributes(p)&FileAttributes.ReparsePoint)!=0),"capture cleanup cannot traverse reparse points");
-        Directory.Delete(output,recursive:true);
-        Console.WriteLine("Live regional evidence summarized in stdout; disposable readbacks removed: "+output);
+        // An explicit evidence destination is retained, including success. Only
+        // the original test-owned GUID scratch directory follows normal cleanup.
+        if(retainedOutput is null){
+            Require(Path.GetFullPath(output).StartsWith(Path.GetFullPath(Path.Combine(root,"build","regional-live-tests"))+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase),"capture cleanup boundary");
+            Require(!Directory.EnumerateFileSystemEntries(output,"*",SearchOption.AllDirectories).Any(p=>(File.GetAttributes(p)&FileAttributes.ReparsePoint)!=0),"capture cleanup cannot traverse reparse points");
+            Directory.Delete(output,recursive:true);Console.WriteLine("Live regional evidence summarized in stdout; disposable readbacks removed: "+output);
+        }
+        else Console.WriteLine("Live regional evidence retained: "+output);
     }
     private static string RunSample(string sample,string root,string output,string arguments,string? mode)
     {
@@ -61,6 +65,10 @@ internal static class RegionalPhysicalResidencyTests
         try
         {
             var files=Directory.GetFiles(output,"frame-*.json");Require(files.Length>0,"no live physical capture");
+            // The accepted prepared raster bypass reports zero TES counters.
+            // Require a matching generation's actual pipeline/query evidence;
+            // zero alone must never stand in for a missing draw.
+            var directGenerations=DirectPreparedRasterGenerations(output);
             var footprint=new List<object>();var levels=new HashSet<int>();var pupils=new HashSet<int>();bool reentered=false;int checkedVertices=0;
             var anchor=new Double3(.1433224599406355,.4788205718227514,.8661348234979923);
             foreach(var file in files)
@@ -88,7 +96,12 @@ internal static class RegionalPhysicalResidencyTests
                 }
                 // Publication is deliberately deferred; inspect the completed L17
                 // return, including a publication after the old frame-740 checkpoint.
-                if(frame>=740&&level==17){Require(f.GetProperty("maxOuter").GetDouble()==1&&f.GetProperty("maxInner").GetDouble()<=1,"reentry factor-1 workload changed");Require(found==9,"Florida reentry footprint incomplete");reentered=true;}
+                if(frame>=740&&level==17){
+                    var outer=f.GetProperty("maxOuter").GetDouble();var inner=f.GetProperty("maxInner").GetDouble();
+                    bool direct=outer==0&&inner==0&&directGenerations.Contains(f.GetProperty("generation").GetRawText());
+                    Require(direct||(outer==1&&inner<=1),"reentry unrefined physical raster workload changed");
+                    Require(found==9,"Florida reentry footprint incomplete");reentered=true;
+                }
             }
             Require(levels.Contains(16)&&levels.Contains(17)&&pupils.Count>2&&reentered&&checkedVertices>50,"missing adjacent-level/pupil/reentry physical coverage");
             FacilitySupportTests.AnalyzeLive(output);
@@ -97,11 +110,16 @@ internal static class RegionalPhysicalResidencyTests
         }
         finally {PlanetaryPhysicalSurface.ConfigureRuntimeGeneration(previous);}
     }
+    internal static HashSet<string> DirectPreparedRasterGenerations(string output)=>
+        Regex.Matches(File.ReadAllText(Path.Combine(output,"runtime.log")),
+            @"GPU anchored refinement:[^\r\n]*generation=(\d+);[^\r\n]*tcsPatches=0;[^\r\n]*refinedVertices=0;[^\r\n]*clippingOutputPrimitives=[1-9]\d*;[^\r\n]*fragmentInvocations=[1-9]\d*;[^\r\n]*indirectDraws=1;[^\r\n]*countersAndQueryFrameMatch=true;[^\r\n]*directPreparedRaster=true")
+            .Select(m=>m.Groups[1].Value).ToHashSet(StringComparer.Ordinal);
     internal static void VerifyPreparationScheduling(string root)
     {
         var native=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","NovaCoreNative.cpp"));
         var staged=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","RegionalPhysicalPreparation.inl"));
         var residency=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","RegionalPhysicalResidency.inl"));
+        var dependencyLifetime=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","RegionalPupilLifetime.h"));
         Require(staged.Contains("std::min(RegionalPreparationVertexBudget,total-job.cursor)")&&
             staged.Contains("job.fencePending=job.cursor==total")&&staged.Contains("return job.fencePending;"),"whole-generation preparation or early slice completion returned");
         Require(native.Contains("RegionalPhysicalEnabled(a)&&!RecordRegionalPreparation(a,c,true))return;")&&
@@ -111,7 +129,8 @@ internal static class RegionalPhysicalResidencyTests
             staged.Contains("std::swap(a.productionBillboardPhysicalBuffer,a.regionalScratchBuffer)")&&
             staged.Contains("if(!job.fencePending)return;"),"pupil updates can mutate published geometry before their fence");
         Require(residency.Contains("job.cursor==job.frame.metadata[2]?2u:0u")&&
-            residency.Contains("job.phase==2&&a.regionalPhysical->Complete(job.mask)"),"partial geographic demand became ready");
+            residency.Contains("bool ready=ResolveDependencyTarget(")&&
+            dependencyLifetime.Contains("return allResident||(job.phase==2&&complete(job.mask));"),"partial geographic demand became ready");
         int update=native.IndexOf("void Update(App &a, float dt)",StringComparison.Ordinal);
         int wait=native.IndexOf("vkWaitForFences",update,StringComparison.Ordinal);
         int inspect=native.IndexOf("InspectRegionalPhysical(a)",update,StringComparison.Ordinal);

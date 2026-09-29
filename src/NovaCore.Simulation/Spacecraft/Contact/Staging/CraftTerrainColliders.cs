@@ -77,7 +77,7 @@ internal sealed class CraftTerrainColliders(BepuPhysics.Simulation simulation,Bu
         for(var x=minX;x<=maxX;x++)for(var y=minY;y<=maxY;y++)
         {
             var key=new CraftTerrainGeometry.Tile(x,y);
-            if(!tiles.TryGetValue(key,out var tile))tile=CraftTerrainGeometry.Prepare(site,origin,key,tolerance);
+            if(!tiles.TryGetValue(key,out var tile))tile=site.TerrainPreparation.Get(origin,key,tolerance);
             total=checked(total+tile.Triangles.Length);if(total>4_194_304)throw new InvalidDataException("Finite terrain triangle capacity exceeded.");
             prepared.Add(key,tile);
         }

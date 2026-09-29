@@ -11,7 +11,7 @@ internal static partial class ModularFloridaTests
         if(minimumIntervals<0||minimumIntervals>1599)throw new ArgumentOutOfRangeException(nameof(minimumIntervals));
         checks=0;var terrain=Terrain();var catalog=AssemblyDefinitionCatalog.Load(File.ReadAllBytes(Path.Combine(Assets,"catalog.json")));
         var craft=CraftCompiler.Compile(catalog,Craft(catalog,false).Data,Assets);
-        var bytes=File.ReadAllBytes(Path.Combine(GraphicsTestHarness.RepositoryPath(),"build/surface-recontact/retry/native.json.input.ncflight.json"));
+        var bytes=File.ReadAllBytes(Path.Combine(GraphicsTestHarness.RepositoryPath(),"tests/fixtures/physical-history/surface-retry.ncflight.json"));
         using var s=ConstructionApplicationSession.RestoreFlight(catalog,bytes,Assets,terrain.Query,terrain.Slab);
         var rows=new List<object>();
         var route=new SurfaceRetryRoute();var input=new PlayerFlightControlInput(s);var keys=NativePilotKeys.None;var generations=new HashSet<int>();
@@ -31,7 +31,7 @@ internal static partial class ModularFloridaTests
             var allocated=GC.GetAllocatedBytesForCurrentThread();var debtBefore=s.Clock.PendingSimulationDebt.Ticks;
             var stamp=System.Diagnostics.Stopwatch.GetTimestamp();s.Engine.AdmitConstructionHostTime(s.Authority,++host,new(15625));
             var status=s.Engine.ServiceConstructionDebt(s.Authority,out var n);Need(status==ConstructionServiceStatus.Published&&n==1,$"retry fixture physical service step={i} stage={route.Stage} status={status} reason={s.Engine.ConstructionSupportFailure(s.Authority)} state={value}");var cost=System.Diagnostics.Stopwatch.GetElapsedTime(stamp).TotalMilliseconds;costs.Add(cost);
-            rows.Add(new{Before=value,After=SurfaceRetryObservation.Read(s),ServiceMs=cost,Allocated=GC.GetAllocatedBytesForCurrentThread()-allocated,DebtBefore=debtBefore,DebtAfter=s.Clock.PendingSimulationDebt.Ticks,Admitted=15625,Retired=n*15625,Work=probe.Read()});
+            rows.Add(new{Before=value,After=SurfaceRetryObservation.Read(s),ServiceMs=cost,Allocated=GC.GetAllocatedBytesForCurrentThread()-allocated,DebtBefore=debtBefore,DebtAfter=s.Clock.PendingSimulationDebt.Ticks,Admitted=15625,Retired=n*15625,Work=probe.Read(),StateSha256=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(s.Save()))});
         }
         Need(complete&&route.TerrainSeen&&route.GroundedRcs&&route.Powered,"complete terrain/contact/RCS/powered/free flight route");
         var invalid=new SurfaceRetryRoute();bool refused=false;try{invalid.Observe(SurfaceRetryObservation.Read(s) with{RawCapture=true});}catch(InvalidDataException){refused=true;}Need(refused,"diagnostic capture cannot masquerade as production");

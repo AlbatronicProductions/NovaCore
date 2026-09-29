@@ -88,6 +88,7 @@ nc::frozen::Header FrozenFrameAuthority(App& a){
   h[VertexCapacity]=a.productionBillboardVertexCapacity;h[TriangleCapacity]=a.productionBillboardTriangleCapacity;
   h[ResidencyBytes]=a.productionBillboardTopologyResidentBytes;h[WorkingBytes]=a.productionBillboardWorkingBytes;
   h[SurfaceMode]=a.submission->planetarySurfaceMode;
+  h[HeaderFlags]=a.directPreparedSurfaceSubmitted?8u:0u; // Has no TCS/TES factors; not a factor of one.
   for(const auto& resource:a.productionBillboardTopologyResources)if(resource.index==a.productionBillboardIndexBuffer)h[Reserved55]=resource.indexBirth;
   h[Reserved60]=a.frozenDeviceIdentity[0];h[Reserved61]=a.frozenDeviceIdentity[1];h[Reserved62]=a.frozenDeviceIdentity[2];
   trace.Returned(RO::AuthorityResources);
@@ -135,7 +136,7 @@ void RecordFrozenCapture(App& a,VkCommandBuffer command){
   auto header=FrozenFrameAuthority(a);auto now=trace.Call(RO::ReserveClock,[&]{return GetTickCount64();});
   auto* slot=trace.Call(RO::ReserveSlot,[&]{return a.frozen.Reserve(now);});
   if(trace.Active())trace.Slots(a.frozen.slots[0].state.load(),a.frozen.slots[0].header[nc::frozen::Identity],a.frozen.slots[1].state.load(),a.frozen.slots[1].header[nc::frozen::Identity]);
-  if(slot){trace.Enter(RO::SlotHeader);auto id=slot->header[nc::frozen::Identity];slot->header=header;slot->header[nc::frozen::Identity]=id;slot->header[nc::frozen::HeaderFlags]=1;
+  if(slot){trace.Enter(RO::SlotHeader);auto id=slot->header[nc::frozen::Identity];slot->header=header;slot->header[nc::frozen::Identity]=id;slot->header[nc::frozen::HeaderFlags]|=1;
     slot->header[nc::frozen::CaptureTransport]=4;
     slot->topology=&a.frozen.PinTopology(slot->header);
     const bool reuseIndices=true;

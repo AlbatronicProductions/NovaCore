@@ -47,6 +47,25 @@ internal static class FrozenRegression
             if(FrozenSnapshot.Read(target).Errors.Count!=0)throw new InvalidOperationException("Historical transport reader failed");
             File.WriteAllBytes(target,original);results.Add(new{name="transport compatibility "+transport,passed=true});
         }
+        // Direct raster is positively identified, never inferred from absent TES work.
+        var historical=original;var direct=(byte[])historical.Clone();
+        Word(direct,51,W(direct,51)|8);Word(direct,14,1);Word(direct,25,4);Word(direct,50,2);Word(direct,31,0);
+        Word(direct,42,0);Word(direct,43,0);BitConverter.GetBytes(1.5f).CopyTo(direct,Offset(direct,101)+88);
+        direct.AsSpan(Offset(direct,5)+23*4,8).Clear();Rehash(direct);File.WriteAllBytes(target,direct);
+        var directResult=FrozenSnapshot.Read(target);
+        if(directResult.Errors.Count!=0||!directResult.DirectPreparedRaster)throw new InvalidOperationException("Direct prepared capture refused");
+        results.Add(new{name="positively identified direct prepared capture",passed=true});
+        original=direct;
+        Reject("unflagged absent tessellation",b=>Word(b,51,W(b,51)&~8ul),true);
+        foreach(int word in new[]{42,43})Reject("direct nonzero stage query "+word,b=>Word(b,word,1),true);
+        foreach(int word in new[]{23,24})Reject("direct nonzero factor "+word,b=>BitConverter.GetBytes(1f).CopyTo(b,Offset(b,5)+word*4),true);
+        foreach(int word in new[]{14,25,50})Reject("direct wrong owner "+word,b=>Word(b,word,99),true);
+        Reject("direct raster override",b=>Word(b,31,1024),true);
+        Reject("direct negative factor probe",b=>BitConverter.GetBytes(-1.5f).CopyTo(b,Offset(b,101)+88),true);
+        Reject("direct nonfinite input",b=>BitConverter.GetBytes(float.NaN).CopyTo(b,Offset(b,101)+88),true);
+        // A self-consistent new mode cannot be attached to the previous submission journal.
+        Reject("rehashed changed draw mode against journal",b=>{},true,true);
+        original=historical;File.WriteAllBytes(target,original);
         byte[] journal=File.ReadAllBytes(Path.Combine(output,"breadcrumbs.bin"));int changed=128;
         while(BitConverter.ToUInt64(journal,changed)==0)changed+=512;
         journal[changed+120]^=1;File.WriteAllBytes(Path.Combine(output,"breadcrumbs.bin"),journal);

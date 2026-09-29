@@ -1,6 +1,20 @@
 # NovaCore current engineering state
 
-## Current bank — M16.0
+## Current bank — M16.1
+
+**M16.1 — Planetary Rendering & Terrain Lifecycle Convergence is BANKED** at
+annotated tag [`m16.1`](https://github.com/AlbatronicProductions/NovaCore/tree/m16.1),
+which identifies the exact milestone commit. [Scope and current truth](milestones/M16.1.md).
+The bank preserves the unified M16.0 generation; Player/public acceptance remains
+unassigned. [Final source/build/package verification](milestones/M16.1-publication.json).
+Prepared raster/receiver, optimized fragment, immutable contact-terrain reuse,
+worker-owned exact readiness/publication and conservative background visibility are
+accepted. Rejected material content, JIT experiments and async allocation are excluded.
+At 3440×1322, grounded frame median/P95/P99 is **6.687/13.575/15.643 ms**;
+whole GPU **5.723/9.892/11.451 ms**. Readiness is **374.539 ms**, 36 fallback frames;
+all 17 grounded P95-tail frames wait on global fallback. No new performance front.
+
+## Preserved baseline — M16.0
 
 **M16.0 — Unified Modular Spaceflight Baseline is BANKED** at
 `78b557b670517da90d005629c087bab7472fb4fc`, annotated tag
@@ -10,7 +24,8 @@ PASS or approve a packaged player release.
 
 | Open responsibility | Current disposition |
 |---|---|
-| Stable 150 FPS / 6.6667 ms whole-frame performance | **OPEN / REVISE**; detailed terrain/material draw remains the dominant GPU owner. |
+| Stable 150 FPS / 6.6667 ms whole-frame performance | **OPEN / REVISE**; current grounded median 6.687 ms; tails remain open. |
+| Cold-fallback closure / planetary fidelity | **OPEN / REVISE** / **REVISE**. |
 | Historical blackout cause | **UNRESOLVED**; healthy bounded runs do not establish causality. |
 | Player/public-release PASS | **UNASSIGNED**. |
 | MinimumRecorder public disposition | **UNDECIDED — KEEP / DEV-ONLY / RETIRE**; temporary qualification infrastructure, not accepted permanent player architecture. |
@@ -31,9 +46,9 @@ destruction and a complete orbital/atmospheric-return mission are not qualified.
 The [campaign scope and measurements](engineering-evidence/performance-150fps/bank-candidate.md)
 and [final recorder-storage supplement](engineering-evidence/minimum-recorder-bounded-storage/README.md)
 retain the accepted engineering evidence. Stable 150 FPS remains open: the final
-GPU payoff gate stopped before a production GPU correction or additional native
-verification. CPU transition tails and unresolved spikes are retained in the
-measurements. Engineering acceptance is not a blanket performance or Player PASS.
+M16.0 GPU payoff gate stopped before a production GPU correction; that is historical.
+The accepted M16.1 corrections and latest measurements above supersede that ordering.
+Cold readiness, transition tails and unresolved spikes remain open. Engineering acceptance is not a blanket performance or Player PASS.
 
 MinimumRecorder remains temporary developer/qualification infrastructure while
 blackout causality is unresolved. Normal development startup performs safe
@@ -65,8 +80,8 @@ flight/control and return to the retained design share this application.
 
 Earlier reports retain their original pre-bank scope, identities and dispositions,
 including preparation and cleanup records. Their UNBANKED/HOLD wording does not
-override the M16.0 tag and current status above. Earlier milestone exclusions
-describe those milestones; only the accepted M16.0 responsibilities supersede them.
+override the M16.0/M16.1 tags and current status above. Earlier milestone exclusions
+describe those milestones; only the accepted responsibilities supersede them.
 No next major engineering front is opened by this documentation update.
 [Known limitations](KNOWN_LIMITATIONS.md) and [Windows build/run](build-windows.md)
 describe the current development boundary. Project Control retains product

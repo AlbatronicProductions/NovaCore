@@ -8,7 +8,7 @@ internal static class FrozenSnapshot
     sealed record Section(ulong Type,ulong Offset,ulong Bytes,ulong Stride);
     internal sealed record Result(string Path,ulong Identity,ulong Frame,ulong Submission,ulong Generation,ulong Pupil,
         ulong Vertices,ulong Triangles,ulong Visible,ulong Clipping,ulong Tcs,ulong Tes,ulong Swap,
-        string PayloadSha256,string AuthoritySha256,bool Synthetic,Dictionary<ulong,string> SectionSha256,List<string> Errors,ulong[] TopologyAuthority);
+        string PayloadSha256,string AuthoritySha256,bool Synthetic,bool DirectPreparedRaster,Dictionary<ulong,string> SectionSha256,List<string> Errors,ulong[] TopologyAuthority);
     static void Require(bool condition,string message){if(!condition)throw new InvalidDataException(message);}
     static ulong W(byte[] h,int i)=>BitConverter.ToUInt64(h,i*8);
     static string AuthorityHash(byte[] original){
@@ -94,13 +94,20 @@ internal static class FrozenSnapshot
         Check((ulong)visible.Count==U(5,0)&&U(5,4)==count,"Visibility/compaction counters disagree");
         Check(U(5,5)==W(h,19)&&W(h,19)==(ulong)U(5,0)+U(5,1)+U(5,3)+U(5,8),"Cull input accounting mismatch");
         Check(U(5,2)==0&&U(5,3)==0,"GPU reports overflow or invalid physical triangles");
-        Check(W(h,42)==(ulong)visible.Count,"TCS query differs from retained population");
-        float outer=BitConverter.ToSingle(payload[5],23*4);Check(float.IsFinite(outer)&&outer is >=1 and <=64,"Tessellation factor outside accepted domain");
+        float outer=BitConverter.ToSingle(payload[5],23*4),inner=BitConverter.ToSingle(payload[5],24*4);
+        if((W(h,51)&8)!=0){
+            float target=BitConverter.ToSingle(payload[101],88);
+            Check(W(h,14)==1&&W(h,25)==4&&W(h,50)==2&&(W(h,31)&0xfc00)==0&&float.IsFinite(target)&&target>=0,"Direct prepared raster eligibility mismatch");
+            Check(W(h,42)==0&&W(h,43)==0&&outer==0&&inner==0,"Direct prepared raster has tessellation work");
+        }else{
+            Check(W(h,42)==(ulong)visible.Count,"TCS query differs from retained population");
+            Check(float.IsFinite(outer)&&outer is >=1 and <=64,"Tessellation factor outside accepted domain");
+        }
         Check(unchecked((long)W(h,9)) is 0 or 1000001003,"Present failed or unavailable");
         // Pupil raw identity[0] starts at byte 128 of the 160-byte current pupil.
         Check(BitConverter.ToUInt32(payload[103],160+128)==W(h,15),"Captured current pupil bytes differ from prepared identity");
         return new(path,W(h,3),W(h,4),W(h,5),W(h,11),W(h,15),W(h,18),W(h,19),(ulong)visible.Count,
-            W(h,40),W(h,42),W(h,43),W(h,10),Convert.ToHexStringLower(digest),AuthorityHash(h),(W(h,51)&2)!=0,hashes,errors,topology);
+            W(h,40),W(h,42),W(h,43),W(h,10),Convert.ToHexStringLower(digest),AuthorityHash(h),(W(h,51)&2)!=0,(W(h,51)&8)!=0,hashes,errors,topology);
     }
     internal static int Inspect(string directory,string? authorityDirectory=null)
     {

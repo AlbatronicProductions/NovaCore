@@ -47,6 +47,7 @@ internal sealed class ConstructionFlightScene : IApplicationVesselScene
     internal long QualificationInstrumentationAllocated;
     internal double QualificationInstrumentationMs;
     internal ConstructionWorkProbe.Sample? QualificationWork;
+    internal QualificationExecutionProbe.Sample? QualificationExecution;
     internal long QualificationDebtBefore,QualificationDebtAfter,QualificationAdmitted;
     private CameraState? restoredCamera;
 
@@ -176,8 +177,10 @@ internal sealed class ConstructionFlightScene : IApplicationVesselScene
         using var workProbe=MeasureQualificationService?new ConstructionWorkProbe():null;
         if(MeasureQualificationService){QualificationDebtBefore=Session.Clock.PendingSimulationDebt.Ticks;QualificationAdmitted=(long)(numerator/Stopwatch.Frequency);}
         var beforeAllocation=MeasureQualificationService?GC.GetAllocatedBytesForCurrentThread():0;
+        var execution=MeasureQualificationService?QualificationExecutionProbe.Read():default;
         var begin=Stopwatch.GetTimestamp();Advance(new((long)(numerator/Stopwatch.Frequency)));
         if(MeasureQualificationService){QualificationServiceMs=Stopwatch.GetElapsedTime(begin).TotalMilliseconds;QualificationServiceAllocated=GC.GetAllocatedBytesForCurrentThread()-beforeAllocation;QualificationWork=workProbe!.Read();QualificationDebtAfter=Session.Clock.PendingSimulationDebt.Ticks;QualificationInstrumentationAllocated=GC.GetAllocatedBytesForCurrentThread()-instrumentationAllocation-QualificationServiceAllocated;QualificationInstrumentationMs=Stopwatch.GetElapsedTime(instrumentationStart).TotalMilliseconds-QualificationServiceMs;}
+        if(MeasureQualificationService)QualificationExecution=QualificationExecutionProbe.Finish(execution);
         if(measured<frameTimes.Length){frameTimes[measured]=elapsed*1000d/Stopwatch.Frequency;serviceTimes[measured++]=(Stopwatch.GetTimestamp()-begin)*1000d/Stopwatch.Frequency;}
         UpdateTitle();
     }

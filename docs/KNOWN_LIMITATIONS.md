@@ -1,6 +1,6 @@
-# M16.0 — current limitations
+# NovaCore — current limitations
 
-**M16.0 is a banked internal engineering baseline. Player/public-release PASS is
+**M16.1 is the current banked internal engineering baseline. Player/public-release PASS is
 UNASSIGNED; there is no packaged player release.** The
 [current engineering state](NOVACORE_CURRENT_STATE.md) records the bank identity.
 Earlier [campaign reports](engineering-evidence/performance-150fps/bank-candidate.md)
@@ -15,11 +15,13 @@ accepted engineering capabilities without closing the limits below.
   dumps/captures, bulk forensics and unselected generated evidence remain local-only
   and must never be committed or included in a player package.
 
-- Latest [performance qualification](engineering-evidence/performance-150fps/README.md):
-  Stage A CPU/contact closure is accepted, but stable 150 FPS at the saved 3440x1440 /
-  actual 3440x1322 viewport remains OPEN. The final GPU payoff gate found no proven
-  single sufficient safe correction; no new GPU implementation/exposure followed.
-  Blackout cause remains unresolved; Player/public-release PASS remains unassigned.
+- Current [M16.1 bank](milestones/M16.1.md): accepted rendering/terrain
+  lifecycle corrections PASS, with all M16.0 outcomes preserved. At 3440×1322, grounded frame
+  median/P95/P99 is **6.687/13.575/15.643 ms**, whole GPU **5.723/9.892/11.451 ms**.
+  Stable 150 FPS / 6.6667 ms and cold-fallback closure remain **OPEN / REVISE**;
+  all 17 grounded P95-tail frames still wait on global fallback. Planetary fidelity
+  remains **REVISE**. Rejected content, compilation policies and async allocation
+  are excluded. No blackout causal or Player/public PASS is assigned.
 - [Recorder storage](engineering-evidence/minimum-recorder-bounded-storage/README.md)
   now has a 512 MiB hard total cap, including metadata/capsules/indexes, with
   preventive maintenance at 400 MiB and full-session reservation before recording.

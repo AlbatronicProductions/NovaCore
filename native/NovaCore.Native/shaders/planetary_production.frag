@@ -153,12 +153,18 @@ uint ResolveProductionFragmentLayer(vec3 unitDirection,out vec2 localUv,out uvec
 // The shared module defaults to the complete bootstrap/diagnostic contract.
 // Only the ordinary NCSM1 pipeline opts into its immutable owner and mode.
 layout(constant_id=0) const bool ordinaryNcsm1=false;
+// Only the zero-displacement prepared pipeline enables this contract. Recover
+// geographic identity at the actual receiver instead of interpolating nonlinear
+// directions normalized at subdivision-dependent TES locations.
+layout(constant_id=1) const bool preparedSurfaceReceiver=false;
 
 void main()
 {
   bool anchored=ordinaryNcsm1||(productionLayer&0x40000000u)!=0u;
   // NCSM1 and startup terrain-v5 are mutually exclusive publication owners.
-  vec3 unitDirection=normalize(bodyDirection);
+  vec3 unitDirection=preparedSurfaceReceiver
+    ?vec3(normalize(SurfaceMaterialBodyPosition(bodyCameraHigh,bodyCameraLow,-viewDirection)))
+    :normalize(bodyDirection);
   uint diagnostic=ordinaryNcsm1?0u:floatBitsToUint(lighting.radianceGlowEnabled.w)>>16;
   // Ownership visualization is purely topological. Keep it ahead of physical
   // payload and material evaluation so this diagnostic also isolates geometry

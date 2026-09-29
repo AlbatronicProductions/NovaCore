@@ -11,7 +11,41 @@ layout(set=0,binding=0,std430) readonly buffer Frame{GpuCameraData camera;}frame
 layout(set=0,binding=2,std430) readonly buffer Input{vec4 cameraHighRadiusHigh;vec4 cameraLowRadiusLow;vec4 thresholds;uvec4 controls;vec4 viewForwardHalfAngle;vec4 textureDemand;}inputData;
 layout(set=0,binding=6,std430) readonly buffer Presentations{Presentation values[];}presentations;
 struct PhysicalVertex{dvec4 body;vec4 normal;vec4 reserved;};layout(set=0,binding=38,std430) readonly buffer Physical{PhysicalVertex values[];}physical;
-layout(location=1) out vec3 normal;layout(location=2) flat out vec3 lightDirection;layout(location=5) out vec3 viewDirection;layout(location=6) out vec3 bodyDirection;layout(location=7) out float terrainHeight;layout(location=17) out vec3 conservativeTrianglePosition;
+layout(location=1) out vec3 normal;layout(location=2) flat out vec3 lightDirection;layout(location=5) out vec3 viewDirection;layout(location=6) out vec3 bodyDirection;layout(location=7) out float terrainHeight;
+#ifdef NOVACORE_DIRECT_PREPARED_SURFACE
+// Same prepared vertices and receiver, with no nonlinear intermediate
+// normalization at generated tessellation vertices. FS normalizes once.
+layout(location=0) out vec4 color;
+layout(location=3) flat out uvec2 material;
+layout(location=4) flat out vec4 response;
+layout(location=8) flat out vec3 bodyCameraHigh;
+layout(location=9) flat out vec3 bodyCameraLow;
+layout(location=10) flat out vec4 localDetail;
+layout(location=11) flat out uint productionLayer;
+layout(location=12) out vec2 productionUv;
+layout(location=13) flat out uvec4 productionAddress;
+layout(location=14) out vec2 productionTransition;
+layout(location=15) out vec2 topologyCoordinate;
+#else
+layout(location=17) out vec3 conservativeTrianglePosition;
+#endif
 layout(push_constant) uniform StellarLighting{vec4 sourceCenterExposure;vec4 sourceColorAmbient;vec4 radianceGlowEnabled;}lighting;
 vec3 rotateQ(vec3 p,vec4 q){return p+2.0*cross(q.xyz,cross(q.xyz,p)+q.w*p);}
-void main(){Presentation p=presentations.values[0];PhysicalVertex pv=physical.values[uint(gl_VertexIndex)];dvec4 bp=pv.body;vec4 pn=pv.normal;dvec3 direction=normalize(bp.xyz),camera=dvec3(inputData.cameraHighRadiusHigh.xyz)+dvec3(inputData.cameraLowRadiusLow.xyz);vec3 relativeBody=vec3(bp.xyz-camera),relative=rotateQ(relativeBody,p.bodyOrientation);normal=normalize(pn.xyz);lightDirection=normalize(rotateQ(lighting.sourceCenterExposure.xyz-p.centerRadius.xyz,vec4(-p.bodyOrientation.xyz,p.bodyOrientation.w)));viewDirection=-relativeBody;bodyDirection=vec3(direction);terrainHeight=float(bp.w);conservativeTrianglePosition=relative;gl_Position=frameData.camera.viewProjection*vec4(relative,1);}
+void main(){
+  Presentation p=presentations.values[0];PhysicalVertex pv=physical.values[uint(gl_VertexIndex)];
+  dvec4 bp=pv.body;vec4 pn=pv.normal;
+  dvec3 direction=normalize(bp.xyz),camera=dvec3(inputData.cameraHighRadiusHigh.xyz)+dvec3(inputData.cameraLowRadiusLow.xyz);
+  vec3 relativeBody=vec3(bp.xyz-camera),relative=rotateQ(relativeBody,p.bodyOrientation);
+  normal=normalize(pn.xyz);
+  lightDirection=normalize(rotateQ(lighting.sourceCenterExposure.xyz-p.centerRadius.xyz,vec4(-p.bodyOrientation.xyz,p.bodyOrientation.w)));
+  viewDirection=-relativeBody;bodyDirection=vec3(direction);terrainHeight=float(bp.w);
+  gl_Position=frameData.camera.viewProjection*vec4(relative,1);
+#ifdef NOVACORE_DIRECT_PREPARED_SURFACE
+  color=vec4(1);material=uvec2(p.identity.w,p.identity.z);response=p.surface;
+  bodyCameraHigh=inputData.cameraHighRadiusHigh.xyz;bodyCameraLow=inputData.cameraLowRadiusLow.xyz;
+  localDetail=p.localDetail;productionLayer=0x40000000u;productionUv=vec2(0);
+  productionAddress=uvec4(0);productionTransition=vec2(1,0);topologyCoordinate=vec2(0);
+#else
+  conservativeTrianglePosition=relative;
+#endif
+}

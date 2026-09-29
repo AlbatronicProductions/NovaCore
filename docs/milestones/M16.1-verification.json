@@ -1,0 +1,800 @@
+{
+  "milestone": "NovaCore M16.1 — Planetary Rendering & Terrain Lifecycle Convergence",
+  "status": "Accepted campaign PASS; bank preparation; FROZEN / UNBANKED",
+  "git": {
+    "branch": "main",
+    "head": "3feabe8e8b42280adbafa6584cd4152d4f85fcaa",
+    "origin": "https://github.com/AlbatronicProductions/NovaCore.git",
+    "remoteMain": "3feabe8e8b42280adbafa6584cd4152d4f85fcaa",
+    "m16_0": "78b557b670517da90d005629c087bab7472fb4fc",
+    "m16_0TagObject": "e67c8dd372d02f33eed2acd8bb46cd4263777e89",
+    "m16_1Created": false
+  },
+  "acceptedContracts": {
+    "prepared eligibility": true,
+    "prepared receiver": true,
+    "optimized artifact": true,
+    "immutable cache": true,
+    "worker payload lease": true,
+    "completion publication": true,
+    "bounded receipts": true,
+    "conservative background policy": true,
+    "opt-in attribution": true,
+    "exact fixture": true
+  },
+  "productionSourcesUnchangedDuringBankPrep": true,
+  "bankPrepOnlyRepair": "Promoted exact 13,505-byte canonical physical fixture from ignored build output; changed only test path and -text checkout rule.",
+  "cpu": {
+    "focusedChecks": [
+      {
+        "test": "NovaCorePreparedSurfaceRasterTests",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "NovaCoreRegionalPupilLifetimeTests",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "NovaCoreRegionalPhysicalTests",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "NovaCorePostContactTimingTests",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "terrain-preparation-cache",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "post-contact",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "surface-refinement",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "surface-cycles",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "surface-persistence",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "surface-seams",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "terrain-reuse",
+        "exitCode": 0,
+        "configuration": "Debug"
+      },
+      {
+        "test": "NovaCorePreparedSurfaceRasterTests",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "NovaCoreRegionalPupilLifetimeTests",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "NovaCoreRegionalPhysicalTests",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "NovaCorePostContactTimingTests",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "terrain-preparation-cache",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "post-contact",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "surface-refinement",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "surface-cycles",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "surface-persistence",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "surface-seams",
+        "exitCode": 0,
+        "configuration": "Release"
+      },
+      {
+        "test": "terrain-reuse",
+        "exitCode": 0,
+        "configuration": "Release"
+      }
+    ],
+    "physicalEquivalence": {
+      "Debug": {
+        "rows": 281,
+        "stateHashes": "identical",
+        "contactObservations": "identical excluding process-local World handle",
+        "debtAndIntervals": "identical",
+        "sha256": "e0fc01fd1f6f461b5f20b09bd648b5b2448dc166c6280a178435bcb4de3019c8"
+      },
+      "Release": {
+        "rows": 281,
+        "stateHashes": "identical",
+        "contactObservations": "identical excluding process-local World handle",
+        "debtAndIntervals": "identical",
+        "sha256": "353b0ec05960a77506be49a85d81348e5fe579e02dca8ad3e488a5204ec4843f"
+      }
+    },
+    "simulation": {
+      "Debug": {
+        "namedGroupsPassed": 95,
+        "log": {
+          "path": "build/m16.1-bank-preparation/simulation-Debug.log",
+          "bytes": 67109,
+          "sha256": "f0b3c8816bb701554b0264bb52878fe3dad574f2b3ecff036a0a292446f6dae1"
+        }
+      },
+      "Release": {
+        "namedGroupsPassed": 95,
+        "log": {
+          "path": "build/m16.1-bank-preparation/simulation-Release.log",
+          "bytes": 67113,
+          "sha256": "30a0f95999c80844a15d1f6d92d38f964f18e9cab800a09295532bd64a89ff54"
+        }
+      }
+    },
+    "gpuExecution": false
+  },
+  "builds": {
+    "Debug": "Stale native, App and test drivers rebuilt, zero errors; managed builds zero warnings.",
+    "Release": "Qualified native/player artifacts already current; test driver rebuilt for fixture path only.",
+    "nativeGameRelaunched": false
+  },
+  "package": {
+    "judgment": "PASS",
+    "fileCount": 136,
+    "bytes": 13110494,
+    "packageSha256": "4d2addb17e9733f19150f3ae575b46edf99839ed08d030ce7d5f16c721163bc9",
+    "shaders": 68,
+    "errors": [],
+    "scope": "Repository-layout canonical build output; explicit verified terrain cache required. Not standalone publish qualification."
+  },
+  "executables": {
+    "NovaCore.dll": {
+      "bytes": 23552,
+      "sha256": "98ab204d75e10171f719c35e7ef9e51d04c129696d90d3c8c57757e012fb06c0"
+    },
+    "NovaCore.exe": {
+      "bytes": 162304,
+      "sha256": "90d016615cbd8d7cf106800d2d9da6ad3ea84189a40bcd64916ea1004bf68c26"
+    },
+    "NovaCore.Native.dll": {
+      "bytes": 486400,
+      "sha256": "df2f06d535123773902059db5f9a5bb9c2c229e43bab3c7f9bf2009a6b6df5d3"
+    },
+    "NovaCore.Recorder.dll": {
+      "bytes": 9728,
+      "sha256": "106e03c5448004806806803247e05df0dba6a9d4bfd7ec5c3352b3777ed52079"
+    },
+    "NovaCore.Recorder.exe": {
+      "bytes": 162304,
+      "sha256": "d2ae11532f9a30b8dab1d1aef5a5165ba7edd91ae76d88bd5f53652f707427fe"
+    },
+    "NovaCore.Simulation.dll": {
+      "bytes": 5232640,
+      "sha256": "2e6404f1d326eec545853f7f822bf2695030c6833b3e826a23b3fb0e7a46bb87"
+    }
+  },
+  "performance": {
+    "viewport": [
+      3440,
+      1322
+    ],
+    "groundedFrameMs": {
+      "median": 6.687,
+      "p95": 13.575,
+      "p99": 15.643
+    },
+    "wholeGpuMs": {
+      "median": 5.723,
+      "p95": 9.892,
+      "p99": 11.451
+    },
+    "dependencyReadinessMs": 374.539,
+    "groundedFallbackFrames": 36,
+    "groundedP95TailFrames": 17,
+    "allGroundedP95TailsWaitGlobal": true,
+    "source": "Retained restored-final native run, not remeasured during bank prep."
+  },
+  "priorQualifiedEvidence": [
+    {
+      "path": "docs/engineering-evidence/planetary-architecture-convergence/results.json",
+      "bytes": 286178,
+      "sha256": "853ab3b0c51653d597cdd2334a27a396a977588a62a0dc2c3d5afef87aea9032"
+    },
+    {
+      "path": "docs/engineering-evidence/planetary-frame-tail-convergence/results.json",
+      "bytes": 817071,
+      "sha256": "be6f6b29aed3d539cc10fd3ef4cf50b62ab2cdd50b4843b30069185e05c06d4a"
+    },
+    {
+      "path": "docs/engineering-evidence/grounded-lifecycle-convergence/results.json",
+      "bytes": 303445,
+      "sha256": "3267c74f1cb28be2b0087aa7d7e5ae45a35f0033a633703d96c344bcb3eb899b"
+    },
+    {
+      "path": "docs/engineering-evidence/terrain-readiness-convergence/results.json",
+      "bytes": 491344,
+      "sha256": "d5563cf351fea79a55939820665e79f0f750e562cfbb3f1e6ca84d9c9c9f73c8"
+    },
+    {
+      "path": "docs/engineering-evidence/current-frame-closure/results.json",
+      "bytes": 609866,
+      "sha256": "8211e596c27a80537c93f60d215fd2862ad6600a86e355f6ffa8d54e4e22f840"
+    },
+    {
+      "path": "docs/engineering-evidence/regional-cold-fallback/results.json",
+      "bytes": 1913743,
+      "sha256": "f527f6d0eacfa52c581e4399640a4bec32dc7e0653dc08942363de614c1bf382"
+    }
+  ],
+  "retainedPerFileProofHashesRevalidated": 594,
+  "historicalSourceHashLimit": {
+    "references": [
+      {
+        "front": "grounded-lifecycle-convergence",
+        "reference": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.PostContact.cs",
+        "reason": "historical hash differs from current path or candidates",
+        "sha256": "fea30334462cb7ebda064f2d89d722b845548f9f259790bfa3012ec986eb8c76"
+      },
+      {
+        "front": "grounded-lifecycle-convergence",
+        "reference": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.SurfaceQualification.cs",
+        "reason": "historical hash differs from current path or candidates",
+        "sha256": "412cfa440cd15752a4dc64081b5e0dc8cf76a3de9f12512ced1c6acf593a92a8"
+      }
+    ],
+    "explanation": "These two older contact-cache test/qualification-driver source hashes are not claimed as current. The post-contact test entry hash matches the historical value before the byte-identical fixture-path repair. The desktop driver has subsequently accepted qualification-only execution/hold guards. Current sources and package are sealed separately; all resolved native-run and controlled-proof files match."
+  },
+  "evidenceLimit": "Current authenticated-history browser mismatch; no fresh live-history verification. Earlier qualified installed/authenticated evidence is retained. Prior standard Vulkan validation is not new sync/GPU-assisted/blackout qualification.",
+  "sourceInventory": [
+    {
+      "path": "native/NovaCore.Native/BackgroundVisibility.h",
+      "bytes": 513,
+      "sha256": "4d0d1f849a2cfd0d074fa816f7392e8f6fbc8390903f32012c067a1a84e4f7ba",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "native/NovaCore.Native/CMakeLists.txt",
+      "bytes": 31716,
+      "sha256": "6c1b1fc45e1c7bc0618ea6f9efbbc9a21b23503e33a5e5bb9eba3eef6d64379e",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "native/NovaCore.Native/FrozenCaptureNative.inl",
+      "bytes": 23167,
+      "sha256": "98fef8364b0f648a805c818f4bac255d68b718dc5df0f1412e8cee2b3118f8f9",
+      "disposition": "DEV-ONLY",
+      "reason": "Qualified direct-raster evidence identity/validation; opt-in forensic route."
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "bytes": 330056,
+      "sha256": "7ff8dec1cf61b597ce51971472fc564b9bc774182a3f17f9bf67f3249d56d943",
+      "disposition": "KEEP",
+      "reason": "Accepted production ownership plus opt-in attribution call sites; existing fence/lifetime preserved."
+    },
+    {
+      "path": "native/NovaCore.Native/PostContactTiming.h",
+      "bytes": 3760,
+      "sha256": "95b25f13c63f9ac5fa76098fcf2277d7cbc74e5c1a221599a5b3d163e50c1e43",
+      "disposition": "DEV-ONLY",
+      "reason": "Opt-in fixed-capacity attribution; disabled clocks/rows/I/O absent."
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSurfaceRaster.h",
+      "bytes": 820,
+      "sha256": "6943e2c409d27d19f4efc0fb4d08fff174f6e622aeff9ab54a99962f328fbac3",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSurfaceRasterTests.cpp",
+      "bytes": 1074,
+      "sha256": "81fa98958e6b0d8b6a7dce0e32d417cfac4af0e91cb643b49a53dc9792cb828e",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidency.h",
+      "bytes": 8756,
+      "sha256": "d56662648bde5d36c6fae2d300b944c92c5c98ad3ad5e13ad818459f5dfe5039",
+      "disposition": "KEEP",
+      "reason": "Accepted exact worker lease, bounded receipts and lifecycle totals, including per-record copy timing; no policy depends on timing."
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidency.inl",
+      "bytes": 13216,
+      "sha256": "44f5f4e3d5fa2bd21ff74f58263a2c7c6cb80b9ca141ba798762422ddb52870c",
+      "disposition": "KEEP",
+      "reason": "Accepted production ownership plus opt-in attribution call sites; existing fence/lifetime preserved."
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidencyTests.cpp",
+      "bytes": 7214,
+      "sha256": "b3d5a3a439144555534682dbaf23379a9aa2e639f002e825773116ecef4f300c",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/planetary_production.frag",
+      "bytes": 19292,
+      "sha256": "c016d8e4fe9403c3ebb03aaffc993c182e3b8c719e56e2b6c0d63a61d291c99b",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/prepared_surface_contract.h",
+      "bytes": 508,
+      "sha256": "964545260cd34fb7c1c292e23f8739eff36e7beda5b4ead278573007eef4a090",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard.vert",
+      "bytes": 3578,
+      "sha256": "7f590ac482564aba0a5706f894bfbecb12dbfdbe148d09dc14db7530b7483307",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard_physical.glsl",
+      "bytes": 2593,
+      "sha256": "41212417ace6a1eec4c33f2ef09b17794f0407a00592663e838f1f29770ab2d6",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ConstructionFlightScene.cs",
+      "bytes": 21093,
+      "sha256": "2b2ebcda50a5cd5a18a559c74e79acd48ec02a59e6962048cc2c32d237d41e51",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit qualification-only attribution/foreground/hold route; no compiler policy."
+    },
+    {
+      "path": "samples/NovaCore.Triangle/QualificationExecutionProbe.cs",
+      "bytes": 1630,
+      "sha256": "e78d3ed250707d8f3572de6537ede63426f94033fbc17170d04a5d8d0cd61f91",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit qualification-only attribution/foreground/hold route; no compiler policy."
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SurfaceRetryObservation.cs",
+      "bytes": 5325,
+      "sha256": "a56d08c878596bf7cb375efee7ec083922b7c9fb6dda72092e343690d1907ef3",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit qualification-only attribution/foreground/hold route; no compiler policy."
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs",
+      "bytes": 14077,
+      "sha256": "0bc282450635190167294412ddc99cbaa220c62d159b245cbc1f7e1f5fdeb197",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainColliders.cs",
+      "bytes": 7674,
+      "sha256": "cdefb7cf660a0fc54858bf1e2b9f99dfd9d32328c4eaf214f67c7a1799ad5116",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainGeometry.cs",
+      "bytes": 8431,
+      "sha256": "bb83bb5427074d2c54337add03a106ed2f80640f8b5f904d05b6b3d739ea3c6c",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainPreparationCache.cs",
+      "bytes": 3594,
+      "sha256": "aaf8c230d92678af4c349d9d24bb6c089a59c63a6907e4e9b739c7b197f81002",
+      "disposition": "KEEP",
+      "reason": "Accepted production geometry, receiver, shader artifact, background or immutable terrain authority."
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FacilitySupportTests.cs",
+      "bytes": 11613,
+      "sha256": "ec6ab13986b142331393e2346f5482d80a43a18c5b1714f98b8447f40fc43301",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.PostContact.cs",
+      "bytes": 4180,
+      "sha256": "1878c4b6dfe9aed7220ac43943495675fe9ae219e48cda84479130ce644b91bb",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.TerrainPreparationCache.cs",
+      "bytes": 8014,
+      "sha256": "00178824c30ae3720e01114dd8e04aa190666345d8c0836b6bc6ee6ad4979c0f",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "bytes": 5969,
+      "sha256": "d948a5db3100992f580d67d5d9e0419aba01c0563f8202ba0788ac07ffe20943",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "bytes": 577064,
+      "sha256": "531ccb5293ae785d7db19aa0d96736c740686568b37646439efa6c7580a98008",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/RegionalPhysicalResidencyTests.cs",
+      "bytes": 15865,
+      "sha256": "56f88a8de564a46b467ad00daecc40091dbaaed177cd235cbbc841a178b20dea",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tests/fixtures/physical-history/README.md",
+      "bytes": 770,
+      "sha256": "b0250f60e674efcb94a50661989727e3cabbf11eeae3744e3dfd53ec7b141a70",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tests/fixtures/physical-history/surface-retry.ncflight.json",
+      "bytes": 13505,
+      "sha256": "8502d85afb64021f5666770525da605e1920848d3af54f6e629a84dd40ee7414",
+      "disposition": "DEV-ONLY",
+      "reason": "Permanent separate regression or exact canonical test fixture."
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/FrozenRegression.cs",
+      "bytes": 8712,
+      "sha256": "d7780db5284f38d9bfaadb1e9e66ff8f0bb97383a278e3f60e93466ac533041f",
+      "disposition": "DEV-ONLY",
+      "reason": "Qualified direct-raster evidence identity/validation; opt-in forensic route."
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/FrozenSnapshot.cs",
+      "bytes": 18943,
+      "sha256": "bebcb2763564bcdd1ea9f68d0fe29edcb54090e40ed67f09675541a914e9d169",
+      "disposition": "DEV-ONLY",
+      "reason": "Qualified direct-raster evidence identity/validation; opt-in forensic route."
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/FrozenOwnershipProbe.cpp",
+      "bytes": 23715,
+      "sha256": "798913a8258c109bc003953801e1a77a6de6aee836e67b5ffdf12254d87f3b5e",
+      "disposition": "DEV-ONLY",
+      "reason": "Qualified direct-raster evidence identity/validation; opt-in forensic route."
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.SurfaceQualification.cs",
+      "bytes": 8645,
+      "sha256": "c9ef7d9bcc6c8982c1c4cf7939ef02d05470f9417b5d2e0c5ee3b97e7df0ca11",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit qualification-only attribution/foreground/hold route; no compiler policy."
+    },
+    {
+      "path": "tools/blackout/Inspect-Capacity.ps1",
+      "bytes": 1309,
+      "sha256": "a139ee6addf93a285f2f21c59b9c618a802f51b6d306b37f157928a5310d6dfd",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/Start-Witness.ps1",
+      "bytes": 1617,
+      "sha256": "3c43d056c6bf4a04a3b70b6be6ccc12f600f6989f7d070d8e15bc489523a2755",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/Stop-Witness.ps1",
+      "bytes": 1712,
+      "sha256": "b77e202fedb8fdc57dd38c187be8068ad770235408be9d709ca0126c8cf25f19",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/beacon.py",
+      "bytes": 4069,
+      "sha256": "e291d9d22fcfdb82946b0e20e6560f2cf719e7e693b4f0a94b18bd0dae1876ce",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/lifetime.py",
+      "bytes": 447,
+      "sha256": "227976b2e9095852c2a67127cc90b994f377fc22001c2e958214fee26ab81bd9",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/receiver.html",
+      "bytes": 3784,
+      "sha256": "68fa510837c73cae64306990e842f9e75d51c6a269bbf5be0bf71c7b7b093849",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/receiver_app.js",
+      "bytes": 17438,
+      "sha256": "ed0a2c94836d5b955b0dd95691a8767dbba85c4eed24388105ffacd32bd00baa",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/receiver_core.js",
+      "bytes": 15428,
+      "sha256": "3dd6354657d7aeb3fe3a4d9cdc4d083f8f556cbaf2ecaf869b33af9f7570ff16",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/receiver_store.js",
+      "bytes": 6541,
+      "sha256": "5ebb7b137621e8e9220614962609bd84f6ce08db2641f560a3f4db32f209fe8e",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/test_export.py",
+      "bytes": 2291,
+      "sha256": "d462478e2d3e9d12b022937675e3cb235a3b2679e91ff22b7875e019ca5aebdd",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/test_packets.cjs",
+      "bytes": 2058,
+      "sha256": "a83719d8aae19c0175243bb7d0faa5354b688273b5776c3f208f215bc0e0d05a",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/test_picker.cjs",
+      "bytes": 4920,
+      "sha256": "a57c91b88714476f93ac202058182eb8c037385485cc2eb48e99cbb95a258bbe",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/test_receiver.cjs",
+      "bytes": 18672,
+      "sha256": "09afbbc7a03e599bc420c69d470e404b70ba2f49d74f482b1a03fbcf959709ee",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/test_standing.cjs",
+      "bytes": 11229,
+      "sha256": "045cc3a827baad0ca6d86e6443dd812103cc1a0770cf52eaaf59c3e61e9909df",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/test_standing.py",
+      "bytes": 5607,
+      "sha256": "032a5a420e4de1b77f7314e8d6fe49ed0c4998596412bb23163beb88393bc911",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/test_witness.py",
+      "bytes": 20931,
+      "sha256": "9f2a81197f2934a69ea3b922f58c5bdc7a86b106ded822bb05524f04d29abbff",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/validate_export.py",
+      "bytes": 13965,
+      "sha256": "34483b132cec1e8c675536f826b7edc9942b539ff158e48ac039ccd000a646a7",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    },
+    {
+      "path": "tools/blackout/witness.py",
+      "bytes": 29924,
+      "sha256": "09efcb754c646f949795afcb45329758a3cd9a56d1ae7bffa9ae7b2f391f6ac9",
+      "disposition": "DEV-ONLY",
+      "reason": "Explicit standalone temporary witness or reusable synthetic test; never player-package content."
+    }
+  ],
+  "bankPrepTestLogIdentities": [
+    {
+      "path": "build/m16.1-bank-preparation/app-debug-build.log",
+      "bytes": 1342,
+      "sha256": "42d7bfb4d268153749dbe4b8de31fe40506b9be26129b0357394727faa3efe23"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/graphics-debug-build.log",
+      "bytes": 702,
+      "sha256": "c327c6659a82c8a8d17579053a487e2b49c7fa2cd034f9be7937b8cb4b5035de"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/graphics-release-build.log",
+      "bytes": 714,
+      "sha256": "fa70d5dbe38ceae8e16efc0792a5f1f85d4b1b4de3bba9841268ea41d50caed1"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/native-debug-build.log",
+      "bytes": 304,
+      "sha256": "34182f1119db8ba7a84ea0aa87c5372cfeec88f2e172b85c9d106802c460cabd"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCorePostContactTimingTests-Debug.log",
+      "bytes": 93,
+      "sha256": "f8145428fa000f3f6ad73523e1b60a24f73bba469104b638f2335a68066873e9"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCorePostContactTimingTests-Release.log",
+      "bytes": 94,
+      "sha256": "72079686fa6a1001f4713f68bea94acdf14a65cedd96da37d262f4fa11a99e6b"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCorePreparedSurfaceRasterTests-Debug.log",
+      "bytes": 51,
+      "sha256": "08b348ce731fde0709f99b835775bbce2d4d29eebd7e03d2da64170ab9eabb27"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCorePreparedSurfaceRasterTests-Release.log",
+      "bytes": 51,
+      "sha256": "08b348ce731fde0709f99b835775bbce2d4d29eebd7e03d2da64170ab9eabb27"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCoreRegionalPhysicalTests-Debug.log",
+      "bytes": 198,
+      "sha256": "3d1395b6135dac1623028977d1bd324b6ca3f21ee4bc6a8a56495f8846366a0e"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCoreRegionalPhysicalTests-Release.log",
+      "bytes": 196,
+      "sha256": "fec22261978ac048990744e630908bdf53f1c295382019aa249e5d7f0bcfac4c"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCoreRegionalPupilLifetimeTests-Debug.log",
+      "bytes": 3008,
+      "sha256": "28a89f2f00dc1ee76f66580639ec1d8db3c69a234bc4a3ead1efe832e134daec"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/NovaCoreRegionalPupilLifetimeTests-Release.log",
+      "bytes": 3008,
+      "sha256": "28a89f2f00dc1ee76f66580639ec1d8db3c69a234bc4a3ead1efe832e134daec"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/post-contact-Debug.log",
+      "bytes": 255,
+      "sha256": "4b9fa14a5eb56205847534388d9176768cf219e83ff51c67a0525a8c95fa47ea"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/post-contact-Release.log",
+      "bytes": 255,
+      "sha256": "35bb0a2ab9a99601a570672c5bc0010008c210a5d60b157095dd26c418428a93"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/simulation-Debug.log",
+      "bytes": 67109,
+      "sha256": "f0b3c8816bb701554b0264bb52878fe3dad574f2b3ecff036a0a292446f6dae1"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/simulation-Release.log",
+      "bytes": 67113,
+      "sha256": "30a0f95999c80844a15d1f6d92d38f964f18e9cab800a09295532bd64a89ff54"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-cycles-Debug.log",
+      "bytes": 524,
+      "sha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-cycles-Release.log",
+      "bytes": 524,
+      "sha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-persistence-Debug.log",
+      "bytes": 9424,
+      "sha256": "ecba99e87d9fbbde7230343e003ccf9ead3811de33f8695f2efdea8b91649078"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-persistence-Release.log",
+      "bytes": 9426,
+      "sha256": "3f62a3d78832b67a1d76bb3ae76b28b0e8390c119c0c95273b3397fc36bc770c"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-refinement-Debug.log",
+      "bytes": 95,
+      "sha256": "fa26a034c90289c6ebcb05699f140b4f5eca821652e63466780406ce1d554c80"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-refinement-Release.log",
+      "bytes": 95,
+      "sha256": "fa26a034c90289c6ebcb05699f140b4f5eca821652e63466780406ce1d554c80"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-seams-Debug.log",
+      "bytes": 2053,
+      "sha256": "a0860c6223bbb7f503c4b69fcb7c78edac9cea1ffc39da07ff9482e8de531b9b"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/surface-seams-Release.log",
+      "bytes": 2033,
+      "sha256": "220d6c95f5182b3c0632d4d389d74336bf7584ade1aa65bcf3de81c531e57ed4"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/terrain-preparation-cache-Debug.log",
+      "bytes": 105,
+      "sha256": "f2fe7ee10991032a035962de4f31eb49e128154225c34a8df8bbdc5d97486280"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/terrain-preparation-cache-Release.log",
+      "bytes": 105,
+      "sha256": "f2fe7ee10991032a035962de4f31eb49e128154225c34a8df8bbdc5d97486280"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/terrain-reuse-Debug.log",
+      "bytes": 33,
+      "sha256": "aa3152fb3295f154d1e6883f51c26c46cd9ad36c6ddbf8a592fa5ff6ef9eaae8"
+    },
+    {
+      "path": "build/m16.1-bank-preparation/terrain-reuse-Release.log",
+      "bytes": 33,
+      "sha256": "aa3152fb3295f154d1e6883f51c26c46cd9ad36c6ddbf8a592fa5ff6ef9eaae8"
+    }
+  ],
+  "rejectedProductionPatternHits": [],
+  "open": [
+    "150 FPS / 6.6667 ms OPEN / REVISE",
+    "Cold-fallback closure OPEN / REVISE",
+    "Planetary fidelity REVISE",
+    "Blackout causality UNRESOLVED",
+    "Player/public acceptance UNASSIGNED"
+  ],
+  "packageBoundary": "Repository-layout development package, exact external terrain required; MinimumRecorder retains temporary classification; no standalone/public release claim.",
+  "scope": "Concise engineering receipt. Paths to local-only historical proofs/logs are provenance, not Git inventory or shipping dependencies.",
+  "recordKind": "Historical bank-preparation receipt; predates authorized publication. See M16.1-publication.json for final current identities."
+}

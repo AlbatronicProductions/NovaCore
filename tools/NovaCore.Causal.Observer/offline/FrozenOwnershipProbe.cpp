@@ -24,7 +24,7 @@ struct Recorder : nc::causal::Recorder {
   void Emit(Phase phase,Kind kind,int64_t result=0,std::initializer_list<uint64_t> values={}){++events;nc::causal::Recorder::Emit(phase,kind,result,values);}
   void Bytes(Phase phase,uint64_t identity,const void* data,size_t bytes){Need(bytes==sizeof(Header),"authority size");std::memcpy(&authority,data,bytes);++authorities;nc::causal::Recorder::Bytes(phase,identity,data,bytes);}
 };
-struct App {
+struct App { bool directPreparedSurfaceSubmitted{};
   struct StartupControl {uint64_t request{},ack{};uint64_t CaptureDisableRequest()const{return request;}void AcknowledgeCaptureDisable(uint64_t r){ack=r;}} startup;
   uint64_t frozenDisableRequest{};bool frozenDrainReported{};
   Recorder causal; nc::frozen::Writer frozen;

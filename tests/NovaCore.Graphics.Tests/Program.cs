@@ -29,7 +29,15 @@ if(args.Contains("--surface-seams",StringComparer.Ordinal)){ModularFloridaTests.
 if(args.Contains("--surface-plane",StringComparer.Ordinal)){ModularFloridaTests.SurfacePlane();return 0;}
 if(args.Contains("--swept-clearance",StringComparer.Ordinal)){ModularFloridaTests.SweptClearance();return 0;}
 if(args.Contains("--terrain-reuse",StringComparer.Ordinal)){ModularFloridaTests.TerrainReuse();return 0;}
+if(args.Contains("--terrain-preparation-cache",StringComparer.Ordinal)){ModularFloridaTests.TerrainPreparationCache();return 0;}
 if(args.Contains("--post-contact",StringComparer.Ordinal)){ModularFloridaTests.PostContactFixture(args[1],args.Length>2?int.Parse(args[2],System.Globalization.CultureInfo.InvariantCulture):0);return 0;}
+if(args.Contains("--post-contact-repeat",StringComparer.Ordinal)){
+    // Repeat the exact route in one process to distinguish cold compiler tiers
+    // from warmed contact service. Each run retains its complete history hashes.
+    if(args.Length!=2)throw new ArgumentException("Expected output filename prefix.");
+    for(var repeat=0;repeat<6;repeat++)ModularFloridaTests.PostContactFixture(args[1]+$"-{repeat}.json");
+    return 0;
+}
 if(args.Contains("--surface-retry-fixture",StringComparer.Ordinal)){ModularFloridaTests.SurfaceRetryFixture();return 0;}
 if(args.Contains("--surface-live-fixtures",StringComparer.Ordinal)){ModularFloridaTests.SurfaceLiveFixtures();return 0;}
 if(args.Contains("--surface-performance",StringComparer.Ordinal)){ModularFloridaTests.SurfacePerformance();return 0;}

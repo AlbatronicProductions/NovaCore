@@ -2,7 +2,9 @@
 #include "LocalTerrainPack.h"
 #include <algorithm>
 #include <array>
+#include <chrono>
 #include <condition_variable>
+#include <cstring>
 #include <deque>
 #include <mutex>
 #include <stdexcept>
@@ -12,7 +14,6 @@ namespace nc::regionalphysical {
 // A bounded physical cache, independent of presentation material arrays.
 // The immutable catalog is authoritative even before I/O.
 constexpr uint32_t MaximumRecords=896, MaskWords=(MaximumRecords+31)/32;
-constexpr uint32_t ReadyCapacity=8, UploadBudget=8;
 constexpr uint64_t MaximumPayloadBytes=uint64_t(MaximumRecords)*localterrain::R16Bytes;
 struct alignas(16) Entry {
   uint32_t face{},level{},x{},y{};
@@ -27,7 +28,7 @@ struct alignas(16) Catalog {
   // sector identities on the host, never a filename or allocation address.
   std::array<Entry,MaximumRecords> entries{};
 };
-struct Completion {uint32_t record{};localterrain::Payload payload;std::string error;};
+struct Completion {uint32_t record{};uint64_t readBytes{},payloadBytes{};double decodeMs{},copyMs{};std::string error;};
 class Residency final {
  public:
   explicit Residency(const localterrain::Pack& pack):pack_(pack),identity_(pack.Records()) {
@@ -72,25 +73,61 @@ class Residency final {
     return true;
   }
   bool AllContributingResident()const {for(uint32_t i=0;i<catalog.count;++i)if(contributes_[i]&&!catalog.entries[i].resident)return false;return true;}
-  bool Pop(Completion& result){std::lock_guard lock(mutex_);if(ready_.empty())return false;result=std::move(ready_.front());ready_.pop_front();wake_.notify_all();return true;}
-  void Published(const Completion& value){catalog.entries[value.record].resident=1;++loaded;readBytes+=value.payload.storedBytes;uploadBytes+=value.payload.elevationBc4.size();transcodeMs+=value.payload.transcodeMilliseconds;}
+  // Render owner lends one immutable allocation for this cache's whole lifetime.
+  // Each requested record grants the worker its disjoint, unpublished byte range
+  // exactly once. No payload may be read by the GPU until PublishCompleted and
+  // the existing host-write -> shader-read submission boundary. Join this worker
+  // before unmapping/freeing the allocation; rebinding or recycling is forbidden.
+  void BindPayload(void* mapped,uint64_t bytes){
+    std::lock_guard lock(mutex_);
+    if(payload_||!mapped||bytes!=uint64_t(catalog.count)*localterrain::R16Bytes||bytes>MaximumPayloadBytes)
+      throw std::runtime_error("regional physical worker payload lifetime/size mismatch");
+    payload_=static_cast<uint8_t*>(mapped);wake_.notify_all();
+  }
+  uint32_t CompletedCount(){std::lock_guard lock(mutex_);return completedCount_;}
+  // Called only by the render owner after its existing frame fence. Acquiring
+  // this mutex makes the worker's completed byte writes happen-before queue
+  // submission. Only small fixed-capacity receipts cross this boundary, never
+  // frame-budgeted residual copies. The catalog itself remains render-owned.
+  uint32_t PublishCompleted(){
+    std::lock_guard lock(mutex_);uint32_t count=0;
+    while(publishedCount_<completedCount_){const auto& value=completed_[publishedCount_];
+      if(!value.error.empty())throw std::runtime_error(value.error);
+      if(value.record>=catalog.count||catalog.entries[value.record].resident||value.payloadBytes!=localterrain::R16Bytes)
+        throw std::runtime_error("regional physical completion identity/size mismatch");
+      catalog.entries[value.record].resident=1;++loaded;++publishedCount_;++count;
+      readBytes+=value.readBytes;uploadBytes+=value.payloadBytes;transcodeMs+=value.decodeMs;workerCopyMs+=value.copyMs;
+    }
+    if(count){++publicationBatches;maximumPublicationRecords=std::max(maximumPublicationRecords,count);}
+    return count;
+  }
   Catalog catalog{};
-  uint64_t requests{},hits{},misses{},loaded{},readBytes{},uploadBytes{};uint32_t queueHighWater{},contributingRecords{};double transcodeMs{};
+  uint64_t requests{},hits{},misses{},loaded{},readBytes{},uploadBytes{},publicationBatches{};
+  uint32_t queueHighWater{},contributingRecords{},maximumPublicationRecords{};double transcodeMs{},workerCopyMs{};
  private:
   bool Covered(localterrain::SectorId id)const {if(pack_.Contains(id))return true;if(id.level>=catalog.maximumLevel)return false;
     ++id.level;id.x*=2;id.y*=2;for(uint32_t y=0;y<2;++y)for(uint32_t x=0;x<2;++x){auto c=id;c.x+=x;c.y+=y;if(!Covered(c))return false;}return true;}
   void Work(){for(;;){uint32_t record;
-    {std::unique_lock lock(mutex_);wake_.wait(lock,[&]{return stop_||(!queue_.empty()&&ready_.size()<ReadyCapacity);});if(stop_)return;record=queue_.front();queue_.pop_front();}
-    Completion result;result.record=record;
+    {std::unique_lock lock(mutex_);wake_.wait(lock,[&]{return stop_||(!queue_.empty()&&payload_);});if(stop_)return;record=queue_.front();queue_.pop_front();}
+    Completion result;result.record=record;localterrain::Payload payload;
     // The existing record digest covers all channels. Read/verify that atomic
     // record, but retain/upload only residuals; material publication is unrelated.
-    if(!pack_.Read(identity_[record].id,result.payload,result.error)||!result.payload.digestValid||result.payload.elevationBc4.size()!=localterrain::R16Bytes)
+    if(!pack_.Read(identity_[record].id,payload,result.error)||!payload.digestValid||payload.elevationBc4.size()!=localterrain::R16Bytes)
       result.error="regional physical record failed integrity/size validation: "+result.error;
-    result.payload.albedoBc7.clear();result.payload.normalBc5.clear();result.payload.controlR8.clear();
-    {std::lock_guard lock(mutex_);if(stop_)return;ready_.push_back(std::move(result));}
+    if(result.error.empty()){
+      const auto start=std::chrono::steady_clock::now();
+      std::memcpy(payload_+size_t(record)*localterrain::R16Bytes,payload.elevationBc4.data(),localterrain::R16Bytes);
+      result.copyMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+      result.readBytes=payload.storedBytes;result.payloadBytes=payload.elevationBc4.size();result.decodeMs=payload.transcodeMilliseconds;
+    }
+    // One atomic pack record is temporary. Completion storage is bounded by
+    // immutable catalog size, not by frame cadence; slow rendering cannot block
+    // acquisition or accumulate another payload allocation per completed record.
+    {std::lock_guard lock(mutex_);if(stop_)return;completed_[completedCount_++]=std::move(result);}
   }}
   const localterrain::Pack& pack_;const std::vector<localterrain::Record> identity_;
   std::array<bool,MaximumRecords> requested_{},contributes_{};std::mutex mutex_;std::condition_variable wake_;
-  std::deque<uint32_t> queue_;std::deque<Completion> ready_;bool stop_{};std::thread worker_;
+  std::deque<uint32_t> queue_;std::array<Completion,MaximumRecords> completed_{};
+  uint32_t completedCount_{},publishedCount_{};uint8_t* payload_{};bool stop_{};std::thread worker_;
 };
 } // namespace nc::regionalphysical

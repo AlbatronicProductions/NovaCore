@@ -39,7 +39,7 @@ complete orbital mission or unrestricted landing anywhere on Earth.
 Current access requires a **Windows 11 x64 source build** and local terrain setup.
 There is no installer or ready-to-play binary release.
 
-1. Follow the [Windows build guide](docs/build-windows.md) to clone M16.0, resolve
+1. Follow the [Windows build guide](docs/build-windows.md) to clone M16.1, resolve
    Git LFS assets and build the application. Prepare **both global Earth and
    Florida terrain packages** using the [terrain guide](docs/terrain-assets.md).
    No prebuilt terrain download is currently configured.
@@ -91,8 +91,11 @@ This opens the editor; it does not physically land the spacecraft.
 
 NovaCore is an **early development build**. Performance optimization, visual
 stability and presentation remain ongoing work.
-[M16.0](https://github.com/AlbatronicProductions/NovaCore/tree/m16.0) is a development
-source checkpoint, not a packaged public release. No release date has been announced.
+[M16.1](https://github.com/AlbatronicProductions/NovaCore/tree/m16.1) is the current
+development source checkpoint, preserving the unified construction and flight route
+with improved planetary rendering and terrain reuse. Performance and final planetary
+presentation remain open. This is not a packaged public release; no release date
+has been announced.
 
 Today's limits:
 

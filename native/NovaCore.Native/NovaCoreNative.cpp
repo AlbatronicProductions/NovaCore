@@ -13,6 +13,8 @@
 #include "StartupLifecycle.h"
 #include "FrozenCapture.h"
 #include "FrozenPacking.h"
+#include "PreparedSurfaceRaster.h"
+#include "BackgroundVisibility.h"
 #include <bit>
 #include "PlanetaryHeightQuery.h"
 #include "PlanetaryMeshPreparation.h"
@@ -412,13 +414,16 @@ struct App {
   VkPipeline exhaustPipeline{};
   uint32_t exhaustMeshHandle{}, preparedObjectCapacity{};
 
-  VkPipeline backgroundPipeline{};
+  VkPipeline backgroundPipeline{},depthMaskedBackgroundPipeline{},backgroundDepthPipeline{};
+  bool depthMaskedBackgroundSubmitted{};
   VkPipeline toneMapPipeline{};
   VkPipeline stellarSunPipeline{};
   VkPipeline stellarGlowPipeline{};
   VkPipeline planetaryPipeline{};
   VkPipeline productionPlanetaryPipeline{};
   VkPipeline productionBillboardPipeline{},productionBillboardNoFaceCullPipeline{},productionBillboardOppositeFacePipeline{},productionBillboardNoDepthPipeline{},productionBillboardPreparePipeline{},productionBillboardResetPipeline{},productionBillboardCullPipeline{},productionBillboardCompactPipeline{};
+  VkPipeline directPreparedSurfacePipeline{};
+  bool directPreparedSurfaceSubmitted{};
   VkPipeline productionBillboardIncomingPreparePipeline{},productionBillboardIncomingResetPipeline{},productionBillboardIncomingCullPipeline{},productionBillboardIncomingCompactPipeline{};
   VkPipeline productionNestedScaleMeshCullPipeline{},productionNestedScaleMeshIncomingCullPipeline{};
   VkPipeline naturalGlobalPreparePipeline{};
@@ -1135,6 +1140,8 @@ void DestroySwap(App &a) {
   if(a.visualPipeline)vkDestroyPipeline(a.device,a.visualPipeline,nullptr);
   if(a.exhaustPipeline)vkDestroyPipeline(a.device,a.exhaustPipeline,nullptr);
   if(a.backgroundPipeline)vkDestroyPipeline(a.device,a.backgroundPipeline,nullptr);
+  if(a.depthMaskedBackgroundPipeline)vkDestroyPipeline(a.device,a.depthMaskedBackgroundPipeline,nullptr);
+  if(a.backgroundDepthPipeline)vkDestroyPipeline(a.device,a.backgroundDepthPipeline,nullptr);
   if(a.toneMapPipeline)vkDestroyPipeline(a.device,a.toneMapPipeline,nullptr);
   if(a.stellarSunPipeline)vkDestroyPipeline(a.device,a.stellarSunPipeline,nullptr);
   if(a.stellarGlowPipeline)vkDestroyPipeline(a.device,a.stellarGlowPipeline,nullptr);
@@ -1146,6 +1153,8 @@ void DestroySwap(App &a) {
   if(a.productionBillboardNoFaceCullPipeline)vkDestroyPipeline(a.device,a.productionBillboardNoFaceCullPipeline,nullptr);
   if(a.productionBillboardOppositeFacePipeline)vkDestroyPipeline(a.device,a.productionBillboardOppositeFacePipeline,nullptr);
   if(a.productionBillboardNoDepthPipeline)vkDestroyPipeline(a.device,a.productionBillboardNoDepthPipeline,nullptr);
+  if(a.directPreparedSurfacePipeline)vkDestroyPipeline(a.device,a.directPreparedSurfacePipeline,nullptr);
+  a.directPreparedSurfacePipeline={};
   if(a.regionalDemandPipeline)vkDestroyPipeline(a.device,a.regionalDemandPipeline,nullptr);
   if(a.regionalIncomingDemandPipeline)vkDestroyPipeline(a.device,a.regionalIncomingDemandPipeline,nullptr);
   a.regionalDemandPipeline={};a.regionalIncomingDemandPipeline={};
@@ -1191,7 +1200,7 @@ void DestroySwap(App &a) {
   a.pipeline = {};
   a.visualPipeline={};
   a.exhaustPipeline={};
-  a.backgroundPipeline={};
+  a.backgroundPipeline={};a.depthMaskedBackgroundPipeline={};a.backgroundDepthPipeline={};
   a.toneMapPipeline={};
   a.stellarSunPipeline={};
   a.stellarGlowPipeline={};
@@ -1236,7 +1245,7 @@ void DestroySwap(App &a) {
     vkDestroySwapchainKHR(a.device, a.swapchain, nullptr);
   a.swapchain = {};
 }
-void CreateHostBuffer(App &,VkDeviceSize,VkBufferUsageFlags,VkBuffer &,VkDeviceMemory &,void *&,const char *,nc::MappedBufferUse=nc::MappedBufferUse::Host);
+void CreateHostBuffer(App &,VkDeviceSize,VkBufferUsageFlags,VkBuffer &,VkDeviceMemory &,void *&,const char *,nc::MappedBufferUse=nc::MappedBufferUse::Host,double* = nullptr);
 void DestroyHostBuffer(App &,VkBuffer &,VkDeviceMemory &,void *&);
 std::string ModuleDirectory();
 void ProductionIoWorker(ProductionIoState *state){
@@ -1614,8 +1623,12 @@ void Swap(App &a) {
     const auto result=vkCreateGraphicsPipelines(a.device,{},1,&ep,nullptr,&a.exhaustPipeline);vkDestroyShaderModule(a.device,ev,nullptr);vkDestroyShaderModule(a.device,ef,nullptr);a.Check(result,"exhaust volume pipeline failed");
   }
   VkPipelineVertexInputStateCreateInfo fullscreenInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-  auto createFullscreenPipeline=[&](const char* fragment,uint32_t subpass,VkPipeline &destination,const char* failure){VkShaderModule fullscreenVs=Shader(a,"shaders/fullscreen.vert.spv"),fullscreenFs{};try{fullscreenFs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,fullscreenVs,nullptr);throw;}VkPipelineShaderStageCreateInfo fullscreenStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,fullscreenVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fullscreenFs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=fullscreenStages;create.pVertexInputState=&fullscreenInput;create.pDepthStencilState=&noDepth;create.subpass=subpass;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,fullscreenVs,nullptr);vkDestroyShaderModule(a.device,fullscreenFs,nullptr);a.Check(result,failure);};
+  auto createFullscreenPipeline=[&](const char* fragment,uint32_t subpass,VkPipeline &destination,const char* failure,const VkPipelineDepthStencilStateCreateInfo* fullscreenDepth=nullptr){VkShaderModule fullscreenVs=Shader(a,"shaders/fullscreen.vert.spv"),fullscreenFs{};try{fullscreenFs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,fullscreenVs,nullptr);throw;}VkPipelineShaderStageCreateInfo fullscreenStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,fullscreenVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fullscreenFs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=fullscreenStages;create.pVertexInputState=&fullscreenInput;create.pDepthStencilState=fullscreenDepth?fullscreenDepth:&noDepth;create.subpass=subpass;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,fullscreenVs,nullptr);vkDestroyShaderModule(a.device,fullscreenFs,nullptr);a.Check(result,failure);};
   createFullscreenPipeline("shaders/space_background.frag.spv",0,a.backgroundPipeline,"space background pipeline failed");
+  // Reverse-Z clear pixels alone own the background. Keep the identical shader,
+  // no depth writes, and the same render-pass/framebuffer lifetime as other pipelines.
+  auto backgroundDepth=noDepth;backgroundDepth.depthTestEnable=VK_TRUE;backgroundDepth.depthCompareOp=VK_COMPARE_OP_EQUAL;
+  createFullscreenPipeline("shaders/space_background.frag.spv",0,a.depthMaskedBackgroundPipeline,"depth-masked background pipeline failed",&backgroundDepth);
   createFullscreenPipeline(a.exhaustMeshHandle?"shaders/exhaust_resolve.frag.spv":"shaders/tone_map.frag.spv",toneSubpass,a.toneMapPipeline,"tone-map pipeline failed");
   VkShaderModule planetaryVs{},planetaryFs{};
   try{planetaryVs=Shader(a,"shaders/planetary.vert.spv");planetaryFs=Shader(a,"shaders/planetary.frag.spv");}catch(...){if(planetaryVs)vkDestroyShaderModule(a.device,planetaryVs,nullptr);throw;}
@@ -1668,6 +1681,26 @@ void Swap(App &a) {
     if(result==VK_SUCCESS){candidateRaster.cullMode=VK_CULL_MODE_BACK_BIT;candidateRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;result=vkCreateGraphicsPipelines(a.device,{},1,&candidateCreate,nullptr,&a.productionBillboardOppositeFacePipeline);}
     if(result==VK_SUCCESS){candidateRaster.frontFace=VK_FRONT_FACE_CLOCKWISE;VkPipelineDepthStencilStateCreateInfo diagnosticNoDepth=depth;diagnosticNoDepth.depthTestEnable=VK_FALSE;diagnosticNoDepth.depthWriteEnable=VK_FALSE;candidateCreate.pDepthStencilState=&diagnosticNoDepth;result=vkCreateGraphicsPipelines(a.device,{},1,&candidateCreate,nullptr,&a.productionBillboardNoDepthPipeline);}
     vkDestroyShaderModule(a.device,candidateVs,nullptr);vkDestroyShaderModule(a.device,candidateTcs,nullptr);vkDestroyShaderModule(a.device,candidateTes,nullptr);vkDestroyShaderModule(a.device,candidateFs,nullptr);a.Check(result,"production spherical billboard graphics/diagnostic pipeline failed");
+  }
+  if(NOVACORE_PREPARED_RENDER_TERRAIN){
+    VkShaderModule vs=Shader(a,"shaders/prepared_surface.vert.spv"),fs{};
+    try{fs=Shader(a,"shaders/prepared_surface.frag.spv");}catch(...){vkDestroyShaderModule(a.device,vs,nullptr);throw;}
+    VkPipelineShaderStageCreateInfo stages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,vs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fs,"main"}};
+    const VkBool32 values[2]{VK_TRUE,VK_TRUE};
+    const VkSpecializationMapEntry entries[2]{{0,0,sizeof(VkBool32)},{1,sizeof(VkBool32),sizeof(VkBool32)}};
+    const VkSpecializationInfo specialization{2,entries,sizeof(values),values};stages[1].pSpecializationInfo=&specialization;
+    VkPipelineVertexInputStateCreateInfo vertexInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
+    VkPipelineInputAssemblyStateCreateInfo assembly=ia;assembly.topology=VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+    VkGraphicsPipelineCreateInfo create=planetaryCreate;create.stageCount=2;create.pStages=stages;create.pVertexInputState=&vertexInput;create.pInputAssemblyState=&assembly;create.pTessellationState=nullptr;create.pColorBlendState=&cb;
+    const auto result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&a.directPreparedSurfacePipeline);
+    // Reuse the exact prepared VS, bindings, culling and indices. No fragment
+    // invocation, no color write, no new storage or publication owner.
+    auto depthColor=ca;depthColor.colorWriteMask=0;auto depthBlend=cb;depthBlend.pAttachments=&depthColor;
+    create.stageCount=1;create.pColorBlendState=&depthBlend;
+    const auto depthResult=result==VK_SUCCESS?vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&a.backgroundDepthPipeline):result;
+    vkDestroyShaderModule(a.device,vs,nullptr);vkDestroyShaderModule(a.device,fs,nullptr);a.Check(result,"direct prepared surface pipeline failed");
+    a.Check(depthResult,"background visibility depth pipeline failed");
+    a.Log(NC_LOG_VULKAN,"Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts");
   }
   VkShaderModule distantVs{},distantFs{};try{distantVs=Shader(a,"shaders/distant_planet.vert.spv");distantFs=Shader(a,"shaders/distant_planet.frag.spv");}catch(...){if(distantVs)vkDestroyShaderModule(a.device,distantVs,nullptr);throw;}VkPipelineShaderStageCreateInfo distantStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,distantVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,distantFs,"main"}};VkVertexInputBindingDescription distantBinding{0,sizeof(DistantVertex),VK_VERTEX_INPUT_RATE_VERTEX};VkVertexInputAttributeDescription distantAttribute{0,0,VK_FORMAT_R32G32B32_SFLOAT,0};VkPipelineVertexInputStateCreateInfo distantInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};distantInput.vertexBindingDescriptionCount=1;distantInput.pVertexBindingDescriptions=&distantBinding;distantInput.vertexAttributeDescriptionCount=1;distantInput.pVertexAttributeDescriptions=&distantAttribute;VkPipelineRasterizationStateCreateInfo distantRaster=rs;distantRaster.cullMode=VK_CULL_MODE_BACK_BIT;distantRaster.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;VkGraphicsPipelineCreateInfo distantCreate=gp;distantCreate.pStages=distantStages;distantCreate.pVertexInputState=&distantInput;distantCreate.pRasterizationState=&distantRaster;distantCreate.pColorBlendState=&planetaryBlend;VkResult distantResult=vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryPipeline);VkPipelineDepthStencilStateCreateInfo handoffDepth=depth;handoffDepth.depthWriteEnable=VK_FALSE;distantCreate.pDepthStencilState=&handoffDepth;VkResult handoffResult=distantResult==VK_SUCCESS?vkCreateGraphicsPipelines(a.device,{},1,&distantCreate,nullptr,&a.distantPlanetaryHandoffPipeline):distantResult;vkDestroyShaderModule(a.device,distantVs,nullptr);vkDestroyShaderModule(a.device,distantFs,nullptr);a.Check(distantResult,"distant planetary pipeline failed");a.Check(handoffResult,"distant planetary handoff pipeline failed");
   VkShaderModule ringVs=Shader(a,"shaders/planetary_ring.vert.spv"),ringFarFs{},ringNearFs{};try{ringFarFs=Shader(a,"shaders/planetary_ring_far.frag.spv");ringNearFs=Shader(a,"shaders/planetary_ring_near.frag.spv");}catch(...){vkDestroyShaderModule(a.device,ringVs,nullptr);if(ringFarFs)vkDestroyShaderModule(a.device,ringFarFs,nullptr);throw;}VkPipelineShaderStageCreateInfo ringStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,ringVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,ringFarFs,"main"}};VkPipelineRasterizationStateCreateInfo ringRaster=rs;ringRaster.cullMode=VK_CULL_MODE_NONE;VkGraphicsPipelineCreateInfo ringCreate=gp;ringCreate.pStages=ringStages;ringCreate.pVertexInputState=&distantInput;ringCreate.pRasterizationState=&ringRaster;ringCreate.pColorBlendState=&planetaryBlend;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingFarPipeline),"far planetary ring pipeline failed");ringStages[1].module=ringNearFs;a.Check(vkCreateGraphicsPipelines(a.device,{},1,&ringCreate,nullptr,&a.planetaryRingNearPipeline),"near planetary ring pipeline failed");vkDestroyShaderModule(a.device,ringVs,nullptr);vkDestroyShaderModule(a.device,ringFarFs,nullptr);vkDestroyShaderModule(a.device,ringNearFs,nullptr);
@@ -1768,7 +1801,7 @@ void CreatePatchBuffer(App &a,VkDeviceSize size) {
   VkBufferCreateInfo pci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};pci.size=a.patchSize;pci.usage=VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;pci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;
   a.Check(vkCreateBuffer(a.device,&pci,nullptr,&a.patchBuffer),"patch buffer failed");VkMemoryRequirements pr;vkGetBufferMemoryRequirements(a.device,a.patchBuffer,&pr);VkMemoryAllocateInfo pai{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};pai.allocationSize=pr.size;pai.memoryTypeIndex=Memory(a,pr.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&pai,nullptr,&a.patchMemory),"patch memory failed");a.Check(vkBindBufferMemory(a.device,a.patchBuffer,a.patchMemory,0),"patch bind failed");a.Check(vkMapMemory(a.device,a.patchMemory,0,a.patchSize,0,&a.patchMapped),"patch map failed");
 }
-void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped,const char *failure,nc::MappedBufferUse use) {
+void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped,const char *failure,nc::MappedBufferUse use,double* timings) {
   // Diagnostic readback only. Ordinary renderer buffer usage is unchanged.
   if(a.causal.Active())usage|=VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
   if(use==nc::MappedBufferUse::TerrainGpuWorkingSet||use==nc::MappedBufferUse::TerrainRequestKeys){
@@ -1791,7 +1824,13 @@ void CreateHostBuffer(App &a,VkDeviceSize size,VkBufferUsageFlags usage,VkBuffer
     if(bound!=VK_SUCCESS){vkUnmapMemory(a.device,tentative);vkFreeMemory(a.device,tentative,nullptr);a.Check(bound,failure);}
     memory=tentative;mapped=pointer;std::memset(mapped,0,(size_t)size);return;
   }
-  VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};ci.size=size;ci.usage=usage;ci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;a.Check(vkCreateBuffer(a.device,&ci,nullptr,&buffer),failure);VkMemoryRequirements requirements;vkGetBufferMemoryRequirements(a.device,buffer,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),failure);a.Check(vkBindBufferMemory(a.device,buffer,memory,0),failure);a.Check(vkMapMemory(a.device,memory,0,size,0,&mapped),failure);std::memset(mapped,0,(size_t)size);
+  PostContactTiming::Lap lap(timings);
+  VkBufferCreateInfo ci{VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO};ci.size=size;ci.usage=usage;ci.sharingMode=VK_SHARING_MODE_EXCLUSIVE;a.Check(vkCreateBuffer(a.device,&ci,nullptr,&buffer),failure);lap.Part(0);
+  VkMemoryRequirements requirements;vkGetBufferMemoryRequirements(a.device,buffer,&requirements);VkMemoryAllocateInfo allocation{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};allocation.allocationSize=requirements.size;allocation.memoryTypeIndex=Memory(a,requirements.memoryTypeBits,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);lap.Part(1);
+  a.Check(vkAllocateMemory(a.device,&allocation,nullptr,&memory),failure);lap.Part(2);
+  a.Check(vkBindBufferMemory(a.device,buffer,memory,0),failure);lap.Part(3);
+  a.Check(vkMapMemory(a.device,memory,0,size,0,&mapped),failure);lap.Part(4);
+  std::memset(mapped,0,(size_t)size);lap.Part(5);
 }
 void DestroyHostBuffer(App &a,VkBuffer &buffer,VkDeviceMemory &memory,void *&mapped) {
   if(mapped)vkUnmapMemory(a.device,memory);if(buffer)vkDestroyBuffer(a.device,buffer,nullptr);if(memory)vkFreeMemory(a.device,memory,nullptr);mapped=nullptr;buffer={};memory={};
@@ -2189,7 +2228,15 @@ void Record(App &a, uint32_t image) {
   if(candidateRequested){RecordProductionBillboardWork(a,c,false);RecordProductionBillboardWork(a,c,true);}
   if(gpuPlanetary){vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,a.planetaryComputePipeline);vkCmdDispatch(c,1,1,1);VkMemoryBarrier selectionBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};selectionBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;selectionBarrier.dstAccessMask=VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_INDIRECT_COMMAND_READ_BIT;vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,0,1,&selectionBarrier,0,nullptr,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_COMPUTE,production?a.productionPlanetaryTerrainPipeline:a.planetaryTerrainPipeline);vkCmdDispatchIndirect(c,a.gpuControlBuffer,offsetof(GpuPlanetaryControl,terrainDispatch));VkMemoryBarrier computeBarrier{VK_STRUCTURE_TYPE_MEMORY_BARRIER};computeBarrier.srcAccessMask=VK_ACCESS_SHADER_WRITE_BIT;computeBarrier.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT|VK_ACCESS_SHADER_READ_BIT;VkPipelineStageFlags consumers=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;if(a.submission->planetaryMode==NC_PLANETARY_CPU_GPU_VALIDATION){computeBarrier.dstAccessMask|=VK_ACCESS_HOST_READ_BIT;consumers|=VK_PIPELINE_STAGE_HOST_BIT;}vkCmdPipelineBarrier(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,consumers,0,1,&computeBarrier,0,nullptr,0,nullptr);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,1);
-  vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,a.timestampQueries,2);
+  const bool preparedOpaque=candidate&&a.directPreparedSurfacePipeline&&DirectPreparedSurfaceEligible(
+    a.productionBillboardTopologyFamily,a.submission->physicalSurfaceGeneration,a.submission->planetarySurfaceMode,
+    a.surfaceDiagnostic,a.submission->productionBillboardFlags,
+    static_cast<const NcPlanetaryGpuConstants*>(a.gpuInputMapped)->targetTexelPixels);
+  const auto* completedDraw=static_cast<const VkDrawIndexedIndirectCommand*>(a.productionBillboardIndirectMapped);
+  const bool maskBackground=preparedOpaque&&a.productionRootsReadyLogged&&completedDraw&&
+    BackgroundDepthPrepassWorthwhile(completedDraw->indexCount,a.extent.width,a.extent.height);
+  if(maskBackground!=a.depthMaskedBackgroundSubmitted)a.Log(NC_LOG_ALWAYS,maskBackground?"Background ownership: prepared depth prepass; original layer ordering; depth restored before scene":"Background ownership: original layered ordering");
+  a.depthMaskedBackgroundSubmitted=maskBackground;
   NcSolarLighting lighting=a.submission->solarLighting;if(!lighting.enabled){lighting.exposure=1;lighting.ambientFloor=.025f;lighting.photosphereR=1;lighting.photosphereG=.91f;lighting.photosphereB=.68f;lighting.sourceRadiance=32;}lighting.speedHud|=a.surfaceDiagnostic<<16;
   vkCmdPushConstants(c,a.pipelineLayout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,sizeof(lighting),&lighting);
   VkClearValue clears[5]{};clears[0].color={{0,0,0,1}};clears[1].color={{0,0,0,1}};clears[2].depthStencil={0,0};
@@ -2201,10 +2248,24 @@ void Record(App &a, uint32_t image) {
   rp.pClearValues = clears;
   vkCmdBeginRenderPass(c, &rp, VK_SUBPASS_CONTENTS_INLINE);
   if(a.causal.Active()&&a.endLabel){a.endLabel(c);VkDebugUtilsLabelEXT label{VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT};label.pLabelName="Scene / Earth surface / overlays";a.beginLabel(c,&label);}
-  vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.backgroundPipeline);
+  if(a.depthMaskedBackgroundSubmitted){
+    if(a.productionBillboardPreparedFrameIdentity!=a.productionBillboardCullFrameIdentity)throw std::runtime_error("background prepass stale prepared geometry rejected");
+    vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.backgroundDepthPipeline);
+    vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
+    vkCmdBindIndexBuffer(c,a.productionBillboardCompactedBuffer,0,VK_INDEX_TYPE_UINT32);
+    vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));
+  }
+  vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,a.timestampQueries,2);
+  vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.depthMaskedBackgroundSubmitted?a.depthMaskedBackgroundPipeline:a.backgroundPipeline);
   vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);
   vkCmdDraw(c,3,1,0,0);
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,3);
+  if(a.depthMaskedBackgroundSubmitted){
+    // This pass supplied only sky visibility. Restore the original scene depth
+    // so every craft, solar layer and terrain draw keeps its order and tie rule.
+    VkClearAttachment attachment{};attachment.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+    VkClearRect rect{{{0,0},a.extent},0,1};vkCmdClearAttachments(c,1,&attachment,1,&rect);
+  }
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,a.timestampQueries,4);
   vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.pipeline);
   vkCmdBindDescriptorSets(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.pipelineLayout,
@@ -2228,6 +2289,7 @@ void Record(App &a, uint32_t image) {
   // zero. This preserves a complete parent without analytic/raster boundary
   // disagreement, redundant visible overlap, depth bias, or skirts.
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,a.timestampQueries,5);
+  a.directPreparedSurfaceSubmitted=false;
   a.anchoredPipelineStatisticsFrameSubmitted=candidate;
   if(a.anchoredPipelineStatisticsFrameSubmitted){
     a.anchoredPipelineStatisticsTerrainFrame=a.frame;
@@ -2245,6 +2307,10 @@ void Record(App &a, uint32_t image) {
       if((a.submission->productionBillboardFlags&1024u)!=0u)rasterPipeline=a.productionBillboardNoFaceCullPipeline;
       else if((a.submission->productionBillboardFlags&2048u)!=0u)rasterPipeline=a.productionBillboardOppositeFacePipeline;
       else if((a.submission->productionBillboardFlags&4096u)!=0u)rasterPipeline=a.productionBillboardNoDepthPipeline;
+      // Use the exact uploaded input: Upload can encode explicit factor probes
+      // there without changing the submitted high-level data.
+      a.directPreparedSurfaceSubmitted=preparedOpaque;
+      if(a.directPreparedSurfaceSubmitted)rasterPipeline=a.directPreparedSurfacePipeline;
       vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,rasterPipeline);
       vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindIndexBuffer(c,a.productionBillboardCompactedBuffer,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer,0,1,sizeof(VkDrawIndexedIndirectCommand));
     }
@@ -2342,10 +2408,10 @@ void InspectGpuPlanetary(App &a) {
 }
 void InspectGpuTimings(App &a){
   if(!a.timestampFrameSubmitted||!a.timestampQueries)return;std::array<uint64_t,App::TimestampCount> ticks{};const auto result=vkGetQueryPoolResults(a.device,a.timestampQueries,0,App::TimestampCount,sizeof(ticks),ticks.data(),sizeof(uint64_t),VK_QUERY_RESULT_64_BIT);if(result!=VK_SUCCESS)return;
-  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.postContactTiming.Completed();a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;a.causal.Emit(Phase::Snapshot,Kind::Info,0,{7,a.lastGpuTimingFrame,nc::causal::Recorder::Bits(values[0]),nc::causal::Recorder::Bits(values[1]),nc::causal::Recorder::Bits(values[2]),nc::causal::Recorder::Bits(values[3]),nc::causal::Recorder::Bits(values[4]),nc::causal::Recorder::Bits(values[5]),nc::causal::Recorder::Bits(values[6]),nc::causal::Recorder::Bits(values[7]),nc::causal::Recorder::Bits(values[8]),nc::causal::Recorder::Bits(values[9]),nc::causal::Recorder::Bits(values[10])});for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
+  std::array<double,App::TimestampCount> values{};const double scale=double(a.timestampPeriodNanoseconds)/1e6;const bool detailedOwner=ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags);values[0]=(ticks[8]-ticks[0])*scale;values[1]=a.depthMaskedBackgroundSubmitted?(ticks[2]-ticks[1])*scale:0;values[2]=detailedOwner?(ticks[6]-ticks[5])*scale:0;values[3]=(ticks[3]-ticks[2])*scale;values[4]=(ticks[4]-ticks[3])*scale;values[5]=(ticks[7]-ticks[0])*scale;values[6]=(ticks[8]-ticks[7])*scale;values[7]=(ticks[1]-ticks[0])*scale;values[8]=(ticks[7]-ticks[4])*scale;values[9]=detailedOwner?(ticks[9]-ticks[5])*scale:0;values[10]=(ticks[10]-ticks[9])*scale;a.postContactTiming.Completed();a.lastGpuTimingMs=values;a.lastGpuTimingFrame=a.anchoredPipelineStatisticsTerrainFrame;a.causal.Emit(Phase::Snapshot,Kind::Info,0,{7,a.lastGpuTimingFrame,nc::causal::Recorder::Bits(values[0]),nc::causal::Recorder::Bits(values[1]),nc::causal::Recorder::Bits(values[2]),nc::causal::Recorder::Bits(values[3]),nc::causal::Recorder::Bits(values[4]),nc::causal::Recorder::Bits(values[5]),nc::causal::Recorder::Bits(values[6]),nc::causal::Recorder::Bits(values[7]),nc::causal::Recorder::Bits(values[8]),nc::causal::Recorder::Bits(values[9]),nc::causal::Recorder::Bits(values[10])});for(uint32_t i=0;i<App::TimestampCount;i++)a.timestampAccumulatedMs[i]+=values[i];a.timestampSampleCount++;
   if((a.submission->productionBillboardFlags&2u)!=0u)
     for(uint32_t i=0;i<App::TimestampCount;i++)a.c3GpuMs[i].push_back(values[i]);
-  if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);}
+  if(a.timestampSampleCount==1||a.timestampSampleCount%120==0){char message[384];std::snprintf(message,sizeof message,"GPU timings: total=%.3f ms; backgroundDepth=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; scene=%.3f; toneMap=%.3f; regionalCompute=%.3f; materialsOverlays=%.3f",values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8]);a.Log(NC_LOG_ALWAYS,message);}
 }
 bool RegionalPhysicalEnabled(const App& a);
 #include "RegionalPhysicalProbe.inl"
@@ -2423,8 +2489,8 @@ void InspectAnchoredPipelineStatistics(App &a){
     const uint32_t input=counters?counters[5]:0u,horizonRejected=counters?counters[1]:0u,
       viewConeRejected=counters?counters[8]:0u,invalid=counters?counters[3]:0u,
       postHorizon=input-horizonRejected-invalid,postScreen=counters?counters[0]:0u;
-    char message[640];std::snprintf(message,sizeof message,
-      "GPU anchored refinement: submittedFrame=%llu; generation=%llu; level=%u; topologyFamily=%u; inputTriangles=%u; postHorizonTriangles=%u; horizonRejected=%u; postScreenConeTriangles=%u; screenConeRejected=%u; tcsPatches=%llu; tcsScreenRejected=%llu; refinedVertices=%llu; clippingOutputPrimitives=%llu; fragmentInvocations=%llu; compactedIndices=%u; indirectDraws=%u; maximumOuterTesFactor=%.6f; maximumInnerTesFactor=%.6f; maximumTesFactor=%u; rasterDiagnostic=0x%X; countersAndQueryFrameMatch=true; CPUFinalRaster=false",
+    char message[768];std::snprintf(message,sizeof message,
+      "GPU anchored refinement: submittedFrame=%llu; generation=%llu; level=%u; topologyFamily=%u; inputTriangles=%u; postHorizonTriangles=%u; horizonRejected=%u; postScreenConeTriangles=%u; screenConeRejected=%u; tcsPatches=%llu; tcsScreenRejected=%llu; refinedVertices=%llu; clippingOutputPrimitives=%llu; fragmentInvocations=%llu; compactedIndices=%u; indirectDraws=%u; maximumOuterTesFactor=%.6f; maximumInnerTesFactor=%.6f; maximumTesFactor=%u; rasterDiagnostic=0x%X; countersAndQueryFrameMatch=true; CPUFinalRaster=false; directPreparedRaster=%s",
       (unsigned long long)a.anchoredPipelineStatisticsTerrainFrame,(unsigned long long)a.anchoredPipelineStatisticsGeneration,
       a.anchoredPipelineStatisticsLevel,a.anchoredPipelineStatisticsTopologyFamily,
       input,postHorizon,horizonRejected,postScreen,viewConeRejected,
@@ -2432,7 +2498,7 @@ void InspectAnchoredPipelineStatistics(App &a){
       (unsigned long long)values[3],(unsigned long long)values[0],(unsigned long long)values[1],
       draw?draw->indexCount:0u,draw&&draw->instanceCount?1u:0u,
       frameMaximumOuterTesFactor,frameMaximumInnerTesFactor,
-      frameMaximumTesFactor,a.anchoredPipelineStatisticsRasterDiagnostic);
+      frameMaximumTesFactor,a.anchoredPipelineStatisticsRasterDiagnostic,a.directPreparedSurfaceSubmitted?"true":"false");
     a.Log(NC_LOG_ALWAYS,message);
     if((a.anchoredPipelineStatisticsRasterDiagnostic&(16384u|32768u))!=0u&&counters){
       const auto&gpu=a.submission->planetaryGpu;
@@ -2719,13 +2785,19 @@ void Update(App &a, float dt) {
   a.causal.Emit(Phase::Host,Kind::End);
   if(a.editor){a.editor->pressed=0;a.editor->released=0;a.editor->wheel=0;}
   const auto callbackEnd=std::chrono::steady_clock::now();
+  a.postContactTiming.BeginUpload(callbackEnd);
   CreateProductionBillboard(a);
   if(a.submission->planetaryMode==NC_PLANETARY_CPU_REFERENCE)EnsurePatchCapacity(a,a.submission->planetaryPatchCount);
+  a.postContactTiming.UploadPart(0);
   Validate(a);
+  a.postContactTiming.UploadPart(1);
   Upload(a);
+  a.postContactTiming.UploadPart(2);
   PrepareProductionUploads(a);
+  a.postContactTiming.UploadPart(3);
 
   UpdateRegionalPhysical(a);
+  a.postContactTiming.UploadPart(4);
   const auto updateEnd=std::chrono::steady_clock::now();
   const double updateMs=std::chrono::duration<double,std::milli>(updateEnd-updateStart).count();a.cpuUpdateMs+=updateMs;
   const double fenceWaitMs=std::chrono::duration<double,std::milli>(fenceEnd-updateStart).count();
@@ -2899,13 +2971,13 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     if(!a.c3FrameMs.empty()){
       auto report=[&](const char*kind,const char*name,std::vector<double> values){if(values.empty())return;const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());std::sort(values.begin(),values.end());auto percentile=[&](double p){return values[std::min(values.size()-1,size_t(std::ceil(p*values.size()))-1)];};char line[320];std::snprintf(line,sizeof line,"P2S5C3 %s timing: %s avg=%.3f ms; p50=%.3f; p95=%.3f; p99=%.3f; max=%.3f; samples=%zu",kind,name,average,percentile(.50),percentile(.95),percentile(.99),values.back(),values.size());a.Log(NC_LOG_ALWAYS,line);};
       const char*cpuNames[8]{"update","fenceWait","inspection","hostCallback","validationUpload","record","submit","present"};for(uint32_t i=0;i<8;i++)report("CPU",cpuNames[i],a.c3CpuMs[i]);
-      const char*gpuNames[App::TimestampCount]{"total","unusedAnchoredCompute","detailedDraw","background","preSurface","scene","toneMap","cullCompact","materialsOverlays","candidateDraw","globalFill"};for(uint32_t i=0;i<App::TimestampCount;i++)report("GPU",gpuNames[i],a.c3GpuMs[i]);
+      const char*gpuNames[App::TimestampCount]{"total","backgroundDepth","detailedDraw","background","preSurface","scene","toneMap","cullCompact","materialsOverlays","candidateDraw","globalFill"};for(uint32_t i=0;i<App::TimestampCount;i++)report("GPU",gpuNames[i],a.c3GpuMs[i]);
       report("frame","all",a.c3FrameMs);report("frame","scaleTransition",a.c3ScaleFrameMs);report("frame","snap",a.c3SnapFrameMs);report("frame","publication",a.c3PublicationFrameMs);report("sync","fenceWait",a.c3FenceMs);
       auto reportCounts=[&](const char*name,std::vector<uint64_t> values){if(values.empty())return;std::sort(values.begin(),values.end());const double average=std::accumulate(values.begin(),values.end(),0.0)/double(values.size());auto percentile=[&](double p){return values[std::min(values.size()-1,size_t(std::ceil(p*values.size()))-1)];};char line[320];std::snprintf(line,sizeof line,"P2S5C3 GPU workload: %s avg=%.1f; p50=%llu; p95=%llu; p99=%llu; max=%llu; samples=%zu",name,average,(unsigned long long)percentile(.50),(unsigned long long)percentile(.95),(unsigned long long)percentile(.99),(unsigned long long)values.back(),values.size());a.Log(NC_LOG_ALWAYS,line);};
       reportCounts("clippingOutputPrimitives",a.c3PipelineValues[0]);reportCounts("fragmentInvocations",a.c3PipelineValues[1]);reportCounts("tcsPatches",a.c3PipelineValues[2]);reportCounts("tesInvocations",a.c3PipelineValues[3]);if(!a.c3MaximumTesFactors.empty()){const auto maximum=*std::max_element(a.c3MaximumTesFactors.begin(),a.c3MaximumTesFactors.end());std::snprintf(text,sizeof text,"P2S5C3 TES factor: actualMaximum=%u; configuredMaximum=64; samples=%zu",maximum,a.c3MaximumTesFactors.size());a.Log(NC_LOG_ALWAYS,text);}
     }
     if(a.anchoredPipelineStatisticsSamples){const double n=double(a.anchoredPipelineStatisticsSamples);std::snprintf(text,sizeof text,"GPU anchored refinement averages: tcsPatches=%.1f; refinedVertices=%.1f; clippingOutputPrimitives=%.1f; fragmentInvocations=%.1f; samples=%llu; CPUFinalRaster=false",double(a.anchoredTessellationControlPatches)/n,double(a.anchoredTessellationEvaluationInvocations)/n,double(a.anchoredClippingPrimitives)/n,double(a.anchoredFragmentShaderInvocations)/n,(unsigned long long)a.anchoredPipelineStatisticsSamples);a.Log(NC_LOG_ALWAYS,text);}
-    if(a.timestampSampleCount){const double n=double(a.timestampSampleCount);std::snprintf(text,sizeof text,"GPU timing averages: total=%.3f ms; anchoredCompute=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; toneMap=%.3f",a.timestampAccumulatedMs[0]/n,a.timestampAccumulatedMs[1]/n,a.timestampAccumulatedMs[2]/n,a.timestampAccumulatedMs[3]/n,a.timestampAccumulatedMs[4]/n,a.timestampAccumulatedMs[6]/n);a.Log(NC_LOG_ALWAYS,text);}
+    if(a.timestampSampleCount){const double n=double(a.timestampSampleCount);std::snprintf(text,sizeof text,"GPU timing averages: total=%.3f ms; backgroundDepth=%.3f; anchoredDraw=%.3f; background=%.3f; preSurface=%.3f; toneMap=%.3f",a.timestampAccumulatedMs[0]/n,a.timestampAccumulatedMs[1]/n,a.timestampAccumulatedMs[2]/n,a.timestampAccumulatedMs[3]/n,a.timestampAccumulatedMs[4]/n,a.timestampAccumulatedMs[6]/n);a.Log(NC_LOG_ALWAYS,text);}
     a.postContactTiming.Write();
     Destroy(a);
     return NC_SUCCESS;

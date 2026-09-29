@@ -84,7 +84,10 @@ internal static class FacilitySupportTests
             return (Path:path,Frame:frame.RootElement.GetProperty("frame").GetInt32(),Level:frame.RootElement.GetProperty("level").GetInt32());
         }).Where(value=>value.Frame>=740&&value.Level==17).OrderBy(value=>value.Frame).First();
         using var json=JsonDocument.Parse(File.ReadAllText(reentry.Path));
-        var f=json.RootElement;Require(f.GetProperty("level").GetInt32()==17&&f.GetProperty("maxOuter").GetDouble()==1,"supported reentry must exercise actual factor-1 L17 geometry");
+        var f=json.RootElement;
+        var outer=f.GetProperty("maxOuter").GetDouble();var inner=f.GetProperty("maxInner").GetDouble();
+        bool direct=outer==0&&inner==0&&RegionalPhysicalResidencyTests.DirectPreparedRasterGenerations(output).Contains(f.GetProperty("generation").GetRawText());
+        Require(f.GetProperty("level").GetInt32()==17&&(direct||(outer==1&&inner<=1)),"supported reentry must exercise actual unrefined L17 geometry");
         foreach(var sample in f.GetProperty("samples").EnumerateArray())
         {
             if(!sample.GetProperty("found").GetBoolean())continue;

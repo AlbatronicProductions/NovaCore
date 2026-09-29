@@ -1,0 +1,625 @@
+{
+  "milestone": "NovaCore M16.1 — Planetary Rendering & Terrain Lifecycle Convergence",
+  "tag": "m16.1",
+  "commitSubject": "NovaCore M16.1: Bank planetary rendering and terrain lifecycle convergence",
+  "bankCommitIdentity": "Resolve annotated tag m16.1; a commit cannot embed its own SHA.",
+  "preBankHead": "3feabe8e8b42280adbafa6584cd4152d4f85fcaa",
+  "m16_0Ancestor": "78b557b670517da90d005629c087bab7472fb4fc",
+  "authorization": "Project Control explicitly authorized final preflight, commit, tag, push main/tag and GitHub/CI verification. Manual retest waived unless fresh evidence creates ambiguity.",
+  "localPreflight": "PASS",
+  "productionChangesAfterAcceptedCandidate": [],
+  "developerToolOnlyChanges": [
+    {
+      "path": "tools/blackout/test_picker.cjs",
+      "reason": "Portable Playwright module lookup or creation of missing synthetic output parent; no production dependency."
+    },
+    {
+      "path": "tools/blackout/test_standing.cjs",
+      "reason": "Portable Playwright module lookup or creation of missing synthetic output parent; no production dependency."
+    },
+    {
+      "path": "tools/blackout/test_standing.py",
+      "reason": "Portable Playwright module lookup or creation of missing synthetic output parent; no production dependency."
+    }
+  ],
+  "reproducibility": {
+    "nativeRelease": "Current CMake source, clean-first NovaCore.Native rebuild; all required shaders regenerated.",
+    "appRelease": "dotnet build tools/NovaCore.App -c Release -t:Rebuild --no-restore; normal project-reference package propagation.",
+    "historicalArtifactsCopiedIntoBuild": false,
+    "ksaDependency": false,
+    "manualRetest": "Waived; no production change or code/shader difference created ambiguity.",
+    "canonicalExecutable": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe",
+    "packageComparison": {
+      "changedFiles": [
+        "NovaCore.ConstructionEditor.staticwebassets.endpoints.json",
+        "NovaCore.Native.dll"
+      ],
+      "nativeChange": "COFF/debug timestamps only; every other byte identical.",
+      "webChange": "Last-Modified response headers only; semantic content identical.",
+      "allShadersIdentical": true,
+      "allManagedExecutableBytesIdentical": true
+    }
+  },
+  "package": {
+    "judgment": "PASS",
+    "fileCount": 136,
+    "bytes": 13110494,
+    "packageSha256": "4056214b7b3e6aa64b1304daed5235d5bbe5011550c2a29f3d69eda51427a739",
+    "shaders": 68,
+    "errors": [],
+    "scope": "Repository-layout canonical build output; explicit verified terrain cache required. Not standalone publish qualification."
+  },
+  "executableIdentities": {
+    "BepuPhysics.dll": {
+      "bytes": 880640,
+      "sha256": "77185e513bd530deb322e41dd4acda9ad8e32e626cfa19492fb7481f25ed1fa7"
+    },
+    "BepuUtilities.dll": {
+      "bytes": 163328,
+      "sha256": "e0a1528ded4ef8efcb8002b99704cb8614b7db840d2cb39b5e45eda52d63bc68"
+    },
+    "NovaCore.ConstructionEditor.dll": {
+      "bytes": 219136,
+      "sha256": "f8324c04386460ddc540900835968147059867e01d816902dca40f2a9a0824bd"
+    },
+    "NovaCore.ConstructionEditor.exe": {
+      "bytes": 162816,
+      "sha256": "7ae0b32354d8620e445c8839c6a801f800e483102c943aa9e653ca079b9b426d"
+    },
+    "NovaCore.Core.dll": {
+      "bytes": 98304,
+      "sha256": "cf06ee0ebce8781d54fbbf0c44a06d55b23d7c1c526eb6393f92f1a37617f579"
+    },
+    "NovaCore.Diagnostics.dll": {
+      "bytes": 204800,
+      "sha256": "8f008f9e5a408d4c9c6e923e89fb9a3d45f7bd8369cbf0cd7a408d6dfd648123"
+    },
+    "NovaCore.dll": {
+      "bytes": 23552,
+      "sha256": "98ab204d75e10171f719c35e7ef9e51d04c129696d90d3c8c57757e012fb06c0"
+    },
+    "NovaCore.EphemerisFormat.dll": {
+      "bytes": 77312,
+      "sha256": "e942e441b080d256c2e3ac7db5e979da9ceed8dbe8e067752179d6f5ab8694fa"
+    },
+    "NovaCore.exe": {
+      "bytes": 162304,
+      "sha256": "90d016615cbd8d7cf106800d2d9da6ad3ea84189a40bcd64916ea1004bf68c26"
+    },
+    "NovaCore.Graphics.dll": {
+      "bytes": 738304,
+      "sha256": "8539a9fa0e14a6232024f1040a24a497621bc1df3314a111cbc293a770587662"
+    },
+    "NovaCore.Interop.dll": {
+      "bytes": 30208,
+      "sha256": "f8eace5b032d27820657cb226e67ab2dc67d35fb3301b37c70e84b60cc500499"
+    },
+    "NovaCore.Launcher.dll": {
+      "bytes": 62464,
+      "sha256": "a26ce328804eb4da0f62273cdf9bea7d5ebcd96fe68875d403b37fab4ec9c65b"
+    },
+    "NovaCore.Launcher.exe": {
+      "bytes": 162304,
+      "sha256": "9e72c1958dd6384b196ba2888526371fc9ade12a7f3d36a26baef803be79b6f8"
+    },
+    "NovaCore.Native.dll": {
+      "bytes": 486400,
+      "sha256": "3deabdaed9a2c74d395f93ff4f637b91c73f95c04cb9b6fa7db6b03df9adf16d"
+    },
+    "NovaCore.Platform.dll": {
+      "bytes": 6656,
+      "sha256": "ffeb84816f63e6c798b58cd3f1ff06d52256cfbb065e91b9e2d599c1b86a0eb5"
+    },
+    "NovaCore.Recorder.dll": {
+      "bytes": 9728,
+      "sha256": "106e03c5448004806806803247e05df0dba6a9d4bfd7ec5c3352b3777ed52079"
+    },
+    "NovaCore.Recorder.exe": {
+      "bytes": 162304,
+      "sha256": "d2ae11532f9a30b8dab1d1aef5a5165ba7edd91ae76d88bd5f53652f707427fe"
+    },
+    "NovaCore.Simulation.dll": {
+      "bytes": 5232640,
+      "sha256": "2e6404f1d326eec545853f7f822bf2695030c6833b3e826a23b3fb0e7a46bb87"
+    },
+    "NovaCore.Triangle.dll": {
+      "bytes": 373248,
+      "sha256": "2b7e60a5b1e8548831f445fb5f3488a34232bb225961b154af7b4d77a4bc3b9f"
+    },
+    "NovaCore.Triangle.exe": {
+      "bytes": 162304,
+      "sha256": "e3c5d728213443845e3b451074a7a4b2d61ae2f93bf9c16e2042e42eafed0859"
+    }
+  },
+  "freshIntegrationChecks": [
+    {
+      "configuration": "Debug",
+      "test": "modular-connectors",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "test": "modular-stabilization",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "test": "modular-gate12-application",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "test": "scalable-support-flight",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "test": "rcs-scalability",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "test": "modular-gate6",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Debug",
+      "test": "scalable-support",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "modular-connectors",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "modular-stabilization",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "modular-gate12-application",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "scalable-support-flight",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "rcs-scalability",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "modular-gate6",
+      "exitCode": 0
+    },
+    {
+      "configuration": "Release",
+      "test": "scalable-support",
+      "exitCode": 0
+    }
+  ],
+  "canonicalSmoke": {
+    "scope": "CPU-only maintenance HWND then normal player UI initialization, seven actions, protected listing.",
+    "gpuExposure": false,
+    "runtimeRootWrites": false,
+    "receipt": {
+      "path": "build/m16.1-publication/canonical-ui-smoke.txt",
+      "bytes": 126,
+      "sha256": "7bd7228075ab8043231d596b66c95f6d80c6b6f93d3347835d37e9982c32d2db"
+    }
+  },
+  "pickerSmoke": {
+    "passed": true,
+    "scope": "Synthetic real-browser File/IndexedDB regression after portable dependency lookup; no new physical S24 qualification required for this lookup-only edit.",
+    "identity": {
+      "path": "build/m16.1-publication/picker-smoke/results.json",
+      "bytes": 998,
+      "sha256": "96f0dc08aa7f83564a61e70a17cf63198acd9aa91f7d97768ba3bf04f54b52c1"
+    }
+  },
+  "preservedDebugReleaseGates": {
+    "focusedChecks": 22,
+    "simulationGroupsPerConfiguration": 95,
+    "regionalRecords": 859,
+    "physicalHistorySteps": 281,
+    "proof": "M16.1-verification.json; permanent production/test sources unchanged from these passed runs."
+  },
+  "inheritedOutcomes": {
+    "unifiedPlayerRoute": "Construction/save-reload/Florida launch/flight-control/retained-design return PASS; terrain/pad recontact/relaunch within accepted physical domain.",
+    "construction": "Generic compatible depth within 1024 parts / 4000000 bytes; per-instance connectors and 1/2/4/8 symmetry; short/medium/long are witnesses, not limits.",
+    "rcs": "Corrected placement/move contract and scalable authority preserved.",
+    "nativeResolutionBlackoutRoute": "Historical bounded route PASS at 3440x1440 desktop / 3440x1322 renderer; 18409 completed submissions, no lost records. Not causal closure or new current-source native run.",
+    "storage": "Authorized scoped historical retirement completed; protected/current evidence retained and bounded maintenance active."
+  },
+  "performance": {
+    "viewport": [
+      3440,
+      1322
+    ],
+    "groundedFrameMs": {
+      "median": 6.687,
+      "p95": 13.575,
+      "p99": 15.643
+    },
+    "wholeGpuMs": {
+      "median": 5.723,
+      "p95": 9.892,
+      "p99": 11.451
+    },
+    "dependencyReadinessMs": 374.539,
+    "groundedFallbackFrames": 36,
+    "groundedP95TailFrames": 17,
+    "allGroundedP95TailsWaitGlobal": true,
+    "source": "Retained restored-final native run, not remeasured during bank prep."
+  },
+  "open": [
+    "150 FPS / 6.6667 ms OPEN / REVISE",
+    "Cold-fallback closure OPEN / REVISE",
+    "Planetary fidelity REVISE",
+    "Blackout causality UNRESOLVED",
+    "Player/public acceptance UNASSIGNED"
+  ],
+  "readme": "Existing branding, hero image, hierarchy, controls and capability prose preserved; factual milestone/build/status changes only.",
+  "ci": "Existing Verified BEPU dependency workflow has no push trigger. Explicitly dispatch against published main, require the bank SHA and all four OS/configuration jobs to pass. Final remote run URL/status belongs to publication receipt and GitHub checks, not a self-referential pre-commit claim.",
+  "publicRelease": "Not created; repository has no existing GitHub Release convention. Source checkpoint only.",
+  "sourceIdentities": [
+    {
+      "path": "native/NovaCore.Native/BackgroundVisibility.h",
+      "bytes": 513,
+      "sha256": "4d0d1f849a2cfd0d074fa816f7392e8f6fbc8390903f32012c067a1a84e4f7ba"
+    },
+    {
+      "path": "native/NovaCore.Native/CMakeLists.txt",
+      "bytes": 31716,
+      "sha256": "6c1b1fc45e1c7bc0618ea6f9efbbc9a21b23503e33a5e5bb9eba3eef6d64379e"
+    },
+    {
+      "path": "native/NovaCore.Native/FrozenCaptureNative.inl",
+      "bytes": 23167,
+      "sha256": "98fef8364b0f648a805c818f4bac255d68b718dc5df0f1412e8cee2b3118f8f9"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "bytes": 330056,
+      "sha256": "7ff8dec1cf61b597ce51971472fc564b9bc774182a3f17f9bf67f3249d56d943"
+    },
+    {
+      "path": "native/NovaCore.Native/PostContactTiming.h",
+      "bytes": 3760,
+      "sha256": "95b25f13c63f9ac5fa76098fcf2277d7cbc74e5c1a221599a5b3d163e50c1e43"
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSurfaceRaster.h",
+      "bytes": 820,
+      "sha256": "6943e2c409d27d19f4efc0fb4d08fff174f6e622aeff9ab54a99962f328fbac3"
+    },
+    {
+      "path": "native/NovaCore.Native/PreparedSurfaceRasterTests.cpp",
+      "bytes": 1074,
+      "sha256": "81fa98958e6b0d8b6a7dce0e32d417cfac4af0e91cb643b49a53dc9792cb828e"
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidency.h",
+      "bytes": 8756,
+      "sha256": "d56662648bde5d36c6fae2d300b944c92c5c98ad3ad5e13ad818459f5dfe5039"
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidency.inl",
+      "bytes": 13216,
+      "sha256": "44f5f4e3d5fa2bd21ff74f58263a2c7c6cb80b9ca141ba798762422ddb52870c"
+    },
+    {
+      "path": "native/NovaCore.Native/RegionalPhysicalResidencyTests.cpp",
+      "bytes": 7214,
+      "sha256": "b3d5a3a439144555534682dbaf23379a9aa2e639f002e825773116ecef4f300c"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/planetary_production.frag",
+      "bytes": 19292,
+      "sha256": "c016d8e4fe9403c3ebb03aaffc993c182e3b8c719e56e2b6c0d63a61d291c99b"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/prepared_surface_contract.h",
+      "bytes": 508,
+      "sha256": "964545260cd34fb7c1c292e23f8739eff36e7beda5b4ead278573007eef4a090"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard.vert",
+      "bytes": 3578,
+      "sha256": "7f590ac482564aba0a5706f894bfbecb12dbfdbe148d09dc14db7530b7483307"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard_physical.glsl",
+      "bytes": 2593,
+      "sha256": "41212417ace6a1eec4c33f2ef09b17794f0407a00592663e838f1f29770ab2d6"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/ConstructionFlightScene.cs",
+      "bytes": 21093,
+      "sha256": "2b2ebcda50a5cd5a18a559c74e79acd48ec02a59e6962048cc2c32d237d41e51"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/QualificationExecutionProbe.cs",
+      "bytes": 1630,
+      "sha256": "e78d3ed250707d8f3572de6537ede63426f94033fbc17170d04a5d8d0cd61f91"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SurfaceRetryObservation.cs",
+      "bytes": 5325,
+      "sha256": "a56d08c878596bf7cb375efee7ec083922b7c9fb6dda72092e343690d1907ef3"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Assemblies/AssemblyFloridaSite.cs",
+      "bytes": 14077,
+      "sha256": "0bc282450635190167294412ddc99cbaa220c62d159b245cbc1f7e1f5fdeb197"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainColliders.cs",
+      "bytes": 7674,
+      "sha256": "cdefb7cf660a0fc54858bf1e2b9f99dfd9d32328c4eaf214f67c7a1799ad5116"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainGeometry.cs",
+      "bytes": 8431,
+      "sha256": "bb83bb5427074d2c54337add03a106ed2f80640f8b5f904d05b6b3d739ea3c6c"
+    },
+    {
+      "path": "src/NovaCore.Simulation/Spacecraft/Contact/Staging/CraftTerrainPreparationCache.cs",
+      "bytes": 3594,
+      "sha256": "aaf8c230d92678af4c349d9d24bb6c089a59c63a6907e4e9b739c7b197f81002"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/FacilitySupportTests.cs",
+      "bytes": 11613,
+      "sha256": "ec6ab13986b142331393e2346f5482d80a43a18c5b1714f98b8447f40fc43301"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.PostContact.cs",
+      "bytes": 4180,
+      "sha256": "1878c4b6dfe9aed7220ac43943495675fe9ae219e48cda84479130ce644b91bb"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/ModularFloridaTests.TerrainPreparationCache.cs",
+      "bytes": 8014,
+      "sha256": "00178824c30ae3720e01114dd8e04aa190666345d8c0836b6bc6ee6ad4979c0f"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/NovaCore.Graphics.Tests.csproj",
+      "bytes": 5969,
+      "sha256": "d948a5db3100992f580d67d5d9e0419aba01c0563f8202ba0788ac07ffe20943"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "bytes": 577064,
+      "sha256": "531ccb5293ae785d7db19aa0d96736c740686568b37646439efa6c7580a98008"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/RegionalPhysicalResidencyTests.cs",
+      "bytes": 15865,
+      "sha256": "56f88a8de564a46b467ad00daecc40091dbaaed177cd235cbbc841a178b20dea"
+    },
+    {
+      "path": "tests/fixtures/physical-history/README.md",
+      "bytes": 770,
+      "sha256": "b0250f60e674efcb94a50661989727e3cabbf11eeae3744e3dfd53ec7b141a70"
+    },
+    {
+      "path": "tests/fixtures/physical-history/surface-retry.ncflight.json",
+      "bytes": 13505,
+      "sha256": "8502d85afb64021f5666770525da605e1920848d3af54f6e629a84dd40ee7414"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/FrozenRegression.cs",
+      "bytes": 8712,
+      "sha256": "d7780db5284f38d9bfaadb1e9e66ff8f0bb97383a278e3f60e93466ac533041f"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/FrozenSnapshot.cs",
+      "bytes": 18943,
+      "sha256": "bebcb2763564bcdd1ea9f68d0fe29edcb54090e40ed67f09675541a914e9d169"
+    },
+    {
+      "path": "tools/NovaCore.Causal.Observer/offline/FrozenOwnershipProbe.cpp",
+      "bytes": 23715,
+      "sha256": "798913a8258c109bc003953801e1a77a6de6aee836e67b5ffdf12254d87f3b5e"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.SurfaceQualification.cs",
+      "bytes": 8645,
+      "sha256": "c9ef7d9bcc6c8982c1c4cf7939ef02d05470f9417b5d2e0c5ee3b97e7df0ca11"
+    },
+    {
+      "path": "tools/blackout/Inspect-Capacity.ps1",
+      "bytes": 1309,
+      "sha256": "a139ee6addf93a285f2f21c59b9c618a802f51b6d306b37f157928a5310d6dfd"
+    },
+    {
+      "path": "tools/blackout/README.md",
+      "bytes": 12038,
+      "sha256": "e79cb0dd234f83c6f9a7884d021f8a9c580c0ec09681822e787c7a3be6baefca"
+    },
+    {
+      "path": "tools/blackout/Start-Witness.ps1",
+      "bytes": 1617,
+      "sha256": "3c43d056c6bf4a04a3b70b6be6ccc12f600f6989f7d070d8e15bc489523a2755"
+    },
+    {
+      "path": "tools/blackout/Stop-Witness.ps1",
+      "bytes": 1712,
+      "sha256": "b77e202fedb8fdc57dd38c187be8068ad770235408be9d709ca0126c8cf25f19"
+    },
+    {
+      "path": "tools/blackout/beacon.py",
+      "bytes": 4069,
+      "sha256": "e291d9d22fcfdb82946b0e20e6560f2cf719e7e693b4f0a94b18bd0dae1876ce"
+    },
+    {
+      "path": "tools/blackout/lifetime.py",
+      "bytes": 447,
+      "sha256": "227976b2e9095852c2a67127cc90b994f377fc22001c2e958214fee26ab81bd9"
+    },
+    {
+      "path": "tools/blackout/receiver.html",
+      "bytes": 3784,
+      "sha256": "68fa510837c73cae64306990e842f9e75d51c6a269bbf5be0bf71c7b7b093849"
+    },
+    {
+      "path": "tools/blackout/receiver_app.js",
+      "bytes": 17438,
+      "sha256": "ed0a2c94836d5b955b0dd95691a8767dbba85c4eed24388105ffacd32bd00baa"
+    },
+    {
+      "path": "tools/blackout/receiver_core.js",
+      "bytes": 15428,
+      "sha256": "3dd6354657d7aeb3fe3a4d9cdc4d083f8f556cbaf2ecaf869b33af9f7570ff16"
+    },
+    {
+      "path": "tools/blackout/receiver_store.js",
+      "bytes": 6541,
+      "sha256": "5ebb7b137621e8e9220614962609bd84f6ce08db2641f560a3f4db32f209fe8e"
+    },
+    {
+      "path": "tools/blackout/test_export.py",
+      "bytes": 2291,
+      "sha256": "d462478e2d3e9d12b022937675e3cb235a3b2679e91ff22b7875e019ca5aebdd"
+    },
+    {
+      "path": "tools/blackout/test_packets.cjs",
+      "bytes": 2058,
+      "sha256": "a83719d8aae19c0175243bb7d0faa5354b688273b5776c3f208f215bc0e0d05a"
+    },
+    {
+      "path": "tools/blackout/test_picker.cjs",
+      "bytes": 4830,
+      "sha256": "92e0efb1e4aae2238e689261162f88c809ffb30c686bb4b2a39c6367e982afe0"
+    },
+    {
+      "path": "tools/blackout/test_receiver.cjs",
+      "bytes": 18672,
+      "sha256": "09afbbc7a03e599bc420c69d470e404b70ba2f49d74f482b1a03fbcf959709ee"
+    },
+    {
+      "path": "tools/blackout/test_standing.cjs",
+      "bytes": 11139,
+      "sha256": "64f757108f108b36f295e27b31014311492f97712fe7ccc6f16fadabfcb28073"
+    },
+    {
+      "path": "tools/blackout/test_standing.py",
+      "bytes": 5619,
+      "sha256": "a8159627f719b54d90ec185540badd806ffcee081c1200b80a60c0a35249ce68"
+    },
+    {
+      "path": "tools/blackout/test_witness.py",
+      "bytes": 20931,
+      "sha256": "9f2a81197f2934a69ea3b922f58c5bdc7a86b106ded822bb05524f04d29abbff"
+    },
+    {
+      "path": "tools/blackout/validate_export.py",
+      "bytes": 13965,
+      "sha256": "34483b132cec1e8c675536f826b7edc9942b539ff158e48ac039ccd000a646a7"
+    },
+    {
+      "path": "tools/blackout/witness.py",
+      "bytes": 29924,
+      "sha256": "09efcb754c646f949795afcb45329758a3cd9a56d1ae7bffa9ae7b2f391f6ac9"
+    }
+  ],
+  "testLogIdentities": [
+    {
+      "path": "build/m16.1-publication/app-release-rebuild.log",
+      "bytes": 1366,
+      "sha256": "2223bbd25aa319af3d0083a73d428bb029d4ef1937157acc3ac0815017266c9f"
+    },
+    {
+      "path": "build/m16.1-publication/modular-connectors-Debug.log",
+      "bytes": 175,
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05"
+    },
+    {
+      "path": "build/m16.1-publication/modular-connectors-Release.log",
+      "bytes": 175,
+      "sha256": "232f5ea7b9464bd627dc6729b65da9d9bad59f390e88e367aaca37a8a1472c05"
+    },
+    {
+      "path": "build/m16.1-publication/modular-gate12-application-Debug.log",
+      "bytes": 17229,
+      "sha256": "3abb99a9906f07139d0b01849b8a5441ee18512b9b55e8eac4913661ad8858e9"
+    },
+    {
+      "path": "build/m16.1-publication/modular-gate12-application-Release.log",
+      "bytes": 17230,
+      "sha256": "e712f27476b436a3d0effef455b813d4b4b2c0b445c8c2ce20ae9e4f023c7ea9"
+    },
+    {
+      "path": "build/m16.1-publication/modular-gate6-Debug.log",
+      "bytes": 147,
+      "sha256": "408e0386a60e658c2fdb416e3f0ff072e93dba12a3cd598df08b3112f0baf327"
+    },
+    {
+      "path": "build/m16.1-publication/modular-gate6-Release.log",
+      "bytes": 147,
+      "sha256": "21117450acd3ffd992cc6d6639765074f98956b50438f8ba5d5466d09ae7544f"
+    },
+    {
+      "path": "build/m16.1-publication/modular-stabilization-Debug.log",
+      "bytes": 436,
+      "sha256": "c37a7a97d94da4b69b93f797b1ef34a7944f871df4bcb3150afed3a592d2aeaa"
+    },
+    {
+      "path": "build/m16.1-publication/modular-stabilization-Release.log",
+      "bytes": 436,
+      "sha256": "c37a7a97d94da4b69b93f797b1ef34a7944f871df4bcb3150afed3a592d2aeaa"
+    },
+    {
+      "path": "build/m16.1-publication/native-release-rebuild.log",
+      "bytes": 4072,
+      "sha256": "900be45ade8c43543b71f1ea1a0065c7bc25848be7c55da8add25031370fc6f9"
+    },
+    {
+      "path": "build/m16.1-publication/picker-smoke.log",
+      "bytes": 1069,
+      "sha256": "90d5a7fd3fc80d9e0eaaa3eee374db5c81f5ae4158304afee50f6efdd92ddf5d"
+    },
+    {
+      "path": "build/m16.1-publication/rcs-scalability-Debug.log",
+      "bytes": 413,
+      "sha256": "303f7863e48c92fc170780342a323d5fdaba58cdf70fa394c63396c8375eac0c"
+    },
+    {
+      "path": "build/m16.1-publication/rcs-scalability-Release.log",
+      "bytes": 413,
+      "sha256": "303f7863e48c92fc170780342a323d5fdaba58cdf70fa394c63396c8375eac0c"
+    },
+    {
+      "path": "build/m16.1-publication/scalable-support-Debug.log",
+      "bytes": 3483,
+      "sha256": "451deb1447b3ef5ebaf2ffeadc62109cbbfd0f637ba5306081c17cf5d0e0da76"
+    },
+    {
+      "path": "build/m16.1-publication/scalable-support-flight-Debug.log",
+      "bytes": 5694,
+      "sha256": "b30aca2370e6f470673a649c9adcccf5915d3e7be63264159bd3e57d9e13276f"
+    },
+    {
+      "path": "build/m16.1-publication/scalable-support-flight-Release.log",
+      "bytes": 5692,
+      "sha256": "919e7dfaa6cd0efa56c82b542c1b5dcae6548554083d665169d6ab053ca8704c"
+    },
+    {
+      "path": "build/m16.1-publication/scalable-support-Release.log",
+      "bytes": 3479,
+      "sha256": "fcf4dd3fa8e0208e5353121c16a8a598d68fceb321984a2dc01fdeb8da487ef5"
+    },
+    {
+      "path": "build/m16.1-publication/standing-host.log",
+      "bytes": 1168,
+      "sha256": "77fa3518837904d1a7fa2067acf88b3b44711692a8634531040b09327847f6c8"
+    }
+  ],
+  "evidenceLimit": "Final authenticated KSA-history browser mismatch remains explicit; earlier qualified evidence preserved. Current source bank does not assign public acceptance, final fidelity, 150 FPS or blackout causality."
+}

@@ -19,6 +19,8 @@ target_link_libraries(NovaCoreFrozenCaptureMock PRIVATE bcrypt)
 add_executable(NovaCoreRegionalPupilLifetimeTests EXCLUDE_FROM_ALL RegionalPupilLifetimeTests.cpp)
 target_compile_features(NovaCoreRegionalPupilLifetimeTests PRIVATE cxx_std_20)
 add_executable(NovaCoreTerrainTessellationTests EXCLUDE_FROM_ALL TerrainTessellationTests.cpp)
+add_executable(NovaCorePreparedSurfaceRasterTests EXCLUDE_FROM_ALL PreparedSurfaceRasterTests.cpp)
+target_compile_features(NovaCorePreparedSurfaceRasterTests PRIVATE cxx_std_20)
 target_compile_features(NovaCoreTerrainTessellationTests PRIVATE cxx_std_20)
 if(MSVC)
   target_compile_options(NovaCoreTerrainTessellationTests PRIVATE /fp:strict)
@@ -118,6 +120,15 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/planetary_production.frag.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production_terrain.comp" -o "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
   DEPENDS "${SHADER_DIR}/facility_light_occlusion.glsl" "${SHADER_DIR}/planetary_production.frag" "${SHADER_DIR}/planetary_production_terrain.comp" "${SHADER_DIR}/production_cube_surface.glsl"  "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/production_cube_filter.glsl" "${SHADER_DIR}/production_earth_material.glsl" "${SHADER_DIR}/production_terrain_material.glsl" "${SHADER_DIR}/surface_material_coordinates.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl")
+# The qualified prepared receiver owns an optimized artifact of the same material
+# source. Keep bootstrap/displaced/diagnostic consumers on their existing module.
+# Precision and filtering source is unchanged; current-GPU replay qualifies -Os.
+add_custom_command(OUTPUT "${SPIRV_DIR}/prepared_surface.frag.spv"
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+  COMMAND ${GLSLC_EXECUTABLE} -Os -MD -MF "${SPIRV_DIR}/prepared_surface.frag.d" -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/prepared_surface.frag.spv"
+  DEPENDS "${SHADER_DIR}/planetary_production.frag"
+  DEPFILE "${SPIRV_DIR}/prepared_surface.frag.d"
+  VERBATIM)
 add_custom_command(OUTPUT
   "${SPIRV_DIR}/production_spherical_billboard_reset.comp.spv"
   "${SPIRV_DIR}/production_spherical_billboard_prepare.comp.spv"
@@ -130,6 +141,7 @@ add_custom_command(OUTPUT
   "${SPIRV_DIR}/production_nested_scale_mesh_incoming_cull.comp.spv"
   "${SPIRV_DIR}/production_spherical_billboard_incoming_compact.comp.spv"
   "${SPIRV_DIR}/production_spherical_billboard.vert.spv"
+  "${SPIRV_DIR}/prepared_surface.vert.spv"
   "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
   "${SPIRV_DIR}/production_spherical_billboard.tese.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
@@ -144,9 +156,10 @@ add_custom_command(OUTPUT
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_nested_scale_mesh_incoming_cull.comp" -o "${SPIRV_DIR}/production_nested_scale_mesh_incoming_cull.comp.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard_incoming_compact.comp" -o "${SPIRV_DIR}/production_spherical_billboard_incoming_compact.comp.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.vert" -o "${SPIRV_DIR}/production_spherical_billboard.vert.spv"
+  COMMAND ${GLSLC_EXECUTABLE} -DNOVACORE_DIRECT_PREPARED_SURFACE=1 -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.vert" -o "${SPIRV_DIR}/prepared_surface.vert.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tesc" -o "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tese" -o "${SPIRV_DIR}/production_spherical_billboard.tese.spv"
-  DEPENDS "${SHADER_DIR}/production_tessellation_factor.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/regional_physical.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/production_spherical_billboard_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_physical.glsl" "${SHADER_DIR}/production_spherical_billboard_reset.comp" "${SHADER_DIR}/production_spherical_billboard_cull.comp" "${SHADER_DIR}/production_spherical_billboard_compact.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_reset.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_compact.comp" "${SHADER_DIR}/production_nested_scale_mesh_cull.comp" "${SHADER_DIR}/production_nested_scale_mesh_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard.vert" "${SHADER_DIR}/production_spherical_billboard.tesc" "${SHADER_DIR}/production_spherical_billboard.tese" "${SHADER_DIR}/production_cube_surface.glsl")
+  DEPENDS "${SHADER_DIR}/prepared_surface_contract.h" "${SHADER_DIR}/production_tessellation_factor.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/regional_physical.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/production_spherical_billboard_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_physical.glsl" "${SHADER_DIR}/production_spherical_billboard_reset.comp" "${SHADER_DIR}/production_spherical_billboard_cull.comp" "${SHADER_DIR}/production_spherical_billboard_compact.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_reset.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_compact.comp" "${SHADER_DIR}/production_nested_scale_mesh_cull.comp" "${SHADER_DIR}/production_nested_scale_mesh_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard.vert" "${SHADER_DIR}/production_spherical_billboard.tesc" "${SHADER_DIR}/production_spherical_billboard.tese" "${SHADER_DIR}/production_cube_surface.glsl")
 add_custom_command(OUTPUT "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv"
   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/distant_planet.vert" -o "${SPIRV_DIR}/distant_planet.vert.spv"
@@ -187,6 +200,7 @@ foreach(REGIONAL_SHADER regional_physical_demand.comp regional_physical_incoming
     DEPENDS "${SHADER_DIR}/${REGIONAL_SHADER}" "${SHADER_DIR}/regional_physical.glsl" "${SHADER_DIR}/production_cube_surface.glsl")
 endforeach()
 add_custom_target(NovaCoreProductionShaders DEPENDS
+  "${SPIRV_DIR}/prepared_surface.frag.spv"
   "${SPIRV_DIR}/regional_physical_demand.comp.spv"
   "${SPIRV_DIR}/regional_physical_incoming_demand.comp.spv"
   "${SPIRV_DIR}/planetary_production.frag.spv"

@@ -6,7 +6,8 @@ using NovaCore.Simulation.Time;
 
 namespace NovaCore.Simulation.Spacecraft.Assemblies;
 
-/// <summary>Cold, bounded rotating-site authority. No spacecraft values, solver handles or mutable stores.</summary>
+/// <summary>Cold, bounded rotating-site authority. No spacecraft values or solver handles.
+/// Its bounded preparation cache holds only immutable certified geometry, never physical state.</summary>
 internal sealed class AssemblyFloridaSite
 {
     internal const string Identity = "srv01-florida-graded-ground/1";
@@ -25,6 +26,7 @@ internal sealed class AssemblyFloridaSite
     internal double SupportPlane {get;}
     internal double AngularSpeedBound {get;}
     internal double AngularAccelerationBound {get;}
+    internal Contact.Staging.CraftTerrainPreparationCache TerrainPreparation {get;}
     internal bool Applicable => terrain.Authority == Authority && terrain.GradingRegion == FloridaFacilitySupport.Region;
     internal IPhysicalSurfaceCollisionSource CollisionSource=>Applicable&&terrain is IPhysicalSurfaceCollisionSource source?source:
         throw new InvalidDataException("Current physical terrain does not provide collision geometry bounds.");
@@ -71,6 +73,7 @@ internal sealed class AssemblyFloridaSite
         if(slab is not null)OriginBodyFixed=slab.TopBodyFixed-region.Up*supportPlane;
         Digest=slab is null ? AssemblyJson.Digest(new {Identity,Authority,Start,End,EarthFrame,EastMetres,OriginBodyFixed,LocalToBodyFixed,model,Mu}) :
             AssemblyJson.Digest(new {Identity=FloridaSlabSupport.Identity,Authority,Start,End,EarthFrame,OriginBodyFixed,LocalToBodyFixed,model,Mu,slab.RootRadius,slab.FoundationDepth,slab.Dimensions});
+        TerrainPreparation=new(this);
     }
 
     internal static AssemblyFloridaSite CreateCraftSlab(IPhysicalSurfacePointQuery query,SimulationInstant start,
