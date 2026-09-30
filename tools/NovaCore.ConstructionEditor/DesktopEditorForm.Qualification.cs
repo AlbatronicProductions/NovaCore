@@ -43,8 +43,21 @@ internal sealed unsafe partial class DesktopEditorForm
         SetCapture(craftName.Handle);return 1;
     }
     private void ViewportMessage(uint message,nuint w=0,int x=200,int y=200)=>PostMessageW(GetWindow(viewport.Handle,5),message,w,(nint)((y<<16)|(x&65535)));
+    private void ExposedSceneMessage(uint message,nuint w=0,int x=600,int y=300)
+    {
+        RequireQualification(WindowFromPoint(viewport.PointToScreen(new(x,y)))==GetWindow(viewport.Handle,5),"camera gesture reaches exposed native viewport");
+        ViewportMessage(message,w,x,y);
+    }
     private void RequireQualification(bool value,string label){qualificationChecks++;if(!value)throw new InvalidDataException("Editor integration: "+label+"; "+message);}
-    private void ClickButton(string text)=>AllControls(this).OfType<Button>().First(b=>b.Text==text&&b.Visible&&b.Enabled).PerformClick();
+    private void ClickButton(string text)
+    {
+        // Retained engineering scenarios use the current command owner for actions moved into menus.
+        switch(text){case "New vehicle":ExecuteCommand("new");return;case "Menu":ShowPause();return;}
+        var button=AllControls(this).OfType<Button>().First(b=>b.Text==text&&b.Visible&&b.Enabled);
+        if(button.Parent is ScrollableControl parent)parent.ScrollControlIntoView(button);
+        RequireQualification(EditorControlReceivesPointer(button),text+" is the actual topmost Windows pointer target");
+        button.PerformClick();
+    }
     private static IEnumerable<Control> AllControls(Control parent){foreach(Control control in parent.Controls){yield return control;foreach(var nested in AllControls(control))yield return nested;}}
     private void WindowClick(Double3 position)
     {
@@ -56,7 +69,10 @@ internal sealed unsafe partial class DesktopEditorForm
         RequireQualification(point.Depth>0&&point.X>=0&&point.Y>=0&&point.X<viewport.Width&&point.Y<viewport.Height,"target projects inside client");
         var packed=(nint)(((int)Math.Round(point.Y)<<16)|((int)Math.Round(point.X)&65535));var child=GetWindow(viewport.Handle,5);
         RequireQualification(child!=IntPtr.Zero,"native child owned by viewport");
-        RequireQualification(PostMessageW(child,0x201,1,packed)&&PostMessageW(child,0x202,0,packed),"post native left edges");
+        RequireQualification(WindowFromPoint(viewport.PointToScreen(new((int)Math.Round(point.X),(int)Math.Round(point.Y))))==child,"scene click reaches exposed native viewport");
+        // PerformClick does not emit the player's button release after catalogue capture
+        // cleanup. Supply that release before the next distinct scene gesture.
+        RequireQualification(PostMessageW(child,0x202,0,packed)&&PostMessageW(child,0x201,1,packed)&&PostMessageW(child,0x202,0,packed),"post released native left gesture");
         RequireQualification(PostMessageW(child,0x200,0,(nint)((10<<16)|10)),"later pointer motion cannot relocate the pending click");
     }
     private void SocketClick(string instance,string socket)

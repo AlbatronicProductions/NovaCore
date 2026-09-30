@@ -21,10 +21,10 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
     private readonly Panel viewport=new(){Dock=DockStyle.Fill,BackColor=Color.FromArgb(15,20,30)};
     private readonly FlowLayoutPanel sidebar=new(){Dock=DockStyle.Left,Width=280,FlowDirection=FlowDirection.TopDown,WrapContents=false,AutoScroll=true,Padding=new(12)};
     private readonly Label status=new(){Dock=DockStyle.Bottom,Height=94,Padding=new(12),AutoEllipsis=true};
-    private readonly ListBox catalogList=new(){Width=244,Height=148};
-    private readonly ComboBox mode=new(){Width=244,DropDownStyle=ComboBoxStyle.DropDownList};
+    private readonly PartDefinitionData[] catalogParts;
+    private PartDefinitionData chosenPart;
+    private int editorIntent,clockDegrees;
     private readonly ComboBox count=new(){Width=112,DropDownStyle=ComboBoxStyle.DropDownList};
-    private readonly ComboBox clock=new(){Width=112,DropDownStyle=ComboBoxStyle.DropDownList};
     private readonly NumericUpDown fill=new(){Width=112,Minimum=0,Maximum=100,Value=100,DecimalPlaces=1,Increment=.5m};
     private readonly NumericUpDown charge=new(){Width=112,Minimum=0,Maximum=100,Value=100,DecimalPlaces=1,Increment=.5m};
     private readonly CheckBox stores=new(){Text="Propellant enabled",Checked=true,AutoSize=true};
@@ -52,12 +52,11 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
     private bool renderedRefused;
     private readonly List<(uint Mesh,Double3 Position,Matrix3 Rotation,uint Tint)> renderEntries;
     private bool socketOverflow;
-    private sealed record CatalogItem(PartDefinitionData Definition){public override string ToString()=>Definition.Construction!.Name;}
-    private PartDefinitionData Chosen=>((CatalogItem)catalogList.SelectedItem!).Definition;
+    private PartDefinitionData Chosen=>chosenPart;
     internal DesktopEditorForm(AssemblyDefinitionCatalog catalog,string assetRoot,string? qualification=null,string tankDefinition="nc.tank.short-2")
     {
         Text="NovaCore · Craft construction";Width=1280;Height=900;MinimumSize=new(960,700);StartPosition=FormStartPosition.CenterScreen;
-        Font=new("Segoe UI",10);BackColor=Color.FromArgb(235,239,244);ForeColor=Color.FromArgb(25,38,55);
+        Font=new("Consolas",10);BackColor=Color.FromArgb(235,239,244);ForeColor=Color.FromArgb(25,38,55);
         session=new(catalog);this.assetRoot=assetRoot;qualificationPath=qualification;qualificationTankDefinition=tankDefinition;
         SurfaceRetrySetup();
         var library=new ConstructionAssetLibrary();
@@ -72,18 +71,18 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
             catalog.Data.Definitions.SelectMany(d=>d.Standard!.SocketGroups).SelectMany(g=>g.Placements).Select(p=>p.Count).DefaultIfEmpty(1).Max(),
             catalog.Data.Definitions.Max(d=>d.Construction!.Consumers.Length));
         renderEntries=new(renderCapacity);
-        foreach(var d in catalog.Data.Definitions.OrderByDescending(d=>d.Standard!.RootEligible).ThenBy(d=>d.Construction!.Name,StringComparer.Ordinal))catalogList.Items.Add(new CatalogItem(d));
-        catalogList.SelectedIndex=0;
-        mode.Items.AddRange(["Select","Place","Move"]);mode.SelectedIndex=0;
-        count.Items.AddRange([1,2,4,8]);count.SelectedIndex=0;clock.Items.AddRange([0,90,180,270]);clock.SelectedIndex=0;
-        count.SelectedIndexChanged+=(_,_)=>ChangedIntent();clock.SelectedIndexChanged+=(_,_)=>ChangedIntent();
+        catalogParts=catalog.Data.Definitions.OrderByDescending(d=>d.Standard!.RootEligible).ThenBy(d=>d.Construction!.Name,StringComparer.Ordinal).ToArray();
+        chosenPart=catalogParts[0];
+        count.Items.AddRange([1,2,4,8]);count.SelectedIndex=0;
+        count.SelectedIndexChanged+=(_,_)=>ChangedIntent();
+        FormBorderStyle=FormBorderStyle.None;Bounds=Screen.FromPoint(Cursor.Position).Bounds;
         BuildPlayerShell();
         Shown+=(_,_)=>ShowStartup();FormClosing+=OnClosing;
         FormClosed+=(_,_)=>{flight?.Dispose();foreach(var bitmap in thumbnails.Values)bitmap.Dispose();visuals.Dispose();session.Dispose();};UpdateStatus();
     }
     private void NeedSelection(){if(selection is null)throw new InvalidDataException("Select a part in the viewport first.");}
     private void Attempt(Action action)
-    {try{action();}catch(Exception e)when(e is InvalidDataException or IOException or UnauthorizedAccessException or ArgumentException or OverflowException or System.Text.Json.JsonException){diagnostic=e.Message;message=PlayerMessage(e);}UpdateStatus();}
+    {try{action();}catch(Exception e)when(e is InvalidDataException or IOException or UnauthorizedAccessException or ArgumentException or OverflowException or System.Text.Json.JsonException){diagnostic=e.Message;message=PlayerMessage(e);if(running&&!loading)ShowInformation("ACTION REFUSED",message);}UpdateStatus();}
     private static string PlayerMessage(Exception e)=>e.Message switch {
         _ when e is System.Text.Json.JsonException=>"This craft file is incomplete or malformed. Choose a valid saved craft. Your current craft is unchanged.",
         var s when s.StartsWith("FIT_COLLISION",StringComparison.Ordinal)=>"Parts would overlap. Choose a clear socket or move the obstructing part. Details are available below.",
@@ -96,13 +95,13 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
     private void CancelGhost(){if(session.Preview is not null)session.CancelPreview(session.Revision);refusedGhost=null;targetKey=null;activeSocketParent=activeSocketTarget=null;}
     private void NavigateHistory(bool backwards)
     {
-        CancelGhost();freeGhost=null;mode.SelectedIndex=0;if(backwards)session.Undo(session.Revision);else session.Redo(session.Revision);
+        CancelGhost();freeGhost=null;editorIntent=0;if(backwards)session.Undo(session.Revision);else session.Redo(session.Revision);
         // Copies intentionally share a logical document Id. Only an exact saved
         // snapshot can restore a known destination; other history states ask.
         savePath=session.Current is {} current&&savedPaths.TryGetValue(current.Design.Digest,out var path)?path:null;
         selection=null;craftName.Text=session.Current?.Design.Data.Craft?.Name??"Development craft";RefreshInspector();
     }
-    private void NewCraft()=>RequestLeave(()=>{session.Clear(session.Revision,true);selection=null;savePath=null;CancelGhost();freeGhost=null;mode.SelectedIndex=0;draftIdentity=Guid.NewGuid().ToString("N");craftName.Text="Development craft";RefreshInspector();});
+    private void NewCraft()=>RequestLeave(()=>{session.Clear(session.Revision,true);selection=null;savePath=null;CancelGhost();freeGhost=null;editorIntent=0;draftIdentity=Guid.NewGuid().ToString("N");craftName.Text="Development craft";RefreshInspector();});
     private void RememberPath(string path)
     {
         var digest=session.Current!.Design.Digest;
@@ -115,6 +114,7 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
     private void OnClosing(object? sender,FormClosingEventArgs e)
     {
         if(approvedClose)return;
+        if(loading){e.Cancel=true;CloseApproved();return;}
         e.Cancel=true;Attempt(()=>RequestLeave(CloseApproved));
     }
     private void FocusCraft()
@@ -132,11 +132,13 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
     }
     private void Input(NativeEditorViewport input)
     {
-        if(input.Width==0||input.Height==0)return;camera.Aspect=(double)input.Width/input.Height;
+        if(input.Width==0||input.Height==0)return;
+        if(EditorUiOwnsPointer(input)){previousX=input.PointerX;previousY=input.PointerY;previousButtons=0;return;}
+        camera.Aspect=(double)input.Width/input.Height;
         var dx=input.PointerX-previousX;var dy=input.PointerY-previousY;
         if((input.Pressed&2)!=0)contextTravel=0;
         else if((input.Buttons&2)!=0)contextTravel+=Math.Abs(dx)+Math.Abs(dy);
-        if((input.Released&2)!=0&&contextTravel<=3&&mode.SelectedIndex==0){PickPart(input);ShowPartContext(input);}
+        if((input.Released&2)!=0&&contextTravel<=3&&editorIntent==0){PickPart(input);ShowPartContext(input);}
         var leftPress=(input.Pressed&1)!=0;
         // A left press owns selection/placement at its latched position. Rebase
         // dragging after this callback so concurrent motion cannot move the
@@ -147,12 +149,12 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
             camera.Distance=Math.Clamp(camera.Distance*Math.Exp(-input.Wheel*.12),.3,1000);
         }
         previousX=input.PointerX;previousY=input.PointerY;previousButtons=leftPress?0:input.Buttons;
-        if(mode.SelectedIndex!=0)UpdateHeldPreview(input);
+        if(editorIntent!=0)UpdateHeldPreview(input);
         if((input.Pressed&1)==0||input.Focused==0)return;
-        if(mode.SelectedIndex==0){contextInspector.Hide();PickPart(input);RefreshInspector();UpdateStatus();return;}
+        if(editorIntent==0){contextInspector.Hide();PickPart(input);RefreshInspector();UpdateStatus();return;}
         Attempt(()=>{
             if(session.Preview is null||refusedGhost is not null)throw new InvalidDataException("Move to a highlighted, clear connection before placing this part.");
-            session.AcceptPreview(session.Revision);refusedGhost=null;targetKey=null;nextInstance++;mode.SelectedIndex=0;freeGhost=null;
+            session.AcceptPreview(session.Revision);refusedGhost=null;targetKey=null;nextInstance++;editorIntent=0;freeGhost=null;
             message="Part attached.";RefreshInspector();
         });
     }
@@ -166,33 +168,33 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
     private void PreviewAtSocket(NativeEditorViewport input)
     {
         var design=session.Current?.Design??throw new InvalidDataException("Place the root first.");
-        if(mode.SelectedIndex==2)NeedSelection();
-        var child=mode.SelectedIndex==2?design.Parts[design.Index(selection!)].Definition:Chosen;
-        var clockValue=Convert.ToInt32(clock.SelectedItem);
+        if(editorIntent==2)NeedSelection();
+        var child=editorIntent==2?design.Parts[design.Index(selection!)].Definition:Chosen;
+        var clockValue=clockDegrees;
         PrepareSockets(input.Width,input.Height);
         var chosen=EditorSocketTargets.Pick(sockets,input.PointerX,input.PointerY);
         if(chosen is not {} socket){CancelGhost();return;}
         var parent=socket.Parent;var target=socket.Target;var mount=socket.Mount;
-        var key=$"{parent}|{target}|{child.Id}|{count.SelectedItem}|{clockValue}|{selection}|{mode.SelectedIndex}";if(key==targetKey&&(session.Preview is not null||refusedGhost is not null))return;
+        var key=$"{parent}|{target}|{child.Id}|{count.SelectedItem}|{clockValue}|{selection}|{editorIntent}";if(key==targetKey&&(session.Preview is not null||refusedGhost is not null))return;
         CancelGhost();targetKey=key;activeSocketParent=parent;activeSocketTarget=target;
         while(design.Data.Instances.Any(p=>p.Id.StartsWith("part-"+nextInstance+"-",StringComparison.Ordinal))||
             design.Data.Symmetry.Any(g=>g.Id=="group-part-"+nextInstance)||
             design.Data.Connections.Any(e=>e.Construction!.Id.StartsWith("joint-part-"+nextInstance+"-",StringComparison.Ordinal)))nextInstance++;
-        var data=mode.SelectedIndex==2?session.PrepareReconnect(session.Revision,selection!,parent,target!,clockValue):session.PreparePlacement(session.Revision,new(session.Catalog.Reference(child),parent,target!,mount!,clockValue,socket.Count,"part-"+nextInstance));
+        var data=editorIntent==2?session.PrepareReconnect(session.Revision,selection!,parent,target!,clockValue):session.PreparePlacement(session.Revision,new(session.Catalog.Reference(child),parent,target!,mount!,clockValue,socket.Count,"part-"+nextInstance));
         try{session.PreviewEdit(session.Revision,data);message="Connection ready. Click to attach the complete preview.";}
         catch(InvalidDataException){refusedGhost=data;throw;}
     }
     private void PrepareSockets(double width,double height)
     {
-        var view=new SocketView(session.Revision,mode.SelectedIndex,Chosen.Id,Convert.ToInt32(count.SelectedItem),Convert.ToInt32(clock.SelectedItem),selection,camera.Eye,camera.Target,camera.Aspect,width,height);
+        var view=new SocketView(session.Revision,editorIntent,Chosen.Id,Convert.ToInt32(count.SelectedItem),clockDegrees,selection,camera.Eye,camera.Target,camera.Aspect,width,height);
         if(socketView==view)return;socketView=view;
         RebuildSockets(width,height,view);
     }
     private void RebuildSockets(double width,double height,SocketView view)
     {
-        sockets.Clear();socketOverflow=false;if(mode.SelectedIndex==0||session.Current is not {} doc)return;
-        var child=mode.SelectedIndex==2&&selection is not null?doc.Design.Parts[doc.Design.Index(selection)].Definition:Chosen;
-        var moving=mode.SelectedIndex==2&&selection is not null?session.SelectionMembers(selection):[];
+        sockets.Clear();socketOverflow=false;if(editorIntent==0||session.Current is not {} doc)return;
+        var child=editorIntent==2&&selection is not null?doc.Design.Parts[doc.Design.Index(selection)].Definition:Chosen;
+        var moving=editorIntent==2&&selection is not null?session.SelectionMembers(selection):[];
         socketOverflow=EditorSocketTargets.Rebuild(sockets,doc.Design,child,view.Count,view.Clock,selection,moving,camera,width,height,picking);
     }
     private void Render(NativeFrameSubmission* frame)
@@ -201,7 +203,7 @@ internal sealed unsafe partial class DesktopEditorForm : Form, IApplicationPrese
         var length=0;var current=session.Current?.Design.Data;var preview=refusedGhost??session.Preview?.Design.Data;
         if(!ReferenceEquals(current,renderedCurrent)||!ReferenceEquals(preview,renderedPreview)||selection!=renderedSelection||renderedRefused!=(refusedGhost is not null))RebuildRenderEntries(current,preview);
         foreach(var entry in renderEntries)Add(entry.Mesh,entry.Position,entry.Rotation,1,entry.Tint);
-        if(freeGhost is {} pose&&preview is null&&mode.SelectedIndex!=0){var asset=assets[Chosen.Id];foreach(var mesh in asset.Meshes)Add(mesh.Handle.Value,pose.Point(mesh.Gimballed?asset.GimbalPivot:Double3.Zero),pose.Rotation,1,6);}
+        if(freeGhost is {} pose&&preview is null&&editorIntent!=0){var asset=assets[Chosen.Id];foreach(var mesh in asset.Meshes)Add(mesh.Handle.Value,pose.Point(mesh.Gimballed?asset.GimbalPivot:Double3.Zero),pose.Rotation,1,6);}
         PrepareSockets(size.Width,size.Height);foreach(var socket in sockets)if(socket.Visible){
             var active=socket.Parent==activeSocketParent&&socket.Target==activeSocketTarget;
             Add(5,socket.Marker,Matrix3.Identity,socket.Scale*(active?1.35:1),socket.Available?(active?7u:4u):5u);

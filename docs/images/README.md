@@ -1,5 +1,18 @@
 # Landing-page media
 
+## M16.2 Vehicle Editor
+
+`novacore-m16.2-construction.jpg` is an unedited copy of the ordinary application
+capture `build/ad4-editor-restoration/built-and-saved.jpg`, September 29, 2026,
+3440 × 1440. SHA-256:
+`9804c2f65d6a73d60162413200a73df8c5b87a002ebef7eda492fe4544f36f80`.
+It shows the accepted candidate's overlaid editor and a 12-part saved craft;
+it does not claim wider flight or public-release qualification. The
+[editor route and receipt](../engineering-evidence/player-entry-convergence/editor-restoration.md)
+record its source/package identity and interaction provenance. The minimum-speed
+correction did not change this editor presentation. The M16.2 landing page uses
+this image; the older media below remains historical evidence.
+
 ## M16.0 construction
 
 `novacore-m16-construction.jpg` is an unchanged copy of the real application

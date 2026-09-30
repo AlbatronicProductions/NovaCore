@@ -1,0 +1,9 @@
+{
+  "recordedUtc": "2026-09-30T03:03:50.2880419+00:00",
+  "stoppedProcess": 2772,
+  "parent": 41748,
+  "commandLine": "\"E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Graphics.Tests.exe\" \"--case=M12D-P2S5F nested production scale-mesh topology\"",
+  "reason": "Documented checked-in-artifact topology mode passed all 18 levels; stop redundant CPU regeneration only. Preserve original nonzero child result; not a candidate assertion failure.",
+  "replacement": "topology-fixture-Debug",
+  "exhaustiveRegeneration": "NOT COMPLETED; not claimed"
+}

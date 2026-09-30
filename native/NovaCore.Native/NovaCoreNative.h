@@ -102,7 +102,7 @@ typedef uint32_t (__cdecl *NcEditorMessageCallback)(uint64_t window,uint32_t mes
 static_assert(sizeof(NcEditorViewport)==56 && offsetof(NcEditorViewport,parentWindow)==8 && offsetof(NcEditorViewport,stop)==52,"editor viewport ABI");
 struct NcApplicationViewport { NcEditorViewport input; uint32_t mode,reserved; };
 static_assert(sizeof(NcApplicationViewport)==64 && offsetof(NcApplicationViewport,mode)==56 && offsetof(NcApplicationViewport,reserved)==60,"application viewport ABI");
-enum NcHostEventType : uint32_t { NC_DIAGNOSTIC = 1, NC_UPDATE_FRAME = 2 };
+enum NcHostEventType : uint32_t { NC_DIAGNOSTIC = 1, NC_UPDATE_FRAME = 2, NC_STARTUP_PROGRESS = 3, NC_PRESENTATION_READY = 4 };
 enum NcLogCategory : uint32_t { NC_LOG_ALWAYS = 0, NC_LOG_NONE = 0, NC_LOG_STARTUP = 1 << 0, NC_LOG_VULKAN = 1 << 1, NC_LOG_PRECISION = 1 << 2, NC_LOG_INPUT = 1 << 3, NC_LOG_RENDERER = 1 << 4, NC_LOG_VALIDATION = 1 << 5, NC_LOG_CAMERA = 1 << 6 };
 struct NcHostEvent { NcHostEventType type; uint32_t logCategory; const char* utf8Message; NcInputState input; NcFrameSubmission* submission; };
 struct NcRuntimeAssets {
@@ -262,6 +262,7 @@ NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission* submission, NcHostCal
 NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets);
 NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity);
 NC_API NcResult __cdecl nc_run_editor_viewport(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity, NcEditorViewport* viewport, NcEditorMessageCallback preprocess);
+NC_API NcResult __cdecl nc_application_await_presentation();
 NC_API NcResult __cdecl nc_run_application_viewport(NcFrameSubmission* submission,NcHostCallback callback,void* userData,const NcRuntimeAssets* assets,const NcVisualMesh* meshes,uint32_t count,uint32_t capacity,NcApplicationViewport* viewport,NcEditorMessageCallback preprocess);
 NC_API NcResult __cdecl nc_run_renderer_with_assets_and_visual_meshes(NcFrameSubmission* submission, NcHostCallback callback, void* userData, const NcRuntimeAssets* assets, const NcVisualMesh* meshes, uint32_t count, uint32_t preparedObjectCapacity);
 NC_API NcResult __cdecl nc_validate_planetary_patches(const NcPlanetaryPatch* patches, uint32_t count);

@@ -7,6 +7,16 @@ Earlier [campaign reports](engineering-evidence/performance-150fps/bank-candidat
 retain their historical pre-bank status and measurements. Banking preserves the
 accepted engineering capabilities without closing the limits below.
 
+**M16.2 is accepted but unbanked.** Its fullscreen entry/loading/UI and exploration
+pause corrections preserve these limits. Actual held-key, focus-loss and physical
+DPI-transition cases not performed remain NOT RUN, separate from automated window
+resize/input evidence. Loading GPU-memory values are driver estimates with a shared
+sampling owner; sampling/repaint can wait for synchronous loading checkpoints.
+See the [current candidate](NOVACORE_CURRENT_STATE.md#accepted-candidate--m162-unbanked).
+Engineering qualification remains **REVISE** for package closure, Graphics failures
+and non-96-DPI coverage. Project Control has explicitly elected manual banking
+with this debt recorded; none of these results becomes a qualification PASS.
+
 - MinimumRecorder remains temporary developer/qualification infrastructure while
   historical blackout causality is **UNRESOLVED**. Its permanent public disposition
   remains **UNDECIDED — KEEP / DEV-ONLY / RETIRE**. The source bank retains necessary

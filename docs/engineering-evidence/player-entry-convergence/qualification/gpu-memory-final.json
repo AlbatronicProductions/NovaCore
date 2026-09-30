@@ -1,0 +1,48 @@
+{
+  "judgment": "STARTUP_FLIGHT_AND_INPUT_PASS",
+  "checks": 12,
+  "source": "2626a49f5233df25fb50019c791203389fdb2aa8f53f321ee3290c23401fd07b",
+  "epoch": 843992536342963,
+  "extent": {
+    "ViewportWidthPixels": 3440,
+    "ViewportHeightPixels": 1440
+  },
+  "loadingStages": [
+    "Core \u00B7 checking planetary data",
+    "Universe \u00B7 preparing Solar system",
+    "Presentation \u00B7 preparing camera and scene",
+    "Planet renderer \u00B7 loading terrain topology",
+    "Renderer \u00B7 creating graphics resources",
+    "Renderer | window ready; creating graphics queue",
+    "Renderer | graphics queue ready",
+    "Assets | mesh system ready",
+    "Planet renderer | terrain resources ready",
+    "Planet renderer | shaders and presentation targets ready",
+    "Renderer | submission resources ready",
+    "Planet renderer | required hierarchy ready"
+  ],
+  "gpuMemory": {
+    "Status": 1,
+    "Sequence": 30,
+    "Timestamp": 1553292629555,
+    "Frequency": 10000000,
+    "SampleUtc": "2026-09-29T22:21:12.3215555Z",
+    "QueryNanoseconds": 4900,
+    "UsageBytes": 622632960,
+    "BudgetBytes": 12288049152,
+    "CapacityBytes": 17163091968,
+    "Adapter": "AMD Radeon RX 6800 XT",
+    "Uuid": "00000000030000000000000000000000",
+    "Luid": "D6C4010000000000",
+    "LuidValid": true,
+    "Vendor": 4098,
+    "Device": 29631,
+    "Driver": 8388961,
+    "HeapMask": 2,
+    "Detail": "VK_EXT_memory_budget; process device-local estimates",
+    "AgeSeconds": 0.3331383,
+    "IsLive": true,
+    "DisplayText": "AMD Radeon RX 6800 XT \u00B7 device-local capacity 16.0 GiB\nNovaCore usage \u2248 0.58 GiB / application budget \u2248 11.44 GiB\nDriver estimates \u00B7 updated live"
+  },
+  "hardwareHeldKeys": false
+}

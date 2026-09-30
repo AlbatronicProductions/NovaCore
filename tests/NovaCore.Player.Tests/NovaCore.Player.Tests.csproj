@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/NovaCore.Simulation/NovaCore.Simulation.csproj" />
+    <ProjectReference Include="../../src/NovaCore.Interop/NovaCore.Interop.csproj" />
+    <ProjectReference Include="../../tools/NovaCore.Launcher/NovaCore.Launcher.csproj" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/PlayerConfiguration.cs" Link="PlayerConfiguration.cs" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/PlayerHudLayouts.cs" Link="PlayerHudLayouts.cs" />
+    <Compile Include="../../tools/NovaCore.ConstructionEditor/PlayerTimeText.cs" Link="PlayerTimeText.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "judgment": "BOUNDED_ENGINEERING_PASS; Project Control visual acceptance pending",
+  "backend": "VK_EXT_memory_budget via vkGetPhysicalDeviceMemoryProperties2; sole authoritative backend; no DXGI",
+  "adapter": {
+    "name": "AMD Radeon RX 6800 XT",
+    "vendorId": 4098,
+    "deviceId": 29631,
+    "driverVersionRaw": 8388961,
+    "uuid": "00000000030000000000000000000000",
+    "luid": "D6C4010000000000",
+    "luidValid": true
+  },
+  "sameNativeHandles": "[native] PLAYER_GPU_BIND queryInstance=000002E5A9902F50 renderInstance=000002E5A9902F50 queryPhysical=000002E5A4312E20 renderPhysical=000002E5A4312E20 matched=1",
+  "sample": {
+    "sequence": 25,
+    "utc": "2026-09-29T22:21:07.2383376Z",
+    "qpc": 1553241797375,
+    "qpcFrequency": 10000000,
+    "utcFileTime": 134351940672383376,
+    "queryNanoseconds": 4800
+  },
+  "heaps": [
+    {
+      "index": 0,
+      "flags": 0,
+      "flagsDecoded": [],
+      "included": false,
+      "reason": "Non-device-local heap excluded",
+      "capacityBytes": 16703094784,
+      "budgetBytes": 15897839616,
+      "usageBytes": 128786432
+    },
+    {
+      "index": 1,
+      "flags": 3,
+      "flagsDecoded": [
+        "DEVICE_LOCAL",
+        "MULTI_INSTANCE"
+      ],
+      "included": true,
+      "reason": "DEVICE_LOCAL heap counted once by heap index",
+      "capacityBytes": 17163091968,
+      "budgetBytes": 12353323008,
+      "usageBytes": 622632960
+    }
+  ],
+  "includedHeapIndices": [
+    1
+  ],
+  "aggregation": "Sum each DEVICE_LOCAL heap index exactly once; memory types are not traversed; MULTI_INSTANCE flag does not multiply heap size.",
+  "aggregateBytes": {
+    "capacityBytes": 17163091968,
+    "budgetBytes": 12353323008,
+    "usageBytes": 622632960
+  },
+  "conversion": "GiB = bytes / 1,073,741,824",
+  "divisorBytes": 1073741824,
+  "unroundedGiB": {
+    "capacityGiB": 15.984375,
+    "budgetGiB": 11.504928588867188,
+    "usageGiB": 0.5798721313476562
+  },
+  "display": {
+    "capacity": "16.0 GiB",
+    "usage": "0.58 GiB",
+    "applicationBudget": "11.50 GiB",
+    "rounding": ".NET fixed-point F1 capacity, F2 usage/budget; nearest rounding, decimal midpoint ties to even; current UI culture"
+  },
+  "displayBinding": {
+    "image": "qualification/loading.png",
+    "captureReturnedUtc": "2026-09-29T22:21:07.381Z",
+    "sampleAgeAtCaptureReturnMilliseconds": 142.6624,
+    "uiLog": "GPU_MEMORY_UI phase=loading sequence=25 sampleQpc=1553241797375 uiQpc=1553241798885 utc=2026-09-29T22:21:07.2383376Z status=Ready usage=622632960 budget=12353323008 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=164.8",
+    "method": "Visually inspected PNG text matches unique nonzero loading sample25. Screenshot and accessibility sampling are asynchronous; use PNG, not stale accessibility text. Return timestamp bounds capture time, not exact scanout."
+  },
+  "semantics": {
+    "capacity": "Reported device-local physical heap capacity, not advertised decimal GB",
+    "budget": "Driver's application allocation budget; neither free VRAM nor physical capacity",
+    "usage": "Driver estimate for NovaCore's process on selected device-local heap; neither allocator payload nor system-wide usage",
+    "earlyZero": "Observed before device allocations; driver reporting may lag; never a prediction of loaded world usage"
+  },
+  "audit": {
+    "readySamples": 28,
+    "aggregateMismatches": 0,
+    "identityChanges": 0,
+    "initialUsageBytes": 0,
+    "maximumUsageBytes": 622632960
+  },
+  "overhead": {
+    "nativeQueryNanoseconds": {
+      "samples": 28,
+      "median": 7050.0,
+      "p95": 10300,
+      "p99": 10500,
+      "maximum": 10500
+    },
+    "phaseBreakdown": {
+      "configuration": {
+        "queryNanoseconds": {
+          "samples": 19,
+          "median": 7200,
+          "p95": 10500,
+          "p99": 10500,
+          "maximum": 10500
+        },
+        "pollCopyFormatLabelMicroseconds": {
+          "samples": 19,
+          "median": 92.7,
+          "p95": 1262.8,
+          "p99": 1262.8,
+          "maximum": 1262.8
+        }
+      },
+      "loading": {
+        "queryNanoseconds": {
+          "samples": 4,
+          "median": 7250.0,
+          "p95": 9200,
+          "p99": 9200,
+          "maximum": 9200
+        },
+        "pollCopyFormatLabelMicroseconds": {
+          "samples": 4,
+          "median": 217.45000000000002,
+          "p95": 454.8,
+          "p99": 454.8,
+          "maximum": 454.8
+        }
+      },
+      "gameplay": {
+        "queryNanoseconds": {
+          "samples": 5,
+          "median": 5100,
+          "p95": 5300,
+          "p99": 5300,
+          "maximum": 5300
+        },
+        "pollCopyFormatLabelMicroseconds": {
+          "samples": 5,
+          "median": 59.1,
+          "p95": 86.1,
+          "p99": 86.1,
+          "maximum": 86.1
+        }
+      }
+    },
+    "sampleIntervalsSeconds": {
+      "samples": 27,
+      "median": 1.0123175,
+      "p95": 1.4521168,
+      "p99": 2.0635054,
+      "maximum": 2.0635054
+    },
+    "limits": "Small bounded run; native duration is query only. UI measure includes Poll, optional evidence CSV flush, copy/format/label work; excludes final console write and later compositor paint. Not an isolated whole-frame treatment/control comparison."
+  },
+  "lifecycle": "One retained instance before START, no logical device before START; renderer borrows that instance/physical device. Same-thread timer/checkpoints poll at intended one-second cadence; cache-only reads. Timer stopped and renderer retired before instance destruction.",
+  "cadenceLimits": "250ms UI timer plus real progress checkpoints; intended approximately1Hz query cadence (GetTickCount64 granularity). Synchronous preparation delays pumping. Stale (>3s) values hidden at next UI refresh; no guarantee of repaint during an uninterruptible driver call.",
+  "failureEvidence": "16 production-owner mock checks; unsupported, missing entry, no local heaps, Ready-to-query-exception clears aggregates and estimates, recovery, balanced instance/surface teardown. 22 managed config/presentation checks include stale/failure formatting. Not hardware driver-fault injection or every admission/startup failure.",
+  "sourceCaptureNote": "Captures precede a frame-statistics wording correction (GPU / VRAM unavailable to GPU timing unavailable) and an intentional-loading-cancellation catch. Captured successful config/loading/gameplay branches are unchanged. Current final source/binary hashes are sealed separately, not claimed as the exact pre-correction capture binary."
+}

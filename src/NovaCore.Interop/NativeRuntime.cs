@@ -381,7 +381,7 @@ public struct NativeInputState { public float DeltaSeconds; public uint MoveLeft
 [Flags] public enum NativePilotKeys : uint { None=0, W=1, S=2, A=4, D=8, Q=16, E=32 }
 [Flags] public enum NativeEngineActions : uint { None=0, On=1, Off=2 }
 
-public enum NativeHostEventType : uint { Diagnostic = 1, UpdateFrame = 2 }
+public enum NativeHostEventType : uint { Diagnostic = 1, UpdateFrame = 2, StartupProgress = 3, PresentationReady = 4 }
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct NativeHostEvent { public NativeHostEventType Type; public uint LogCategory; public byte* Utf8Message; public NativeInputState Input; public NativeFrameSubmission* Submission; }
@@ -404,6 +404,9 @@ public static partial class NativeRuntime
 
     [LibraryImport("NovaCore.Native", EntryPoint = "nc_run_editor_viewport")]
     public static unsafe partial NativeResult RunEditorViewport(NativeFrameSubmission* submission, HostCallback callback, IntPtr userData, NativeVisualMesh* meshes, uint count, uint preparedObjectCapacity, NativeEditorViewport* viewport, EditorMessageCallback preprocess);
+
+    [LibraryImport("NovaCore.Native", EntryPoint="nc_application_await_presentation")]
+    public static partial NativeResult AwaitApplicationPresentation();
 
     [LibraryImport("NovaCore.Native", EntryPoint="nc_run_application_viewport")]
     [UnmanagedCallConv(CallConvs=[typeof(System.Runtime.CompilerServices.CallConvCdecl)])]

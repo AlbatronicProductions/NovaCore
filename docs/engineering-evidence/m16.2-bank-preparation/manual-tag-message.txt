@@ -1,0 +1,27 @@
+NovaCore M16.2 — Player Entry, Fullscreen Viewport & UI Architecture Convergence
+
+Project Control accepts and banks the player entry / Configuration → Loading →
+Gameplay responsibility, fullscreen viewport and overlay/menu architecture,
+Vehicle Editor presentation/ownership, Exploration 0.1× ↔ authoritative pause,
+README/landing-page refresh, and accepted construction/save/load/launch routes.
+
+This bank records accepted production responsibility only. It does not certify
+or close the following qualification debt:
+- Shader package inventory: 69 present versus inherited 66 expectation.
+- Graphics qualification: inherited assertions/path contracts unresolved.
+- Native facility qualification unresolved.
+- Full Graphics Release gate not completed.
+- Non-96-DPI gate not performed.
+- 150 FPS whole-frame target.
+- Cold/global terrain fallback.
+- Planetary visual fidelity.
+- Historical blackout causality.
+- Public-release readiness.
+
+Physical held-key, focus-loss and DPI-transition cases not performed remain
+unclaimed. Wider flight qualification remains open. MinimumRecorder remains
+temporary diagnostic/qualification infrastructure pending separate disposition.
+
+Parent: m16.1 / 40314c0f72396ea5f4ff39121f0b6821f1f96146.
+Manual banking is conditional on the recorded final Release build/precheck;
+the earlier engineering REVISE results are retained, not converted to PASS.

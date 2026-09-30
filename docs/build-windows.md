@@ -1,11 +1,12 @@
 # Build on Windows 11
 
-These instructions build **M16.1 — Planetary Rendering & Terrain Lifecycle Convergence**, the
-banked internal engineering baseline. Player/public-release PASS remains unassigned.
+The toolchain below builds the current source, including the accepted **M16.2**
+candidate. M16.2 is unbanked; **M16.1 — Planetary Rendering & Terrain Lifecycle
+Convergence** remains the latest banked checkout. Player/public-release PASS remains unassigned.
 This is a repository-layout development build, not a standalone installer.
 
 The unified entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
-Run it without arguments for startup/configuration → Solar exploration →
+Run it without arguments for fullscreen Configuration → Loading → Gameplay →
 construction → Florida launch → flight/control → return to the retained design.
 See the [player walkthrough and controls](../README.md#try-novacore).
 `NovaCore.Launcher.exe` is the legacy scenario/engineering tool.
@@ -26,6 +27,11 @@ commands below from that repository root. Project Control's canonical developmen
 tree remains `E:\NovaCore`; source builders can use their own checkout location.
 No private prospective-source export, isolated worktree executable or test catalog
 is needed for the normal application.
+
+The `m16.1` clone command reproduces that bank, not the uncommitted M16.2 candidate
+currently in `E:\NovaCore`. Do not substitute an unpublished `m16.2` tag. Candidate
+qualification and exact inputs are recorded in the
+[M16.2 preparation receipt](engineering-evidence/m16.2-bank-preparation/README.md).
 
 Both `earth-surface-v5` and `earth-florida-m12` must be built and verified before
 starting Earth/Solar scenes, even away from Florida. Runtime does not download
@@ -206,8 +212,9 @@ build, loads that exact path, and checks the actual loaded module. No native PAT
 fallback is accepted. Test shader paths use the same configuration. Window tests
 also verify the sample DLL and all source-derived deployed shader hashes (currently 66) against that build.
 
-Full automated validation means all 90 managed cases, plus the three native cases
-below, pass in both configurations with their stated prerequisites. Category
+The current Graphics runner lists 116 managed cases. Full Graphics validation
+means those cases plus the four native cases below pass in both configurations
+with their stated prerequisites. Category
 exclusions are not passes or skips. There are no unconditional skipped cases.
 Missing GPU/layer/assets are actionable failures, not silent environment skips.
 Headless-only success must be reported as headless-only.
@@ -217,7 +224,7 @@ Native cases are explicit CMake targets excluded from the default build:
 ```powershell
 cmake --build build/native-ninja --target NovaCoreRegionalPhysicalTests NovaCoreFacilityVisibilityTests NovaCoreSurfaceMaterialCoordinatesTests NovaCoreStellarProjectionTests
 build/native-ninja/NovaCoreRegionalPhysicalTests.exe <verified-Florida-nccube-path>
-build/native-ninja/NovaCoreFacilityVisibilityTests.exe build/native-ninja/shaders/facility_visibility_test.comp.spv
+build/native-ninja/NovaCoreFacilityVisibilityTests.exe build/native-ninja/test-shaders/facility_visibility_test.comp.spv
 build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninja/shaders/surface_material_coordinates_test.comp.spv
 build/native-ninja/NovaCoreStellarProjectionTests.exe build/native-ninja/shaders/stellar_glow.vert.spv
 # Repeat using build/native-ninja-release.
@@ -241,15 +248,29 @@ object evidence set `NOVACORE_VULKAN_CALLSTACK=1`. Remove those diagnostic overr
 after use. An ambient failure is reported independently of canonical regression
 status; it is never converted into a pass. See [Package 2](graphics-validation-package-2.md).
 
-The regional native case is CPU-only. The two presentation cases require Vulkan
+The regional native case is CPU-only. The three presentation cases require Vulkan
 FP64 and Khronos validation in **both** configurations, including instance creation
 and device teardown. Their errors fail the executable. Ordinary runtime code
 requests validation in Debug; canonical tests also enable it in Release through
 the loader environment and check the loaded module. The runtime's Release message
 describes its compiled request policy, not the loader's forced layer chain.
+
+M16.2 also requires the explicit `tests/NovaCore.Player.Tests` project and
+`NovaCorePlayerGpuMemoryTests` native target; the solution/default native build
+does not select both automatically. The latter is a CPU-only owner/aggregation
+test. Build it in each native configuration and run the resulting executable.
+Use `tools/verify-player-package.py --output <receipt.json>` after builds and
+native test-target generation. Its source-derived runtime shader inventory must
+match the package exactly; stale retired outputs or test-only shaders are failures.
+The current M16.2 preparation records such a failure and is **REVISE**, not a
+package PASS. See its [receipt](engineering-evidence/m16.2-bank-preparation/README.md).
 Managed GPU proof/query contexts enable the layer when available; preflight
 requires it. Direct native commands above inherit ambient discovery; use the
-Graphics runner's `--native-gpu` entry for canonical regression status.
+Graphics runner's `--native-gpu` entry for canonical regression status. Current
+M16.2 preparation found that runner still supplies the old `shaders/` path for
+the facility test, so it fails despite CMake producing the file in `test-shaders/`.
+That test-harness correction remains pending Project Control; do not count the
+direct command as a replacement PASS for the failing mandatory runner.
 
 The sole accepted window warning is the exact SDK message
 `WARNING-Shader-OutputNotConsumed` for vertex output Location 11 Component 0,

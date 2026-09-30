@@ -1,0 +1,82 @@
+{
+  "sourceVideo": "E:\\Videos\\2026-09-28 21-45-06.mp4",
+  "reproduction": "ffmpeg -ss <filename stem seconds> -i <sourceVideo> -frames:v 1 <timestamp>.png",
+  "target": "E:\\NovaCore\\build\\player-entry-convergence\\reference",
+  "reason": "Reproducible timestamp PNG extracts from preserved user video; observations retained in accepted reports; no runtime/build/test consumers",
+  "sourceSha256": "8b4b9e2c21683ae231c8ef9f48527ae21368bdccf4b62cfca383459e7f4d6638",
+  "bytes": 92936125.0,
+  "state": "REMOVED_VERIFIED_DISPOSABLE_EXTRACTS",
+  "files": [
+    {
+      "bytes": 703869,
+      "sha256": "968f7b84ca1bb20f2e14d5ca53f8476aaae5f36768d2959792160f158485ae4a",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\0.png"
+    },
+    {
+      "bytes": 71839,
+      "sha256": "c8edc54a8cc3a018123486a7b054175130e9cc182e3630392b3d4ae9ddd6818b",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\10.png"
+    },
+    {
+      "bytes": 709817,
+      "sha256": "2dfb6035dbeee0bc8e644eb33d26f4639a13556656b9ecc7aa2c138cf657cd6c",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\2.png"
+    },
+    {
+      "bytes": 9515168,
+      "sha256": "db68ebb0390221ac58ab50d9feb72774527bb13594a57afa73bc82348186df5a",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\20.png"
+    },
+    {
+      "bytes": 11602798,
+      "sha256": "d12c46a7d92ca2e55612155ab139ecf8617af75c73f7137120699db1358dcd72",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\33.png"
+    },
+    {
+      "bytes": 11355786,
+      "sha256": "e87300d7dcf62c6b9eca15d9d28549091577e7782b8d6af9fd10086a660b13e2",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\35.png"
+    },
+    {
+      "bytes": 11880933,
+      "sha256": "60bfbafa36bea65b7730103a91c0121f2476aef4ef1d6f52ce35a68535a451e1",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\38.png"
+    },
+    {
+      "bytes": 11371980,
+      "sha256": "563619da68caec22a99137576caa6a8ee6124ca6a1f7c32822ba7f66ee14a308",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\41.png"
+    },
+    {
+      "bytes": 11806831,
+      "sha256": "baed03e4d1121d6c0bab89becdc9c80938ad047c3ea27e1585c6a1e8a7a7cba5",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\44.png"
+    },
+    {
+      "bytes": 9380126,
+      "sha256": "57d6ca2d202c0afe8afaaf1f14e12d5bee402804ef6569b8175e5cbde5dc7aeb",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\48.png"
+    },
+    {
+      "bytes": 335376,
+      "sha256": "e1ab82a5ecc38647e2d076b6084f4601b345644f05089b0d6e556d8ba9127103",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\5.png"
+    },
+    {
+      "bytes": 9662540,
+      "sha256": "07d2953d645a7407b23c49270ab4d9ca414aa7a553f1d80a111081bf6757c27c",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\52.png"
+    },
+    {
+      "bytes": 2486438,
+      "sha256": "6fc41bb88b8eae316665c7782999cdaeba94dbf969e84aab7093b1d91b51e43d",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\68.png"
+    },
+    {
+      "bytes": 2052624,
+      "sha256": "55c3a363554c6c9c94564db8eda439124f18f206df00f8370e79725f14903387",
+      "path": "E:\\NovaCore\\build\\player-entry-convergence\\reference\\71.png"
+    }
+  ],
+  "removedUtc": "2026-09-30T02:36:46.1779881+00:00"
+}

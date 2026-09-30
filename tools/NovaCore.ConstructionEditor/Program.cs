@@ -15,7 +15,10 @@ internal static class Program
         }
         root??=Path.Combine(AppContext.BaseDirectory,"assets","vehicles","modular-starter");catalog??=Path.Combine(root,"catalog.json");
         PlayerApplication.InitializeUi();
-        try{Application.Run(new DesktopEditorForm(AssemblyDefinitionCatalog.Load(File.ReadAllBytes(catalog)),root,qualification,tankDefinition));}
+        try{
+            using var form=new DesktopEditorForm(AssemblyDefinitionCatalog.Load(File.ReadAllBytes(catalog)),root,qualification,tankDefinition);
+            try{Application.Run(form);}finally{form.StopPlayerGpuMemory();}
+        }
         catch(Exception e){Environment.ExitCode=1;Console.Error.WriteLine(e);if(qualification is null)MessageBox.Show(e.Message,"NovaCore construction could not start",MessageBoxButtons.OK,MessageBoxIcon.Error);}
     }
 }

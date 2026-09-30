@@ -1,0 +1,16 @@
+{
+  "command": [
+    "dotnet",
+    "run",
+    "--project",
+    "tools/NovaCore.AssetTool",
+    "-c",
+    "Release",
+    "--no-build",
+    "--",
+    "status",
+    "earth-surface-v5"
+  ],
+  "reportedStatus": "Valid",
+  "capturedOutput": "Asset: earth-surface-v5\nVersion: terrain-v5; NCCUBE1\nCache: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\nPath: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube\nStatus: Valid\nBytes: 61484224/61484224\nSHA-256: 38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae\nVerification buffer: 1048576 bytes\n"
+}

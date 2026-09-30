@@ -27,6 +27,7 @@ internal sealed unsafe partial class DesktopEditorForm
     private void QualifyApplicationFrame(in NativeInputState input)
     {
         if(qualificationPath is null)return;
+        if(PlayerEntryQualification){QualifyPlayerEntry(input);return;}
         if(SurfaceRetryQualification){SurfaceRetryBegin();return;}
         if(RecorderQualification){RecorderBeginFrame();return;}
         if(qualificationHover is {} aim&&(native->PointerX!=aim.X||native->PointerY!=aim.Y)){
@@ -51,7 +52,7 @@ internal sealed unsafe partial class DesktopEditorForm
                     applicationHandle=Handle.ToInt64();childHandle=GetWindow(viewport.Handle,5).ToInt64();RequireQualification(childHandle!=0&&!editing&&solar is not null,"one native renderer begins in the Solar game");ClickButton("New vehicle");ChooseCard("nc.core.command-2");Hover(Double3.Zero);break;
                 case 1: RequireQualification(session.Current is null&&session.Preview is not null,"card creates uncommitted root ghost");qualificationTarget=session.Preview!.Design.Parts[0].Instance.Pose.Position;Hover(new(.25,0,0));break;
                 case 2: RequireQualification((session.Preview!.Design.Parts[0].Instance.Pose.Position-qualificationTarget).LengthSquared>.01,"held root follows pointer: "+session.Preview.Design.Parts[0].Instance.Pose.Position+" from "+qualificationTarget);WindowClick(Double3.Zero);break;
-                case 3: RequireQualification(session.Current?.Design.Parts.Length==1&&mode.SelectedIndex==0,"root click commits");ChooseCard(InitialQualificationTank);SocketHover("core","aft");break;
+                case 3: RequireQualification(session.Current?.Design.Parts.Length==1&&editorIntent==0,"root click commits");ChooseCard(InitialQualificationTank);SocketHover("core","aft");break;
                 case 4: ExpectPreview(2);SocketClick("core","aft");break;
                 case 5: ExpectCommit(2);qualificationTank=session.Current!.Design.Data.Instances.Single(p=>p.Definition.Id==InitialQualificationTank).Id;ChooseCard("nc.mount.single-2to1");camera.Pitch=-.4;SocketHover(qualificationTank,"aft");break;
                 case 6: ExpectPreview(3);SocketClick(qualificationTank!,"aft");break;
@@ -61,7 +62,7 @@ internal sealed unsafe partial class DesktopEditorForm
                 case 10: ExpectPreview(12);RequireQualification(session.Preview!.Design.Data.Symmetry.Single().Members.Length==8,"generic eight-member ghost");VerifyRenderedPreview();SocketClick(qualificationTank!,"radial-1");break;
                 case 11: ExpectCommit(12);qualificationSaved=session.Save(session.Revision);ClickButton("Undo");RequireQualification(session.Current!.Design.Parts.Length==4,"one undo removes group");ClickButton("Redo");RequireQualification(session.Save(session.Revision).SequenceEqual(qualificationSaved),"exact atomic redo");ClickButton("Undo");ChooseCard("nc.rcs.block-r1");count.SelectedItem=1;SocketClick(qualificationTank!,"radial-0");break;
                 case 12: RequireQualification(session.Current!.Design.Parts.Length==5,"single blocker committed");qualificationSaved=session.Save(session.Revision);ChooseCard("nc.rcs.block-r1");count.SelectedItem=8;SocketHover(qualificationTank!,"radial-1");break;
-                case 13: RequireQualification(session.Preview is null&&refusedGhost is not null&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"one invalid member refuses complete eight without source mutation");ClickButton("Bin");ClickButton("Undo");ChooseCard("nc.rcs.block-r1");SocketClick(qualificationTank!,"radial-1");break;
+                case 13: RequireQualification(session.Preview is null&&refusedGhost is not null&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"one invalid member refuses complete eight without source mutation");ClickButton("Cancel");ClickButton("Undo");ChooseCard("nc.rcs.block-r1");SocketClick(qualificationTank!,"radial-1");break;
                 case 14: RequireQualification(session.Current!.Design.Parts.Length==12,"eight restored");if(qualificationTankDefinition=="deep"){
                     session.Load(session.Revision,AssemblyJson.Write(StabilizationCraftFixture.Create(session.Catalog,2,shortOnly:true)),true);
                     // Retain the previous two-tank/one-ring preservation witness.
@@ -84,23 +85,23 @@ internal sealed unsafe partial class DesktopEditorForm
                 case 15: applicationSave="Application-"+qualificationTankDefinition+"-"+Guid.NewGuid().ToString("N")[..8];overlay!.Controls.OfType<TextBox>().Single().Text=applicationSave;ClickButton("Save new");RequireQualification(!session.Dirty&&File.ReadAllBytes(savePath!).SequenceEqual(qualificationSaved!),"in-product save exact bytes");ClickButton("New vehicle");RequireQualification(session.Current is null,"new draft");ClickButton("Save / Load");break;
                 case 16: var list=overlay!.Controls.OfType<ListBox>().Single();list.SelectedItem=list.Items.Cast<SavedEntry>().Single(x=>x.Text==applicationSave);ClickButton("Load selected");RequireQualification(session.Save(session.Revision).SequenceEqual(qualificationSaved!),"in-product reload exact craft");qualificationSaved=session.Save(session.Revision);launchedDigest=session.Current!.Design.Digest;launchedRevision=session.Revision;launchedDirty=session.Dirty;ClickButton("Launch vehicle");break;
                 case 17: RequireQualification(flight is not null&&!editing&&flight.Craft.Design.Digest==launchedDigest,"same-application exact craft launch");retainedFlight=flight;ViewportMessage(0x201,1);ViewportMessage(0x202);break;
-                case 18: if(padWarmPhase==3){padWarmPhase=4;padWarmUntil=System.Diagnostics.Stopwatch.GetTimestamp()+20*System.Diagnostics.Stopwatch.Frequency;}if(System.Diagnostics.Stopwatch.GetTimestamp()<padWarmUntil){applicationStep--;break;}if(!flight!.Measurements.PhaseComplete(0)){applicationStep--;break;}RequireQualification(status.Text.Contains("SUPPORTED",StringComparison.Ordinal),"supported feedback remains visible inside the product");poweredStart=flight.State.Epoch.Ticks;PostFlightKey('Z');break;
+                case 18: if(padWarmPhase==3){padWarmPhase=4;padWarmUntil=System.Diagnostics.Stopwatch.GetTimestamp()+20*System.Diagnostics.Stopwatch.Frequency;}if(System.Diagnostics.Stopwatch.GetTimestamp()<padWarmUntil){applicationStep--;break;}if(!flight!.Measurements.PhaseComplete(0)){applicationStep--;break;}RequireQualification(flightHud.Visible&&flightHud.Text.Contains("SUPPORTED",StringComparison.Ordinal),"supported feedback remains visible inside the product");poweredStart=flight.State.Epoch.Ticks;PostFlightKey('Z');break;
                 case 19: RequireQualification(flight!.Actuation.Main&&!flight.Failed,"hosted Z ignition");if(!flight.Measurements.PhaseComplete(1)||flight.State.Epoch.Ticks-poweredStart<(RcsScalabilityQualification?16_000_000:8_000_000)){applicationStep--;break;}PostFlightKey('W',false);break;
                 case 20: RequireQualification(flight!.PlayerInput.Observation.Requested!=default,"hosted physical attitude request");ViewportMessage(0x101,'W');PostFlightKey('X');if(RcsScalabilityQualification)PostFlightKey('Q',false);break;
-                case 21: RequireQualification(!flight!.Actuation.Main&&!flight.Failed,"hosted X cutoff");if(RcsScalabilityQualification)RequireQualification(!flight.Actuation.Jets.IsEmpty&&Enumerable.Range(32,flight.Actuation.Jets.Length-32).Any(flight.Actuation.Jets.Contains),"high-index RCS realized through native flight");if(!flight.Measurements.PhaseComplete(2)){applicationStep--;break;}if(RcsScalabilityQualification)ViewportMessage(0x101,'Q');RequireQualification(status.Text.Contains("COAST",StringComparison.Ordinal)&&status.Text.Contains("main OFF",StringComparison.Ordinal),"coast and cutoff feedback remain visible without a title bar");ClickButton("Menu");ClickButton("New vehicle / retained design");retainedEpoch=flight.State.Epoch.Ticks;break;
+                case 21: RequireQualification(!flight!.Actuation.Main&&!flight.Failed,"hosted X cutoff");if(RcsScalabilityQualification)RequireQualification(!flight.Actuation.Jets.IsEmpty&&Enumerable.Range(32,flight.Actuation.Jets.Length-32).Any(flight.Actuation.Jets.Contains),"high-index RCS realized through native flight");if(!flight.Measurements.PhaseComplete(2)){applicationStep--;break;}if(RcsScalabilityQualification)ViewportMessage(0x101,'Q');RequireQualification(flightHud.Visible&&flightHud.Text.Contains("COAST",StringComparison.Ordinal)&&flightHud.Text.Contains("main OFF",StringComparison.Ordinal),"coast and cutoff feedback remain visible without a title bar");ClickButton("Menu");ExecuteCommand("new");retainedEpoch=flight.State.Epoch.Ticks;break;
                 case 22: RequireQualification(editing&&ReferenceEquals(flight,retainedFlight)&&session.Current!.Design.Digest==launchedDigest&&session.Revision==launchedRevision&&session.Dirty==launchedDirty,"return retains owners, draft, history and dirty baseline");RequireQualification(flight!.State.Epoch.Ticks==retainedEpoch&&solar!.CurrentTime.Ticks==retainedEpoch,"editor preserves single physical/Solar epoch");ClickButton("Return to flight");break;
-                case 23: RequireQualification(ReferenceEquals(flight,retainedFlight)&&flight!.State.Epoch.Ticks>=retainedEpoch&&!flight.Failed,"resume continues canonical flight");ClickButton("Menu");ClickButton("New vehicle / retained design");break;
+                case 23: RequireQualification(ReferenceEquals(flight,retainedFlight)&&flight!.State.Epoch.Ticks>=retainedEpoch&&!flight.Failed,"resume continues canonical flight");ClickButton("Menu");ExecuteCommand("new");break;
                 case 24: RunLaunchRefusalChecks();RunApplicationAdversarialChecks();qualificationName=craftName.Text;ClientSize=new(1100,740);break;
                 case 25: RequireQualification(native->Width==(uint)viewport.ClientSize.Width&&native->Height==(uint)viewport.ClientSize.Height,"resize keeps native child extent");craftName.Focus();PostMessageW(craftName.Handle,0x102,'Z',1);PostMessageW(craftName.Handle,0x100,9,1);break;
                 case 26: RequireQualification(native->Focused==0&&!craftName.Focused&&craftName.Text.Contains('Z')&&flight!.PlayerInput.Observation.Requested==default,"text and Tab remain isolated from physical controls");craftName.Text=qualificationName;ValidateChildren();count.SelectedItem=8;count.Focus();PostMessageW(count.Handle,0x100,0x26,1);break;
-                case 27: RequireQualification(Convert.ToInt32(count.SelectedItem)==4,"combo keyboard input survives native message pump");qualificationSaved=session.Save(session.Revision);qualificationYaw=camera.Yaw;ViewportMessage(0x204,2);break;
-                case 28: ViewportMessage(0x200,2,240,200);break;
-                case 29: RequireQualification(camera.Yaw!=qualificationYaw&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"right drag orbits without editing");ViewportMessage(0x205);qualificationTarget=camera.Target;ViewportMessage(0x207,16);break;
-                case 30: ViewportMessage(0x200,16,220,240);break;
-                case 31: RequireQualification(camera.Target!=qualificationTarget&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"middle drag pans without editing");ViewportMessage(0x208);qualificationDistance=camera.Distance;ViewportMessage(0x20a,120u<<16);break;
+                case 27: RequireQualification(Convert.ToInt32(count.SelectedItem)==4,"combo keyboard input survives native message pump");qualificationSaved=session.Save(session.Revision);qualificationYaw=camera.Yaw;ExposedSceneMessage(0x204,2);break;
+                case 28: ExposedSceneMessage(0x200,2,640,300);break;
+                case 29: RequireQualification(camera.Yaw!=qualificationYaw&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"right drag orbits without editing");ExposedSceneMessage(0x205);qualificationTarget=camera.Target;ExposedSceneMessage(0x207,16);break;
+                case 30: ExposedSceneMessage(0x200,16,620,340);break;
+                case 31: RequireQualification(camera.Target!=qualificationTarget&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"middle drag pans without editing");ExposedSceneMessage(0x208);qualificationDistance=camera.Distance;ExposedSceneMessage(0x20a,120u<<16);break;
                 case 32: RequireQualification(camera.Distance<qualificationDistance&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"wheel zoom is presentation only");ViewportMessage(0x201,1);PostMessageW(Handle,0x8001,0,0);break;
-                case 33: RequireQualification(native->Pressed==0&&native->Buttons==0&&native->Focused==0&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"foreign capture clears pending click and held input");ReleaseCapture();ShowStartup();overlay!.Controls.OfType<CheckBox>().Single().Checked=true;ClickButton("Apply display settings");break;
-                case 34: RequireQualification(Handle.ToInt64()==applicationHandle&&GetWindow(viewport.Handle,5).ToInt64()==childHandle&&native->Stop==0,"fullscreen preserves parent, child and renderer lease");ShowStartup();overlay!.Controls.OfType<CheckBox>().Single().Checked=false;overlay.Controls.OfType<ComboBox>().Single().SelectedItem=NovaCore.Launcher.NovaCoreResolutionPreset.Resolution1280x720;ClickButton("Apply display settings");break;
+                case 33: RequireQualification(native->Pressed==0&&native->Buttons==0&&native->Focused==0&&session.Save(session.Revision).SequenceEqual(qualificationSaved!),"foreign capture clears pending click and held input");ReleaseCapture();QualifyDisplaySettings(true);break;
+                case 34: RequireQualification(Handle.ToInt64()==applicationHandle&&GetWindow(viewport.Handle,5).ToInt64()==childHandle&&native->Stop==0,"fullscreen preserves parent, child and renderer lease");QualifyDisplaySettings(false);break;
                 case 35: RequireQualification(Handle.ToInt64()==applicationHandle&&GetWindow(viewport.Handle,5).ToInt64()==childHandle&&native->Stop==0,"windowed return preserves parent, child and renderer lease");RequireQualification(session.Save(session.Revision).SequenceEqual(qualificationSaved!)&&ReferenceEquals(flight,retainedFlight),"display transitions preserve both document and physical owner");FocusCraft();editorMeasuring=true;break;
                 default:
                     if(warmMeasurements.Count<360){applicationStep--;break;}
@@ -110,6 +111,14 @@ internal sealed unsafe partial class DesktopEditorForm
                     approvedClose=true;native->Stop=1;break;
             }
         }catch(Exception ex){FailQualification(ex);native->Stop=1;}
+    }
+    private void QualifyDisplaySettings(bool fullscreen)
+    {
+        ShowStartup();
+        var fields=AllControls(overlay!).OfType<ComboBox>().ToArray();
+        fields.Single(c=>c.Items.Count>0&&c.Items[0] is NovaCore.Launcher.NovaCoreWindowMode).SelectedItem=fullscreen?NovaCore.Launcher.NovaCoreWindowMode.BorderlessFullscreen:NovaCore.Launcher.NovaCoreWindowMode.Windowed;
+        fields.Single(c=>c.Items.Count>0&&c.Items[0] is NovaCore.Launcher.NovaCoreResolutionPreset).SelectedItem=NovaCore.Launcher.NovaCoreResolutionPreset.Resolution1280x720;
+        ClickButton("APPLY SETTINGS");
     }
     private void PreparePadDaylight()
     {
@@ -128,6 +137,7 @@ internal sealed unsafe partial class DesktopEditorForm
     }
     void IApplicationPresentation.ObservePresentation(NativeFrameSubmission* frame)
     {
+        if(PlayerEntryQualification)return;
         if(SurfaceRetryQualification){SurfaceRetryObserve();return;}
         if(RecorderQualification){RecorderObserve(frame);return;}
         if(qualificationPath is null||qualificationTankDefinition is "connector-graph" or "stabilization")return;
@@ -149,10 +159,32 @@ internal sealed unsafe partial class DesktopEditorForm
         }
         padObservedRoutes.Add(route);Console.WriteLine($"FLORIDA_LIFECYCLE_PASS route={route} slabs={slabs} legacyMeshes=0 caster={(editing?0:7)}");
     }
-    private void ChooseCard(string id){category="All";RefreshCatalog();partCards[id].PerformClick();}
+    private void ChooseCard(string id)
+    {
+        categoryPicker.SelectedItem="All";RefreshCatalog();var card=partCards[id];cards.ScrollControlIntoView(card);
+        if(!editorHitGuardQualified)
+        {
+            viewport.BringToFront();
+            RequireQualification(!EditorControlReceivesPointer(card),"occluded catalogue fails player hit acceptance");
+            RaiseEditorPanels();card.Enabled=false;
+            RequireQualification(!EditorControlReceivesPointer(card),"disabled catalogue fails player hit acceptance");
+            card.Enabled=true;editorHitGuardQualified=true;
+            var statistics=frameStatistics;frameStatistics=true;RefreshHud(true);
+            RequireQualification(EditorControlReceivesPointer(categoryPicker)&&EditorControlReceivesPointer(card),"frame statistics preserve catalogue interaction");
+            frameStatistics=statistics;RefreshHud(true);
+            var yaw=camera.Yaw;var target=camera.Target;var distance=camera.Distance;var revision=session.Revision;
+            var covered=*native;covered.PointerX=200;covered.PointerY=200;covered.Buttons=3;covered.Pressed=1;covered.Wheel=1;covered.Focused=1;
+            Input(covered);covered.PointerX=240;Input(covered);
+            RequireQualification(camera.Yaw==yaw&&camera.Target==target&&camera.Distance==distance&&session.Revision==revision,"covered UI rejects stale scene camera and placement input");
+        }
+        RequireQualification(EditorControlReceivesPointer(card),"catalogue card is visible and the actual topmost Windows pointer target");
+        card.PerformClick();
+        RequireQualification(editorIntent==1&&Chosen.Id==id,"visible palette owns part selection");
+    }
+    private bool editorHitGuardQualified;
     private void Hover(Double3 position){var point=camera.Project(position,viewport.ClientSize.Width,viewport.ClientSize.Height);qualificationHover=new((int)Math.Round(point.X),(int)Math.Round(point.Y));ViewportMessage(0x200,0,qualificationHover.Value.X,qualificationHover.Value.Y);}
     private void SocketHover(string instance,string socket){var p=session.Current!.Design.Parts.Single(p=>p.Instance.Id==instance);Hover(p.Instance.Pose.Then(p.Definition.Attachments.Single(a=>a.Id==socket).Frame).Position);}
-    private void ExpectPreview(int parts){RequireQualification(session.Preview?.Design.Parts.Length==parts,$"hover snaps all preview members before click; mode={mode.SelectedIndex} chosen={Chosen.Id} pointer={native->PointerX},{native->PointerY} sockets="+string.Join(";",sockets.Select(s=>$"{s.Target}@{s.X:F1},{s.Y:F1},visible={s.Visible}")));expectedPreview=session.Preview!.Design.Digest;}
+    private void ExpectPreview(int parts){RequireQualification(session.Preview?.Design.Parts.Length==parts,$"hover snaps all preview members before click; mode={editorIntent} chosen={Chosen.Id} pointer={native->PointerX},{native->PointerY} sockets="+string.Join(";",sockets.Select(s=>$"{s.Target}@{s.X:F1},{s.Y:F1},visible={s.Visible}")));expectedPreview=session.Preview!.Design.Digest;}
     private void ExpectCommit(int parts){RequireQualification(session.Current?.Design.Parts.Length==parts&&session.Current.Design.Digest==expectedPreview&&session.Preview is null,"click commits exact shown transform and membership");}
     private void PostFlightKey(char key,bool release=true){ViewportMessage(0x100,key);if(release)ViewportMessage(0x101,key);}
     private void VerifyRenderedPreview()

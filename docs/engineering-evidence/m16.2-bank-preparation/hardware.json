@@ -1,0 +1,34 @@
+{
+  "recordedUtc": "2026-09-29T22:50:54.3253226-04:00",
+  "videoControllers": [
+    {
+      "Name": "Meta Virtual Monitor",
+      "PNPDeviceID": "ROOT\\DISPLAY\\0000",
+      "DriverVersion": "15.52.32.370",
+      "CurrentHorizontalResolution": 2560,
+      "CurrentVerticalResolution": 1440
+    },
+    {
+      "Name": "Virtual Desktop Monitor",
+      "PNPDeviceID": "ROOT\\DISPLAY\\0001",
+      "DriverVersion": "13.50.53.699",
+      "CurrentHorizontalResolution": 2560,
+      "CurrentVerticalResolution": 1440
+    },
+    {
+      "Name": "AMD Radeon RX 6800 XT",
+      "PNPDeviceID": "PCI\\VEN_1002&DEV_73BF&SUBSYS_233A1458&REV_C1\\6&CF24139&0&00000009",
+      "DriverVersion": "32.0.21045.5002",
+      "CurrentHorizontalResolution": 3440,
+      "CurrentVerticalResolution": 1440
+    },
+    {
+      "Name": "AMD Radeon(TM) Graphics",
+      "PNPDeviceID": "PCI\\VEN_1002&DEV_13C0&SUBSYS_D0001458&REV_C2\\4&16012499&0&0041",
+      "DriverVersion": "32.0.21045.5002",
+      "CurrentHorizontalResolution": null,
+      "CurrentVerticalResolution": null
+    }
+  ],
+  "qualificationTopologyMode": "Full Debug regeneration case intentionally interrupted after separately passing the documented checked-in-artifact validation across all 18 scales. See topology-mode-switch.json; no completed regeneration or exhaustive determinism claim."
+}

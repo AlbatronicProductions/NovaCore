@@ -51,6 +51,13 @@ void CausalDeviceOptions(App& a,std::vector<const char*>& extensions,VkDeviceCre
 void CausalBudget(App& a){
   if(!a.causal.Active()||GetTickCount64()<a.nextBudgetSample)return;
   a.nextBudgetSample=GetTickCount64()+1000;
+  NcPlayerGpuMemorySnapshot player{};
+  if(a.application&&ReadPlayerGpuMemory(player)){
+    a.causal.Emit(Phase::Capabilities,Kind::Info,0,{uint64_t(player.status==1),uint64_t(a.getFault!=nullptr),player.sequence});
+    if(player.status==1)for(uint32_t heap=0;heap<player.heapCount;heap++)
+      a.causal.Emit(Phase::MemoryBudget,Kind::Info,0,{heap,player.heapUsage[heap],player.heapBudget[heap],player.heapCapacity[heap]});
+    return;
+  }
   a.causal.Emit(Phase::Capabilities,Kind::Info,0,{uint64_t(a.memoryBudget),uint64_t(a.getFault!=nullptr),0});
   if(!a.memoryBudget)return;
   auto fn=(PFN_vkGetPhysicalDeviceMemoryProperties2)vkGetInstanceProcAddr(a.instance,"vkGetPhysicalDeviceMemoryProperties2");

@@ -7,7 +7,7 @@ internal sealed unsafe partial class DesktopEditorForm
     private void LaunchCraft()
     {
         if(solar is null)throw new InvalidDataException("The game session is not ready.");
-        if(mode.SelectedIndex!=0||session.Preview is not null)throw new InvalidDataException("Place or cancel the held part before launch.");
+        if(editorIntent!=0||session.Preview is not null)throw new InvalidDataException("Place or cancel the held part before launch.");
         var source=session.Current?.Design??throw new InvalidDataException("Build a craft before launch.");
         var bytes=source.Save();var candidate=CraftCompiler.Compile(session.Catalog,source.Data,assetRoot);
         // Preserve exact-source admission after removing the process boundary.

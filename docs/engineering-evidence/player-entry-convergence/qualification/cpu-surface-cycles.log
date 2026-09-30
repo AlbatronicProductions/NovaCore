@@ -1,0 +1,7 @@
+SURFACE_CYCLE long=False episode=0 burnTicks=6 peakClearance=0.14581541587268276
+SURFACE_CYCLE long=False episode=1 burnTicks=6 peakClearance=0.1460729948960373
+SURFACE_CYCLE long=False episode=2 burnTicks=6 peakClearance=0.14635315291711404
+SURFACE_CYCLE long=True episode=0 burnTicks=11 peakClearance=0.09463709316779845
+SURFACE_CYCLE long=True episode=1 burnTicks=11 peakClearance=0.09494793759089504
+SURFACE_CYCLE long=True episode=2 burnTicks=11 peakClearance=0.09527468156391539
+SURFACE_CYCLES_PASS checks=3692

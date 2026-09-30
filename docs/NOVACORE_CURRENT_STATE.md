@@ -1,5 +1,43 @@
 # NovaCore current engineering state
 
+## Accepted candidate — M16.2 (UNBANKED)
+
+Project Control accepts **M16.2 — Player Entry, Fullscreen Viewport & UI Architecture
+Convergence**, including the minimum-speed/pause correction. Parent is `m16.1` /
+`40314c0f72396ea5f4ff39121f0b6821f1f96146`. Project Control has now authorized
+manual banking of this production responsibility with explicitly recorded open
+qualification debt, conditional on the final Release build and unchanged candidate.
+The earlier engineering judgment remains **REVISE** for package/Graphics/DPI
+qualification; the banking decision does not convert those gates into PASS.
+See the [manual bank decision](engineering-evidence/m16.2-bank-preparation/manual-bank-decision.md).
+Commit, tag and push remain manual; this text does not assert publication.
+
+The canonical application now follows fullscreen Configuration → dedicated Loading
+→ fullscreen Gameplay. Real preparation tasks, selected-adapter memory reporting
+and terrain/completed-frame readiness precede gameplay. Menus and the owned styled
+Vehicle Editor overlay a full-client viewport; the primary target is 3440×1440.
+Construction/validation/save-load/launch and retained-editor authority are preserved.
+Attachment is catalogue click → compatible socket hover/preview → click attach;
+catalogue drag-and-drop is not implemented. One upper-right speed display replaces
+raw Epoch and the obsolete transient speed presentation.
+
+Exploration decrease at 0.1× requests authoritative user pause; repeated decrease
+stays paused; increase resumes 0.1× before the existing ladder. Shifted punctuation
+works, paused time does not accumulate catch-up, and menu holds remain independently
+effective. Editor draft save/reload retains exploration pause. Existing physical
+launch/reload boundaries intentionally reset to 1×; flight remains 1×/pause only.
+Space remains unbound. Focus-loss behavior remains input suppression, not a newly
+introduced automatic simulation-pause owner.
+
+Acceptance covers the user-exercised workflow. Physical held-key, focus-loss and
+DPI-transition permutations not performed remain unclaimed. Wider flight and
+Player/public-release PASS are not assigned. Loading samples are low-cadence driver
+estimates with explicit freshness/failure handling; synchronous loading checkpoints
+do not promise continuous repaint or sampling. The existing performance, cold/global
+terrain fallback, planetary fidelity, blackout and MinimumRecorder limits below
+remain open. [Bank-preparation record](engineering-evidence/m16.2-bank-preparation/README.md)
+and [pause evidence](engineering-evidence/player-entry-convergence/minimum-speed-pause.md).
+
 ## Current bank — M16.1
 
 **M16.1 — Planetary Rendering & Terrain Lifecycle Convergence is BANKED** at

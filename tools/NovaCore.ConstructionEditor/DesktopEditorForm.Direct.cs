@@ -12,9 +12,9 @@ internal sealed unsafe partial class DesktopEditorForm
     private void HoldPart(PartDefinitionData part)
     {
         contextInspector.Hide();
-        CancelGhost();for(var i=0;i<catalogList.Items.Count;i++)if(((CatalogItem)catalogList.Items[i]).Definition.Id==part.Id){catalogList.SelectedIndex=i;break;}
-        mode.SelectedIndex=1;lastHoverX=lastHoverY=int.MinValue;hoverRevision=-1;freeGhost=new(camera.Target,Matrix3.Identity);
-        foreach(var pair in partCards)pair.Value.FlatAppearance.BorderColor=pair.Key==part.Id?Color.FromArgb(86,211,240):Color.FromArgb(72,86,100);
+        InvalidatePlayerInput();CancelGhost();chosenPart=part;
+        editorIntent=1;lastHoverX=lastHoverY=int.MinValue;hoverRevision=-1;freeGhost=new(camera.Target,Matrix3.Identity);
+        foreach(var pair in partCards)pair.Value.FlatAppearance.BorderColor=pair.Key==part.Id?AccentColor:Color.FromArgb(76,78,82);
         message="Move the held part into the viewport. Highlighted connections show where it fits.";
     }
     private void UpdateHeldPreview(NativeEditorViewport input)
@@ -34,7 +34,7 @@ internal sealed unsafe partial class DesktopEditorForm
     private string draftIdentity=Guid.NewGuid().ToString("N");
     private void RotateHeld()
     {
-        if(mode.SelectedIndex!=0){clock.SelectedIndex=(clock.SelectedIndex+1)%clock.Items.Count;return;}
+        if(editorIntent!=0){clockDegrees=(clockDegrees+90)%360;ChangedIntent();return;}
         NeedSelection();var design=session.Current!.Design;
         var group=design.Data.Symmetry.SingleOrDefault(g=>g.Members.Any(m=>m.Part==selection));
         var connection=design.Data.Connections.SingleOrDefault(e=>e.Child==(group?.BasePart??selection));

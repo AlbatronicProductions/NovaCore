@@ -1,0 +1,557 @@
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 powered support. Space starts 20 seconds: stock 600 N main, RCS OFF, finite fuel/oxidizer decrease. Sub-weight thrust: supported, no liftoff or departure. Camera WASD/QE, mouse look, R reset. Relaunch for a cold restart.
+SRV01_COLD_PREPARATION ms=255.3758 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 powered support. Space starts 20 seconds: stock 600 N main, RCS OFF, finite fuel/oxidizer decrease. Sub-weight thrust: supported, no liftoff or departure. Camera WASD/QE, mouse look, R reset. Relaunch for a cold restart.
+SRV01_COLD_PREPARATION ms=12.3079 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=powered-supported-assembly-presentation bytes=0 entry=PASS exit=PASS
+ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS
+ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152
+ASSEMBLY_POWERED_SUPPORT_PRESENTATION PASS ready/canonical-pose/main-only/resources/camera/backlog/completion
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 supported contact. Space starts 20 seconds on the bounded slab. Main/RCS OFF; unchanged fuel and oxidizer. No departure. Camera WASD/QE, mouse look, R reset. Relaunch for a cold restart.
+SRV01_COLD_PREPARATION ms=14.6287 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 supported contact. Space starts 20 seconds on the bounded slab. Main/RCS OFF; unchanged fuel and oxidizer. No departure. Camera WASD/QE, mouse look, R reset. Relaunch for a cold restart.
+SRV01_COLD_PREPARATION ms=12.8199 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=supported-assembly-application-presentation bytes=0 entry=PASS exit=PASS
+ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS
+ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152
+ASSEMBLY_SUPPORTED_PRESENTATION PASS copied-O/38-draws/no-exhaust/camera/backlog/held-endpoint visualMeshBytes=1359096 displaySampleArraysBytes=640000 slabUsesExistingMesh=true
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.
+SRV01_COLD_PREPARATION ms=13.434 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.
+SRV01_COLD_PREPARATION ms=11.7334 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.
+SRV01_COLD_PREPARATION ms=11.9739 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.
+SRV01_COLD_PREPARATION ms=12.5624 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=assembly-application-service-presentation bytes=0 entry=PASS exit=PASS
+ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS
+ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152
+ORDINARY_ALLOCATION gate=assembly-terminal-presentation bytes=0 entry=PASS exit=PASS
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.
+SRV01_COLD_PREPARATION ms=12.9043 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.
+SRV01_COLD_PREPARATION ms=11.9304 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ASSEMBLY_PRESENTATION PASS ready/start/64Hz/material-origin/copied-pose/camera/backlog/plan/final-hold/CLI/zero-allocation
+Window deployment: sample=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; managedSha256=C62335CAEE1C1BEF7B2033EBFDCBAB2C2F4101B4B1820CC069E5BEF613D68C64; nativeSha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; verifiedShaders=68
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=False; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Native host callback is active
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.013
+[native] Planetary context transition: epoch=1; body=0; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] GPU timings: total=0.021 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.003; preSurface=0.000; scene=0.015; toneMap=0.006; regionalCompute=0.002; materialsOverlays=0.002
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Average frame time: 25.287 ms (4 frames)
+[native] Frame pacing: p50=0.688 ms; p95=39.438 ms; p99=39.438 ms; max=39.438 ms; samples=4
+[native] Fence wait pacing: average=0.008 ms; p95=0.013 ms; max=0.013 ms; samples=4
+[native] CPU timings: update=0.921 ms; fence=0.008; inspection=0.027; hostCallback=0.875; validationUpload=0.010; record=0.102; submit=0.170; present=2.642
+[native] GPU timing averages: total=0.021 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.003; preSurface=0.000; toneMap=0.006
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=False; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Native host callback is active
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.012
+[native] Planetary context transition: epoch=1; body=0; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Average frame time: 55.676 ms (2 frames)
+[native] Frame pacing: p50=31.903 ms; p95=61.118 ms; p99=61.118 ms; max=61.118 ms; samples=2
+[native] Fence wait pacing: average=0.008 ms; p95=0.012 ms; max=0.012 ms; samples=2
+[native] CPU timings: update=1.040 ms; fence=0.008; inspection=0.025; hostCallback=0.994; validationUpload=0.013; record=0.562; submit=0.047; present=4.474
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window deployment: sample=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; managedSha256=C62335CAEE1C1BEF7B2033EBFDCBAB2C2F4101B4B1820CC069E5BEF613D68C64; nativeSha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; verifiedShaders=68
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=False; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+Scene: sol; bodies=10; instant=0; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.
+Solar startup: deterministic J2000 ET0.
+Controls: LMB/RMB drag orbit or surface yaw/pitch, wheel zoom, E attach/detach surface-relative camera, surface WASD with Shift fast/Ctrl slow, 1-0 focus, ,/. rate, Space pause, R Solar Map/home.
+Runtime fingerprint: cwd=E:\NovaCore; process=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; base=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\
+Runtime managed: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.dll; bytes=374784; sha256=c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64
+Runtime native-resolved: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; bytes=500736; sha256=47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e
+Runtime production-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973
+Runtime production-tess-control: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c
+Runtime production-tess-evaluation: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e
+Runtime distant-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8
+Runtime terrain-v5: global=E:\NovaCore\.novacore\cache\terrain\v1\sha256\38\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\NovaCore\.novacore\cache\terrain\v1\sha256\c4\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\earth-data\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317
+New Earth Renderer topology route: production=true; format=NCSM1; directory=E:\NovaCore\assets\planetary-nested-scale-mesh; persistentScaleResources=true; displacedTriangleCull=true.
+Earth route: NCSM1 available; preparation deferred until Earth focus; anchoredOwner=false.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Production cube pack: terrain-v5; maxLevel=2; records=126; raw transactional payloads; physicalSlots=256; immutableGlobalRecords=126; uploadBudget=2
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Earth terrain-v5 material roots ready: mask=0x3F; renderer-lifetime pinned=true
+[native] Production cache extent seeded: records=126; controlHighWater=126; offset=104
+[native] Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=126; terrainBindings=126; injectedBatchDelayMs=0; milliseconds=79.332
+[native] Native host callback is active
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.004
+Solar instant=4561; rate=1:1; mode=SolarMap; focus=Sun; distance=8676676500600 m; distance/radius=12471.865028891763; overlays=orbits:9,labels:6,markers:10
+[native] Planetary context transition: epoch=1; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Average frame time: 133.553 ms (2 frames)
+[native] Frame pacing: p50=112.013 ms; p95=131.412 ms; p99=131.412 ms; max=131.412 ms; samples=2
+[native] Fence wait pacing: average=0.005 ms; p95=0.006 ms; max=0.006 ms; samples=2
+[native] CPU timings: update=3.612 ms; fence=0.005; inspection=0.027; hostCallback=3.065; validationUpload=0.516; record=0.118; submit=0.030; present=8.353
+[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; completionCapacity=896; payloadWriter=workerWriteOnce; publicationBatches=0; maximumPublicationRecords=0; workerCopyMs=0.000; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=True; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+Scene: sol; bodies=10; instant=0; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.
+Solar startup: deterministic J2000 ET0.
+Controls: LMB/RMB drag orbit or surface yaw/pitch, wheel zoom, E attach/detach surface-relative camera, surface WASD with Shift fast/Ctrl slow, 1-0 focus, ,/. rate, Space pause, R Solar Map/home.
+Runtime fingerprint: cwd=E:\NovaCore; process=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; base=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\
+Runtime managed: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.dll; bytes=374784; sha256=c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64
+Runtime native-resolved: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; bytes=500736; sha256=47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e
+Runtime production-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973
+Runtime production-tess-control: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c
+Runtime production-tess-evaluation: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e
+Runtime distant-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8
+Runtime terrain-v5: global=E:\NovaCore\.novacore\cache\terrain\v1\sha256\38\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\NovaCore\.novacore\cache\terrain\v1\sha256\c4\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\earth-data\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317
+New Earth Renderer topology route: production=true; format=NCSM1; directory=E:\NovaCore\assets\planetary-nested-scale-mesh; persistentScaleResources=true; displacedTriangleCull=true.
+Earth route: NCSM1 available; preparation deferred until Earth focus; anchoredOwner=false.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Production cube pack: terrain-v5; maxLevel=2; records=126; raw transactional payloads; physicalSlots=256; immutableGlobalRecords=126; uploadBudget=2
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Earth terrain-v5 material roots ready: mask=0x3F; renderer-lifetime pinned=true
+[native] Production cache extent seeded: records=126; controlHighWater=126; offset=104
+[native] Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=126; terrainBindings=126; injectedBatchDelayMs=0; milliseconds=83.024
+[native] Native host callback is active
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.006
+Solar instant=5422; rate=1:1; mode=SolarMap; focus=Sun; distance=8676676500600 m; distance/radius=12471.865028891763; overlays=orbits:9,labels:6,markers:10
+[native] Planetary context transition: epoch=1; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=800x600; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Swapchain: format=37 colorSpace=0 extent=800x600; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Average frame time: 135.953 ms (2 frames)
+[native] Frame pacing: p50=115.226 ms; p95=127.402 ms; p99=127.402 ms; max=127.402 ms; samples=2
+[native] Fence wait pacing: average=0.006 ms; p95=0.006 ms; max=0.006 ms; samples=2
+[native] CPU timings: update=3.695 ms; fence=0.006; inspection=0.039; hostCallback=3.192; validationUpload=0.458; record=0.104; submit=0.039; present=8.912
+[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; completionCapacity=896; payloadWriter=workerWriteOnce; publicationBatches=0; maximumPublicationRecords=0; workerCopyMs=0.000; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false
+Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=False; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+Scene: sol; bodies=10; instant=0; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.
+Solar startup: deterministic J2000 ET0.
+Controls: LMB/RMB drag orbit or surface yaw/pitch, wheel zoom, E attach/detach surface-relative camera, surface WASD with Shift fast/Ctrl slow, 1-0 focus, ,/. rate, Space pause, R Solar Map/home.
+Runtime fingerprint: cwd=E:\NovaCore; process=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; base=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\
+Runtime managed: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.dll; bytes=374784; sha256=c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64
+Runtime native-resolved: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; bytes=500736; sha256=47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e
+Runtime production-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973
+Runtime production-tess-control: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c
+Runtime production-tess-evaluation: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e
+Runtime distant-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8
+Runtime terrain-v5: global=E:\NovaCore\.novacore\cache\terrain\v1\sha256\38\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\NovaCore\.novacore\cache\terrain\v1\sha256\c4\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\earth-data\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317
+New Earth Renderer topology route: production=true; format=NCSM1; directory=E:\NovaCore\assets\planetary-nested-scale-mesh; persistentScaleResources=true; displacedTriangleCull=true.
+Earth route: NCSM1 available; preparation deferred until Earth focus; anchoredOwner=false.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Production cube pack: terrain-v5; maxLevel=2; records=126; raw transactional payloads; physicalSlots=256; immutableGlobalRecords=126; uploadBudget=2
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Earth terrain-v5 material roots ready: mask=0x3F; renderer-lifetime pinned=true
+[native] Production cache extent seeded: records=126; controlHighWater=126; offset=104
+[native] Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=126; terrainBindings=126; injectedBatchDelayMs=0; milliseconds=78.468
+[native] Native host callback is active
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.004
+Solar instant=5073; rate=1:1; mode=SolarMap; focus=Sun; distance=8676676500600 m; distance/radius=12471.865028891763; overlays=orbits:9,labels:6,markers:10
+[native] Planetary context transition: epoch=1; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Average frame time: 120.271 ms (2 frames)
+[native] Frame pacing: p50=93.503 ms; p95=121.280 ms; p99=121.280 ms; max=121.280 ms; samples=2
+[native] Fence wait pacing: average=0.005 ms; p95=0.005 ms; max=0.005 ms; samples=2
+[native] CPU timings: update=4.287 ms; fence=0.005; inspection=0.027; hostCallback=3.951; validationUpload=0.305; record=0.118; submit=0.058; present=12.950
+[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; completionCapacity=896; payloadWriter=workerWriteOnce; publicationBatches=0; maximumPublicationRecords=0; workerCopyMs=0.000; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=True; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+Scene: sol; bodies=10; instant=0; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.
+Solar startup: deterministic J2000 ET0.
+Controls: LMB/RMB drag orbit or surface yaw/pitch, wheel zoom, E attach/detach surface-relative camera, surface WASD with Shift fast/Ctrl slow, 1-0 focus, ,/. rate, Space pause, R Solar Map/home.
+Runtime fingerprint: cwd=E:\NovaCore; process=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; base=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\
+Runtime managed: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.dll; bytes=374784; sha256=c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64
+Runtime native-resolved: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; bytes=500736; sha256=47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e
+Runtime production-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973
+Runtime production-tess-control: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c
+Runtime production-tess-evaluation: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e
+Runtime distant-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8
+Runtime terrain-v5: global=E:\NovaCore\.novacore\cache\terrain\v1\sha256\38\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\NovaCore\.novacore\cache\terrain\v1\sha256\c4\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\earth-data\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317
+New Earth Renderer topology route: production=true; format=NCSM1; directory=E:\NovaCore\assets\planetary-nested-scale-mesh; persistentScaleResources=true; displacedTriangleCull=true.
+Earth route: NCSM1 available; preparation deferred until Earth focus; anchoredOwner=false.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Production cube pack: terrain-v5; maxLevel=2; records=126; raw transactional payloads; physicalSlots=256; immutableGlobalRecords=126; uploadBudget=2
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Earth terrain-v5 material roots ready: mask=0x3F; renderer-lifetime pinned=true
+[native] Production cache extent seeded: records=126; controlHighWater=126; offset=104
+[native] Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=126; terrainBindings=126; injectedBatchDelayMs=0; milliseconds=82.091
+[native] Native host callback is active
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.004
+Solar instant=5062; rate=1:1; mode=SolarMap; focus=Sun; distance=8676676500600 m; distance/radius=12471.865028891763; overlays=orbits:9,labels:6,markers:10
+[native] Planetary context transition: epoch=1; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=800x600; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Swapchain: format=37 colorSpace=0 extent=800x600; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Average frame time: 136.238 ms (2 frames)
+[native] Frame pacing: p50=120.412 ms; p95=122.269 ms; p99=122.269 ms; max=122.269 ms; samples=2
+[native] Fence wait pacing: average=0.005 ms; p95=0.006 ms; max=0.006 ms; samples=2
+[native] CPU timings: update=4.270 ms; fence=0.005; inspection=0.035; hostCallback=3.804; validationUpload=0.425; record=0.105; submit=0.030; present=10.521
+[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; completionCapacity=896; payloadWriter=workerWriteOnce; publicationBatches=0; maximumPublicationRecords=0; workerCopyMs=0.000; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false
+Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true
+Window deployment: sample=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; managedSha256=C62335CAEE1C1BEF7B2033EBFDCBAB2C2F4101B4B1820CC069E5BEF613D68C64; nativeSha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; verifiedShaders=68
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=False; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+Scene: sol; bodies=10; instant=0; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.
+Solar startup: deterministic J2000 ET0.
+Controls: LMB/RMB drag orbit or surface yaw/pitch, wheel zoom, E attach/detach surface-relative camera, surface WASD with Shift fast/Ctrl slow, 1-0 focus, ,/. rate, Space pause, R Solar Map/home.
+Runtime fingerprint: cwd=E:\NovaCore; process=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; base=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\
+Runtime managed: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.dll; bytes=374784; sha256=c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64
+Runtime native-resolved: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; bytes=500736; sha256=47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e
+Runtime production-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973
+Runtime production-tess-control: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c
+Runtime production-tess-evaluation: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e
+Runtime distant-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8
+Runtime terrain-v5: global=E:\NovaCore\.novacore\cache\terrain\v1\sha256\38\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\NovaCore\.novacore\cache\terrain\v1\sha256\c4\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\earth-data\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317
+New Earth Renderer topology route: production=true; format=NCSM1; directory=E:\NovaCore\assets\planetary-nested-scale-mesh; persistentScaleResources=true; displacedTriangleCull=true.
+Earth route: NCSM1 available; preparation deferred until Earth focus; anchoredOwner=false.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Production cube pack: terrain-v5; maxLevel=2; records=126; raw transactional payloads; physicalSlots=256; immutableGlobalRecords=126; uploadBudget=2
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Earth terrain-v5 material roots ready: mask=0x3F; renderer-lifetime pinned=true
+[native] Production cache extent seeded: records=126; controlHighWater=126; offset=104
+[native] Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=126; terrainBindings=126; injectedBatchDelayMs=0; milliseconds=78.862
+[native] Native host callback is active
+[native] WM_MOUSEWHEEL wParam=0x780000 delta=120 accumulatedRaw=120
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.004
+Solar orbit distance=6941480340480 m
+Solar instant=5322; rate=1:1; mode=SolarMap; focus=Sun; distance=6941480340480 m; distance/radius=9977.692023113412; overlays=orbits:9,labels:6,markers:10
+[native] Planetary context transition: epoch=1; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] Swapchain recreated after resize
+[native] Average frame time: 135.428 ms (2 frames)
+[native] Frame pacing: p50=120.828 ms; p95=122.082 ms; p99=122.082 ms; max=122.082 ms; samples=2
+[native] Fence wait pacing: average=0.005 ms; p95=0.006 ms; max=0.006 ms; samples=2
+[native] CPU timings: update=4.433 ms; fence=0.005; inspection=0.019; hostCallback=4.122; validationUpload=0.287; record=0.099; submit=0.026; present=8.904
+[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; completionCapacity=896; payloadWriter=workerWriteOnce; publicationBatches=0; maximumPublicationRecords=0; workerCopyMs=0.000; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false
+Wheel boundary PASS: diagnosticIsolation=False; nativeMessageDelivered=true; solarZoom=True
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window loaded module: E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; sha256=47787E3E92B7985FD109310D0E688CF5541257472D0DB172AF845417E39E172E; borderless=False; visible=true
+Vulkan module: C:\WINDOWS\SYSTEM32\vulkan-1.dll; sha256=ED08AC7805CDDF02D4D5B8C1431E7DF79D9864650FD72EFAD1A0F073236C9233
+Vulkan module: C:\ProgramData\obs-studio-hook\graphics-hook64.dll; sha256=49C0DDEAC72B130D4F8AE90510219949022C1F992ADB48D81A4972F2CD6C2585
+Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+Scene: sol; bodies=10; instant=0; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.
+Solar startup: deterministic J2000 ET0.
+Controls: LMB/RMB drag orbit or surface yaw/pitch, wheel zoom, E attach/detach surface-relative camera, surface WASD with Shift fast/Ctrl slow, 1-0 focus, ,/. rate, Space pause, R Solar Map/home.
+Runtime fingerprint: cwd=E:\NovaCore; process=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; base=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\
+Runtime managed: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.dll; bytes=374784; sha256=c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64
+Runtime native-resolved: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; bytes=500736; sha256=47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e
+Runtime production-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973
+Runtime production-tess-control: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c
+Runtime production-tess-evaluation: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e
+Runtime distant-fragment: path=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8
+Runtime terrain-v5: global=E:\NovaCore\.novacore\cache\terrain\v1\sha256\38\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\NovaCore\.novacore\cache\terrain\v1\sha256\c4\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\earth-data\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317
+New Earth Renderer topology route: production=true; format=NCSM1; directory=E:\NovaCore\assets\planetary-nested-scale-mesh; persistentScaleResources=true; displacedTriangleCull=true.
+Earth route: NCSM1 available; preparation deferred until Earth focus; anchoredOwner=false.
+[native] Loaded runtime paths: module=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\shaders/distant_planet.frag.spv
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+[native] Created persistent generic meshes: triangleIndices=3; floridaLaunchPadVertices=96; floridaLaunchPadIndices=144
+[native] Production cube pack: terrain-v5; maxLevel=2; records=126; raw transactional payloads; physicalSlots=256; immutableGlobalRecords=126; uploadBudget=2
+[native] Swapchain: format=37 colorSpace=0 extent=640x480; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] shaders/regional_physical_demand.comp.spv
+[native] shaders/regional_physical_incoming_demand.comp.spv
+[native] shaders/production_spherical_billboard_prepare.comp.spv
+[native] shaders/production_spherical_billboard_reset.comp.spv
+[native] shaders/production_spherical_billboard_cull.comp.spv
+[native] shaders/production_spherical_billboard_compact.comp.spv
+[native] shaders/production_spherical_billboard_incoming_prepare.comp.spv
+[native] shaders/production_spherical_billboard_incoming_reset.comp.spv
+[native] shaders/production_spherical_billboard_incoming_cull.comp.spv
+[native] shaders/production_spherical_billboard_incoming_compact.comp.spv
+[native] shaders/production_nested_scale_mesh_cull.comp.spv
+[native] shaders/production_nested_scale_mesh_incoming_cull.comp.spv
+[native] Earth terrain-v5 material roots ready: mask=0x3F; renderer-lifetime pinned=true
+[native] Production cache extent seeded: records=126; controlHighWater=126; offset=104
+[native] Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=126; terrainBindings=126; injectedBatchDelayMs=0; milliseconds=78.629
+[native] Native host callback is active
+[native] WM_MOUSEWHEEL wParam=0x780000 delta=120 accumulatedRaw=120
+[native] Renderer health: completedFrame=0; extent=640x480; applicationMode=4294967295; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.004
+Solar instant=4242; rate=1:1; mode=SolarMap; focus=Sun; distance=8676676500600 m; distance/radius=12471.865028891763; overlays=orbits:9,labels:6,markers:10
+[native] Planetary context transition: epoch=1; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] shaders/regional_physical_demand.comp.spv
+[native] shaders/regional_physical_incoming_demand.comp.spv
+[native] shaders/production_spherical_billboard_prepare.comp.spv
+[native] shaders/production_spherical_billboard_reset.comp.spv
+[native] shaders/production_spherical_billboard_cull.comp.spv
+[native] shaders/production_spherical_billboard_compact.comp.spv
+[native] shaders/production_spherical_billboard_incoming_prepare.comp.spv
+[native] shaders/production_spherical_billboard_incoming_reset.comp.spv
+[native] shaders/production_spherical_billboard_incoming_cull.comp.spv
+[native] shaders/production_spherical_billboard_incoming_compact.comp.spv
+[native] shaders/production_nested_scale_mesh_cull.comp.spv
+[native] shaders/production_nested_scale_mesh_incoming_cull.comp.spv
+[native] Swapchain recreated after resize
+[native] Swapchain: format=37 colorSpace=0 extent=784x561; HDR scene format=97
+[native] NCSM1 fragment shading: ordinary specialization; startup=shared default
+[native] NCSM1 TES geographic address: ordinary specialization (inverse disabled)
+[native] Prepared surface: direct indexed raster; continuous FP64 fragment receiver; optimized material artifact; TES retained for displaced/diagnostic contracts
+[native] shaders/regional_physical_demand.comp.spv
+[native] shaders/regional_physical_incoming_demand.comp.spv
+[native] shaders/production_spherical_billboard_prepare.comp.spv
+[native] shaders/production_spherical_billboard_reset.comp.spv
+[native] shaders/production_spherical_billboard_cull.comp.spv
+[native] shaders/production_spherical_billboard_compact.comp.spv
+[native] shaders/production_spherical_billboard_incoming_prepare.comp.spv
+[native] shaders/production_spherical_billboard_incoming_reset.comp.spv
+[native] shaders/production_spherical_billboard_incoming_cull.comp.spv
+[native] shaders/production_spherical_billboard_incoming_compact.comp.spv
+[native] shaders/production_nested_scale_mesh_cull.comp.spv
+[native] shaders/production_nested_scale_mesh_incoming_cull.comp.spv
+[native] Swapchain recreated after resize
+[native] Average frame time: 133.715 ms (2 frames)
+[native] Frame pacing: p50=118.092 ms; p95=123.408 ms; p99=123.408 ms; max=123.408 ms; samples=2
+[native] Fence wait pacing: average=0.005 ms; p95=0.006 ms; max=0.006 ms; samples=2
+[native] CPU timings: update=3.584 ms; fence=0.005; inspection=0.021; hostCallback=3.231; validationUpload=0.327; record=0.101; submit=0.035; present=8.694
+[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; completionCapacity=896; payloadWriter=workerWriteOnce; publicationBatches=0; maximumPublicationRecords=0; workerCopyMs=0.000; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false
+Wheel boundary PASS: diagnosticIsolation=True; nativeMessageDelivered=true; solarZoom=False
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=13.5773 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+PLAYER_INPUT_COST calls=20000 elapsed_ms=37.4803 bytes=0
+PLAYER_ENGINE PASS checks=9898
+PLAYER_ATTITUDE_COST samples=1024 median_ms=0.0053 p95_ms=0.0054 p99_ms=0.0135 max_ms=0.0433 normal_bytes=0 gc0=0 isolated_bytes=0 positive_bytes=152
+PLAYER_ATTITUDE PASS checks=8264
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.2796 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.1319 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.0842 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=13.106 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=13.517 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.422 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.2062 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.4074 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.6251 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.4665 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV control proving scene: READY waits for Z ignition; X cuts the main engine. W/S pitch, A/D yaw, Q/E roll; release clears demand, momentum continues. One finite 2-second free-flight episode at 1x, no gravity/contact/orbit/departure. Mouse orbit, wheel zoom, celestial focus and F stay independent. Relaunch for a new session.
+SRV01_COLD_PREPARATION ms=12.4848 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+{"measurement":"PLAYER_INTEGRATED_COST","phase":"request-sign-resolution","samples":640,"medianMs":0,"p95Ms":0.0001,"p99Ms":0.0001,"maxMs":0.0003,"repetitionMaxMs":[0.0002,0.0003,0.0002,0.0002,0.0002],"normalBytes":0,"isolatedBytes":0,"collections":[0,0,0],"positiveBytes":152}
+{"measurement":"PLAYER_INTEGRATED_COST","phase":"input-plus-canonical-admission","samples":640,"medianMs":0.0021,"p95Ms":0.0062,"p99Ms":0.0085,"maxMs":0.0198,"repetitionMaxMs":[0.0132,0.0158,0.0139,0.0198,0.0152],"normalBytes":0,"isolatedBytes":0,"collections":[0,0,0],"positiveBytes":152}
+{"measurement":"PLAYER_INTEGRATED_COST","phase":"allocation-table-lookup","samples":640,"medianMs":0.0001,"p95Ms":0.0001,"p99Ms":0.0004,"maxMs":0.0006,"repetitionMaxMs":[0.0005,0.0006,0.0005,0.0005,0.0005],"normalBytes":0,"isolatedBytes":0,"collections":[0,0,0],"positiveBytes":152}
+{"measurement":"PLAYER_INTEGRATED_COST","phase":"host-credit-physical-service-observation","samples":640,"medianMs":0.0955,"p95Ms":0.1064,"p99Ms":0.1272,"maxMs":0.1618,"repetitionMaxMs":[0.1135,0.1187,0.1618,0.1272,0.1247],"normalBytes":0,"isolatedBytes":0,"collections":[0,0,0],"positiveBytes":152}
+{"measurement":"PLAYER_INTEGRATED_COST","phase":"vessel-follow-and-render-submission","samples":640,"medianMs":0.2218,"p95Ms":0.2486,"p99Ms":0.2736,"maxMs":0.3001,"repetitionMaxMs":[0.2552,0.2608,0.3001,0.26,0.2605],"normalBytes":0,"isolatedBytes":0,"collections":[0,0,0],"positiveBytes":152}
+{"measurement":"PLAYER_INTEGRATED_COST","phase":"combined-including-diagnostic-request-and-lookup","samples":640,"medianMs":0.3223,"p95Ms":0.3523,"p99Ms":0.3794,"maxMs":0.3999,"repetitionMaxMs":[0.3746,0.3779,0.3999,0.3778,0.3729],"normalBytes":0,"isolatedBytes":0,"collections":[0,0,0],"positiveBytes":152}
+PLAYER_INTEGRATED PASS checks=3007 captured_frontiers=0,9,31,35,41,63,72,94
+SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab
+FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.5915
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.
+SRV01_COLD_PREPARATION ms=150.7637 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ACTIVE_VESSEL_STATIC PASS identity=canonical lifetime=explicit orbit=PASS zoom=PASS free=DEFERRED home=unbound celestial=Earth,Moon,Sun,Mars refocus=F environment=Earth materialOrigin=O nonmutation=canonical-observation-bytes retirement=PASS displayFrames=600 maximumSiteDistance=15.360005995220792
+SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab
+FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2334
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.
+SRV01_COLD_PREPARATION ms=132.7119 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS
+ACTIVE_VESSEL_COST {"route":"camera-at-warp-1","warm":512,"count":2048,"median":0.0743,"p95":0.293,"p99":0.3053,"maximum":0.5493,"collections":[0,0,0],"allocated":0,"tails":[{"ms":0.5493,"index":482},{"ms":0.4376,"index":483},{"ms":0.3506,"index":2},{"ms":0.3423,"index":159},{"ms":0.3393,"index":321},{"ms":0.3352,"index":590},{"ms":0.3317,"index":643},{"ms":0.3298,"index":212}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_COST {"route":"supported-warp-1","warm":512,"count":2048,"median":0.0743,"p95":0.0761,"p99":0.0831,"maximum":0.1153,"collections":[0,0,0],"allocated":4751360,"tails":[{"ms":0.1153,"index":1204},{"ms":0.1044,"index":147},{"ms":0.0968,"index":148},{"ms":0.0966,"index":1633},{"ms":0.0961,"index":568},{"ms":0.0936,"index":353},{"ms":0.0927,"index":305},{"ms":0.0926,"index":790}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_WARP {"factor":1,"frames":600,"maximumOffset":1.2825190372575068E-05,"maximumHorizon":1.609529295749793E-07,"maximumDistance":9.144515143333365E-06,"terrainCorrections":0,"canonicalUnchanged":true}
+SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab
+FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2136
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.
+SRV01_COLD_PREPARATION ms=111.9691 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS
+ACTIVE_VESSEL_COST {"route":"camera-at-warp-120","warm":512,"count":2048,"median":0.0314,"p95":0.0323,"p99":0.0352,"maximum":0.0585,"collections":[0,0,0],"allocated":0,"tails":[{"ms":0.0585,"index":1804},{"ms":0.0547,"index":822},{"ms":0.0527,"index":1309},{"ms":0.0494,"index":1142},{"ms":0.0483,"index":677},{"ms":0.0453,"index":1141},{"ms":0.0449,"index":1803},{"ms":0.0448,"index":1310}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_COST {"route":"supported-warp-120","warm":512,"count":2048,"median":0.0561,"p95":0.0701,"p99":0.0722,"maximum":0.1054,"collections":[0,0,0],"allocated":4751360,"tails":[{"ms":0.1054,"index":201},{"ms":0.0899,"index":1679},{"ms":0.0826,"index":202},{"ms":0.0814,"index":742},{"ms":0.0794,"index":200},{"ms":0.0778,"index":1138},{"ms":0.0751,"index":1308},{"ms":0.0751,"index":1574}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_WARP {"factor":120,"frames":600,"maximumOffset":1.2706837655196019E-05,"maximumHorizon":1.623512853162285E-07,"maximumDistance":9.373143875279766E-06,"terrainCorrections":0,"canonicalUnchanged":true}
+SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab
+FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2223
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.
+SRV01_COLD_PREPARATION ms=112.1122 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS
+ACTIVE_VESSEL_COST {"route":"camera-at-warp-14400","warm":512,"count":2048,"median":0.0298,"p95":0.0356,"p99":0.0404,"maximum":0.06,"collections":[0,0,0],"allocated":0,"tails":[{"ms":0.06,"index":1823},{"ms":0.0515,"index":1486},{"ms":0.0488,"index":607},{"ms":0.0463,"index":852},{"ms":0.0462,"index":923},{"ms":0.0445,"index":812},{"ms":0.0437,"index":1703},{"ms":0.0425,"index":195}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_COST {"route":"supported-warp-14400","warm":512,"count":2048,"median":0.0578,"p95":0.0683,"p99":0.0791,"maximum":0.1351,"collections":[0,0,0],"allocated":4751360,"tails":[{"ms":0.1351,"index":1704},{"ms":0.1308,"index":1703},{"ms":0.1178,"index":1705},{"ms":0.1162,"index":1707},{"ms":0.1161,"index":1706},{"ms":0.1161,"index":1711},{"ms":0.1158,"index":1709},{"ms":0.1156,"index":1708}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_WARP {"factor":14400,"frames":600,"maximumOffset":1.4349719309970898E-05,"maximumHorizon":5.070600856821404E-07,"maximumDistance":1.3057511441871839E-05,"terrainCorrections":0,"canonicalUnchanged":true}
+SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab
+FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.2147
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.
+SRV01_COLD_PREPARATION ms=110.743 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=warp-camera-display bytes=0 entry=PASS exit=PASS
+ACTIVE_VESSEL_COST {"route":"camera-at-warp-86400","warm":512,"count":2048,"median":0.0298,"p95":0.0356,"p99":0.0395,"maximum":0.0516,"collections":[0,0,0],"allocated":0,"tails":[{"ms":0.0516,"index":748},{"ms":0.0486,"index":315},{"ms":0.047,"index":645},{"ms":0.046,"index":747},{"ms":0.0435,"index":1323},{"ms":0.0431,"index":1363},{"ms":0.0419,"index":1874},{"ms":0.0412,"index":999}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_COST {"route":"supported-warp-86400","warm":512,"count":2048,"median":0.0581,"p95":0.0651,"p99":0.0754,"maximum":0.1621,"collections":[0,0,0],"allocated":4751360,"tails":[{"ms":0.1621,"index":847},{"ms":0.1444,"index":850},{"ms":0.143,"index":846},{"ms":0.1267,"index":1900},{"ms":0.124,"index":1901},{"ms":0.1206,"index":848},{"ms":0.1184,"index":849},{"ms":0.0974,"index":623}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_WARP {"factor":86400,"frames":600,"maximumOffset":1.428240232699955E-05,"maximumHorizon":5.076233532711742E-07,"maximumDistance":1.3057511441871839E-05,"terrainCorrections":0,"canonicalUnchanged":true}
+ACTIVE_VESSEL_FRAME_TRANSITIONS PASS nonEarthParent=true separateEnvironment=true sameNewEpoch=true fullRoll=true retainedOffVessel=true invalidRefusal=true
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=128 cadence_hz=64 max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+SRV-01 reusable parts. Space starts the recorded 2-second episode: main, gimbal, six RCS commands. Exhaust shows realized jets only; no gravity or contact.
+SRV01_COLD_PREPARATION ms=2.7076 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ACTIVE_VESSEL_MOVING {"pass":true,"physicalIntervals":128,"comChanged":true,"maxFollowError":0,"translations":[100,1000,100000],"maximumRelativeEncodingError":0,"solarPaused":true,"held":true,"saveUnchanged":true,"largestRoot":7000000000000}
+SRV01_FLORIDA_SITE identity=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e authority=PhysicalSurfaceAuthorityIdentity { BodyId = 6, Terrain = TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True }, PhysicalGeneration = 4, ReferenceRadiusMetres = 6371008.8, GlobalSha256 = 4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317, RegionalSha256 = c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe, CompositionIdentity = 86364352542676184, FacilitySupportIdentity = 5597594574148789740, QueryPolicyVersion = 1 } support=authored-base-footing-union presentation=single-finite-slab
+FLORIDA_PRESENTATION_READY site=3a00abf1bd7926bacc597fc8142d4bdef22a36301107fdbef59cc1b51bca336e body=6 terrain=TerrainAuthorityVersion { SourceId = 2, Version = 5, IsValid = True } facility=AnchoredSurfaceObjectId { Value = 5639455913931657284, IsValid = True } displayEpoch=0 east=0 support=authored-base-footing-union coldMs=0.202
+STOCK_ASSEMBLY_READY design=novacore.stock.SRV01.FourHorn digest=ac23c15ae52adc5e8e836bd954d9084b10a2699cc01f0a6906a992724ea67fcf intervals=1200 cadence_hz=60 supported_contact=true max_service=4 parts=7 physical_jets=16 visual_mesh_instances=37 shared_gpu_meshes=23 mesh_buffer_bytes=1359096
+Florida Solar world: authenticated site, one finite authored support slab, stock SRV-01 centred on top. Engine/RCS OFF. The bounded contact owner starts after preparation and holds its final site-relative endpoint after 20 seconds; Solar exploration, celestial time and camera controls remain independent presentation owners. No launch or departure. Project Control manual support/presentation acceptance PASS; production shadows deferred.
+SRV01_COLD_PREPARATION ms=109.5618 includes=catalog_owner_history_assets_bindings excludes=native_gpu_startup host_credit=0
+ORDINARY_ALLOCATION gate=vessel-follow-orbit-zoom-display bytes=0 entry=PASS exit=PASS
+ORDINARY_ALLOCATION gate=vessel-F-refocus bytes=0 entry=PASS exit=PASS
+ORDINARY_ALLOCATION gate=positive-control bytes=152 entry=PASS exit=PASS
+ORDINARY_CONTROL type=System.Byte[] length=128 bytes=152
+ACTIVE_VESSEL_COST {"route":"florida-vessel-follow-orbit-zoom","warm":512,"count":2048,"median":0.0442,"p95":0.0487,"p99":0.0568,"maximum":0.0831,"collections":[0,0,0],"allocated":0,"tails":[{"ms":0.0831,"index":1135},{"ms":0.0743,"index":73},{"ms":0.0673,"index":1485},{"ms":0.0647,"index":1829},{"ms":0.0613,"index":1403},{"ms":0.0608,"index":1828},{"ms":0.0597,"index":1542},{"ms":0.0596,"index":1136}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_COST {"route":"F-refocus","warm":512,"count":2048,"median":0.0143,"p95":0.0176,"p99":0.02,"maximum":0.0261,"collections":[0,0,0],"allocated":0,"tails":[{"ms":0.0261,"index":1749},{"ms":0.0259,"index":2042},{"ms":0.0258,"index":1187},{"ms":0.0246,"index":1554},{"ms":0.0244,"index":575},{"ms":0.0242,"index":386},{"ms":0.0236,"index":1065},{"ms":0.0208,"index":147}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_COST {"route":"celestial-vessel-switch","warm":512,"count":2048,"median":0.0189,"p95":0.0235,"p99":0.0257,"maximum":0.0296,"collections":[0,0,0],"allocated":98304,"tails":[{"ms":0.0296,"index":329},{"ms":0.0293,"index":337},{"ms":0.0291,"index":1834},{"ms":0.0286,"index":533},{"ms":0.0284,"index":286},{"ms":0.0276,"index":644},{"ms":0.0275,"index":283},{"ms":0.0266,"index":57}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_COST {"route":"solar-celestial-display","warm":512,"count":2048,"median":0.0089,"p95":0.0111,"p99":0.0126,"maximum":0.0203,"collections":[0,0,0],"allocated":0,"tails":[{"ms":0.0203,"index":63},{"ms":0.0198,"index":705},{"ms":0.0163,"index":1929},{"ms":0.0158,"index":1161},{"ms":0.0149,"index":1822},{"ms":0.0145,"index":1823},{"ms":0.0139,"index":719},{"ms":0.0135,"index":152}],"scope":"managed only; supported-warp includes Solar publication; camera-at-warp uses a coherent held publication; no GPU or physical ticks"}
+ACTIVE_VESSEL_STORAGE {"targetSlots":1,"historySlots":0,"observationBytes":136,"retainedBefore":258072992,"retainedAfter":258072608,"refocusOperations":10000,"bindingUnchanged":true}

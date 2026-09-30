@@ -1,0 +1,753 @@
+{
+  "judgment": "REVISE - not authorization to stage or bank",
+  "head": "40314c0f72396ea5f4ff39121f0b6821f1f96146",
+  "intended": [
+    {
+      "path": "README.md",
+      "action": "modify",
+      "category": "docs",
+      "bytes": 8020,
+      "sha256": "d5d213f7750c497b3fef366b1e89b7b6209fa789affc1a617f3681fb5b7138f1"
+    },
+    {
+      "path": "docs/KNOWN_LIMITATIONS.md",
+      "action": "modify",
+      "category": "docs",
+      "bytes": 6950,
+      "sha256": "2fd271423de15e7a6f69cbb7d141cb8eaf44ea51489840cfeceb69433a8f77b6"
+    },
+    {
+      "path": "docs/NOVACORE_CURRENT_STATE.md",
+      "action": "modify",
+      "category": "docs",
+      "bytes": 52143,
+      "sha256": "adfccb27b29de8faf2b92a6f570780d3ee2296e760c1b9f4a43fce6d621e63c7"
+    },
+    {
+      "path": "docs/build-windows.md",
+      "action": "modify",
+      "category": "docs",
+      "bytes": 19749,
+      "sha256": "98fcd66b9696ef7f693566542a5ed731773a0dbe01ea2070db8529840649a392"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/README.md",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 19671,
+      "sha256": "77efea8bebf5c600818dda1d4e9d22bcc836e4dc8ebb255888b1ba912fccdb77"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/bank-inventory.json",
+      "action": "add",
+      "category": "evidence",
+      "hashScope": "Self-referential receipt/pathlist excluded from internal digest; verify separately"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/candidate-identity.json",
+      "action": "add",
+      "category": "evidence",
+      "hashScope": "Self-referential receipt/pathlist excluded from internal digest; verify separately"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/cleanup-reference.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 3522,
+      "sha256": "190c02a9ca63b01c4c44f91df70bdbf45b3406f7a6cca1fb3cc536673be6df56"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/fixtures/pause-route.craft.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 9656,
+      "sha256": "eeda6331dc928e4ea38f4e5e18e3dd2d17ea928763a3e917adf75c0e1e057b94"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/hardware.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 1365,
+      "sha256": "efbc1cc39dd612499d35ed50fc7148a9c650df73e24bcc6a72351aae9c583065"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/inherited-test-contracts.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 1920,
+      "sha256": "f7a76d01872dde430428aa784b527609eae9e22579a7bfde8e45aecf7f6b16a2"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/make-receipts.py",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 11707,
+      "sha256": "4ce63d64335cbdf98a70ff6a1d5fac779aef0e255f3f575c389c5604b498a699"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/native-witnesses.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 44924,
+      "sha256": "19efa4f4d93b8dcdd80a34ee7553dfded9a7b5c6c34956148cb05d21e44e8630"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/package.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 22573,
+      "sha256": "7f7d6121244d48c5a8b36a9c6950ffd71ac63a78fc2d9be2dfd3565762b7d4a4"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/qualification-summary.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 81455,
+      "sha256": "c53d09f7fce7a319933278e7a20ffe989ba0c9d7551aa6d0630fe66ac4348308"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/readme-render.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 229,
+      "sha256": "6c77a554e9975d55679ad8f4f3d8a9ef2781c9535b8e8b5251bc46fd1eb13b75"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/remote-preflight.txt",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 174,
+      "sha256": "829a44584dd2cf154460bd209b6c0cb0778a032a37c03bc321ba87d039b6dfeb"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/stage-paths.txt",
+      "action": "add",
+      "category": "evidence",
+      "hashScope": "Self-referential receipt/pathlist excluded from internal digest; verify separately"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/terrain-global-status.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 651,
+      "sha256": "ff6fa650f2bd9909160c7e200164f844f38b5a711f3b417cbb5505998d8c5297"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/terrain-regional-status.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 655,
+      "sha256": "74c16c4dba863e21e9b50c3da11048e8336e0e7a4278503065866664668b3906"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/topology-mode-switch.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 586,
+      "sha256": "491076e69d577def1883289b2ca1e2171a6b370be0d761bb6c38227fb0b41658"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/witnesses/ordinary-esc-resume.jpg",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 171509,
+      "sha256": "64e2c76a62a0ee615b4368b802eefab68836bcc47048489cf176fefd2e628596"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/witnesses/ordinary-paused.jpg",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 171839,
+      "sha256": "a56e147a64366ae47f759606f03fa698e7c414bca671fa854f5f1c69e44b0c44"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/witnesses/ordinary-realtime.jpg",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 171147,
+      "sha256": "ccd2556b94bb87ea4ae6ede598e0447a9fc15ce04e7ac5044b7ed9ef402d877b"
+    },
+    {
+      "path": "docs/engineering-evidence/m16.2-bank-preparation/witnesses/ordinary-resumed-minimum.jpg",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 171415,
+      "sha256": "9ea44f4a842c0363c122c46ffe80c2c9c0b3a1abf1324051945619b4c6f00dd2"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/README.md",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 20617,
+      "sha256": "f775953b8ea190edb551e3f3f60a530947ddbf1df411f9401ee2a6c4f36435b2"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/editor-restoration-receipt.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 66253,
+      "sha256": "81442a07aa7c9fe8d16c7ba84b0d1c023a3ff3d70b47bdeb3881780e1a47451a"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/editor-restoration-receipt.py",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 4465,
+      "sha256": "62c6f52b82207e7d9e9b08312b2c3a7db82cfc89b07a4855c6584bbda555d115"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/editor-restoration.md",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 13087,
+      "sha256": "ccdc58559357966dc4a890d133dc583741b327d5ef5f14fbc826cfee23785ac6"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/memory-receipt.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 6806,
+      "sha256": "9c56dc9147ef54af12d036db9441731b1710935791f77428d87846fbb3dae6fb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/memory-receipt.py",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 8838,
+      "sha256": "2ea9241076196234009b81b507ef427632343a915a53318496c3caf675cefb4d"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/minimum-speed-pause-receipt.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 105956,
+      "sha256": "135d5d4fb3a36dc30630ed16751f2d14da276dcad8fb6fd46aa5ce63e4b9a895"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/minimum-speed-pause.md",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 10261,
+      "sha256": "1e42a3fc00ccb270a7a5bac31cf2b3ca39280033f28390db809207b18fedf624"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/app-final-build.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 82,
+      "sha256": "90daeea712f00cc57a6814434e0fd57115250c2565356bc947e7983d0ee1f096"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/configuration.png",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 150281,
+      "sha256": "17aa73525337c927cea29851b3de2e28c32e25e5f8b7a6d97c56c3b8b955f516"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/construction-preservation-v2.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 2180,
+      "sha256": "d26615fc9a435c86861ed8301c648b1818eacb4621e82716d84d0b14c69e83ad"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/cpu-editor-regressions.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 93317,
+      "sha256": "c247df4f64a7618ba96f247aecd28b90ddfe97dcc740b09261cd48ac7c3da144"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/cpu-surface-cycles.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 524,
+      "sha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/cpu-surface-persistence.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 9427,
+      "sha256": "c289d40b6c0c7549782e40e7d2f62244f250569fe0e1159974a6f8a81415fbbb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gameplay.png",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 113727,
+      "sha256": "7947ae0fadfd04d8ea4b7d47ba2e95fe302eb117d5721fa41802026cd01716a2"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-cancel-v2-native.csv",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 6019,
+      "sha256": "ce0d95f802d066de4fbfa4402853b5633c566b9a273988545023226cb6e0dbab"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-cancel-v2.stderr.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-cancel-v2.stdout.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 8755,
+      "sha256": "ccd9baf270d7e5218bbac73c3cbe12668d9f8488a475ad9e7b38dc71698bebb0"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final-native.csv",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 10282,
+      "sha256": "0c9c9ada9aed46c50728b8044f5fe76d3d73b0682b3443b9be90f00a1865da92"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 1771,
+      "sha256": "59604f0975355b0c2daf967ffa90671fa3ff25c770b357d8a411ec2e4e933aaa"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final.stderr.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final.stdout.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 172154,
+      "sha256": "9f42a7f009c58b76210209fb5eb200b8b56b884b368122bdf608f2a2171b0ef5"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/launcher-tests.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 684,
+      "sha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/loading.png",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 97859,
+      "sha256": "0ff2ec3682bf71fa69139760e8efa31779e7621d397f5873900f0c472f584cdb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/native-memory-tests.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 73,
+      "sha256": "0c29f5169de97d0004d8d7d41e43dc47dcff9f1ced6e220d1433a5c79600248b"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/player-tests-v2.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 104,
+      "sha256": "bafcb22f1b9e0169733dc9dc9d7b5d1581949a0b84564e8f5463f564144574bd"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final-memory.csv",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 10658,
+      "sha256": "e466320a6efd79e0a7328d8860e2f6b3b4b29b5cd4ea375323b79e3c6004ce88"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final-performance.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 16082,
+      "sha256": "85bf4db97084129d5e01286f66ab3f9a37e6d47a9510b13230dc2d9e27d5282b"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 5756,
+      "sha256": "17f0cf77b82c6c69a018127fae60c1e8fcfb5075bc7dcc89d39febf5c071b92c"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final.stderr.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final.stdout.log",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 28231,
+      "sha256": "62c7316736edf5e58ca8b2af86abffd5fdea9f8fb2251de10016508c9e0456ca"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/seal.json",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 15619,
+      "sha256": "53bcdbbb0ac51e946e007e4073d3ce1657f9865464a86db0f34cd21598253bc1"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/seal.py",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 2005,
+      "sha256": "ddf9e27d1bb181364dea14c2882855e24b7c398522c464064f6b13f5a4dfde0a"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/summarize-timings.py",
+      "action": "add",
+      "category": "evidence",
+      "bytes": 2692,
+      "sha256": "2660dec5e9c1e9405678450cc68d1fa77699eaffa8eef5a381cd84f9afa70550"
+    },
+    {
+      "path": "docs/images/README.md",
+      "action": "modify",
+      "category": "docs",
+      "bytes": 2766,
+      "sha256": "702bcd95cc3464356f529dd43938d9165ab101aa6fbd6d53d8755204c4c6e7ab"
+    },
+    {
+      "path": "docs/images/novacore-m16.2-construction.jpg",
+      "action": "add",
+      "category": "assets",
+      "bytes": 153417,
+      "sha256": "9804c2f65d6a73d60162413200a73df8c5b87a002ebef7eda492fe4544f36f80"
+    },
+    {
+      "path": "native/NovaCore.Native/CMakeLists.txt",
+      "action": "modify",
+      "category": "production",
+      "bytes": 31613,
+      "sha256": "0e9ebe55b543141700027b914196eca91ab73863b05481629d5e5d57cd3d3f12"
+    },
+    {
+      "path": "native/NovaCore.Native/CausalNative.inl",
+      "action": "modify",
+      "category": "production",
+      "bytes": 15527,
+      "sha256": "69cb85100821d103726b25fc17da0773e31bc943c61bf8695df8be32def72e32"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "action": "modify",
+      "category": "production",
+      "bytes": 335269,
+      "sha256": "8a0ca07450205a3c666383af42e1c843a521c0a4658106c9dfec2b38cbaad5e7"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "action": "modify",
+      "category": "production",
+      "bytes": 20886,
+      "sha256": "03c783673e076d1b2cc48fc7398066db13563cca913f04517070a657d70d250a"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemory.h",
+      "action": "add",
+      "category": "production",
+      "bytes": 715,
+      "sha256": "5c21d953c7f7fe4db2b93c292150ae56409bcebfdc211787918f3c901e34bb0e"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemory.inl",
+      "action": "add",
+      "category": "production",
+      "bytes": 9291,
+      "sha256": "ac8a1e39aa83fc0bffd997e1d66b49aaaeb5a65adcfd5a89ffab1485e84d88a0"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemoryExports.inl",
+      "action": "add",
+      "category": "production",
+      "bytes": 1370,
+      "sha256": "0d9a65ef9e53607a5f6097c87988ac361e70b337382d3da4b1dacd0c952463a6"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemoryTests.cpp",
+      "action": "add",
+      "category": "tests",
+      "bytes": 5428,
+      "sha256": "54ee9b9a050494db59497bb55b5ab224860090dbc59fe41a6ef20633135bfa90"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/solar_speed_hud.frag",
+      "action": "delete",
+      "category": "production"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/solar_speed_hud.vert",
+      "action": "delete",
+      "category": "production"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/IApplicationPresentation.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 997,
+      "sha256": "3303e45d27651386aa55683a1faaae9c19a0a89cdd218b97a244f5dd75e710d3"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 69253,
+      "sha256": "f92371707a925c65750199e5e4424c2c81a4a7266449a8668ae6d01859bb29f6"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/SolarSystemScene.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 125551,
+      "sha256": "6151da57d7ae7179ff6737de738e74dbac4fd0b5cec9ff86ec6ed3b234d77fd2"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 26814,
+      "sha256": "38d2929bd478cb252c938d047350843a4b47bf90b0b5f009913e6f3c462ac375"
+    },
+    {
+      "path": "src/NovaCore.Interop/PlayerGpuMemory.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 4076,
+      "sha256": "b8d580fd7d1061106ccbd403d9c39083a49ba09f496df02c5710e481e3f66808"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/Program.cs",
+      "action": "modify",
+      "category": "tests",
+      "bytes": 576798,
+      "sha256": "9fbce56eaf43ff66caba5c6df5f1bc0b33ae07d6e75b02e6b3aa9d0921b64a24"
+    },
+    {
+      "path": "tests/NovaCore.Player.Tests/NovaCore.Player.Tests.csproj",
+      "action": "add",
+      "category": "tests",
+      "bytes": 806,
+      "sha256": "4f0b049d28f3312ab63f889271587caf82e2fccdc4d7c94cd1a650a96659ef40"
+    },
+    {
+      "path": "tests/NovaCore.Player.Tests/Program.cs",
+      "action": "add",
+      "category": "tests",
+      "bytes": 4972,
+      "sha256": "752993e8f336128eadb3ae74374d8e8cee549cbedb410b675b08cd8f3628b4e8"
+    },
+    {
+      "path": "tools/NovaCore.App/NovaCore.App.csproj",
+      "action": "modify",
+      "category": "production",
+      "bytes": 1187,
+      "sha256": "9d1667ac3bf12db3618d223e1d136a5a77f3bc212a215eb1d3f9f94857193d68"
+    },
+    {
+      "path": "tools/NovaCore.App/app.manifest",
+      "action": "add",
+      "category": "production",
+      "bytes": 558,
+      "sha256": "4f15ce221afbbf6ee0e569f44657d1743884d202fa658b0013468fbfae064029"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 15962,
+      "sha256": "c9238605090ee87b37f622b4b5d874a68c1829c4f8005d4f5e96fc2191fbfdda"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs",
+      "action": "modify",
+      "category": "tests",
+      "bytes": 24686,
+      "sha256": "6f9ad7863e1b000e0ba017aac071601454966e2d3af28cc24b62664a08a9c464"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Commands.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 19101,
+      "sha256": "274871b7d896d8758286dca27644d5f753fa1c9c66bdfd8c048ecaa67e359e7c"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Configuration.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 10387,
+      "sha256": "c04eafc9cc1f9556cfd8daa8b527be54e8b52a98af57d8c474d6ed6b06af3f0c"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Direct.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 3332,
+      "sha256": "fe293c8598d7151b7c2ac807a7f7e02f5050d0cceee78ab61e792a1a4ef71248"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.EditorPresentation.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 7221,
+      "sha256": "503d614f243ff0124db7c00343cd078b3a4fdba4464249ca41c694304ef55828"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.FlightPersistence.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 247,
+      "sha256": "ddabfab7f812623834e0a01786597156a019f0811af2177da1cd2b5233b4ebfd"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.GpuMemory.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 2550,
+      "sha256": "150454b26d26618191425d124805f0de23273f2c7ae53c6b8aa708fa77e57782"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Launch.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 3009,
+      "sha256": "1f8084f229ed9e081ef95884e362bbe543a888ed81eb7e6191037b2cd0682926"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Loading.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 4173,
+      "sha256": "d4b1db2e95bc7a5d89f31f368eb5ee1bd0720cab28ec33f13e750a8daa1ee154"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PersistenceQualification.cs",
+      "action": "modify",
+      "category": "tests",
+      "bytes": 10194,
+      "sha256": "436992d8ddb75e7519d67de268c5032bb0d4a769bba0ad56095bd32e276368a1"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PlayerDialogs.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 5637,
+      "sha256": "3a642285db27702801dca3d35af48b1e106fd64dd9ed2c507ae128adecc5ab58"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PlayerEntryQualification.cs",
+      "action": "add",
+      "category": "tests",
+      "bytes": 7788,
+      "sha256": "adff960444079bb093cb21ad6e888e58b3f78af1e64a567ef629d57dac78c0bb"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Qualification.cs",
+      "action": "modify",
+      "category": "tests",
+      "bytes": 6990,
+      "sha256": "89690a9f401f358eb37950cbf2c277bb03cc64a6c95b2ae1b87bd7ed9057b0b1"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Saves.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 3928,
+      "sha256": "5fc044afaf4ff8209799fd7af4c3c1741d57305a1e4e50d30504144e3732b582"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.SpeedBoundaryQualification.cs",
+      "action": "add",
+      "category": "tests",
+      "bytes": 11621,
+      "sha256": "2d9237db9a7b1051c89caf54e849e13cb3f578a28c3c136ab075b4467001d9fa"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.StabilizationQualification.cs",
+      "action": "modify",
+      "category": "tests",
+      "bytes": 6518,
+      "sha256": "040a31725f1c9cae1903325f855afe009f902f4a83d9e77b87ae5dd02a9798bc"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 18863,
+      "sha256": "041c1ee6514f21bbf2faab2c4cda8e0048dfdfad2102c473ecca3beaf8d3ee14"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/PlayerConfiguration.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 3382,
+      "sha256": "f32986a8a4dd68ac8411e58960ad80c21a973632e852f79bb59e36cde8babcb8"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/PlayerHudLayouts.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 2193,
+      "sha256": "44ea911eed584a270c9dd5d1af2a7fe1773eabe4f38c9168c290e79d17cf109e"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/PlayerOverlayLayer.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 1225,
+      "sha256": "d21de7ff0a8ec6e126f456ca5aed0c38c6da21d676f2ff49f4df76ccb4a440f3"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/PlayerTimeText.cs",
+      "action": "add",
+      "category": "production",
+      "bytes": 440,
+      "sha256": "0b101af03a13c83dba1695c840978b50fed7521642f76b643b977b1319a34fd0"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/Program.cs",
+      "action": "modify",
+      "category": "production",
+      "bytes": 1849,
+      "sha256": "8127b8eb46a7fe603984116e96d88e329b515186b86a2966031dc1feba306b35"
+    }
+  ],
+  "categoryCounts": {
+    "docs": 5,
+    "evidence": 55,
+    "assets": 1,
+    "production": 33,
+    "tests": 10
+  },
+  "staged": [],
+  "unrelatedChanges": [],
+  "modifiedStatusWithoutBlobChange": [
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ConnectorQualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.LaunchQualification.cs",
+    "tools/NovaCore.ConstructionEditor/DesktopEditorForm.RecorderQualification.cs"
+  ],
+  "exclusions": [
+    "build/",
+    "**/bin/",
+    "**/obj/",
+    ".novacore/cache/",
+    "recorder runtime journals/capsules/dumps",
+    "E:/Videos/2026-09-28 21-45-06.mp4",
+    "E:/Kitten Space Agency",
+    "user player saves",
+    "external local tool/project attachments"
+  ],
+  "exclusionNote": "Status-only paths have no git blob diff; preserved without edit or staging. No identified unrelated content changes."
+}

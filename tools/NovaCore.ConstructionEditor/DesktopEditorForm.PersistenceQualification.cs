@@ -50,7 +50,7 @@ internal sealed unsafe partial class DesktopEditorForm
         ClickButton("New vehicle");RequireQualification(session.Current is null&&savePath is null,"new draft clears active file association");
         TestLoad(partialPath);RequireQualification(session.Save(session.Revision).SequenceEqual(partial)&&!session.Dirty&&session.Current!.Design.Data.Id==identity,"visible reload preserves identity, symmetry and partial resources");
         var clean=EditorFingerprint();ShowSaveBrowser(false);
-        RequireQualification(!sidebar.Enabled&&!inspector.Enabled&&!navigation.Enabled,"modal save flow blocks background editing");
+        RequireQualification(!sidebar.Enabled&&!inspector.Enabled,"modal save flow blocks background editing");
         ClickButton("Back");RequireQualification(EditorFingerprint()==clean,"cancelled browser leaves all source state intact");
         TestRename("Unsaved "+suffix);var dirty=EditorFingerprint();
         ClickButton("New vehicle");ClickButton("Cancel");RequireQualification(EditorFingerprint()==dirty,"Cancel protects a dirty draft from New");

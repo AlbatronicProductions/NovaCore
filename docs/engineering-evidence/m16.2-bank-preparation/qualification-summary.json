@@ -1,0 +1,1564 @@
+{
+  "recordedUtc": "2026-09-30T03:07:42.816403+00:00",
+  "commands": [
+    {
+      "name": "native-configure-Debug",
+      "command": [
+        "cmake",
+        "-S",
+        "native/NovaCore.Native",
+        "-B",
+        "build/native-ninja",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:14.3519645+00:00",
+      "endedUtc": "2026-09-30T02:31:14.5837073+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\native-configure-Debug.log",
+      "logSha256": "86c29a374ff280b4317c1c164bc650f6ddc784b8d13a764b2b0498b93e101ad7",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "native-build-Debug",
+      "command": [
+        "cmake",
+        "--build",
+        "build/native-ninja",
+        "--target",
+        "NovaCore.Native",
+        "NovaCorePlayerGpuMemoryTests",
+        "NovaCoreRegionalPhysicalTests",
+        "NovaCoreFacilityVisibilityTests",
+        "NovaCoreSurfaceMaterialCoordinatesTests",
+        "NovaCoreStellarProjectionTests"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:14.5954911+00:00",
+      "endedUtc": "2026-09-30T02:31:19.0502718+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\native-build-Debug.log",
+      "logSha256": "8afe6b8e5745cc55901103a9fa4223c68831b0c205bb50e3f9bac742d27e1823",
+      "failureDetails": [],
+      "summaryLines": [
+        "[1/16] Generating shaders/surface_material_coordinates_test.comp.spv",
+        "[2/16] Generating test-shaders/facility_visibility_test.comp.spv",
+        "[3/16] Generating shaders/solar_orbit.vert.spv, shaders/solar_orbit.frag.spv, shaders/solar_marker.vert.spv, shaders/solar_marker.frag.spv, shaders/solar_label.vert.spv, shaders/solar_label.frag.spv",
+        "[4/16] Building CXX object CMakeFiles\\NovaCoreSurfaceMaterialCoordinatesTests.dir\\SurfaceMaterialCoordinatesTests.cpp.obj",
+        "[5/16] Building CXX object CMakeFiles\\NovaCoreFacilityVisibilityTests.dir\\FacilityLightOcclusionTests.cpp.obj",
+        "[6/16] Linking CXX executable NovaCoreFacilityVisibilityTests.exe",
+        "[7/16] Linking CXX executable NovaCoreSurfaceMaterialCoordinatesTests.exe",
+        "[8/16] Building CXX object CMakeFiles\\NovaCorePlayerGpuMemoryTests.dir\\PlayerGpuMemoryTests.cpp.obj",
+        "[9/16] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetaryHeightQuery.cpp.obj",
+        "[10/16] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetarySphericalBillboardGpuProof.cpp.obj",
+        "[11/16] Building CXX object CMakeFiles\\NovaCore.Native.dir\\PlanetaryMeshPreparation.cpp.obj",
+        "[12/16] Linking CXX executable NovaCorePlayerGpuMemoryTests.exe",
+        "[13/16] Building CXX object CMakeFiles\\NovaCoreStellarProjectionTests.dir\\StellarProjectionTests.cpp.obj",
+        "[14/16] Linking CXX executable NovaCoreStellarProjectionTests.exe",
+        "[15/16] Building CXX object CMakeFiles\\NovaCore.Native.dir\\NovaCoreNative.cpp.obj",
+        "[16/16] Linking CXX shared library NovaCore.Native.dll"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "solution-build-Debug",
+      "command": [
+        "dotnet",
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Debug",
+        "--no-restore",
+        "-t:Rebuild"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:19.0515488+00:00",
+      "endedUtc": "2026-09-30T02:31:28.8740925+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\solution-build-Debug.log",
+      "logSha256": "92e923168b09fcc262dd5c6b356943dd20b538e7c2275667aaad43d55e9d705d",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "app-build-Debug",
+      "command": [
+        "dotnet",
+        "build",
+        "tools/NovaCore.App",
+        "-c",
+        "Debug",
+        "--no-restore",
+        "-t:Rebuild"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:28.8750764+00:00",
+      "endedUtc": "2026-09-30T02:31:34.6827638+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\app-build-Debug.log",
+      "logSha256": "cb4ecdc7adbeee7f0c24f843b0da63370808a7469ae8d98e210f01f271fc8d80",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "player-build-Debug",
+      "command": [
+        "dotnet",
+        "build",
+        "tests/NovaCore.Player.Tests",
+        "-c",
+        "Debug",
+        "--no-restore"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:34.6836434+00:00",
+      "endedUtc": "2026-09-30T02:31:35.7722799+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\player-build-Debug.log",
+      "logSha256": "d3b45ab3f95db1da593613c48a6f037f088dd615fe59ef6a955abe7a7bfc1795",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "memory-native-Debug",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja\\NovaCorePlayerGpuMemoryTests.exe"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:35.7732273+00:00",
+      "endedUtc": "2026-09-30T02:31:35.8294506+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\memory-native-Debug.log",
+      "logSha256": "0c29f5169de97d0004d8d7d41e43dc47dcff9f1ced6e220d1433a5c79600248b",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS GPU memory owner: 16 checks; mock driver; zero GPU/device creation"
+      ],
+      "reportedResultLines": [
+        "PASS GPU memory owner: 16 checks; mock driver; zero GPU/device creation"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "native-configure-Release",
+      "command": [
+        "cmake",
+        "-S",
+        "native/NovaCore.Native",
+        "-B",
+        "build/native-ninja-release",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:35.8302717+00:00",
+      "endedUtc": "2026-09-30T02:31:35.9914314+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\native-configure-Release.log",
+      "logSha256": "5b67522edde79b621b958e35bd567d90e220ddaec3edd503ac49409145227fe6",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "native-build-Release",
+      "command": [
+        "cmake",
+        "--build",
+        "build/native-ninja-release",
+        "--target",
+        "NovaCore.Native",
+        "NovaCorePlayerGpuMemoryTests",
+        "NovaCoreRegionalPhysicalTests",
+        "NovaCoreFacilityVisibilityTests",
+        "NovaCoreSurfaceMaterialCoordinatesTests",
+        "NovaCoreStellarProjectionTests"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:35.9923995+00:00",
+      "endedUtc": "2026-09-30T02:31:37.5896850+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\native-build-Release.log",
+      "logSha256": "d76a9c7d384e1e00c6e7c8485954c04ea7857e90ec1a961b3aee08db17812ee4",
+      "failureDetails": [],
+      "summaryLines": [
+        "[1/11] Generating test-shaders/facility_visibility_test.comp.spv",
+        "[2/11] Generating shaders/surface_material_coordinates_test.comp.spv",
+        "[3/11] Building CXX object CMakeFiles\\NovaCoreSurfaceMaterialCoordinatesTests.dir\\SurfaceMaterialCoordinatesTests.cpp.obj",
+        "[4/11] Linking CXX executable NovaCoreSurfaceMaterialCoordinatesTests.exe",
+        "[5/11] Building CXX object CMakeFiles\\NovaCoreFacilityVisibilityTests.dir\\FacilityLightOcclusionTests.cpp.obj",
+        "[6/11] Linking CXX executable NovaCoreFacilityVisibilityTests.exe",
+        "[7/11] Building CXX object CMakeFiles\\NovaCoreRegionalPhysicalTests.dir\\LocalTerrainPack.cpp.obj",
+        "[8/11] Building CXX object CMakeFiles\\NovaCoreRegionalPhysicalTests.dir\\RegionalPhysicalResidencyTests.cpp.obj",
+        "[9/11] Building CXX object CMakeFiles\\NovaCoreStellarProjectionTests.dir\\StellarProjectionTests.cpp.obj",
+        "[10/11] Linking CXX executable NovaCoreRegionalPhysicalTests.exe",
+        "[11/11] Linking CXX executable NovaCoreStellarProjectionTests.exe"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "solution-build-Release",
+      "command": [
+        "dotnet",
+        "build",
+        "NovaCore.sln",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-t:Rebuild"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:37.5904232+00:00",
+      "endedUtc": "2026-09-30T02:31:45.9579713+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\solution-build-Release.log",
+      "logSha256": "9a094559bf384852b5f490889219e56c149e6174b1e326474c4a8e96b054ba9a",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "app-build-Release",
+      "command": [
+        "dotnet",
+        "build",
+        "tools/NovaCore.App",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-t:Rebuild"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:45.9587601+00:00",
+      "endedUtc": "2026-09-30T02:31:50.2379964+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\app-build-Release.log",
+      "logSha256": "56116b81cbeb97749e9d82864ea4198ebb56a766f4fd661fc8d0b9b1f32e8777",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "player-build-Release",
+      "command": [
+        "dotnet",
+        "build",
+        "tests/NovaCore.Player.Tests",
+        "-c",
+        "Release",
+        "--no-restore"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:50.2387809+00:00",
+      "endedUtc": "2026-09-30T02:31:51.1172982+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\player-build-Release.log",
+      "logSha256": "1f4d07b8b40f51fd6b60cd666667a78e6f22937cac92c87cc879ad121723e7c2",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "memory-native-Release",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja-release\\NovaCorePlayerGpuMemoryTests.exe"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:31:51.1181003+00:00",
+      "endedUtc": "2026-09-30T02:31:51.1475166+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\memory-native-Release.log",
+      "logSha256": "0c29f5169de97d0004d8d7d41e43dc47dcff9f1ced6e220d1433a5c79600248b",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS GPU memory owner: 16 checks; mock driver; zero GPU/device creation"
+      ],
+      "reportedResultLines": [
+        "PASS GPU memory owner: 16 checks; mock driver; zero GPU/device creation"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Precision-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Precision.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:32:10.7820761+00:00",
+      "endedUtc": "2026-09-30T02:32:11.5453687+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Precision-Debug.log",
+      "logSha256": "e847d95cb6aea227f2684e3f7954460176c833fd8739cc02a5e1c58d6718a3e4",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "PASS"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-ReferenceFrames-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.ReferenceFrames.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:32:11.5582221+00:00",
+      "endedUtc": "2026-09-30T02:32:13.3787712+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-ReferenceFrames-Debug.log",
+      "logSha256": "4962bac531d2021b799ef7c3fb2f9686eb7857a0c582b4cfd41fb6fdeaffa458",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Camera-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Camera.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:32:13.3807643+00:00",
+      "endedUtc": "2026-09-30T02:32:14.3312819+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Camera-Debug.log",
+      "logSha256": "9401e5ce2ba30bd387d8e09da3c3565e3af212a83be86a6963094be3b848b961",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Simulation-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Simulation.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:32:14.3371343+00:00",
+      "endedUtc": "2026-09-30T02:32:35.6744898+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Simulation-Debug.log",
+      "logSha256": "c6e24129678292a72ff2836243c89bd128bf74c27aea1b7299a17d06e5483c47",
+      "failureDetails": [],
+      "summaryLines": [
+        "CONTACT_SERVICE_SEQUENCE tilted=True moving=False fps=150 steps=1200 support=600/600 shorts=400 longs=800 debt=0 trajectory=EXACT geometric_peak_m=0.004164378500802757 drift_m=5.960464477539063E-08",
+        "CONTACT_SERVICE_SEQUENCE tilted=True moving=False fps=240 steps=1200 support=600/600 shorts=400 longs=800 debt=0 trajectory=EXACT geometric_peak_m=0.004164378500802757 drift_m=5.960464477539063E-08",
+        "CONTACT_SERVICE_SEQUENCE tilted=True moving=False fps=0 steps=1200 support=600/600 shorts=400 longs=800 debt=0 trajectory=EXACT geometric_peak_m=0.004164378500802757 drift_m=5.960464477539063E-08",
+        "ARTICLE_SCHEDULE tilted=False hz=30 endpoints=1200/1200 support=600/600 selector_service_boundaries=600 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=60 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=150 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=240 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=0 endpoints=1200/1200 support=600/600 selector_service_boundaries=300 selector_differences=0 budget_stops=299 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_PRIVATE_EQUIVALENCE tilted=False endpoints=1200/1200 canonical_nonmutation=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=30 endpoints=1200/1200 support=600/600 selector_service_boundaries=600 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=60 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=150 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=240 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=0 endpoints=1200/1200 support=600/600 selector_service_boundaries=300 selector_differences=0 budget_stops=299 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_PRIVATE_EQUIVALENCE tilted=True endpoints=1200/1200 canonical_nonmutation=PASS",
+        "COMMAND_SCHEDULES PASS 30/60/150/240/delayed history=8/8 funding=2000000 boundary=120",
+        "COMMAND_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "COMMAND_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "COMMAND_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ENGINE_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "ENGINE_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "ENGINE_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Launcher-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Launcher.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:32:35.6754246+00:00",
+      "endedUtc": "2026-09-30T02:32:36.3262156+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Launcher-Debug.log",
+      "logSha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "NovaCore launcher tests passed: 19"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Player-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Player.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:32:36.3274073+00:00",
+      "endedUtc": "2026-09-30T02:32:37.0446264+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Player-Debug.log",
+      "logSha256": "f626a82e531b64090561624101f4be9793de722553d500afbdeabb05d99559ba",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS player configuration: 49 checks",
+        "PASS player configuration and GPU memory presentation: 55 checks"
+      ],
+      "reportedResultLines": [
+        "PASS player configuration: 49 checks",
+        "PASS player configuration and GPU memory presentation: 55 checks"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-App.Diagnostics-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.App.Diagnostics.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:32:37.0454923+00:00",
+      "endedUtc": "2026-09-30T02:32:37.5080205+00:00",
+      "exitCode": 1,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-App.Diagnostics-Debug.log",
+      "logSha256": "b473285ddb0a2894f39946baa00878e16685fb43dddace0e98a091ca0bb822f0",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": true,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "diagnostics-build-Debug",
+      "command": [
+        "dotnet",
+        "build",
+        "tests/NovaCore.App.Diagnostics.Tests",
+        "-c",
+        "Debug"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:33:48.5882963+00:00",
+      "endedUtc": "2026-09-30T02:33:49.6157775+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\diagnostics-build-Debug.log",
+      "logSha256": "69bfef9895a47d8bc0a73f5a852c34c121cbf6e0f86283553efd3d4b54a4882d",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-App.Diagnostics-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.App.Diagnostics.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:33:49.6284776+00:00",
+      "endedUtc": "2026-09-30T02:33:50.1822474+00:00",
+      "exitCode": -532462766,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-App.Diagnostics-Debug-retry1.log",
+      "logSha256": "447ba9d18f7c7a5a958625bd389e6a3e4c927bfd901e2865a811c4b42a336263",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": true,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-App.Diagnostics-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.App.Diagnostics.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "E:\\NovaCore\\build\\m16.2-bank-preparation\\session-log-test-Debug"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:34:16.0269568+00:00",
+      "endedUtc": "2026-09-30T02:34:17.6435177+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-App.Diagnostics-Debug-retry2.log",
+      "logSha256": "ecd1f166f5bd29046f0aece24fca6e4fa08391897368bd6c61986742c66d6db4",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS 113 diagnostic checks; no window or GPU created"
+      ],
+      "reportedResultLines": [
+        "PASS 113 diagnostic checks; no window or GPU created"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-MinimumRecorder-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.MinimumRecorder.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:34:17.6573904+00:00",
+      "endedUtc": "2026-09-30T02:34:18.2870647+00:00",
+      "exitCode": -532462766,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-MinimumRecorder-Debug.log",
+      "logSha256": "ab5071cee07d2fc437def62ac5829d0ac1b440100171bad7fb07fe752f528d8d",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": true,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-MinimumRecorder-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.MinimumRecorder.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "E:\\NovaCore\\build\\m16.2-bank-preparation\\MinimumRecorder-fixtures-Debug",
+        "E:\\NovaCore\\tools\\NovaCore.Recorder\\bin\\Debug\\net10.0-windows\\NovaCore.Recorder.exe"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:48:41.8835867+00:00",
+      "endedUtc": "2026-09-30T02:49:05.5516540+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-MinimumRecorder-Debug-retry1.log",
+      "logSha256": "427397198fde58b812c8af3015af8c7f25eefa9bd73a302b193efafb3bf79cff",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS 22708 checks; CPU-only."
+      ],
+      "reportedResultLines": [
+        "PASS 22708 checks; CPU-only."
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Retention-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Retention.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "E:\\NovaCore\\build\\m16.2-bank-preparation\\Retention-fixtures-Debug",
+        "E:\\NovaCore\\tools\\NovaCore.Recorder\\bin\\Debug\\net10.0-windows\\NovaCore.Recorder.exe"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:49:05.5655251+00:00",
+      "endedUtc": "2026-09-30T02:51:07.3911595+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Retention-Debug.log",
+      "logSha256": "5d6d3ae3a304fe26d9d2c1dce5141088604ac92565d6f3521fbf47b3fc484e6d",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS capsule checksum corruption refuses",
+        "PASS schema dispatch refuses checksummed oversized decompressed metadata before parse",
+        "PASS valid-checksummed terminal substitution refuses checkpoint disagreement",
+        "PASS 389 retention checks"
+      ],
+      "reportedResultLines": [
+        "PASS capsule checksum corruption refuses",
+        "PASS schema dispatch refuses checksummed oversized decompressed metadata before parse",
+        "PASS valid-checksummed terminal substitution refuses checkpoint disagreement",
+        "PASS 389 retention checks"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-BepuDependency-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.BepuDependency.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:07.3995982+00:00",
+      "endedUtc": "2026-09-30T02:51:08.0892809+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-BepuDependency-Debug.log",
+      "logSha256": "46b9f239058362b8bf65ab1eec1459970d5561559439d3bf0b2fe9c8ab6a2a00",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-EphemerisBuilder-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.EphemerisBuilder.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:08.0945130+00:00",
+      "endedUtc": "2026-09-30T02:51:08.8066862+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-EphemerisBuilder-Debug.log",
+      "logSha256": "0f4fedbfd8f57a7166884e885e3769c48b42ba642ebf89381406287eb3d1d59e",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Precision-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Precision.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:08.8124069+00:00",
+      "endedUtc": "2026-09-30T02:51:09.4947298+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Precision-Release.log",
+      "logSha256": "7a62f6576786182a72359616d105ef5c217753267d54c1a2d119260f52915d84",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "PASS"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-ReferenceFrames-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.ReferenceFrames.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:09.5007018+00:00",
+      "endedUtc": "2026-09-30T02:51:10.4742280+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-ReferenceFrames-Release.log",
+      "logSha256": "83c442f6c7bfb67ae9c20cfcbf86c3ae59de57a46cf5002d7cc893b8a4d9d85e",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Camera-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Camera.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:10.4791686+00:00",
+      "endedUtc": "2026-09-30T02:51:11.2274369+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Camera-Release.log",
+      "logSha256": "dc85f1a1d5a7341e0cd69284b698ef9a0b62638e488e465eb2aeb9e20819f96a",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Simulation-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Simulation.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:11.2327068+00:00",
+      "endedUtc": "2026-09-30T02:51:21.6445528+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Simulation-Release.log",
+      "logSha256": "e54a94963be65ff41ae8dbaf0b2c78253c2c3887823139ad25387af0cddfb864",
+      "failureDetails": [],
+      "summaryLines": [
+        "CONTACT_SERVICE_SEQUENCE tilted=True moving=False fps=150 steps=1200 support=600/600 shorts=400 longs=800 debt=0 trajectory=EXACT geometric_peak_m=0.004164378500802757 drift_m=5.960464477539063E-08",
+        "CONTACT_SERVICE_SEQUENCE tilted=True moving=False fps=240 steps=1200 support=600/600 shorts=400 longs=800 debt=0 trajectory=EXACT geometric_peak_m=0.004164378500802757 drift_m=5.960464477539063E-08",
+        "CONTACT_SERVICE_SEQUENCE tilted=True moving=False fps=0 steps=1200 support=600/600 shorts=400 longs=800 debt=0 trajectory=EXACT geometric_peak_m=0.004164378500802757 drift_m=5.960464477539063E-08",
+        "ARTICLE_SCHEDULE tilted=False hz=30 endpoints=1200/1200 support=600/600 selector_service_boundaries=600 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=60 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=150 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=240 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=False hz=0 endpoints=1200/1200 support=600/600 selector_service_boundaries=300 selector_differences=0 budget_stops=299 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_PRIVATE_EQUIVALENCE tilted=False endpoints=1200/1200 canonical_nonmutation=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=30 endpoints=1200/1200 support=600/600 selector_service_boundaries=600 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=60 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=150 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=240 endpoints=1200/1200 support=600/600 selector_service_boundaries=1200 selector_differences=0 budget_stops=0 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_SCHEDULE tilted=True hz=0 endpoints=1200/1200 support=600/600 selector_service_boundaries=300 selector_differences=0 budget_stops=299 accepted=20000000 debt=0 history=1200 final_hold=PASS",
+        "ARTICLE_PRIVATE_EQUIVALENCE tilted=True endpoints=1200/1200 canonical_nonmutation=PASS",
+        "COMMAND_SCHEDULES PASS 30/60/150/240/delayed history=8/8 funding=2000000 boundary=120",
+        "COMMAND_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "COMMAND_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "COMMAND_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS",
+        "ENGINE_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "ENGINE_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "ENGINE_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=False moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=False endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS",
+        "RESOURCE_ARTICLE PASS tilted=True moving=True endpoint_bits=1200/1200 original_geometry_gates=PASS same_world=PASS no_force_applied=PASS"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Launcher-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Launcher.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:21.6499165+00:00",
+      "endedUtc": "2026-09-30T02:51:22.3478091+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Launcher-Release.log",
+      "logSha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "NovaCore launcher tests passed: 19"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Player-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Player.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:22.3536134+00:00",
+      "endedUtc": "2026-09-30T02:51:23.1476434+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Player-Release.log",
+      "logSha256": "f626a82e531b64090561624101f4be9793de722553d500afbdeabb05d99559ba",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS player configuration: 49 checks",
+        "PASS player configuration and GPU memory presentation: 55 checks"
+      ],
+      "reportedResultLines": [
+        "PASS player configuration: 49 checks",
+        "PASS player configuration and GPU memory presentation: 55 checks"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "diagnostics-build-Release",
+      "command": [
+        "dotnet",
+        "build",
+        "tests/NovaCore.App.Diagnostics.Tests",
+        "-c",
+        "Release"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:23.1529579+00:00",
+      "endedUtc": "2026-09-30T02:51:25.3141970+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\diagnostics-build-Release.log",
+      "logSha256": "eb411e8f185f1db7acfa9716415d5b0cfddc25b14f654472fb6502e09f00ad2c",
+      "failureDetails": [],
+      "summaryLines": [
+        "    0 Warning(s)",
+        "    0 Error(s)"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-App.Diagnostics-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.App.Diagnostics.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "E:\\NovaCore\\build\\m16.2-bank-preparation\\session-log-test-Release"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:25.3198587+00:00",
+      "endedUtc": "2026-09-30T02:51:27.0188585+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-App.Diagnostics-Release.log",
+      "logSha256": "ecd1f166f5bd29046f0aece24fca6e4fa08391897368bd6c61986742c66d6db4",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS 113 diagnostic checks; no window or GPU created"
+      ],
+      "reportedResultLines": [
+        "PASS 113 diagnostic checks; no window or GPU created"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-MinimumRecorder-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.MinimumRecorder.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "E:\\NovaCore\\build\\m16.2-bank-preparation\\MinimumRecorder-fixtures-Release",
+        "E:\\NovaCore\\tools\\NovaCore.Recorder\\bin\\Release\\net10.0-windows\\NovaCore.Recorder.exe"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:27.0240018+00:00",
+      "endedUtc": "2026-09-30T02:51:50.7497729+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-MinimumRecorder-Release.log",
+      "logSha256": "427397198fde58b812c8af3015af8c7f25eefa9bd73a302b193efafb3bf79cff",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS 22708 checks; CPU-only."
+      ],
+      "reportedResultLines": [
+        "PASS 22708 checks; CPU-only."
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-Retention-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Retention.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "E:\\NovaCore\\build\\m16.2-bank-preparation\\Retention-fixtures-Release",
+        "E:\\NovaCore\\tools\\NovaCore.Recorder\\bin\\Release\\net10.0-windows\\NovaCore.Recorder.exe"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:51:50.7556969+00:00",
+      "endedUtc": "2026-09-30T02:54:07.9745831+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-Retention-Release.log",
+      "logSha256": "924428888c54545e30e6d38de99ec382e6a5c12113b83928be9fc452e03a1c87",
+      "failureDetails": [],
+      "summaryLines": [
+        "PASS capsule checksum corruption refuses",
+        "PASS schema dispatch refuses checksummed oversized decompressed metadata before parse",
+        "PASS valid-checksummed terminal substitution refuses checkpoint disagreement",
+        "PASS 389 retention checks"
+      ],
+      "reportedResultLines": [
+        "PASS capsule checksum corruption refuses",
+        "PASS schema dispatch refuses checksummed oversized decompressed metadata before parse",
+        "PASS valid-checksummed terminal substitution refuses checkpoint disagreement",
+        "PASS 389 retention checks"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-BepuDependency-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.BepuDependency.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:54:07.9812237+00:00",
+      "endedUtc": "2026-09-30T02:54:08.7499687+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-BepuDependency-Release.log",
+      "logSha256": "46b9f239058362b8bf65ab1eec1459970d5561559439d3bf0b2fe9c8ab6a2a00",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "test-EphemerisBuilder-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.EphemerisBuilder.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:54:08.7559975+00:00",
+      "endedUtc": "2026-09-30T02:54:09.5248807+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\test-EphemerisBuilder-Release.log",
+      "logSha256": "0f4fedbfd8f57a7166884e885e3769c48b42ba642ebf89381406287eb3d1d59e",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "regional-native-Debug",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja\\NovaCoreRegionalPhysicalTests.exe",
+        "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:54:50.0358644+00:00",
+      "endedUtc": "2026-09-30T02:54:51.5145833+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\regional-native-Debug.log",
+      "logSha256": "d6ab6a63221a2f475896373c6ac46c6cedb3552db338357b8949445066bda1be",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "graphics-native-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "--native-gpu"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:54:51.5312366+00:00",
+      "endedUtc": "2026-09-30T02:54:56.2096852+00:00",
+      "exitCode": 1,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\graphics-native-Debug.log",
+      "logSha256": "80f2c1a55243f15e8739946ec150ebde70c1b3e5cdc9234bd01b92fc28a80fe8",
+      "failureDetails": [
+        [
+          "Vulkan profile: CANONICAL (Khronos validation only)",
+          "Canonical layer: manifest=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.json; binary=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true",
+          "Loader-visible layers: VK_LAYER_KHRONOS_validation",
+          "GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "presentation test SPIR-V missing",
+          "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+          "Surface material coordinates PASS: 540 GPU coordinate components; 3 orientations, 3 body radii, 4 camera distances; maxPhysicalErrorMetres=0.000183627; FP64 body identity / FP32 local differential; no shell input",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\""
+        ]
+      ],
+      "summaryLines": [
+        "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+        "Native GPU Debug: pass=2; fail=1; skip=0"
+      ],
+      "reportedResultLines": [
+        "Native GPU Debug: pass=2; fail=1; skip=0"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE"
+    },
+    {
+      "name": "modular-editor-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "--modular-editor-regressions"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:54:39.7222060+00:00",
+      "endedUtc": "2026-09-30T02:55:55.9553950+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\modular-editor-Debug.log",
+      "logSha256": "8195e386322864f4995c9e31b15c1c6701fb09a89c475d4d4807c0b5a18f5701",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE"
+    },
+    {
+      "name": "surface-persistence-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "--surface-persistence"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:55:55.9716302+00:00",
+      "endedUtc": "2026-09-30T02:56:00.4583921+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\surface-persistence-Debug.log",
+      "logSha256": "395a804a89953c44fca514e7e818a431288ca628f0a272d1a673df5116252c9f",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "SURFACE_PERSISTENCE_PASS checks=35"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "surface-cycles-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "--surface-cycles"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:56:00.4658064+00:00",
+      "endedUtc": "2026-09-30T02:56:06.7137877+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\surface-cycles-Debug.log",
+      "logSha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "SURFACE_CYCLES_PASS checks=3692"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "regional-native-Release",
+      "command": [
+        "E:\\NovaCore\\build\\native-ninja-release\\NovaCoreRegionalPhysicalTests.exe",
+        "E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:56:32.7769136+00:00",
+      "endedUtc": "2026-09-30T02:56:33.6846086+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\regional-native-Release.log",
+      "logSha256": "fb58f4002129278c66d330e5cd88e792b7752b838c566c22714a05965e5a3d54",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "modular-editor-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "--modular-editor-regressions"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:56:06.7383849+00:00",
+      "endedUtc": "2026-09-30T02:56:34.7007604+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\modular-editor-Release.log",
+      "logSha256": "d389211d56f92f9cb5a0066f08b365cc4e0c970494e00836b1288daa2f84fa03",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE"
+    },
+    {
+      "name": "surface-persistence-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "--surface-persistence"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:56:34.7069159+00:00",
+      "endedUtc": "2026-09-30T02:56:38.7374138+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\surface-persistence-Release.log",
+      "logSha256": "c9af2b6232c56279b470e2ddd519d1812c3ad653b62883472c67b684764d62b8",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "SURFACE_PERSISTENCE_PASS checks=35"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "graphics-native-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "--native-gpu"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:56:33.7010150+00:00",
+      "endedUtc": "2026-09-30T02:56:38.9915257+00:00",
+      "exitCode": 1,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\graphics-native-Release.log",
+      "logSha256": "918f6bb097700136b6274b6b7a3191ec7bb785a13cfbc34d5ce4d18707973095",
+      "failureDetails": [
+        [
+          "Vulkan profile: CANONICAL (Khronos validation only)",
+          "Canonical layer: manifest=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.json; binary=C:\\VulkanSDK\\1.4.357.0\\Bin\\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true",
+          "Loader-visible layers: VK_LAYER_KHRONOS_validation",
+          "GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "presentation test SPIR-V missing",
+          "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+          "Surface material coordinates PASS: 540 GPU coordinate components; 3 orientations, 3 body radii, 4 camera distances; maxPhysicalErrorMetres=0.000183627; FP64 body identity / FP32 local differential; no shell input",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\"",
+          "Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers \"VK_LAYER_KHRONOS_validation\""
+        ]
+      ],
+      "summaryLines": [
+        "FAIL [native-gpu] NovaCoreFacilityVisibilityTests",
+        "Native GPU Release: pass=2; fail=1; skip=0"
+      ],
+      "reportedResultLines": [
+        "Native GPU Release: pass=2; fail=1; skip=0"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE"
+    },
+    {
+      "name": "surface-cycles-Release",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "--surface-cycles"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:56:38.7433471+00:00",
+      "endedUtc": "2026-09-30T02:56:43.1988902+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\surface-cycles-Release.log",
+      "logSha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [
+        "SURFACE_CYCLES_PASS checks=3692"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "package-verification",
+      "command": [
+        "python",
+        "tools/verify-player-package.py",
+        "--output",
+        "build/m16.2-bank-preparation/package.json"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:58:46.0717349+00:00",
+      "endedUtc": "2026-09-30T02:58:46.2341144+00:00",
+      "exitCode": 1,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\package-verification.log",
+      "logSha256": "11c783f8d68c072ddb45225417918c54718746b62230f72839533143d78daf40",
+      "failureDetails": [],
+      "summaryLines": [],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "topology-fixture-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Debug",
+        "--no-build",
+        "--",
+        "--case=M12D-P2S5F nested production scale-mesh topology"
+      ],
+      "environment": {
+        "NOVACORE_P2S5F_ARTIFACT_INPUT": "E:\\NovaCore\\assets\\planetary-nested-scale-mesh"
+      },
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T03:03:11.6972279+00:00",
+      "endedUtc": "2026-09-30T03:03:29.3148592+00:00",
+      "exitCode": 0,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\topology-fixture-Debug.log",
+      "logSha256": "37217230926a6aafd9e5131a0ef99190fc6b6ec4cb7dd347366fb7c0aacb3879",
+      "failureDetails": [],
+      "summaryLines": [
+        "P2S5F library: levels=18; bytes=554579640; maxPair=253532632; finest=712106/1424208; maxEdge=375144.030m; maxSag=2761.001212m; finestSpacing=2.020586m"
+      ],
+      "reportedResultLines": [],
+      "invocationFailure": false,
+      "evidenceClass": "AUTHORITATIVE TEST-PROBE / BUILD"
+    },
+    {
+      "name": "graphics-Debug",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tests/NovaCore.Graphics.Tests",
+        "-c",
+        "Debug",
+        "--no-build"
+      ],
+      "cwd": "E:\\NovaCore",
+      "startedUtc": "2026-09-30T02:34:18.7728105+00:00",
+      "endedUtc": "2026-09-30T03:04:47.5761160+00:00",
+      "exitCode": 1,
+      "log": "E:\\NovaCore\\build\\m16.2-bank-preparation\\graphics-Debug.log",
+      "logSha256": "edc0bc719a398defe77c8ec02e4b9fa12d843afa09f8842bc3eedaee2f890056",
+      "failureDetails": [
+        [
+          "{\"stage\":3,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":953.1377770649269,\"maximumRadialDot\":-0.9999999999999998,\"horizonFrames\":0}",
+          "{\"stage\":4,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":76.57231583073735,\"maximumRadialDot\":-0.13042370873812253,\"horizonFrames\":7093}",
+          "{\"stage\":5,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":76.57231583073735,\"maximumRadialDot\":-0.12642656753170775,\"horizonFrames\":7093}",
+          "{\"stage\":6,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":76.57231583073735,\"maximumRadialDot\":-0.12949933241767372,\"horizonFrames\":7093}",
+          "[{\"stage\":1,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":67195058.18792023,\"maximumRadialDot\":-1,\"horizonFrames\":0},{\"stage\":2,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":968377.0968228336,\"maximumRadialDot\":-0.9999999999999999,\"horizonFrames\":0},{\"stage\":3,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":953.1377770649269,\"maximumRadialDot\":-0.9999999999999998,\"horizonFrames\":0},{\"stage\":4,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":76.57231583073735,\"maximumRadialDot\":-0.13042370873812253,\"horizonFrames\":7093},{\"stage\":5,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":76.57231583073735,\"maximumRadialDot\":-0.12642656753170775,\"horizonFrames\":7093},{\"stage\":6,\"fps\":60,\"epoch\":0,\"targetObserved\":true,\"minimumAltitude\":76.57231583073735,\"maximumRadialDot\":-0.12949933241767372,\"horizonFrames\":7093}]",
+          "PASS [headless] Earth camera blackout replay",
+          "System.InvalidOperationException: Re-audit offline mirror for production_spherical_billboard.vert",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "FAIL [headless] Earth horizon submission boundary",
+          "   at EarthHorizonSubmissionTests.Require(Boolean b, String m) in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\EarthHorizonSubmissionTests.cs:line 23",
+          "   at EarthHorizonSubmissionTests.Run() in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\EarthHorizonSubmissionTests.cs:line 126",
+          "   at GraphicsTestHarness.RunSelected(String[] args, ValueTuple`2[] tests) in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\GraphicsTestHarness.cs:line 71",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "P2S5C exact horizon: base=1344.683px; TES64=21.010672px; transitionCurvature=0.459px; silhouette=1.312px; requiresManualSignificanceCheck=true",
+          "PASS [headless] Terrain tessellation CPU singular boundary",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll"
+        ],
+        [
+          "P2S5C2 actual reuse: L16-L17=416142/450778 (92.316%); snap=437574/450778 (97.071%); entering=13204",
+          "P2S5C2 physical snap L8: active=142786; reused=125566; new=17220; reuse=87.940%; initialCpu=2648.610ms; initialGpu=14.911080ms; snapCpu=1420.280ms; snapGpu=2.088960ms; heightParity=8.998313206E-011m; normalParity=7.583505303E-007rad; topologyUploads=0",
+          "P2S5C2 moving runtime: publications=1; topologyUploads=1; current=L8; pupilError=1.963069314E-004rad; resident=19418836; peak=19418836; callback=0.320540/1.368600/1.368600ms",
+          "P2S5C2 moving timings avg/p95/max ms: selector=0.006520/0.023000/0.023000; pupilSnap=0.026600/0.105400/0.105400; scheduling=0.873000/0.873000/0.873000; physical=119.663700/119.663700/119.663700; gpuPrepare=0.000000/0.000000/0.000000; publication=0.011800/0.011800/0.011800",
+          "P2S5D cross-level movement: currentFrame=1->3; L8MovesDuringL9Prepare=true; publications=2; owners=1; zero=0; overlap=0; stale=0",
+          "P2S5C2 pupil campaign error: max=2.323803751E-003rad; authoredAxisThreshold=2.222634321E-003rad",
+          "P2S5C2 campaign: levels=18; descent=18; ascent=18; frames=86; cardinalDiagonalWrapPoles=8; maxPupilError=2.323803751E-003rad; timeWarp=body-fixed input invariant; unanchored=body-fixed input invariant",
+          "P2S5C exact horizon: base=1344.683px; TES64=21.010672px; transitionCurvature=0.459px; silhouette=1.312px; requiresManualSignificanceCheck=true",
+          "FAIL [gpu] M12D-P2S5C production spherical billboard runtime",
+          "System.InvalidOperationException: The candidate must be the development render default",
+          "   at TerrainRenderAuthorityTests.VerifyDefaultAndSampling(String root) in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\TerrainRenderAuthorityTests.cs:line 22",
+          "   at PlanetaryProductionSphericalBillboardRuntimeTests.ProveKsaParityPhysicalResponsibilitySplit(String root) in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\PlanetaryProductionSphericalBillboardRuntimeTests.cs:line 230",
+          "   at PlanetaryProductionSphericalBillboardRuntimeTests.Run() in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\PlanetaryProductionSphericalBillboardRuntimeTests.cs:line 48",
+          "   at GraphicsTestHarness.RunSelected(String[] args, ValueTuple`2[] tests) in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\GraphicsTestHarness.cs:line 71",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "P2S5B candidate preflight: base16=1344.683; transition16=0.459; silhouette16=1.312; tes16=225; jump16=8.003; bytes16=178195320; overlap16=245675016; base18=1344.683; transition18=0.459; silhouette18=1.312; tes18=225; jump18=2.000; bytes18=235627328; overlap18=267010792"
+        ],
+        [
+          "P2S5F S09: vertices=350554; triangles=701104; regions=10; minEdge=518.390093m; avgEdge=16014.514m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=93847.035m; immutable=29446444; hash=0x8F6B13684734EB1E; generatedMs=49287.3",
+          "P2S5F S10: vertices=399962; triangles=799920; regions=11; minEdge=259.226504m; avgEdge=14060.606m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=46926.063m; immutable=33596716; hash=0x94FC3260597D77E0; generatedMs=64821.0",
+          "P2S5F S11: vertices=449370; triangles=898736; regions=12; minEdge=129.617181m; avgEdge=12525.502m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=23463.350m; immutable=37746988; hash=0x29745C559AE6222F; generatedMs=83978.3",
+          "P2S5F S12: vertices=498778; triangles=997552; regions=13; minEdge=64.808921m; avgEdge=11289.637m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=11731.715m; immutable=41897260; hash=0xE79EBA567AF0F876; generatedMs=104118.9",
+          "P2S5F S13: vertices=548186; triangles=1096368; regions=14; minEdge=32.404147m; avgEdge=10274.323m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=5865.862m; immutable=46047532; hash=0x72F194C57A876360; generatedMs=135898.7",
+          "P2S5F S14: vertices=597594; triangles=1195184; regions=15; minEdge=16.201448m; avgEdge=9425.879m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=2932.932m; immutable=50197804; hash=0x8999DD8A034A9AB1; generatedMs=158133.8",
+          "P2S5F S15: vertices=647002; triangles=1294000; regions=16; minEdge=8.099055m; avgEdge=8706.545m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=1466.466m; immutable=54348076; hash=0x967DCF11C4ABC256; generatedMs=176036.9",
+          "P2S5F S16: vertices=696410; triangles=1392816; regions=17; minEdge=4.047858m; avgEdge=8089.062m; maxEdge=375144.030m; maxSpan=5.888298722E-002rad; sag=2761.001212m; support=6360008.800m; pupil=733.233m; immutable=58498348; hash=0x32840D29EDE00769; generatedMs=212303.3",
+          "FAIL [headless] M12D-P2S5F nested production scale-mesh topology",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "TES geographic specialization PASS: default=false; ordinary inverse absent; diagnostic inverse retained",
+          "M13.2 fragment specialization PASS: default=full; ordinary diagnostic read absent; five nonordinary inputs removed; full interface retained; SPIR-V valid",
+          "P2S5G compiled surface interface: VS=16 scalars; TCS=13 scalars/control point; 32 redundant TCS scalars removed; fragment inputs=16; frame/body provenance preserved",
+          "PASS [headless] M12D-P2S5G bounded spherical billboard surface interface",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "Loader-visible layers: VK_LAYER_KHRONOS_validation"
+        ],
+        [
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "Parent/child LOD correspondence: sharedDrift=0.000E+000 m; elevationMismatch=0.000E+000 m; edgeError=0.000E+000 m; splitMerge=0.000E+000 m; patchHash=0x98792D7EBC45FF6D",
+          "PASS [headless] Parent-child LOD geographic correspondence",
+          "System.Exception: scene-space orbit lines use read-only reversed-Z occlusion: Solar overview remains pre-surface while focused far-side segments cannot draw through terrain",
+          "   at Program.<<Main>$>g__Check|0_80(Boolean condition, String message) in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\Program.cs:line 4694",
+          "   at Program.<<Main>$>g__OpaqueDistantDetailedHandoffTest|0_8() in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\Program.cs:line 1094",
+          "   at GraphicsTestHarness.RunSelected(String[] args, ValueTuple`2[] tests) in E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\GraphicsTestHarness.cs:line 71",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "FAIL [headless] Opaque distant-detailed handoff",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "PASS [headless] Planetary representation handoff",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "Distant transform parity: helper=identity/+90X/+90Y/+90Z/-90Z; bodies=Earth/Moon/Mars/Jupiter/Saturn; T0=0s; T1=3600s; paused-camera and Sun vectors invariant",
+          "PASS [headless] Distant quaternion transform parity",
+          "Native identity: configuration=Debug; loaded=E:\\NovaCore\\tests\\NovaCore.Graphics.Tests\\bin\\Debug\\net10.0\\NovaCore.Native.dll; sha256=46594873AE925DB023A8AC2227E814BBC2760F830E32FE926F9695271F4EC542; source=E:\\NovaCore\\build\\native-ninja\\NovaCore.Native.dll",
+          "Production model winding: triangles=64512; outward=64512; inward=0; degenerate=0; firstMismatch="
+        ]
+      ],
+      "failureClassification": {
+        "assertionFailures": [
+          "Earth horizon submission boundary",
+          "M12D-P2S5C production spherical billboard runtime",
+          "Opaque distant-detailed handoff"
+        ],
+        "agentInterrupted": [
+          "M12D-P2S5F nested production scale-mesh topology"
+        ],
+        "documentedArtifactModeReplacement": "topology-fixture-Debug PASS; original raw nonzero count retained"
+      },
+      "summaryLines": [
+        "Surface free-look controls: horizonError=1.665334537E-016 rad; rollError=1.490116119E-008 rad; pitch=[-88.50000000000001,88.50000000000001] deg; speeds=12.125000001232602/60.6249999933301/303.1249999658523 m/s; pitchSpeedError=0.000000000E+000; ratios=0.20000000004233537/4.999999999986834; clearances=24.999999728053808/24.999999728053808/24.999999728053808/24.999999728053808/24.999999728053808",
+        "SurfaceAnchor: acquisitionError=0.000E+000 m; ENU maxError=7.288E-010 m; cameraRelativePackError=0.000E+000 m; acquisitionCameraPositionError=2.751E-005 m; acquisitionInvariantError=0.000E+000 m; zoomRatioError=6.710E-011; maxOrientationStep=0.000E+000 rad; handoffTarget=0.000E+000/0.000E+000 m; handoffCamera=2.751E-005 m; handoffDistance=0.000E+000 m; handoffOrientation=0.000E+000/0.000E+000 rad; anchor=596.33 ns; ENU=279.95 ns; handoff=5.12 ns; zoom=29.30 ns; allocations=0",
+        "FAIL [headless] Earth horizon submission boundary",
+        "P2S5C2 actual reuse: L16-L17=416142/450778 (92.316%); snap=437574/450778 (97.071%); entering=13204",
+        "P2S5C2 moving runtime: publications=1; topologyUploads=1; current=L8; pupilError=1.963069314E-004rad; resident=19418836; peak=19418836; callback=0.320540/1.368600/1.368600ms",
+        "P2S5C2 moving timings avg/p95/max ms: selector=0.006520/0.023000/0.023000; pupilSnap=0.026600/0.105400/0.105400; scheduling=0.873000/0.873000/0.873000; physical=119.663700/119.663700/119.663700; gpuPrepare=0.000000/0.000000/0.000000; publication=0.011800/0.011800/0.011800",
+        "FAIL [gpu] M12D-P2S5C production spherical billboard runtime",
+        "FAIL [headless] M12D-P2S5F nested production scale-mesh topology",
+        "P2A bounds: sampledValue=1.46163299655574908E+000/4.76313972081441239E+000; sampledGradient=1.56791337541058007E-001/1.05273437500000000E+000; analytic=sqrt(3),12.25/cell",
+        "P2A structure: directional=0.117213/0.761195; crossGrid=0.129676/0.399839; autocorrelation=-0.202239/0.642900; repeated=0.204352/0.835381; seeds=4; domains=4",
+        "P2B structure Grassland: directional=0.203004; axisPersistence=0.476139; crossGrid4=0.049194; autocorrelation=0.284486; repeatedStamp=0.287591; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "P2B structure ScrubDry: directional=0.254675; axisPersistence=0.184057; crossGrid4=0.004686; autocorrelation=0.167571; repeatedStamp=0.241123; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "P2B structure RockyMountain: directional=0.485401; axisPersistence=0.186774; crossGrid4=0.183531; autocorrelation=0.447363; repeatedStamp=0.424021; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "P2B structure Alpine: directional=0.360236; axisPersistence=0.240743; crossGrid4=0.132803; autocorrelation=0.297640; repeatedStamp=0.256602; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "P2B structure DesertDunes: directional=0.142103; axisPersistence=0.570421; crossGrid4=0.006118; autocorrelation=0.314161; repeatedStamp=0.270739; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "P2B structure CoastWetland: directional=0.233293; axisPersistence=0.431537; crossGrid4=0.077389; autocorrelation=0.265005; repeatedStamp=0.186022; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "P2B structure SnowGlacial: directional=0.370799; axisPersistence=0.332272; crossGrid4=0.078178; autocorrelation=0.170599; repeatedStamp=0.210978; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "P2B structure GenericRemote: directional=0.201337; axisPersistence=0.262398; crossGrid4=0.058484; autocorrelation=0.199027; repeatedStamp=0.281244; gen3=0.686227/0.397887/0.142762/0.800021/0.883288",
+        "Terrain-v5 payload continuity: internal=E0/A0/L0; face=E0/A0/L0; corner=E0/A0/L0; rawParentChild=E934.157321m/A0.342157/L0.480392; uncoordinatedMorphGap=467.078660m; coherentMorphGap=0m; edgeAgeGap=0; renderedMixedEdge=position0m/material0/land0/normal0rad; actualEdgeGap=0.000E+000m; oneSidedNormal=7.074E-002rad; gutterNormal=2.980E-008rad; constrainedVertices=32; stitch=[-U/+U oddY->evenY,-V/+V oddX->evenX]; parentAddressDirection=0.000E+000; elevationEnvelope=[-10036.240177,6196.917678]m; quarterMorphStep=233.539330m; Florida=PositiveZ/0.6102718683788446/0.8413558131838053; land=[0.866448,0.933995,1.000000]",
+        "M12 Florida: records=859; levels=8/9/10/11; launchResidual=15.002m; maxQuantization=0.001961m; bytes=210307596",
+        "Physical-normal frame: boundaryLatitude=71.80512766123321deg; longitude=-42deg; discontinuousReferenceJump=2.382990847247186rad; canonicalEastJump=0rad; canonicalNorthJump=1.4901161193847656E-08rad; longitudeWrap=1.4901161193847656E-08rad; polarStep=9.99155915632302E-07rad; minimumHandedness=0.9999999999999997; south=PositiveY/L2/2/1@0.6666189931924974,0.3494472650593392; north=PositiveY/L2/2/1@0.6666189827254602,0.3494472745838204",
+        "Camera terrain exclusion: sites=0/2.15218388006408/5248.158850966612 m; localResidualMax=28.279296875 m; formerClearance=-14.083751551623099 m; physical=10 m; guard=0.001 m; tolerance=0.0001 m; rootLoss=1.494608819E-006 m; highLowLoss=9.313225746E-010 m; floatLoss=3.362074494E-007 m; maximumError=3.074131905E-006; minimumStress=10.000011461786926 m; corrections=9; guardConsumed=9.885382131E-004 m; exteriorCorrection=110.00100687891245 m; exteriorIterations=1; exteriorQueries=1584; runtimeIterations=14; runtimeDistribution=2298/14/0/0; runtimeMaxIterations=1; runtimeMaxCorrection=110.00100021902472 m; runtimeQueries=2326; maxPositionDelta=30286.01124767529 m; maxOrientationDelta=1.3728589052673685 rad; maxTargetDistance=57.42364609426007 m; transportError=3.357931297E-009 m; gpuClearance=10.000997754745185 m; stationaryDrift=0.000000000E+000 m; directionError=0.000000000E+000 m; invariantAvg/P95/P99=57150.0/76500.0/79600.0 ns; invariantAllocations=0",
+        "FAIL [headless] Opaque distant-detailed handoff",
+        "Graphics Debug: selected=116; pass=112; fail=4; skip=0; excluded=0"
+      ],
+      "reportedResultLines": [
+        "Graphics Debug: selected=116; pass=112; fail=4; skip=0; excluded=0"
+      ],
+      "invocationFailure": false,
+      "evidenceClass": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE"
+    }
+  ],
+  "invocationErrorsAreNotCandidateFailures": true,
+  "fullGraphicsCountsComeFromRunnerSummary": true,
+  "noPhysicalInputClaim": true,
+  "notRun": [
+    {
+      "gate": "Full Graphics Release",
+      "reason": "Sequential full-suite phase stops at mandatory Debug failure; requires correction and both configurations before banking"
+    },
+    {
+      "gate": "Non-96-DPI layout/hit/render coordinates",
+      "reason": "No actual scaled-DPI native run performed; 96-DPI resizing is insufficient"
+    }
+  ]
+}

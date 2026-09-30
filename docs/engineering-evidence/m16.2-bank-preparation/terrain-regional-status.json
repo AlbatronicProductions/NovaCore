@@ -1,0 +1,16 @@
+{
+  "command": [
+    "dotnet",
+    "run",
+    "--project",
+    "tools/NovaCore.AssetTool",
+    "-c",
+    "Release",
+    "--no-build",
+    "--",
+    "status",
+    "earth-florida-m12"
+  ],
+  "reportedStatus": "Valid",
+  "capturedOutput": "Asset: earth-florida-m12\nVersion: terrain-v5; NCCUBE3\nCache: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\nPath: E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube\nStatus: Valid\nBytes: 210307596/210307596\nSHA-256: c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe\nVerification buffer: 1048576 bytes\n"
+}

@@ -1,0 +1,102 @@
+{
+  "judgment": "APPLICATION_INTEGRATION_PASS",
+  "playerPass": false,
+  "padRoutes": [
+    "editor",
+    "flight",
+    "flight-return",
+    "game",
+    "game-return"
+  ],
+  "checks": 588,
+  "tank": "nc.tank.short-2",
+  "process": 3508,
+  "window": 9177524,
+  "parts": 12,
+  "source": "86c9f80c057eaf5fe97dd2e5b766d2374a7a139518bcdf87c5b38e713115b7d5",
+  "compiled": "4238ee9a45fd2545197fb182d82810dc1d8d50c107a68dead94476d740929db9",
+  "retainedEpoch": 844049089719129,
+  "finalEpoch": 844049089750379,
+  "frames": 10512,
+  "warmWindows": [
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.543999671936035,
+        "p95": 6.063700199127197,
+        "p99": 6.260400295257568,
+        "max": 6.4618000984191895
+      },
+      "cpuMs": {
+        "median": 0.0083,
+        "p95": 0.0504,
+        "p99": 0.0612,
+        "max": 0.063
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.563899993896484,
+        "p95": 5.898499965667725,
+        "p99": 6.168799877166748,
+        "max": 10.757599830627441
+      },
+      "cpuMs": {
+        "median": 0.0058,
+        "p95": 0.0464,
+        "p99": 0.0579,
+        "max": 0.0696
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "samples": 120,
+      "frameMs": {
+        "median": 5.547199726104736,
+        "p95": 5.899100303649902,
+        "p99": 6.141499996185303,
+        "max": 6.232900142669678
+      },
+      "cpuMs": {
+        "median": 0.0057,
+        "p95": 0.0527,
+        "p99": 0.0579,
+        "max": 0.0667
+      },
+      "allocatedBytes": {
+        "median": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "gc": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native": "5b13b01c89e8a78f0027b04156c9b14b1aa4dc6e862f5eb41ecc8ee739d89e01"
+}

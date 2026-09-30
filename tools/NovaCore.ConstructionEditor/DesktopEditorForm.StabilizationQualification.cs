@@ -24,7 +24,7 @@ internal sealed unsafe partial class DesktopEditorForm
         applicationStep++;
         if(stabilizationProfile>=stabilizationDepths.Length){
             if(stabilizationPhase==0){
-                CancelGhost();freeGhost=null;mode.SelectedIndex=0;selection=null;qualificationHover=null;
+                CancelGhost();freeGhost=null;editorIntent=0;selection=null;qualificationHover=null;
                 session.Load(session.Revision,AssemblyJson.Write(StabilizationCraftFixture.Create(session.Catalog,100,true)),true);
                 FocusCraft();camera.Pitch=.2;stabilizationPhase=1;editorMeasuring=true;stabilizationStarted=System.Diagnostics.Stopwatch.GetTimestamp();return;
             }
@@ -36,7 +36,7 @@ internal sealed unsafe partial class DesktopEditorForm
         var depth=stabilizationDepths[stabilizationProfile];
         switch(stabilizationPhase){
             case 0:
-                if(!editing)ClickButton("New vehicle");else{CancelGhost();session.Clear(session.Revision,true);selection=null;mode.SelectedIndex=0;RefreshInspector();}
+                if(!editing)ClickButton("New vehicle");else{CancelGhost();session.Clear(session.Revision,true);selection=null;editorIntent=0;RefreshInspector();}
                 connectorTanks.Clear();stabilizationPlaced=stabilizationRadial=0;stabilizationParent="core";count.SelectedItem=8;
                 ChooseCard("nc.core.command-2");camera.Target=Double3.Zero;camera.Distance=8;Hover(Double3.Zero);stabilizationPhase=1;break;
             case 1: RequireQualification(session.Preview is not null,"fresh root preview");WindowClick(Double3.Zero);stabilizationPhase=2;break;

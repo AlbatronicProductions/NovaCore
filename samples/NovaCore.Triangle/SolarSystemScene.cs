@@ -239,8 +239,6 @@ internal sealed class SolarSystemScene
     ];
     private const uint FocusedOverlayBit = 0x8000_0000u;
     private const double OrbitSensitivity = .002d;
-    internal const double SpeedHudDisplaySeconds = 2d;
-    internal const double SpeedHudFadeSeconds = .75d;
     private readonly CelestialSystemDefinition _system;
     private readonly ReferenceFrameId _root;
     private readonly int[] _traversalIndices;
@@ -276,7 +274,6 @@ internal sealed class SolarSystemScene
     private PlanetaryRepresentationHandoff _handoff = new(EarthPlanetaryScene.HandoffConfiguration);
     private PlanetaryRepresentationBlend _blend;
     private int _rateStepIndex = 1;
-    private double _speedHudSecondsRemaining;
     private double _orbitDistance;
     private long _orbitCurveBuildCount = 1, _orbitCurveReuseCount;
     private SimulationInstant _orbitAuthorityTime;
@@ -452,9 +449,7 @@ internal sealed class SolarSystemScene
     }
     internal SimulationRate Rate => _clock.Rate;
     internal int SpeedPresetIndex => _rateStepIndex;
-    internal string SpeedHudLabel => SimulationSpeedPresets.Get(_rateStepIndex).Label;
-    internal bool SpeedHudVisible => _speedHudSecondsRemaining > 0d;
-    internal float SpeedHudAlpha => !SpeedHudVisible ? 0f : (float)Math.Clamp(_speedHudSecondsRemaining / SpeedHudFadeSeconds, 0d, 1d);
+    internal string SpeedLabel => SimulationSpeedPresets.Get(_rateStepIndex).Label;
     internal DateTimeOffset? StartupUtc { get; }
     internal bool IsPaused => _clock.IsPaused;
     internal double OrbitDistance => _orbitDistance;
@@ -726,7 +721,6 @@ internal sealed class SolarSystemScene
 
     internal void ApplyPresentationInput(CameraState camera, in NativeInputState input, out bool rateChanged, out bool pauseChanged,bool deferVesselPose=false)
     {
-        AdvanceSpeedHud(input.DeltaSeconds);
         rateChanged = false;
         pauseChanged = false;
         var rateStep = (input.RateDecrease != 0) == (input.RateIncrease != 0) ? 0 : input.RateIncrease != 0 ? 1 : -1;
@@ -735,7 +729,6 @@ internal sealed class SolarSystemScene
         {
             _rateStepIndex = nextRateIndex;
             rateChanged = _clock.TrySetRate(SimulationSpeedPresets.Get(_rateStepIndex).Rate);
-            if (rateChanged) _speedHudSecondsRemaining = SpeedHudDisplaySeconds;
         }
         if (input.PauseToggle != 0)
         {
@@ -986,7 +979,6 @@ internal sealed class SolarSystemScene
         var lighting = SolarLightingPresentation.CreateDefault(Presentation.Bodies[0].Position);
         if (!lighting.TryEncode(new UniversePosition(camera.Position.Value, Presentation.RootFrame), out var native))
             throw new InvalidOperationException("Solar lighting transport failed.");
-        native.SpeedHud = SpeedHudPacked();
         return native;
     }
 
@@ -1114,19 +1106,6 @@ internal sealed class SolarSystemScene
     {
         var t = Math.Clamp((value - minimum) / (maximum - minimum), 0d, 1d);
         return t * t * (3d - 2d * t);
-    }
-
-    private void AdvanceSpeedHud(float wallSeconds)
-    {
-        if (_speedHudSecondsRemaining <= 0d || !float.IsFinite(wallSeconds) || wallSeconds <= 0f) return;
-        _speedHudSecondsRemaining = Math.Max(0d, _speedHudSecondsRemaining - Math.Min((double)wallSeconds, 1d));
-    }
-
-    private uint SpeedHudPacked()
-    {
-        if (!SpeedHudVisible) return 0u;
-        var alpha = (uint)Math.Clamp((int)Math.Round(SpeedHudAlpha * byte.MaxValue, MidpointRounding.AwayFromZero), 1, byte.MaxValue);
-        return (uint)(_rateStepIndex + 1) | alpha << 8;
     }
 
     private static void AddPriority(Span<int> priority, ref int count, int index)

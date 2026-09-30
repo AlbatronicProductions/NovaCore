@@ -1,5 +1,6 @@
 #include "NovaCoreNative.h"
 #include "PreparedSubmissionStorage.h"
+#include "PlayerGpuMemory.h"
 #include "PostContactTiming.h"
 #include "ProductionCubeSurface.h"
 #include "LocalTerrainPack.h"
@@ -43,6 +44,9 @@
 #include <windows.h>
 
 namespace {
+bool PlayerGpuTelemetryActive();
+VkInstance PlayerGpuInstance();
+bool ReadPlayerGpuMemory(NcPlayerGpuMemorySnapshot& snapshot);
 SHORT RegionalValidationKeyState(int key){return std::getenv("NOVACORE_REGIONAL_PHYSICAL_PROBE")?0:GetAsyncKeyState(key);}
 
 constexpr uint32_t Width = 960, Height = 540;
@@ -309,6 +313,7 @@ struct RegionalPreparationJob {
 struct App;
 void CausalFault(App&,VkResult);
 struct App {
+  bool ownsInstance=true;
   nc::causal::Recorder causal;
   nc::causal::RecordingCallTrace recordingTrace;
   nc::startup::Channel startup;
@@ -437,7 +442,6 @@ struct App {
   VkPipeline solarOrbitPipeline{};
   VkPipeline solarMarkerPipeline{};
   VkPipeline solarLabelPipeline{};
-  VkPipeline solarSpeedHudPipeline{};
   VkPipeline orbitPipeline{};
   VkPipeline previousOrbitPipeline{};
   VkPipeline bodyForwardPipeline{};
@@ -559,6 +563,10 @@ struct App {
   LONG rawMouseX{}, rawMouseY{};
   LONG wheelDeltaRaw{};
   bool lookActive{};
+  std::array<bool,256> playerBlockedKeys{};
+  bool playerReadySent{};
+  uint64_t playerReadySubmit{};
+  uint64_t playerPresentationGeneration{};
   bool pauseWasDown{}, rateDecreaseWasDown{}, rateIncreaseWasDown{};
   std::array<bool, 8> sasModeWasDown{};
   std::array<bool, 10> presentationFocusWasDown{};
@@ -620,6 +628,8 @@ App *gApp{};
 #include "CausalNative.inl"
 #include "OrdinaryNative.inl"
 void ClearRawInput(App &a) {
+  if(a.application)a.playerBlockedKeys.fill(true);
+  a.resetWasDown=false;a.focusVesselWasDown=false;
   a.rawMouseX = 0;
   a.rawMouseY = 0;
   a.lookActive = false;
@@ -656,6 +666,9 @@ uint32_t PilotKey(WPARAM key) {
     case 'D': return 8u; case 'Q': return 16u; case 'E': return 32u; default: return 0u; }
 }
 LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
+  if(gApp&&gApp->application&&(m==WM_CANCELMODE||m==WM_KILLFOCUS||(m==WM_CAPTURECHANGED&&!gApp->editorReleasingCapture))){ClearRawInput(*gApp);gApp->editor->buttons=gApp->editor->pressed=gApp->editor->released=0;gApp->editor->wheel=0;}
+  if(gApp&&gApp->application){if((m==WM_KEYUP||m==WM_SYSKEYUP)&&w<256)gApp->playerBlockedKeys[w]=false;if(m==WM_LBUTTONUP)gApp->playerBlockedKeys[VK_LBUTTON]=false;if(m==WM_RBUTTONUP)gApp->playerBlockedKeys[VK_RBUTTON]=false;if(m==WM_MBUTTONUP)gApp->playerBlockedKeys[VK_MBUTTON]=false;}
+  if(gApp&&gApp->application&&gApp->application->mode==2u&&(m==WM_LBUTTONDOWN||m==WM_RBUTTONDOWN||m==WM_MBUTTONDOWN||m==WM_MOUSEWHEEL||m==WM_KEYDOWN))return 0;
   if(gApp&&gApp->application&&(m==WM_CLOSE||m==WM_DESTROY)){gApp->editor->stop=1;return 0;}
   if(gApp&&gApp->application&&m==WM_LBUTTONDOWN)SetFocus(h);
   if(gApp&&gApp->application&&m==WM_RBUTTONDOWN)SetFocus(h);
@@ -668,6 +681,7 @@ LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
     // Preserve the first left press until delivery; motion remains separately
     // available to the next callback. Focus/capture refusal still clears edges.
     if(down==1u&&!(input.pressed&1u)){gApp->editorPressX=gApp->editorPointerX;gApp->editorPressY=gApp->editorPointerY;}
+    if(down&&gApp->application&&gApp->playerBlockedKeys[down==1u?VK_LBUTTON:down==2u?VK_RBUTTON:VK_MBUTTON])return 0;
     if(down){SetFocus(h);SetCapture(h);input.buttons|=down;input.pressed|=down;return 0;}
     if(up){input.buttons&=~up;input.released|=up;if(!input.buttons&&GetCapture()==h){gApp->editorReleasingCapture=true;ReleaseCapture();gApp->editorReleasingCapture=false;}return 0;}
     if(m==WM_MOUSEWHEEL){input.wheel+=float(GET_WHEEL_DELTA_WPARAM(w))/WHEEL_DELTA;return 0;}
@@ -682,6 +696,7 @@ LRESULT CALLBACK Proc(HWND h, UINT m, WPARAM w, LPARAM l) {
   // an engine. This is requested input only, consumed by an explicit context.
   if (m == WM_KEYDOWN && gApp && GetForegroundWindow() == (gApp->application?GetAncestor(h,GA_ROOT):h) && GetFocus() == h &&
       (GetCapture() == nullptr || GetCapture() == h) && (l & (1LL << 30)) == 0) {
+    if(gApp->application&&w<256&&gApp->playerBlockedKeys[w])return 0;
     if (w == 'Z') gApp->engineActions |= 1u;
     if (w == 'X') gApp->engineActions |= 2u;
     gApp->pilotKeys |= PilotKey(w);
@@ -1008,6 +1023,7 @@ void Window(App &a) {
   ShowWindow(a.window, SW_SHOW);
 }
 void Instance(App &a) {
+  if(a.application&&PlayerGpuInstance()){a.instance=PlayerGpuInstance();a.ownsInstance=false;return;}
   const char *ext[]{VK_KHR_SURFACE_EXTENSION_NAME,
                     VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
                     VK_EXT_DEBUG_UTILS_EXTENSION_NAME};
@@ -1018,7 +1034,7 @@ void Instance(App &a) {
                        1,
                        "NovaCore",
                        1,
-                       a.causal.Active()?VK_API_VERSION_1_1:VK_API_VERSION_1_0};
+                       (a.causal.Active()||PlayerGpuTelemetryActive())?VK_API_VERSION_1_1:VK_API_VERSION_1_0};
   VkInstanceCreateInfo ci{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};
   ci.pApplicationInfo = &ai;
   ci.enabledExtensionCount = 3;
@@ -1068,6 +1084,7 @@ bool Suitable(VkPhysicalDevice d, VkSurfaceKHR s) {
                                VK_KHR_SWAPCHAIN_EXTENSION_NAME);
          });
 }
+#include "PlayerGpuMemory.inl"
 void Device(App &a) {
   CausalScope causalScope(a,Phase::Device);
   uint32_t n = 0;
@@ -1075,14 +1092,18 @@ void Device(App &a) {
   std::vector<VkPhysicalDevice> d(n);
   vkEnumeratePhysicalDevices(a.instance, &n, d.data());
   for (auto x : d)
-    if (Suitable(x, a.surface)) {
+    if ((!a.application||!PlayerGpuTelemetryActive()||playerGpuMemory->Matches(x))&&Suitable(x, a.surface)) {
       a.physical = x;
       break;
     }
   if (!a.physical)
-    throw std::runtime_error("no suitable Vulkan GPU");
+    throw std::runtime_error("no suitable Vulkan GPU matching the configured adapter");
   VkPhysicalDeviceProperties p;
   vkGetPhysicalDeviceProperties(a.physical, &p);
+  if(a.application&&PlayerGpuTelemetryActive()){
+    if(a.instance!=playerGpuMemory->instance||a.physical!=playerGpuMemory->physical)throw std::runtime_error("GPU telemetry/render ownership mismatch");
+    char binding[256];std::snprintf(binding,sizeof(binding),"PLAYER_GPU_BIND queryInstance=%p renderInstance=%p queryPhysical=%p renderPhysical=%p matched=1",(void*)playerGpuMemory->instance,(void*)a.instance,(void*)playerGpuMemory->physical,(void*)a.physical);a.Log(NC_LOG_STARTUP,binding);
+  }
   a.timestampPeriodNanoseconds=p.limits.timestampPeriod;
   char text[256];
   std::snprintf(text, sizeof text, "GPU: %.128s | Vulkan %u.%u | vendor=%04x device=%04x driverRaw=%u maxTessellation=%u", p.deviceName,
@@ -1104,6 +1125,9 @@ void Device(App &a) {
   ci.pQueueCreateInfos = qs.data();
   VkPhysicalDeviceFaultFeaturesEXT fault{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT};
   CausalDeviceOptions(a,extensions,ci,fault);
+  if(a.application&&playerGpuMemory&&playerGpuMemory->supported&&
+      std::none_of(extensions.begin(),extensions.end(),[](const char* s){return std::strcmp(s,VK_EXT_MEMORY_BUDGET_EXTENSION_NAME)==0;}))
+    extensions.push_back(VK_EXT_MEMORY_BUDGET_EXTENSION_NAME);
   ci.enabledExtensionCount = uint32_t(extensions.size());
   ci.ppEnabledExtensionNames = extensions.data();
   VkPhysicalDeviceFeatures enabledFeatures{};enabledFeatures.shaderFloat64=VK_TRUE;enabledFeatures.samplerAnisotropy=VK_TRUE;enabledFeatures.multiDrawIndirect=VK_TRUE;enabledFeatures.tessellationShader=VK_TRUE;enabledFeatures.vertexPipelineStoresAndAtomics=VK_TRUE;enabledFeatures.pipelineStatisticsQuery=VK_TRUE;ci.pEnabledFeatures=&enabledFeatures;
@@ -1187,8 +1211,6 @@ void DestroySwap(App &a) {
     vkDestroyPipeline(a.device,a.solarMarkerPipeline,nullptr);
   if (a.solarLabelPipeline)
     vkDestroyPipeline(a.device,a.solarLabelPipeline,nullptr);
-  if (a.solarSpeedHudPipeline)
-    vkDestroyPipeline(a.device,a.solarSpeedHudPipeline,nullptr);
   if (a.orbitPipeline)
     vkDestroyPipeline(a.device, a.orbitPipeline, nullptr);
   if (a.previousOrbitPipeline)
@@ -1218,7 +1240,6 @@ void DestroySwap(App &a) {
   a.solarOrbitPipeline = {};
   a.solarMarkerPipeline = {};
   a.solarLabelPipeline = {};
-  a.solarSpeedHudPipeline = {};
   a.orbitPipeline = {};
   a.previousOrbitPipeline = {};
   a.bodyForwardPipeline = {};
@@ -1739,7 +1760,7 @@ void Swap(App &a) {
   a.Check(activeOrbitResult, "orbit pipeline failed");
   a.orbitPipeline = activeOrbitPipeline;
   VkShaderModule solarOrbitVs{},solarOrbitFs{};try{solarOrbitVs=Shader(a,"shaders/solar_orbit.vert.spv");solarOrbitFs=Shader(a,"shaders/solar_orbit.frag.spv");}catch(...){if(solarOrbitVs)vkDestroyShaderModule(a.device,solarOrbitVs,nullptr);throw;}VkPipelineShaderStageCreateInfo solarOrbitStages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,solarOrbitVs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,solarOrbitFs,"main"}};VkPipelineInputAssemblyStateCreateInfo solarOrbitAssembly=orbitAssembly;solarOrbitAssembly.topology=VK_PRIMITIVE_TOPOLOGY_LINE_LIST;VkGraphicsPipelineCreateInfo solarOrbitCreate=orbitPipeline;solarOrbitCreate.pStages=solarOrbitStages;solarOrbitCreate.pInputAssemblyState=&solarOrbitAssembly;solarOrbitCreate.pColorBlendState=&planetaryBlend;VkResult solarOrbitResult=vkCreateGraphicsPipelines(a.device,{},1,&solarOrbitCreate,nullptr,&a.solarOrbitPipeline);vkDestroyShaderModule(a.device,solarOrbitVs,nullptr);vkDestroyShaderModule(a.device,solarOrbitFs,nullptr);a.Check(solarOrbitResult,"solar orbit pipeline failed");
-  VkPipelineVertexInputStateCreateInfo overlayInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};VkPipelineInputAssemblyStateCreateInfo overlayAssembly{VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};overlayAssembly.topology=VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;auto createOverlay=[&](const char *vertex,const char *fragment,VkPipeline &destination,const char *failure){VkShaderModule vs=Shader(a,vertex),fs{};try{fs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,vs,nullptr);throw;}VkPipelineShaderStageCreateInfo stages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,vs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=stages;create.pVertexInputState=&overlayInput;create.pInputAssemblyState=&overlayAssembly;create.pColorBlendState=&planetaryBlend;create.pDepthStencilState=&noDepth;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,vs,nullptr);vkDestroyShaderModule(a.device,fs,nullptr);a.Check(result,failure);};createOverlay("shaders/solar_marker.vert.spv","shaders/solar_marker.frag.spv",a.solarMarkerPipeline,"solar marker pipeline failed");createOverlay("shaders/solar_label.vert.spv","shaders/solar_label.frag.spv",a.solarLabelPipeline,"solar label pipeline failed");createOverlay("shaders/solar_speed_hud.vert.spv","shaders/solar_speed_hud.frag.spv",a.solarSpeedHudPipeline,"solar speed HUD pipeline failed");
+  VkPipelineVertexInputStateCreateInfo overlayInput{VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};VkPipelineInputAssemblyStateCreateInfo overlayAssembly{VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO};overlayAssembly.topology=VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;auto createOverlay=[&](const char *vertex,const char *fragment,VkPipeline &destination,const char *failure){VkShaderModule vs=Shader(a,vertex),fs{};try{fs=Shader(a,fragment);}catch(...){vkDestroyShaderModule(a.device,vs,nullptr);throw;}VkPipelineShaderStageCreateInfo stages[2]{{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_VERTEX_BIT,vs,"main"},{VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,nullptr,0,VK_SHADER_STAGE_FRAGMENT_BIT,fs,"main"}};VkGraphicsPipelineCreateInfo create=gp;create.pStages=stages;create.pVertexInputState=&overlayInput;create.pInputAssemblyState=&overlayAssembly;create.pColorBlendState=&planetaryBlend;create.pDepthStencilState=&noDepth;VkResult result=vkCreateGraphicsPipelines(a.device,{},1,&create,nullptr,&destination);vkDestroyShaderModule(a.device,vs,nullptr);vkDestroyShaderModule(a.device,fs,nullptr);a.Check(result,failure);};createOverlay("shaders/solar_marker.vert.spv","shaders/solar_marker.frag.spv",a.solarMarkerPipeline,"solar marker pipeline failed");createOverlay("shaders/solar_label.vert.spv","shaders/solar_label.frag.spv",a.solarLabelPipeline,"solar label pipeline failed");
   VkShaderModule previousOrbitVs{}, previousOrbitFs{};
   try { previousOrbitVs = Shader(a, "shaders/orbit.vert.spv"); previousOrbitFs = Shader(a, "shaders/orbit_previous.frag.spv"); }
   catch (...) { if (previousOrbitVs) vkDestroyShaderModule(a.device, previousOrbitVs, nullptr); throw; }
@@ -1789,6 +1810,7 @@ void Swap(App &a) {
     a.Check(vkCreateFramebuffer(a.device, &fb, nullptr, &a.framebuffers[i]),
             "framebuffer failed");
   }
+  if(a.application){++a.playerPresentationGeneration;char line[400];std::snprintf(line,sizeof line,"PLAYER_TARGET generation=%llu swapchain=%p color=%p depth=%p target=%ux%u framebuffer=%ux%u",(unsigned long long)a.playerPresentationGeneration,(void*)a.swapchain,(void*)a.sceneColor,(void*)a.sceneDepth,a.extent.width,a.extent.height,a.extent.width,a.extent.height);a.Log(NC_LOG_ALWAYS,line);}
 }
 void DestroyPatchBuffer(App &a) {
   if(a.patchMapped)vkUnmapMemory(a.device,a.patchMemory);
@@ -2325,7 +2347,7 @@ void Record(App &a, uint32_t image) {
   if (a.submission->previousOrbitVertexCount >= 2 && a.previousOrbitBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.previousOrbitPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.previousOrbitBuffer, &offset); vkCmdDraw(c, a.submission->previousOrbitVertexCount, 1, 0, 0); }
   if (a.submission->bodyForwardVertexCount == 2 && a.bodyForwardBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.bodyForwardPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.bodyForwardBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
   if (a.submission->targetDirectionVertexCount == 2 && a.targetDirectionBuffer) { VkDeviceSize offset = 0; vkCmdBindPipeline(c, VK_PIPELINE_BIND_POINT_GRAPHICS, a.targetDirectionPipeline); vkCmdBindVertexBuffers(c, 0, 1, &a.targetDirectionBuffer, &offset); vkCmdDraw(c, 2, 1, 0, 0); }
-  if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.stellarSunPipeline);vkCmdBindVertexBuffers(c,0,1,&a.stellarSun.vb,&offset);vkCmdBindIndexBuffer(c,a.stellarSun.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.stellarSun.indices,distantCount,0,0,0);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarMarkerPipeline);vkCmdDraw(c,24,10,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarLabelPipeline);vkCmdDraw(c,42,10,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarSpeedHudPipeline);vkCmdDraw(c,210,1,0,0);}
+  if(solarOverlay){VkDeviceSize offset=0;vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.stellarSunPipeline);vkCmdBindVertexBuffers(c,0,1,&a.stellarSun.vb,&offset);vkCmdBindIndexBuffer(c,a.stellarSun.ib,0,VK_INDEX_TYPE_UINT32);vkCmdDrawIndexed(c,a.stellarSun.indices,distantCount,0,0,0);vkCmdBindDescriptorSets(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.pipelineLayout,0,1,&a.descriptor,0,nullptr);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarMarkerPipeline);vkCmdDraw(c,24,10,0,0);vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.solarLabelPipeline);vkCmdDraw(c,42,10,0,0);}
   vkCmdWriteTimestamp(c,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,a.timestampQueries,7);
   if(a.exhaustMeshHandle){
     vkCmdNextSubpass(c,VK_SUBPASS_CONTENTS_INLINE);
@@ -2585,6 +2607,19 @@ void Draw(App &a) {
     return;
   }
   a.Check(pr, "present failed");
+  if(a.application&&!a.playerReadySent){
+    const bool physical=a.submission->planetarySurfaceMode==NC_PLANETARY_SURFACE_PRODUCTION_CUBE;
+    const auto* requested=a.submission->productionBillboardFrame;
+    const auto pupil=a.productionBillboardRasterFrameIdentity;
+    const bool physicalReady=RegionalPhysicalEnabled(a)&&
+      ProductionBillboardPresentationEnabled(a.productionBillboardAuthoritative,a.submission->productionBillboardFlags)&&
+      a.productionBillboardTopologyFamily==NC_PLANETARY_PRODUCTION_TOPOLOGY_NESTED_SCALE_MESH_NCSM1&&a.productionBillboardGeneration!=0&&
+      a.anchoredPipelineStatisticsFrameSubmitted&&a.anchoredPipelineStatisticsTerrainFrame==a.frame&&
+      a.anchoredPipelineStatisticsGeneration==a.productionBillboardGeneration&&requested&&requested->current.metadata[0]!=0&&pupil!=0&&
+      pupil==a.productionBillboardPreparedFrameIdentity&&pupil==a.productionBillboardCullFrameIdentity&&
+      pupil==a.regionalPublishedPupil.identity[0]&&pupil==requested->current.identity[0];
+    if(!physical||physicalReady)a.playerReadySubmit=a.submitSerial;
+  }
 }
 void Destroy(App &a) {
   CausalScope causalScope(a,Phase::Cleanup);
@@ -2627,7 +2662,7 @@ void Destroy(App &a) {
     if (fn)
       fn(a.instance, a.debug, nullptr);
   }
-  if (a.instance)
+  if (a.instance&&a.ownsInstance)
     vkDestroyInstance(a.instance, nullptr);
   if (a.window)
     DestroyWindow(a.window);
@@ -2679,6 +2714,8 @@ void Update(App &a, float dt) {
     if(a.application->mode>2u||a.application->reserved)throw std::runtime_error("invalid application input context");
     if(a.application->mode!=a.previousApplicationMode){ClearRawInput(a);a.editor->buttons=a.editor->pressed=a.editor->released=0;a.editor->wheel=0;a.previousApplicationMode=a.application->mode;}
   }
+  if(a.application)for(int key=0;key<256;++key)if(!(RegionalValidationKeyState(key)&0x8000))a.playerBlockedKeys[key]=false;
+  auto playerKey=[&](int key){return a.application&&a.playerBlockedKeys[key]?SHORT(0):RegionalValidationKeyState(key);};
   const auto updateStart=std::chrono::steady_clock::now();
   // The owning message loop checks the observer stop before beginning a frame.
   a.causal.Emit(Phase::Fence,Kind::Begin,0,{uint64_t(a.fence)});
@@ -2687,6 +2724,7 @@ void Update(App &a, float dt) {
   a.startup.Completed(a.causal.completed.load());
   a.causal.Emit(Phase::Fence,Kind::End,0,{uint64_t(a.fence)});
   a.causal.Emit(Phase::Completed,Kind::Info);
+  if(a.application&&!a.playerReadySent&&a.playerReadySubmit>0&&a.submitSerial>=a.playerReadySubmit){NcHostEvent ready{NC_PRESENTATION_READY,NC_LOG_NONE,"First presentation fence completed",{},nullptr};a.cb(&ready,a.cbData);a.playerReadySent=true;char line[240];std::snprintf(line,sizeof line,"PLAYER_READY submit=%llu presentationGeneration=%llu regionalPupil=%u physicalOwner=%u",(unsigned long long)a.playerReadySubmit,(unsigned long long)a.playerPresentationGeneration,a.regionalPublishedPupil.identity[0],uint32_t(a.productionBillboardAuthoritative));a.Log(NC_LOG_ALWAYS,line);}
   CompleteFrozenCapture(a); // Existing fence, before either publication can swap resources.
   CausalSnapshot(a,true); // Capture completed ownership before a replacement is published.
   const auto fenceEnd=std::chrono::steady_clock::now();
@@ -2714,7 +2752,7 @@ void Update(App &a, float dt) {
   RegionalPhysicalProbe::Capture(a);
   InspectGpuPlanetary(a);
   const auto inspectionEnd=std::chrono::steady_clock::now();
-  bool active = (RegionalValidationKeyState(VK_LBUTTON) & 0x8000) != 0 || (RegionalValidationKeyState(VK_RBUTTON) & 0x8000) != 0;
+  bool active = (playerKey(VK_LBUTTON) & 0x8000) != 0 || (playerKey(VK_RBUTTON) & 0x8000) != 0;
   if (active && !a.lookActive) {
     a.lookActive = true;
     a.rawMouseX = 0;
@@ -2731,8 +2769,8 @@ void Update(App &a, float dt) {
   if (std::getenv("NOVACORE_REGIONAL_PHYSICAL_PROBE")) wheel = 0;
   a.rawMouseX = 0;
   a.rawMouseY = 0;
-  auto rising = [](int key, bool &wasDown) {
-    const bool down = (RegionalValidationKeyState(key) & 0x8000) != 0;
+  auto rising = [&](int key, bool &wasDown) {
+    const bool down = (playerKey(key) & 0x8000) != 0;
     const bool result = down && !wasDown;
     wasDown = down;
     return result;
@@ -2751,22 +2789,22 @@ void Update(App &a, float dt) {
   const uint32_t engineActions = controlInputActive ? a.engineActions : 0u;
   a.engineActions = 0;
   NcInputState in{dt,
-                  (RegionalValidationKeyState('A') & 0x8000) != 0,
-                  (RegionalValidationKeyState('D') & 0x8000) != 0,
-                  (RegionalValidationKeyState('W') & 0x8000) != 0,
-                  (RegionalValidationKeyState('S') & 0x8000) != 0,
-                  (RegionalValidationKeyState('Q') & 0x8000) != 0,
-                  (RegionalValidationKeyState('E') & 0x8000) != 0,
+                  (playerKey('A') & 0x8000) != 0,
+                  (playerKey('D') & 0x8000) != 0,
+                  (playerKey('W') & 0x8000) != 0,
+                  (playerKey('S') & 0x8000) != 0,
+                  (playerKey('Q') & 0x8000) != 0,
+                  (playerKey('E') & 0x8000) != 0,
                   rising('R', a.resetWasDown),
                   a.lookActive,
                   x,
                   y,
                   wheel,
-                  rising(VK_SPACE, a.pauseWasDown),
-                  rising(VK_OEM_COMMA, a.rateDecreaseWasDown),
-                  rising(VK_OEM_PERIOD, a.rateIncreaseWasDown), sasModeKey,
-                  (RegionalValidationKeyState(VK_SHIFT) & 0x8000) != 0,
-                  (RegionalValidationKeyState(VK_CONTROL) & 0x8000) != 0,
+                  a.application ? 0u : uint32_t(rising(VK_SPACE, a.pauseWasDown)),
+                  a.application ? 0u : uint32_t(rising(VK_OEM_COMMA, a.rateDecreaseWasDown)),
+                  a.application ? 0u : uint32_t(rising(VK_OEM_PERIOD, a.rateIncreaseWasDown)), sasModeKey,
+                  (playerKey(VK_SHIFT) & 0x8000) != 0,
+                  (playerKey(VK_CONTROL) & 0x8000) != 0,
                   static_cast<NcPresentationFocus>(presentationFocus),
                   a.extent.width,
                   a.extent.height, cameraActions, engineActions, controlInputActive, controlInputActive ? a.pilotKeys : 0u};
@@ -2890,27 +2928,36 @@ static NcResult RunRenderer(NcFrameSubmission *s, NcHostCallback cb, void *data,
     a.surfaceDiagnostic=SurfaceDiagnosticFromEnvironment();
     if(a.surfaceDiagnostic){char message[128];std::snprintf(message,sizeof message,"Surface diagnostic isolation flags: 0x%02X",a.surfaceDiagnostic);a.Log(NC_LOG_ALWAYS,message);}
     LogLoadedRuntimePaths(a);
+    auto progress=[&](const char* text){if(!a.application)return;NcHostEvent event{NC_STARTUP_PROGRESS,NC_LOG_NONE,text,{},nullptr};a.cb(&event,a.cbData);if(a.editor->stop)throw nc::startup::Cancelled{};};
     Window(a);
+    progress("Renderer | window ready; creating graphics queue");
     a.startup.CheckAllowed();
     Instance(a);
     SetupDebug(a);
     Surface(a);
     a.startup.CheckAllowed();
     Device(a);
+    progress("Renderer | graphics queue ready");
     CreateMesh(a);
     CreateVisualMeshes(a,meshes,meshCount);
+    progress("Assets | mesh system ready");
     a.startup.CheckAllowed();
     CreateProductionCubeSurface(a);
     CreateLocalTerrain(a);
+    progress("Planet renderer | terrain resources ready");
     a.startup.CheckAllowed();
     Validate(a);
     Swap(a);
+    a.resized=false; // Initial target already matches its newly created child.
+    progress("Planet renderer | shaders and presentation targets ready");
     a.startup.CheckAllowed();
     CreateSubmission(a);
     Commands(a);
     CreateFrozenCapture(a);
+    progress("Renderer | submission resources ready");
     a.startup.CheckAllowed();
     BootstrapProductionHierarchy(a);
+    progress("Planet renderer | required hierarchy ready");
     a.startup.CheckAllowed();
     a.startup.Mark(nc::startup::NativeReady);
     a.causal.Emit(Phase::Setup,Kind::End);
@@ -3024,6 +3071,10 @@ extern "C" NC_API NcResult __cdecl nc_upload_spherical_billboard_gpu_proof_topol
 extern "C" NC_API NcResult __cdecl nc_publish_spherical_billboard_physical_surface(const NcSphericalBillboardPhysicalSurface* surface,NcSphericalBillboardProofMetrics* metrics){return PublishSphericalBillboardPhysicalSurface(surface,metrics);}
 extern "C" NC_API NcResult __cdecl nc_run_spherical_billboard_gpu_proof_frame(const NcSphericalBillboardProofFrame* frame,NcSphericalBillboardProofMetrics* metrics){return RunSphericalBillboardGpuProofFrame(frame,metrics);}
 extern "C" NC_API NcResult __cdecl nc_shutdown_spherical_billboard_gpu_proof(){return ShutdownSphericalBillboardGpuProof();}
+extern "C" NC_API NcResult __cdecl nc_application_await_presentation() {
+  if(!gApp||!gApp->application||GetWindowThreadProcessId(gApp->window,nullptr)!=GetCurrentThreadId())return NC_INVALID_ARGUMENT;
+  gApp->playerReadySent=false;gApp->playerReadySubmit=0;return NC_SUCCESS;
+}
 extern "C" NC_API NcResult __cdecl nc_run_renderer(NcFrameSubmission *s, NcHostCallback cb, void *data) { return RunRenderer(s,cb,data,nullptr); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_assets(NcFrameSubmission *s, NcHostCallback cb, void *data, const NcRuntimeAssets *assets) { return RunRenderer(s,cb,data,assets); }
 extern "C" NC_API NcResult __cdecl nc_run_renderer_with_visual_meshes(NcFrameSubmission *s,NcHostCallback cb,void *data,const NcVisualMesh* meshes,uint32_t count,uint32_t preparedObjectCapacity){return RunRenderer(s,cb,data,nullptr,meshes,count,preparedObjectCapacity);}
@@ -3049,3 +3100,5 @@ extern "C" NC_API int __cdecl nc_read_minimum_measurement(nc::minimum::Measureme
 extern "C" NC_API int __cdecl nc_minimum_route_marker(uint64_t body,double distance,double radius,uint64_t epoch){
   auto* r=nc::minimum::recorder.get();if(!r)return 1;auto e=r->Make(nc::minimum::Window);e.w[17]=1;e.w[18]=body;std::memcpy(e.w+19,&distance,8);std::memcpy(e.w+20,&radius,8);e.w[21]=epoch;return r->Emit(e)?0:1;
 }
+
+#include "PlayerGpuMemoryExports.inl"

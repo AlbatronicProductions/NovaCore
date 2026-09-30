@@ -18,7 +18,7 @@ internal sealed unsafe partial class DesktopEditorForm
     private string? displayedFlightStatus;
     private float lastApplicationDelta;
     private Control? overlay;
-    private readonly FlowLayoutPanel navigation=new(){Dock=DockStyle.Top,Height=46,Padding=new(8,5,8,5),WrapContents=false};
+    private readonly PlayerOverlayLayer modalBackdrop=new(){BackColor=Color.Gray,Alpha=96,Visible=false};
     private readonly FlowLayoutPanel inspector=new(){Dock=DockStyle.Right,Width=260,FlowDirection=FlowDirection.TopDown,WrapContents=false,Padding=new(12),AutoScroll=true};
     private readonly FlowLayoutPanel cards=new(){Width=220,Height=480,AutoScroll=true,WrapContents=true};
     private readonly FlowLayoutPanel contextInspector=new(){Width=280,Height=420,FlowDirection=FlowDirection.TopDown,WrapContents=false,Padding=new(12),AutoScroll=true,Visible=false};
@@ -36,18 +36,20 @@ internal sealed unsafe partial class DesktopEditorForm
     NativeRuntime.EditorMessageCallback IApplicationPresentation.Preprocess=>preprocess!;
     ConstructionFlightScene? IApplicationPresentation.Flight=>flight;
     bool IApplicationPresentation.Editing=>editing;
-    bool IApplicationPresentation.Paused=>editing||overlay is not null;
+    bool IApplicationPresentation.Paused=>editing||loading||overlay is not null||menuOpen||physicalUserPaused;
     void IApplicationPresentation.Attach(SolarSystemScene scene,CameraState camera){solar=scene;flightCamera=camera;}
     void IApplicationPresentation.BeginFrame(in NativeInputState input)
     {
-        if(applicationViewport is null)return;
+        if(applicationViewport is null)return;playerFrameCounter++;
         if(firstApplicationFrame){firstApplicationFrame=false;message="Solar system · choose New vehicle to build, or Menu for navigation.";UpdateStatus();FocusViewport();}
+        try{AdvanceLoading();}catch(Exception ex){ReportPresentationFailure(ex);}
         lastApplicationDelta=input.DeltaSeconds;
-        applicationViewport->Mode=overlay is not null?2u:editing?0u:1u;
+        UpdateInputMode();
+        RefreshPlayerChrome(input.DeltaSeconds);
         if(!editing&&overlay is null&&flight is not null&&displayedFlightStatus!=flight.PlayerStatus){displayedFlightStatus=flight.PlayerStatus;status.Text=displayedFlightStatus+"\nMouse: orbit / zoom · 1–0: celestial focus · F: craft · Menu: return to construction · Physical flight: 1×";}
-        try{if(editing&&overlay is null)Input(*native);}
+        try{if(editing&&overlay is null&&!menuOpen&&!loading)Input(*native);}
         catch(Exception ex){ReportPresentationFailure(ex);}
-        QualifyApplicationFrame(input);
+        if(!loading)QualifyApplicationFrame(input);
     }
     void IApplicationPresentation.PresentEditor(NativeFrameSubmission* frame)
     {
@@ -69,27 +71,13 @@ internal sealed unsafe partial class DesktopEditorForm
     }
     private void BuildPlayerShell()
     {
-        Text="NovaCore";BackColor=Color.FromArgb(20,26,34);ForeColor=Color.FromArgb(224,231,237);
-        sidebar.Width=360;sidebar.Padding=new(8);sidebar.BackColor=Color.FromArgb(27,34,44);
-        inspector.BackColor=contextInspector.BackColor=sidebar.BackColor;navigation.BackColor=Color.FromArgb(14,20,28);status.BackColor=navigation.BackColor;status.Height=72;
-        Controls.Add(viewport);Controls.Add(inspector);Controls.Add(sidebar);Controls.Add(status);Controls.Add(navigation);
-        ActionButton(navigation,"Menu",ShowPause,90);ActionButton(navigation,"New vehicle",()=>{if(editing)NewCraft();else EnterEditor();},130);
-        ActionButton(navigation,"Return to flight",LeaveEditor,140);ActionButton(navigation,"Focus craft",FocusCraft,110);
-        var body=new FlowLayoutPanel(){Width=344,Height=400,WrapContents=false};
-        var categories=new FlowLayoutPanel(){Width=112,Height=400,FlowDirection=FlowDirection.TopDown,WrapContents=false,AutoScroll=true};
-        foreach(var name in new[]{"All"}.Concat(session.Catalog.Data.Definitions.Select(d=>d.Standard!.Category).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal)))
-            ActionButton(categories,name,()=>{category=name;RefreshCatalog();},104,70);
-        void FitCatalog(){body.Height=Math.Max(180,sidebar.ClientSize.Height-190);cards.Height=categories.Height=body.Height-6;}
-        sidebar.Resize+=(_,_)=>FitCatalog();FitCatalog();
-        body.Controls.Add(categories);body.Controls.Add(cards);sidebar.Controls.Add(body);
-        foreach(CatalogItem item in catalogList.Items){var d=item.Definition;thumbnails[d.Id]=PartThumbnail.Draw(assets[d.Id]);
-            var card=new Button(){Text=d.Construction!.Name,Image=thumbnails[d.Id],TextImageRelation=TextImageRelation.ImageAboveText,Width=103,Height=128,FlatStyle=FlatStyle.Flat,BackColor=Color.FromArgb(37,46,59),ForeColor=ForeColor,Tag=d.Id};
-            card.Click+=(_,_)=>Attempt(()=>HoldPart(d));tooltips.SetToolTip(card,$"{d.Construction.Name}\n{d.Standard!.Purpose}\nDry mass {d.DryMassKg:0.##} kg · development content");partCards.Add(d.Id,card);
-        }
-        var modes=new FlowLayoutPanel(){Width=340,Height=40};ActionButton(modes,"Select",()=>{CancelGhost();freeGhost=null;mode.SelectedIndex=0;},80);ActionButton(modes,"Move",()=>{NeedSelection();CancelGhost();mode.SelectedIndex=2;},80);ActionButton(modes,"Bin",()=>{CancelGhost();freeGhost=null;mode.SelectedIndex=0;message="Held part cancelled.";},80);sidebar.Controls.Add(modes);
-        var symmetry=new FlowLayoutPanel(){Width=340,Height=62};symmetry.Controls.Add(new Label(){Text="Symmetry",AutoSize=true,Margin=new(4,8,4,0)});count.Width=70;symmetry.Controls.Add(count);
-        ActionButton(symmetry,"Rotate",RotateHeld,90);sidebar.Controls.Add(symmetry);
-        sidebar.Controls.Add(new Label(){Width=330,Height=70,Text="Click a part card, then a connection.\nRight drag: orbit · middle drag: pan\nWheel: zoom · X: symmetry · Delete: cancel"});
+        Text="NovaCore";BackColor=Color.FromArgb(55,57,60);ForeColor=Color.FromArgb(224,231,237);
+        // The editor has one presentation tree. Its panels overlay the full renderer.
+        viewport.Dock=sidebar.Dock=inspector.Dock=status.Dock=DockStyle.None;
+        sidebar.BackColor=inspector.BackColor=contextInspector.BackColor=status.BackColor=PanelColor;
+        sidebar.Padding=new(Ui(10));inspector.Padding=new(Ui(12));status.Padding=new(Ui(8));
+        Controls.Add(viewport);Controls.Add(inspector);Controls.Add(sidebar);Controls.Add(status);Controls.Add(modalBackdrop);
+        BuildEditorCatalogue();
         contextInspector.Controls.Add(selectedInfo);contextInspector.Controls.Add(new Label(){Text="Propellant / charge (%)",AutoSize=true});
         var quantities=new FlowLayoutPanel(){Width=232,Height=38};fill.Width=103;charge.Width=103;quantities.Controls.Add(fill);quantities.Controls.Add(charge);contextInspector.Controls.Add(quantities);contextInspector.Controls.Add(stores);contextInspector.Controls.Add(electrical);
         ActionButton(contextInspector,"Apply to selected group",()=>{NeedSelection();CancelGhost();session.ConfigureSelection(session.Revision,selection!,(double)fill.Value/100,(double)charge.Value/100,stores.Checked,electrical.Checked);RefreshInspector();},225);
@@ -100,17 +88,28 @@ internal sealed unsafe partial class DesktopEditorForm
         ActionButton(inspector,"Fill consumables",FillConsumables,225);
         ActionButton(inspector,"Launch vehicle",LaunchCraft,225,42);
         ActionButton(inspector,"Save / Load",()=>ShowSaveBrowser(false),225);
-        Controls.Add(contextInspector);RefreshCatalog();SetEditorPanels(false);Resize+=(_,_)=>CenterOverlay();
+        ActionButton(inspector,"Focus craft",FocusCraft,225);
+        ActionButton(inspector,"Return to flight",LeaveEditor,225);
+        StyleEditorControls(inspector);StyleEditorControls(contextInspector);
+        Controls.Add(contextInspector);BuildPlayerCommands();RefreshCatalog();SetEditorPanels(false);Resize+=(_,_)=>LayoutPlayerShell();LayoutPlayerShell();
+    }
+    private void LayoutPlayerShell()
+    {
+        viewport.Bounds=ClientRectangle;modalBackdrop.Bounds=ClientRectangle;
+        topBar.Bounds=new(0,0,ClientSize.Width,Ui(27));
+        LayoutEditorPanels();
+        CenterOverlay();
     }
     private Button ActionButton(Control parent,string label,Action action,int width=240,int height=32)
     {
-        var button=new Button(){Text=label,Width=width,Height=height,FlatStyle=FlatStyle.Flat,BackColor=Color.FromArgb(43,57,72),ForeColor=ForeColor};
+        var button=new Button(){Text=label,Width=width,Height=height,FlatStyle=FlatStyle.Flat,BackColor=PanelColor,ForeColor=ForeColor};
         button.Click+=(_,_)=>Attempt(action);parent.Controls.Add(button);return button;
     }
     private void RefreshCatalog()
     {
+        if(session.Current is null&&category!="All"&&!catalogParts.Any(d=>d.Standard!.RootEligible&&d.Standard.Category==category)){category="All";categoryPicker.SelectedItem=category;}
         cards.SuspendLayout();cards.Controls.Clear();
-        foreach(CatalogItem item in catalogList.Items){var d=item.Definition;if(category!="All"&&d.Standard!.Category!=category)continue;if(session.Current is null&&!d.Standard!.RootEligible)continue;cards.Controls.Add(partCards[d.Id]);}
+        foreach(var d in catalogParts){if(category!="All"&&d.Standard!.Category!=category)continue;if(session.Current is null&&!d.Standard!.RootEligible)continue;cards.Controls.Add(partCards[d.Id]);}
         cards.ResumeLayout();
     }
     private void RefreshInspector()
@@ -130,71 +129,37 @@ internal sealed unsafe partial class DesktopEditorForm
     private FlowLayoutPanel OpenOverlay(string title,int width=360,int height=360)
     {
         if(overlay is not null){Controls.Remove(overlay);overlay.Dispose();}
-        var panel=new FlowLayoutPanel(){Width=width,Height=height,Padding=new(24),FlowDirection=FlowDirection.TopDown,WrapContents=false,BackColor=Color.FromArgb(24,33,45),AutoScroll=true};
-        panel.Controls.Add(new Label(){Text=title,Width=width-52,Height=42,Font=new(Font.FontFamily,15,FontStyle.Bold)});
-        overlay=panel;Controls.Add(panel);CenterOverlay();panel.BringToFront();if(applicationViewport is not null)applicationViewport->Mode=2;
+        var panel=new FlowLayoutPanel(){Width=width,Height=height,Padding=new(Ui(12)),FlowDirection=FlowDirection.TopDown,WrapContents=false,BackColor=PanelColor,AutoScroll=true};
+        panel.Controls.Add(new Label(){Text=title,Width=width-52,Height=42,Font=new(Font.FontFamily,10,FontStyle.Bold)});
+        if(applicationViewport is not null)applicationViewport->Mode=2;
+        InvalidatePlayerInput();
+        overlay=panel;Controls.Add(panel);CenterOverlay();topBar.Hide();modalBackdrop.Visible=running;modalBackdrop.BringToFront();panel.BringToFront();
         contextInspector.Hide();
-        sidebar.Enabled=inspector.Enabled=navigation.Enabled=false;
+        sidebar.Enabled=inspector.Enabled=false;
         return panel;
     }
-    private void CenterOverlay(){if(overlay is not null)overlay.Location=new(Math.Max(0,(ClientSize.Width-overlay.Width)/2),Math.Max(navigation.Height,(ClientSize.Height-overlay.Height)/2));}
-    private void CloseOverlay(){if(overlay is not null){Controls.Remove(overlay);overlay.Dispose();overlay=null;}sidebar.Enabled=inspector.Enabled=true;navigation.Enabled=running;if(applicationViewport is not null)applicationViewport->Mode=editing?0u:1u;FocusViewport();}
-    private void ShowStartup()
-    {
-        navigation.Enabled=running;
-        startupSettings=LauncherSettingsStore.LoadOrDefault();var panel=OpenOverlay("NOVACORE",430,370);
-        var resolution=new ComboBox(){Width=370,DropDownStyle=ComboBoxStyle.DropDownList};
-        resolution.FormattingEnabled=true;resolution.Format+=(_,e)=>{if(e.ListItem is NovaCoreResolutionPreset preset)e.Value=preset==NovaCoreResolutionPreset.NativeDesktop?"Native display":preset.ToString().Replace("Resolution",string.Empty).Replace("x"," × ");};
-        foreach(var value in Enum.GetValues<NovaCoreResolutionPreset>())resolution.Items.Add(value);resolution.SelectedItem=startupSettings.Resolution;
-        var fullscreen=new CheckBox(){Text="Borderless fullscreen",Checked=startupSettings.WindowMode==NovaCoreWindowMode.BorderlessFullscreen,AutoSize=true};
-        resolution.Enabled=!fullscreen.Checked;fullscreen.CheckedChanged+=(_,_)=>resolution.Enabled=!fullscreen.Checked;
-        panel.Controls.Add(new Label(){Text="Windowed resolution",AutoSize=true});panel.Controls.Add(resolution);panel.Controls.Add(fullscreen);
-        panel.Controls.Add(new Label(){Text="Explore the Solar system and build a vehicle.\nDevelopment content · Florida flight at 1×",Width=370,Height=64});
-        ActionButton(panel,running?"Apply display settings":"Start NovaCore",()=>{
-            if(!running&&!DiagnosticStartup.TryBeginLoading()){CloseApproved();return;}
-            var desktop=Screen.FromControl(this).Bounds;
-            if(!ScenarioCatalog.TryCreateConfiguration(NovaCoreScenarioPreset.SolarSystemOverview,null,fullscreen.Checked?NovaCoreWindowMode.BorderlessFullscreen:NovaCoreWindowMode.Windowed,(NovaCoreResolutionPreset)resolution.SelectedItem!,startupSettings.Diagnostics,desktop.Width,desktop.Height,out configuration,out var error))throw new InvalidDataException(error);
-            if(qualificationPath is null&&!LauncherSettingsStore.TrySave(startupSettings with {WindowMode=configuration!.WindowMode,Resolution=configuration.ResolutionPreset,Diagnostics=configuration.Diagnostics},out error))throw new IOException(error);
-            FormBorderStyle=fullscreen.Checked?FormBorderStyle.None:FormBorderStyle.Sizable;
-            if(fullscreen.Checked){Bounds=desktop;}else ClientSize=new(Math.Max(960,configuration!.ClientResolution.Width),Math.Max(700,configuration.ClientResolution.Height));
-            CloseOverlay();navigation.Enabled=true;message=running?"Display settings applied.":"Loading the Solar system…";UpdateStatus();Refresh();if(!running)BeginInvoke(RunViewport);
-        },370,42);
-        if(running)ActionButton(panel,"Back",CloseOverlay,370);
-        if(!running)DiagnosticStartup.Mark(DiagnosticStartup.UiReady);
-        if(qualificationPath is not null&&!running){if(!RecorderQualification&&!SurfaceRetryQualification){resolution.SelectedItem=RcsScalabilityQualification?NovaCoreResolutionPreset.Resolution3440x1440:NovaCoreResolutionPreset.Resolution1280x720;fullscreen.Checked=RcsScalabilityQualification;}BeginInvoke(()=>ClickButton("Start NovaCore"));}
-    }
+    private void CenterOverlay(){if(overlay is not null)overlay.Location=new(Math.Max(0,(ClientSize.Width-overlay.Width)/2),Math.Max(0,(ClientSize.Height-overlay.Height)/2));}
+    private void CloseOverlay(){InvalidatePlayerInput();if(overlay is not null){Controls.Remove(overlay);overlay.Dispose();overlay=null;}modalBackdrop.Hide();sidebar.Enabled=inspector.Enabled=true;UpdateInputMode();RaiseEditorPanels();FocusViewport();}
+    private void ShowStartup()=>ShowPlayerConfiguration();
     [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern IntPtr SetFocus(IntPtr window);
     private void FocusViewport(){if(running){var child=GetWindow(viewport.Handle,5);if(child!=IntPtr.Zero)SetFocus(child);}}
     private void ShowPartContext(NativeEditorViewport input){if(selection is null){contextInspector.Hide();return;}RefreshInspector();contextInspector.Location=new(Math.Clamp(viewport.Left+input.PointerX+12,0,Math.Max(0,ClientSize.Width-contextInspector.Width)),Math.Clamp(viewport.Top+input.PointerY,46,Math.Max(46,ClientSize.Height-status.Height-contextInspector.Height)));contextInspector.Show();contextInspector.BringToFront();}
-    private void ShowPause()
-    {
-        if(!running)return;if(overlay is not null){CloseOverlay();return;}
-        var panel=OpenOverlay(editing?"CONSTRUCTION · PAUSED":"PAUSED",360,450);
-        ActionButton(panel,"Resume",CloseOverlay,300);
-        if(editing){ActionButton(panel,"Save / Load",()=>ShowSaveBrowser(false),300);ActionButton(panel,"Exit editor",LeaveEditor,300);}
-        else
-        {
-            ActionButton(panel,"New vehicle / retained design",EnterEditor,300);
-            if(flight is {Failed:false})ActionButton(panel,"Save flight",SaveFlight,300);
-            ActionButton(panel,"Load flight",LoadFlight,300);
-        }
-        ActionButton(panel,"Settings",ShowStartup,300);
-        ActionButton(panel,"Quit",()=>RequestLeave(CloseApproved),300);
-    }
+    private void ShowPause(){if(!running||loading)return;if(overlay is not null)CloseOverlay();else ShowPausePanel();}
     private void EnterEditor(){CloseOverlay();editing=true;flight?.SuspendLive();SetEditorPanels(true);RefreshInspector();if(applicationViewport is not null)applicationViewport->Mode=0;message="Choose a category and a part card.";UpdateStatus();}
     private void LeaveEditor(){CloseOverlay();editing=false;displayedFlightStatus=null;SetEditorPanels(false);flight?.SuspendLive();if(applicationViewport is not null)applicationViewport->Mode=1;FocusViewport();message=flight is null?"Solar system": "Z ignite · X cutoff · WASD/QE attitude · mouse orbit · F craft · Menu returns to construction";UpdateStatus();}
-    private void SetEditorPanels(bool value){contextInspector.Hide();sidebar.Visible=inspector.Visible=value;navigation.Controls[2].Visible=value;navigation.Controls[3].Visible=value;}
+    private void SetEditorPanels(bool value){contextInspector.Hide();sidebar.Visible=inspector.Visible=status.Visible=value;RaiseEditorPanels();}
     private void RunViewport()
     {
-        if(running)return;var lease=new NativeApplicationViewport(){Input=new(){Size=64,Version=1,ParentWindow=(ulong)viewport.Handle.ToInt64()},Mode=1};
+        if(running)return;var lease=new NativeApplicationViewport(){Input=new(){Size=64,Version=1,ParentWindow=(ulong)viewport.Handle.ToInt64()},Mode=2};
         applicationViewport=&lease;native=&lease.Input;running=true;
         preprocess=(window,msg,w,l,_)=>{
             try{
                 if(QualificationMessage(msg)!=0)return 1;
+                if(msg==0x101)blockedShortcuts.Remove((Keys)w);
                 if(msg==0x100&&(l&(1L<<30))==0){
-                    if(w==27){ShowPause();return 1;}
-                    if(editing&&overlay is null&&Control.FromChildHandle((IntPtr)window) is not TextBoxBase and not UpDownBase and not ComboBox){
-                        if(w==46){CancelGhost();freeGhost=null;mode.SelectedIndex=0;return 1;}
+                    if(DispatchPlayerKey((IntPtr)window,w))return 1;
+                    if(editing&&overlay is null&&!menuOpen&&!loading&&GetForegroundWindow()==Handle&&GetFocus()==(IntPtr)window&&Control.FromChildHandle((IntPtr)window) is not TextBoxBase and not UpDownBase and not ComboBox){
+                        if(w==46){CancelGhost();freeGhost=null;editorIntent=0;return 1;}
                         if(w==88){count.SelectedIndex=(count.SelectedIndex+((ModifierKeys&Keys.Shift)!=0?3:1))%4;return 1;}
                     }
                 }
@@ -207,8 +172,10 @@ internal sealed unsafe partial class DesktopEditorForm
         try{
             if(!SampleOptions.TryParse(["--scene=sol"],out var options,out var error)||!LogOptions.TryParse(options.LogArguments,out var log,out error))throw new InvalidDataException(error);
             if(ApplicationRenderer.Run(options,log,options.UseProductionEarth,this)!=0)throw new InvalidDataException("The application renderer stopped. See the retained diagnostic log.");
-        }catch(Exception ex){Console.Error.WriteLine(ex);message=ex.Message;UpdateStatus();FailQualification(ex);}
-        finally{native=null;applicationViewport=null;preprocess=null;running=false;}
+        }catch(OperationCanceledException)when(approvedClose){Console.WriteLine("PLAYER_LOADING_CANCELLED requested=true cleanup=complete");}
+        catch(Exception ex){Console.Error.WriteLine(ex);message=ex.Message;UpdateStatus();FailQualification(ex);}
+        finally{native=null;applicationViewport=null;preprocess=null;running=false;loading=false;}
+        if(!approvedClose){startCommitted=false;ShowInformation("SESSION STOPPED",message+"\nYour construction draft is retained. Close the application and retry after correcting the reported cause.");}
         try{RecorderReport();SurfaceRetryReport();}catch(Exception e){FailQualification(e);}
         if(approvedClose)BeginInvoke(Close);
     }

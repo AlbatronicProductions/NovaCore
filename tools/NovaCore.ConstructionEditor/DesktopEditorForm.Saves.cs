@@ -25,7 +25,7 @@ internal sealed unsafe partial class DesktopEditorForm
         ActionButton(actions,"Load selected",()=>{
             if(entries.SelectedItem is not SavedEntry entry)throw new InvalidDataException("Select a saved vehicle first.");
             RequestLeave(()=>{
-                session.LoadFrom(session.Revision,entry.Path,true);RememberPath(entry.Path);selection=null;refusedGhost=null;targetKey=null;freeGhost=null;mode.SelectedIndex=0;
+                session.LoadFrom(session.Revision,entry.Path,true);RememberPath(entry.Path);selection=null;refusedGhost=null;targetKey=null;freeGhost=null;editorIntent=0;
                 craftName.Text=session.Current!.Design.Data.Craft!.Name;FocusCraft();RefreshInspector();CloseOverlay();message="Vehicle loaded.";
             });
         },160);
@@ -35,7 +35,7 @@ internal sealed unsafe partial class DesktopEditorForm
     private void SaveEntry(string path,Action? afterSave)
     {
         if(session.Current is null)throw new InvalidDataException("Place a root before saving.");
-        if(session.Preview is not null||mode.SelectedIndex!=0)throw new InvalidDataException("Place or cancel the held part before saving.");
+        if(session.Preview is not null||editorIntent!=0)throw new InvalidDataException("Place or cancel the held part before saving.");
         Directory.CreateDirectory(SaveDirectory);session.SaveTo(session.Revision,path);RememberPath(path);CloseOverlay();message="Vehicle saved.";afterSave?.Invoke();
     }
     private void RequestLeave(Action continuation)

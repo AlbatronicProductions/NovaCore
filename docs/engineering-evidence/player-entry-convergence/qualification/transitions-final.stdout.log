@@ -1,0 +1,149 @@
+Diagnostic session: C:\Users\Tyler\AppData\Local\NovaCore\Logs\20260929-222328-333-27932-bf4b6743b73d402fab140a3d0d404718
+Qualification recorder: C:\Users\Tyler\AppData\Local\NovaCore\MinimumRecorder\d68bc343273641bc95799a99274f1942
+GPU_MEMORY_UI phase=configuration sequence=3 sampleQpc=1554667456272 uiQpc=1554667475468 utc=2026-09-29T22:23:29.8042270Z status=Ready usage=0 budget=12320555008 capacity=17163091968 queryNs=3600 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=1322.9
+PLAYER_LOADING stage=Core � checking planetary data monotonic=1554668769147
+Earth route policy: scene=sol; owner=NCSM1; physicalGeneration=4; focus=None; altitude=; site=land; anchoredInstantiated=false; manualAcceptance=passed.
+Physical surface authority: generation=4; mode=M12DNaturalTerrainCandidate.
+PLAYER_LOADING stage=Universe � preparing Solar system monotonic=1554672510965
+Scene: sol; bodies=10; instant=843992679502408; rate=1:1; physical body radii plus screen-space markers; trajectory paths=9 x 128 segments.
+Solar startup: UTC=2026-09-29T22:23:30.3200567+00:00; SimulationInstant=843992679502408 ticks (843992679.502408 ET seconds from J2000).
+Controls: LMB/RMB drag orbit or surface yaw/pitch, wheel zoom, E attach/detach surface-relative camera, surface WASD with Shift fast/Ctrl slow, 1-0 focus, ,/. rate, Space pause, R Solar Map/home.
+Runtime fingerprint: cwd=E:\NovaCore; process=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\NovaCore.exe; base=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\
+Runtime managed: path=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\NovaCore.Triangle.dll; bytes=374784; sha256=c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64
+Runtime native-resolved: path=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\NovaCore.Native.dll; bytes=500736; sha256=47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e
+Runtime production-fragment: path=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\shaders\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973
+Runtime production-tess-control: path=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\shaders\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c
+Runtime production-tess-evaluation: path=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\shaders\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e
+Runtime distant-fragment: path=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\shaders\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8
+Runtime terrain-v5: global=E:\NovaCore\.novacore\cache\terrain\v1\sha256\38\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\NovaCore\.novacore\cache\terrain\v1\sha256\c4\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\NovaCore\assets\earth\runtime\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317
+PLAYER_LOADING stage=Presentation � preparing camera and scene monotonic=1554673911903
+PLAYER_LOADING stage=Planet renderer � loading terrain topology monotonic=1554673936206
+New Earth Renderer topology route: production=true; format=NCSM1; directory=E:\NovaCore\assets\planetary-nested-scale-mesh; persistentScaleResources=true; displacedTriangleCull=true.
+Earth route: NCSM1 available; preparation deferred until Earth focus; anchoredOwner=false.
+PLAYER_LOADING stage=Renderer � creating graphics resources monotonic=1554692212259
+GPU_MEMORY_UI phase=loading sequence=4 sampleQpc=1554692213306 uiQpc=1554692216084 utc=2026-09-29T22:23:32.2799307Z status=Ready usage=0 budget=12375605248 capacity=17163091968 queryNs=8300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=317.4
+[native] Loaded runtime paths: module=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\NovaCore.Native.dll; cwd=E:\NovaCore; productionFragment=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\shaders/planetary_production.frag.spv; distantFragment=E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\shaders/distant_planet.frag.spv
+PLAYER_LOADING stage=Renderer | window ready; creating graphics queue monotonic=1554692291150
+[native] PLAYER_GPU_BIND queryInstance=0000016127687790 renderInstance=0000016127687790 queryPhysical=000001612990EF10 renderPhysical=000001612990EF10 matched=1
+[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64
+[native] Vulkan validation layer: disabled (Release)
+PLAYER_LOADING stage=Renderer | graphics queue ready monotonic=1554692548621
+[native] REUSABLE_VISUAL_MESHES count=30 vertices=4448 indices=6408 gpu_buffer_bytes=239136
+PLAYER_LOADING stage=Assets | mesh system ready monotonic=1554692679791
+[native] Production cube pack: terrain-v5; maxLevel=2; records=126; raw transactional payloads; physicalSlots=256; immutableGlobalRecords=126; uploadBudget=2
+PLAYER_LOADING stage=Planet renderer | terrain resources ready monotonic=1554692828158
+[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=51946208 extent=3440x1440 physics_bytes=0
+[native] PLAYER_TARGET generation=1 swapchain=00000161276622A0 color=0000016138F95810 depth=0000016138F97110 target=3440x1440 framebuffer=3440x1440
+PLAYER_LOADING stage=Planet renderer | shaders and presentation targets ready monotonic=1554693809570
+[native] PREPARED_VISUAL_SUBMISSION capacity=21505 bytes=1720496 initial_active=1
+PLAYER_LOADING stage=Renderer | submission resources ready monotonic=1554695554619
+[native] Earth terrain-v5 material roots ready: mask=0x3F; renderer-lifetime pinned=true
+[native] Production cache extent seeded: records=126; controlHighWater=126; offset=104
+[native] Earth terrain-v5 complete L0-L2 hierarchy synchronously resident before first submitted presentation frame: records=126; terrainBindings=126; injectedBatchDelayMs=0; milliseconds=77.613
+PLAYER_LOADING stage=Planet renderer | required hierarchy ready monotonic=1554696351083
+[native] Native host callback is active
+[native] Renderer health: completedFrame=0; extent=3440x1440; applicationMode=2; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=0.004
+[native] Planetary context transition: epoch=1; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] PLAYER_READY submit=1 presentationGeneration=1 regionalPupil=0 physicalOwner=0
+[native] GPU timings: total=0.943 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.669; preSurface=0.000; scene=0.879; toneMap=0.064; regionalCompute=0.183; materialsOverlays=0.018
+[native] PLAYER_READY submit=2 presentationGeneration=1 regionalPupil=0 physicalOwner=0
+PLAYER_LOADING_COMPLETE readiness=native-first-fence-and-selected-session-presentation memory=Ready sample=4
+SURFACE_RETRY_INPUT foreground=True viewportFocused=True action=None
+PLAYER_ENTRY_PROOF phase=0 loop=3 render=3440x1440 hwnd=14093560
+GPU_MEMORY_UI phase=gameplay sequence=5 sampleQpc=1554702993097 uiQpc=1554702993648 utc=2026-09-29T22:23:33.3579096Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4600 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=69.7
+[native] GPU timings: total=1.195 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.055; toneMap=0.140; regionalCompute=0.002; materialsOverlays=0.378
+[native] GPU timings: total=1.078 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.018; toneMap=0.060; regionalCompute=0.002; materialsOverlays=0.342
+GPU_MEMORY_UI phase=gameplay sequence=6 sampleQpc=1554713047264 uiQpc=1554713047801 utc=2026-09-29T22:23:34.3633264Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4400 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=70.9
+[native] GPU timings: total=1.081 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.020; toneMap=0.060; regionalCompute=0.002; materialsOverlays=0.344
+PLAYER_ENTRY_PROOF phase=1 loop=365 render=3440x1440 hwnd=14093560
+GPU_MEMORY_UI phase=gameplay sequence=7 sampleQpc=1554723051506 uiQpc=1554723051997 utc=2026-09-29T22:23:35.3637507Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4900 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=66.0
+[native] GPU timings: total=1.163 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.101; toneMap=0.062; regionalCompute=0.002; materialsOverlays=0.424
+[native] GPU timings: total=1.139 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.078; toneMap=0.061; regionalCompute=0.002; materialsOverlays=0.401
+GPU_MEMORY_UI phase=gameplay sequence=8 sampleQpc=1554733387716 uiQpc=1554733388170 utc=2026-09-29T22:23:36.3973716Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=62.7
+[native] GPU timings: total=0.968 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.910; toneMap=0.058; regionalCompute=0.002; materialsOverlays=0.234
+GPU_MEMORY_UI phase=gameplay sequence=9 sampleQpc=1554743388153 uiQpc=1554743388641 utc=2026-09-29T22:23:37.3974154Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4400 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=65.0
+[native] GPU timings: total=1.053 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.995; toneMap=0.059; regionalCompute=0.002; materialsOverlays=0.318
+[native] Renderer health: completedFrame=891; extent=3440x1440; applicationMode=2; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=3.774
+[native] GPU timings: total=1.127 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.933; toneMap=0.194; regionalCompute=0.002; materialsOverlays=0.256
+GPU_MEMORY_UI phase=gameplay sequence=10 sampleQpc=1554753381960 uiQpc=1554753382388 utc=2026-09-29T22:23:38.3967960Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4200 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=58.8
+[native] GPU timings: total=1.082 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.023; toneMap=0.059; regionalCompute=0.002; materialsOverlays=0.346
+PLAYER_ENTRY_PROOF phase=2 loop=1085 render=3440x1440 hwnd=14093560
+[native] GPU timings: total=1.171 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.035; toneMap=0.136; regionalCompute=0.002; materialsOverlays=0.359
+GPU_MEMORY_UI phase=gameplay sequence=11 sampleQpc=1554763550984 uiQpc=1554763551720 utc=2026-09-29T22:23:39.4136985Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4900 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=90.1
+[native] GPU timings: total=1.093 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.033; toneMap=0.061; regionalCompute=0.002; materialsOverlays=0.356
+GPU_MEMORY_UI phase=gameplay sequence=12 sampleQpc=1554773660572 uiQpc=1554773661070 utc=2026-09-29T22:23:40.4246572Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=4500 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=66.6
+[native] GPU timings: total=1.359 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.032; toneMap=0.327; regionalCompute=0.002; materialsOverlays=0.355
+[native] GPU timings: total=1.085 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.025; toneMap=0.060; regionalCompute=0.002; materialsOverlays=0.348
+GPU_MEMORY_UI phase=gameplay sequence=13 sampleQpc=1554783881605 uiQpc=1554783882047 utc=2026-09-29T22:23:41.4467606Z status=Ready usage=525115392 budget=12288573440 capacity=17163091968 queryNs=5900 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=62.7
+PLAYER_ENTRY_PROOF phase=3 loop=1625 render=3440x1440 hwnd=14093560
+[native] GPU timings: total=1.154 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.026; toneMap=0.128; regionalCompute=0.002; materialsOverlays=0.349
+GPU_MEMORY_UI phase=gameplay sequence=14 sampleQpc=1554793832662 uiQpc=1554793833146 utc=2026-09-29T22:23:42.4418663Z status=Ready usage=525115392 budget=12287606784 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=66.8
+[native] Renderer health: completedFrame=1790; extent=3440x1440; applicationMode=2; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=3.909
+[native] GPU timings: total=0.748 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.690; toneMap=0.058; regionalCompute=0.002; materialsOverlays=0.013
+[native] GPU timings: total=0.746 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.690; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.013
+GPU_MEMORY_UI phase=gameplay sequence=15 sampleQpc=1554804001112 uiQpc=1554804001540 utc=2026-09-29T22:23:43.4587112Z status=Ready usage=525115392 budget=12287606784 capacity=17163091968 queryNs=4700 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=60.1
+[native] GPU timings: total=0.747 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.690; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.013
+GPU_MEMORY_UI phase=gameplay sequence=16 sampleQpc=1554814000144 uiQpc=1554814000620 utc=2026-09-29T22:23:44.4586146Z status=Ready usage=525115392 budget=12287606784 capacity=17163091968 queryNs=4400 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=68.5
+[native] GPU timings: total=1.104 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.043; toneMap=0.060; regionalCompute=0.002; materialsOverlays=0.367
+[native] GPU timings: total=1.100 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.041; toneMap=0.060; regionalCompute=0.002; materialsOverlays=0.364
+GPU_MEMORY_UI phase=gameplay sequence=17 sampleQpc=1554824219290 uiQpc=1554824219681 utc=2026-09-29T22:23:45.4805291Z status=Ready usage=525115392 budget=12287606784 capacity=17163091968 queryNs=4200 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=54.8
+PLAYER_ENTRY_PROOF phase=4 loop=2344 render=3440x1440 hwnd=14093560
+[native] Planetary context transition: epoch=2; body=0; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] GPU timings: total=0.100 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.032; preSurface=0.000; scene=0.043; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.000
+GPU_MEMORY_UI phase=gameplay sequence=18 sampleQpc=1554834432010 uiQpc=1554834432406 utc=2026-09-29T22:23:46.5018011Z status=Ready usage=525115392 budget=12287606784 capacity=17163091968 queryNs=4700 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=61.1
+[native] GPU timings: total=0.100 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.032; preSurface=0.000; scene=0.043; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.000
+[native] GPU timings: total=0.101 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.032; preSurface=0.000; scene=0.043; toneMap=0.058; regionalCompute=0.002; materialsOverlays=0.000
+GPU_MEMORY_UI phase=gameplay sequence=19 sampleQpc=1554844708538 uiQpc=1554844708919 utc=2026-09-29T22:23:47.5294539Z status=Ready usage=525115392 budget=12287606784 capacity=17163091968 queryNs=4200 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=59.8
+[native] Renderer health: completedFrame=2686; extent=3440x1440; applicationMode=0; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=4.776
+[native] GPU timings: total=0.100 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.032; preSurface=0.000; scene=0.043; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.000
+GPU_MEMORY_UI phase=gameplay sequence=20 sampleQpc=1554854987663 uiQpc=1554854988397 utc=2026-09-29T22:23:48.5573669Z status=Ready usage=525115392 budget=12287606784 capacity=17163091968 queryNs=7400 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=94.3
+PLAYER_ENTRY_PROOF phase=5 loop=2880 render=3440x1440 hwnd=14093560
+[native] Planetary context transition: epoch=3; body=2; surfaceMode=0; terrainVersion=0; physicalGeneration=4; regime=0; productionEligible=false; owner=bounded-sphere
+[native] GPU timings: total=1.348 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.670; preSurface=0.000; scene=1.202; toneMap=0.146; regionalCompute=0.183; materialsOverlays=0.341
+[native] GPU timings: total=1.079 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.019; toneMap=0.060; regionalCompute=0.002; materialsOverlays=0.343
+GPU_MEMORY_UI phase=gameplay sequence=21 sampleQpc=1554865439198 uiQpc=1554865439589 utc=2026-09-29T22:23:49.6025198Z status=Ready usage=525115392 budget=12288131072 capacity=17163091968 queryNs=4400 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=54.8
+[native] GPU timings: total=1.102 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.045; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.368
+GPU_MEMORY_UI phase=gameplay sequence=22 sampleQpc=1554875602264 uiQpc=1554875602712 utc=2026-09-29T22:23:50.6188265Z status=Ready usage=525115392 budget=12288131072 capacity=17163091968 queryNs=4500 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=60.9
+[native] GPU timings: total=0.956 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.665; preSurface=0.000; scene=0.898; toneMap=0.058; regionalCompute=0.002; materialsOverlays=0.222
+[native] GPU timings: total=1.113 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.975; toneMap=0.138; regionalCompute=0.002; materialsOverlays=0.299
+GPU_MEMORY_UI phase=gameplay sequence=23 sampleQpc=1554885550799 uiQpc=1554885551228 utc=2026-09-29T22:23:51.6136799Z status=Ready usage=525115392 budget=12288131072 capacity=17163091968 queryNs=4300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=58.7
+PLAYER_ENTRY_PROOF phase=6 loop=3420 render=3440x1440 hwnd=14093560
+[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=21562080 extent=1920x1080 physics_bytes=0
+[native] PLAYER_TARGET generation=2 swapchain=0000016138DE6330 color=000001B0EB316E30 depth=000001614B9ECD60 target=1920x1080 framebuffer=1920x1080
+[native] PREPARED_VISUAL_SUBMISSION capacity=21505 bytes=1720496 initial_active=1
+[native] Swapchain recreated after resize
+[native] GPU timings: total=0.329 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.280; preSurface=0.000; scene=0.302; toneMap=0.027; regionalCompute=0.002; materialsOverlays=0.012
+GPU_MEMORY_UI phase=gameplay sequence=24 sampleQpc=1554895765102 uiQpc=1554895765553 utc=2026-09-29T22:23:52.6351104Z status=Ready usage=344498176 budget=12296699904 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=61.7
+[native] Renderer health: completedFrame=3550; extent=1920x1080; applicationMode=1; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=4.446
+[native] GPU timings: total=0.330 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.280; preSurface=0.000; scene=0.303; toneMap=0.027; regionalCompute=0.002; materialsOverlays=0.013
+[native] GPU timings: total=0.330 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.280; preSurface=0.000; scene=0.303; toneMap=0.027; regionalCompute=0.002; materialsOverlays=0.012
+GPU_MEMORY_UI phase=gameplay sequence=25 sampleQpc=1554905986777 uiQpc=1554905987168 utc=2026-09-29T22:23:53.6572778Z status=Ready usage=344498176 budget=12296699904 capacity=17163091968 queryNs=4300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=54.9
+[native] GPU timings: total=0.330 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.281; preSurface=0.000; scene=0.303; toneMap=0.027; regionalCompute=0.002; materialsOverlays=0.013
+GPU_MEMORY_UI phase=gameplay sequence=26 sampleQpc=1554916264806 uiQpc=1554916265218 utc=2026-09-29T22:23:54.6850807Z status=Ready usage=344498176 budget=12296699904 capacity=17163091968 queryNs=4900 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=57.9
+[native] GPU timings: total=0.329 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.280; preSurface=0.000; scene=0.302; toneMap=0.027; regionalCompute=0.002; materialsOverlays=0.012
+[native] GPU timings: total=0.330 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.281; preSurface=0.000; scene=0.304; toneMap=0.027; regionalCompute=0.002; materialsOverlays=0.012
+GPU_MEMORY_UI phase=gameplay sequence=27 sampleQpc=1554926542393 uiQpc=1554926542841 utc=2026-09-29T22:23:55.7128394Z status=Ready usage=344498176 budget=12296699904 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=61.3
+PLAYER_ENTRY_PROOF phase=7 loop=4104 render=1920x1080 hwnd=14093560
+[native] EXHAUST_PRESENTATION_STORAGE targets=2 allocated_bytes=51946208 extent=3440x1440 physics_bytes=0
+[native] PLAYER_TARGET generation=3 swapchain=0000016138DE5DB0 color=000001B0EB316E30 depth=000001612437BFA0 target=3440x1440 framebuffer=3440x1440
+[native] PREPARED_VISUAL_SUBMISSION capacity=21505 bytes=1720496 initial_active=1
+[native] Swapchain recreated after resize
+[native] GPU timings: total=1.047 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.988; toneMap=0.058; regionalCompute=0.002; materialsOverlays=0.312
+GPU_MEMORY_UI phase=gameplay sequence=28 sampleQpc=1554936883892 uiQpc=1554936884536 utc=2026-09-29T22:23:56.7469893Z status=Ready usage=525115392 budget=12292243456 capacity=17163091968 queryNs=4600 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=79.7
+[native] GPU timings: total=0.746 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.689; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.013
+[native] Renderer health: completedFrame=4432; extent=3440x1440; applicationMode=1; surfaceMode=0; patches=0; billboardOwner=0; camera=(0,0,0); fenceMs=4.737
+[native] GPU timings: total=0.746 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.689; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.013
+GPU_MEMORY_UI phase=gameplay sequence=29 sampleQpc=1554946940800 uiQpc=1554946941214 utc=2026-09-29T22:23:57.7526801Z status=Ready usage=525115392 budget=12292243456 capacity=17163091968 queryNs=4600 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=57.5
+[native] GPU timings: total=0.987 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.927; toneMap=0.059; regionalCompute=0.002; materialsOverlays=0.251
+GPU_MEMORY_UI phase=gameplay sequence=30 sampleQpc=1554957162067 uiQpc=1554957162493 utc=2026-09-29T22:23:58.7748069Z status=Ready usage=525115392 budget=12325273600 capacity=17163091968 queryNs=4300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=63.9
+[native] GPU timings: total=1.172 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=1.113; toneMap=0.058; regionalCompute=0.002; materialsOverlays=0.437
+[native] GPU timings: total=0.746 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.666; preSurface=0.000; scene=0.689; toneMap=0.057; regionalCompute=0.002; materialsOverlays=0.013
+PLAYER_ENTRY_PROOF phase=8 loop=4806 render=3440x1440 hwnd=14093560
+[native] Average frame time: 5.634 ms (4806 frames)
+[native] Frame pacing: p50=5.505 ms; p95=6.013 ms; p99=6.300 ms; max=99.329 ms; samples=4806
+[native] Fence wait pacing: average=4.511 ms; p95=5.088 ms; max=6.593 ms; samples=4806
+[native] CPU timings: update=4.827 ms; fence=4.511; inspection=0.033; hostCallback=0.265; validationUpload=0.017; record=0.039; submit=0.020; present=0.185
+[native] GPU timing averages: total=0.810 ms; backgroundDepth=0.000; anchoredDraw=0.000; background=0.540; preSurface=0.000; toneMap=0.078
+[native] NCSM1 regional physical totals: requests=0; hits=0; misses=0; loaded=0; readBytes=0; uploadedBytes=0; residentHighWater=0; allocatedBytes=4; maximumBytes=124895232; queueHighWater=0; completionCapacity=896; payloadWriter=workerWriteOnce; publicationBatches=0; maximumPublicationRecords=0; workerCopyMs=0.000; demandDispatches=0; dependencyDelayMsMax=0.000; recordReadDecodeVerifyMs=0.000; contributingRecords=670; anchoredDemandRequired=false
+GPU_MEMORY_CLOSED timer=stopped renderer=retired sharedInstance=destroyed
+Session ended; exitCode=0

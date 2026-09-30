@@ -1,0 +1,41 @@
+{
+  "parent": "m16.1",
+  "diffFromParentEmpty": true,
+  "files": [
+    {
+      "path": "tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs",
+      "bytes": 1835,
+      "sha256": "0fbb1ccefda721b933188cdf11edd617c20746ef8cb2b9231ecbb40839b8c44c"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs",
+      "bytes": 28173,
+      "sha256": "da081ce0d86877b6404fe31f9be2c7d327fd0a30afc9f358c5bae1c1c170c9cc"
+    },
+    {
+      "path": "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+      "bytes": 10327,
+      "sha256": "0486023bf8bc39eeda718a90c666a4ca4d9f596d80f04b0a6ef8b59533d81506"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/prepared_surface_contract.h",
+      "bytes": 508,
+      "sha256": "964545260cd34fb7c1c292e23f8739eff36e7beda5b4ead278573007eef4a090"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard_physical.glsl",
+      "bytes": 2593,
+      "sha256": "41212417ace6a1eec4c33f2ef09b17794f0407a00592663e838f1f29770ab2d6"
+    },
+    {
+      "path": "native/NovaCore.Native/shaders/production_spherical_billboard.vert",
+      "bytes": 3578,
+      "sha256": "7f590ac482564aba0a5706f894bfbecb12dbfdbe148d09dc14db7530b7483307"
+    }
+  ],
+  "opaqueHandoffTestBlockUnchangedFromParent": true,
+  "opaqueHandoffTestBlockSha256": "8cd9b28327e1b6ab7abcfbd38599f3b29e1dce02a8a51488be4e0fe5ce47e795",
+  "opaqueHandoffCause": "First-match indirect terrain draw finds banked background depth prepass instead of later color branch; preserve explicit prepass depth reset and scene ordering when correcting assertion",
+  "gateDisposition": "Still FAIL; inherited origin is not a waiver",
+  "constructionCount": "667 current versus 675 prior: eleven versus fifteen daylight-search hours, two checks per attempted hour; all five routes and timed ignition/coast loops retained"
+}

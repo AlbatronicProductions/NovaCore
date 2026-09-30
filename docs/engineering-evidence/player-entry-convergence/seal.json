@@ -1,0 +1,380 @@
+{
+  "schema": 1,
+  "sealedUtc": "2026-09-29T22:33:32.536950+00:00",
+  "head": "40314c0f72396ea5f4ff39121f0b6821f1f96146",
+  "branch": "main",
+  "indexUnchanged": true,
+  "banked": false,
+  "scope": "Current final working files/binaries plus retained evidence. Capture provenance and subsequent narrow corrections are documented in memory-receipt.json.",
+  "sources": [
+    {
+      "path": "native/NovaCore.Native/CMakeLists.txt",
+      "bytes": 32088,
+      "sha256": "c680e0a30e2fe30f417c384fa1e88eb6e3783eb32d911dab66ed951bd3f62b08"
+    },
+    {
+      "path": "native/NovaCore.Native/CausalNative.inl",
+      "bytes": 15527,
+      "sha256": "69cb85100821d103726b25fc17da0773e31bc943c61bf8695df8be32def72e32"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.cpp",
+      "bytes": 335682,
+      "sha256": "7f91dc412ba22ba12d8fb83fc1666099b3229e75ff7367c62db88c21b3f43790"
+    },
+    {
+      "path": "native/NovaCore.Native/NovaCoreNative.h",
+      "bytes": 20886,
+      "sha256": "03c783673e076d1b2cc48fc7398066db13563cca913f04517070a657d70d250a"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemory.h",
+      "bytes": 715,
+      "sha256": "5c21d953c7f7fe4db2b93c292150ae56409bcebfdc211787918f3c901e34bb0e"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemory.inl",
+      "bytes": 9291,
+      "sha256": "ac8a1e39aa83fc0bffd997e1d66b49aaaeb5a65adcfd5a89ffab1485e84d88a0"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemoryExports.inl",
+      "bytes": 1370,
+      "sha256": "0d9a65ef9e53607a5f6097c87988ac361e70b337382d3da4b1dacd0c952463a6"
+    },
+    {
+      "path": "native/NovaCore.Native/PlayerGpuMemoryTests.cpp",
+      "bytes": 5428,
+      "sha256": "54ee9b9a050494db59497bb55b5ab224860090dbc59fe41a6ef20633135bfa90"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/IApplicationPresentation.cs",
+      "bytes": 997,
+      "sha256": "3303e45d27651386aa55683a1faaae9c19a0a89cdd218b97a244f5dd75e710d3"
+    },
+    {
+      "path": "samples/NovaCore.Triangle/Program.cs",
+      "bytes": 69253,
+      "sha256": "f92371707a925c65750199e5e4424c2c81a4a7266449a8668ae6d01859bb29f6"
+    },
+    {
+      "path": "src/NovaCore.Interop/NativeRuntime.cs",
+      "bytes": 26814,
+      "sha256": "38d2929bd478cb252c938d047350843a4b47bf90b0b5f009913e6f3c462ac375"
+    },
+    {
+      "path": "src/NovaCore.Interop/PlayerGpuMemory.cs",
+      "bytes": 4076,
+      "sha256": "b8d580fd7d1061106ccbd403d9c39083a49ba09f496df02c5710e481e3f66808"
+    },
+    {
+      "path": "tests/NovaCore.Player.Tests/NovaCore.Player.Tests.csproj",
+      "bytes": 603,
+      "sha256": "30a0b452e0369a2dc3e5bc10cc91bc2649743aaddb801b9bd6b2b3455ed032ea"
+    },
+    {
+      "path": "tests/NovaCore.Player.Tests/Program.cs",
+      "bytes": 4231,
+      "sha256": "f7c43026f2b0f5f03ce7e77819b04eddbc320cc6b9fb4b044262d53ecb079f00"
+    },
+    {
+      "path": "tools/NovaCore.App/NovaCore.App.csproj",
+      "bytes": 1187,
+      "sha256": "9d1667ac3bf12db3618d223e1d136a5a77f3bc212a215eb1d3f9f94857193d68"
+    },
+    {
+      "path": "tools/NovaCore.App/app.manifest",
+      "bytes": 558,
+      "sha256": "4f15ce221afbbf6ee0e569f44657d1743884d202fa658b0013468fbfae064029"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Application.cs",
+      "bytes": 18719,
+      "sha256": "b141ac6ffb10b96279df6fc717f3420fb7dcc31a495037e3d0948a22e60b30d7"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.ApplicationQualification.cs",
+      "bytes": 23003,
+      "sha256": "6eb824e880df6d3aafcad46ec98b3550773230ef392c446be1ff2c6f9843ec6f"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Commands.cs",
+      "bytes": 18563,
+      "sha256": "c4e57a46fb327fc60757eaf6f8c07a5cc01cf8541dd73984f7a2ad97c75b0cdd"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Configuration.cs",
+      "bytes": 10387,
+      "sha256": "c04eafc9cc1f9556cfd8daa8b527be54e8b52a98af57d8c474d6ed6b06af3f0c"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.FlightPersistence.cs",
+      "bytes": 247,
+      "sha256": "ddabfab7f812623834e0a01786597156a019f0811af2177da1cd2b5233b4ebfd"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.GpuMemory.cs",
+      "bytes": 2510,
+      "sha256": "31e9efa8f64ce70d16198445efe57d400da515918e8843fab00507aed4cf4f40"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Loading.cs",
+      "bytes": 4173,
+      "sha256": "d4b1db2e95bc7a5d89f31f368eb5ee1bd0720cab28ec33f13e750a8daa1ee154"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PlayerDialogs.cs",
+      "bytes": 5637,
+      "sha256": "3a642285db27702801dca3d35af48b1e106fd64dd9ed2c507ae128adecc5ab58"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.PlayerEntryQualification.cs",
+      "bytes": 7677,
+      "sha256": "1c8dc6238d6829d985c064441c3938fd74d6aa80fbe247be8f7e2898e490fe5a"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.Qualification.cs",
+      "bytes": 6146,
+      "sha256": "758e18c84c249fb8dc843770aa9f10b54fa3beb8215d68328d524513effa1481"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/DesktopEditorForm.cs",
+      "bytes": 19392,
+      "sha256": "6fa594dfb2c742a3633b7ba9007e0413fc51eb589fbf778514c256ae95fdc7be"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/PlayerConfiguration.cs",
+      "bytes": 3382,
+      "sha256": "f32986a8a4dd68ac8411e58960ad80c21a973632e852f79bb59e36cde8babcb8"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/PlayerHudLayouts.cs",
+      "bytes": 2193,
+      "sha256": "44ea911eed584a270c9dd5d1af2a7fe1773eabe4f38c9168c290e79d17cf109e"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/PlayerOverlayLayer.cs",
+      "bytes": 1225,
+      "sha256": "d21de7ff0a8ec6e126f456ca5aed0c38c6da21d676f2ff49f4df76ccb4a440f3"
+    },
+    {
+      "path": "tools/NovaCore.ConstructionEditor/Program.cs",
+      "bytes": 1849,
+      "sha256": "8127b8eb46a7fe603984116e96d88e329b515186b86a2966031dc1feba306b35"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.ConstructionEditor.dll",
+      "bytes": 292352,
+      "sha256": "34dfd6099ad003e613b32bec0f7e216b74d81f1b15e6778e6fe0daae4e6fe456"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Core.dll",
+      "bytes": 98304,
+      "sha256": "8b24f821fddbae3ccbaf024a23a24c83d04eae629ac88e770e75961f000bafe7"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Diagnostics.dll",
+      "bytes": 204800,
+      "sha256": "a815664b1fa4a9f5e89d37c3acaac2303cafebe8b92ac7f6eabcf931bc0f5dc2"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.dll",
+      "bytes": 23552,
+      "sha256": "105b79f9da803caca6d3cf1ce699c90957932ac46b0e7fdeb62254f5974fc7cb"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.EphemerisFormat.dll",
+      "bytes": 77312,
+      "sha256": "ebdc615ddf1d268603258a3e0ac8a0e6caf1765144d671d0cf72da7feaac797c"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Graphics.dll",
+      "bytes": 738304,
+      "sha256": "ad5faf08858226b5c6eb2200a13cb3f14cd3a6b9f9c3246e6edb37a657093e2b"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Interop.dll",
+      "bytes": 43008,
+      "sha256": "f1aae50458018d6722b03de7b4027bb9ff4daa6cd6348b91261bedfd3f1b40bb"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Launcher.dll",
+      "bytes": 62464,
+      "sha256": "d205879c9b99d5f43e3cc1ec49f2fda3b1dfdc0146411856b2b6b9dcc5b0ccb6"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Native.dll",
+      "bytes": 500736,
+      "sha256": "47787e3e92b7985fd109310d0e688cf5541257472d0db172af845417e39e172e"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Platform.dll",
+      "bytes": 6656,
+      "sha256": "4263d0652f246b07505d90e10389f671b2b3cad6f443bf6b98cfd3d61d8960c2"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Recorder.dll",
+      "bytes": 9728,
+      "sha256": "291b28c37594cb1fd1b001900f0df95d3f8365852f187e96fd02add88eb0f1f2"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Simulation.dll",
+      "bytes": 5232640,
+      "sha256": "5e55d66c6521125707c952f6698382e8d53f736b93a15f9987bdf6a3c9090c1e"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.Triangle.dll",
+      "bytes": 374784,
+      "sha256": "c62335caee1c1bef7b2033ebfdcbab2c2f4101b4b1820cc069e5bef613d68c64"
+    },
+    {
+      "path": "tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe",
+      "bytes": 162304,
+      "sha256": "107abbc8a17e36e8f9fe90ca5e2a0344e9a2d482dad0af03fa1fe2c0eff5bfd4"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/memory-receipt.json",
+      "bytes": 6806,
+      "sha256": "9c56dc9147ef54af12d036db9441731b1710935791f77428d87846fbb3dae6fb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/memory-receipt.py",
+      "bytes": 8838,
+      "sha256": "2ea9241076196234009b81b507ef427632343a915a53318496c3caf675cefb4d"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/app-final-build.log",
+      "bytes": 82,
+      "sha256": "90daeea712f00cc57a6814434e0fd57115250c2565356bc947e7983d0ee1f096"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/configuration.png",
+      "bytes": 150281,
+      "sha256": "17aa73525337c927cea29851b3de2e28c32e25e5f8b7a6d97c56c3b8b955f516"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/construction-preservation-v2.json",
+      "bytes": 2180,
+      "sha256": "d26615fc9a435c86861ed8301c648b1818eacb4621e82716d84d0b14c69e83ad"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/cpu-editor-regressions.log",
+      "bytes": 93317,
+      "sha256": "c247df4f64a7618ba96f247aecd28b90ddfe97dcc740b09261cd48ac7c3da144"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/cpu-surface-cycles.log",
+      "bytes": 524,
+      "sha256": "33c932ae58a3ea8ff5981a5002400ec6508aeebc5749235fadced6b9961c6dcb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/cpu-surface-persistence.log",
+      "bytes": 9427,
+      "sha256": "c289d40b6c0c7549782e40e7d2f62244f250569fe0e1159974a6f8a81415fbbb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gameplay.png",
+      "bytes": 113727,
+      "sha256": "7947ae0fadfd04d8ea4b7d47ba2e95fe302eb117d5721fa41802026cd01716a2"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-cancel-v2-native.csv",
+      "bytes": 6019,
+      "sha256": "ce0d95f802d066de4fbfa4402853b5633c566b9a273988545023226cb6e0dbab"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-cancel-v2.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-cancel-v2.stdout.log",
+      "bytes": 8755,
+      "sha256": "ccd9baf270d7e5218bbac73c3cbe12668d9f8488a475ad9e7b38dc71698bebb0"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final-native.csv",
+      "bytes": 10282,
+      "sha256": "0c9c9ada9aed46c50728b8044f5fe76d3d73b0682b3443b9be90f00a1865da92"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final.json",
+      "bytes": 1771,
+      "sha256": "59604f0975355b0c2daf967ffa90671fa3ff25c770b357d8a411ec2e4e933aaa"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/gpu-memory-final.stdout.log",
+      "bytes": 172154,
+      "sha256": "9f42a7f009c58b76210209fb5eb200b8b56b884b368122bdf608f2a2171b0ef5"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/launcher-tests.log",
+      "bytes": 684,
+      "sha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/loading.png",
+      "bytes": 97859,
+      "sha256": "0ff2ec3682bf71fa69139760e8efa31779e7621d397f5873900f0c472f584cdb"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/native-memory-tests.log",
+      "bytes": 73,
+      "sha256": "0c29f5169de97d0004d8d7d41e43dc47dcff9f1ced6e220d1433a5c79600248b"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/player-tests-v2.log",
+      "bytes": 104,
+      "sha256": "bafcb22f1b9e0169733dc9dc9d7b5d1581949a0b84564e8f5463f564144574bd"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final-memory.csv",
+      "bytes": 10658,
+      "sha256": "e466320a6efd79e0a7328d8860e2f6b3b4b29b5cd4ea375323b79e3c6004ce88"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final-performance.json",
+      "bytes": 16082,
+      "sha256": "85bf4db97084129d5e01286f66ab3f9a37e6d47a9510b13230dc2d9e27d5282b"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final.json",
+      "bytes": 5756,
+      "sha256": "17f0cf77b82c6c69a018127fae60c1e8fcfb5075bc7dcc89d39febf5c071b92c"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/qualification/transitions-final.stdout.log",
+      "bytes": 28231,
+      "sha256": "62c7316736edf5e58ca8b2af86abffd5fdea9f8fb2251de10016508c9e0456ca"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/README.md",
+      "bytes": 20617,
+      "sha256": "f775953b8ea190edb551e3f3f60a530947ddbf1df411f9401ee2a6c4f36435b2"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/seal.py",
+      "bytes": 2005,
+      "sha256": "ddf9e27d1bb181364dea14c2882855e24b7c398522c464064f6b13f5a4dfde0a"
+    },
+    {
+      "path": "docs/engineering-evidence/player-entry-convergence/summarize-timings.py",
+      "bytes": 2692,
+      "sha256": "2660dec5e9c1e9405678450cc68d1fa77699eaffa8eef5a381cd84f9afa70550"
+    }
+  ]
+}

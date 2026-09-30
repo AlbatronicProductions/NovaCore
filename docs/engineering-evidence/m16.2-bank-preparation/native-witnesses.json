@@ -1,0 +1,824 @@
+{
+  "currentRuns": [
+    {
+      "launch": {
+        "mode": "nc.tank.short-2",
+        "executable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+        "executableSha256": "107abbc8a17e36e8f9fe90ca5e2a0344e9a2d482dad0af03fa1fe2c0eff5bfd4",
+        "arguments": [
+          "--qualify-editor",
+          "E:\\NovaCore\\build\\m16.2-bank-preparation\\native-nc.tank.short-2\\result.json",
+          "--qualification-tank",
+          "nc.tank.short-2"
+        ],
+        "startedUtc": "2026-09-30T02:53:20.4541432+00:00",
+        "endedUtc": "2026-09-30T02:54:29.3310111+00:00",
+        "exitCode": 0,
+        "process": 41292,
+        "source": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE",
+        "cache": "Existing verified global/Florida disk cache; new process; no cache purge; OS/driver caches uncontrolled"
+      },
+      "result": {
+        "judgment": "APPLICATION_INTEGRATION_PASS",
+        "playerPass": false,
+        "padRoutes": [
+          "editor",
+          "flight",
+          "flight-return",
+          "game",
+          "game-return"
+        ],
+        "checks": 667,
+        "tank": "nc.tank.short-2",
+        "process": 41292,
+        "window": 3148854,
+        "parts": 12,
+        "source": "a1ef88e98284b65f7351bad81e07e5775bccf6f98dbea0a6cf28152a40fe38ea",
+        "compiled": "cf76873e2d4a43a8cf36e3828527e39cb964e32870035495f4985e690adff353",
+        "retainedEpoch": 844048524833059,
+        "finalEpoch": 844048524879934,
+        "frames": 10392,
+        "warmWindows": [
+          {
+            "samples": 120,
+            "frameMs": {
+              "median": 5.578199863433838,
+              "p95": 5.896000385284424,
+              "p99": 6.011399745941162,
+              "max": 6.131500244140625
+            },
+            "cpuMs": {
+              "median": 0.0081,
+              "p95": 0.0332,
+              "p99": 0.0443,
+              "max": 0.1033
+            },
+            "allocatedBytes": {
+              "median": 0,
+              "p95": 0,
+              "p99": 0,
+              "max": 0
+            },
+            "gc": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "samples": 120,
+            "frameMs": {
+              "median": 5.553400039672852,
+              "p95": 5.928600311279297,
+              "p99": 6.063499927520752,
+              "max": 10.215300559997559
+            },
+            "cpuMs": {
+              "median": 0.0057,
+              "p95": 0.022,
+              "p99": 0.0347,
+              "max": 0.0366
+            },
+            "allocatedBytes": {
+              "median": 0,
+              "p95": 0,
+              "p99": 0,
+              "max": 0
+            },
+            "gc": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "samples": 120,
+            "frameMs": {
+              "median": 5.542799949645996,
+              "p95": 5.849800109863281,
+              "p99": 5.945899963378906,
+              "max": 5.981899738311768
+            },
+            "cpuMs": {
+              "median": 0.0052,
+              "p95": 0.0199,
+              "p99": 0.0338,
+              "max": 0.0366
+            },
+            "allocatedBytes": {
+              "median": 0,
+              "p95": 0,
+              "p99": 0,
+              "max": 0
+            },
+            "gc": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "native": "82f13c237fda69089156acbc375ffbdc546b7763a46232b5163e8e63dbcb16ed"
+      },
+      "log": {
+        "path": "build/m16.2-bank-preparation/native-nc.tank.short-2/stdout.log",
+        "bytes": 561920,
+        "sha256": "911103ad6dfecc4ca71a01b9d0d55fa849823bdeff198b735da76790fc8c9118"
+      },
+      "stderr": {
+        "path": "build/m16.2-bank-preparation/native-nc.tank.short-2/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "memorySamples": [
+        "GPU_MEMORY_UI phase=configuration sequence=3 sampleQpc=1716585346455 uiQpc=1716585366755 utc=2026-09-30T02:53:21.5932452Z status=Ready usage=0 budget=12220416000 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=1447.2",
+        "GPU_MEMORY_UI phase=loading sequence=4 sampleQpc=1716617111805 uiQpc=1716617114431 utc=2026-09-30T02:53:24.7697811Z status=Ready usage=0 budget=12277825536 capacity=17163091968 queryNs=11400 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=329.2",
+        "GPU_MEMORY_UI phase=gameplay sequence=5 sampleQpc=1716628097641 uiQpc=1716628097920 utc=2026-09-30T02:53:25.8683642Z status=Ready usage=369926144 budget=12215959552 capacity=17163091968 queryNs=5900 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=47.9",
+        "GPU_MEMORY_UI phase=gameplay sequence=6 sampleQpc=1716638418574 uiQpc=1716638418852 utc=2026-09-30T02:53:26.9004574Z status=Ready usage=369926144 budget=12215959552 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=49.1",
+        "GPU_MEMORY_UI phase=gameplay sequence=7 sampleQpc=1716653297534 uiQpc=1716653297752 utc=2026-09-30T02:53:28.3883537Z status=Ready usage=369926144 budget=12215959552 capacity=17163091968 queryNs=8600 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=51.4",
+        "GPU_MEMORY_UI phase=gameplay sequence=8 sampleQpc=1716663368173 uiQpc=1716663368383 utc=2026-09-30T02:53:29.3954175Z status=Ready usage=369926144 budget=12237455360 capacity=17163091968 queryNs=5300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=48.1",
+        "GPU_MEMORY_UI phase=gameplay sequence=9 sampleQpc=1716673528301 uiQpc=1716673528443 utc=2026-09-30T02:53:30.4114303Z status=Ready usage=369926144 budget=12237455360 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=33.6"
+      ],
+      "runtimeFingerprints": [
+        "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe; base=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\",
+        "Runtime managed: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Triangle.dll; bytes=374272; sha256=613abc4816451f7c8f217de346d0dc4cfc2e85673791c5d3a1b30534b4a0a57b",
+        "Runtime native-resolved: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Native.dll; bytes=500224; sha256=82f13c237fda69089156acbc375ffbdc546b7763a46232b5163e8e63dbcb16ed",
+        "Runtime production-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973",
+        "Runtime production-tess-control: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c",
+        "Runtime production-tess-evaluation: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "Runtime distant-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "Runtime terrain-v5: global=E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\\NovaCore\\assets\\earth\\runtime\\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+      ],
+      "overlap": "Functional run overlapped the full Debug suite CPU-only scale-mesh regeneration and CPU retention; not a performance benchmark",
+      "keyEvents": [
+        "Diagnostic session: C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Logs\\20260930-025320-520-41292-e9b76e6d52cc43edbc160ef8c659cc14",
+        "Qualification recorder: C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder\\c00a539c870b4c8a87708713392eb4aa",
+        "PLAYER_LOADING stage=Core � checking planetary data monotonic=1716587184383",
+        "PLAYER_LOADING stage=Universe � preparing Solar system monotonic=1716591143577",
+        "PLAYER_LOADING stage=Presentation � preparing camera and scene monotonic=1716593454162",
+        "PLAYER_LOADING stage=Planet renderer � loading terrain topology monotonic=1716593474604",
+        "PLAYER_LOADING stage=Renderer � creating graphics resources monotonic=1716617108363",
+        "PLAYER_LOADING stage=Renderer | window ready; creating graphics queue monotonic=1716617187658",
+        "[native] PLAYER_GPU_BIND queryInstance=000001C8A9872A80 renderInstance=000001C8A9872A80 queryPhysical=000001C8A9895600 renderPhysical=000001C8A9895600 matched=1",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64",
+        "PLAYER_LOADING stage=Renderer | graphics queue ready monotonic=1716617476785",
+        "PLAYER_LOADING stage=Assets | mesh system ready monotonic=1716617634323",
+        "PLAYER_LOADING stage=Planet renderer | terrain resources ready monotonic=1716617785802",
+        "[native] PLAYER_TARGET generation=1 swapchain=000001C8A9E337F0 color=0000021858B69B80 depth=0000021858B6F490 target=1280x720 framebuffer=1280x720",
+        "PLAYER_LOADING stage=Planet renderer | shaders and presentation targets ready monotonic=1716618694764",
+        "PLAYER_LOADING stage=Renderer | submission resources ready monotonic=1716620014535",
+        "PLAYER_LOADING stage=Planet renderer | required hierarchy ready monotonic=1716621018910",
+        "PLAYER_LOADING_COMPLETE readiness=native-first-fence-and-selected-session-presentation memory=Ready sample=4",
+        "[native] PLAYER_TARGET generation=2 swapchain=000001C8A9E32CF0 color=000002185910BD60 depth=0000021859107900 target=1100x740 framebuffer=1100x740",
+        "[native] PLAYER_TARGET generation=3 swapchain=000001C8A9E32CF0 color=000001C8AA792DF0 depth=0000021858C04D40 target=3440x1440 framebuffer=3440x1440",
+        "[native] PLAYER_TARGET generation=4 swapchain=000001C8A9E32CF0 color=000001C8AA792DF0 depth=0000021858C04D40 target=1280x720 framebuffer=1280x720",
+        "GPU_MEMORY_CLOSED timer=stopped renderer=retired sharedInstance=destroyed",
+        "Session ended; exitCode=0"
+      ]
+    },
+    {
+      "launch": {
+        "mode": "player-entry",
+        "executable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+        "executableSha256": "107abbc8a17e36e8f9fe90ca5e2a0344e9a2d482dad0af03fa1fe2c0eff5bfd4",
+        "arguments": [
+          "--qualify-editor",
+          "E:\\NovaCore\\build\\m16.2-bank-preparation\\native-player-entry\\result.json",
+          "--qualification-tank",
+          "player-entry"
+        ],
+        "startedUtc": "2026-09-30T02:51:59.4038010+00:00",
+        "endedUtc": "2026-09-30T02:52:31.3709680+00:00",
+        "exitCode": 0,
+        "process": 42616,
+        "source": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE",
+        "cache": "Existing verified global/Florida disk cache; new process; no cache purge; OS/driver caches uncontrolled"
+      },
+      "result": {
+        "judgment": "ENGINEERING_TRANSITIONS_PASS",
+        "visualAcceptance": false,
+        "realOsDpiTransition": false,
+        "heldHardwareKeys": false,
+        "checks": 17244,
+        "extents": [
+          {
+            "phase": 0,
+            "elapsed": 0.0028586,
+            "loop": 3,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 1,
+            "elapsed": 2.0048912,
+            "loop": 362,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 2,
+            "elapsed": 6.0052157,
+            "loop": 1082,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 3,
+            "elapsed": 9.0049021,
+            "loop": 1622,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 4,
+            "elapsed": 13.0052889,
+            "loop": 2340,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 5,
+            "elapsed": 16.004239,
+            "loop": 2876,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 6,
+            "elapsed": 19.0050086,
+            "loop": 3413,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 7,
+            "elapsed": 23.0045407,
+            "loop": 4097,
+            "parent": {
+              "Width": 1920,
+              "Height": 1080
+            },
+            "host": {
+              "Width": 1920,
+              "Height": 1080
+            },
+            "render": {
+              "ViewportWidthPixels": 1920,
+              "ViewportHeightPixels": 1080
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 1.7777777777777777,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          },
+          {
+            "phase": 8,
+            "elapsed": 27.0052884,
+            "loop": 4798,
+            "parent": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "host": {
+              "Width": 3440,
+              "Height": 1440
+            },
+            "render": {
+              "ViewportWidthPixels": 3440,
+              "ViewportHeightPixels": 1440
+            },
+            "parentHwnd": 3016438,
+            "childHwnd": 1576036,
+            "dpi": 96,
+            "projection": {
+              "VerticalFieldOfViewRadians": 1.0471975511965976,
+              "AspectRatio": 2.388888888888889,
+              "NearClip": 1000000,
+              "FarClip": 14959787070000
+            }
+          }
+        ]
+      },
+      "log": {
+        "path": "build/m16.2-bank-preparation/native-player-entry/stdout.log",
+        "bytes": 28031,
+        "sha256": "3b848159c004c429fd10778302c68c8bb8dfb453e9264dcfc1c633748a99c531"
+      },
+      "stderr": {
+        "path": "build/m16.2-bank-preparation/native-player-entry/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "memorySamples": [
+        "GPU_MEMORY_UI phase=configuration sequence=3 sampleQpc=1715778321668 uiQpc=1715778343154 utc=2026-09-30T02:52:00.8907665Z status=Ready usage=0 budget=12228542464 capacity=17163091968 queryNs=4300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=1387.9",
+        "GPU_MEMORY_UI phase=loading sequence=4 sampleQpc=1715804601404 uiQpc=1715804603920 utc=2026-09-30T02:52:03.5187408Z status=Ready usage=0 budget=12294602752 capacity=17163091968 queryNs=14700 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=328.8",
+        "GPU_MEMORY_UI phase=gameplay sequence=5 sampleQpc=1715816333799 uiQpc=1715816334149 utc=2026-09-30T02:52:04.6919802Z status=Ready usage=525115392 budget=12240601088 capacity=17163091968 queryNs=5100 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=55.3",
+        "GPU_MEMORY_UI phase=gameplay sequence=6 sampleQpc=1715826501488 uiQpc=1715826501955 utc=2026-09-30T02:52:05.7087492Z status=Ready usage=525115392 budget=12240601088 capacity=17163091968 queryNs=5200 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=67.7",
+        "GPU_MEMORY_UI phase=gameplay sequence=7 sampleQpc=1715836782828 uiQpc=1715836783145 utc=2026-09-30T02:52:06.7368830Z status=Ready usage=525115392 budget=12240601088 capacity=17163091968 queryNs=5000 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=51.2",
+        "GPU_MEMORY_UI phase=gameplay sequence=8 sampleQpc=1715846839311 uiQpc=1715846839467 utc=2026-09-30T02:52:07.7425314Z status=Ready usage=525115392 budget=12240601088 capacity=17163091968 queryNs=5200 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=35.9",
+        "GPU_MEMORY_UI phase=gameplay sequence=9 sampleQpc=1715857112946 uiQpc=1715857113068 utc=2026-09-30T02:52:08.7698946Z status=Ready usage=525115392 budget=12240601088 capacity=17163091968 queryNs=4400 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=29.9"
+      ],
+      "runtimeFingerprints": [
+        "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe; base=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\",
+        "Runtime managed: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Triangle.dll; bytes=374272; sha256=613abc4816451f7c8f217de346d0dc4cfc2e85673791c5d3a1b30534b4a0a57b",
+        "Runtime native-resolved: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Native.dll; bytes=500224; sha256=82f13c237fda69089156acbc375ffbdc546b7763a46232b5163e8e63dbcb16ed",
+        "Runtime production-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973",
+        "Runtime production-tess-control: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c",
+        "Runtime production-tess-evaluation: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "Runtime distant-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "Runtime terrain-v5: global=E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\\NovaCore\\assets\\earth\\runtime\\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+      ],
+      "overlap": "Functional run overlapped the full Debug suite CPU-only scale-mesh regeneration and CPU retention; not a performance benchmark",
+      "keyEvents": [
+        "Diagnostic session: C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Logs\\20260930-025159-518-42616-a73319ada2e74f09a24c46bbdbecf71d",
+        "Qualification recorder: C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder\\296cfae878804f4eac6dcd043d7a145c",
+        "PLAYER_LOADING stage=Core � checking planetary data monotonic=1715780125714",
+        "PLAYER_LOADING stage=Universe � preparing Solar system monotonic=1715784071200",
+        "PLAYER_LOADING stage=Presentation � preparing camera and scene monotonic=1715785692718",
+        "PLAYER_LOADING stage=Planet renderer � loading terrain topology monotonic=1715785710502",
+        "PLAYER_LOADING stage=Renderer � creating graphics resources monotonic=1715804599186",
+        "PLAYER_LOADING stage=Renderer | window ready; creating graphics queue monotonic=1715804681628",
+        "[native] PLAYER_GPU_BIND queryInstance=000002282CD1EBC0 renderInstance=000002282CD1EBC0 queryPhysical=000002282D2274E0 renderPhysical=000002282D2274E0 matched=1",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64",
+        "PLAYER_LOADING stage=Renderer | graphics queue ready monotonic=1715804953840",
+        "PLAYER_LOADING stage=Assets | mesh system ready monotonic=1715805111367",
+        "PLAYER_LOADING stage=Planet renderer | terrain resources ready monotonic=1715805277279",
+        "[native] PLAYER_TARGET generation=1 swapchain=00000228242C2290 color=00000228388F3F00 depth=00000228388F9810 target=3440x1440 framebuffer=3440x1440",
+        "PLAYER_LOADING stage=Planet renderer | shaders and presentation targets ready monotonic=1715806684737",
+        "PLAYER_LOADING stage=Renderer | submission resources ready monotonic=1715807291845",
+        "PLAYER_LOADING stage=Planet renderer | required hierarchy ready monotonic=1715808114124",
+        "PLAYER_LOADING_COMPLETE readiness=native-first-fence-and-selected-session-presentation memory=Ready sample=4",
+        "[native] PLAYER_TARGET generation=2 swapchain=0000022838E891E0 color=0000022838961960 depth=0000022838962C20 target=1920x1080 framebuffer=1920x1080",
+        "[native] PLAYER_TARGET generation=3 swapchain=0000022838E8BB20 color=000002285679FC60 depth=0000022838E78120 target=3440x1440 framebuffer=3440x1440",
+        "GPU_MEMORY_CLOSED timer=stopped renderer=retired sharedInstance=destroyed",
+        "Session ended; exitCode=0"
+      ]
+    },
+    {
+      "launch": {
+        "mode": "speed-boundary",
+        "executable": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe",
+        "executableSha256": "107abbc8a17e36e8f9fe90ca5e2a0344e9a2d482dad0af03fa1fe2c0eff5bfd4",
+        "arguments": [
+          "--qualify-editor",
+          "E:\\NovaCore\\build\\m16.2-bank-preparation\\native-speed-boundary\\result.json",
+          "--qualification-tank",
+          "speed-boundary"
+        ],
+        "startedUtc": "2026-09-30T02:52:36.5311980+00:00",
+        "endedUtc": "2026-09-30T02:53:00.9522023+00:00",
+        "exitCode": 0,
+        "process": 25068,
+        "source": "AUTOMATED NATIVE INPUT + AUTHORITATIVE TEST-PROBE",
+        "cache": "Existing verified global/Florida disk cache; new process; no cache purge; OS/driver caches uncontrolled"
+      },
+      "result": {
+        "judgment": "SPEED_BOUNDARY_PASS",
+        "checks": 46,
+        "hardwareKeys": false,
+        "realOsDpiTransition": false,
+        "source": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.ConstructionEditor.dll",
+        "native": "82f13c237fda69089156acbc375ffbdc546b7763a46232b5163e8e63dbcb16ed",
+        "samples": [
+          {
+            "label": "initial",
+            "frame": 3,
+            "utc": "2026-09-30T02:52:41.442953+00:00",
+            "epoch": 844008827971911,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 1
+            },
+            "preset": 1,
+            "userPaused": false,
+            "hostHold": false,
+            "effectiveSimulationPause": false,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · 1x (Realtime)"
+          },
+          {
+            "label": "minimum",
+            "frame": 182,
+            "utc": "2026-09-30T02:52:42.4420954+00:00",
+            "epoch": 844008828086805,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": false,
+            "hostHold": false,
+            "effectiveSimulationPause": false,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · 0.1x (Slow Motion)"
+          },
+          {
+            "label": "paused ignores one hour host sample",
+            "frame": 362,
+            "utc": "2026-09-30T02:52:43.4424599+00:00",
+            "epoch": 844008828087362,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": false,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "repeated comma",
+            "frame": 542,
+            "utc": "2026-09-30T02:52:44.4423903+00:00",
+            "epoch": 844008828087362,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": false,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "resumed minimum",
+            "frame": 723,
+            "utc": "2026-09-30T02:52:45.4477062+00:00",
+            "epoch": 844008829187420,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": false,
+            "hostHold": false,
+            "effectiveSimulationPause": false,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · 0.1x (Slow Motion)"
+          },
+          {
+            "label": "1x",
+            "frame": 903,
+            "utc": "2026-09-30T02:52:46.4477711+00:00",
+            "epoch": 844008830182511,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 1
+            },
+            "preset": 1,
+            "userPaused": false,
+            "hostHold": false,
+            "effectiveSimulationPause": false,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · 1x (Realtime)"
+          },
+          {
+            "label": "Esc open",
+            "frame": 1264,
+            "utc": "2026-09-30T02:52:48.4536138+00:00",
+            "epoch": 844008831188042,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": true,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "overlay rejects period",
+            "frame": 1445,
+            "utc": "2026-09-30T02:52:49.4591778+00:00",
+            "epoch": 844008831188042,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": true,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "Esc resume",
+            "frame": 1626,
+            "utc": "2026-09-30T02:52:50.4645584+00:00",
+            "epoch": 844008831188042,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": false,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "menu hold after user resume",
+            "frame": 1986,
+            "utc": "2026-09-30T02:52:52.4704249+00:00",
+            "epoch": 844008831188042,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": false,
+            "hostHold": true,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "text entry",
+            "frame": 2344,
+            "utc": "2026-09-30T02:52:54.4704803+00:00",
+            "epoch": 844008831188042,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": true,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "editor hold",
+            "frame": 2702,
+            "utc": "2026-09-30T02:52:56.4801443+00:00",
+            "epoch": 844008831188042,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": true,
+            "effectiveSimulationPause": true,
+            "editing": true,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "editor return",
+            "frame": 2851,
+            "utc": "2026-09-30T02:52:57.4814859+00:00",
+            "epoch": 844008831188042,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 10
+            },
+            "preset": 0,
+            "userPaused": true,
+            "hostHold": false,
+            "effectiveSimulationPause": true,
+            "editing": false,
+            "physical": false,
+            "hud": "Exploration · Paused"
+          },
+          {
+            "label": "physical reload",
+            "frame": 3174,
+            "utc": "2026-09-30T02:53:00.4861+00:00",
+            "epoch": 844008832141167,
+            "rate": {
+              "Numerator": 1,
+              "Denominator": 1
+            },
+            "preset": 1,
+            "userPaused": false,
+            "hostHold": false,
+            "effectiveSimulationPause": false,
+            "editing": false,
+            "physical": true,
+            "hud": "Flight · 1×"
+          }
+        ]
+      },
+      "log": {
+        "path": "build/m16.2-bank-preparation/native-speed-boundary/stdout.log",
+        "bytes": 182890,
+        "sha256": "080519cf6d7b5b170aaa4737fcfa5493ae04ad4306761f19917cb0f732578d7d"
+      },
+      "stderr": {
+        "path": "build/m16.2-bank-preparation/native-speed-boundary/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "memorySamples": [
+        "GPU_MEMORY_UI phase=configuration sequence=3 sampleQpc=1716150357773 uiQpc=1716150394586 utc=2026-09-30T02:52:38.0943770Z status=Ready usage=0 budget=12207308800 capacity=17163091968 queryNs=4100 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=1298.9",
+        "GPU_MEMORY_UI phase=loading sequence=4 sampleQpc=1716179314143 uiQpc=1716179316233 utc=2026-09-30T02:52:40.9900146Z status=Ready usage=0 budget=12319506432 capacity=17163091968 queryNs=8300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=248.3",
+        "GPU_MEMORY_UI phase=gameplay sequence=5 sampleQpc=1716190726193 uiQpc=1716190726584 utc=2026-09-30T02:52:42.1312195Z status=Ready usage=525115392 budget=12254232576 capacity=17163091968 queryNs=4300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=57.4",
+        "GPU_MEMORY_UI phase=gameplay sequence=6 sampleQpc=1716200726264 uiQpc=1716200726558 utc=2026-09-30T02:52:43.1312266Z status=Ready usage=525115392 budget=12254232576 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=48.8",
+        "GPU_MEMORY_UI phase=gameplay sequence=7 sampleQpc=1716211003923 uiQpc=1716211004202 utc=2026-09-30T02:52:44.1589925Z status=Ready usage=525115392 budget=12232474624 capacity=17163091968 queryNs=4800 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=47.1",
+        "GPU_MEMORY_UI phase=gameplay sequence=8 sampleQpc=1716221227254 uiQpc=1716221227408 utc=2026-09-30T02:52:45.1813255Z status=Ready usage=525115392 budget=12232474624 capacity=17163091968 queryNs=4500 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=40.5",
+        "GPU_MEMORY_UI phase=gameplay sequence=9 sampleQpc=1716231337920 uiQpc=1716231338068 utc=2026-09-30T02:52:46.1923921Z status=Ready usage=525115392 budget=12232474624 capacity=17163091968 queryNs=4300 adapter=AMD Radeon RX 6800 XT uuid=00000000030000000000000000000000 luid=D6C4010000000000 luidValid=True vendor=1002 device=73BF heapMask=2 copyAndUiUs=38.4"
+      ],
+      "runtimeFingerprints": [
+        "Runtime fingerprint: cwd=E:\\NovaCore; process=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.exe; base=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\",
+        "Runtime managed: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Triangle.dll; bytes=374272; sha256=613abc4816451f7c8f217de346d0dc4cfc2e85673791c5d3a1b30534b4a0a57b",
+        "Runtime native-resolved: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\NovaCore.Native.dll; bytes=500224; sha256=82f13c237fda69089156acbc375ffbdc546b7763a46232b5163e8e63dbcb16ed",
+        "Runtime production-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\planetary_production.frag.spv; bytes=152676; sha256=36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973",
+        "Runtime production-tess-control: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tesc.spv; bytes=15444; sha256=5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c",
+        "Runtime production-tess-evaluation: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\production_spherical_billboard.tese.spv; bytes=22836; sha256=d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e",
+        "Runtime distant-fragment: path=E:\\NovaCore\\tools\\NovaCore.App\\bin\\Release\\net10.0-windows\\shaders\\distant_planet.frag.spv; bytes=35760; sha256=04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8",
+        "Runtime terrain-v5: global=E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\38\\38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae.nccube; sha256=38ec671f475896f2c0a674e952f4121f117b18b1446bd363e3596bada4bf47ae; local=E:\\NovaCore\\.novacore\\cache\\terrain\\v1\\sha256\\c4\\c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe.nccube; localSha256=c45c6d94e004e1a2927dc65d405a347b1800c619b22b2eb6b3543f3c445d3afe; elevationOracle=E:\\NovaCore\\assets\\earth\\runtime\\earth_elevation_8192x4096.r16; elevationOracleLoaded=True; elevationSha256=4600bc01767eb81404756af62c0ee87b4bc459b82de15dca6989df34fef76317"
+      ],
+      "overlap": "Functional run overlapped the full Debug suite CPU-only scale-mesh regeneration and CPU retention; not a performance benchmark",
+      "keyEvents": [
+        "Diagnostic session: C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Logs\\20260930-025236-586-25068-28b1824c5c654a75aa3178d6dc30a167",
+        "Qualification recorder: C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder\\5a7a9de87fbb498e8fd97ccd3780ddc8",
+        "PLAYER_LOADING stage=Core � checking planetary data monotonic=1716153244564",
+        "PLAYER_LOADING stage=Universe � preparing Solar system monotonic=1716157237844",
+        "PLAYER_LOADING stage=Presentation � preparing camera and scene monotonic=1716158719918",
+        "PLAYER_LOADING stage=Planet renderer � loading terrain topology monotonic=1716158741488",
+        "PLAYER_LOADING stage=Renderer � creating graphics resources monotonic=1716179312962",
+        "PLAYER_LOADING stage=Renderer | window ready; creating graphics queue monotonic=1716179380324",
+        "[native] PLAYER_GPU_BIND queryInstance=000002A2A768C980 renderInstance=000002A2A768C980 queryPhysical=000002A2A9E148B0 renderPhysical=000002A2A9E148B0 matched=1",
+        "[native] GPU: AMD Radeon RX 6800 XT | Vulkan 1.4 | vendor=1002 device=73bf driverRaw=8388961 maxTessellation=64",
+        "PLAYER_LOADING stage=Renderer | graphics queue ready monotonic=1716179638023",
+        "PLAYER_LOADING stage=Assets | mesh system ready monotonic=1716179777582",
+        "PLAYER_LOADING stage=Planet renderer | terrain resources ready monotonic=1716179921890",
+        "[native] PLAYER_TARGET generation=1 swapchain=000002A2B63433D0 color=000002A2B6884A60 depth=000002A2B688A370 target=3440x1440 framebuffer=3440x1440",
+        "PLAYER_LOADING stage=Planet renderer | shaders and presentation targets ready monotonic=1716180914351",
+        "PLAYER_LOADING stage=Renderer | submission resources ready monotonic=1716182462574",
+        "PLAYER_LOADING stage=Planet renderer | required hierarchy ready monotonic=1716183283818",
+        "PLAYER_LOADING_COMPLETE readiness=native-first-fence-and-selected-session-presentation memory=Ready sample=4",
+        "GPU_MEMORY_CLOSED timer=stopped renderer=retired sharedInstance=destroyed",
+        "Session ended; exitCode=0"
+      ]
+    }
+  ],
+  "priorAcceptedReports": [
+    "docs/engineering-evidence/player-entry-convergence/README.md",
+    "docs/engineering-evidence/player-entry-convergence/editor-restoration.md",
+    "docs/engineering-evidence/player-entry-convergence/minimum-speed-pause.md"
+  ],
+  "physicalUserInput": "NOT RUN in bank preparation; scoped user acceptance supplied by Project Control",
+  "non96DpiLayoutGate": "NOT RUN - required",
+  "physicalMonitorDpiTransition": "NOT RUN - unclaimed",
+  "heldHardwareAndFocusLoss": "NOT RUN - unclaimed"
+}

@@ -1,0 +1,664 @@
+{
+  "phases": [
+    {
+      "phase": 0,
+      "name": "hidden",
+      "loops": [
+        3,
+        365
+      ],
+      "frame_work_ms": {
+        "samples": 332,
+        "median": 5.51845,
+        "p95": 6.1029,
+        "p99": 6.3285,
+        "maximum": 6.7146
+      },
+      "frame_cadence_ms": {
+        "samples": 332,
+        "median": 5.566549999999999,
+        "p95": 6.1654,
+        "p99": 6.4057,
+        "maximum": 6.7434
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 332,
+        "median": 0.3724,
+        "p95": 0.6681000000000001,
+        "p99": 0.9833,
+        "maximum": 1.1064999999999998
+      },
+      "ui_host_callback_ms": {
+        "samples": 332,
+        "median": 0.1009,
+        "p95": 0.3702,
+        "p99": 0.6123,
+        "maximum": 0.8839
+      },
+      "gpu_ms": {
+        "samples": 332,
+        "median": 1.08315,
+        "p95": 1.28027,
+        "p99": 1.4209200000000002,
+        "maximum": 1.45405
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.51025,
+        "p95": 7.9963,
+        "p99": 9.3752,
+        "maximum": 9.3752
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.57065,
+          "p95": 6.1815,
+          "p99": 6.3882,
+          "maximum": 6.4729
+        },
+        {
+          "samples": 120,
+          "median": 5.5781,
+          "p95": 6.0774,
+          "p99": 6.4057,
+          "maximum": 6.4357
+        }
+      ]
+    },
+    {
+      "phase": 1,
+      "name": "pause_backdrop",
+      "loops": [
+        365,
+        1085
+      ],
+      "frame_work_ms": {
+        "samples": 690,
+        "median": 5.45485,
+        "p95": 6.0728,
+        "p99": 6.2587,
+        "maximum": 6.5581
+      },
+      "frame_cadence_ms": {
+        "samples": 690,
+        "median": 5.539199999999999,
+        "p95": 6.1864,
+        "p99": 6.3694,
+        "maximum": 6.6669
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 690,
+        "median": 0.73195,
+        "p95": 0.9540000000000001,
+        "p99": 1.1452000000000002,
+        "maximum": 1.4841999999999995
+      },
+      "ui_host_callback_ms": {
+        "samples": 690,
+        "median": 0.44655,
+        "p95": 0.6547,
+        "p99": 0.8048,
+        "maximum": 1.0292
+      },
+      "gpu_ms": {
+        "samples": 690,
+        "median": 1.11166,
+        "p95": 1.2434800000000001,
+        "p99": 1.44551,
+        "maximum": 1.5402000000000002
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.29995,
+        "p95": 6.0625,
+        "p99": 18.0194,
+        "maximum": 18.0194
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.5256,
+          "p95": 6.2113,
+          "p99": 6.5604,
+          "maximum": 6.6014
+        },
+        {
+          "samples": 120,
+          "median": 5.53395,
+          "p95": 6.1561,
+          "p99": 6.3092,
+          "maximum": 6.4001
+        },
+        {
+          "samples": 120,
+          "median": 5.5604499999999994,
+          "p95": 6.2097,
+          "p99": 6.2585,
+          "maximum": 6.3141
+        },
+        {
+          "samples": 120,
+          "median": 5.51675,
+          "p95": 6.201,
+          "p99": 6.2777,
+          "maximum": 6.3214
+        },
+        {
+          "samples": 120,
+          "median": 5.5228,
+          "p95": 6.1261,
+          "p99": 6.3796,
+          "maximum": 6.6669
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "hidden_after_resume",
+      "loops": [
+        1085,
+        1625
+      ],
+      "frame_work_ms": {
+        "samples": 510,
+        "median": 5.49835,
+        "p95": 6.0065,
+        "p99": 6.2262,
+        "maximum": 6.567
+      },
+      "frame_cadence_ms": {
+        "samples": 510,
+        "median": 5.5447500000000005,
+        "p95": 6.0667,
+        "p99": 6.2529,
+        "maximum": 6.6066
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 510,
+        "median": 0.3775000000000003,
+        "p95": 0.5647000000000002,
+        "p99": 0.7765000000000004,
+        "maximum": 0.9919999999999999
+      },
+      "ui_host_callback_ms": {
+        "samples": 510,
+        "median": 0.08915000000000001,
+        "p95": 0.2605,
+        "p99": 0.4851,
+        "maximum": 0.5968
+      },
+      "gpu_ms": {
+        "samples": 510,
+        "median": 1.085105,
+        "p95": 1.32535,
+        "p99": 1.39175,
+        "maximum": 1.5447600000000001
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.47725,
+        "p95": 6.2188,
+        "p99": 13.0101,
+        "maximum": 13.0101
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.5442,
+          "p95": 6.0856,
+          "p99": 6.2529,
+          "maximum": 6.2979
+        },
+        {
+          "samples": 120,
+          "median": 5.532500000000001,
+          "p95": 6.0154,
+          "p99": 6.2635,
+          "maximum": 6.6066
+        },
+        {
+          "samples": 120,
+          "median": 5.55685,
+          "p95": 6.0795,
+          "p99": 6.1977,
+          "maximum": 6.5947
+        },
+        {
+          "samples": 120,
+          "median": 5.54105,
+          "p95": 5.9829,
+          "p99": 6.2395,
+          "maximum": 6.2984
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "universe_dropdown",
+      "loops": [
+        1625,
+        2344
+      ],
+      "frame_work_ms": {
+        "samples": 689,
+        "median": 5.4869,
+        "p95": 6.0389,
+        "p99": 6.2372,
+        "maximum": 6.5071
+      },
+      "frame_cadence_ms": {
+        "samples": 689,
+        "median": 5.5583,
+        "p95": 6.1737,
+        "p99": 6.4917,
+        "maximum": 6.6302
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 689,
+        "median": 0.7487000000000004,
+        "p95": 1.0002000000000004,
+        "p99": 1.1376999999999997,
+        "maximum": 1.3360000000000005
+      },
+      "ui_host_callback_ms": {
+        "samples": 689,
+        "median": 0.4606,
+        "p95": 0.6734,
+        "p99": 0.8286,
+        "maximum": 1.0105
+      },
+      "gpu_ms": {
+        "samples": 689,
+        "median": 1.08685,
+        "p95": 1.30384,
+        "p99": 1.41066,
+        "maximum": 1.6754900000000001
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.425750000000001,
+        "p95": 6.0549,
+        "p99": 21.9423,
+        "maximum": 21.9423
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.55045,
+          "p95": 6.2971,
+          "p99": 6.5066,
+          "maximum": 6.5897
+        },
+        {
+          "samples": 120,
+          "median": 5.552099999999999,
+          "p95": 6.1972,
+          "p99": 6.467,
+          "maximum": 6.4923
+        },
+        {
+          "samples": 120,
+          "median": 5.5629,
+          "p95": 6.0788,
+          "p99": 6.2654,
+          "maximum": 6.3472
+        },
+        {
+          "samples": 120,
+          "median": 5.5979,
+          "p95": 6.1372,
+          "p99": 6.6122,
+          "maximum": 6.6302
+        },
+        {
+          "samples": 120,
+          "median": 5.51075,
+          "p95": 6.0748,
+          "p99": 6.3919,
+          "maximum": 6.4847
+        }
+      ]
+    },
+    {
+      "phase": 4,
+      "name": "editor",
+      "loops": [
+        2344,
+        2880
+      ],
+      "frame_work_ms": {
+        "samples": 506,
+        "median": 5.5145,
+        "p95": 5.7611,
+        "p99": 5.8472,
+        "maximum": 6.2749
+      },
+      "frame_cadence_ms": {
+        "samples": 506,
+        "median": 5.554449999999999,
+        "p95": 5.8108,
+        "p99": 6.0372,
+        "maximum": 6.4893
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 506,
+        "median": 0.34009999999999996,
+        "p95": 0.5266000000000004,
+        "p99": 0.6477999999999999,
+        "maximum": 0.8680000000000001
+      },
+      "ui_host_callback_ms": {
+        "samples": 506,
+        "median": 0.06955,
+        "p95": 0.1622,
+        "p99": 0.2741,
+        "maximum": 0.6129
+      },
+      "gpu_ms": {
+        "samples": 506,
+        "median": 0.10012000000000001,
+        "p95": 0.10052000000000001,
+        "p99": 0.10080000000000001,
+        "maximum": 0.10108
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.49745,
+        "p95": 6.3635,
+        "p99": 38.2745,
+        "maximum": 38.2745
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.55385,
+          "p95": 5.804,
+          "p99": 5.8686,
+          "maximum": 6.4893
+        },
+        {
+          "samples": 120,
+          "median": 5.55785,
+          "p95": 5.8265,
+          "p99": 6.019,
+          "maximum": 6.0594
+        },
+        {
+          "samples": 120,
+          "median": 5.54485,
+          "p95": 5.8054,
+          "p99": 6.3039,
+          "maximum": 6.3472
+        },
+        {
+          "samples": 120,
+          "median": 5.556100000000001,
+          "p95": 5.8092,
+          "p99": 6.0372,
+          "maximum": 6.4336
+        }
+      ]
+    },
+    {
+      "phase": 5,
+      "name": "return_hidden",
+      "loops": [
+        2880,
+        3420
+      ],
+      "frame_work_ms": {
+        "samples": 510,
+        "median": 5.522600000000001,
+        "p95": 5.9707,
+        "p99": 6.2286,
+        "maximum": 6.4972
+      },
+      "frame_cadence_ms": {
+        "samples": 510,
+        "median": 5.562799999999999,
+        "p95": 6.0346,
+        "p99": 6.4263,
+        "maximum": 7.0562
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 510,
+        "median": 0.3765999999999999,
+        "p95": 0.5936,
+        "p99": 0.9095999999999993,
+        "maximum": 1.1436000000000002
+      },
+      "ui_host_callback_ms": {
+        "samples": 510,
+        "median": 0.0899,
+        "p95": 0.2634,
+        "p99": 0.4896,
+        "maximum": 0.8808
+      },
+      "gpu_ms": {
+        "samples": 510,
+        "median": 1.079565,
+        "p95": 1.1733300000000002,
+        "p99": 1.3375400000000002,
+        "maximum": 1.4359400000000002
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.52895,
+        "p95": 6.2425,
+        "p99": 6.933,
+        "maximum": 6.933
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.567,
+          "p95": 5.994,
+          "p99": 6.2602,
+          "maximum": 6.5022
+        },
+        {
+          "samples": 120,
+          "median": 5.5318000000000005,
+          "p95": 6.0453,
+          "p99": 6.5479,
+          "maximum": 7.0562
+        },
+        {
+          "samples": 120,
+          "median": 5.57845,
+          "p95": 6.0337,
+          "p99": 6.1379,
+          "maximum": 6.2185
+        },
+        {
+          "samples": 120,
+          "median": 5.57505,
+          "p95": 5.9813,
+          "p99": 6.1764,
+          "maximum": 6.2869
+        }
+      ]
+    },
+    {
+      "phase": 6,
+      "name": "1920x1080_hidden",
+      "loops": [
+        3420,
+        4104
+      ],
+      "frame_work_ms": {
+        "samples": 654,
+        "median": 5.5119,
+        "p95": 5.8228,
+        "p99": 6.0467,
+        "maximum": 7.5264
+      },
+      "frame_cadence_ms": {
+        "samples": 654,
+        "median": 5.54655,
+        "p95": 5.8959,
+        "p99": 6.086,
+        "maximum": 7.6109
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 654,
+        "median": 0.37100000000000005,
+        "p95": 0.6745000000000005,
+        "p99": 0.8657000000000001,
+        "maximum": 0.9413
+      },
+      "ui_host_callback_ms": {
+        "samples": 654,
+        "median": 0.0922,
+        "p95": 0.314,
+        "p99": 0.5297,
+        "maximum": 0.6843
+      },
+      "gpu_ms": {
+        "samples": 654,
+        "median": 0.32972,
+        "p95": 0.33076000000000005,
+        "p99": 0.33140000000000003,
+        "maximum": 0.33492000000000005
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.4003499999999995,
+        "p95": 34.3577,
+        "p99": 84.2549,
+        "maximum": 84.2549
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.535299999999999,
+          "p95": 5.955,
+          "p99": 6.1789,
+          "maximum": 7.6109
+        },
+        {
+          "samples": 120,
+          "median": 5.54725,
+          "p95": 5.8419,
+          "p99": 6.1939,
+          "maximum": 6.2412
+        },
+        {
+          "samples": 120,
+          "median": 5.5511,
+          "p95": 5.8799,
+          "p99": 6.0328,
+          "maximum": 6.0736
+        },
+        {
+          "samples": 120,
+          "median": 5.536300000000001,
+          "p95": 5.8847,
+          "p99": 6.0152,
+          "maximum": 6.043
+        },
+        {
+          "samples": 120,
+          "median": 5.54735,
+          "p95": 5.8534,
+          "p99": 5.9369,
+          "maximum": 5.9744
+        }
+      ]
+    },
+    {
+      "phase": 7,
+      "name": "3440x1440_restored",
+      "loops": [
+        4104,
+        4806
+      ],
+      "frame_work_ms": {
+        "samples": 672,
+        "median": 5.52275,
+        "p95": 6.0554,
+        "p99": 6.3123,
+        "maximum": 6.4415
+      },
+      "frame_cadence_ms": {
+        "samples": 672,
+        "median": 5.552250000000001,
+        "p95": 6.0869,
+        "p99": 6.3187,
+        "maximum": 6.4738
+      },
+      "cpu_work_including_present_excluding_fence_ms": {
+        "samples": 672,
+        "median": 0.3738499999999998,
+        "p95": 0.6128999999999993,
+        "p99": 0.8116999999999999,
+        "maximum": 0.9426000000000004
+      },
+      "ui_host_callback_ms": {
+        "samples": 672,
+        "median": 0.0888,
+        "p95": 0.2793,
+        "p99": 0.494,
+        "maximum": 0.6676
+      },
+      "gpu_ms": {
+        "samples": 672,
+        "median": 1.085835,
+        "p95": 1.18666,
+        "p99": 1.3372600000000001,
+        "maximum": 1.4084100000000002
+      },
+      "transition_frame_ms": {
+        "samples": 30,
+        "median": 5.5354,
+        "p95": 26.1256,
+        "p99": 99.3286,
+        "maximum": 99.3286
+      },
+      "repeating_120_loop_cadence": [
+        {
+          "samples": 120,
+          "median": 5.5511,
+          "p95": 6.0212,
+          "p99": 6.2167,
+          "maximum": 6.2459
+        },
+        {
+          "samples": 120,
+          "median": 5.56265,
+          "p95": 6.0287,
+          "p99": 6.2503,
+          "maximum": 6.4738
+        },
+        {
+          "samples": 120,
+          "median": 5.5382,
+          "p95": 6.109,
+          "p99": 6.3636,
+          "maximum": 6.4028
+        },
+        {
+          "samples": 120,
+          "median": 5.5579,
+          "p95": 6.1859,
+          "p99": 6.3341,
+          "maximum": 6.3708
+        },
+        {
+          "samples": 120,
+          "median": 5.54895,
+          "p95": 6.1212,
+          "p99": 6.269,
+          "maximum": 6.3548
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Short bounded shared desktop run; no 150 FPS qualification.",
+    "Desktop activity is uncontrolled; original transitions run had Explorer occlusion during pause capture.",
+    "CPU work includes Vulkan present; GPU timestamps exclude Windows compositor cost.",
+    "Editor changes scene content and cannot isolate overlay cost."
+  ]
+}

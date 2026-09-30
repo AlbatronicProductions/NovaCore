@@ -13,6 +13,8 @@ internal unsafe interface IApplicationPresentation
     ConstructionFlightScene? Flight { get; }
     bool Editing { get; }
     bool Paused { get; }
+    bool LoadingCancelled => false;
+    void LoadingProgress(string stage,bool ready=false) { }
     void Attach(SolarSystemScene solar,CameraState camera);
     void BeginFrame(in NativeInputState input);
     void PresentEditor(NativeFrameSubmission* frame);
