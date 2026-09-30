@@ -1,6 +1,27 @@
 # NovaCore engineering handoff
 
-## Current bank — M16.1; front closed
+## Current bank — M16.2; front closed
+
+**NovaCore M16.2 — Player Entry, Fullscreen Viewport & UI Architecture Convergence
+is BANKED.** Annotated tag [m16.2](https://github.com/AlbatronicProductions/NovaCore/tree/m16.2)
+and GitHub main resolve to `cd8fdcf977dee633f57da790e931a388b922048f`.
+Parent: `m16.1` / `40314c0f72396ea5f4ff39121f0b6821f1f96146`.
+Canonical tree: `E:\NovaCore`, branch `main`.
+**STOP FOR PROJECT CONTROL. No next front.**
+
+Accepted responsibility: fullscreen Configuration → Loading → Gameplay; full-client
+viewport; overlay menus and owned Vehicle Editor; Exploration 0.1× ↔ authoritative
+pause; landing-page refresh; preserved construction/save/load/launch routes.
+See [M16.2 scope](milestones/M16.2.md) and [current state](NOVACORE_CURRENT_STATE.md).
+
+The manual bank retains 69-versus-66 shader inventory debt, inherited Graphics
+assertion/path and native facility debt, full Graphics Release NOT RUN and
+non-96-DPI NOT RUN. 150 FPS and cold/global fallback remain OPEN; planetary fidelity
+REVISE; blackout causality UNRESOLVED; public-release PASS UNASSIGNED;
+MinimumRecorder disposition UNDECIDED. No wider flight or unperformed physical
+input/DPI coverage is implied. Historical preparation receipts remain unchanged.
+
+## Prior bank — M16.1
 
 **NovaCore M16.1 — Planetary Rendering & Terrain Lifecycle Convergence is BANKED.**
 Annotated tag [`m16.1`](https://github.com/AlbatronicProductions/NovaCore/tree/m16.1)
@@ -15,7 +36,7 @@ The current tree retains the accepted prepared-raster/receiver, compiler artifac
 contact cache, readiness worker/publication and background visibility corrections.
 The async regional-allocation trial, JIT policies and generic material content are rejected.
 
-Current 3440×1322 grounded frame: **6.687 / 13.575 / 15.643 ms**;
+M16.1 measured 3440×1322 grounded frame: **6.687 / 13.575 / 15.643 ms**;
 GPU **5.723 / 9.892 / 11.451 ms**. Readiness **374.539 ms**, 36 fallback frames.
 150 FPS and cold closure **OPEN / REVISE**; planetary fidelity **REVISE**;
 blackout **UNRESOLVED**; Player/public acceptance **UNASSIGNED**.

@@ -1,21 +1,25 @@
 # NovaCore — current limitations
 
-**M16.1 is the current banked internal engineering baseline. Player/public-release PASS is
+**M16.2 is the current banked internal engineering baseline. Player/public-release PASS is
 UNASSIGNED; there is no packaged player release.** The
 [current engineering state](NOVACORE_CURRENT_STATE.md) records the bank identity.
 Earlier [campaign reports](engineering-evidence/performance-150fps/bank-candidate.md)
 retain their historical pre-bank status and measurements. Banking preserves the
 accepted engineering capabilities without closing the limits below.
 
-**M16.2 is accepted but unbanked.** Its fullscreen entry/loading/UI and exploration
+**M16.2 banks the accepted production responsibility with open qualification debt.**
+Its fullscreen entry/loading/UI and exploration
 pause corrections preserve these limits. Actual held-key, focus-loss and physical
 DPI-transition cases not performed remain NOT RUN, separate from automated window
 resize/input evidence. Loading GPU-memory values are driver estimates with a shared
 sampling owner; sampling/repaint can wait for synchronous loading checkpoints.
-See the [current candidate](NOVACORE_CURRENT_STATE.md#accepted-candidate--m162-unbanked).
+See the [current bank](NOVACORE_CURRENT_STATE.md#current-bank--m162-banked).
 Engineering qualification remains **REVISE** for package closure, Graphics failures
-and non-96-DPI coverage. Project Control has explicitly elected manual banking
-with this debt recorded; none of these results becomes a qualification PASS.
+and non-96-DPI coverage. The completed manual bank does not turn these results
+into qualification PASS. Shader inventory remains 69 present versus 66 expected;
+inherited Graphics assertion/path contracts and native facility qualification
+remain unresolved. Full Graphics Release and non-96-DPI gates remain NOT RUN.
+See the [M16.2 scope and retained debt](milestones/M16.2.md).
 
 - MinimumRecorder remains temporary developer/qualification infrastructure while
   historical blackout causality is **UNRESOLVED**. Its permanent public disposition
@@ -25,7 +29,7 @@ with this debt recorded; none of these results becomes a qualification PASS.
   dumps/captures, bulk forensics and unselected generated evidence remain local-only
   and must never be committed or included in a player package.
 
-- Current [M16.1 bank](milestones/M16.1.md): accepted rendering/terrain
+- Parent [M16.1 bank](milestones/M16.1.md): accepted rendering/terrain
   lifecycle corrections PASS, with all M16.0 outcomes preserved. At 3440×1322, grounded frame
   median/P95/P99 is **6.687/13.575/15.643 ms**, whole GPU **5.723/9.892/11.451 ms**.
   Stable 150 FPS / 6.6667 ms and cold-fallback closure remain **OPEN / REVISE**;

@@ -6,7 +6,7 @@
 capture `build/ad4-editor-restoration/built-and-saved.jpg`, September 29, 2026,
 3440 × 1440. SHA-256:
 `9804c2f65d6a73d60162413200a73df8c5b87a002ebef7eda492fe4544f36f80`.
-It shows the accepted candidate's overlaid editor and a 12-part saved craft;
+It shows the overlaid editor now banked in M16.2 and a 12-part saved craft;
 it does not claim wider flight or public-release qualification. The
 [editor route and receipt](../engineering-evidence/player-entry-convergence/editor-restoration.md)
 record its source/package identity and interaction provenance. The minimum-speed
@@ -38,7 +38,7 @@ from the final page because they add little visual clarity.
 
 ## One recommended next capture
 
-Record one short, real gameplay clip from the banked M16.0 build in readable
+Record one short, real gameplay clip from the banked M16.2 build in readable
 daylight: construction/save → Florida launch → propulsion/RCS → physical
 terrain/pad contact and settling → relaunch. Show the complete craft and local
 terrain, with no pause menu or diagnostic overlays. Identify any cuts and retain

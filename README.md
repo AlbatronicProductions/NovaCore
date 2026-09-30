@@ -13,7 +13,7 @@ the current flight limits. NovaCore is developed by **Albatronic Productions**.
 
 ![NovaCore Vehicle Editor over the full viewport, showing a modular spacecraft, part catalogue and build controls](docs/images/novacore-m16.2-construction.jpg)
 
-*Vehicle Editor in the accepted M16.2 candidate, September 29, 2026.
+*Vehicle Editor presentation now banked in M16.2; captured September 29, 2026.
 Actual application capture; spacecraft art and interface are still evolving.*
 
 ## What you can do now
@@ -107,12 +107,12 @@ This opens the editor; it does not physically land the spacecraft.
 NovaCore is an **early development build**. Performance optimization, visual
 stability and presentation remain ongoing work.
 **M16.2 — Player Entry, Fullscreen Viewport & UI Architecture Convergence** is
-accepted for manual banking with recorded qualification debt. It brings Configuration → Loading →
-Gameplay, the overlaid Vehicle Editor and exploration pause controls together.
-[M16.1](https://github.com/AlbatronicProductions/NovaCore/tree/m16.1) remains the
-latest banked source checkpoint until M16.2 is published. Performance and final
-planetary presentation remain open. This is not a packaged public release;
-no release date has been announced.
+banked under [m16.2](https://github.com/AlbatronicProductions/NovaCore/tree/m16.2).
+It brings Configuration → Loading → Gameplay, the overlaid Vehicle Editor and
+exploration pause controls together. Performance, planetary fidelity and release
+qualification remain open; [known limitations](docs/KNOWN_LIMITATIONS.md) records
+the retained debt. This is not a packaged public release; no release date has
+been announced.
 
 Today's limits:
 

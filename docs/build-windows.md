@@ -1,8 +1,8 @@
 # Build on Windows 11
 
-The toolchain below builds the current source, including the accepted **M16.2**
-candidate. M16.2 is unbanked; **M16.1 — Planetary Rendering & Terrain Lifecycle
-Convergence** remains the latest banked checkout. Player/public-release PASS remains unassigned.
+The latest reproducible bank is **M16.2 — Player Entry, Fullscreen Viewport & UI
+Architecture Convergence**, commit `cd8fdcf977dee633f57da790e931a388b922048f`.
+It retains explicit qualification debt; Player/public-release PASS remains unassigned.
 This is a repository-layout development build, not a standalone installer.
 
 The unified entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
@@ -16,7 +16,7 @@ See the [player walkthrough and controls](../README.md#try-novacore).
 For a new source checkout, with Git and Git LFS installed:
 
 ```powershell
-git clone --branch m16.1 https://github.com/AlbatronicProductions/NovaCore.git
+git clone --branch m16.2 https://github.com/AlbatronicProductions/NovaCore.git
 cd NovaCore
 git lfs install
 git lfs pull
@@ -28,10 +28,9 @@ tree remains `E:\NovaCore`; source builders can use their own checkout location.
 No private prospective-source export, isolated worktree executable or test catalog
 is needed for the normal application.
 
-The `m16.1` clone command reproduces that bank, not the uncommitted M16.2 candidate
-currently in `E:\NovaCore`. Do not substitute an unpublished `m16.2` tag. Candidate
-qualification and exact inputs are recorded in the
-[M16.2 preparation receipt](engineering-evidence/m16.2-bank-preparation/README.md).
+The `m16.2` checkout reproduces the banked source responsibility, including its
+open qualification debt. See the [M16.2 milestone](milestones/M16.2.md); its linked
+preparation receipts retain their original pre-bank identities and judgments.
 
 Both `earth-surface-v5` and `earth-florida-m12` must be built and verified before
 starting Earth/Solar scenes, even away from Florida. Runtime does not download
@@ -120,13 +119,16 @@ python tools/verify-player-package.py --output build/player-package-verification
 & ./tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe
 ```
 
-The final M16.1 preflight rebuilt native Release from source, rebuilt NovaCore.App
-through its project references, verified the package and ran CPU integration/startup
-smoke checks. No historical DLL/shader copying or KSA dependency was used.
-See the [publication verification record](milestones/M16.1-publication.json).
+The final M16.2 manual precheck built native Release and rebuilt the solution and
+canonical NovaCore.App with zero warnings/errors. Its package verification retained
+the accepted shader-inventory failure; the build PASS is not package-closure PASS.
+See the [final precheck](engineering-evidence/m16.2-bank-preparation/manual-precheck.json).
 
-The current source-derived package contains 68 shaders, the native DLL, managed
-dependencies, starter/SRV assets and third-party notices. Native content flows
+The source-derived runtime shader closure expects 66 shaders; the observed bank
+precheck package contains 69, including two retired HUD outputs and one test shader.
+It also contains the native DLL, managed dependencies, starter/SRV assets and
+third-party notices. This retained inventory debt is not waived by the verifier.
+Native content flows
 through project references; do not hand-copy DLLs or shaders. The verifier checks
 the CMake target output closure and current source content, not an old candidate.
 
@@ -262,8 +264,9 @@ test. Build it in each native configuration and run the resulting executable.
 Use `tools/verify-player-package.py --output <receipt.json>` after builds and
 native test-target generation. Its source-derived runtime shader inventory must
 match the package exactly; stale retired outputs or test-only shaders are failures.
-The current M16.2 preparation records such a failure and is **REVISE**, not a
-package PASS. See its [receipt](engineering-evidence/m16.2-bank-preparation/README.md).
+The historical M16.2 preparation records such a failure and remains **REVISE**, not a
+package PASS. Project Control subsequently banked the responsibility with this debt;
+see the [milestone](milestones/M16.2.md) and [receipt](engineering-evidence/m16.2-bank-preparation/README.md).
 Managed GPU proof/query contexts enable the layer when available; preflight
 requires it. Direct native commands above inherit ambient discovery; use the
 Graphics runner's `--native-gpu` entry for canonical regression status. Current

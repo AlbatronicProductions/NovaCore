@@ -1,16 +1,19 @@
 # NovaCore current engineering state
 
-## Accepted candidate — M16.2 (UNBANKED)
+## Current bank — M16.2 (BANKED)
 
-Project Control accepts **M16.2 — Player Entry, Fullscreen Viewport & UI Architecture
-Convergence**, including the minimum-speed/pause correction. Parent is `m16.1` /
-`40314c0f72396ea5f4ff39121f0b6821f1f96146`. Project Control has now authorized
-manual banking of this production responsibility with explicitly recorded open
-qualification debt, conditional on the final Release build and unchanged candidate.
-The earlier engineering judgment remains **REVISE** for package/Graphics/DPI
-qualification; the banking decision does not convert those gates into PASS.
-See the [manual bank decision](engineering-evidence/m16.2-bank-preparation/manual-bank-decision.md).
-Commit, tag and push remain manual; this text does not assert publication.
+**M16.2 — Player Entry, Fullscreen Viewport & UI Architecture Convergence is BANKED**
+under annotated tag [m16.2](https://github.com/AlbatronicProductions/NovaCore/tree/m16.2),
+commit `cd8fdcf977dee633f57da790e931a388b922048f`, September 30, 2026.
+Parent is `m16.1` / `40314c0f72396ea5f4ff39121f0b6821f1f96146`.
+Local HEAD, GitHub main and the peeled tag were verified at this commit.
+Project Control banked the accepted production responsibility with explicitly
+recorded qualification debt. Package/Graphics contracts and native facility
+qualification remain unresolved; full Graphics Release and non-96-DPI gates are
+NOT RUN. The earlier engineering **REVISE** is not converted to PASS.
+See the [milestone record](milestones/M16.2.md) and historical
+[manual bank decision](engineering-evidence/m16.2-bank-preparation/manual-bank-decision.md).
+**STOP FOR PROJECT CONTROL. No next production front is authorized.**
 
 The canonical application now follows fullscreen Configuration → dedicated Loading
 → fullscreen Gameplay. Real preparation tasks, selected-adapter memory reporting
@@ -38,7 +41,7 @@ terrain fallback, planetary fidelity, blackout and MinimumRecorder limits below
 remain open. [Bank-preparation record](engineering-evidence/m16.2-bank-preparation/README.md)
 and [pause evidence](engineering-evidence/player-entry-convergence/minimum-speed-pause.md).
 
-## Current bank — M16.1
+## Prior bank — M16.1
 
 **M16.1 — Planetary Rendering & Terrain Lifecycle Convergence is BANKED** at
 annotated tag [`m16.1`](https://github.com/AlbatronicProductions/NovaCore/tree/m16.1),
@@ -118,7 +121,7 @@ flight/control and return to the retained design share this application.
 
 Earlier reports retain their original pre-bank scope, identities and dispositions,
 including preparation and cleanup records. Their UNBANKED/HOLD wording does not
-override the M16.0/M16.1 tags and current status above. Earlier milestone exclusions
+override the banked tags through M16.2 and current status above. Earlier milestone exclusions
 describe those milestones; only the accepted responsibilities supersede them.
 No next major engineering front is opened by this documentation update.
 [Known limitations](KNOWN_LIMITATIONS.md) and [Windows build/run](build-windows.md)

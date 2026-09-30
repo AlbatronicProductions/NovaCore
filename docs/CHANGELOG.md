@@ -1,5 +1,20 @@
 # Development change record
 
+## 2026-09-30 — M16.2: Player Entry, Fullscreen Viewport & UI Architecture Convergence (BANKED)
+
+Banked under annotated tag [m16.2](https://github.com/AlbatronicProductions/NovaCore/tree/m16.2),
+commit `cd8fdcf977dee633f57da790e931a388b922048f`; parent `m16.1` /
+`40314c0f72396ea5f4ff39121f0b6821f1f96146`.
+Accepts Configuration → Loading → Gameplay, fullscreen viewport and overlay/menu
+architecture, owned Vehicle Editor presentation, Exploration 0.1× ↔ authoritative
+pause, README refresh and preserved construction/save/load/launch routes.
+
+The manual bank retains shader/package and Graphics contract/facility debt;
+full Graphics Release and non-96-DPI gates remain NOT RUN. 150 FPS and cold/global
+fallback remain OPEN; planetary fidelity REVISE; blackout causality UNRESOLVED;
+public-release PASS UNASSIGNED; MinimumRecorder disposition UNDECIDED.
+Banking does not certify these open items. [Scope and evidence](milestones/M16.2.md).
+
 ## 2026-09-29 — M16.1: Planetary Rendering & Terrain Lifecycle Convergence (banked)
 
 Accepted production campaign PASS: prepared zero-displacement direct raster and
