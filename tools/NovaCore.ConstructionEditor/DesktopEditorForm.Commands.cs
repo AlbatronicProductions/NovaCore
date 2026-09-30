@@ -26,8 +26,8 @@ internal sealed unsafe partial class DesktopEditorForm
         Add("new","Build New Vehicle",()=>{if(editing)NewCraft();else EnterEditor();},Ready);
         Add("launch","Launch Existing Vehicle",ShowLaunchBrowser,Ready);
         Add("settings","Settings",ShowPlayerConfiguration,Ready,Keys.Escape);
-        Add("update","Check for Update",()=>ShowInformation("NOVACORE UPDATES","Automatic update checking is not available.\nInstalled baseline: M16.1\nLocal development changes may be present."),Ready);
-        Add("history","Version History",()=>ShowInformation("VERSION HISTORY","M16.1 · banked local baseline\n40314c0f72396ea5f4ff39121f0b6821f1f96146\n\nPlayer entry convergence is unbanked development work.\nSee docs/milestones/M16.1.md for the baseline record."),Ready);
+        Add("update","Check for Update",()=>ShowInformation("NOVACORE UPDATES","Automatic update checking is not available.\nCurrent bank: M16.2\nLocal development changes may be present."),Ready);
+        Add("history","Version History",()=>ShowInformation("VERSION HISTORY","M16.2 · banked engineering baseline\ncd8fdcf977dee633f57da790e931a388b922048f\n\nPlayer Entry, Fullscreen Viewport && UI Architecture Convergence\nSee docs/milestones/M16.2.md for the bank record."),Ready);
         Add("exit","Exit Game",()=>RequestLeave(CloseApproved));
         Add("pause","Paused",()=>SetUserPause(!UserPaused),Scene,check:()=>UserPaused);
         for(var i=0;i<SimulationSpeedPresets.Count;i++){var index=i;Add("speed"+i,SimulationSpeedPresets.Get(i).Label.Replace("Simulation Speed: ",""),()=>SelectSpeed(index),()=>Scene()??(flight is not null&&index!=1?"Physical flight is qualified at 1× only":null),check:()=>flight is null?solar?.SpeedPresetIndex==index: index==1);}
