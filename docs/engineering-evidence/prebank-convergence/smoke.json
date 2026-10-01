@@ -1,0 +1,22 @@
+{
+  "inputType": "Automated native Windows input; not physical user acceptance",
+  "executable": "E:/NovaCore/tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe",
+  "arguments": [],
+  "pid": 43784,
+  "actualDpi": 120,
+  "displayResolution": [
+    3440,
+    1440
+  ],
+  "packageSha256": "528199b8fb1a7b3bc9c0d545a1314fcbab51480fe825aac26399d820a819a9c3",
+  "rawLogPath": "C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\Logs\\20260930-220259-718-43784-62cd8843a17647d6968111f5c1655cfb\\segment-0.log",
+  "rawLogSha256": "006f49b4bef6e75d71c792b8620de47334a158bb19433f5733da56b7eb509333",
+  "selectedLogWitnesses": [
+    "Qualification recorder: C:\\Users\\Tyler\\AppData\\Local\\NovaCore\\MinimumRecorder\\ca521cc451864fc0968e777fd188b736",
+    "PLAYER_LOADING_COMPLETE readiness=native-first-fence-and-selected-session-presentation memory=Ready sample=57",
+    "GPU_MEMORY_CLOSED timer=stopped renderer=retired sharedInstance=destroyed",
+    "Session ended; exitCode=0"
+  ],
+  "performanceClosure": false,
+  "systemAnomalyObserved": false
+}

@@ -1,0 +1,19 @@
+{
+  "recordedUtc": "2026-09-30T21:19:05.483579+00:00",
+  "head": "b0ccfd8f17643868a8d9011968a4566bc8a13f69",
+  "branch": "main",
+  "m16.2Commit": "cd8fdcf977dee633f57da790e931a388b922048f",
+  "sourceFiles": {
+    "docs/build-windows.md": "b20697dd1cd3c39c0429c78d21cddcc4166039bd6653eb341d7c5b7d5b21770f",
+    "native/NovaCore.Native/CMakeLists.txt": "543aa707c76b9f440db8ecd96b6c63d48e8ddee031849c22d6f650f015e52969",
+    "native/NovaCore.Native/RuntimeShaderDeployment.cmake": "c044aa752e2e3d093ac3c7be206d2d8a9dabe9749f72383af91da8b287b7b51a",
+    "samples/NovaCore.Triangle/NovaCore.Triangle.csproj": "c0715ac5c57c904f0e278100ea15d6bb19c9755804f872896d64c9f6de50c7f0",
+    "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs": "9aa6d238722630794eb895e4b29046110ea0b9c6b5f9aeef28e3d1b2e557d04e",
+    "tools/NovaCore.App/NovaCore.App.csproj": "521842e303e2fa766794977c55bc3abdcc829930a87682ae0788819187773718",
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj": "a84908d615a418caee8e8e34d8da986894ae55c6e6e146a6cd41d47b064e338a",
+    "tools/RuntimeShaderDeployment.targets": "4b8ef76e8a928bb5ad2795dacd414de8e2ab9a94a98389017b4bbfcb04abfd87",
+    "tools/deploy-runtime-shaders.py": "f1b22374a5efa97c014f8443570f8c181a26044b176cd2362072a0ca8b55d670",
+    "tools/test-runtime-shader-deployment.py": "d256e1ce5a4e11f88af1dfe578e52134931c76192f0a0beebea061df707abb1a",
+    "tools/verify-player-package.py": "b8bfeb1de15d4715057b93e65efaf8985f84a14c5b8369b60fc78833e2c05f7e"
+  }
+}

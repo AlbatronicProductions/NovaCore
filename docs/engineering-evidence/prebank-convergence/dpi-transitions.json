@@ -1,0 +1,243 @@
+{
+  "judgment": "ENGINEERING_TRANSITIONS_PASS",
+  "visualAcceptance": false,
+  "realOsDpiTransition": false,
+  "heldHardwareKeys": false,
+  "checks": 17275,
+  "extents": [
+    {
+      "phase": 0,
+      "elapsed": 0.0029898,
+      "loop": 3,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 1,
+      "elapsed": 2.0018442,
+      "loop": 364,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 2,
+      "elapsed": 6.0019293,
+      "loop": 1084,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 3,
+      "elapsed": 9.0015133,
+      "loop": 1624,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 4,
+      "elapsed": 13.0024736,
+      "loop": 2341,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 5,
+      "elapsed": 16.0010331,
+      "loop": 2874,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 6,
+      "elapsed": 19.0020167,
+      "loop": 3414,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 7,
+      "elapsed": 23.0013169,
+      "loop": 4102,
+      "parent": {
+        "Width": 1920,
+        "Height": 1080
+      },
+      "host": {
+        "Width": 1920,
+        "Height": 1080
+      },
+      "render": {
+        "ViewportWidthPixels": 1920,
+        "ViewportHeightPixels": 1080
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 1.7777777777777777,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    },
+    {
+      "phase": 8,
+      "elapsed": 27.0021125,
+      "loop": 4807,
+      "parent": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "host": {
+        "Width": 3440,
+        "Height": 1440
+      },
+      "render": {
+        "ViewportWidthPixels": 3440,
+        "ViewportHeightPixels": 1440
+      },
+      "parentHwnd": 16845828,
+      "childHwnd": 2756292,
+      "dpi": 120,
+      "projection": {
+        "VerticalFieldOfViewRadians": 1.0471975511965976,
+        "AspectRatio": 2.388888888888889,
+        "NearClip": 1000000,
+        "FarClip": 14959787070000
+      }
+    }
+  ]
+}

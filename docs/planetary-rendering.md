@@ -75,11 +75,11 @@ The production chain is:
 canonical body-fixed physical terrain
 → immutable persistent NCSM1 scale resource
 → retained/snapped pupil
-→ full physical relief and normal preparation before TES
+→ full physical relief and normal preparation before raster
 → conservative curved-patch planet occlusion
 → conservative screen/frustum rejection
 → compacted original index triplets
-→ KSA-parity per-edge TCS factors and ordinary TES interpolation
+→ direct prepared-surface raster when eligible; retained TCS/TES for other supported inputs
 → indexed indirect raster
 → fence-complete atomic publication
 ```
@@ -87,23 +87,31 @@ canonical body-fixed physical terrain
 Topology density controls the piecewise-linear approximation presented to the
 GPU. It does not own or redefine `H(bodyDirection)`.
 
-## Visibility, compaction, and TES
+## Visibility, compaction, and raster ownership
 
 Pre-TES planet occlusion encloses each displaced curved patch conservatively;
 it does not infer visibility from a planar triangle-facing test. Screen and
 frustum rejection likewise remove only work proven unable to contribute. The
 surviving triangle stream is compacted into an indexed-indirect draw payload.
 
-The compact VS/TCS interface carries 13 scalars per control point: prepared
+The accepted M16.1 direct prepared-surface route is selected by
+`native/NovaCore.Native/PreparedSurfaceRaster.h`: prepared-terrain contract enabled,
+NCSM1, generation 4, production-cube mode, no surface/raster diagnostic override,
+and finite nonnegative uploaded factor demand. It uses the same prepared physical
+vertices, compaction and receiver without invoking TCS/TES. Diagnostic overrides,
+negative factor probes and other ineligible supported submissions retain their
+existing tessellation route. This is the current owner, not a new replacement.
+
+On that retained route, the compact VS/TCS interface carries 13 scalars per control point: prepared
 normal, light direction, camera-relative view, physical direction and height. TES reads frame/body
 constants from immutable buffers and reconstructs material geography from the
-interpolated prepared receiver. Ordinary NCSM1 rendering specializes inverse
+interpolated prepared receiver. NCSM1 rendering specializes inverse
 geographic-address reconstruction away; `owners` and `boundaries` diagnostics
 retain it. Diagnostic mode is immutable for a native context, and all four
 NCSM1 raster-state pipelines use the same applicable specialization.
 
-Full canonical physical relief is prepared at shared vertices before
-tessellation. Ordinary TES interpolates the published camera-relative surface,
+Full canonical physical relief is prepared at shared vertices before raster.
+When selected, TES interpolates the published camera-relative surface,
 height and normal; it does not evaluate an additional near-field H displacement.
 Gameplay and clearance continue to query full canonical H independently. No
 authored TES height maps are currently supplied. Hardware tessellation remains:

@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-30",
+  "writer": "AD4 / root",
+  "reviews": [
+    {
+      "reviewer": "graphics_contract_review",
+      "mode": "read-only",
+      "judgment": "PASS",
+      "findingResolved": "Depth-clear assertion initially allowed an intervening nonzero override. Final declaration-through-clear statement guard rejects nonzero depth and aspect override in independent in-memory mutations.",
+      "conclusion": "Current numerical bounds, original bad-case witnesses, conservative culling, precision and retained TES behavior remain protected. All four window cases remain; separate independent package oracle remains mandatory.",
+      "sha256": {
+        "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs": "93e1af85f240f0a78cd71b16db12721ef359fb07ec44e5e1d3b17cb3b0fc32b0",
+        "tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs": "169eb1a6b04d156e75856ab57f1bff3cc35c19dbf95bc4b96d6a3927337d8dc7",
+        "tests/NovaCore.Graphics.Tests/Program.cs": "53f9c2b59849dbe8cd5584bee8386de36fc7910daa81323f1558083f9ee47667",
+        "tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs": "dd9409f1671aa078015298c3a9529e85e86034da4553ee5ee487f1ec370c8b3e",
+        "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs": "e7ba16faaa18670cd7de616b8dd166242a60c6f22fbdcb72a357b586c9321925"
+      }
+    },
+    {
+      "reviewer": "convergence_review",
+      "mode": "read-only",
+      "judgment": "PASS bounded audit; no broad provider retirement justified",
+      "report": "ownership-audit.md",
+      "conclusion": "Facility harness migration follows its existing producer. Supported entry, renderer, cold/data/memory fallbacks and recorder retain real consumers. Diagnostic browser and synthetic unloaded elevation are deferred unchanged. No KSA history access claimed."
+    },
+    {
+      "reviewer": "convergence_review",
+      "mode": "read-only final closeout and retained-image review",
+      "judgment": "No material panel/control clipping or overlap visible; evidence corroborates bounded automated DPI qualification",
+      "findingResolved": "Physical query refusal statuses distinguished; current facility build documentation reconciled.",
+      "conclusion": "120 DPI receipt, native extents, 17275 checks, recovery hashes and reviewed source hashes confirmed. Editor pointer is on highlighted command-core region with Selected 1 linked part(s) status. Screenshots cannot establish native-pixel raster quality, causal sequence alone, hidden routes or physical human acceptance.",
+      "sha256": {
+        "configuration-125.jpg": "ad1bb3a9f05a7fa68088c0c35e6e9cbc25702af8001689c1a1564a6dc0f73c90",
+        "editor-picking-125.jpg": "85d19b4960d4d219e5d936daf7c5e8bc87fccd238e90e35a06bc933051bd5631",
+        "flight-125.jpg": "1201ea5cff49ca9246b245b07c950561480c74b08575ccbee01ad5a9e588edef",
+        "dpi-transitions.json": "dc19d76f2e52da6e9417131ce687a57952f2651458172c0f9e51240b52f95f37"
+      }
+    },
+    {
+      "reviewer": "graphics_contract_review",
+      "mode": "read-only final evidence verification; no independent rerun",
+      "judgment": "PASS; no factual qualification blocker",
+      "conclusion": "All14 production seals and five reviewed test hashes match. Each configuration has116 unique Graphics PASS entries exactly matching source and retained inventory, no omissions/extras/failures/skips/exclusions; native GPU3/3; ten native CPU log hashes match; both builds0warnings/errors; Player55 each; final package receipts byte-equal retained copies; actual120DPI throughout17275 checks and matching extents; Release smoke/package match; final shader suite31PASS. Pending README rows observed during review were subsequently finalized from these receipts."
+    }
+  ]
+}

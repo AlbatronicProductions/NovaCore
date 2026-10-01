@@ -1088,10 +1088,28 @@ static void OpaqueDistantDetailedHandoffTest()
     Check(nativeSource.Contains("handoffDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthWriteEnable=VK_TRUE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthCompareOp=VK_COMPARE_OP_GREATER",StringComparison.Ordinal),"Distant handoff and Detailed reversed-Z depth ownership remain unchanged");
     var orbitDraw=nativeSource.IndexOf("if(solarOverlay&&a.submission->orbitVertexCount>=2",StringComparison.Ordinal);
     var distantDrawIndex=nativeSource.IndexOf("if(distantCount){VkDeviceSize",StringComparison.Ordinal);
-    var candidateOrAnchoredDrawIndex=nativeSource.IndexOf("vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer",StringComparison.Ordinal);
+    var colorBranch=nativeSource.IndexOf("a.anchoredPipelineStatisticsFrameSubmitted=candidate;",StringComparison.Ordinal);
+    Check(colorBranch>distantDrawIndex,"terrain color branch follows distant scene ownership");
+    var candidateOrAnchoredDrawIndex=nativeSource.IndexOf("vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer",colorBranch,StringComparison.Ordinal);
     var detailedDrawIndex=nativeSource.IndexOf("if(!candidate&&diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)",StringComparison.Ordinal);
     var focusedOrbitDraw=nativeSource.IndexOf("if (!solarOverlay && a.submission->orbitVertexCount",StringComparison.Ordinal);
     Check(nativeSource.Contains("solarOrbitCreate=orbitPipeline",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL",StringComparison.Ordinal)&&nativeSource.Contains("orbitPipeline.pDepthStencilState=&orbitDepth",StringComparison.Ordinal)&&orbitDraw>=0&&distantDrawIndex>orbitDraw&&candidateOrAnchoredDrawIndex>distantDrawIndex&&detailedDrawIndex>candidateOrAnchoredDrawIndex&&focusedOrbitDraw>detailedDrawIndex,"scene-space orbit lines use read-only reversed-Z occlusion: Solar overview remains pre-surface while focused far-side segments cannot draw through terrain");
+    // Background visibility uses the same geometry before the color branch. Its
+    // temporary depth must be cleared to reversed-Z zero before any scene draw.
+    var prepass=nativeSource.IndexOf("vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.backgroundDepthPipeline)",StringComparison.Ordinal);
+    Check(prepass>=0,"background visibility prepass exists");
+    var prepassDraw=nativeSource.IndexOf("vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer",prepass,StringComparison.Ordinal);
+    var background=nativeSource.IndexOf("a.depthMaskedBackgroundSubmitted?a.depthMaskedBackgroundPipeline:a.backgroundPipeline",prepass,StringComparison.Ordinal);
+    var restore=nativeSource.IndexOf("VkClearAttachment attachment{};attachment.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;",background,StringComparison.Ordinal);
+    Check(prepassDraw>prepass&&background>prepassDraw&&restore>background,"background draw follows prepass and precedes depth-only zero restore");
+    const string clearStatement="VkClearRect rect{{{0,0},a.extent},0,1};vkCmdClearAttachments(c,1,&attachment,1,&rect);";
+    var fullClear=nativeSource.IndexOf(clearStatement,restore,StringComparison.Ordinal);
+    var sceneBatches=nativeSource.IndexOf("for (uint32_t i = 0; i < a.submission->batchCount; i++)",restore,StringComparison.Ordinal);
+    Check(fullClear>restore&&sceneBatches>fullClear&&orbitDraw>sceneBatches,"full drawable depth restore precedes craft and all scene color draws");
+    var restoreStatements=string.Concat(nativeSource[restore..(fullClear+clearStatement.Length)].Where(c=>!char.IsWhiteSpace(c)));
+    Check(restoreStatements=="VkClearAttachmentattachment{};attachment.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;"+
+        "VkClearRectrect{{{0,0},a.extent},0,1};vkCmdClearAttachments(c,1,&attachment,1,&rect);",
+        "depth restore reaches the clear with zero depth, depth-only aspect and full extent; no intervening override");
 }
 
 static void PlanetaryPresentationPipelineTest()

@@ -97,10 +97,12 @@ internal static class GraphicsTestHarness
     {
         VerifyValidationLayer();
         var failed = 0;
-        foreach (var (name, shader) in new[] { ("NovaCoreFacilityVisibilityTests", "facility_visibility_test.comp.spv"), ("NovaCoreSurfaceMaterialCoordinatesTests", "surface_material_coordinates_test.comp.spv"), ("NovaCoreStellarProjectionTests", "stellar_glow.vert.spv") })
+        // Follow each CMake producer: facility/surface are qualification outputs;
+        // stellar exercises the runtime shader. None changes runtime membership.
+        foreach (var (name, directory, shader) in new[] { ("NovaCoreFacilityVisibilityTests", "test-shaders", "facility_visibility_test.comp.spv"), ("NovaCoreSurfaceMaterialCoordinatesTests", "test-shaders", "surface_material_coordinates_test.comp.spv"), ("NovaCoreStellarProjectionTests", "shaders", "stellar_glow.vert.spv") })
         {
             var start = new ProcessStartInfo(RepositoryPath("build", NativeDirectory, name + ".exe")) { UseShellExecute=false, RedirectStandardOutput=true, RedirectStandardError=true };
-            start.ArgumentList.Add(RepositoryPath("build", NativeDirectory, "shaders", shader));
+            start.ArgumentList.Add(RepositoryPath("build", NativeDirectory, directory, shader));
             using var child = Process.Start(start)!;
             var stdout=child.StandardOutput.ReadToEndAsync(); var stderr=child.StandardError.ReadToEndAsync(); child.WaitForExit();
             Console.Write(stdout.GetAwaiter().GetResult()); Console.Error.Write(stderr.GetAwaiter().GetResult());

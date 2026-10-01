@@ -1,0 +1,252 @@
+Selected complete-run result lines; full local log SHA256=1606fe6e6fb0ec0114eb4e5dc77e98aa5bcfe4833ef2889159e865a3a4f281be
+Vulkan profile: CANONICAL (Khronos validation only)
+Canonical layer: manifest=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.json; binary=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Stock assembly canonical presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Powered free-flight canonical presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Contact development canonical presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Powered contact canonical presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Certified Florida continuation publication
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Certified continuation acceptance gaps
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Certified continuation allocation matrix
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Certified Florida publication costs
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Post-impact Florida terrain-contact coverage
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Post-impact Florida coverage costs
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Florida monotone contact certification
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Qualified Florida root contact kinematics
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Certified Florida isolated response proposal
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Certified Florida pre-impact velocity tuple
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Certified Florida post-impact velocity realization
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Private Florida post-impact initial state
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Private Florida paired canonical propagation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Exact-event Earth-relative production terrain
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Contact generation production terrain
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Physical surface-point query
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Physical surface-point stale snapshot
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Window deployment: sample=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; managedSha256=8BC75364AD76384284CB0350C29157D420C123E71AE85E5CE2EE97AD28A165B1; nativeSha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; verifiedShaders=66
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+PASS [window] Generic grid and frames startup
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Facility lighting authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] MeshHandle
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Transport layout
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Transform conversion
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Camera relative
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Batches and capacity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Resolved render transport
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Orbit curve transport
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Static reference-frame fixture transport
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Dynamic reference-frame fixture publication
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Celestial analytical fixture publication
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Celestial player torque controls
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Celestial SAS mode selection
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Celestial SAS control cadence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Celestial SAS convergence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Celestial SAS diagnostic indicators
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Camera snapshot allocation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary presentation pipeline
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary presentation SPIR-V stride
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Focus target authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planet material presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planet micro-normal foundation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planet surface scatter placement
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary surface camera presentation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Earth CPU elevation oracle
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Canonical body-fixed geographic handedness
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Canonical SurfaceAnchor physical terrain authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Anchored Florida launch site
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Earth route convergence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Window deployment: sample=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; managedSha256=8BC75364AD76384284CB0350C29157D420C123E71AE85E5CE2EE97AD28A165B1; nativeSha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; verifiedShaders=66
+Live facility support PASS: contact=9; transition=4; outside=1; maxContactGap=3.193505108356476E-06; maxPreparedBaseError=0.0010033775383870847
+Live regional CPU/GPU parity PASS: captures=45; checkedVertices=1596; levels=8,9,10,11,12,13,14,15,16,17; pupils=37
+PASS [window] Live NCSM1 regional physical residency
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Window deployment: sample=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; managedSha256=8BC75364AD76384284CB0350C29157D420C123E71AE85E5CE2EE97AD28A165B1; nativeSha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; verifiedShaders=66
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Window lifecycle PASS: borderless=True; resize/minimize/restore/close; nativeHandlesReleased=true
+PASS [window] Production window lifecycle
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Window validation message policy
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+Window deployment: sample=E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.exe; managedSha256=8BC75364AD76384284CB0350C29157D420C123E71AE85E5CE2EE97AD28A165B1; nativeSha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; verifiedShaders=66
+Wheel boundary PASS: diagnosticIsolation=False; nativeMessageDelivered=true; solarZoom=True
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+Wheel boundary PASS: diagnosticIsolation=True; nativeMessageDelivered=true; solarZoom=False
+Window lifecycle PASS: borderless=False; resize/minimize/restore/close; nativeHandlesReleased=true
+PASS [window] Regional diagnostic wheel isolation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Florida facility support
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Surface-relative camera authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Near-surface inertial free-look
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] SurfaceAnchor acquisition, ENU, and handoff
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Camera focus-position continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Camera SurfaceAnchor handoff monotonicity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Solar preset camera-path convergence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Zoom motion-profile continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Solar camera bounded-domain crash regression
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Earth camera blackout offline workload
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Earth camera blackout replay
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Earth horizon submission boundary
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Terrain tessellation CPU singular boundary
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Surface visual-aim continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Inertial visual-aim authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Cube-sphere planetary surface
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production relaxed cube-sphere patch hierarchy
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Anchored spherical mesh-tier contract
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] M12D-P2S2 spherical billboard topology proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] M12D-P2S3 spherical billboard GPU runtime proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] M12D-P2S4 canonical natural terrain billboard binding
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] M12D-P2S5C production spherical billboard runtime
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] M12D-P2S5B production spherical billboard topology library
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] M12D-P2S5F nested production scale-mesh topology
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] M12D-P2S5G bounded spherical billboard surface interface
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] GPU physical-height preparation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Multiscale physical terrain modifier foundation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Single canonical physical surface authority
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Global/anchored physical frequency continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] M12D-P2A canonical hashed cell field proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] M12D-P2B multiscale natural terrain family proof
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] M12D-P2C1 prepared natural terrain
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Generation-4 physical renderer integration
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production material noise value preservation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [gpu] Displaced mesh and physical normals
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Screen-space subdivision
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Terrain-v5 seams, mixed-LOD authority, and Florida classification
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Terrain asset distribution boundary
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Cache lifecycle cleanup
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Local terrain format and GPU compression
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Local terrain payload-2 authoring contract
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] M12 Florida regional physical surface
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production cube-sphere GPU residency integration
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production physical-normal tangent continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production surface body eligibility and transition ownership
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production Earth material-state continuity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary camera terrain exclusion
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Close-ground reference-frame diagnostic
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Production terrain material synthesis
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary terrain residency and surface frame
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary patch topology and ABI
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Parent-child LOD geographic correspondence
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Opaque distant-detailed handoff
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Planetary representation handoff
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Distant quaternion transform parity
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Distant visible hemisphere winding
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Continuous Earth distance visibility
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Camera drag isolation
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Sol system presentation and focus
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] SolAnalytical Earth planetary scene
+Native identity: configuration=Release; loaded=E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Native.dll; sha256=D80AE20C18641952C1FAF4C3880D85D1AA14B9368BF3B9F2823DF7FA90F8B15F; source=E:\NovaCore\build\native-ninja-release\NovaCore.Native.dll
+PASS [headless] Florida foundation seating
+Graphics Release: selected=116; pass=116; fail=0; skip=0; excluded=0

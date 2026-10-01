@@ -1,0 +1,158 @@
+[
+  {
+    "configuration": "Debug",
+    "case": "baseline",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "missing_source",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "missing_deployed",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "corrupt_deployed",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "unknown_extra",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "owned_obsolete",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "modified_obsolete",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "forged_path",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "contaminated_source",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "wrong_manifest_agreement",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "wrong_config",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "wrong_cache_config",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "wrong_source_and_manifest",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "wrong_dll",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Debug",
+    "case": "legacy_migration",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "baseline",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "missing_source",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "missing_deployed",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "corrupt_deployed",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "unknown_extra",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "owned_obsolete",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "modified_obsolete",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "forged_path",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "contaminated_source",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "wrong_manifest_agreement",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "wrong_config",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "wrong_cache_config",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "wrong_source_and_manifest",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "wrong_dll",
+    "result": "PASS"
+  },
+  {
+    "configuration": "Release",
+    "case": "legacy_migration",
+    "result": "PASS"
+  },
+  {
+    "configuration": "all",
+    "case": "dangling_reparse_lstat_guard",
+    "result": "PASS",
+    "method": "mocked lstat attributes"
+  }
+]

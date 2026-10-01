@@ -119,8 +119,15 @@ internal static class EarthHorizonSubmissionTests
         var hashes=sourceNames.Select(name=>new{name,sha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(root,"native","NovaCore.Native","shaders",name))))}).ToArray();
         // A source-level culling/VS model must fail closed when its source changes.
         // Re-audit these mirrors rather than silently accepting a stale proof.
+        // 2026-09-30 audit: both direct-prepared and TES vertex variants share
+        // FP64 body-camera subtraction, FP32 rotation and the same clip transform.
+        // New direct varyings do not change that model. Factor coverage below
+        // exercises the retained TES route, not ordinary direct raster execution.
+        // See docs/engineering-evidence/prebank-convergence/contracts.md.
         var audited=new Dictionary<string,string>{
-            ["production_spherical_billboard.vert"]="A798669960B7FF379F095E1C9749CB1D90A0CAF5506B51AA87C40F865E933BB7",
+            ["production_spherical_billboard.vert"]="7F590AC482564ABA0A5706F894BFBECB12DBFDBE148D09DC14DB7530B7483307",
+            ["production_spherical_billboard.tesc"]="CC3412546B6815CA264B539AE97D38CAA7146CB39BA04220EDFC0E23BE85C9AA",
+            ["production_tessellation_factor.glsl"]="93202E80EC0DB1FD5F20DB6FD970A195AB055174F659E844DB2173D8E2A6AAC7",
             ["production_nested_scale_mesh_cull.comp"]="611C3670B5800CC3AC352BED5D326EB59EF1ABBA6BA2CC5519337967703B5550",
             ["production_nested_scale_mesh_incoming_cull.comp"]="7DC18DFB540A3BE29BC90671F49675FCC5A6D6D13B6BA05282A6BA900B3F1BD4"};
         foreach(var hash in hashes)if(audited.TryGetValue(hash.name,out var expected))Require(hash.sha256==expected,"Re-audit offline mirror for "+hash.name);
@@ -203,7 +210,7 @@ internal static class EarthHorizonSubmissionTests
         }
         PublicationWitness(root,levels,contracts,pinned.Normalized(),output);
         AuditOriginalPinned(scene,camera,resolver,levels[17],contracts[levels[17].TopologyHash],pinned,output);
-        File.WriteAllText(Path.Combine(output,"summary.json"),JsonSerializer.Serialize(new{gpuExposure=false,livePreflightClean=false,caseCount,total,invalidIncluded,invalidRejected,legacyIncluded,oldInvalid,scope="production camera transport, topology, pupil and CPU height authority; source-level FP32 shader model"},Json));
+        File.WriteAllText(Path.Combine(output,"summary.json"),JsonSerializer.Serialize(new{gpuExposure=false,livePreflightClean=false,caseCount,total,invalidIncluded,invalidRejected,legacyIncluded,oldInvalid,scope="common direct/TES vertex transform and culling; retained TES factor route; production topology/pupil/CPU height authority; scalar FP32 source model, not ordinary direct-raster TCS execution"},Json));
         Require(legacyIncluded>0,"boundary regression must retain a pre-correction production-reachable witness");
         Require(invalidIncluded==0,"Source-model production draw includes invalid tessellation; preserve witness and investigate owner before GPU exposure");
     }

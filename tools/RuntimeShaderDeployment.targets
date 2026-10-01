@@ -1,0 +1,24 @@
+<Project>
+  <PropertyGroup>
+    <NativeBuildDirectory Condition="'$(NativeBuildDirectory)' == '' and '$(Configuration)' == 'Release'">native-ninja-release</NativeBuildDirectory>
+    <NativeBuildDirectory Condition="'$(NativeBuildDirectory)' == ''">native-ninja</NativeBuildDirectory>
+    <NativeRuntimeRoot>$(MSBuildThisFileDirectory)..\build\$(NativeBuildDirectory)\</NativeRuntimeRoot>
+    <_ShaderDeploymentScript>$(MSBuildThisFileDirectory)deploy-runtime-shaders.py</_ShaderDeploymentScript>
+    <_ShaderRepository>$(MSBuildThisFileDirectory)..</_ShaderRepository>
+  </PropertyGroup>
+  <!-- Runs before SDK incremental-clean/copy consumes or rewrites the legacy
+       FileListAbsolute ledger. All three canonical consumers use the same owner. -->
+  <Target Name="DeployOwnedRuntimeShaders" BeforeTargets="PrepareForBuild;GetCopyToOutputDirectoryItems;ComputeFilesToPublish">
+    <Exec Command="python &quot;$(_ShaderDeploymentScript)&quot; --repository &quot;$(_ShaderRepository)&quot; --native &quot;$(NativeRuntimeRoot).&quot; --configuration &quot;$(Configuration)&quot; --destination &quot;$(TargetDir).&quot; --legacy-file-list &quot;$(IntermediateOutputPath)$(MSBuildProjectFile).FileListAbsolute.txt&quot; --items-output &quot;$(IntermediateOutputPath)runtime-shader-items.txt&quot;" />
+    <ReadLinesFromFile File="$(IntermediateOutputPath)runtime-shader-items.txt">
+      <Output TaskParameter="Lines" ItemName="RuntimeShader" />
+    </ReadLinesFromFile>
+    <ItemGroup Condition="'$(NativeRuntimeContentProducer)' == 'true'">
+      <Content Include="@(RuntimeShader)" Link="shaders\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+      <Content Include="$(NativeRuntimeRoot)NovaCore.Native.dll" Link="NovaCore.Native.dll" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+    </ItemGroup>
+  </Target>
+  <Target Name="DeployOwnedRuntimeShadersToPublish" BeforeTargets="CopyFilesToPublishDirectory" DependsOnTargets="DeployOwnedRuntimeShaders">
+    <Exec Command="python &quot;$(_ShaderDeploymentScript)&quot; --repository &quot;$(_ShaderRepository)&quot; --native &quot;$(NativeRuntimeRoot).&quot; --configuration &quot;$(Configuration)&quot; --destination &quot;$(PublishDir).&quot;" />
+  </Target>
+</Project>

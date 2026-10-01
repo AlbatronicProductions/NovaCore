@@ -1,0 +1,581 @@
+{
+  "judgment": "PASS",
+  "repository": "E:\\NovaCore",
+  "package": "E:\\NovaCore\\tools\\NovaCore.App\\bin\\Debug\\net10.0-windows",
+  "fileCount": 135,
+  "bytes": 15220405,
+  "packageSha256": "9f7d6e1bbf3b8834a6d47437dc85c364b109e93d319b1d69f1578ea74e8dcea5",
+  "configuration": "Debug",
+  "native": "E:\\NovaCore\\build\\native-ninja",
+  "runtimeInventory": [
+    "body_forward.frag.spv",
+    "distant_planet.frag.spv",
+    "distant_planet.vert.spv",
+    "exhaust.frag.spv",
+    "exhaust.vert.spv",
+    "exhaust_resolve.frag.spv",
+    "frozen_capture_pack.comp.spv",
+    "fullscreen.vert.spv",
+    "orbit.frag.spv",
+    "orbit.vert.spv",
+    "orbit_previous.frag.spv",
+    "planetary.frag.spv",
+    "planetary.vert.spv",
+    "planetary_height_query.comp.spv",
+    "planetary_mesh_displace.comp.spv",
+    "planetary_mesh_normals.comp.spv",
+    "planetary_natural_terrain_families_query.comp.spv",
+    "planetary_natural_terrain_field_query.comp.spv",
+    "planetary_natural_terrain_global_prepare.comp.spv",
+    "planetary_natural_terrain_prepare.comp.spv",
+    "planetary_production.frag.spv",
+    "planetary_production_terrain.comp.spv",
+    "planetary_ring.vert.spv",
+    "planetary_ring_far.frag.spv",
+    "planetary_ring_near.frag.spv",
+    "planetary_select.comp.spv",
+    "planetary_terrain_generate.comp.spv",
+    "prepared_surface.frag.spv",
+    "prepared_surface.vert.spv",
+    "production_nested_scale_mesh_cull.comp.spv",
+    "production_nested_scale_mesh_incoming_cull.comp.spv",
+    "production_spherical_billboard.tesc.spv",
+    "production_spherical_billboard.tese.spv",
+    "production_spherical_billboard.vert.spv",
+    "production_spherical_billboard_compact.comp.spv",
+    "production_spherical_billboard_cull.comp.spv",
+    "production_spherical_billboard_incoming_compact.comp.spv",
+    "production_spherical_billboard_incoming_cull.comp.spv",
+    "production_spherical_billboard_incoming_prepare.comp.spv",
+    "production_spherical_billboard_incoming_reset.comp.spv",
+    "production_spherical_billboard_prepare.comp.spv",
+    "production_spherical_billboard_reset.comp.spv",
+    "regional_physical_demand.comp.spv",
+    "regional_physical_incoming_demand.comp.spv",
+    "sas_target.frag.spv",
+    "solar_label.frag.spv",
+    "solar_label.vert.spv",
+    "solar_marker.frag.spv",
+    "solar_marker.vert.spv",
+    "solar_orbit.frag.spv",
+    "solar_orbit.vert.spv",
+    "space_background.frag.spv",
+    "spherical_billboard_proof.frag.spv",
+    "spherical_billboard_proof.vert.spv",
+    "spherical_billboard_proof_compact.comp.spv",
+    "spherical_billboard_proof_cull.comp.spv",
+    "spherical_billboard_proof_normals.comp.spv",
+    "spherical_billboard_proof_prepare.comp.spv",
+    "spherical_billboard_proof_reset.comp.spv",
+    "stellar_glow.frag.spv",
+    "stellar_glow.vert.spv",
+    "stellar_sun.frag.spv",
+    "stellar_sun.vert.spv",
+    "tone_map.frag.spv",
+    "triangle.frag.spv",
+    "triangle.vert.spv"
+  ],
+  "runtimeConsumers": [
+    "body_forward.frag.spv",
+    "distant_planet.frag.spv",
+    "distant_planet.vert.spv",
+    "exhaust.frag.spv",
+    "exhaust.vert.spv",
+    "exhaust_resolve.frag.spv",
+    "frozen_capture_pack.comp.spv",
+    "fullscreen.vert.spv",
+    "orbit.frag.spv",
+    "orbit.vert.spv",
+    "orbit_previous.frag.spv",
+    "planetary.frag.spv",
+    "planetary.vert.spv",
+    "planetary_height_query.comp.spv",
+    "planetary_natural_terrain_global_prepare.comp.spv",
+    "planetary_production.frag.spv",
+    "planetary_production_terrain.comp.spv",
+    "planetary_ring.vert.spv",
+    "planetary_ring_far.frag.spv",
+    "planetary_ring_near.frag.spv",
+    "planetary_select.comp.spv",
+    "planetary_terrain_generate.comp.spv",
+    "prepared_surface.frag.spv",
+    "prepared_surface.vert.spv",
+    "production_nested_scale_mesh_cull.comp.spv",
+    "production_nested_scale_mesh_incoming_cull.comp.spv",
+    "production_spherical_billboard.tesc.spv",
+    "production_spherical_billboard.tese.spv",
+    "production_spherical_billboard.vert.spv",
+    "production_spherical_billboard_compact.comp.spv",
+    "production_spherical_billboard_cull.comp.spv",
+    "production_spherical_billboard_incoming_compact.comp.spv",
+    "production_spherical_billboard_incoming_cull.comp.spv",
+    "production_spherical_billboard_incoming_prepare.comp.spv",
+    "production_spherical_billboard_incoming_reset.comp.spv",
+    "production_spherical_billboard_prepare.comp.spv",
+    "production_spherical_billboard_reset.comp.spv",
+    "regional_physical_demand.comp.spv",
+    "regional_physical_incoming_demand.comp.spv",
+    "sas_target.frag.spv",
+    "solar_label.frag.spv",
+    "solar_label.vert.spv",
+    "solar_marker.frag.spv",
+    "solar_marker.vert.spv",
+    "solar_orbit.frag.spv",
+    "solar_orbit.vert.spv",
+    "space_background.frag.spv",
+    "spherical_billboard_proof.frag.spv",
+    "spherical_billboard_proof.vert.spv",
+    "spherical_billboard_proof_compact.comp.spv",
+    "spherical_billboard_proof_cull.comp.spv",
+    "spherical_billboard_proof_normals.comp.spv",
+    "spherical_billboard_proof_prepare.comp.spv",
+    "spherical_billboard_proof_reset.comp.spv",
+    "stellar_glow.frag.spv",
+    "stellar_glow.vert.spv",
+    "stellar_sun.frag.spv",
+    "stellar_sun.vert.spv",
+    "tone_map.frag.spv",
+    "triangle.frag.spv",
+    "triangle.vert.spv"
+  ],
+  "shaders": 66,
+  "errors": [],
+  "scope": "Repository-layout canonical build output; explicit verified terrain cache required. Not standalone publish qualification.",
+  "files": {
+    "novacore-runtime-shaders.json": {
+      "bytes": 7341,
+      "sha256": "d202a5c60e1f37ea0d04a57ad9e38a0a776af88cf00d00fb117e5413843a18b2"
+    },
+    "NovaCore.dll": {
+      "bytes": 24064,
+      "sha256": "d44e77ed0a946d66e5eab97932b8a68cedd47771d8ed9039424a9d4347a04ff4"
+    },
+    "NovaCore.exe": {
+      "bytes": 162304,
+      "sha256": "5f7c587231319742b31a4c9a94a8b6edc02f9a2a295c03d9d603cc6455a94cf7"
+    },
+    "NovaCore.Native.dll": {
+      "bytes": 2232320,
+      "sha256": "94d121e220e563092359eae41e51af8558b12a2dc5c0b34d8a8847c35a800145"
+    },
+    "shaders/body_forward.frag.spv": {
+      "bytes": 440,
+      "sha256": "fa706803f042fb5a9f7a3c9965a3e2de3e8838e075d67876b78df9bdc132ce0e"
+    },
+    "shaders/distant_planet.frag.spv": {
+      "bytes": 35760,
+      "sha256": "04137afb1c632dfb7074480377d9f93136ab3127d382baeef07d52b09409eba8"
+    },
+    "shaders/distant_planet.vert.spv": {
+      "bytes": 8428,
+      "sha256": "cf28fe0a7c0797bd7d72076437ba78c4e0d97bb1a0ae3c065baf3bfc5db62cb8"
+    },
+    "shaders/exhaust.frag.spv": {
+      "bytes": 20292,
+      "sha256": "ae6b7b86ca55b33ddd01908ad89ec4fece0c7cd29f225fc8516068794696ef80"
+    },
+    "shaders/exhaust.vert.spv": {
+      "bytes": 4900,
+      "sha256": "492860487930e2013beb4b247b026eeaf2f6e28956da0553408fbaa1005dbe19"
+    },
+    "shaders/exhaust_resolve.frag.spv": {
+      "bytes": 3584,
+      "sha256": "db6ddd09497866aa665393503f9f1603211481c307f013f1b9c0ef9a6020c31c"
+    },
+    "shaders/frozen_capture_pack.comp.spv": {
+      "bytes": 12972,
+      "sha256": "c767a7ab4bb8061aa7c00f9ce37a5779922deab9022e3ab7fc0c80516ab69c07"
+    },
+    "shaders/fullscreen.vert.spv": {
+      "bytes": 1308,
+      "sha256": "a18f9b5e0b4a4e7a077b1017bad7b1c5c40313b3f70113f1e0771cd202433130"
+    },
+    "shaders/orbit.frag.spv": {
+      "bytes": 456,
+      "sha256": "b06f50708727144e8d0f08d35cd2e64d8b1cef501ed20b10fea4a34196026267"
+    },
+    "shaders/orbit.vert.spv": {
+      "bytes": 1756,
+      "sha256": "b4b9dd635f32156654e30d843c29eb864feb09751d7b3027cf99a5d741b6a45b"
+    },
+    "shaders/orbit_previous.frag.spv": {
+      "bytes": 456,
+      "sha256": "c4935060e07e01742d59d8a5834241e2963dcc80ed8e35baeac5b08288761e61"
+    },
+    "shaders/planetary.frag.spv": {
+      "bytes": 18548,
+      "sha256": "417f17b236834f0ac94fa3bbfdae52ad164599ff14051e9b396809beea75cda1"
+    },
+    "shaders/planetary.vert.spv": {
+      "bytes": 135600,
+      "sha256": "ddb84030e2621df8f05489e339989d66de60d73435f490b4ec0af4251d7a0338"
+    },
+    "shaders/planetary_height_query.comp.spv": {
+      "bytes": 156160,
+      "sha256": "99ed73cd152d802ed582430ddf33ad52767f69937e1e4867dad4716abc4f56f8"
+    },
+    "shaders/planetary_mesh_displace.comp.spv": {
+      "bytes": 133704,
+      "sha256": "587446a3d54eb3272baba135cae0136fb5dc30d254ce27a2f7ca7c5409efb2f2"
+    },
+    "shaders/planetary_mesh_normals.comp.spv": {
+      "bytes": 6264,
+      "sha256": "90b7b85919712be884e944b2afffe639fc24db83f5e73c0599118d8807150066"
+    },
+    "shaders/planetary_natural_terrain_families_query.comp.spv": {
+      "bytes": 50884,
+      "sha256": "5fabc5591f492948d69ff236785f8478d4b9196000a0a7af8b731267fc5016c5"
+    },
+    "shaders/planetary_natural_terrain_field_query.comp.spv": {
+      "bytes": 27172,
+      "sha256": "aa136512bebc9c818b4ccd6a1ae106f3bd21021786c9c8f9a37c0c2c844abd5d"
+    },
+    "shaders/planetary_natural_terrain_global_prepare.comp.spv": {
+      "bytes": 49540,
+      "sha256": "5a5450321873f5ff8bed7dd9e4f06c342625724d629da2232521fbace01c7a85"
+    },
+    "shaders/planetary_natural_terrain_prepare.comp.spv": {
+      "bytes": 55480,
+      "sha256": "aceb31079451be0bc1b10d495d7cd23a1c45be601755724c6de2a29ca21335c7"
+    },
+    "shaders/planetary_production.frag.spv": {
+      "bytes": 152676,
+      "sha256": "36cbc19f2a3871b2af253394a5ec16f75d278137b79141d3868125181d377973"
+    },
+    "shaders/planetary_production_terrain.comp.spv": {
+      "bytes": 368,
+      "sha256": "405e6e6daab609ca383297ba8be706bfa96859c65dc2d9f42476a32cddd85df7"
+    },
+    "shaders/planetary_ring.vert.spv": {
+      "bytes": 7728,
+      "sha256": "cccede52d3c64db872360912db9eb29e60cb892c648ed53ce1c178f8623d0cfb"
+    },
+    "shaders/planetary_ring_far.frag.spv": {
+      "bytes": 2692,
+      "sha256": "343db81bccc310b21c600ab6ee6722438151694683bb0cf7ba01d54a9b68ade6"
+    },
+    "shaders/planetary_ring_near.frag.spv": {
+      "bytes": 2692,
+      "sha256": "48b8ef4e56b6be9380cfbaca7daa790035e704541b6b8a550b3cc7bed540244c"
+    },
+    "shaders/planetary_select.comp.spv": {
+      "bytes": 91064,
+      "sha256": "8189bbd2a85fe23033f12c558d8b221b62b8969c17ba9ffcf07b7c8501fe8adf"
+    },
+    "shaders/planetary_terrain_generate.comp.spv": {
+      "bytes": 10292,
+      "sha256": "1fc8c24ea6b4a55e83997fadf80b4901f692b8bc2de84a5cf6ac043e4da531d1"
+    },
+    "shaders/prepared_surface.frag.spv": {
+      "bytes": 127984,
+      "sha256": "d2a8bb3e68d8c5417dcff7e90477f282ab678e0c7489cd53447ee3f86a4a5bab"
+    },
+    "shaders/prepared_surface.vert.spv": {
+      "bytes": 9376,
+      "sha256": "234d2a0b47ffdfc63ee3d7314dfa4373011bb0a89c2d4140a1d0649eae88632d"
+    },
+    "shaders/production_nested_scale_mesh_cull.comp.spv": {
+      "bytes": 30484,
+      "sha256": "497d88225a914b9601ad6c0f44733e834794a952854e71b26be426ead8780d94"
+    },
+    "shaders/production_nested_scale_mesh_incoming_cull.comp.spv": {
+      "bytes": 30484,
+      "sha256": "23bd1b04d0291e6271138041433eee07e57503482e8e5cf845e4b72c75967336"
+    },
+    "shaders/production_spherical_billboard.tesc.spv": {
+      "bytes": 15444,
+      "sha256": "5c8bd5d3915e0fe8ef9e597cf17c2ef0e2101656d732392a6b5f9b7fe80d301c"
+    },
+    "shaders/production_spherical_billboard.tese.spv": {
+      "bytes": 22836,
+      "sha256": "d0bc5d7a450f336d45c26c499b0b3a79ecc0258e1ffb9dee0b5bcfb8aa21d31e"
+    },
+    "shaders/production_spherical_billboard.vert.spv": {
+      "bytes": 8028,
+      "sha256": "4f566b0d9c2a0e1e5b2765813cf55b6edf2010e172f96d01fe42daad88ffdb1f"
+    },
+    "shaders/production_spherical_billboard_compact.comp.spv": {
+      "bytes": 3460,
+      "sha256": "2aabd7633b333f86df8a6eae6b76ed2d13a7129443dcd9201531de047b12f4d9"
+    },
+    "shaders/production_spherical_billboard_cull.comp.spv": {
+      "bytes": 14624,
+      "sha256": "2827b58dcd7029695e0b33272018e54d19d6113b8d7ab9ac591c343b3d994398"
+    },
+    "shaders/production_spherical_billboard_incoming_compact.comp.spv": {
+      "bytes": 2940,
+      "sha256": "6b0238138222112ddf1f945f5e6a31867d5dd11f57169481ece9c05337f43e4e"
+    },
+    "shaders/production_spherical_billboard_incoming_cull.comp.spv": {
+      "bytes": 14624,
+      "sha256": "8c677f08ae051cf525108a436066983d41961ce70757ca29a86df165d2663cfb"
+    },
+    "shaders/production_spherical_billboard_incoming_prepare.comp.spv": {
+      "bytes": 91824,
+      "sha256": "3b330d24dc873c2676dbb877208efae4d91347b66ef029706b8a3f0d3116f91c"
+    },
+    "shaders/production_spherical_billboard_incoming_reset.comp.spv": {
+      "bytes": 1736,
+      "sha256": "5d750f929dcab4f9f3138b4cdfa869ab26e3051d4b28485c02ee483f89e14d6e"
+    },
+    "shaders/production_spherical_billboard_prepare.comp.spv": {
+      "bytes": 94876,
+      "sha256": "d178e6ba6b73045dc214e75000489c09a7f0982f9cff7663489ba0818d30ae8b"
+    },
+    "shaders/production_spherical_billboard_reset.comp.spv": {
+      "bytes": 1736,
+      "sha256": "cf583d16e14c8a8ec63b393d8752541648d932cf0165231cc48f6076e28fc027"
+    },
+    "shaders/regional_physical_demand.comp.spv": {
+      "bytes": 22344,
+      "sha256": "7d80dbd70be13cc55f00ef836cd8da9d3783064411320697777f6b5c848d8f67"
+    },
+    "shaders/regional_physical_incoming_demand.comp.spv": {
+      "bytes": 22360,
+      "sha256": "a56b62b5432206b8ab5eded734b13a0ddf9f0c726a4b444f8d24139bdcc17a60"
+    },
+    "shaders/sas_target.frag.spv": {
+      "bytes": 440,
+      "sha256": "4e99fda06f571590f950e91d93025cafa83e4a454e68e3583ce59d869f0a3ef2"
+    },
+    "shaders/solar_label.frag.spv": {
+      "bytes": 47588,
+      "sha256": "673c5dc0cc1e199d497c7c927f282a02da444fa258860b6cb94b6fd1ed12c90a"
+    },
+    "shaders/solar_label.vert.spv": {
+      "bytes": 11388,
+      "sha256": "a13a7a8acb3ae2da2cac129a203caffd86b5a7f434701d99b59284fdd01f1844"
+    },
+    "shaders/solar_marker.frag.spv": {
+      "bytes": 448,
+      "sha256": "d428743c08f96f4e508eab131cfb54981c2628eecc7acd3d2df220b19103275b"
+    },
+    "shaders/solar_marker.vert.spv": {
+      "bytes": 7776,
+      "sha256": "50d948741d3ca6b59577a82d3346ab3cac51edcb9ab80047247ac61c345b6db6"
+    },
+    "shaders/solar_orbit.frag.spv": {
+      "bytes": 1412,
+      "sha256": "23b511270c196c2186f7935699ca7fdedf3c92c629da67c10e8ae7615286181f"
+    },
+    "shaders/solar_orbit.vert.spv": {
+      "bytes": 4008,
+      "sha256": "d71520615e2533a06208c3cec752d2689f524a30fb6a11bd2ca4ae00e2cc027f"
+    },
+    "shaders/space_background.frag.spv": {
+      "bytes": 12108,
+      "sha256": "0c98ee3df0ba8ad8f313cc352a02032528e6b0e36b2dfa8cc2be1a6755b71cfc"
+    },
+    "shaders/spherical_billboard_proof.frag.spv": {
+      "bytes": 716,
+      "sha256": "31b75eb3c71e58c55e863e42a0ae703421afcb47a5bad1f8a10f213ecb7ae269"
+    },
+    "shaders/spherical_billboard_proof.vert.spv": {
+      "bytes": 3056,
+      "sha256": "bb46f890042a949a2e664b3bdde8f5b5cdb7ab6761b7bd54c6d4b67c828198ed"
+    },
+    "shaders/spherical_billboard_proof_compact.comp.spv": {
+      "bytes": 4424,
+      "sha256": "4565eb6dab20c8d08c93d042bf4cf69e362ab3c0b9cc92b8df8793c1a268a5ac"
+    },
+    "shaders/spherical_billboard_proof_cull.comp.spv": {
+      "bytes": 7408,
+      "sha256": "4d61c6f06bd8c5f5c80ebe83a1cb835266a8b85df70fefd17da6c6db0ef2ed76"
+    },
+    "shaders/spherical_billboard_proof_normals.comp.spv": {
+      "bytes": 5368,
+      "sha256": "6241b4d06ffe62704a88997afd189cee8f38778e0d4100c1cd7cfc5e9d13e63e"
+    },
+    "shaders/spherical_billboard_proof_prepare.comp.spv": {
+      "bytes": 4128,
+      "sha256": "c8491a619f5f723976fb97734033dcc81883062a7a3f43ae14b653c43216d632"
+    },
+    "shaders/spherical_billboard_proof_reset.comp.spv": {
+      "bytes": 1372,
+      "sha256": "6b8289c27561c96b77b293915fccf6619642186b0ab19ca0f43c7e4d1f6141cb"
+    },
+    "shaders/stellar_glow.frag.spv": {
+      "bytes": 1736,
+      "sha256": "e83a5e7458ec4be4b835384c88ec3ea958ae13569ee9ac823a4e2b2db17facee"
+    },
+    "shaders/stellar_glow.vert.spv": {
+      "bytes": 6592,
+      "sha256": "43463716ad81d7c913273d498b6f46a00cfd8a877e2c000d31fa66d5742cf1f8"
+    },
+    "shaders/stellar_sun.frag.spv": {
+      "bytes": 3208,
+      "sha256": "5c448c0da4cadeb08bf2c85c74448d3b690fd3d6bccab1fc2c49da7a0bf54769"
+    },
+    "shaders/stellar_sun.vert.spv": {
+      "bytes": 5168,
+      "sha256": "3e124d5babcb1d219499aa2de1482f90fc7c9008e92b054f7ca0d268336346b6"
+    },
+    "shaders/tone_map.frag.spv": {
+      "bytes": 2700,
+      "sha256": "d617345e95589ecb087ed40c20f4d04a427251a2b5249d8181cc63c421ee3979"
+    },
+    "shaders/triangle.frag.spv": {
+      "bytes": 7736,
+      "sha256": "4ca0561cc5d38be1ef9268bb62057bf211f9bf3fb39b8630d21a97556cc6b593"
+    },
+    "shaders/triangle.vert.spv": {
+      "bytes": 7104,
+      "sha256": "dfd7eb24e0e684db56a518a9f99660a36e56960e6e9068f0861001d62b9bc34a"
+    }
+  },
+  "filesScope": "Selected runtime provenance files; packageSha256 covers the full package in the original local receipt.",
+  "nativeAuthority": {
+    "schema": 1,
+    "configuration": "Debug",
+    "cmakeSha256": "543aa707c76b9f440db8ecd96b6c63d48e8ddee031849c22d6f650f015e52969",
+    "ownerSha256": "c044aa752e2e3d093ac3c7be206d2d8a9dabe9749f72383af91da8b287b7b51a",
+    "shaders": [
+      "body_forward.frag.spv",
+      "distant_planet.frag.spv",
+      "distant_planet.vert.spv",
+      "exhaust.frag.spv",
+      "exhaust.vert.spv",
+      "exhaust_resolve.frag.spv",
+      "frozen_capture_pack.comp.spv",
+      "fullscreen.vert.spv",
+      "orbit.frag.spv",
+      "orbit.vert.spv",
+      "orbit_previous.frag.spv",
+      "planetary.frag.spv",
+      "planetary.vert.spv",
+      "planetary_height_query.comp.spv",
+      "planetary_mesh_displace.comp.spv",
+      "planetary_mesh_normals.comp.spv",
+      "planetary_natural_terrain_families_query.comp.spv",
+      "planetary_natural_terrain_field_query.comp.spv",
+      "planetary_natural_terrain_global_prepare.comp.spv",
+      "planetary_natural_terrain_prepare.comp.spv",
+      "planetary_production.frag.spv",
+      "planetary_production_terrain.comp.spv",
+      "planetary_ring.vert.spv",
+      "planetary_ring_far.frag.spv",
+      "planetary_ring_near.frag.spv",
+      "planetary_select.comp.spv",
+      "planetary_terrain_generate.comp.spv",
+      "prepared_surface.frag.spv",
+      "prepared_surface.vert.spv",
+      "production_nested_scale_mesh_cull.comp.spv",
+      "production_nested_scale_mesh_incoming_cull.comp.spv",
+      "production_spherical_billboard.tesc.spv",
+      "production_spherical_billboard.tese.spv",
+      "production_spherical_billboard.vert.spv",
+      "production_spherical_billboard_compact.comp.spv",
+      "production_spherical_billboard_cull.comp.spv",
+      "production_spherical_billboard_incoming_compact.comp.spv",
+      "production_spherical_billboard_incoming_cull.comp.spv",
+      "production_spherical_billboard_incoming_prepare.comp.spv",
+      "production_spherical_billboard_incoming_reset.comp.spv",
+      "production_spherical_billboard_prepare.comp.spv",
+      "production_spherical_billboard_reset.comp.spv",
+      "regional_physical_demand.comp.spv",
+      "regional_physical_incoming_demand.comp.spv",
+      "sas_target.frag.spv",
+      "solar_label.frag.spv",
+      "solar_label.vert.spv",
+      "solar_marker.frag.spv",
+      "solar_marker.vert.spv",
+      "solar_orbit.frag.spv",
+      "solar_orbit.vert.spv",
+      "space_background.frag.spv",
+      "spherical_billboard_proof.frag.spv",
+      "spherical_billboard_proof.vert.spv",
+      "spherical_billboard_proof_compact.comp.spv",
+      "spherical_billboard_proof_cull.comp.spv",
+      "spherical_billboard_proof_normals.comp.spv",
+      "spherical_billboard_proof_prepare.comp.spv",
+      "spherical_billboard_proof_reset.comp.spv",
+      "stellar_glow.frag.spv",
+      "stellar_glow.vert.spv",
+      "stellar_sun.frag.spv",
+      "stellar_sun.vert.spv",
+      "tone_map.frag.spv",
+      "triangle.frag.spv",
+      "triangle.vert.spv"
+    ]
+  },
+  "nativeLinkReceipt": {
+    "configuration": "Debug",
+    "dllSha256": "94d121e220e563092359eae41e51af8558b12a2dc5c0b34d8a8847c35a800145"
+  },
+  "observedNativeShaderDirectory": [
+    "body_forward.frag.spv",
+    "distant_planet.frag.spv",
+    "distant_planet.vert.spv",
+    "exhaust.frag.spv",
+    "exhaust.vert.spv",
+    "exhaust_resolve.frag.spv",
+    "frozen_capture_pack.comp.spv",
+    "fullscreen.vert.spv",
+    "orbit.frag.spv",
+    "orbit.vert.spv",
+    "orbit_previous.frag.spv",
+    "planetary.frag.spv",
+    "planetary.vert.spv",
+    "planetary_height_query.comp.spv",
+    "planetary_mesh_displace.comp.spv",
+    "planetary_mesh_normals.comp.spv",
+    "planetary_natural_terrain_families_query.comp.spv",
+    "planetary_natural_terrain_field_query.comp.spv",
+    "planetary_natural_terrain_global_prepare.comp.spv",
+    "planetary_natural_terrain_prepare.comp.spv",
+    "planetary_production.frag.spv",
+    "planetary_production_terrain.comp.spv",
+    "planetary_ring.vert.spv",
+    "planetary_ring_far.frag.spv",
+    "planetary_ring_near.frag.spv",
+    "planetary_select.comp.spv",
+    "planetary_terrain_generate.comp.spv",
+    "prepared_surface.frag.spv",
+    "prepared_surface.vert.spv",
+    "production_nested_scale_mesh_cull.comp.spv",
+    "production_nested_scale_mesh_incoming_cull.comp.spv",
+    "production_spherical_billboard.tesc.spv",
+    "production_spherical_billboard.tese.spv",
+    "production_spherical_billboard.vert.spv",
+    "production_spherical_billboard_compact.comp.spv",
+    "production_spherical_billboard_cull.comp.spv",
+    "production_spherical_billboard_incoming_compact.comp.spv",
+    "production_spherical_billboard_incoming_cull.comp.spv",
+    "production_spherical_billboard_incoming_prepare.comp.spv",
+    "production_spherical_billboard_incoming_reset.comp.spv",
+    "production_spherical_billboard_prepare.comp.spv",
+    "production_spherical_billboard_reset.comp.spv",
+    "regional_physical_demand.comp.spv",
+    "regional_physical_incoming_demand.comp.spv",
+    "sas_target.frag.spv",
+    "solar_label.frag.spv",
+    "solar_label.vert.spv",
+    "solar_marker.frag.spv",
+    "solar_marker.vert.spv",
+    "solar_orbit.frag.spv",
+    "solar_orbit.vert.spv",
+    "solar_speed_hud.frag.spv",
+    "solar_speed_hud.vert.spv",
+    "space_background.frag.spv",
+    "spherical_billboard_proof.frag.spv",
+    "spherical_billboard_proof.vert.spv",
+    "spherical_billboard_proof_compact.comp.spv",
+    "spherical_billboard_proof_cull.comp.spv",
+    "spherical_billboard_proof_normals.comp.spv",
+    "spherical_billboard_proof_prepare.comp.spv",
+    "spherical_billboard_proof_reset.comp.spv",
+    "stellar_glow.frag.spv",
+    "stellar_glow.vert.spv",
+    "stellar_sun.frag.spv",
+    "stellar_sun.vert.spv",
+    "surface_material_coordinates_test.comp.spv",
+    "tone_map.frag.spv",
+    "triangle.frag.spv",
+    "triangle.vert.spv"
+  ],
+  "ignoredNonRuntimeSourceOutputs": [
+    "solar_speed_hud.frag.spv",
+    "solar_speed_hud.vert.spv",
+    "surface_material_coordinates_test.comp.spv"
+  ]
+}

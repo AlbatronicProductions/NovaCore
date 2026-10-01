@@ -1,0 +1,20 @@
+PASS default selection
+PASS scenario catalog
+PASS contact development scenarios
+PASS powered free-flight scenario
+PASS stock assembly scenario
+PASS player flight control scenario
+PASS Earth fullscreen native preset
+PASS M12D spherical billboard GPU proof preset
+PASS new Earth renderer preset
+PASS Earth fullscreen Solar camera path
+PASS structured launch environment
+PASS launcher build configuration
+PASS Earth orbital arguments
+PASS invariant altitude formatting
+PASS subdivision diagnostic mapping
+PASS Florida launch mapping
+PASS invalid configuration rejection
+PASS diagnostics arguments
+PASS existing production scenarios
+NovaCore launcher tests passed: 19

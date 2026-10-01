@@ -1,0 +1,72 @@
+[
+  {
+    "configuration": "Debug",
+    "target": "regional",
+    "exitCode": 0,
+    "logSha256": "350a04383afef3656df52509e3ceeb17f6bd4b4a39f3052273eedf97c8fc4414",
+    "output": "Regional physical identity/readiness/cache: PASS; exactRecords=859; producerWithoutPublicationMs=525.859; payloadBytes=119737728; workerCopyMs=2.4052; fixedReceipts=896; no anchored owner required"
+  },
+  {
+    "configuration": "Debug",
+    "target": "NovaCorePreparedSurfaceRasterTests",
+    "exitCode": 0,
+    "logSha256": "08b348ce731fde0709f99b835775bbce2d4d29eebd7e03d2da64170ab9eabb27",
+    "output": "PASS prepared raster eligibility; GPU execution=0"
+  },
+  {
+    "configuration": "Debug",
+    "target": "NovaCoreTerrainTessellationTests",
+    "exitCode": 0,
+    "logSha256": "ce9eabd124adc10a667c1c2186e46b10bc716565370686a2fd1a4ca839a74b57",
+    "output": "{\"ordinaryUnchanged\":100000,\"singularNeighborhood\":2400,\"replayedEdges\":0,\"maxDifference\":0,\"gpuExposure\":false}"
+  },
+  {
+    "configuration": "Debug",
+    "target": "NovaCoreMappedBufferMemoryTests",
+    "exitCode": 0,
+    "logSha256": "e78746d60193a6d72088ce9b4857efef96261983ee4da4bbc280fdd85552bce7",
+    "output": "PASS mapped terrain memory policy: 30 checks"
+  },
+  {
+    "configuration": "Debug",
+    "target": "NovaCorePlayerGpuMemoryTests",
+    "exitCode": 0,
+    "logSha256": "0c29f5169de97d0004d8d7d41e43dc47dcff9f1ced6e220d1433a5c79600248b",
+    "output": "PASS GPU memory owner: 16 checks; mock driver; zero GPU/device creation"
+  },
+  {
+    "configuration": "Release",
+    "target": "regional",
+    "exitCode": 0,
+    "logSha256": "b60cf4c41fdcd97ff6cd2f4f58b9647c4cd878012d3ee19fae04d1d02a676667",
+    "output": "Regional physical identity/readiness/cache: PASS; exactRecords=859; producerWithoutPublicationMs=394.833; payloadBytes=119737728; workerCopyMs=2.4735; fixedReceipts=896; no anchored owner required"
+  },
+  {
+    "configuration": "Release",
+    "target": "NovaCorePreparedSurfaceRasterTests",
+    "exitCode": 0,
+    "logSha256": "08b348ce731fde0709f99b835775bbce2d4d29eebd7e03d2da64170ab9eabb27",
+    "output": "PASS prepared raster eligibility; GPU execution=0"
+  },
+  {
+    "configuration": "Release",
+    "target": "NovaCoreTerrainTessellationTests",
+    "exitCode": 0,
+    "logSha256": "ce9eabd124adc10a667c1c2186e46b10bc716565370686a2fd1a4ca839a74b57",
+    "output": "{\"ordinaryUnchanged\":100000,\"singularNeighborhood\":2400,\"replayedEdges\":0,\"maxDifference\":0,\"gpuExposure\":false}"
+  },
+  {
+    "configuration": "Release",
+    "target": "NovaCoreMappedBufferMemoryTests",
+    "exitCode": 0,
+    "logSha256": "e78746d60193a6d72088ce9b4857efef96261983ee4da4bbc280fdd85552bce7",
+    "output": "PASS mapped terrain memory policy: 30 checks"
+  },
+  {
+    "configuration": "Release",
+    "target": "NovaCorePlayerGpuMemoryTests",
+    "exitCode": 0,
+    "logSha256": "0c29f5169de97d0004d8d7d41e43dc47dcff9f1ced6e220d1433a5c79600248b",
+    "output": "PASS GPU memory owner: 16 checks; mock driver; zero GPU/device creation"
+  }
+]

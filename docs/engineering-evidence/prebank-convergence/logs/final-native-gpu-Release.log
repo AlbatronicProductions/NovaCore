@@ -1,0 +1,126 @@
+Vulkan profile: CANONICAL (Khronos validation only)
+Canonical layer: manifest=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.json; binary=C:\VulkanSDK\1.4.357.0\Bin\VkLayer_khronos_validation.dll; sha256=9725CE7A9225F42F8961C433DACAE4CC8FAE3A16E95EF1D0A7C7E8BC09132C40; strict=true
+Loader-visible layers: VK_LAYER_KHRONOS_validation
+GPU prerequisite: VK_LAYER_KHRONOS_validation available; query/proof contexts enable it in both configurations.
+FP32 boundary interval: case=6 rotation=1 camera=0 toleranceMetres=0.00199127
+FP32 boundary interval: case=6 rotation=1 camera=600 toleranceMetres=0.00199127
+Facility visibility PASS: 126 GPU/CPU cases; parallel/grazing/boundary/single-slab/no-legacy-casters/Sun/camera/orientation/range/lighting; inactive and invalid-definition gates
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+PASS [native-gpu] NovaCoreFacilityVisibilityTests
+Surface material coordinates PASS: 540 GPU coordinate components; 3 orientations, 3 body radii, 4 camera distances; maxPhysicalErrorMetres=0.000183627; FP64 body identity / FP32 local differential; no shell input
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+PASS [native-gpu] NovaCoreSurfaceMaterialCoordinatesTests
+GPU AMD Radeon RX 6800 XT viewport 860x360
+STELLAR_PROJECTION distance=5e+09 pose=0 clipW=-5e+09 pixels=0 PASS
+STELLAR_PROJECTION distance=5e+09 pose=1 clipW=-4.87585e+09 pixels=0 PASS
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+Presentation test Vulkan [Loader Message]: env var 'VK_INSTANCE_LAYERS' defined and adding layers "VK_LAYER_KHRONOS_validation"
+STELLAR_PROJECTION distance=5e+09 pose=2 clipW=-4.68147e+09 pixels=0 PASS
+STELLAR_PROJECTION distance=5e+09 pose=3 clipW=-8.49836e+08 pixels=0 PASS
+STELLAR_PROJECTION distance=5e+09 pose=4 clipW=5e+09 pixels=56484 PASS
+STELLAR_PROJECTION distance=5e+09 pose=5 clipW=4.9374e+09 pixels=56490 PASS
+STELLAR_PROJECTION distance=5e+09 pose=6 clipW=8.49836e+08 pixels=0 PASS
+STELLAR_PROJECTION distance=5e+09 pose=7 clipW=4.74799e+09 pixels=56489 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=0 clipW=-1.496e+11 pixels=0 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=1 clipW=-1.45885e+11 pixels=0 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=2 clipW=-1.40069e+11 pixels=0 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=3 clipW=-2.54271e+10 pixels=0 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=4 clipW=1.496e+11 pixels=68 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=5 clipW=1.47727e+11 pixels=66 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=6 clipW=2.54271e+10 pixels=0 PASS
+STELLAR_PROJECTION distance=1.496e+11 pose=7 clipW=1.4206e+11 pixels=63 PASS
+STELLAR_PROJECTION distance=4e+12 pose=0 clipW=-4e+12 pixels=0 PASS
+STELLAR_PROJECTION distance=4e+12 pose=1 clipW=-3.90068e+12 pixels=0 PASS
+STELLAR_PROJECTION distance=4e+12 pose=2 clipW=-3.74517e+12 pixels=0 PASS
+STELLAR_PROJECTION distance=4e+12 pose=3 clipW=-6.79869e+11 pixels=0 PASS
+STELLAR_PROJECTION distance=4e+12 pose=4 clipW=4e+12 pixels=36 PASS
+STELLAR_PROJECTION distance=4e+12 pose=5 clipW=3.94992e+12 pixels=36 PASS
+STELLAR_PROJECTION distance=4e+12 pose=6 clipW=6.79869e+11 pixels=0 PASS
+STELLAR_PROJECTION distance=4e+12 pose=7 clipW=3.79839e+12 pixels=34 PASS
+Stellar projection PASS: 24 production raster cases, disabled instance, zero depth; strict validation
+PASS [native-gpu] NovaCoreStellarProjectionTests
+Native GPU Release: pass=3; fail=0; skip=0

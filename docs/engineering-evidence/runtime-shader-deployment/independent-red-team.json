@@ -1,0 +1,11 @@
+{
+  "fixture": "C:\\Users\\Tyler\\AppData\\Local\\Temp\\nc-shader-redteam-r07xklzq",
+  "checks": {
+    "clean": true,
+    "idempotent": true,
+    "unknown_refused": true,
+    "owned_retired_unrelated_preserved": true,
+    "config_refused": true,
+    "missing_refused": true
+  }
+}

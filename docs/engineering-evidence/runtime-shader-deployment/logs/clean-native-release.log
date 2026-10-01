@@ -1,0 +1,44 @@
+-- The CXX compiler identification is MSVC 19.51.36252.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Vulkan: C:/VulkanSDK/1.4.357.0/Lib/vulkan-1.lib (found version "1.4.357") found components: glslc glslangValidator
+-- Configuring done (1.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: E:/NovaCore/build/shader-deployment/clean-native-release
+[1/34] Generating shaders/orbit_previous.frag.spv
+[2/34] Generating shaders/planetary_height_query.comp.spv
+[3/34] Generating shaders/planetary_natural_terrain_families_query.comp.spv
+[4/34] Generating shaders/planetary_natural_terrain_field_query.comp.spv
+[5/34] Generating shaders/planetary_natural_terrain_global_prepare.comp.spv
+[6/34] Generating shaders/planetary_natural_terrain_prepare.comp.spv
+[7/34] Generating shaders/orbit.vert.spv, shaders/orbit.frag.spv
+[8/34] Generating shaders/body_forward.frag.spv, shaders/sas_target.frag.spv
+[9/34] Generating shaders/distant_planet.vert.spv, shaders/distant_planet.frag.spv
+[10/34] Generating shaders/regional_physical_demand.comp.spv
+[11/34] Generating shaders/regional_physical_incoming_demand.comp.spv
+[12/34] Generating shaders/planetary.vert.spv, shaders/planetary.frag.spv
+[13/34] Generating shaders/exhaust.vert.spv
+[14/34] Generating shaders/exhaust.frag.spv
+[15/34] Generating shaders/frozen_capture_pack.comp.spv
+[16/34] Generating shaders/exhaust_resolve.frag.spv
+[17/34] Generating shaders/triangle.frag.spv
+[18/34] Generating shaders/triangle.vert.spv
+[19/34] Generating shaders/planetary_select.comp.spv, shaders/planetary_terrain_generate.comp.spv
+[20/34] Generating shaders/planetary_production.frag.spv, shaders/planetary_production_terrain.comp.spv
+[21/34] Generating shaders/planetary_ring.vert.spv, shaders/planetary_ring_far.frag.spv, shaders/planetary_ring_near.frag.spv
+[22/34] Generating shaders/planetary_mesh_displace.comp.spv, shaders/planetary_mesh_normals.comp.spv
+[23/34] Generating shaders/fullscreen.vert.spv, shaders/space_background.frag.spv, shaders/tone_map.frag.spv, shaders/stellar_sun.vert.spv, shaders/stellar_sun.frag.spv, shaders/stellar_glow.vert.spv, shaders/stellar_glow.frag.spv
+[24/34] Generating shaders/prepared_surface.frag.spv
+[25/34] Generating shaders/solar_orbit.vert.spv, shaders/solar_orbit.frag.spv, shaders/solar_marker.vert.spv, shaders/solar_marker.frag.spv, shaders/solar_label.vert.spv, shaders/solar_label.frag.spv
+[26/34] Generating shaders/spherical_billboard_proof_reset.comp.spv, shaders/spherical_billboard_proof_prepare.comp.spv, shaders/spherical_billboard_proof_normals.comp.spv, shaders/spherical_billboard_proof_cull.comp.spv, shaders/spherical_billboard_proof_compact.comp.spv, shaders/spherical_billboard_proof.vert.spv, shaders/spherical_billboard_proof.frag.spv
+[27/34] Generating shaders/production_spherical_billboard_reset.comp.spv, shaders/production_spherical_billboard_prepare.comp.spv, shaders/production_spherical_billboard_incoming_prepare.comp.spv, shaders/production_spherical_billboard_cull.comp.spv, shaders/production_spherical_billboard_compact.comp.spv, shaders/production_spherical_billboard_incoming_reset.comp.spv, shaders/production_spherical_billboard_incoming_cull.comp.spv, shaders/production_nested_scale_mesh_cull.comp.spv, shaders/production_nested_scale_mesh_incoming_cull.comp.spv, shaders/production_spherical_billboard_incoming_compact.comp.spv, shaders/production_spherical_billboard.vert.spv, shaders/prepared_surface.vert.spv, shaders/production_spherical_billboard.tesc.spv, shaders/production_spherical_billboard.tese.spv
+[28/34] Building CXX object CMakeFiles\NovaCore.Native.dir\ProductionCubeSurface.cpp.obj
+[29/34] Building CXX object CMakeFiles\NovaCore.Native.dir\LocalTerrainPack.cpp.obj
+[30/34] Building CXX object CMakeFiles\NovaCore.Native.dir\PlanetarySphericalBillboardGpuProof.cpp.obj
+[31/34] Building CXX object CMakeFiles\NovaCore.Native.dir\PlanetaryMeshPreparation.cpp.obj
+[32/34] Building CXX object CMakeFiles\NovaCore.Native.dir\PlanetaryHeightQuery.cpp.obj
+[33/34] Building CXX object CMakeFiles\NovaCore.Native.dir\NovaCoreNative.cpp.obj
+[34/34] Linking CXX shared library NovaCore.Native.dll

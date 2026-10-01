@@ -1,0 +1,23 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Runtime shaders: Debug, 66 owned, 0 obsolete removed
+  NovaCore.Interop -> E:\NovaCore\src\NovaCore.Interop\bin\Debug\net10.0\NovaCore.Interop.dll
+  NovaCore.Core -> E:\NovaCore\src\NovaCore.Core\bin\Debug\net10.0\NovaCore.Core.dll
+  NovaCore.Platform -> E:\NovaCore\src\NovaCore.Platform\bin\Debug\net10.0\NovaCore.Platform.dll
+  NovaCore.Launcher -> E:\NovaCore\tools\NovaCore.Launcher\bin\Debug\net10.0-windows\NovaCore.Launcher.dll
+  NovaCore.EphemerisFormat -> E:\NovaCore\src\NovaCore.EphemerisFormat\bin\Debug\net10.0\NovaCore.EphemerisFormat.dll
+  NovaCore.Diagnostics -> E:\NovaCore\src\NovaCore.Diagnostics\bin\Debug\net10.0-windows\NovaCore.Diagnostics.dll
+  NovaCore.Simulation -> E:\NovaCore\src\NovaCore.Simulation\bin\Debug\net10.0\NovaCore.Simulation.dll
+  NovaCore.Graphics -> E:\NovaCore\src\NovaCore.Graphics\bin\Debug\net10.0\NovaCore.Graphics.dll
+  Runtime shaders: Debug, 66 owned, 0 obsolete removed
+  Runtime shaders: Debug, 66 owned, 0 obsolete removed
+  NovaCore.Triangle -> E:\NovaCore\samples\NovaCore.Triangle\bin\Debug\net10.0\NovaCore.Triangle.dll
+  NovaCore.ConstructionEditor -> E:\NovaCore\tools\NovaCore.ConstructionEditor\bin\Debug\net10.0-windows\NovaCore.ConstructionEditor.dll
+  NovaCore.Recorder -> E:\NovaCore\tools\NovaCore.Recorder\bin\Debug\net10.0-windows\NovaCore.Recorder.dll
+  NovaCore.App -> E:\NovaCore\tools\NovaCore.App\bin\Debug\net10.0-windows\NovaCore.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.43

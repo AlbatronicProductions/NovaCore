@@ -9,17 +9,21 @@ accepted engineering capabilities without closing the limits below.
 
 **M16.2 banks the accepted production responsibility with open qualification debt.**
 Its fullscreen entry/loading/UI and exploration
-pause corrections preserve these limits. Actual held-key, focus-loss and physical
-DPI-transition cases not performed remain NOT RUN, separate from automated window
-resize/input evidence. Loading GPU-memory values are driver estimates with a shared
+pause corrections preserve these limits. Physical held-key, focus-loss and live
+monitor-transition permutations not performed remain NOT RUN. The later actual
+125% fixed-display qualification is separately recorded below. Loading GPU-memory
+values are driver estimates with a shared
 sampling owner; sampling/repaint can wait for synchronous loading checkpoints.
 See the [current bank](NOVACORE_CURRENT_STATE.md#current-bank--m162-banked).
-Engineering qualification remains **REVISE** for package closure, Graphics failures
-and non-96-DPI coverage. The completed manual bank does not turn these results
-into qualification PASS. Shader inventory remains 69 present versus 66 expected;
-inherited Graphics assertion/path contracts and native facility qualification
-remain unresolved. Full Graphics Release and non-96-DPI gates remain NOT RUN.
-See the [M16.2 scope and retained debt](milestones/M16.2.md).
+At banking, engineering qualification was **REVISE** for package closure, Graphics
+failures and non-96-DPI coverage: 69 shaders were present versus 66 expected,
+inherited assertions and the facility path failed, and full Graphics Release and
+non-96-DPI gates were NOT RUN. These historical results remain unchanged in the
+[M16.2 record](milestones/M16.2.md). The later unbanked maintenance candidate has
+its own [current qualification report](engineering-evidence/prebank-convergence/README.md),
+including actual 125% Windows DPI evidence using automated native input. It does
+not assign physical held-key/focus-loss/monitor-transition, performance, blackout
+causality or public-release acceptance.
 
 - MinimumRecorder remains temporary developer/qualification infrastructure while
   historical blackout causality is **UNRESOLVED**. Its permanent public disposition

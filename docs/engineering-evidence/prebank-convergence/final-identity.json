@@ -1,0 +1,449 @@
+{
+  "recordedUtc": "2026-09-30T22:28:21.492526+00:00",
+  "judgment": "PASS bounded maintenance/convergence qualification",
+  "branch": "main",
+  "head": "b0ccfd8f17643868a8d9011968a4566bc8a13f69",
+  "peeledM16_2": "cd8fdcf977dee633f57da790e931a388b922048f",
+  "scope": "Exact unbanked working inputs plus final evidence; this manifest excludes its own self-reference. No milestone assignment.",
+  "statusPorcelain": [
+    " M docs/KNOWN_LIMITATIONS.md",
+    " M docs/NOVACORE_CURRENT_STATE.md",
+    " M docs/build-windows.md",
+    " M docs/planetary-rendering.md",
+    " M native/NovaCore.Native/CMakeLists.txt",
+    " M samples/NovaCore.Triangle/NovaCore.Triangle.csproj",
+    " M tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs",
+    " M tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs",
+    " M tests/NovaCore.Graphics.Tests/Program.cs",
+    " M tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs",
+    " M tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs",
+    " M tools/NovaCore.App/NovaCore.App.csproj",
+    " M tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj",
+    " M tools/verify-player-package.py",
+    "?? docs/engineering-evidence/prebank-convergence/README.md",
+    "?? docs/engineering-evidence/prebank-convergence/accepted-added-files.zip",
+    "?? docs/engineering-evidence/prebank-convergence/accepted-shader.diff",
+    "?? docs/engineering-evidence/prebank-convergence/causal-attempts.json",
+    "?? docs/engineering-evidence/prebank-convergence/commands.md",
+    "?? docs/engineering-evidence/prebank-convergence/configuration-125.jpg",
+    "?? docs/engineering-evidence/prebank-convergence/contracts.md",
+    "?? docs/engineering-evidence/prebank-convergence/dpi-package.json",
+    "?? docs/engineering-evidence/prebank-convergence/dpi-transitions.json",
+    "?? docs/engineering-evidence/prebank-convergence/dpi.md",
+    "?? docs/engineering-evidence/prebank-convergence/editor-picking-125.jpg",
+    "?? docs/engineering-evidence/prebank-convergence/final-identity.json",
+    "?? docs/engineering-evidence/prebank-convergence/final-tracked.diff",
+    "?? docs/engineering-evidence/prebank-convergence/flight-125.jpg",
+    "?? docs/engineering-evidence/prebank-convergence/gate-inventory.txt",
+    "?? docs/engineering-evidence/prebank-convergence/gates.json",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Debug/cases.jsonl",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Debug/publication-witness.json",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Debug/sources.json",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Debug/summary.json",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Release/cases.jsonl",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Release/publication-witness.json",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Release/sources.json",
+    "?? docs/engineering-evidence/prebank-convergence/horizon-Release/summary.json",
+    "?? docs/engineering-evidence/prebank-convergence/independent-review.json",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-build-Debug.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-build-Release.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-graphics-Debug.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-graphics-Release.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-native-gpu-Debug.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-native-gpu-Release.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-player-Debug.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-player-Release.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/final-shader-red-team.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/launcher-Debug.log",
+    "?? docs/engineering-evidence/prebank-convergence/logs/launcher-Release.log",
+    "?? docs/engineering-evidence/prebank-convergence/native-cpu-results.json",
+    "?? docs/engineering-evidence/prebank-convergence/ownership-audit.md",
+    "?? docs/engineering-evidence/prebank-convergence/package-Debug.json",
+    "?? docs/engineering-evidence/prebank-convergence/package-Release.json",
+    "?? docs/engineering-evidence/prebank-convergence/preservation-baseline.json",
+    "?? docs/engineering-evidence/prebank-convergence/production-identity.json",
+    "?? docs/engineering-evidence/prebank-convergence/shader-red-team.json",
+    "?? docs/engineering-evidence/prebank-convergence/smoke.json",
+    "?? docs/engineering-evidence/runtime-shader-deployment/README.md",
+    "?? docs/engineering-evidence/runtime-shader-deployment/commands.md",
+    "?? docs/engineering-evidence/runtime-shader-deployment/flight-smoke.png",
+    "?? docs/engineering-evidence/runtime-shader-deployment/independent-red-team.json",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/app-release-initial.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/clean-build-debug.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/clean-build-release.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/clean-native-debug.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/clean-native-release.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/incremental-app-Debug.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/incremental-app-Release.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/native-gpu-debug.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/native-gpu-release.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/native-test-release.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/negative-tests.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/player-Debug.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/player-Release.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/test-build-debug.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/logs/test-build-release.log",
+    "?? docs/engineering-evidence/runtime-shader-deployment/negative-results.json",
+    "?? docs/engineering-evidence/runtime-shader-deployment/package-debug.json",
+    "?? docs/engineering-evidence/runtime-shader-deployment/package-release.json",
+    "?? docs/engineering-evidence/runtime-shader-deployment/scenario-comparison.json",
+    "?? docs/engineering-evidence/runtime-shader-deployment/source-identity.json",
+    "?? native/NovaCore.Native/RuntimeShaderDeployment.cmake",
+    "?? tools/RuntimeShaderDeployment.targets",
+    "?? tools/deploy-runtime-shaders.py",
+    "?? tools/test-runtime-shader-deployment.py"
+  ],
+  "stagedDiffBytes": 0,
+  "stagedDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "trackedDiffSha256": "b274fe3061819fa736773948802c3b837f411ef0424f531faeb6341a97b77fa1",
+  "deletions": [],
+  "preservationChanges": {
+    "initialFilesChangedWithinAuthorizedScope": [
+      "docs/build-windows.md",
+      "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs"
+    ],
+    "allOtherInitialFiles": "unchanged byte-for-byte"
+  },
+  "files": {
+    "docs/KNOWN_LIMITATIONS.md": {
+      "sha256": "dc1bdeb7fc3b4b3ca244d7ed2733433a3842a3b1021e252cca74acb0850f70e4",
+      "bytes": 7558
+    },
+    "docs/NOVACORE_CURRENT_STATE.md": {
+      "sha256": "808dd289924d7d65ce963d29fe036fd30776cc49187bea980d5074e8c57f0726",
+      "bytes": 53154
+    },
+    "docs/build-windows.md": {
+      "sha256": "411c9a154c3b367ccf86afec1310fc64a22ef21d7697da5d80a886501b0ca635",
+      "bytes": 22384
+    },
+    "docs/engineering-evidence/prebank-convergence/README.md": {
+      "sha256": "44b639358a80e480fe884541829a07e8109a516de039925fd2e64a425da29919",
+      "bytes": 9336
+    },
+    "docs/engineering-evidence/prebank-convergence/accepted-added-files.zip": {
+      "sha256": "286c45d8555fdf62a343f3f4513e9ddc64943c884ef9a737837c035740d21b2f",
+      "bytes": 84842
+    },
+    "docs/engineering-evidence/prebank-convergence/accepted-shader.diff": {
+      "sha256": "d433129b11fba65e7749e860c8812efa24290c44eb9abcb52b8fab46b2b9a2b1",
+      "bytes": 45155
+    },
+    "docs/engineering-evidence/prebank-convergence/causal-attempts.json": {
+      "sha256": "ca147e3c2ce0a7e10659e79bb9f03e0e7359dfb507226b96151429b5934cc61b",
+      "bytes": 2494
+    },
+    "docs/engineering-evidence/prebank-convergence/commands.md": {
+      "sha256": "13e4ff445b6cb5cc86b7a9b616866196f152a8f57db6f523b1c251a01f9f0e28",
+      "bytes": 4728
+    },
+    "docs/engineering-evidence/prebank-convergence/configuration-125.jpg": {
+      "sha256": "ad1bb3a9f05a7fa68088c0c35e6e9cbc25702af8001689c1a1564a6dc0f73c90",
+      "bytes": 111227
+    },
+    "docs/engineering-evidence/prebank-convergence/contracts.md": {
+      "sha256": "0f6c5206e56640b0550d7aa47c41365d78a2d9de024c47cba147bd3cf968a10d",
+      "bytes": 4735
+    },
+    "docs/engineering-evidence/prebank-convergence/dpi-package.json": {
+      "sha256": "fc162d627a21222568b30dc4b28d34f8ad173a10a3e74c383aeeeb14f9ac3f5e",
+      "bytes": 27256
+    },
+    "docs/engineering-evidence/prebank-convergence/dpi-transitions.json": {
+      "sha256": "dc19d76f2e52da6e9417131ce687a57952f2651458172c0f9e51240b52f95f37",
+      "bytes": 5757
+    },
+    "docs/engineering-evidence/prebank-convergence/dpi.md": {
+      "sha256": "b675d175c1c9467844c4fd173e5e093c9e39399a1dba71f14c5353bafe1cdd09",
+      "bytes": 3957
+    },
+    "docs/engineering-evidence/prebank-convergence/editor-picking-125.jpg": {
+      "sha256": "85d19b4960d4d219e5d936daf7c5e8bc87fccd238e90e35a06bc933051bd5631",
+      "bytes": 111820
+    },
+    "docs/engineering-evidence/prebank-convergence/final-tracked.diff": {
+      "sha256": "b274fe3061819fa736773948802c3b837f411ef0424f531faeb6341a97b77fa1",
+      "bytes": 72310
+    },
+    "docs/engineering-evidence/prebank-convergence/flight-125.jpg": {
+      "sha256": "1201ea5cff49ca9246b245b07c950561480c74b08575ccbee01ad5a9e588edef",
+      "bytes": 77744
+    },
+    "docs/engineering-evidence/prebank-convergence/gate-inventory.txt": {
+      "sha256": "32b0666cf464c796b7b9bb4c8a2375465201ad212c97f0ca2d4f3a26c0b73779",
+      "bytes": 5664
+    },
+    "docs/engineering-evidence/prebank-convergence/gates.json": {
+      "sha256": "6f51a690d5df586f6d57d3d9e236d70837f055449ef41db4f3d43524eaa111c7",
+      "bytes": 951
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Debug/cases.jsonl": {
+      "sha256": "fba8e065ecdcb729a6dba84c466d5aa7537be4f254d787964f8d8eca98492980",
+      "bytes": 52949
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Debug/publication-witness.json": {
+      "sha256": "73d0a8aa984bcbb9dec008d2d7d1dd88a367df17b6627e1a22e567e8f6358e42",
+      "bytes": 21521
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Debug/sources.json": {
+      "sha256": "b890346beac513031385a5bb893646e4c5e7f1a771b6aec4fa29fbd21f5882b5",
+      "bytes": 1033
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Debug/summary.json": {
+      "sha256": "33d38d02e88375aee1fe50c9d714e412fad7e6164b3ef8d51a6f4b8d0b59b02d",
+      "bytes": 355
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Release/cases.jsonl": {
+      "sha256": "fba8e065ecdcb729a6dba84c466d5aa7537be4f254d787964f8d8eca98492980",
+      "bytes": 52949
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Release/publication-witness.json": {
+      "sha256": "73d0a8aa984bcbb9dec008d2d7d1dd88a367df17b6627e1a22e567e8f6358e42",
+      "bytes": 21521
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Release/sources.json": {
+      "sha256": "b890346beac513031385a5bb893646e4c5e7f1a771b6aec4fa29fbd21f5882b5",
+      "bytes": 1033
+    },
+    "docs/engineering-evidence/prebank-convergence/horizon-Release/summary.json": {
+      "sha256": "33d38d02e88375aee1fe50c9d714e412fad7e6164b3ef8d51a6f4b8d0b59b02d",
+      "bytes": 355
+    },
+    "docs/engineering-evidence/prebank-convergence/independent-review.json": {
+      "sha256": "d4a42663cf204bd939c64c02215684711b1adc1bc5a0697a62b31d2da966a6a7",
+      "bytes": 3779
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-build-Debug.log": {
+      "sha256": "5f84b520f37214ba018f40675cc84b31677a19b318ef021163b7615859560a3e",
+      "bytes": 3544
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-build-Release.log": {
+      "sha256": "168ef66cdc56ee66d838fab857692dcfd24c4a438e23787892aedfaac2b87728",
+      "bytes": 3604
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-graphics-Debug.log": {
+      "sha256": "d42d67c27a143dfe6cc8fcbe7793f91eb1a639b6c6d0ff0d7ff422a83e14feca",
+      "bytes": 39038
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-graphics-Release.log": {
+      "sha256": "0aa5281c4c8e13a9c64768bd7faab26622277456448c225f683488740b702eb1",
+      "bytes": 40439
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-native-gpu-Debug.log": {
+      "sha256": "a9b7a6bb468668ea935d47fcad7e58e76b4061e65d37f8e41511bce4b76facc3",
+      "bytes": 14518
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-native-gpu-Release.log": {
+      "sha256": "47e3662f61d1a8f358918666221f13e05e19a58ed276f1a2e1f5f0d6fd3a08d0",
+      "bytes": 14520
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-player-Debug.log": {
+      "sha256": "f626a82e531b64090561624101f4be9793de722553d500afbdeabb05d99559ba",
+      "bytes": 104
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-player-Release.log": {
+      "sha256": "f626a82e531b64090561624101f4be9793de722553d500afbdeabb05d99559ba",
+      "bytes": 104
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/final-shader-red-team.log": {
+      "sha256": "484271bde1678db652c5a6be02a150ea5fa24e80ca5bf921bfd8bd769770294e",
+      "bytes": 955
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/launcher-Debug.log": {
+      "sha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b",
+      "bytes": 684
+    },
+    "docs/engineering-evidence/prebank-convergence/logs/launcher-Release.log": {
+      "sha256": "fb281d17e89b43c69b53abc67cef70f9c3db8aa059c5b05df40676dcb507127b",
+      "bytes": 684
+    },
+    "docs/engineering-evidence/prebank-convergence/native-cpu-results.json": {
+      "sha256": "16fbabc825a6678a3276b3f972bf2271bb96d15b3f7853516e6d1bbb757561ab",
+      "bytes": 3095
+    },
+    "docs/engineering-evidence/prebank-convergence/ownership-audit.md": {
+      "sha256": "e87ea379dddb05b789aec2579a432d7684d5570d713ee53601b118edbc17c356",
+      "bytes": 6751
+    },
+    "docs/engineering-evidence/prebank-convergence/package-Debug.json": {
+      "sha256": "10a33e4c48d350e7ba9143e295381f34a2ec44684e6df9b6947af4a0a23bfb14",
+      "bytes": 27248
+    },
+    "docs/engineering-evidence/prebank-convergence/package-Release.json": {
+      "sha256": "fc162d627a21222568b30dc4b28d34f8ad173a10a3e74c383aeeeb14f9ac3f5e",
+      "bytes": 27256
+    },
+    "docs/engineering-evidence/prebank-convergence/preservation-baseline.json": {
+      "sha256": "d0b8cd3b252eef650337e5eb34ddbd1e02471a7d81db25835d2e1845126d6589",
+      "bytes": 8367
+    },
+    "docs/engineering-evidence/prebank-convergence/production-identity.json": {
+      "sha256": "493c06d9d67b73fabab05a3ec30c59a50a2e5a6af2bc8b5f7f18d327320797a6",
+      "bytes": 2796
+    },
+    "docs/engineering-evidence/prebank-convergence/shader-red-team.json": {
+      "sha256": "784e5ffdb510286a446a12324f43f3e32e53539a5f5d79ba08df49dad93a4799",
+      "bytes": 3078
+    },
+    "docs/engineering-evidence/prebank-convergence/smoke.json": {
+      "sha256": "5f1bd105b51aef88c38e4309da31903d09609f3eecacc2d4ca29a9650b6e4123",
+      "bytes": 1068
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/README.md": {
+      "sha256": "7a547345f1b19fe3a4e2f5666e0ec0a9299508271ae917d56d8464a91c5aa9b0",
+      "bytes": 11156
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/commands.md": {
+      "sha256": "db7587e7bb30c1dbd1f5aa179376acdd96535bf79eadf45e4859548c3af69d47",
+      "bytes": 5658
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/flight-smoke.png": {
+      "sha256": "205ffbe73ac337b37a98ec225301f4429749acf0ba5aa25f6863761a777cebd7",
+      "bytes": 117138
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/independent-red-team.json": {
+      "sha256": "3c2423d9e3c588703528487d839bacb8a2583190b970094afc13977171fa1325",
+      "bytes": 289
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/app-release-initial.log": {
+      "sha256": "d937409de541126abad5c9f4e976bac14ca903c3d8c67821b90580bbfa9f575d",
+      "bytes": 1622
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/clean-build-debug.log": {
+      "sha256": "f896bbae006568423aae8e2c4345910837da8ea24c2622b10a60e73fe1310c72",
+      "bytes": 1592
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/clean-build-release.log": {
+      "sha256": "4c617acc234c60a55e93d70adc7f3e62adbfcacede727c89acf396a8e8e9cc26",
+      "bytes": 1622
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/clean-native-debug.log": {
+      "sha256": "b1dfa32f98518493303139c24a4b6c3af21d361095db2f36ce9113978014e31d",
+      "bytes": 4450
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/clean-native-release.log": {
+      "sha256": "2d56b7007ebe818e9aac5685f6239661b198ec16e00eb2276ae4f7d8c3022de4",
+      "bytes": 4452
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/incremental-app-Debug.log": {
+      "sha256": "c6e1d2afcc9dc895c2cb2eda540eb6f5271558eae314e2fef64313406383eb16",
+      "bytes": 1592
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/incremental-app-Release.log": {
+      "sha256": "fa77000301b97dd94d1b95e2a2880330382b53682a661ee41daf80301b6f4ec4",
+      "bytes": 1622
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/native-gpu-debug.log": {
+      "sha256": "b612829ebbcebb3b9f19a115ddd3deeae64fbf759b1ec15c974838e717c8d628",
+      "bytes": 12665
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/native-gpu-release.log": {
+      "sha256": "533e43d2ad8414363595a30283183e3ea80009bfd241e63e75353b72e220c4e2",
+      "bytes": 12667
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/native-test-release.log": {
+      "sha256": "3ef1a4f191d0456530f5a145ec3493495b928f160bee74fe4849a0120c00b6fc",
+      "bytes": 19479
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/negative-tests.log": {
+      "sha256": "484271bde1678db652c5a6be02a150ea5fa24e80ca5bf921bfd8bd769770294e",
+      "bytes": 955
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/player-Debug.log": {
+      "sha256": "f626a82e531b64090561624101f4be9793de722553d500afbdeabb05d99559ba",
+      "bytes": 104
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/player-Release.log": {
+      "sha256": "f626a82e531b64090561624101f4be9793de722553d500afbdeabb05d99559ba",
+      "bytes": 104
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/test-build-debug.log": {
+      "sha256": "a5f0b45cfc43c0c87148a2288d4390c230842b51a725e30e4fbfb0fee34cda6c",
+      "bytes": 74
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/logs/test-build-release.log": {
+      "sha256": "a5f0b45cfc43c0c87148a2288d4390c230842b51a725e30e4fbfb0fee34cda6c",
+      "bytes": 74
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/negative-results.json": {
+      "sha256": "784e5ffdb510286a446a12324f43f3e32e53539a5f5d79ba08df49dad93a4799",
+      "bytes": 3078
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/package-debug.json": {
+      "sha256": "d77d8eebfb6d243ffdc3e592a849b3077dddf78b5d743ad9f8e48a703709f627",
+      "bytes": 23369
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/package-release.json": {
+      "sha256": "c98a876a7f38f959b2b0dc6aa2be8a979022034178c3534eda574cd8d4ac29a0",
+      "bytes": 23384
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/scenario-comparison.json": {
+      "sha256": "805366e9c3b4ba760181ee00413f8ca678e4c03b707049f4c1963604b78f3578",
+      "bytes": 2739
+    },
+    "docs/engineering-evidence/runtime-shader-deployment/source-identity.json": {
+      "sha256": "b4edfe5536d14588cea3b4c0e1a58188f32cdd64643b05655c6c43d6c08b6964",
+      "bytes": 1524
+    },
+    "docs/planetary-rendering.md": {
+      "sha256": "affeeeafee4d5def461db19517fa5c990b1af0de1285f44966dacf43eebe5056",
+      "bytes": 15637
+    },
+    "native/NovaCore.Native/CMakeLists.txt": {
+      "sha256": "543aa707c76b9f440db8ecd96b6c63d48e8ddee031849c22d6f650f015e52969",
+      "bytes": 31832
+    },
+    "native/NovaCore.Native/RuntimeShaderDeployment.cmake": {
+      "sha256": "c044aa752e2e3d093ac3c7be206d2d8a9dabe9749f72383af91da8b287b7b51a",
+      "bytes": 3475
+    },
+    "samples/NovaCore.Triangle/NovaCore.Triangle.csproj": {
+      "sha256": "c0715ac5c57c904f0e278100ea15d6bb19c9755804f872896d64c9f6de50c7f0",
+      "bytes": 1266
+    },
+    "tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs": {
+      "sha256": "dd9409f1671aa078015298c3a9529e85e86034da4553ee5ee487f1ec370c8b3e",
+      "bytes": 28902
+    },
+    "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs": {
+      "sha256": "93e1af85f240f0a78cd71b16db12721ef359fb07ec44e5e1d3b17cb3b0fc32b0",
+      "bytes": 10554
+    },
+    "tests/NovaCore.Graphics.Tests/Program.cs": {
+      "sha256": "53f9c2b59849dbe8cd5584bee8386de36fc7910daa81323f1558083f9ee47667",
+      "bytes": 578979
+    },
+    "tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs": {
+      "sha256": "169eb1a6b04d156e75856ab57f1bff3cc35c19dbf95bc4b96d6a3927337d8dc7",
+      "bytes": 2514
+    },
+    "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs": {
+      "sha256": "e7ba16faaa18670cd7de616b8dd166242a60c6f22fbdcb72a357b586c9321925",
+      "bytes": 13543
+    },
+    "tools/NovaCore.App/NovaCore.App.csproj": {
+      "sha256": "521842e303e2fa766794977c55bc3abdcc829930a87682ae0788819187773718",
+      "bytes": 1268
+    },
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj": {
+      "sha256": "a84908d615a418caee8e8e34d8da986894ae55c6e6e146a6cd41d47b064e338a",
+      "bytes": 1181
+    },
+    "tools/RuntimeShaderDeployment.targets": {
+      "sha256": "4b8ef76e8a928bb5ad2795dacd414de8e2ab9a94a98389017b4bbfcb04abfd87",
+      "bytes": 2300
+    },
+    "tools/deploy-runtime-shaders.py": {
+      "sha256": "f1b22374a5efa97c014f8443570f8c181a26044b176cd2362072a0ca8b55d670",
+      "bytes": 6109
+    },
+    "tools/test-runtime-shader-deployment.py": {
+      "sha256": "d256e1ce5a4e11f88af1dfe578e52134931c76192f0a0beebea061df707abb1a",
+      "bytes": 10263
+    },
+    "tools/verify-player-package.py": {
+      "sha256": "b8bfeb1de15d4715057b93e65efaf8985f84a14c5b8369b60fc78833e2c05f7e",
+      "bytes": 8276
+    }
+  }
+}

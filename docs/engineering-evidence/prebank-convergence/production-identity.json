@@ -1,0 +1,65 @@
+{
+  "branch": "main",
+  "head": "b0ccfd8f17643868a8d9011968a4566bc8a13f69",
+  "bank": "cd8fdcf977dee633f57da790e931a388b922048f",
+  "scope": "All unbanked production/build/test files; unchanged tracked inputs identified by HEAD. Evidence/docs have separate final identity.",
+  "files": {
+    "native/NovaCore.Native/CMakeLists.txt": {
+      "sha256": "543aa707c76b9f440db8ecd96b6c63d48e8ddee031849c22d6f650f015e52969",
+      "bytes": 31832
+    },
+    "native/NovaCore.Native/RuntimeShaderDeployment.cmake": {
+      "sha256": "c044aa752e2e3d093ac3c7be206d2d8a9dabe9749f72383af91da8b287b7b51a",
+      "bytes": 3475
+    },
+    "samples/NovaCore.Triangle/NovaCore.Triangle.csproj": {
+      "sha256": "c0715ac5c57c904f0e278100ea15d6bb19c9755804f872896d64c9f6de50c7f0",
+      "bytes": 1266
+    },
+    "tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs": {
+      "sha256": "dd9409f1671aa078015298c3a9529e85e86034da4553ee5ee487f1ec370c8b3e",
+      "bytes": 28902
+    },
+    "tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs": {
+      "sha256": "93e1af85f240f0a78cd71b16db12721ef359fb07ec44e5e1d3b17cb3b0fc32b0",
+      "bytes": 10554
+    },
+    "tests/NovaCore.Graphics.Tests/Program.cs": {
+      "sha256": "53f9c2b59849dbe8cd5584bee8386de36fc7910daa81323f1558083f9ee47667",
+      "bytes": 578979
+    },
+    "tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs": {
+      "sha256": "169eb1a6b04d156e75856ab57f1bff3cc35c19dbf95bc4b96d6a3927337d8dc7",
+      "bytes": 2514
+    },
+    "tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs": {
+      "sha256": "e7ba16faaa18670cd7de616b8dd166242a60c6f22fbdcb72a357b586c9321925",
+      "bytes": 13543
+    },
+    "tools/NovaCore.App/NovaCore.App.csproj": {
+      "sha256": "521842e303e2fa766794977c55bc3abdcc829930a87682ae0788819187773718",
+      "bytes": 1268
+    },
+    "tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj": {
+      "sha256": "a84908d615a418caee8e8e34d8da986894ae55c6e6e146a6cd41d47b064e338a",
+      "bytes": 1181
+    },
+    "tools/RuntimeShaderDeployment.targets": {
+      "sha256": "4b8ef76e8a928bb5ad2795dacd414de8e2ab9a94a98389017b4bbfcb04abfd87",
+      "bytes": 2300
+    },
+    "tools/deploy-runtime-shaders.py": {
+      "sha256": "f1b22374a5efa97c014f8443570f8c181a26044b176cd2362072a0ca8b55d670",
+      "bytes": 6109
+    },
+    "tools/test-runtime-shader-deployment.py": {
+      "sha256": "d256e1ce5a4e11f88af1dfe578e52134931c76192f0a0beebea061df707abb1a",
+      "bytes": 10263
+    },
+    "tools/verify-player-package.py": {
+      "sha256": "b8bfeb1de15d4715057b93e65efaf8985f84a14c5b8369b60fc78833e2c05f7e",
+      "bytes": 8276
+    }
+  },
+  "stagedDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "path": "build\\prebank-convergence\\before-native.log",
+    "sha256": "23d0445c4ba917b26db35685b115f8a7e72ae4edbee09a9d6ee97bbaa3f657ba",
+    "result": "FAIL",
+    "classification": "Harness/path defect",
+    "cause": "Facility shader produced in test-shaders but harness supplied shaders; other two native GPU cases passed."
+  },
+  {
+    "path": "build\\prebank-convergence\\before-horizon.log",
+    "sha256": "3ae2c0cc518aee7e4b2686517e364343e441bd8295b9e568e8ba827559c2e894",
+    "result": "FAIL",
+    "classification": "Obsolete test contract",
+    "cause": "Common vertex hash predates direct variant; correspondence audited before new guard."
+  },
+  {
+    "path": "build\\prebank-convergence\\before-orbit.log",
+    "sha256": "2c5705e6f563e7646a84628b28c94681ebb5a5c99682ebf0524bc6721d1e5c9b",
+    "result": "FAIL",
+    "classification": "Obsolete test contract",
+    "cause": "First indirect terrain draw is the prepass; color branch must be scoped and depth lifetime protected."
+  },
+  {
+    "path": "build\\prebank-convergence\\before-terrain.log",
+    "sha256": "e08c56bbc5d399a29c794d8b0c502952bc58202f152ee52b779d625169b5b0d2",
+    "result": "FAIL",
+    "classification": "Obsolete test contract",
+    "cause": "Default define moved to shared prepared surface contract."
+  },
+  {
+    "path": "build\\prebank-convergence\\graphics-Debug.log",
+    "sha256": "aa783125b662669dfe4e4f12827a13aa34ab98c0d1a1990d12f874162fee5846",
+    "result": "112 PASS / 4 FAIL / 0 SKIP / 0 EXCLUDED",
+    "classification": "Obsolete test prerequisite",
+    "cause": "Four window cases refused glob69 vs source-owned66 before entering their runtime checks. Full run completed; superseded by complete final run."
+  },
+  {
+    "path": "build\\prebank-convergence\\build-Release.log",
+    "sha256": "2b29e38ae315ffbec43f48aae83ff01c74824830fb4c2007a20b89225cbaae0d",
+    "result": "FAIL / Graphics NOT RUN",
+    "classification": "Environmental file lock",
+    "cause": "Ordinary smoke PID43784 held App native DLL during concurrent build. Closed normally; rebuilt sequentially."
+  },
+  {
+    "path": "build\\prebank-convergence\\dpi\\entry.json",
+    "sha256": "b234362d778c1862b3c899b239cefe8e18ead3ee8a04324487e7bd238641123a",
+    "result": "FAIL",
+    "classification": "Harness foreground precondition",
+    "cause": "Settings held focus at automatic start; repeat activated existing manual-start option, without production change."
+  }
+]

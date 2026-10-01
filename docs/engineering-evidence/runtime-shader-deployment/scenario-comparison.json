@@ -1,0 +1,54 @@
+{
+  "Debug": {
+    "clean": {
+      "judgment": "PASS",
+      "native": "E:\\NovaCore\\build\\shader-deployment\\clean-native-debug",
+      "shaderInventoryAndHashesEqual": true,
+      "packageSha256": "810389ea66febcc51f19bf008ac39c09b1e4ad9cddfc0978a206277ef5d6ecfc",
+      "fullReceiptSha256": "c0ab9d26c9baee46fddfa96bf4177343c7ae2d67c533883870dda6a47e07455c",
+      "nativeDllSha256": "8840e402f55e68375803b55a85d91ad003038fb8b88c38c5eccc80054c9a2074"
+    },
+    "afterNativeTests": {
+      "judgment": "PASS",
+      "native": "E:\\NovaCore\\build\\native-ninja",
+      "shaderInventoryAndHashesEqual": true,
+      "packageSha256": "9f7d6e1bbf3b8834a6d47437dc85c364b109e93d319b1d69f1578ea74e8dcea5",
+      "fullReceiptSha256": "10a33e4c48d350e7ba9143e295381f34a2ec44684e6df9b6947af4a0a23bfb14",
+      "nativeDllSha256": "94d121e220e563092359eae41e51af8558b12a2dc5c0b34d8a8847c35a800145"
+    },
+    "incremental": {
+      "judgment": "PASS",
+      "native": "E:\\NovaCore\\build\\native-ninja",
+      "shaderInventoryAndHashesEqual": true,
+      "packageSha256": "9f7d6e1bbf3b8834a6d47437dc85c364b109e93d319b1d69f1578ea74e8dcea5",
+      "fullReceiptSha256": "10a33e4c48d350e7ba9143e295381f34a2ec44684e6df9b6947af4a0a23bfb14",
+      "nativeDllSha256": "94d121e220e563092359eae41e51af8558b12a2dc5c0b34d8a8847c35a800145"
+    }
+  },
+  "Release": {
+    "clean": {
+      "judgment": "PASS",
+      "native": "E:\\NovaCore\\build\\shader-deployment\\clean-native-release",
+      "shaderInventoryAndHashesEqual": true,
+      "packageSha256": "110f7d05ba0fc4946dc897901aafc9f8a7308c8c53051d03f802536f14b49994",
+      "fullReceiptSha256": "bb107b888f374e0f2d309e4abe1003a6df3d474ab2545551d5e9360ca03d50c4",
+      "nativeDllSha256": "72ec0406912ff014e5eb148cbdb4cb0608557ae67f8360b4c18423a0702df072"
+    },
+    "afterNativeTests": {
+      "judgment": "PASS",
+      "native": "E:\\NovaCore\\build\\native-ninja-release",
+      "shaderInventoryAndHashesEqual": true,
+      "packageSha256": "528199b8fb1a7b3bc9c0d545a1314fcbab51480fe825aac26399d820a819a9c3",
+      "fullReceiptSha256": "fc162d627a21222568b30dc4b28d34f8ad173a10a3e74c383aeeeb14f9ac3f5e",
+      "nativeDllSha256": "d80ae20c18641952c1faf4c3880d85d1aa14b9368bf3b9f2823df7fa90f8b15f"
+    },
+    "incremental": {
+      "judgment": "PASS",
+      "native": "E:\\NovaCore\\build\\native-ninja-release",
+      "shaderInventoryAndHashesEqual": true,
+      "packageSha256": "528199b8fb1a7b3bc9c0d545a1314fcbab51480fe825aac26399d820a819a9c3",
+      "fullReceiptSha256": "fc162d627a21222568b30dc4b28d34f8ad173a10a3e74c383aeeeb14f9ac3f5e",
+      "nativeDllSha256": "d80ae20c18641952c1faf4c3880d85d1aa14b9368bf3b9f2823df7fa90f8b15f"
+    }
+  }
+}

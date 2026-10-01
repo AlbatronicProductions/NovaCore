@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
+using System.Text.Json;
 using NovaCore.Graphics;
 
 internal static class WindowLifecycleTests
@@ -17,10 +17,18 @@ internal static class WindowLifecycleTests
         Require(File.Exists(sample), "Build the matching Triangle configuration before window tests: " + sample);
         var native = Path.Combine(directory, "NovaCore.Native.dll");
         Require(GraphicsTestHarness.Hash(native) == GraphicsTestHarness.Hash(Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "NovaCore.Native.dll")), "Sample native DLL is stale.");
-        // The production owner now publishes the complete native shader glob.
-        // Reading the unevaluated MSBuild Include would try to hash literal *.spv.
-        var shaders = Directory.GetFiles(Path.Combine(root,"build",GraphicsTestHarness.NativeDirectory,"shaders"),"*.spv").Select(p=>Path.GetFileName(p)!).ToArray();
-        Require(shaders.Length>0,"Native shader package is empty.");
+        // The accepted native owner exports dependency membership, not every file
+        // left in its output directory. Independent source/consumer verification
+        // remains a separate package gate; this route checks the executing sample.
+        var nativeRoot=Path.Combine(root,"build",GraphicsTestHarness.NativeDirectory);
+        using var authority=JsonDocument.Parse(File.ReadAllText(Path.Combine(nativeRoot,"runtime-shaders.json")));
+        Require(authority.RootElement.GetProperty("schema").GetInt32()==1&&
+            authority.RootElement.GetProperty("configuration").GetString()==GraphicsTestHarness.Configuration,"Native shader authority configuration.");
+        Require(authority.RootElement.GetProperty("cmakeSha256").GetString()==GraphicsTestHarness.Hash(Path.Combine(root,"native","NovaCore.Native","CMakeLists.txt")).ToLowerInvariant()&&
+            authority.RootElement.GetProperty("ownerSha256").GetString()==GraphicsTestHarness.Hash(Path.Combine(root,"native","NovaCore.Native","RuntimeShaderDeployment.cmake")).ToLowerInvariant(),"Native shader authority source identity.");
+        var shaders=authority.RootElement.GetProperty("shaders").EnumerateArray().Select(v=>v.GetString()!).ToArray();
+        Require(shaders.Length>0&&shaders.SequenceEqual(shaders.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal))&&
+            shaders.All(n=>Path.GetFileName(n)==n&&n.EndsWith(".spv",StringComparison.Ordinal)),"Native shader authority names and ordering.");
         Require(shaders.Order().SequenceEqual(Directory.GetFiles(Path.Combine(directory,"shaders"),"*.spv").Select(Path.GetFileName).Order()),"Sample shader inventory differs from native owner.");
         foreach (var shader in shaders)
             Require(GraphicsTestHarness.Hash(Path.Combine(directory, "shaders", shader)) ==

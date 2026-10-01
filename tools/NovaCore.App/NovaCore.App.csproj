@@ -19,4 +19,5 @@
     <Error Condition="!Exists('../NovaCore.Recorder/bin/$(Configuration)/net10.0-windows/NovaCore.Recorder.exe')" Text="Mandatory minimum recorder executable missing." />
     <Copy SourceFiles="@(RecorderFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
   </Target>
+  <Import Project="../RuntimeShaderDeployment.targets" />
 </Project>

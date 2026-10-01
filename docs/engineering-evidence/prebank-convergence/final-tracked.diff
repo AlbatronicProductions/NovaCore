@@ -1,0 +1,802 @@
+diff --git a/docs/KNOWN_LIMITATIONS.md b/docs/KNOWN_LIMITATIONS.md
+index 4925386..1acbd60 100644
+--- a/docs/KNOWN_LIMITATIONS.md
++++ b/docs/KNOWN_LIMITATIONS.md
+@@ -9,17 +9,21 @@ accepted engineering capabilities without closing the limits below.
+ 
+ **M16.2 banks the accepted production responsibility with open qualification debt.**
+ Its fullscreen entry/loading/UI and exploration
+-pause corrections preserve these limits. Actual held-key, focus-loss and physical
+-DPI-transition cases not performed remain NOT RUN, separate from automated window
+-resize/input evidence. Loading GPU-memory values are driver estimates with a shared
++pause corrections preserve these limits. Physical held-key, focus-loss and live
++monitor-transition permutations not performed remain NOT RUN. The later actual
++125% fixed-display qualification is separately recorded below. Loading GPU-memory
++values are driver estimates with a shared
+ sampling owner; sampling/repaint can wait for synchronous loading checkpoints.
+ See the [current bank](NOVACORE_CURRENT_STATE.md#current-bank--m162-banked).
+-Engineering qualification remains **REVISE** for package closure, Graphics failures
+-and non-96-DPI coverage. The completed manual bank does not turn these results
+-into qualification PASS. Shader inventory remains 69 present versus 66 expected;
+-inherited Graphics assertion/path contracts and native facility qualification
+-remain unresolved. Full Graphics Release and non-96-DPI gates remain NOT RUN.
+-See the [M16.2 scope and retained debt](milestones/M16.2.md).
++At banking, engineering qualification was **REVISE** for package closure, Graphics
++failures and non-96-DPI coverage: 69 shaders were present versus 66 expected,
++inherited assertions and the facility path failed, and full Graphics Release and
++non-96-DPI gates were NOT RUN. These historical results remain unchanged in the
++[M16.2 record](milestones/M16.2.md). The later unbanked maintenance candidate has
++its own [current qualification report](engineering-evidence/prebank-convergence/README.md),
++including actual 125% Windows DPI evidence using automated native input. It does
++not assign physical held-key/focus-loss/monitor-transition, performance, blackout
++causality or public-release acceptance.
+ 
+ - MinimumRecorder remains temporary developer/qualification infrastructure while
+   historical blackout causality is **UNRESOLVED**. Its permanent public disposition
+diff --git a/docs/NOVACORE_CURRENT_STATE.md b/docs/NOVACORE_CURRENT_STATE.md
+index f8f2126..95a35a7 100644
+--- a/docs/NOVACORE_CURRENT_STATE.md
++++ b/docs/NOVACORE_CURRENT_STATE.md
+@@ -6,14 +6,18 @@
+ under annotated tag [m16.2](https://github.com/AlbatronicProductions/NovaCore/tree/m16.2),
+ commit `cd8fdcf977dee633f57da790e931a388b922048f`, September 30, 2026.
+ Parent is `m16.1` / `40314c0f72396ea5f4ff39121f0b6821f1f96146`.
+-Local HEAD, GitHub main and the peeled tag were verified at this commit.
++At banking, local HEAD, GitHub main and the peeled tag were verified at this commit.
+ Project Control banked the accepted production responsibility with explicitly
+-recorded qualification debt. Package/Graphics contracts and native facility
+-qualification remain unresolved; full Graphics Release and non-96-DPI gates are
+-NOT RUN. The earlier engineering **REVISE** is not converted to PASS.
++recorded qualification debt. At that bank, package/Graphics contracts and native
++facility qualification were unresolved; full Graphics Release and non-96-DPI gates
++were NOT RUN. Those historical results are not converted to PASS.
+ See the [milestone record](milestones/M16.2.md) and historical
+ [manual bank decision](engineering-evidence/m16.2-bank-preparation/manual-bank-decision.md).
+-**STOP FOR PROJECT CONTROL. No next production front is authorized.**
++Current main baseline is `b0ccfd8f17643868a8d9011968a4566bc8a13f69`. The unbanked
++post-M16.2 maintenance/convergence candidate and its separately measured results
++are identified in the [qualification report](engineering-evidence/prebank-convergence/README.md).
++This is not M16.3. Publication remains stopped for final Project Control acceptance;
++the M16.2 tag and bank record remain immutable.
+ 
+ The canonical application now follows fullscreen Configuration → dedicated Loading
+ → fullscreen Gameplay. Real preparation tasks, selected-adapter memory reporting
+@@ -117,7 +121,8 @@ remain intact. New consumables are empty; explicitly fill before launch.
+ entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
+ Startup/configuration, Solar exploration, construction, Florida launch, physical
+ flight/control and return to the retained design share this application.
+-`NovaCore.Launcher.exe` remains a legacy scenario/engineering entry.
++`NovaCore.Launcher.exe` remains a supported scenario/engineering entry; its assembly
++also supplies shared configuration types. NovaCore.App owns ordinary player entry.
+ 
+ Earlier reports retain their original pre-bank scope, identities and dispositions,
+ including preparation and cleanup records. Their UNBANKED/HOLD wording does not
+@@ -616,11 +621,11 @@ Their original pending classifications describe the investigation stage.
+ canonical body-fixed physical terrain H(bodyDirection)
+ → immutable persistent NCSM1 scale resource
+ → retained and snapped pupil representation
+-→ full physical relief and normal preparation before TES
++→ full physical relief and normal preparation before raster
+ → conservative curved-patch planet occlusion
+ → conservative screen/frustum visibility
+ → compacted GPU workload
+-→ KSA-parity per-edge TCS factors and TES interpolation of prepared terrain
++→ direct prepared-surface raster when eligible; retained TCS/TES for other supported inputs
+ → indexed indirect raster
+ → fence-complete atomic publication
+ ```
+@@ -634,8 +639,8 @@ the pupil moves or changes level.
+ Managed code owns canonical FP64 identity and queries, selection, bounded
+ preparation scheduling, regional demand and immutable submission. Native Vulkan
+ owns persistent topology, full-relief render preparation, reusable working
+-buffers, conservative visibility/compaction, bounded tessellation and
+-interpolation, synchronization and fence-confirmed publication, HDR, reversed-Z
++buffers, conservative visibility/compaction, direct prepared-surface raster and
++retained bounded tessellation/interpolation, synchronization and fence-confirmed publication, HDR, reversed-Z
+ depth, and presentation. Ordinary shading specializes unused diagnostics and
+ skips material noise only when its contribution is zero.
+ 
+@@ -661,9 +666,11 @@ deterministic physical modifiers, and the final non-negative clamp. It owns:
+ - geographic identity independent of camera, topology, pupil, level, cache,
+   generation, and render cadence.
+ 
+-Full physical relief is prepared at shared render vertices before tessellation.
+-Ordinary TES interpolates that published surface and adds no separate physical
+-height evaluation; gameplay and camera clearance retain full canonical queries.
++Full physical relief is prepared at shared render vertices. The accepted M16.1
++direct prepared-surface route rasterizes that published geometry when
++`DirectPreparedSurfaceEligible` admits it. Diagnostic/raster overrides and negative
++factor probes retain TCS/TES, whose interpolation adds no separate physical height
++evaluation; gameplay and camera clearance retain full canonical queries.
+ Topology density controls the piecewise-linear presentation of that surface; it
+ does not define physical truth. Exact render/query equality at every interpolated
+ point is not implied. Hardware tessellation and future material-displacement
+@@ -692,7 +699,7 @@ alone. Hysteresis and a retained current generation prevent oscillation while a
+ replacement prepares. Level changes and same-level snaps do not change Earth
+ orientation or `SurfaceAnchor` authority.
+ 
+-The 50 m contract applies only to near-camera TCS/TES refinement. It is not a
++The retained 50 m contract applies only when the TCS/TES route is selected. It is not a
+ terrain-coverage radius. Factor-1 production base geometry remains present and
+ depth-owning outside the refinement range, including across the local horizon.
+ 
+diff --git a/docs/build-windows.md b/docs/build-windows.md
+index 38c31f3..4bf12e3 100644
+--- a/docs/build-windows.md
++++ b/docs/build-windows.md
+@@ -9,7 +9,9 @@ The unified entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.ex
+ Run it without arguments for fullscreen Configuration → Loading → Gameplay →
+ construction → Florida launch → flight/control → return to the retained design.
+ See the [player walkthrough and controls](../README.md#try-novacore).
+-`NovaCore.Launcher.exe` is the legacy scenario/engineering tool.
++`NovaCore.Launcher.exe` remains the supported scenario/engineering tool; ordinary
++player entry belongs to NovaCore.App. Its assembly also owns shared configuration
++types consumed by the player frontend.
+ 
+ ## Get the source
+ 
+@@ -63,7 +65,8 @@ Required tools:
+ - Visual Studio 2026 with Desktop development with C++ and Windows 11 SDK
+ - CMake 4.4 or later
+ - LunarG Vulkan SDK, including validation layers and `glslc`
+-- PowerShell 7 for scripts; Python 3 for package verification (not player runtime)
++- PowerShell 7 for scripts; Python 3 for current-main shader deployment and package
++  verification (not player runtime)
+ - Vulkan-capable graphics driver, VC++ x64 runtime, .NET 10 Desktop and ASP.NET
+   runtimes (included with the installed SDK development environment)
+ 
+@@ -132,6 +135,41 @@ Native content flows
+ through project references; do not hand-copy DLLs or shaders. The verifier checks
+ the CMake target output closure and current source content, not an old candidate.
+ 
++### Current-main runtime shader deployment correction (after M16.2)
++
++The bank observations above remain historical. On the current development candidate,
++native CMake exports `runtime-shaders.json` from the actual `NovaCore.Native`
++dependency graph, including all outputs of each required producer. The shared
++`tools/RuntimeShaderDeployment.targets` deploys that configuration's exact inventory
++to Triangle, ConstructionEditor and NovaCore.App. It requires Python 3 on PATH.
++There is no wildcard shader collection or fixed shader-count acceptance rule.
++
++Build native first, using separate single-configuration Ninja Debug/Release roots.
++The generated authority and link-time DLL receipt must match the requested
++configuration. `novacore-runtime-shaders.json` records deployed file ownership and
++hashes. Incremental builds remove unchanged obsolete owned shaders; the initial
++migration uses the prior MSBuild copy ledger plus matching source-output bytes.
++Unknown extras or modified obsolete files are preserved and fail the build. Inspect
++their ownership before taking action; deleting a directory is not the recovery policy.
++
++The surface-material qualification producer now writes to `test-shaders/` and its
++harness follows that path. Native test builds cannot expand runtime membership.
++Verify each configuration explicitly after building its application:
++
++```powershell
++python tools/verify-player-package.py --configuration Debug --output build/player-package-debug.json
++python tools/verify-player-package.py --configuration Release --output build/player-package-release.json
++python tools/test-runtime-shader-deployment.py
++```
++
++The verifier independently reconstructs source-declared target/output ownership
++and checks runtime shader references, exact deployed membership and hashes. See the
++[bounded correction evidence](engineering-evidence/runtime-shader-deployment/README.md)
++for clean/incremental/test-order results and limits. This candidate does not revise
++the immutable M16.2 record. The subsequent
++[maintenance qualification](engineering-evidence/prebank-convergence/README.md)
++records current Graphics/facility/DPI results separately from the bank's debt.
++
+ To reproduce with existing terrain distribution bytes, use the hash-validating
+ installer instead of regenerating terrain. Both inputs must match the checked-in
+ manifests; `--cache` is an explicit disposable destination:
+@@ -194,7 +232,7 @@ dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=headle
+ dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=gpu
+ dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=window
+ # Omit the category to run all cases; repeat with -c Release.
+-# Same controlled child-process environment for both native GPU executables:
++# Same controlled child-process environment for all three native GPU executables:
+ dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --native-gpu
+ # Separate ambient compatibility diagnostic (nonzero remains a failure):
+ dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --ambient --native-gpu
+@@ -227,7 +265,7 @@ Native cases are explicit CMake targets excluded from the default build:
+ cmake --build build/native-ninja --target NovaCoreRegionalPhysicalTests NovaCoreFacilityVisibilityTests NovaCoreSurfaceMaterialCoordinatesTests NovaCoreStellarProjectionTests
+ build/native-ninja/NovaCoreRegionalPhysicalTests.exe <verified-Florida-nccube-path>
+ build/native-ninja/NovaCoreFacilityVisibilityTests.exe build/native-ninja/test-shaders/facility_visibility_test.comp.spv
+-build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninja/shaders/surface_material_coordinates_test.comp.spv
++build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninja/test-shaders/surface_material_coordinates_test.comp.spv
+ build/native-ninja/NovaCoreStellarProjectionTests.exe build/native-ninja/shaders/stellar_glow.vert.spv
+ # Repeat using build/native-ninja-release.
+ ```
+@@ -270,10 +308,11 @@ see the [milestone](milestones/M16.2.md) and [receipt](engineering-evidence/m16.
+ Managed GPU proof/query contexts enable the layer when available; preflight
+ requires it. Direct native commands above inherit ambient discovery; use the
+ Graphics runner's `--native-gpu` entry for canonical regression status. Current
+-M16.2 preparation found that runner still supplies the old `shaders/` path for
+-the facility test, so it fails despite CMake producing the file in `test-shaders/`.
+-That test-harness correction remains pending Project Control; do not count the
+-direct command as a replacement PASS for the failing mandatory runner.
++M16.2 preparation found that runner supplied the old `shaders/` facility path.
++The current maintenance candidate follows CMake's existing `test-shaders/`
++producer for both facility and surface-material cases. Required evidence is the
++canonical runner result in both configurations, not substitution of a direct
++ambient command for that gate.
+ 
+ The sole accepted window warning is the exact SDK message
+ `WARNING-Shader-OutputNotConsumed` for vertex output Location 11 Component 0,
+diff --git a/docs/planetary-rendering.md b/docs/planetary-rendering.md
+index 0dc769b..2b0d116 100644
+--- a/docs/planetary-rendering.md
++++ b/docs/planetary-rendering.md
+@@ -75,11 +75,11 @@ The production chain is:
+ canonical body-fixed physical terrain
+ → immutable persistent NCSM1 scale resource
+ → retained/snapped pupil
+-→ full physical relief and normal preparation before TES
++→ full physical relief and normal preparation before raster
+ → conservative curved-patch planet occlusion
+ → conservative screen/frustum rejection
+ → compacted original index triplets
+-→ KSA-parity per-edge TCS factors and ordinary TES interpolation
++→ direct prepared-surface raster when eligible; retained TCS/TES for other supported inputs
+ → indexed indirect raster
+ → fence-complete atomic publication
+ ```
+@@ -87,23 +87,31 @@ canonical body-fixed physical terrain
+ Topology density controls the piecewise-linear approximation presented to the
+ GPU. It does not own or redefine `H(bodyDirection)`.
+ 
+-## Visibility, compaction, and TES
++## Visibility, compaction, and raster ownership
+ 
+ Pre-TES planet occlusion encloses each displaced curved patch conservatively;
+ it does not infer visibility from a planar triangle-facing test. Screen and
+ frustum rejection likewise remove only work proven unable to contribute. The
+ surviving triangle stream is compacted into an indexed-indirect draw payload.
+ 
+-The compact VS/TCS interface carries 13 scalars per control point: prepared
++The accepted M16.1 direct prepared-surface route is selected by
++`native/NovaCore.Native/PreparedSurfaceRaster.h`: prepared-terrain contract enabled,
++NCSM1, generation 4, production-cube mode, no surface/raster diagnostic override,
++and finite nonnegative uploaded factor demand. It uses the same prepared physical
++vertices, compaction and receiver without invoking TCS/TES. Diagnostic overrides,
++negative factor probes and other ineligible supported submissions retain their
++existing tessellation route. This is the current owner, not a new replacement.
++
++On that retained route, the compact VS/TCS interface carries 13 scalars per control point: prepared
+ normal, light direction, camera-relative view, physical direction and height. TES reads frame/body
+ constants from immutable buffers and reconstructs material geography from the
+-interpolated prepared receiver. Ordinary NCSM1 rendering specializes inverse
++interpolated prepared receiver. NCSM1 rendering specializes inverse
+ geographic-address reconstruction away; `owners` and `boundaries` diagnostics
+ retain it. Diagnostic mode is immutable for a native context, and all four
+ NCSM1 raster-state pipelines use the same applicable specialization.
+ 
+-Full canonical physical relief is prepared at shared vertices before
+-tessellation. Ordinary TES interpolates the published camera-relative surface,
++Full canonical physical relief is prepared at shared vertices before raster.
++When selected, TES interpolates the published camera-relative surface,
+ height and normal; it does not evaluate an additional near-field H displacement.
+ Gameplay and clearance continue to query full canonical H independently. No
+ authored TES height maps are currently supplied. Hardware tessellation remains:
+diff --git a/native/NovaCore.Native/CMakeLists.txt b/native/NovaCore.Native/CMakeLists.txt
+index b724d40..bd9a6ec 100644
+--- a/native/NovaCore.Native/CMakeLists.txt
++++ b/native/NovaCore.Native/CMakeLists.txt
+@@ -37,65 +37,67 @@ target_compile_features(NovaCorePresentationResultTests PRIVATE cxx_std_20)
+ target_include_directories(NovaCorePresentationResultTests PRIVATE ${Vulkan_INCLUDE_DIRS})
+ find_program(GLSLC_EXECUTABLE glslc REQUIRED HINTS "$ENV{VULKAN_SDK}/Bin")
+ 
++include(RuntimeShaderDeployment.cmake)
++
+ set(SHADER_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaders")
+ set(SPIRV_DIR "${CMAKE_CURRENT_BINARY_DIR}/shaders")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/triangle.vert.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/triangle.vert.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/triangle.vert" -o "${SPIRV_DIR}/triangle.vert.spv"
+   DEPENDS "${SHADER_DIR}/triangle.vert")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/triangle.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/triangle.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/triangle.frag" -o "${SPIRV_DIR}/triangle.frag.spv"
+   DEPENDS "${SHADER_DIR}/triangle.frag")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/orbit.vert" -o "${SPIRV_DIR}/orbit.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/orbit.frag" -o "${SPIRV_DIR}/orbit.frag.spv"
+   DEPENDS "${SHADER_DIR}/orbit.vert" "${SHADER_DIR}/orbit.frag")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/orbit_previous.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/orbit_previous.frag.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/orbit_previous.frag" -o "${SPIRV_DIR}/orbit_previous.frag.spv"
+   DEPENDS "${SHADER_DIR}/orbit_previous.frag")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/body_forward.frag" -o "${SPIRV_DIR}/body_forward.frag.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/sas_target.frag" -o "${SPIRV_DIR}/sas_target.frag.spv"
+   DEPENDS "${SHADER_DIR}/body_forward.frag" "${SHADER_DIR}/sas_target.frag")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary.vert" -o "${SPIRV_DIR}/planetary.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary.frag" -o "${SPIRV_DIR}/planetary.frag.spv"
+   DEPENDS "${SHADER_DIR}/planetary.vert" "${SHADER_DIR}/planetary.frag" "${SHADER_DIR}/production_cube_surface.glsl"  "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_select.comp" -o "${SPIRV_DIR}/planetary_select.comp.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_terrain_generate.comp" -o "${SPIRV_DIR}/planetary_terrain_generate.comp.spv"
+   DEPENDS "${SHADER_DIR}/planetary_select.comp" "${SHADER_DIR}/planetary_terrain_generate.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/planet_terrain.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_height_query.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_height_query.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_height_query.comp" -o "${SPIRV_DIR}/planetary_height_query.comp.spv"
+   DEPENDS "${SHADER_DIR}/planetary_height_query.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_field_query.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv"
+   DEPENDS "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_field_query.comp" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_families_query.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv"
+   DEPENDS "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_families_query.comp" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_prepare.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv"
+   DEPENDS "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_prepare.comp" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_natural_terrain_global_prepare.comp" -o "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv"
+   DEPENDS "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_global_prepare.comp"  "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl" "${SHADER_DIR}/production_cube_surface.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_mesh_displace.comp.spv" "${SPIRV_DIR}/planetary_mesh_normals.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_mesh_displace.comp.spv" "${SPIRV_DIR}/planetary_mesh_normals.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_mesh_displace.comp" -o "${SPIRV_DIR}/planetary_mesh_displace.comp.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_mesh_normals.comp" -o "${SPIRV_DIR}/planetary_mesh_normals.comp.spv"
+   DEPENDS "${SHADER_DIR}/planetary_mesh_displace.comp" "${SHADER_DIR}/planetary_mesh_normals.comp" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/physical_surface.glsl" "${SHADER_DIR}/planetary_natural_terrain_surface.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/planetary_natural_terrain_families.glsl" "${SHADER_DIR}/planetary_natural_terrain_field.glsl")
+-add_custom_command(OUTPUT
++nc_shader_command(OUTPUT
+   "${SPIRV_DIR}/spherical_billboard_proof_reset.comp.spv"
+   "${SPIRV_DIR}/spherical_billboard_proof_prepare.comp.spv"
+   "${SPIRV_DIR}/spherical_billboard_proof_normals.comp.spv"
+@@ -119,7 +121,7 @@ add_custom_command(OUTPUT
+     "${SHADER_DIR}/spherical_billboard_proof_compact.comp"
+     "${SHADER_DIR}/spherical_billboard_proof.vert"
+     "${SHADER_DIR}/spherical_billboard_proof.frag")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/planetary_production.frag.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production_terrain.comp" -o "${SPIRV_DIR}/planetary_production_terrain.comp.spv"
+@@ -127,13 +129,13 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_production.frag.spv" "${SPIRV_
+ # The qualified prepared receiver owns an optimized artifact of the same material
+ # source. Keep bootstrap/displaced/diagnostic consumers on their existing module.
+ # Precision and filtering source is unchanged; current-GPU replay qualifies -Os.
+-add_custom_command(OUTPUT "${SPIRV_DIR}/prepared_surface.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/prepared_surface.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} -Os -MD -MF "${SPIRV_DIR}/prepared_surface.frag.d" -I "${SHADER_DIR}" "${SHADER_DIR}/planetary_production.frag" -o "${SPIRV_DIR}/prepared_surface.frag.spv"
+   DEPENDS "${SHADER_DIR}/planetary_production.frag"
+   DEPFILE "${SPIRV_DIR}/prepared_surface.frag.d"
+   VERBATIM)
+-add_custom_command(OUTPUT
++nc_shader_command(OUTPUT
+   "${SPIRV_DIR}/production_spherical_billboard_reset.comp.spv"
+   "${SPIRV_DIR}/production_spherical_billboard_prepare.comp.spv"
+   "${SPIRV_DIR}/production_spherical_billboard_incoming_prepare.comp.spv"
+@@ -164,18 +166,18 @@ add_custom_command(OUTPUT
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tesc" -o "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/production_spherical_billboard.tese" -o "${SPIRV_DIR}/production_spherical_billboard.tese.spv"
+   DEPENDS "${SHADER_DIR}/prepared_surface_contract.h" "${SHADER_DIR}/production_tessellation_factor.glsl" "${SHADER_DIR}/facility_support.glsl" "${SHADER_DIR}/regional_physical.glsl" "${SHADER_DIR}/planetary_physical_authority.glsl" "${SHADER_DIR}/production_spherical_billboard_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_prepare.comp" "${SHADER_DIR}/production_spherical_billboard_physical.glsl" "${SHADER_DIR}/production_spherical_billboard_reset.comp" "${SHADER_DIR}/production_spherical_billboard_cull.comp" "${SHADER_DIR}/production_spherical_billboard_compact.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_reset.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard_incoming_compact.comp" "${SHADER_DIR}/production_nested_scale_mesh_cull.comp" "${SHADER_DIR}/production_nested_scale_mesh_incoming_cull.comp" "${SHADER_DIR}/production_spherical_billboard.vert" "${SHADER_DIR}/production_spherical_billboard.tesc" "${SHADER_DIR}/production_spherical_billboard.tese" "${SHADER_DIR}/production_cube_surface.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/distant_planet.vert" -o "${SPIRV_DIR}/distant_planet.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/distant_planet.frag" -o "${SPIRV_DIR}/distant_planet.frag.spv"
+   DEPENDS "${SHADER_DIR}/distant_planet.vert" "${SHADER_DIR}/distant_planet.frag" "${SHADER_DIR}/planet_material.glsl" "${SHADER_DIR}/planet_terrain.glsl" "${SHADER_DIR}/earth_ocean_material.glsl" "${SHADER_DIR}/production_cube_surface.glsl" "${SHADER_DIR}/production_cube_filter.glsl" "${SHADER_DIR}/production_earth_material.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/planetary_ring.vert.spv" "${SPIRV_DIR}/planetary_ring_far.frag.spv" "${SPIRV_DIR}/planetary_ring_near.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/planetary_ring.vert.spv" "${SPIRV_DIR}/planetary_ring_far.frag.spv" "${SPIRV_DIR}/planetary_ring_near.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/planetary_ring.vert" -o "${SPIRV_DIR}/planetary_ring.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/planetary_ring_far.frag" -o "${SPIRV_DIR}/planetary_ring_far.frag.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/planetary_ring_near.frag" -o "${SPIRV_DIR}/planetary_ring_near.frag.spv"
+   DEPENDS "${SHADER_DIR}/planetary_ring.vert" "${SHADER_DIR}/planetary_ring_far.frag" "${SHADER_DIR}/planetary_ring_near.frag")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_orbit.vert" -o "${SPIRV_DIR}/solar_orbit.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_orbit.frag" -o "${SPIRV_DIR}/solar_orbit.frag.spv"
+@@ -184,7 +186,7 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/sola
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/solar_label.vert" -o "${SPIRV_DIR}/solar_label.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/solar_label.frag" -o "${SPIRV_DIR}/solar_label.frag.spv"
+   DEPENDS "${SHADER_DIR}/solar_orbit.vert" "${SHADER_DIR}/solar_orbit.frag" "${SHADER_DIR}/solar_marker.vert" "${SHADER_DIR}/solar_marker.frag" "${SHADER_DIR}/solar_label.vert" "${SHADER_DIR}/solar_label.frag" "${SHADER_DIR}/solar_sans_sdf.glsl")
+-add_custom_command(OUTPUT "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space_background.frag.spv" "${SPIRV_DIR}/tone_map.frag.spv" "${SPIRV_DIR}/stellar_sun.vert.spv" "${SPIRV_DIR}/stellar_sun.frag.spv" "${SPIRV_DIR}/stellar_glow.vert.spv" "${SPIRV_DIR}/stellar_glow.frag.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space_background.frag.spv" "${SPIRV_DIR}/tone_map.frag.spv" "${SPIRV_DIR}/stellar_sun.vert.spv" "${SPIRV_DIR}/stellar_sun.frag.spv" "${SPIRV_DIR}/stellar_glow.vert.spv" "${SPIRV_DIR}/stellar_glow.frag.spv"
+   COMMAND ${CMAKE_COMMAND} -E make_directory "${SPIRV_DIR}"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/fullscreen.vert" -o "${SPIRV_DIR}/fullscreen.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/space_background.frag" -o "${SPIRV_DIR}/space_background.frag.spv"
+@@ -194,14 +196,14 @@ add_custom_command(OUTPUT "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/stellar_glow.vert" -o "${SPIRV_DIR}/stellar_glow.vert.spv"
+   COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/stellar_glow.frag" -o "${SPIRV_DIR}/stellar_glow.frag.spv"
+   DEPENDS "${SHADER_DIR}/fullscreen.vert" "${SHADER_DIR}/space_background.frag" "${SHADER_DIR}/tone_map.frag" "${SHADER_DIR}/stellar_sun.vert" "${SHADER_DIR}/stellar_sun.frag" "${SHADER_DIR}/stellar_glow.vert" "${SHADER_DIR}/stellar_glow.frag")
+-add_custom_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv"    "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv" "${SPIRV_DIR}/planetary_height_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv"  "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv" "${SPIRV_DIR}/planetary_ring.vert.spv" "${SPIRV_DIR}/planetary_ring_far.frag.spv" "${SPIRV_DIR}/planetary_ring_near.frag.spv" "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv" "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space_background.frag.spv" "${SPIRV_DIR}/tone_map.frag.spv" "${SPIRV_DIR}/stellar_sun.vert.spv" "${SPIRV_DIR}/stellar_sun.frag.spv" "${SPIRV_DIR}/stellar_glow.vert.spv" "${SPIRV_DIR}/stellar_glow.frag.spv")
++nc_shader_target(NovaCoreShaders DEPENDS "${SPIRV_DIR}/triangle.vert.spv" "${SPIRV_DIR}/triangle.frag.spv" "${SPIRV_DIR}/orbit.vert.spv" "${SPIRV_DIR}/orbit.frag.spv" "${SPIRV_DIR}/orbit_previous.frag.spv" "${SPIRV_DIR}/body_forward.frag.spv" "${SPIRV_DIR}/sas_target.frag.spv" "${SPIRV_DIR}/planetary.vert.spv" "${SPIRV_DIR}/planetary.frag.spv"    "${SPIRV_DIR}/planetary_select.comp.spv" "${SPIRV_DIR}/planetary_terrain_generate.comp.spv" "${SPIRV_DIR}/planetary_height_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_field_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_families_query.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_prepare.comp.spv" "${SPIRV_DIR}/planetary_natural_terrain_global_prepare.comp.spv"  "${SPIRV_DIR}/distant_planet.vert.spv" "${SPIRV_DIR}/distant_planet.frag.spv" "${SPIRV_DIR}/planetary_ring.vert.spv" "${SPIRV_DIR}/planetary_ring_far.frag.spv" "${SPIRV_DIR}/planetary_ring_near.frag.spv" "${SPIRV_DIR}/solar_orbit.vert.spv" "${SPIRV_DIR}/solar_orbit.frag.spv" "${SPIRV_DIR}/solar_marker.vert.spv" "${SPIRV_DIR}/solar_marker.frag.spv" "${SPIRV_DIR}/solar_label.vert.spv" "${SPIRV_DIR}/solar_label.frag.spv" "${SPIRV_DIR}/fullscreen.vert.spv" "${SPIRV_DIR}/space_background.frag.spv" "${SPIRV_DIR}/tone_map.frag.spv" "${SPIRV_DIR}/stellar_sun.vert.spv" "${SPIRV_DIR}/stellar_sun.frag.spv" "${SPIRV_DIR}/stellar_glow.vert.spv" "${SPIRV_DIR}/stellar_glow.frag.spv")
+ 
+ foreach(REGIONAL_SHADER regional_physical_demand.comp regional_physical_incoming_demand.comp)
+-  add_custom_command(OUTPUT "${SPIRV_DIR}/${REGIONAL_SHADER}.spv"
++  nc_shader_command(OUTPUT "${SPIRV_DIR}/${REGIONAL_SHADER}.spv"
+     COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/${REGIONAL_SHADER}" -o "${SPIRV_DIR}/${REGIONAL_SHADER}.spv"
+     DEPENDS "${SHADER_DIR}/${REGIONAL_SHADER}" "${SHADER_DIR}/regional_physical.glsl" "${SHADER_DIR}/production_cube_surface.glsl")
+ endforeach()
+-add_custom_target(NovaCoreProductionShaders DEPENDS
++nc_shader_target(NovaCoreProductionShaders DEPENDS
+   "${SPIRV_DIR}/prepared_surface.frag.spv"
+   "${SPIRV_DIR}/regional_physical_demand.comp.spv"
+   "${SPIRV_DIR}/regional_physical_incoming_demand.comp.spv"
+@@ -218,10 +220,10 @@ add_custom_target(NovaCoreProductionShaders DEPENDS
+   "${SPIRV_DIR}/production_spherical_billboard.vert.spv"
+   "${SPIRV_DIR}/production_spherical_billboard.tesc.spv"
+   "${SPIRV_DIR}/production_spherical_billboard.tese.spv")
+-add_custom_target(NovaCoreMeshPreparationShaders DEPENDS
++nc_shader_target(NovaCoreMeshPreparationShaders DEPENDS
+   "${SPIRV_DIR}/planetary_mesh_displace.comp.spv"
+   "${SPIRV_DIR}/planetary_mesh_normals.comp.spv")
+-add_custom_target(NovaCoreSphericalBillboardProofShaders DEPENDS
++nc_shader_target(NovaCoreSphericalBillboardProofShaders DEPENDS
+   "${SPIRV_DIR}/spherical_billboard_proof_reset.comp.spv"
+   "${SPIRV_DIR}/spherical_billboard_proof_prepare.comp.spv"
+   "${SPIRV_DIR}/spherical_billboard_proof_normals.comp.spv"
+@@ -231,10 +233,10 @@ add_custom_target(NovaCoreSphericalBillboardProofShaders DEPENDS
+   "${SPIRV_DIR}/spherical_billboard_proof.frag.spv")
+ add_library(NovaCore.Native SHARED NovaCoreNative.cpp NovaCoreNative.h PlanetaryHeightQuery.cpp PlanetaryHeightQuery.h PlanetaryMeshPreparation.cpp PlanetaryMeshPreparation.h PlanetarySphericalBillboardGpuProof.cpp PlanetarySphericalBillboardGpuProof.h ProductionCubeSurface.cpp ProductionCubeSurface.h LocalTerrainPack.cpp LocalTerrainPack.h)
+ add_dependencies(NovaCore.Native NovaCoreShaders NovaCoreProductionShaders NovaCoreMeshPreparationShaders NovaCoreSphericalBillboardProofShaders)
+-add_custom_command(OUTPUT "${SPIRV_DIR}/frozen_capture_pack.comp.spv"
++nc_shader_command(OUTPUT "${SPIRV_DIR}/frozen_capture_pack.comp.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/frozen_capture_pack.comp" -o "${SPIRV_DIR}/frozen_capture_pack.comp.spv"
+   DEPENDS "${SHADER_DIR}/frozen_capture_pack.comp" "${SHADER_DIR}/frozen_capture_pack_shared.glsl")
+-add_custom_target(NovaCoreFrozenPackingShader DEPENDS "${SPIRV_DIR}/frozen_capture_pack.comp.spv")
++nc_shader_target(NovaCoreFrozenPackingShader DEPENDS "${SPIRV_DIR}/frozen_capture_pack.comp.spv")
+ add_dependencies(NovaCore.Native NovaCoreFrozenPackingShader)
+ 
+ add_executable(NovaCoreRegionalPhysicalTests EXCLUDE_FROM_ALL RegionalPhysicalResidencyTests.cpp LocalTerrainPack.cpp)
+@@ -254,10 +256,10 @@ add_custom_command(TARGET NovaCore.Native POST_BUILD
+ 
+ # Permanent analytical visibility parity test; never copied into the player shader package.
+ file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/test-shaders")
+-add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv"
++nc_shader_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv"
+   COMMAND ${GLSLC_EXECUTABLE} -I "${SHADER_DIR}" "${SHADER_DIR}/facility_visibility_test.comp" -o "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv"
+   DEPENDS "${SHADER_DIR}/facility_visibility_test.comp" "${SHADER_DIR}/facility_light_occlusion.glsl")
+-add_custom_target(NovaCoreFacilityVisibilityTestShader DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv")
++nc_shader_target(NovaCoreFacilityVisibilityTestShader DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/facility_visibility_test.comp.spv")
+ add_executable(NovaCoreFacilityVisibilityTests EXCLUDE_FROM_ALL FacilityLightOcclusionTests.cpp)
+ add_dependencies(NovaCoreFacilityVisibilityTests NovaCoreFacilityVisibilityTestShader)
+ target_compile_features(NovaCoreFacilityVisibilityTests PRIVATE cxx_std_20)
+@@ -265,10 +267,10 @@ target_compile_definitions(NovaCoreFacilityVisibilityTests PRIVATE NOMINMAX WIN3
+ target_link_libraries(NovaCoreFacilityVisibilityTests PRIVATE Vulkan::Vulkan)
+ 
+ # Body-fixed material receiver/precision contract, using the production GLSL helper.
+-add_custom_command(OUTPUT "${SPIRV_DIR}/surface_material_coordinates_test.comp.spv"
+-  COMMAND "${GLSLC_EXECUTABLE}" --target-env=vulkan1.1 -I "${SHADER_DIR}" "${SHADER_DIR}/surface_material_coordinates_test.comp" -o "${SPIRV_DIR}/surface_material_coordinates_test.comp.spv"
++nc_shader_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/surface_material_coordinates_test.comp.spv"
++  COMMAND "${GLSLC_EXECUTABLE}" --target-env=vulkan1.1 -I "${SHADER_DIR}" "${SHADER_DIR}/surface_material_coordinates_test.comp" -o "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/surface_material_coordinates_test.comp.spv"
+   DEPENDS "${SHADER_DIR}/surface_material_coordinates_test.comp" "${SHADER_DIR}/surface_material_coordinates.glsl")
+-add_custom_target(NovaCoreSurfaceMaterialTestShader DEPENDS "${SPIRV_DIR}/surface_material_coordinates_test.comp.spv")
++nc_shader_target(NovaCoreSurfaceMaterialTestShader DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/test-shaders/surface_material_coordinates_test.comp.spv")
+ add_executable(NovaCoreSurfaceMaterialCoordinatesTests EXCLUDE_FROM_ALL SurfaceMaterialCoordinatesTests.cpp)
+ add_dependencies(NovaCoreSurfaceMaterialCoordinatesTests NovaCoreSurfaceMaterialTestShader)
+ target_compile_features(NovaCoreSurfaceMaterialCoordinatesTests PRIVATE cxx_std_20)
+@@ -283,11 +285,11 @@ target_link_libraries(NovaCoreStellarProjectionTests PRIVATE Vulkan::Vulkan)
+ 
+ # Bounded reusable-nozzle presentation and native active-length/capacity contract.
+ foreach(EXHAUST_SHADER exhaust.vert exhaust.frag exhaust_resolve.frag)
+-  add_custom_command(OUTPUT "${SPIRV_DIR}/${EXHAUST_SHADER}.spv"
++  nc_shader_command(OUTPUT "${SPIRV_DIR}/${EXHAUST_SHADER}.spv"
+     COMMAND ${GLSLC_EXECUTABLE} "${SHADER_DIR}/${EXHAUST_SHADER}" -o "${SPIRV_DIR}/${EXHAUST_SHADER}.spv"
+     DEPENDS "${SHADER_DIR}/${EXHAUST_SHADER}")
+ endforeach()
+-add_custom_target(NovaCoreExhaustShaders DEPENDS "${SPIRV_DIR}/exhaust.vert.spv" "${SPIRV_DIR}/exhaust.frag.spv" "${SPIRV_DIR}/exhaust_resolve.frag.spv")
++nc_shader_target(NovaCoreExhaustShaders DEPENDS "${SPIRV_DIR}/exhaust.vert.spv" "${SPIRV_DIR}/exhaust.frag.spv" "${SPIRV_DIR}/exhaust_resolve.frag.spv")
+ add_dependencies(NovaCore.Native NovaCoreExhaustShaders)
+ add_executable(NovaCorePreparedSubmissionTests EXCLUDE_FROM_ALL PreparedSubmissionStorageTests.cpp)
+ target_compile_features(NovaCorePreparedSubmissionTests PRIVATE cxx_std_20)
+@@ -297,3 +299,6 @@ add_executable(NovaCoreExhaustPresentationTests EXCLUDE_FROM_ALL ExhaustPresenta
+ add_dependencies(NovaCoreExhaustPresentationTests NovaCoreExhaustShaders NovaCoreShaders)
+ target_compile_features(NovaCoreExhaustPresentationTests PRIVATE cxx_std_20)
+ target_link_libraries(NovaCoreExhaustPresentationTests PRIVATE Vulkan::Vulkan)
++
++# Export the actual native dependency closure, including multi-output siblings.
++nc_export_runtime_shaders(NovaCore.Native)
+diff --git a/samples/NovaCore.Triangle/NovaCore.Triangle.csproj b/samples/NovaCore.Triangle/NovaCore.Triangle.csproj
+index 94f0810..f9ba290 100644
+--- a/samples/NovaCore.Triangle/NovaCore.Triangle.csproj
++++ b/samples/NovaCore.Triangle/NovaCore.Triangle.csproj
+@@ -1,10 +1,7 @@
+ <Project Sdk="Microsoft.NET.Sdk">
+   <PropertyGroup><OutputType>Exe</OutputType><PlatformTarget>x64</PlatformTarget><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
+-  <PropertyGroup>
+-    <NativeBuildDirectory Condition="'$(NativeBuildDirectory)' == '' and '$(Configuration)' == 'Release'">native-ninja-release</NativeBuildDirectory>
+-    <NativeBuildDirectory Condition="'$(NativeBuildDirectory)' == ''">native-ninja</NativeBuildDirectory>
+-    <NativeRuntimeRoot>$(MSBuildThisFileDirectory)..\..\build\$(NativeBuildDirectory)\</NativeRuntimeRoot>
+-  </PropertyGroup>
++  <PropertyGroup><NativeRuntimeContentProducer>true</NativeRuntimeContentProducer></PropertyGroup>
++  <Import Project="../../tools/RuntimeShaderDeployment.targets" />
+   <ItemGroup>
+     <Content Include="..\..\assets\visual\SRV01\*.glb" Link="assets\visual\SRV01\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+     <ProjectReference Include="..\..\src\NovaCore.Core\NovaCore.Core.csproj" />
+@@ -13,17 +10,6 @@
+     <ProjectReference Include="..\..\src\NovaCore.Platform\NovaCore.Platform.csproj" />
+     <ProjectReference Include="..\..\src\NovaCore.Simulation\NovaCore.Simulation.csproj" />
+   </ItemGroup>
+-  <!-- Native runtime content belongs to the renderer and flows through project references
+-       to ConstructionEditor and NovaCore.App for both build and publish. Build native first. -->
+-  <ItemGroup>
+-    <RuntimeShader Include="$(NativeRuntimeRoot)shaders\*.spv" />
+-    <Content Include="@(RuntimeShader)" Link="shaders\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+-    <Content Include="$(NativeRuntimeRoot)NovaCore.Native.dll" Link="NovaCore.Native.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+-  </ItemGroup>
+-  <Target Name="ValidateNativeRuntimeContent" BeforeTargets="PrepareForBuild;GetCopyToOutputDirectoryItems;ComputeFilesToPublish">
+-    <Error Condition="!Exists('$(NativeRuntimeRoot)NovaCore.Native.dll')" Text="Native runtime is missing from $(NativeRuntimeRoot). Build the matching native configuration before building or publishing the application." />
+-    <Error Condition="'@(RuntimeShader)' == ''" Text="Native SPIR-V shader package is empty in $(NativeRuntimeRoot)shaders. Build the matching native configuration before building or publishing the application." />
+-  </Target>
+   <Target Name="CopyEarthElevation" AfterTargets="Build">
+     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\assets\earth\runtime\earth_elevation_8192x4096.r16" DestinationFolder="$(OutDir)earth-data" SkipUnchangedFiles="true" />
+   </Target>
+diff --git a/tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs b/tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs
+index 997ea26..0cd2af9 100644
+--- a/tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs
++++ b/tests/NovaCore.Graphics.Tests/EarthHorizonSubmissionTests.cs
+@@ -119,8 +119,15 @@ internal static class EarthHorizonSubmissionTests
+         var hashes=sourceNames.Select(name=>new{name,sha256=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(root,"native","NovaCore.Native","shaders",name))))}).ToArray();
+         // A source-level culling/VS model must fail closed when its source changes.
+         // Re-audit these mirrors rather than silently accepting a stale proof.
++        // 2026-09-30 audit: both direct-prepared and TES vertex variants share
++        // FP64 body-camera subtraction, FP32 rotation and the same clip transform.
++        // New direct varyings do not change that model. Factor coverage below
++        // exercises the retained TES route, not ordinary direct raster execution.
++        // See docs/engineering-evidence/prebank-convergence/contracts.md.
+         var audited=new Dictionary<string,string>{
+-            ["production_spherical_billboard.vert"]="A798669960B7FF379F095E1C9749CB1D90A0CAF5506B51AA87C40F865E933BB7",
++            ["production_spherical_billboard.vert"]="7F590AC482564ABA0A5706F894BFBECB12DBFDBE148D09DC14DB7530B7483307",
++            ["production_spherical_billboard.tesc"]="CC3412546B6815CA264B539AE97D38CAA7146CB39BA04220EDFC0E23BE85C9AA",
++            ["production_tessellation_factor.glsl"]="93202E80EC0DB1FD5F20DB6FD970A195AB055174F659E844DB2173D8E2A6AAC7",
+             ["production_nested_scale_mesh_cull.comp"]="611C3670B5800CC3AC352BED5D326EB59EF1ABBA6BA2CC5519337967703B5550",
+             ["production_nested_scale_mesh_incoming_cull.comp"]="7DC18DFB540A3BE29BC90671F49675FCC5A6D6D13B6BA05282A6BA900B3F1BD4"};
+         foreach(var hash in hashes)if(audited.TryGetValue(hash.name,out var expected))Require(hash.sha256==expected,"Re-audit offline mirror for "+hash.name);
+@@ -203,7 +210,7 @@ internal static class EarthHorizonSubmissionTests
+         }
+         PublicationWitness(root,levels,contracts,pinned.Normalized(),output);
+         AuditOriginalPinned(scene,camera,resolver,levels[17],contracts[levels[17].TopologyHash],pinned,output);
+-        File.WriteAllText(Path.Combine(output,"summary.json"),JsonSerializer.Serialize(new{gpuExposure=false,livePreflightClean=false,caseCount,total,invalidIncluded,invalidRejected,legacyIncluded,oldInvalid,scope="production camera transport, topology, pupil and CPU height authority; source-level FP32 shader model"},Json));
++        File.WriteAllText(Path.Combine(output,"summary.json"),JsonSerializer.Serialize(new{gpuExposure=false,livePreflightClean=false,caseCount,total,invalidIncluded,invalidRejected,legacyIncluded,oldInvalid,scope="common direct/TES vertex transform and culling; retained TES factor route; production topology/pupil/CPU height authority; scalar FP32 source model, not ordinary direct-raster TCS execution"},Json));
+         Require(legacyIncluded>0,"boundary regression must retain a pre-correction production-reachable witness");
+         Require(invalidIncluded==0,"Source-model production draw includes invalid tessellation; preserve witness and investigate owner before GPU exposure");
+     }
+diff --git a/tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs b/tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs
+index 23f7b96..711de8e 100644
+--- a/tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs
++++ b/tests/NovaCore.Graphics.Tests/GraphicsTestHarness.cs
+@@ -97,10 +97,12 @@ internal static class GraphicsTestHarness
+     {
+         VerifyValidationLayer();
+         var failed = 0;
+-        foreach (var (name, shader) in new[] { ("NovaCoreFacilityVisibilityTests", "facility_visibility_test.comp.spv"), ("NovaCoreSurfaceMaterialCoordinatesTests", "surface_material_coordinates_test.comp.spv"), ("NovaCoreStellarProjectionTests", "stellar_glow.vert.spv") })
++        // Follow each CMake producer: facility/surface are qualification outputs;
++        // stellar exercises the runtime shader. None changes runtime membership.
++        foreach (var (name, directory, shader) in new[] { ("NovaCoreFacilityVisibilityTests", "test-shaders", "facility_visibility_test.comp.spv"), ("NovaCoreSurfaceMaterialCoordinatesTests", "test-shaders", "surface_material_coordinates_test.comp.spv"), ("NovaCoreStellarProjectionTests", "shaders", "stellar_glow.vert.spv") })
+         {
+             var start = new ProcessStartInfo(RepositoryPath("build", NativeDirectory, name + ".exe")) { UseShellExecute=false, RedirectStandardOutput=true, RedirectStandardError=true };
+-            start.ArgumentList.Add(RepositoryPath("build", NativeDirectory, "shaders", shader));
++            start.ArgumentList.Add(RepositoryPath("build", NativeDirectory, directory, shader));
+             using var child = Process.Start(start)!;
+             var stdout=child.StandardOutput.ReadToEndAsync(); var stderr=child.StandardError.ReadToEndAsync(); child.WaitForExit();
+             Console.Write(stdout.GetAwaiter().GetResult()); Console.Error.Write(stderr.GetAwaiter().GetResult());
+diff --git a/tests/NovaCore.Graphics.Tests/Program.cs b/tests/NovaCore.Graphics.Tests/Program.cs
+index 8293896..b8d3406 100644
+--- a/tests/NovaCore.Graphics.Tests/Program.cs
++++ b/tests/NovaCore.Graphics.Tests/Program.cs
+@@ -1088,10 +1088,28 @@ static void OpaqueDistantDetailedHandoffTest()
+     Check(nativeSource.Contains("handoffDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthWriteEnable=VK_TRUE",StringComparison.Ordinal)&&nativeSource.Contains("depth.depthCompareOp=VK_COMPARE_OP_GREATER",StringComparison.Ordinal),"Distant handoff and Detailed reversed-Z depth ownership remain unchanged");
+     var orbitDraw=nativeSource.IndexOf("if(solarOverlay&&a.submission->orbitVertexCount>=2",StringComparison.Ordinal);
+     var distantDrawIndex=nativeSource.IndexOf("if(distantCount){VkDeviceSize",StringComparison.Ordinal);
+-    var candidateOrAnchoredDrawIndex=nativeSource.IndexOf("vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer",StringComparison.Ordinal);
++    var colorBranch=nativeSource.IndexOf("a.anchoredPipelineStatisticsFrameSubmitted=candidate;",StringComparison.Ordinal);
++    Check(colorBranch>distantDrawIndex,"terrain color branch follows distant scene ownership");
++    var candidateOrAnchoredDrawIndex=nativeSource.IndexOf("vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer",colorBranch,StringComparison.Ordinal);
+     var detailedDrawIndex=nativeSource.IndexOf("if(!candidate&&diagnosticGlobal&&regional&&(a.submission->planetaryPatchCount||gpuPlanetary)",StringComparison.Ordinal);
+     var focusedOrbitDraw=nativeSource.IndexOf("if (!solarOverlay && a.submission->orbitVertexCount",StringComparison.Ordinal);
+     Check(nativeSource.Contains("solarOrbitCreate=orbitPipeline",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthWriteEnable=VK_FALSE",StringComparison.Ordinal)&&nativeSource.Contains("orbitDepth.depthCompareOp=VK_COMPARE_OP_GREATER_OR_EQUAL",StringComparison.Ordinal)&&nativeSource.Contains("orbitPipeline.pDepthStencilState=&orbitDepth",StringComparison.Ordinal)&&orbitDraw>=0&&distantDrawIndex>orbitDraw&&candidateOrAnchoredDrawIndex>distantDrawIndex&&detailedDrawIndex>candidateOrAnchoredDrawIndex&&focusedOrbitDraw>detailedDrawIndex,"scene-space orbit lines use read-only reversed-Z occlusion: Solar overview remains pre-surface while focused far-side segments cannot draw through terrain");
++    // Background visibility uses the same geometry before the color branch. Its
++    // temporary depth must be cleared to reversed-Z zero before any scene draw.
++    var prepass=nativeSource.IndexOf("vkCmdBindPipeline(c,VK_PIPELINE_BIND_POINT_GRAPHICS,a.backgroundDepthPipeline)",StringComparison.Ordinal);
++    Check(prepass>=0,"background visibility prepass exists");
++    var prepassDraw=nativeSource.IndexOf("vkCmdDrawIndexedIndirect(c,a.productionBillboardIndirectBuffer",prepass,StringComparison.Ordinal);
++    var background=nativeSource.IndexOf("a.depthMaskedBackgroundSubmitted?a.depthMaskedBackgroundPipeline:a.backgroundPipeline",prepass,StringComparison.Ordinal);
++    var restore=nativeSource.IndexOf("VkClearAttachment attachment{};attachment.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;",background,StringComparison.Ordinal);
++    Check(prepassDraw>prepass&&background>prepassDraw&&restore>background,"background draw follows prepass and precedes depth-only zero restore");
++    const string clearStatement="VkClearRect rect{{{0,0},a.extent},0,1};vkCmdClearAttachments(c,1,&attachment,1,&rect);";
++    var fullClear=nativeSource.IndexOf(clearStatement,restore,StringComparison.Ordinal);
++    var sceneBatches=nativeSource.IndexOf("for (uint32_t i = 0; i < a.submission->batchCount; i++)",restore,StringComparison.Ordinal);
++    Check(fullClear>restore&&sceneBatches>fullClear&&orbitDraw>sceneBatches,"full drawable depth restore precedes craft and all scene color draws");
++    var restoreStatements=string.Concat(nativeSource[restore..(fullClear+clearStatement.Length)].Where(c=>!char.IsWhiteSpace(c)));
++    Check(restoreStatements=="VkClearAttachmentattachment{};attachment.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;"+
++        "VkClearRectrect{{{0,0},a.extent},0,1};vkCmdClearAttachments(c,1,&attachment,1,&rect);",
++        "depth restore reaches the clear with zero depth, depth-only aspect and full extent; no intervening override");
+ }
+ 
+ static void PlanetaryPresentationPipelineTest()
+diff --git a/tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs b/tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs
+index b7f780c..e44ab4d 100644
+--- a/tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs
++++ b/tests/NovaCore.Graphics.Tests/TerrainRenderAuthorityTests.cs
+@@ -18,8 +18,14 @@ internal static class TerrainRenderAuthorityTests
+     internal static void VerifyDefaultAndSampling(string root)
+     {
+         var shader=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","production_spherical_billboard_physical.glsl"));
+-        if(!shader.Contains("#define NOVACORE_PREPARED_RENDER_TERRAIN 1",StringComparison.Ordinal))
+-            throw new InvalidOperationException("The candidate must be the development render default");
++        var contract=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","prepared_surface_contract.h"));
++        var raster=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","PreparedSurfaceRaster.h"));
++        if(!contract.Contains("#define NOVACORE_PREPARED_RENDER_TERRAIN 1",StringComparison.Ordinal)||
++            !shader.Contains("#include \"prepared_surface_contract.h\"",StringComparison.Ordinal)||
++            !raster.Contains("#include \"shaders/prepared_surface_contract.h\"",StringComparison.Ordinal)||
++            !raster.Contains("return NOVACORE_PREPARED_RENDER_TERRAIN &&",StringComparison.Ordinal)||
++            shader.Contains("#define NOVACORE_PREPARED_RENDER_TERRAIN",StringComparison.Ordinal))
++            throw new InvalidOperationException("Shared prepared-surface contract must own the shader and native raster default");
+         var sample=File.ReadAllText(Path.Combine(root,"samples","NovaCore.Triangle","Program.cs"));
+         if(Regex.Matches(sample,@"Math\.Max\(10d,gpu\.SurfaceAltitudeMetres\)").Count!=2)
+             throw new InvalidOperationException("Startup and moving render selection must consume physical ground clearance");
+diff --git a/tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs b/tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs
+index 9f2cc80..8aeddf8 100644
+--- a/tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs
++++ b/tests/NovaCore.Graphics.Tests/WindowLifecycleTests.cs
+@@ -1,7 +1,7 @@
+ using System.Collections.Concurrent;
+ using System.Diagnostics;
+ using System.Runtime.InteropServices;
+-using System.Xml.Linq;
++using System.Text.Json;
+ using NovaCore.Graphics;
+ 
+ internal static class WindowLifecycleTests
+@@ -17,10 +17,18 @@ internal static class WindowLifecycleTests
+         Require(File.Exists(sample), "Build the matching Triangle configuration before window tests: " + sample);
+         var native = Path.Combine(directory, "NovaCore.Native.dll");
+         Require(GraphicsTestHarness.Hash(native) == GraphicsTestHarness.Hash(Path.Combine(root, "build", GraphicsTestHarness.NativeDirectory, "NovaCore.Native.dll")), "Sample native DLL is stale.");
+-        // The production owner now publishes the complete native shader glob.
+-        // Reading the unevaluated MSBuild Include would try to hash literal *.spv.
+-        var shaders = Directory.GetFiles(Path.Combine(root,"build",GraphicsTestHarness.NativeDirectory,"shaders"),"*.spv").Select(p=>Path.GetFileName(p)!).ToArray();
+-        Require(shaders.Length>0,"Native shader package is empty.");
++        // The accepted native owner exports dependency membership, not every file
++        // left in its output directory. Independent source/consumer verification
++        // remains a separate package gate; this route checks the executing sample.
++        var nativeRoot=Path.Combine(root,"build",GraphicsTestHarness.NativeDirectory);
++        using var authority=JsonDocument.Parse(File.ReadAllText(Path.Combine(nativeRoot,"runtime-shaders.json")));
++        Require(authority.RootElement.GetProperty("schema").GetInt32()==1&&
++            authority.RootElement.GetProperty("configuration").GetString()==GraphicsTestHarness.Configuration,"Native shader authority configuration.");
++        Require(authority.RootElement.GetProperty("cmakeSha256").GetString()==GraphicsTestHarness.Hash(Path.Combine(root,"native","NovaCore.Native","CMakeLists.txt")).ToLowerInvariant()&&
++            authority.RootElement.GetProperty("ownerSha256").GetString()==GraphicsTestHarness.Hash(Path.Combine(root,"native","NovaCore.Native","RuntimeShaderDeployment.cmake")).ToLowerInvariant(),"Native shader authority source identity.");
++        var shaders=authority.RootElement.GetProperty("shaders").EnumerateArray().Select(v=>v.GetString()!).ToArray();
++        Require(shaders.Length>0&&shaders.SequenceEqual(shaders.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal))&&
++            shaders.All(n=>Path.GetFileName(n)==n&&n.EndsWith(".spv",StringComparison.Ordinal)),"Native shader authority names and ordering.");
+         Require(shaders.Order().SequenceEqual(Directory.GetFiles(Path.Combine(directory,"shaders"),"*.spv").Select(Path.GetFileName).Order()),"Sample shader inventory differs from native owner.");
+         foreach (var shader in shaders)
+             Require(GraphicsTestHarness.Hash(Path.Combine(directory, "shaders", shader)) ==
+diff --git a/tools/NovaCore.App/NovaCore.App.csproj b/tools/NovaCore.App/NovaCore.App.csproj
+index 0f0f1eb..f04fff2 100644
+--- a/tools/NovaCore.App/NovaCore.App.csproj
++++ b/tools/NovaCore.App/NovaCore.App.csproj
+@@ -19,4 +19,5 @@
+     <Error Condition="!Exists('../NovaCore.Recorder/bin/$(Configuration)/net10.0-windows/NovaCore.Recorder.exe')" Text="Mandatory minimum recorder executable missing." />
+     <Copy SourceFiles="@(RecorderFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+   </Target>
++  <Import Project="../RuntimeShaderDeployment.targets" />
+ </Project>
+diff --git a/tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj b/tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj
+index ff1c979..a67031a 100644
+--- a/tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj
++++ b/tools/NovaCore.ConstructionEditor/NovaCore.ConstructionEditor.csproj
+@@ -16,4 +16,5 @@
+     <Content Include="../../assets/vehicles/modular-starter/**" Link="assets/vehicles/modular-starter/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+     <Content Update="wwwroot/**" CopyToOutputDirectory="PreserveNewest" />
+   </ItemGroup>
++  <Import Project="../RuntimeShaderDeployment.targets" />
+ </Project>
+diff --git a/tools/verify-player-package.py b/tools/verify-player-package.py
+index 3afdad5..2dd71d8 100644
+--- a/tools/verify-player-package.py
++++ b/tools/verify-player-package.py
+@@ -4,11 +4,13 @@ import argparse, hashlib, json, pathlib, re
+ p = argparse.ArgumentParser()
+ p.add_argument('--repository', type=pathlib.Path, default=pathlib.Path('.'))
+ p.add_argument('--package', type=pathlib.Path)
++p.add_argument('--configuration', choices=['Debug', 'Release'], default='Release')
++p.add_argument('--native', type=pathlib.Path)
+ p.add_argument('--output', type=pathlib.Path, required=True)
+ a = p.parse_args()
+ root = a.repository.resolve()
+-package = a.package.resolve() if a.package else root/'tools/NovaCore.App/bin/Release/net10.0-windows'
+-native = root/'build/native-ninja-release'
++package = a.package.resolve() if a.package else root/f'tools/NovaCore.App/bin/{a.configuration}/net10.0-windows'
++native = a.native.resolve() if a.native else root/('build/native-ninja-release' if a.configuration == 'Release' else 'build/native-ninja')
+ sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+ files = {f.relative_to(package).as_posix(): {'bytes': f.stat().st_size, 'sha256': sha(f)} for f in sorted(package.rglob('*')) if f.is_file()}
+ errors = []
+@@ -21,17 +23,56 @@ targets = set()
+ for body in re.findall(r'add_dependencies\(NovaCore.Native\s+([^)]*)\)', cmake): targets.update(body.split())
+ shaders = set()
+ for target in targets:
+-    body = re.search(r'add_custom_target\('+re.escape(target)+r'\s+DEPENDS\s+([^)]*)\)', cmake)
++    body = re.search(r'(?:add_custom_target|nc_shader_target)\('+re.escape(target)+r'\s+DEPENDS\s+([^)]*)\)', cmake)
+     require(body is not None, 'Unresolved shader target: '+target)
+     if body: shaders.update(re.findall(r'\$\{SPIRV_DIR\}/([\w.-]+\.spv)', body[1]))
+ # CMake can produce several shaders in one command. A requested output owns
+ # all its sibling outputs (including the nested-scale cull shaders).
+-groups = [set(re.findall(r'\$\{SPIRV_DIR\}/([\w.-]+\.spv)', body)) for body in re.findall(r'add_custom_command\(OUTPUT\s+(.*?)\s+COMMAND',cmake,re.S)]
++groups = [set(re.findall(r'\$\{SPIRV_DIR\}/([\w.-]+\.spv)', body)) for body in re.findall(r'(?:add_custom_command|nc_shader_command)\(OUTPUT\s+(.*?)\s+COMMAND',cmake,re.S)]
+ while True:
+     closure = shaders | set().union(*(g for g in groups if g & shaders))
+     if closure == shaders: break
+     shaders = closure
+ require(bool(shaders), 'No source-derived shaders')
++# Independent source declaration oracle above is deliberately NOT the generated
++# manifest consumed by deployment. Direct runtime consumers add a second boundary.
++consumer_files = list((root/'src').rglob('*.cs')) + list((root/'samples').rglob('*.cs')) + list((root/'tools').rglob('*.cs'))
++library = re.search(r'add_library\(NovaCore.Native SHARED ([^)]*)\)', cmake)
++require(library is not None, 'Cannot resolve native runtime source ownership')
++if library:
++    pending = [root/'native/NovaCore.Native'/name for name in library[1].split()]
++    included = set()
++    while pending:
++        f = pending.pop().resolve()
++        if f in included: continue
++        included.add(f)
++        for name in re.findall(r'^\s*#include\s+"([^"]+)"', f.read_bytes().decode('latin-1'), re.M):
++            child = (f.parent/name).resolve()
++            if child.is_file() and child.is_relative_to(root): pending.append(child)
++    consumer_files += sorted(included)
++consumers = set()
++for f in consumer_files:
++    if not {'bin', 'obj'} & set(f.parts):
++        consumers.update(re.findall(r'(?:shaders/|["\\])([A-Za-z0-9_.-]+\.spv)', f.read_bytes().decode('latin-1')))
++require(consumers <= shaders, 'Runtime consumer missing from dependency closure: '+repr(sorted(consumers-shaders)))
++try:
++    authority = json.loads((native/'runtime-shaders.json').read_text())
++    require(authority.get('schema') == 1, 'Unknown runtime shader manifest schema')
++    require(authority.get('configuration') == a.configuration, 'Native manifest configuration mismatch')
++    require(authority.get('shaders') == sorted(shaders), 'Generated deployment manifest differs from independent source closure')
++    for key, name in [('cmakeSha256','CMakeLists.txt'), ('ownerSha256','RuntimeShaderDeployment.cmake')]:
++        require(authority.get(key) == sha(root/'native/NovaCore.Native'/name), 'Stale native deployment authority: '+name)
++    cache = (native/'CMakeCache.txt').read_text()
++    require(bool(re.search(r'^CMAKE_BUILD_TYPE:STRING='+a.configuration+r'$', cache, re.M)), 'CMake configuration mismatch')
++    binary = json.loads((native/'native-runtime-build.json').read_text())
++    require(binary.get('configuration') == a.configuration and binary.get('dllSha256') == sha(native/'NovaCore.Native.dll'), 'Native link provenance mismatch')
++    receipt = json.loads((package/'novacore-runtime-shaders.json').read_text())
++    require(receipt.get('schema') == 1 and receipt.get('owner') == 'NovaCore runtime shader deployment', 'Invalid shader ownership receipt')
++    require(receipt.get('configuration') == a.configuration, 'Deployed shader configuration mismatch')
++    require(receipt.get('authoritySha256') == sha(native/'runtime-shaders.json'), 'Deployed authority differs from native authority')
++    require(receipt.get('files') == {name:sha(native/'shaders'/name) for name in sorted(shaders)}, 'Deployed ownership/hash receipt differs from native runtime')
++except (OSError, ValueError, KeyError) as error:
++    require(False, 'Runtime shader provenance unavailable: '+str(error))
+ actual = {name.removeprefix('shaders/') for name in files if name.startswith('shaders/')}
+ require(actual == shaders, 'Shader inventory differs from native target dependencies: '+repr(sorted(actual ^ shaders)))
+ for name in shaders: same('shaders/'+name, native/'shaders'/name)
+@@ -49,13 +90,13 @@ same('third-party/Bepu/ATTRIBUTION.txt',root/'external/bepu/ATTRIBUTION.txt')
+ for name in ['NovaCore.exe','NovaCore.dll','NovaCore.deps.json','NovaCore.runtimeconfig.json','NovaCore.ConstructionEditor.dll','NovaCore.Triangle.dll','NovaCore.Diagnostics.dll','NovaCore.Recorder.exe','NovaCore.Recorder.dll','NovaCore.Recorder.deps.json','NovaCore.Recorder.runtimeconfig.json']:
+     require(name in files, 'Missing player entry/dependency: '+name)
+ for name in ['NovaCore.Recorder.exe','NovaCore.Recorder.dll','NovaCore.Recorder.deps.json','NovaCore.Recorder.runtimeconfig.json']:
+-    same(name,root/'tools/NovaCore.Recorder/bin/Release/net10.0-windows'/name)
++    same(name,root/f'tools/NovaCore.Recorder/bin/{a.configuration}/net10.0-windows'/name)
+ deps = json.loads((package/'NovaCore.deps.json').read_text())
+ for target in deps['targets'].values():
+     for library in target.values():
+         for name in library.get('runtime', {}): require(pathlib.PurePosixPath(name).name in files, 'Missing managed dependency: '+name)
+ manifest_sha = hashlib.sha256(''.join(f'{k}\0{v["bytes"]}\0{v["sha256"]}\n' for k,v in sorted(files.items())).encode()).hexdigest()
+-result = {'judgment':'PASS' if not errors else 'FAIL','repository':str(root),'package':str(package),'files':files,'fileCount':len(files),'bytes':sum(v['bytes'] for v in files.values()),'packageSha256':manifest_sha,'shaders':len(shaders),'errors':errors,'scope':'Repository-layout canonical build output; explicit verified terrain cache required. Not standalone publish qualification.'}
++result = {'judgment':'PASS' if not errors else 'FAIL','repository':str(root),'package':str(package),'files':files,'fileCount':len(files),'bytes':sum(v['bytes'] for v in files.values()),'packageSha256':manifest_sha,'configuration':a.configuration,'native':str(native),'runtimeInventory':sorted(shaders),'runtimeConsumers':sorted(consumers),'shaders':len(shaders),'errors':errors,'scope':'Repository-layout canonical build output; explicit verified terrain cache required. Not standalone publish qualification.'}
+ a.output.parent.mkdir(parents=True,exist_ok=True)
+ a.output.write_text(json.dumps(result,indent=2)+'\n')
+ print(json.dumps({k:v for k,v in result.items() if k!='files'},indent=2))

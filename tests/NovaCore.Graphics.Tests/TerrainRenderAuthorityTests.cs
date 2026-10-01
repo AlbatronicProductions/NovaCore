@@ -18,8 +18,14 @@ internal static class TerrainRenderAuthorityTests
     internal static void VerifyDefaultAndSampling(string root)
     {
         var shader=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","production_spherical_billboard_physical.glsl"));
-        if(!shader.Contains("#define NOVACORE_PREPARED_RENDER_TERRAIN 1",StringComparison.Ordinal))
-            throw new InvalidOperationException("The candidate must be the development render default");
+        var contract=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","shaders","prepared_surface_contract.h"));
+        var raster=File.ReadAllText(Path.Combine(root,"native","NovaCore.Native","PreparedSurfaceRaster.h"));
+        if(!contract.Contains("#define NOVACORE_PREPARED_RENDER_TERRAIN 1",StringComparison.Ordinal)||
+            !shader.Contains("#include \"prepared_surface_contract.h\"",StringComparison.Ordinal)||
+            !raster.Contains("#include \"shaders/prepared_surface_contract.h\"",StringComparison.Ordinal)||
+            !raster.Contains("return NOVACORE_PREPARED_RENDER_TERRAIN &&",StringComparison.Ordinal)||
+            shader.Contains("#define NOVACORE_PREPARED_RENDER_TERRAIN",StringComparison.Ordinal))
+            throw new InvalidOperationException("Shared prepared-surface contract must own the shader and native raster default");
         var sample=File.ReadAllText(Path.Combine(root,"samples","NovaCore.Triangle","Program.cs"));
         if(Regex.Matches(sample,@"Math\.Max\(10d,gpu\.SurfaceAltitudeMetres\)").Count!=2)
             throw new InvalidOperationException("Startup and moving render selection must consume physical ground clearance");

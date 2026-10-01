@@ -1,0 +1,38 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  NovaCore.Platform -> E:\NovaCore\src\NovaCore.Platform\bin\Release\net10.0\NovaCore.Platform.dll
+  NovaCore.Diagnostics -> E:\NovaCore\src\NovaCore.Diagnostics\bin\Release\net10.0-windows\NovaCore.Diagnostics.dll
+  NovaCore.Interop -> E:\NovaCore\src\NovaCore.Interop\bin\Release\net10.0\NovaCore.Interop.dll
+  NovaCore.EphemerisFormat -> E:\NovaCore\src\NovaCore.EphemerisFormat\bin\Release\net10.0\NovaCore.EphemerisFormat.dll
+  NovaCore.Launcher -> E:\NovaCore\tools\NovaCore.Launcher\bin\Release\net10.0-windows\NovaCore.Launcher.dll
+  NovaCore.Recorder -> E:\NovaCore\tools\NovaCore.Recorder\bin\Release\net10.0-windows\NovaCore.Recorder.dll
+  NovaCore.Retention.Tests -> E:\NovaCore\tests\NovaCore.Retention.Tests\bin\Release\net10.0-windows\NovaCore.Retention.Tests.dll
+  NovaCore.MinimumRecorder.Tests -> E:\NovaCore\tests\NovaCore.MinimumRecorder.Tests\bin\Release\net10.0-windows\NovaCore.MinimumRecorder.Tests.dll
+  NovaCore.EphemerisBuilder -> E:\NovaCore\tools\NovaCore.EphemerisBuilder\bin\Release\net10.0\NovaCore.EphemerisBuilder.dll
+  NovaCore.Launcher.Tests -> E:\NovaCore\tests\NovaCore.Launcher.Tests\bin\Release\net10.0-windows\NovaCore.Launcher.Tests.dll
+  Runtime shaders: Release, 66 owned, 0 obsolete removed
+  Runtime shaders: Release, 66 owned, 0 obsolete removed
+  Runtime shaders: Release, 66 owned, 0 obsolete removed
+  NovaCore.Core -> E:\NovaCore\src\NovaCore.Core\bin\Release\net10.0\NovaCore.Core.dll
+  NovaCore.Graphics -> E:\NovaCore\src\NovaCore.Graphics\bin\Release\net10.0\NovaCore.Graphics.dll
+  NovaCore.Simulation -> E:\NovaCore\src\NovaCore.Simulation\bin\Release\net10.0\NovaCore.Simulation.dll
+  NovaCore.ReferenceFrameFixture -> E:\NovaCore\samples\NovaCore.ReferenceFrameFixture\bin\Release\net10.0\NovaCore.ReferenceFrameFixture.dll
+  NovaCore.Camera.Tests -> E:\NovaCore\tests\NovaCore.Camera.Tests\bin\Release\net10.0\NovaCore.Camera.Tests.dll
+  NovaCore.ReferenceFrames.Tests -> E:\NovaCore\tests\NovaCore.ReferenceFrames.Tests\bin\Release\net10.0\NovaCore.ReferenceFrames.Tests.dll
+  NovaCore.Triangle -> E:\NovaCore\samples\NovaCore.Triangle\bin\Release\net10.0\NovaCore.Triangle.dll
+  NovaCore.NaifEphemerisAdapter -> E:\NovaCore\tools\NovaCore.NaifEphemerisAdapter\bin\Release\net10.0\NovaCore.NaifEphemerisAdapter.dll
+  NovaCore.BepuDependency.Tests -> E:\NovaCore\tests\NovaCore.BepuDependency.Tests\bin\Release\net10.0\NovaCore.BepuDependency.Tests.dll
+  NovaCore.Simulation.Tests -> E:\NovaCore\tests\NovaCore.Simulation.Tests\bin\Release\net10.0\NovaCore.Simulation.Tests.dll
+  NovaCore.Graphics.Tests -> E:\NovaCore\tests\NovaCore.Graphics.Tests\bin\Release\net10.0\NovaCore.Graphics.Tests.dll
+  NovaCore.Precision.Tests -> E:\NovaCore\tests\NovaCore.Precision.Tests\bin\Release\net10.0\NovaCore.Precision.Tests.dll
+  NovaCore.AssetTool -> E:\NovaCore\tools\NovaCore.AssetTool\bin\Release\net10.0\NovaCore.AssetTool.dll
+  NovaCore.EphemerisBuilder.Tests -> E:\NovaCore\tests\NovaCore.EphemerisBuilder.Tests\bin\Release\net10.0\NovaCore.EphemerisBuilder.Tests.dll
+  NovaCore.NaifEphemerisAdapter.Tests -> E:\NovaCore\tests\NovaCore.NaifEphemerisAdapter.Tests\bin\Release\net10.0\NovaCore.NaifEphemerisAdapter.Tests.dll
+  NovaCore.ConstructionEditor -> E:\NovaCore\tools\NovaCore.ConstructionEditor\bin\Release\net10.0-windows\NovaCore.ConstructionEditor.dll
+  NovaCore.App -> E:\NovaCore\tools\NovaCore.App\bin\Release\net10.0-windows\NovaCore.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.72

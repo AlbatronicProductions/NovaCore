@@ -6,14 +6,18 @@
 under annotated tag [m16.2](https://github.com/AlbatronicProductions/NovaCore/tree/m16.2),
 commit `cd8fdcf977dee633f57da790e931a388b922048f`, September 30, 2026.
 Parent is `m16.1` / `40314c0f72396ea5f4ff39121f0b6821f1f96146`.
-Local HEAD, GitHub main and the peeled tag were verified at this commit.
+At banking, local HEAD, GitHub main and the peeled tag were verified at this commit.
 Project Control banked the accepted production responsibility with explicitly
-recorded qualification debt. Package/Graphics contracts and native facility
-qualification remain unresolved; full Graphics Release and non-96-DPI gates are
-NOT RUN. The earlier engineering **REVISE** is not converted to PASS.
+recorded qualification debt. At that bank, package/Graphics contracts and native
+facility qualification were unresolved; full Graphics Release and non-96-DPI gates
+were NOT RUN. Those historical results are not converted to PASS.
 See the [milestone record](milestones/M16.2.md) and historical
 [manual bank decision](engineering-evidence/m16.2-bank-preparation/manual-bank-decision.md).
-**STOP FOR PROJECT CONTROL. No next production front is authorized.**
+Current main baseline is `b0ccfd8f17643868a8d9011968a4566bc8a13f69`. The unbanked
+post-M16.2 maintenance/convergence candidate and its separately measured results
+are identified in the [qualification report](engineering-evidence/prebank-convergence/README.md).
+This is not M16.3. Publication remains stopped for final Project Control acceptance;
+the M16.2 tag and bank record remain immutable.
 
 The canonical application now follows fullscreen Configuration → dedicated Loading
 → fullscreen Gameplay. Real preparation tasks, selected-adapter memory reporting
@@ -117,7 +121,8 @@ remain intact. New consumables are empty; explicitly fill before launch.
 entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.exe`.
 Startup/configuration, Solar exploration, construction, Florida launch, physical
 flight/control and return to the retained design share this application.
-`NovaCore.Launcher.exe` remains a legacy scenario/engineering entry.
+`NovaCore.Launcher.exe` remains a supported scenario/engineering entry; its assembly
+also supplies shared configuration types. NovaCore.App owns ordinary player entry.
 
 Earlier reports retain their original pre-bank scope, identities and dispositions,
 including preparation and cleanup records. Their UNBANKED/HOLD wording does not
@@ -616,11 +621,11 @@ Their original pending classifications describe the investigation stage.
 canonical body-fixed physical terrain H(bodyDirection)
 → immutable persistent NCSM1 scale resource
 → retained and snapped pupil representation
-→ full physical relief and normal preparation before TES
+→ full physical relief and normal preparation before raster
 → conservative curved-patch planet occlusion
 → conservative screen/frustum visibility
 → compacted GPU workload
-→ KSA-parity per-edge TCS factors and TES interpolation of prepared terrain
+→ direct prepared-surface raster when eligible; retained TCS/TES for other supported inputs
 → indexed indirect raster
 → fence-complete atomic publication
 ```
@@ -634,8 +639,8 @@ the pupil moves or changes level.
 Managed code owns canonical FP64 identity and queries, selection, bounded
 preparation scheduling, regional demand and immutable submission. Native Vulkan
 owns persistent topology, full-relief render preparation, reusable working
-buffers, conservative visibility/compaction, bounded tessellation and
-interpolation, synchronization and fence-confirmed publication, HDR, reversed-Z
+buffers, conservative visibility/compaction, direct prepared-surface raster and
+retained bounded tessellation/interpolation, synchronization and fence-confirmed publication, HDR, reversed-Z
 depth, and presentation. Ordinary shading specializes unused diagnostics and
 skips material noise only when its contribution is zero.
 
@@ -661,9 +666,11 @@ deterministic physical modifiers, and the final non-negative clamp. It owns:
 - geographic identity independent of camera, topology, pupil, level, cache,
   generation, and render cadence.
 
-Full physical relief is prepared at shared render vertices before tessellation.
-Ordinary TES interpolates that published surface and adds no separate physical
-height evaluation; gameplay and camera clearance retain full canonical queries.
+Full physical relief is prepared at shared render vertices. The accepted M16.1
+direct prepared-surface route rasterizes that published geometry when
+`DirectPreparedSurfaceEligible` admits it. Diagnostic/raster overrides and negative
+factor probes retain TCS/TES, whose interpolation adds no separate physical height
+evaluation; gameplay and camera clearance retain full canonical queries.
 Topology density controls the piecewise-linear presentation of that surface; it
 does not define physical truth. Exact render/query equality at every interpolated
 point is not implied. Hardware tessellation and future material-displacement
@@ -692,7 +699,7 @@ alone. Hysteresis and a retained current generation prevent oscillation while a
 replacement prepares. Level changes and same-level snaps do not change Earth
 orientation or `SurfaceAnchor` authority.
 
-The 50 m contract applies only to near-camera TCS/TES refinement. It is not a
+The retained 50 m contract applies only when the TCS/TES route is selected. It is not a
 terrain-coverage radius. Factor-1 production base geometry remains present and
 depth-owning outside the refinement range, including across the local horizon.
 

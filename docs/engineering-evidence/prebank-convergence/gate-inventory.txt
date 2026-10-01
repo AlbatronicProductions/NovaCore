@@ -1,0 +1,116 @@
+headless | Stock assembly canonical presentation
+headless | Powered free-flight canonical presentation
+headless | Contact development canonical presentation
+headless | Powered contact canonical presentation
+headless | Certified Florida continuation publication
+headless | Certified continuation acceptance gaps
+headless | Certified continuation allocation matrix
+headless | Certified Florida publication costs
+headless | Post-impact Florida terrain-contact coverage
+headless | Post-impact Florida coverage costs
+headless | Florida monotone contact certification
+headless | Qualified Florida root contact kinematics
+headless | Certified Florida isolated response proposal
+headless | Certified Florida pre-impact velocity tuple
+headless | Certified Florida post-impact velocity realization
+headless | Private Florida post-impact initial state
+headless | Private Florida paired canonical propagation
+headless | Exact-event Earth-relative production terrain
+headless | Contact generation production terrain
+headless | Physical surface-point query
+headless | Physical surface-point stale snapshot
+window | Generic grid and frames startup
+headless | Facility lighting authority
+headless | MeshHandle
+headless | Transport layout
+headless | Transform conversion
+headless | Camera relative
+headless | Batches and capacity
+headless | Resolved render transport
+headless | Orbit curve transport
+headless | Static reference-frame fixture transport
+headless | Dynamic reference-frame fixture publication
+headless | Celestial analytical fixture publication
+headless | Celestial player torque controls
+headless | Celestial SAS mode selection
+headless | Celestial SAS control cadence
+headless | Celestial SAS convergence
+headless | Celestial SAS diagnostic indicators
+headless | Camera snapshot allocation
+headless | Planetary presentation pipeline
+headless | Planetary presentation SPIR-V stride
+headless | Focus target authority
+headless | Planet material presentation
+headless | Planet micro-normal foundation
+headless | Planet surface scatter placement
+headless | Planetary surface camera presentation
+headless | Earth CPU elevation oracle
+headless | Canonical body-fixed geographic handedness
+headless | Canonical SurfaceAnchor physical terrain authority
+headless | Anchored Florida launch site
+headless | Earth route convergence
+window | Live NCSM1 regional physical residency
+window | Production window lifecycle
+headless | Window validation message policy
+window | Regional diagnostic wheel isolation
+headless | Florida facility support
+headless | Surface-relative camera authority
+headless | Near-surface inertial free-look
+headless | SurfaceAnchor acquisition, ENU, and handoff
+headless | Camera focus-position continuity
+headless | Camera SurfaceAnchor handoff monotonicity
+headless | Solar preset camera-path convergence
+headless | Zoom motion-profile continuity
+headless | Solar camera bounded-domain crash regression
+headless | Earth camera blackout offline workload
+headless | Earth camera blackout replay
+headless | Earth horizon submission boundary
+headless | Terrain tessellation CPU singular boundary
+headless | Surface visual-aim continuity
+headless | Inertial visual-aim authority
+headless | Cube-sphere planetary surface
+headless | Production relaxed cube-sphere patch hierarchy
+headless | Anchored spherical mesh-tier contract
+headless | M12D-P2S2 spherical billboard topology proof
+gpu | M12D-P2S3 spherical billboard GPU runtime proof
+gpu | M12D-P2S4 canonical natural terrain billboard binding
+gpu | M12D-P2S5C production spherical billboard runtime
+headless | M12D-P2S5B production spherical billboard topology library
+headless | M12D-P2S5F nested production scale-mesh topology
+headless | M12D-P2S5G bounded spherical billboard surface interface
+gpu | GPU physical-height preparation
+headless | Multiscale physical terrain modifier foundation
+headless | Single canonical physical surface authority
+headless | Global/anchored physical frequency continuity
+gpu | M12D-P2A canonical hashed cell field proof
+gpu | M12D-P2B multiscale natural terrain family proof
+gpu | M12D-P2C1 prepared natural terrain
+headless | Generation-4 physical renderer integration
+headless | Production material noise value preservation
+gpu | Displaced mesh and physical normals
+headless | Screen-space subdivision
+headless | Terrain-v5 seams, mixed-LOD authority, and Florida classification
+headless | Terrain asset distribution boundary
+headless | Cache lifecycle cleanup
+headless | Local terrain format and GPU compression
+headless | Local terrain payload-2 authoring contract
+headless | M12 Florida regional physical surface
+headless | Production cube-sphere GPU residency integration
+headless | Production physical-normal tangent continuity
+headless | Production surface body eligibility and transition ownership
+headless | Production Earth material-state continuity
+headless | Planetary camera terrain exclusion
+headless | Close-ground reference-frame diagnostic
+headless | Production terrain material synthesis
+headless | Planetary terrain residency and surface frame
+headless | Planetary patch topology and ABI
+headless | Parent-child LOD geographic correspondence
+headless | Opaque distant-detailed handoff
+headless | Planetary representation handoff
+headless | Distant quaternion transform parity
+headless | Distant visible hemisphere winding
+headless | Continuous Earth distance visibility
+headless | Camera drag isolation
+headless | Sol system presentation and focus
+headless | SolAnalytical Earth planetary scene
+headless | Florida foundation seating

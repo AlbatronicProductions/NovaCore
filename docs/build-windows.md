@@ -9,7 +9,9 @@ The unified entry is `tools/NovaCore.App/bin/Release/net10.0-windows/NovaCore.ex
 Run it without arguments for fullscreen Configuration → Loading → Gameplay →
 construction → Florida launch → flight/control → return to the retained design.
 See the [player walkthrough and controls](../README.md#try-novacore).
-`NovaCore.Launcher.exe` is the legacy scenario/engineering tool.
+`NovaCore.Launcher.exe` remains the supported scenario/engineering tool; ordinary
+player entry belongs to NovaCore.App. Its assembly also owns shared configuration
+types consumed by the player frontend.
 
 ## Get the source
 
@@ -63,7 +65,8 @@ Required tools:
 - Visual Studio 2026 with Desktop development with C++ and Windows 11 SDK
 - CMake 4.4 or later
 - LunarG Vulkan SDK, including validation layers and `glslc`
-- PowerShell 7 for scripts; Python 3 for package verification (not player runtime)
+- PowerShell 7 for scripts; Python 3 for current-main shader deployment and package
+  verification (not player runtime)
 - Vulkan-capable graphics driver, VC++ x64 runtime, .NET 10 Desktop and ASP.NET
   runtimes (included with the installed SDK development environment)
 
@@ -132,6 +135,41 @@ Native content flows
 through project references; do not hand-copy DLLs or shaders. The verifier checks
 the CMake target output closure and current source content, not an old candidate.
 
+### Current-main runtime shader deployment correction (after M16.2)
+
+The bank observations above remain historical. On the current development candidate,
+native CMake exports `runtime-shaders.json` from the actual `NovaCore.Native`
+dependency graph, including all outputs of each required producer. The shared
+`tools/RuntimeShaderDeployment.targets` deploys that configuration's exact inventory
+to Triangle, ConstructionEditor and NovaCore.App. It requires Python 3 on PATH.
+There is no wildcard shader collection or fixed shader-count acceptance rule.
+
+Build native first, using separate single-configuration Ninja Debug/Release roots.
+The generated authority and link-time DLL receipt must match the requested
+configuration. `novacore-runtime-shaders.json` records deployed file ownership and
+hashes. Incremental builds remove unchanged obsolete owned shaders; the initial
+migration uses the prior MSBuild copy ledger plus matching source-output bytes.
+Unknown extras or modified obsolete files are preserved and fail the build. Inspect
+their ownership before taking action; deleting a directory is not the recovery policy.
+
+The surface-material qualification producer now writes to `test-shaders/` and its
+harness follows that path. Native test builds cannot expand runtime membership.
+Verify each configuration explicitly after building its application:
+
+```powershell
+python tools/verify-player-package.py --configuration Debug --output build/player-package-debug.json
+python tools/verify-player-package.py --configuration Release --output build/player-package-release.json
+python tools/test-runtime-shader-deployment.py
+```
+
+The verifier independently reconstructs source-declared target/output ownership
+and checks runtime shader references, exact deployed membership and hashes. See the
+[bounded correction evidence](engineering-evidence/runtime-shader-deployment/README.md)
+for clean/incremental/test-order results and limits. This candidate does not revise
+the immutable M16.2 record. The subsequent
+[maintenance qualification](engineering-evidence/prebank-convergence/README.md)
+records current Graphics/facility/DPI results separately from the bank's debt.
+
 To reproduce with existing terrain distribution bytes, use the hash-validating
 installer instead of regenerating terrain. Both inputs must match the checked-in
 manifests; `--cache` is an explicit disposable destination:
@@ -194,7 +232,7 @@ dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=headle
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=gpu
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --category=window
 # Omit the category to run all cases; repeat with -c Release.
-# Same controlled child-process environment for both native GPU executables:
+# Same controlled child-process environment for all three native GPU executables:
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --native-gpu
 # Separate ambient compatibility diagnostic (nonzero remains a failure):
 dotnet run --project tests/NovaCore.Graphics.Tests -c Debug -- --ambient --native-gpu
@@ -227,7 +265,7 @@ Native cases are explicit CMake targets excluded from the default build:
 cmake --build build/native-ninja --target NovaCoreRegionalPhysicalTests NovaCoreFacilityVisibilityTests NovaCoreSurfaceMaterialCoordinatesTests NovaCoreStellarProjectionTests
 build/native-ninja/NovaCoreRegionalPhysicalTests.exe <verified-Florida-nccube-path>
 build/native-ninja/NovaCoreFacilityVisibilityTests.exe build/native-ninja/test-shaders/facility_visibility_test.comp.spv
-build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninja/shaders/surface_material_coordinates_test.comp.spv
+build/native-ninja/NovaCoreSurfaceMaterialCoordinatesTests.exe build/native-ninja/test-shaders/surface_material_coordinates_test.comp.spv
 build/native-ninja/NovaCoreStellarProjectionTests.exe build/native-ninja/shaders/stellar_glow.vert.spv
 # Repeat using build/native-ninja-release.
 ```
@@ -270,10 +308,11 @@ see the [milestone](milestones/M16.2.md) and [receipt](engineering-evidence/m16.
 Managed GPU proof/query contexts enable the layer when available; preflight
 requires it. Direct native commands above inherit ambient discovery; use the
 Graphics runner's `--native-gpu` entry for canonical regression status. Current
-M16.2 preparation found that runner still supplies the old `shaders/` path for
-the facility test, so it fails despite CMake producing the file in `test-shaders/`.
-That test-harness correction remains pending Project Control; do not count the
-direct command as a replacement PASS for the failing mandatory runner.
+M16.2 preparation found that runner supplied the old `shaders/` facility path.
+The current maintenance candidate follows CMake's existing `test-shaders/`
+producer for both facility and surface-material cases. Required evidence is the
+canonical runner result in both configurations, not substitution of a direct
+ambient command for that gate.
 
 The sole accepted window warning is the exact SDK message
 `WARNING-Shader-OutputNotConsumed` for vertex output Location 11 Component 0,

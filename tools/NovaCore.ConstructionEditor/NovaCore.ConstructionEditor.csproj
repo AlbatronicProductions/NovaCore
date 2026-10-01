@@ -16,4 +16,5 @@
     <Content Include="../../assets/vehicles/modular-starter/**" Link="assets/vehicles/modular-starter/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <Content Update="wwwroot/**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+  <Import Project="../RuntimeShaderDeployment.targets" />
 </Project>

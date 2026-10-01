@@ -1,0 +1,57 @@
+[
+  {
+    "exit": 0,
+    "configuration": "Debug",
+    "gate": "solution build"
+  },
+  {
+    "exit": 0,
+    "configuration": "Debug",
+    "gate": "complete Graphics"
+  },
+  {
+    "exit": 0,
+    "configuration": "Debug",
+    "gate": "native GPU"
+  },
+  {
+    "exit": 0,
+    "configuration": "Debug",
+    "gate": "Player"
+  },
+  {
+    "exit": 0,
+    "configuration": "Debug",
+    "gate": "package"
+  },
+  {
+    "exit": 0,
+    "configuration": "Release",
+    "gate": "solution build"
+  },
+  {
+    "exit": 0,
+    "configuration": "Release",
+    "gate": "complete Graphics"
+  },
+  {
+    "exit": 0,
+    "configuration": "Release",
+    "gate": "native GPU"
+  },
+  {
+    "exit": 0,
+    "configuration": "Release",
+    "gate": "Player"
+  },
+  {
+    "exit": 0,
+    "configuration": "Release",
+    "gate": "package"
+  },
+  {
+    "exit": 0,
+    "configuration": "both",
+    "gate": "shader red team"
+  }
+]
